@@ -1,0 +1,1383 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXO NORUEGA — El sistema desde dentro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;900&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --dark: #0a192f;
+            --deep: #112240;
+            --surface: #172a45;
+            --aurora: #64ffda;
+            --aurora-50: rgba(100, 255, 218, 0.5);
+            --aurora-20: rgba(100, 255, 218, 0.2);
+            --aurora-10: rgba(100, 255, 218, 0.1);
+            --aurora-05: rgba(100, 255, 218, 0.05);
+            --aurora-03: rgba(100, 255, 218, 0.03);
+            --text: #ccd6f6;
+            --muted: #8892b0;
+            --white: #e6f1ff;
+            --poppins: 'Poppins', system-ui, sans-serif;
+            --serif: 'DM Serif Display', Georgia, serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: var(--poppins);
+            background: var(--dark);
+            color: var(--text);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        ::selection { background: var(--aurora-20); color: var(--white); }
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: var(--dark); }
+        ::-webkit-scrollbar-thumb { background: var(--aurora-20); border-radius: 2px; }
+
+        /* ═══════ AURORA CURSOR ═══════ */
+        .aurora-cursor-canvas {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.6;
+            mix-blend-mode: screen;
+        }
+
+        @media (hover: none) {
+            .aurora-cursor-canvas { display: none; }
+        }
+
+        /* ═══════ GRAIN ═══════ */
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 10000;
+        }
+
+        /* ═══════ AURORA ═══════ */
+        .aurora-canvas {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .aurora-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(120px);
+        }
+
+        .aurora-orb-1 {
+            width: 600px; height: 600px;
+            top: -15%; right: -10%;
+            background: radial-gradient(circle, rgba(100,255,218,0.06) 0%, transparent 70%);
+            animation: orb1 22s ease-in-out infinite alternate;
+        }
+
+        .aurora-orb-2 {
+            width: 500px; height: 400px;
+            bottom: 10%; left: -8%;
+            background: radial-gradient(circle, rgba(100,255,218,0.04) 0%, transparent 70%);
+            animation: orb2 28s ease-in-out infinite alternate;
+        }
+
+        .aurora-orb-3 {
+            width: 300px; height: 300px;
+            top: 40%; right: 20%;
+            background: radial-gradient(circle, rgba(100,255,218,0.025) 0%, transparent 70%);
+            animation: orb3 18s ease-in-out infinite alternate;
+        }
+
+        @keyframes orb1 {
+            0% { transform: translate(0, 0) scale(1); opacity: 0.7; }
+            50% { transform: translate(-60px, 40px) scale(1.15); opacity: 1; }
+            100% { transform: translate(-100px, 80px) scale(0.9); opacity: 0.6; }
+        }
+        @keyframes orb2 {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(80px, -60px) scale(1.2); }
+        }
+        @keyframes orb3 {
+            0% { transform: translate(0, 0); opacity: 0.5; }
+            100% { transform: translate(-40px, 30px); opacity: 1; }
+        }
+
+        /* ═══════ GRID ═══════ */
+        .grid-lines {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .grid-line-v {
+            position: absolute;
+            top: 0; bottom: 0;
+            width: 1px;
+            background: rgba(100, 255, 218, 0.015);
+        }
+
+        /* ═══════ LAYOUT ═══════ */
+        .wrap {
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 0 32px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ═══════ NAV ═══════ */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            padding: 20px 0;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        nav.scrolled {
+            background: rgba(10, 25, 47, 0.88);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 14px 0;
+            border-bottom: 1px solid rgba(100, 255, 218, 0.04);
+        }
+
+        .nav-inner {
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 0 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-left svg { width: 28px; height: 28px; }
+
+        .nav-brand {
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            color: var(--white);
+        }
+
+        .nav-cta {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--aurora);
+            text-decoration: none;
+            padding: 8px 18px;
+            border: 1px solid var(--aurora-20);
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+
+        .nav-cta:hover {
+            background: var(--aurora-10);
+            border-color: var(--aurora);
+        }
+
+        /* ═══════ HERO ═══════ */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 120px 0 80px;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: 48px;
+            align-items: center;
+            width: 100%;
+        }
+
+        .hero-eyebrow {
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--aurora);
+            margin-bottom: 20px;
+        }
+
+        .hero-h1 {
+            font-size: clamp(36px, 5vw, 56px);
+            font-weight: 900;
+            line-height: 1.02;
+            letter-spacing: -0.035em;
+            color: var(--white);
+            margin-bottom: 24px;
+        }
+
+        .hero-h1 em {
+            font-family: var(--serif);
+            font-style: italic;
+            color: var(--aurora);
+            font-weight: 400;
+        }
+
+        .hero-sub {
+            font-size: 15px;
+            font-weight: 300;
+            line-height: 1.7;
+            color: var(--muted);
+            max-width: 520px;
+            margin-bottom: 36px;
+        }
+
+        .hero-form-wrap { max-width: 460px; }
+
+        .hero-form { display: flex; gap: 8px; }
+
+        .hero-form input {
+            flex: 1;
+            padding: 14px 18px;
+            background: var(--deep);
+            border: 1px solid rgba(100, 255, 218, 0.08);
+            border-radius: 6px;
+            color: var(--white);
+            font-family: var(--poppins);
+            font-size: 14px;
+            font-weight: 300;
+            outline: none;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .hero-form input:focus {
+            border-color: var(--aurora-50);
+            box-shadow: 0 0 0 3px rgba(100, 255, 218, 0.08);
+        }
+
+        .hero-form input::placeholder { color: var(--muted); opacity: 0.6; }
+
+        .hero-form button {
+            padding: 14px 28px;
+            background: var(--aurora);
+            color: var(--dark);
+            border: none;
+            border-radius: 6px;
+            font-family: var(--poppins);
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.3s;
+        }
+
+        .hero-form button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 24px rgba(100, 255, 218, 0.15);
+        }
+
+        .hero-note {
+            font-size: 11px;
+            color: var(--muted);
+            font-weight: 300;
+            margin-top: 12px;
+            opacity: 0.7;
+        }
+
+        /* ═══════ WORD CARD — V4 REDESIGN ═══════ */
+        .hero-sidebar { 
+            display: flex; 
+            justify-content: center;
+            align-items: center;
+        }
+
+        .word-card-wrap {
+            position: relative;
+            width: 100%;
+            max-width: 340px;
+        }
+
+        /* Animated gradient border */
+        .word-card-wrap::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 16px;
+            padding: 1px;
+            background: linear-gradient(
+                160deg,
+                rgba(100, 255, 218, 0.25),
+                rgba(100, 255, 218, 0.04) 35%,
+                rgba(100, 255, 218, 0.0) 50%,
+                rgba(100, 255, 218, 0.06) 70%,
+                rgba(100, 255, 218, 0.2)
+            );
+            -webkit-mask: 
+                linear-gradient(#fff 0 0) content-box, 
+                linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+            animation: borderShift 8s ease-in-out infinite alternate;
+        }
+
+        @keyframes borderShift {
+            0% { opacity: 0.6; filter: hue-rotate(0deg); }
+            50% { opacity: 1; }
+            100% { opacity: 0.7; filter: hue-rotate(5deg); }
+        }
+
+        /* Soft glow behind */
+        .word-card-wrap::after {
+            content: '';
+            position: absolute;
+            top: 20%; left: 10%;
+            width: 80%; height: 60%;
+            background: radial-gradient(
+                ellipse at center,
+                rgba(100, 255, 218, 0.06) 0%,
+                transparent 70%
+            );
+            filter: blur(40px);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .word-card {
+            position: relative;
+            z-index: 1;
+            background: rgba(10, 25, 47, 0.92);
+            border-radius: 16px;
+            padding: 32px 30px 28px;
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            min-height: 290px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .word-main {
+            flex: 1;
+        }
+
+        .word-norwegian {
+            font-family: var(--serif);
+            font-size: 44px;
+            font-style: italic;
+            color: var(--aurora);
+            line-height: 1.0;
+            margin-bottom: 4px;
+            text-shadow: 0 0 60px rgba(100, 255, 218, 0.1);
+            letter-spacing: -0.01em;
+        }
+
+        .word-translation {
+            font-size: 14px;
+            font-weight: 400;
+            color: var(--white);
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+
+        .word-divider {
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(
+                90deg,
+                var(--aurora-20) 0%,
+                rgba(100, 255, 218, 0.04) 100%
+            );
+            margin-bottom: 18px;
+        }
+
+        .word-meaning {
+            font-size: 13px;
+            font-weight: 300;
+            line-height: 1.7;
+            color: var(--text);
+            margin-bottom: 16px;
+            opacity: 0.8;
+        }
+
+        .word-quote {
+            font-size: 12px;
+            font-weight: 300;
+            font-style: italic;
+            line-height: 1.55;
+            color: var(--muted);
+            padding-left: 14px;
+            border-left: 2px solid var(--aurora-20);
+        }
+
+        /* Dots indicator */
+        .word-dots {
+            display: flex;
+            gap: 6px;
+            margin-top: 20px;
+            justify-content: center;
+        }
+
+        .word-dot {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: rgba(100, 255, 218, 0.1);
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+
+        .word-dot.active {
+            background: var(--aurora);
+            box-shadow: 0 0 8px rgba(100, 255, 218, 0.3);
+            transform: scale(1.2);
+        }
+
+        .word-dot:hover:not(.active) {
+            background: rgba(100, 255, 218, 0.25);
+        }
+
+        /* ═══════ SECTIONS ═══════ */
+        .section-eyebrow {
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--aurora);
+            margin-bottom: 16px;
+        }
+
+        h2 {
+            font-size: clamp(26px, 3.5vw, 40px);
+            font-weight: 900;
+            color: var(--white);
+            letter-spacing: -0.03em;
+            line-height: 1.08;
+            margin-bottom: 20px;
+        }
+
+        h2 em {
+            font-family: var(--serif);
+            font-style: italic;
+            color: var(--aurora);
+            font-weight: 400;
+        }
+
+        /* ═══════ BISTURÍ ═══════ */
+        .bisturi {
+            padding: 72px 0;
+            text-align: center;
+        }
+
+        .bisturi-text {
+            font-family: var(--serif);
+            font-size: clamp(22px, 3.2vw, 34px);
+            line-height: 1.5;
+            color: var(--text);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .bisturi-text strong { color: var(--white); }
+        .bisturi-text em { color: var(--aurora); font-style: normal; }
+
+        .bisturi-kicker {
+            font-family: var(--poppins);
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            color: var(--muted);
+            margin-top: 20px;
+            opacity: 0.7;
+        }
+
+        /* ═══════ VERSIÓN C ═══════ */
+        .version-c { padding: 40px 0 80px; }
+
+        .v-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-top: 10px;
+        }
+
+        .v-card {
+            padding: 28px 24px;
+            border-radius: 8px;
+            border: 1px solid;
+        }
+
+        .v-card.dead {
+            border-color: rgba(136, 146, 176, 0.08);
+            background: rgba(17, 34, 64, 0.2);
+        }
+
+        .v-card.alive {
+            border-color: var(--aurora-20);
+            background: rgba(100, 255, 218, 0.03);
+        }
+
+        .v-tag {
+            font-size: 9px;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .v-card.dead .v-tag { color: var(--muted); opacity: 0.5; }
+        .v-card.alive .v-tag { color: var(--aurora); }
+
+        .v-title {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+
+        .v-card.dead .v-title { color: var(--muted); }
+        .v-card.alive .v-title { color: var(--white); }
+
+        .v-desc {
+            font-size: 12.5px;
+            font-weight: 300;
+            line-height: 1.6;
+            color: var(--muted);
+        }
+
+        .v-card.alive .v-desc { color: var(--text); }
+
+        /* ═══════ PREVIEW ═══════ */
+        .preview { padding: 80px 0; }
+
+        .preview-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 56px;
+            align-items: start;
+        }
+
+        .preview-left p {
+            font-size: 14px;
+            font-weight: 300;
+            line-height: 1.7;
+            color: var(--muted);
+            margin-bottom: 28px;
+        }
+
+        .nl-mockup {
+            background: var(--deep);
+            border: 1px solid rgba(100, 255, 218, 0.06);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .nl-header {
+            padding: 14px 20px;
+            border-bottom: 1px solid rgba(100, 255, 218, 0.04);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nl-header svg { width: 20px; height: 20px; }
+
+        .nl-header-text {
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--muted);
+        }
+
+        .nl-body { padding: 24px 20px 0; position: relative; }
+
+        .nl-date {
+            font-size: 10px;
+            color: var(--muted);
+            font-weight: 400;
+            margin-bottom: 8px;
+        }
+
+        .nl-title {
+            font-family: var(--serif);
+            font-size: 22px;
+            color: var(--white);
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+
+        .nl-excerpt {
+            font-size: 13px;
+            font-weight: 300;
+            line-height: 1.75;
+            color: var(--muted);
+        }
+
+        .nl-excerpt .hl { color: var(--aurora); font-weight: 400; }
+        .nl-excerpt .martillo { display: block; color: var(--white); font-weight: 600; margin: 10px 0; font-size: 14px; }
+
+        .nl-fade { position: relative; padding-bottom: 32px; }
+
+        .nl-fade::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 80px;
+            background: linear-gradient(transparent, var(--deep));
+        }
+
+        .nl-fade-text {
+            position: absolute;
+            bottom: 8px;
+            left: 20px;
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--aurora);
+            z-index: 2;
+        }
+
+        /* ═══════ PILARES ═══════ */
+        .pillars { padding: 80px 0; }
+
+        .p-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-top: 10px;
+        }
+
+        .p-card {
+            padding: 28px 24px;
+            border-radius: 8px;
+            border: 1px solid rgba(100, 255, 218, 0.04);
+            background: var(--deep);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .p-card::before {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 0; height: 2px;
+            background: var(--aurora);
+            transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .p-card:hover::before { width: 100%; }
+        .p-card:hover { background: rgba(17, 34, 64, 0.8); }
+
+        .p-num {
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            color: var(--aurora);
+            text-transform: uppercase;
+            margin-bottom: 14px;
+        }
+
+        .p-name {
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 10px;
+            line-height: 1.25;
+        }
+
+        .p-desc {
+            font-size: 13px;
+            font-weight: 300;
+            line-height: 1.65;
+            color: var(--muted);
+        }
+
+        /* ═══════ MANIFESTO ═══════ */
+        .manifesto {
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .manifesto-quote {
+            font-family: var(--serif);
+            font-size: clamp(24px, 3.5vw, 40px);
+            line-height: 1.35;
+            color: var(--text);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .manifesto-quote strong { color: var(--white); }
+        .manifesto-quote em { color: var(--aurora); font-style: normal; }
+
+        .manifesto-sub {
+            font-family: var(--poppins);
+            font-size: 14px;
+            font-weight: 300;
+            color: var(--muted);
+            margin-top: 24px;
+            letter-spacing: 0.01em;
+        }
+
+        /* ═══════ AUDIENCIA ═══════ */
+        .audience { padding: 80px 0 100px; }
+
+        .aud-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+        }
+
+        .aud-col h3 {
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .aud-yes h3 { color: var(--aurora); }
+        .aud-no h3 { color: var(--muted); }
+
+        .aud-col ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .aud-col ul li {
+            font-size: 13px;
+            font-weight: 300;
+            line-height: 1.55;
+            color: var(--muted);
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .aud-col ul li::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 7px;
+            width: 6px; height: 6px;
+            border-radius: 1px;
+            transform: rotate(45deg);
+        }
+
+        .aud-yes li::before { background: var(--aurora-50); }
+        .aud-no li::before { background: rgba(136, 146, 176, 0.2); }
+        .aud-yes li { color: var(--text); }
+
+        /* ═══════ FINAL CTA ═══════ */
+        .final { padding: 100px 0 80px; text-align: center; }
+
+        .final h2 {
+            font-size: clamp(30px, 4.5vw, 52px);
+            font-weight: 900;
+            color: var(--white);
+            letter-spacing: -0.03em;
+            line-height: 1.05;
+            margin-bottom: 12px;
+        }
+
+        .final h2 em {
+            font-family: var(--serif);
+            font-style: italic;
+            color: var(--aurora);
+            font-weight: 400;
+        }
+
+        .final-sub {
+            font-size: 15px;
+            font-weight: 300;
+            color: var(--muted);
+            margin-bottom: 40px;
+        }
+
+        .final .hero-form {
+            max-width: 460px;
+            margin: 0 auto;
+        }
+
+        /* ═══════ FOOTER ═══════ */
+        footer {
+            padding: 32px 0;
+            border-top: 1px solid rgba(100, 255, 218, 0.04);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .foot-l { font-size: 11px; color: var(--muted); font-weight: 300; }
+        .foot-r { font-size: 10px; color: var(--muted); font-weight: 400; letter-spacing: 0.08em; text-transform: uppercase; }
+
+        /* ═══════ DIVIDER ═══════ */
+        .sep {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px 0;
+        }
+
+        .sep-line { width: 40px; height: 1px; background: var(--aurora-20); }
+        .sep-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--aurora); margin: 0 12px; }
+
+        /* ═══════ REVEALS ═══════ */
+        .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.vis { opacity: 1; transform: translateY(0); }
+        .reveal-d1 { transition-delay: 0.1s; }
+        .reveal-d2 { transition-delay: 0.2s; }
+        .reveal-d3 { transition-delay: 0.3s; }
+
+        /* ═══════ RESPONSIVE ═══════ */
+        @media (max-width: 900px) {
+            .hero-content { 
+                grid-template-columns: 1fr; 
+                gap: 40px; 
+            }
+            .hero-sidebar { order: -1; }
+            .word-card-wrap { max-width: 380px; margin: 0 auto; }
+            .word-norwegian { font-size: 38px; }
+            .word-card { min-height: 270px; }
+        }
+
+        @media (max-width: 768px) {
+            .wrap { padding: 0 20px; }
+            .v-grid { grid-template-columns: 1fr; }
+            .p-grid { grid-template-columns: 1fr; }
+            .preview-layout { grid-template-columns: 1fr; gap: 40px; }
+            .aud-grid { grid-template-columns: 1fr; gap: 32px; }
+            .hero-form { flex-direction: column; }
+            .hero-form button { padding: 14px; }
+            .final .hero-form { flex-direction: column; }
+            footer { flex-direction: column; gap: 8px; text-align: center; }
+            nav .nav-cta { display: none; }
+            .word-card-wrap { max-width: 100%; }
+            .word-card { padding: 28px 24px 24px; min-height: 250px; }
+            .word-norwegian { font-size: 34px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="aurora-canvas">
+        <div class="aurora-orb aurora-orb-1"></div>
+        <div class="aurora-orb aurora-orb-2"></div>
+        <div class="aurora-orb aurora-orb-3"></div>
+    </div>
+
+    <canvas id="auroraCursor" class="aurora-cursor-canvas"></canvas>
+
+    <div class="grid-lines">
+        <div class="grid-line-v" style="left: 25%"></div>
+        <div class="grid-line-v" style="left: 50%"></div>
+        <div class="grid-line-v" style="left: 75%"></div>
+    </div>
+
+    <nav id="nav">
+        <div class="nav-inner">
+            <div class="nav-left">
+                <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10 48 L10 20 L22 32 L22 16" stroke="#64ffda" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="0.5"/>
+                    <path d="M42 48 L42 16 L54 32 L54 48" stroke="#64ffda" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span class="nav-brand">Nexo Noruega</span>
+            </div>
+            <a href="#suscribir" class="nav-cta">Suscribirme</a>
+        </div>
+    </nav>
+
+    <div class="wrap">
+
+        <!-- HERO -->
+        <section class="hero">
+            <div class="hero-content">
+                <div>
+                    <div class="hero-eyebrow">NEXO NORUEGA</div>
+                    <h1 class="hero-h1">
+                        Cómo funciona la vida donde <em>las cosas funcionan</em>
+                    </h1>
+                    <p class="hero-sub">
+                        Todo el mundo tiene una versión de Noruega. La del turista. La del resentido. La del que lleva ocho meses y ya es experto. Pobres criaturas.
+                    </p>
+                    <div class="hero-form-wrap">
+                        <form class="hero-form" onsubmit="subscribeSubstack(event, this)">
+                            <input type="email" name="email" placeholder="tu@email.com" required>
+                            <button type="submit">Suscribirme</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="hero-sidebar">
+                    <div class="word-card-wrap">
+                        <div class="word-card" id="wordCard">
+                            <div class="word-main">
+                                <div class="word-norwegian" id="wNor">Tillit</div>
+                                <div class="word-translation" id="wTrans">Confianza</div>
+                                <div class="word-divider"></div>
+                                <div class="word-meaning" id="wMean">La infraestructura invisible del sistema noruego. La razón por la que la gente paga impuestos sin protestar.</div>
+                                <div class="word-quote" id="wQuote">"Cuando las instituciones hacen lo que prometen, la gente confía."</div>
+                            </div>
+                            <div class="word-dots" id="wordDots">
+                                <div class="word-dot active" data-i="0"></div>
+                                <div class="word-dot" data-i="1"></div>
+                                <div class="word-dot" data-i="2"></div>
+                                <div class="word-dot" data-i="3"></div>
+                                <div class="word-dot" data-i="4"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- BISTURÍ -->
+        <section class="bisturi reveal">
+            <p class="bisturi-text">
+                Hay países caros de <em>vivir.</em><br>Y países caros de <strong>soñar.</strong>
+            </p>
+            <p class="bisturi-kicker">No son los mismos.</p>
+        </section>
+
+        <!-- VERSIÓN C -->
+        <section class="version-c reveal">
+            <div class="v-grid">
+                <div class="v-card dead">
+                    <div class="v-tag">Versión A</div>
+                    <div class="v-title">"Noruega es el paraíso"</div>
+                    <div class="v-desc">Vlogs de auroras. Influencers de ocho meses. Fantasía que no te ayuda a decidir nada.</div>
+                </div>
+                <div class="v-card dead">
+                    <div class="v-tag">Versión B</div>
+                    <div class="v-title">"Es imposible. Y hace frío."</div>
+                    <div class="v-desc">Los noruegos son fríos. Es carísimo. La oscuridad. Queja de quien nunca salió de la burbuja.</div>
+                </div>
+                <div class="v-card alive">
+                    <div class="v-tag">Nexo Noruega</div>
+                    <div class="v-title">Un sistema que funciona. Con grietas reales.</div>
+                    <div class="v-desc">Datos. Experiencia directa. Todas las fases completadas. Sin romanticismo. Sin quejas.</div>
+                </div>
+            </div>
+        </section>
+
+        <div class="sep reveal"><div class="sep-line"></div><div class="sep-dot"></div><div class="sep-line"></div></div>
+
+        <!-- PREVIEW -->
+        <section class="preview reveal">
+            <div class="preview-layout">
+                <div class="preview-left">
+                    <div class="section-eyebrow">La newsletter</div>
+                    <h2>El cálculo completo. No el <em>titular.</em></h2>
+                    <p>Todo lo que te cuentan sobre Noruega viene con letra pequeña. Aquí la leemos entera. Datos verificables, experiencia de años, y el análisis que nadie tiene tiempo — o ganas — de hacer.</p>
+                </div>
+                <div class="nl-mockup">
+                    <div class="nl-header">
+                        <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M10 48 L10 20 L22 32 L22 16" stroke="#64ffda" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="0.5"/>
+                            <path d="M42 48 L42 16 L54 32 L54 48" stroke="#64ffda" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span class="nl-header-text">NEXO NORUEGA · Edición #1</span>
+                    </div>
+                    <div class="nl-body">
+                        <div class="nl-date">Febrero 2026</div>
+                        <div class="nl-title">Por qué no emigré a Noruega</div>
+                        <div class="nl-excerpt">
+                            La pregunta que siempre me hacen: "¿Por qué te fuiste de España?" La respuesta que nunca doy: <span class="hl">"No me fui. Vine."</span>
+
+                            <span class="martillo">La diferencia no es semántica. Es de décadas.</span>
+
+                            Emigrar implica huir. Instalarse implica construir. Y la diferencia entre ambas se nota a los tres años, cuando los que vinieron "a probar" ya se han ido y los que vinieron a construir están negociando su primera hipoteca...
+                        </div>
+                        <div class="nl-fade"></div>
+                        <span class="nl-fade-text">Sigue leyendo →</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PILARES -->
+        <section class="pillars reveal">
+            <div class="section-eyebrow">Pilares</div>
+            <h2>Lo que cubre.</h2>
+            <div class="p-grid">
+                <div class="p-card">
+                    <div class="p-num">01</div>
+                    <div class="p-name">El sistema</div>
+                    <div class="p-desc">Impuestos, autónomos, sanidad, burocracia. La maquinaria por dentro.</div>
+                </div>
+                <div class="p-card">
+                    <div class="p-num">02</div>
+                    <div class="p-name">Calidad de vida</div>
+                    <div class="p-desc">Lo que se ve después de años. No es genética. Es diseño.</div>
+                </div>
+                <div class="p-card">
+                    <div class="p-num">03</div>
+                    <div class="p-name">Integración real</div>
+                    <div class="p-desc">Idioma, círculo social, código cultural. La barrera existe. Se cruza.</div>
+                </div>
+                <div class="p-card">
+                    <div class="p-num">04</div>
+                    <div class="p-name">Comparativa</div>
+                    <div class="p-desc">España vs. Noruega. Datos. Lo bueno de ambos lados.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MANIFESTO -->
+        <section class="manifesto reveal">
+            <p class="manifesto-quote">
+                <strong>No vendo paraísos.</strong> <em>Cuento sistemas.</em>
+            </p>
+            <p class="manifesto-sub">He pasado todas las fases. Y la balanza, de momento, está muy a favor.</p>
+        </section>
+
+        <div class="sep reveal"><div class="sep-line"></div><div class="sep-dot"></div><div class="sep-line"></div></div>
+
+        <!-- AUDIENCIA -->
+        <section class="audience reveal">
+            <div class="section-eyebrow">Para quién es esto</div>
+            <div class="aud-grid">
+                <div class="aud-col aud-yes">
+                    <h3>✦ Para el 10%</h3>
+                    <ul>
+                        <li>Quieres información real, no fantasía ni vlogs de auroras</li>
+                        <li>Estás considerando Noruega o llevas años y buscas perspectiva</li>
+                        <li>Prefieres datos a opiniones</li>
+                        <li>Viniste a construir, no a quejarte</li>
+                    </ul>
+                </div>
+                <div class="aud-col aud-no">
+                    <h3>✕ Para el resto ya hay contenido</h3>
+                    <ul>
+                        <li>Buscas "trucos para emigrar" y fórmulas mágicas</li>
+                        <li>Tu fuente es alguien que lleva menos de un año</li>
+                        <li>Prefieres la queja al análisis</li>
+                        <li>Ya tienes tus vlogs de auroras con música épica</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- FINAL CTA -->
+        <section class="final reveal" id="suscribir">
+            <h2>La balanza está <em>a favor.</em></h2>
+            <p class="final-sub">Te explico por qué.</p>
+            <form class="hero-form" onsubmit="subscribeSubstack(event, this)">
+                <input type="email" name="email" placeholder="tu@email.com" required>
+                <button type="submit">Suscribirme</button>
+            </form>
+            <p class="hero-note" style="text-align:center; margin-top:14px;">Sin spam · Cancelas cuando quieras</p>
+        </section>
+
+        <footer>
+            <div class="foot-l">© 2026 Nexo Noruega — No teorizo. Cuento.</div>
+            <div class="foot-r">Oslo, Norge</div>
+        </footer>
+    </div>
+
+    <script>
+        // Scroll reveal
+        const obs = new IntersectionObserver(entries => {
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); });
+        }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+        document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+        // Nav scroll
+        const nav = document.getElementById('nav');
+        window.addEventListener('scroll', () => {
+            nav.classList.toggle('scrolled', window.scrollY > 60);
+        });
+
+        // Word rotation
+        const words = [
+            { word: 'Tillit', trans: 'Confianza', meaning: 'La infraestructura invisible del sistema noruego. La razón por la que la gente paga impuestos sin protestar.', quote: '"Cuando las instituciones hacen lo que prometen, la gente confía."' },
+            { word: 'Trygghet', trans: 'Seguridad', meaning: 'La sensación de que el sistema estará ahí cuando lo necesites. Que si algo sale mal, no estás solo.', quote: '"No es riqueza. Es la certeza de que mañana también va a funcionar."' },
+            { word: 'Dugnad', trans: 'Trabajo comunitario', meaning: 'Los vecinos se juntan sin paga ni obligación. Sin pancartas. Sin fotos. Solo se hace.', quote: '"Capital social que no se compra. Se construye."' },
+            { word: 'Janteloven', trans: 'La ley de Jante', meaning: 'El código cultural de no destacar. No se juzga. Se entiende. Se convive con ello.', quote: '"No es que no puedas destacar. Es que no necesitas demostrarlo."' },
+            { word: 'Friluftsliv', trans: 'Vida al aire libre', meaning: 'La naturaleza no es escapada de fin de semana. Es forma de existir.', quote: '"Aquí no vas a la naturaleza. Vives en ella."' },
+        ];
+
+        let idx = 0;
+        let timer;
+        const card = document.getElementById('wordCard');
+        const wNor = document.getElementById('wNor');
+        const wTrans = document.getElementById('wTrans');
+        const wMean = document.getElementById('wMean');
+        const wQuote = document.getElementById('wQuote');
+        const dots = document.querySelectorAll('.word-dot');
+
+        function goTo(i) {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(5px)';
+            setTimeout(() => {
+                idx = i;
+                const w = words[idx];
+                wNor.textContent = w.word;
+                wTrans.textContent = w.trans;
+                wMean.textContent = w.meaning;
+                wQuote.textContent = w.quote;
+                dots.forEach((d, j) => d.classList.toggle('active', j === idx));
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+            }, 300);
+        }
+
+        function autoNext() {
+            goTo((idx + 1) % words.length);
+        }
+
+        function startTimer() {
+            clearInterval(timer);
+            timer = setInterval(autoNext, 6000);
+        }
+
+        // Click dots to navigate
+        dots.forEach(d => {
+            d.addEventListener('click', () => {
+                const i = parseInt(d.dataset.i);
+                if (i !== idx) {
+                    goTo(i);
+                    startTimer(); // reset timer on manual nav
+                }
+            });
+        });
+
+        card.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+        startTimer();
+
+        // ═══════ AURORA CURSOR ═══════
+        ;(function() {
+            const canvas = document.getElementById('auroraCursor');
+            const ctx = canvas.getContext('2d');
+            let W, H;
+            let mouseX = -9999, mouseY = -9999;
+            let targetX = -9999, targetY = -9999;
+            let active = false;
+            let fadeIn = 0;
+
+            // Trail of past positions for ribbon effect
+            const trail = [];
+            const TRAIL_LEN = 28;
+
+            // Particles that drift off the trail
+            const particles = [];
+            const MAX_P = 40;
+
+            function resize() {
+                W = canvas.width = window.innerWidth;
+                H = canvas.height = window.innerHeight;
+            }
+            resize();
+            window.addEventListener('resize', resize);
+
+            document.addEventListener('mousemove', e => {
+                targetX = e.clientX;
+                targetY = e.clientY;
+                if (!active) { 
+                    active = true; 
+                    mouseX = targetX; 
+                    mouseY = targetY; 
+                }
+            });
+
+            document.addEventListener('mouseleave', () => { active = false; });
+            document.addEventListener('mouseenter', () => { active = true; });
+
+            function spawnParticle(x, y, vx, vy) {
+                if (particles.length >= MAX_P) return;
+                particles.push({
+                    x, y,
+                    vx: vx + (Math.random() - 0.5) * 0.8,
+                    vy: vy + (Math.random() - 0.5) * 0.8 - 0.3,
+                    life: 1,
+                    decay: 0.008 + Math.random() * 0.012,
+                    size: 2 + Math.random() * 4,
+                    hue: 160 + Math.random() * 20, // teal-green range
+                });
+            }
+
+            function draw() {
+                ctx.clearRect(0, 0, W, H);
+
+                // Smooth follow
+                const ease = 0.12;
+                mouseX += (targetX - mouseX) * ease;
+                mouseY += (targetY - mouseY) * ease;
+
+                // Fade in/out
+                if (active) { fadeIn = Math.min(1, fadeIn + 0.03); }
+                else { fadeIn = Math.max(0, fadeIn - 0.02); }
+
+                if (fadeIn < 0.001) {
+                    trail.length = 0;
+                    particles.length = 0;
+                    requestAnimationFrame(draw);
+                    return;
+                }
+
+                ctx.globalAlpha = fadeIn;
+
+                // Add to trail
+                trail.unshift({ x: mouseX, y: mouseY });
+                if (trail.length > TRAIL_LEN) trail.pop();
+
+                // Spawn particles from trail movement
+                if (trail.length > 2) {
+                    const dx = trail[0].x - trail[1].x;
+                    const dy = trail[0].y - trail[1].y;
+                    const speed = Math.sqrt(dx * dx + dy * dy);
+                    if (speed > 2 && Math.random() < 0.6) {
+                        // Perpendicular drift
+                        const nx = -dy / speed;
+                        const ny = dx / speed;
+                        const side = Math.random() > 0.5 ? 1 : -1;
+                        spawnParticle(
+                            mouseX + nx * side * (5 + Math.random() * 15),
+                            mouseY + ny * side * (5 + Math.random() * 15),
+                            nx * side * 0.3,
+                            -0.4
+                        );
+                    }
+                }
+
+                // ── Draw main aurora ribbon ──
+                if (trail.length > 3) {
+                    // Wide soft glow
+                    for (let w = 0; w < 3; w++) {
+                        const width = [120, 60, 20][w];
+                        const alpha = [0.015, 0.03, 0.06][w];
+
+                        ctx.beginPath();
+                        ctx.moveTo(trail[0].x, trail[0].y);
+                        for (let i = 1; i < trail.length - 1; i++) {
+                            const xc = (trail[i].x + trail[i + 1].x) / 2;
+                            const yc = (trail[i].y + trail[i + 1].y) / 2;
+                            ctx.quadraticCurveTo(trail[i].x, trail[i].y, xc, yc);
+                        }
+                        ctx.lineWidth = width;
+                        ctx.lineCap = 'round';
+                        ctx.lineJoin = 'round';
+                        ctx.strokeStyle = `rgba(100, 255, 218, ${alpha})`;
+                        ctx.stroke();
+                    }
+
+                    // Core bright line
+                    ctx.beginPath();
+                    ctx.moveTo(trail[0].x, trail[0].y);
+                    for (let i = 1; i < trail.length - 1; i++) {
+                        const xc = (trail[i].x + trail[i + 1].x) / 2;
+                        const yc = (trail[i].y + trail[i + 1].y) / 2;
+                        ctx.quadraticCurveTo(trail[i].x, trail[i].y, xc, yc);
+                    }
+
+                    const grad = ctx.createLinearGradient(
+                        trail[0].x, trail[0].y,
+                        trail[trail.length - 1].x, trail[trail.length - 1].y
+                    );
+                    grad.addColorStop(0, 'rgba(100, 255, 218, 0.25)');
+                    grad.addColorStop(0.5, 'rgba(100, 255, 218, 0.12)');
+                    grad.addColorStop(1, 'rgba(100, 255, 218, 0)');
+                    ctx.lineWidth = 2;
+                    ctx.strokeStyle = grad;
+                    ctx.stroke();
+                }
+
+                // ── Main glow at cursor ──
+                const glow = ctx.createRadialGradient(mouseX, mouseY, 0, mouseX, mouseY, 180);
+                glow.addColorStop(0, 'rgba(100, 255, 218, 0.06)');
+                glow.addColorStop(0.3, 'rgba(100, 255, 218, 0.025)');
+                glow.addColorStop(0.7, 'rgba(100, 255, 218, 0.005)');
+                glow.addColorStop(1, 'rgba(100, 255, 218, 0)');
+                ctx.fillStyle = glow;
+                ctx.fillRect(mouseX - 180, mouseY - 180, 360, 360);
+
+                // Secondary warm glow (slight offset for depth)
+                const glow2 = ctx.createRadialGradient(
+                    mouseX + 20, mouseY - 15, 0,
+                    mouseX + 20, mouseY - 15, 100
+                );
+                glow2.addColorStop(0, 'rgba(100, 220, 255, 0.03)');
+                glow2.addColorStop(1, 'rgba(100, 220, 255, 0)');
+                ctx.fillStyle = glow2;
+                ctx.fillRect(mouseX - 100, mouseY - 120, 240, 230);
+
+                // ── Particles ──
+                for (let i = particles.length - 1; i >= 0; i--) {
+                    const p = particles[i];
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    p.vy -= 0.01; // gentle upward drift
+                    p.life -= p.decay;
+
+                    if (p.life <= 0) {
+                        particles.splice(i, 1);
+                        continue;
+                    }
+
+                    const a = p.life * 0.3;
+                    const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.size);
+                    g.addColorStop(0, `hsla(${p.hue}, 100%, 70%, ${a})`);
+                    g.addColorStop(1, `hsla(${p.hue}, 100%, 70%, 0)`);
+                    ctx.fillStyle = g;
+                    ctx.fillRect(p.x - p.size, p.y - p.size, p.size * 2, p.size * 2);
+                }
+
+                requestAnimationFrame(draw);
+            }
+
+            requestAnimationFrame(draw);
+        })();
+    </script>
+
+    <script>
+        function subscribeSubstack(e, form) {
+            e.preventDefault();
+            const email = form.email.value.trim();
+            if (!email) return;
+            
+            const btn = form.querySelector('button');
+            btn.textContent = 'Abriendo Substack...';
+            btn.disabled = true;
+            
+            // Redirect to Substack with email pre-filled
+            window.open(
+                'https://nexonoruega.substack.com/subscribe?email=' + encodeURIComponent(email),
+                '_blank'
+            );
+            
+            // Visual feedback
+            setTimeout(() => {
+                btn.textContent = '✓ Confirma en Substack';
+                btn.style.background = 'rgba(100,255,218,0.15)';
+                form.email.value = '';
+            }, 300);
+            
+            setTimeout(() => {
+                btn.textContent = 'Suscribirme';
+                btn.style.background = '';
+                btn.disabled = false;
+            }, 5000);
+        }
+    </script>
+</body>
+</html>
