@@ -431,6 +431,27 @@
     .version.c .etiqueta { color: var(--noche); }
     .version.c p { color: var(--noche); font-size: 1.18rem; }
 
+    /* ============ Marcado: subrayado total, rotulador aurora ============ */
+    mark.marcado {
+      color: inherit;
+      background-color: transparent;
+      background-image: linear-gradient(180deg, rgba(63, 203, 148, 0.30), rgba(63, 203, 148, 0.22));
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+      border-radius: 0.25em 0.4em 0.3em 0.35em / 0.4em 0.25em 0.35em 0.3em;
+      padding: 0.06em 0.16em;
+      margin: 0 -0.06em;
+      -webkit-box-decoration-break: clone;
+      box-decoration-break: clone;
+    }
+    /* El rotulador se pasa de izquierda a derecha cuando el bloque revela */
+    .js .reveal mark.marcado {
+      background-size: 0% 100%;
+      transition: background-size 0.7s var(--ease-suave);
+      transition-delay: calc(var(--d, 0s) + 0.55s);
+    }
+    .js .reveal.visible mark.marcado { background-size: 100% 100%; }
+
     /* ============ DATO NEXO ============ */
     .dato { text-align: left; padding-bottom: 0; }
     .dato .numero {
@@ -711,6 +732,7 @@
       .celda { transition: none !important; animation: none !important; }
       .reticula.activa .celda.on { animation: none !important; }
       .version.c::before, .contrato::before { transform: scaleY(1); transition: none; }
+      .js .reveal mark.marcado { background-size: 100% 100%; transition: none; }
       .js .versiones .version:not(.c).visible { opacity: 1; }
       .js .pieza:not(.visible) .titulo::before { transform: scaleX(1); }
       header::before, .header-inner { transition: none; }
@@ -767,7 +789,7 @@
       </svg>
       <p class="kicker-caesar caesar reveal" style="transition-delay:.08s">Nexo Noruega</p>
       <h1 class="reveal" style="transition-delay:.16s">Cómo funciona la vida donde <em>las cosas funcionan.</em></h1>
-      <p class="sub reveal" style="transition-delay:.26s">Todo el mundo tiene una versión de Noruega. La del que vino de vacaciones, la del que se fue dolido, la del que llegó hace ocho meses y ya da charlas. Esta es la otra: <strong>la de dentro, con el cálculo completo.</strong></p>
+      <p class="sub reveal" style="transition-delay:.26s">Todo el mundo tiene una versión de Noruega. La del que vino de vacaciones, la del que se fue dolido, la del que llegó el jueves pasado y ya da charlas. Esta es la otra: <strong>la de dentro, con el cálculo completo.</strong></p>
       <div class="reveal" style="transition-delay:.36s">
         <a class="cta" href="https://nexonoruega.substack.com/subscribe">Suscribirme</a>
         <p class="microcopy">Sin trucos, sin paraíso, sin clickbait.</p>
@@ -791,15 +813,15 @@
       <div class="versiones" data-stagger>
         <div class="version reveal">
           <span class="etiqueta">Versión A</span>
-          <p>El paraíso de los vlogs de auroras. Dron sobre el fiordo, música épica, cero preguntas incómodas. Te emociona. No te sirve para decidir nada.</p>
+          <p>El paraíso de los vlogs de auroras. Dron sobre el fiordo, música épica, cero preguntas incómodas. <mark class="marcado">Te emociona.</mark> No te sirve para decidir nada.</p>
         </div>
         <div class="version reveal">
           <span class="etiqueta">Versión B</span>
-          <p>La queja del que nunca salió de su burbuja. Todo es frío, todo es caro, todos son raros. Te asusta. Y te sirve igual de poco.</p>
+          <p>La queja del que nunca salió de su burbuja. Todo es frío, todo es caro, todos son raros. <mark class="marcado">Te asusta.</mark> Y te sirve igual de poco.</p>
         </div>
         <div class="version c reveal">
           <span class="etiqueta">Versión C · Nexo</span>
-          <p>Un sistema que funciona, con grietas reales. Lo que te devuelve y lo que te cobra. Lo que presume y lo que calla. La única versión con la que se puede decidir.</p>
+          <p>Un sistema que funciona, con grietas reales. Lo que te devuelve y lo que te cobra. Lo que presume y lo que calla. <mark class="marcado">La única versión con la que se puede decidir.</mark></p>
         </div>
       </div>
       <p class="reveal" style="--d:.3s; font-style:italic; color:var(--fiordo); font-size:1.18rem; margin-top:42px; max-width:50ch">Las dos primeras se venden solas. La tercera hay que escribirla.</p>
@@ -832,15 +854,15 @@
       <div class="entrega" data-stagger>
         <div class="pieza reveal">
           <span class="titulo">Un sistema, decodificado</span>
-          <p>Impuestos, vivienda, sanidad, guardería. Qué te cobra, qué te devuelve y dónde se atasca. La maquinaria, no el folleto.</p>
+          <p>Impuestos, vivienda, sanidad, guardería. Qué te cobra, qué te devuelve y dónde se atasca. <mark class="marcado">La maquinaria, no el folleto.</mark></p>
         </div>
         <div class="pieza reveal">
           <span class="titulo">Todas las fases</span>
-          <p>Llegar, el idioma, el trabajo, criar aquí. Lo que viví y lo que opino de cada una. Cuando opino, traigo la fuente.</p>
+          <p>Llegar, el idioma, el trabajo, criar aquí. Lo que viví y lo que opino de cada una. <mark class="marcado">Cuando opino, traigo la fuente.</mark></p>
         </div>
         <div class="pieza reveal">
           <span class="titulo">La grieta</span>
-          <p>Las listas de espera, los precios, los inviernos que pesan. Sin la parte incómoda no hay análisis, hay propaganda.</p>
+          <p>Las listas de espera, los precios, los inviernos que pesan. Sin la parte incómoda <mark class="marcado">no hay análisis, hay propaganda.</mark></p>
         </div>
       </div>
     </div>
