@@ -1148,6 +1148,20 @@
         });
       }, { threshold: 0.18 });
       elementos.forEach(el => io.observe(el));
+
+      /* Red de seguridad: lo que queda sobre el pliegue nunca se queda oculto,
+         aunque la página cargue en una pestaña en segundo plano. */
+      function rescatar() {
+        elementos.forEach(el => {
+          if (!el.classList.contains('visible') && el.getBoundingClientRect().top < innerHeight) {
+            el.classList.add('visible');
+          }
+        });
+      }
+      addEventListener('load', () => setTimeout(rescatar, 1200));
+      document.addEventListener('visibilitychange', () => {
+        if (!document.hidden) setTimeout(rescatar, 600);
+      });
     })();
 
     /* ============ Cabecera: cristal oscuro al hacer scroll ============ */
