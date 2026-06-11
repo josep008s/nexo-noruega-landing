@@ -328,6 +328,26 @@
       from { transform: translate3d(-6px, 0, 0); }
       to   { transform: translate3d(6px, 0, 0); }
     }
+    /* Vetas de agua en calma, derivando despacio */
+    .fiordo .brillo-agua rect { animation: brillo-deriva 9s ease-in-out infinite alternate; }
+    .fiordo .brillo-agua rect:nth-of-type(2) { animation-duration: 12s; animation-delay: -4s; }
+    .fiordo .brillo-agua rect:nth-of-type(3) { animation-duration: 10s; animation-delay: -7s; }
+    .fiordo .brillo-agua rect:nth-of-type(4) { animation-duration: 14s; animation-delay: -2s; }
+    .fiordo .brillo-agua rect:nth-of-type(5) { animation-duration: 11s; animation-delay: -5s; }
+    @keyframes brillo-deriva {
+      from { transform: translate3d(-7px, 0, 0); }
+      to   { transform: translate3d(7px, 0, 0); }
+    }
+    /* La escena despierta cuando el lector llega a ella */
+    @media (prefers-reduced-motion: no-preference) {
+      .js .fiordo .bruma, .js .fiordo .agua, .js .fiordo .brillo-agua { opacity: 0; }
+      .js .fiordo .bruma { transition: opacity 2.4s ease 0.2s; }
+      .js .fiordo .agua { transition: opacity 2.8s ease 0.4s; }
+      .js .fiordo .brillo-agua { transition: opacity 3s ease 0.9s; }
+      .js .fiordo.viva .bruma.b1 { opacity: .13; }
+      .js .fiordo.viva .bruma.b2 { opacity: .11; }
+      .js .fiordo.viva .agua, .js .fiordo.viva .brillo-agua { opacity: 1; }
+    }
 
     /* ============ Hero ============ */
     .hero {
@@ -754,7 +774,7 @@
       .reveal, .js .reveal { opacity: 1 !important; transform: none !important; transition: none !important; clip-path: none !important; }
       .cta:hover { transform: none; }
       .estrellas, .niebla, .veta, .cielo::before { animation: none !important; }
-      .fiordo .bruma, .fiordo .aur-pulso, .fiordo .reflejo-a, .fiordo .reflejo-b { animation: none !important; }
+      .fiordo .bruma, .fiordo .aur-pulso, .fiordo .reflejo-a, .fiordo .reflejo-b, .fiordo .brillo-agua rect { animation: none !important; }
       .aurora { transition: none; }
       .js .runa-grande path { animation: none; stroke-dasharray: none; stroke-dashoffset: 0; }
       .celda { transition: none !important; animation: none !important; }
@@ -848,7 +868,7 @@
           <stop offset="1" stop-color="#F3F5F4"/>
         </linearGradient>
         <radialGradient id="f1-gaur" cx=".5" cy=".5" r=".5">
-          <stop offset="0" stop-color="#3FCB94" stop-opacity=".10"/>
+          <stop offset="0" stop-color="#3FCB94" stop-opacity=".16"/>
           <stop offset="1" stop-color="#3FCB94" stop-opacity="0"/>
         </radialGradient>
         <linearGradient id="f1-gfade" x1="0" y1="0" x2="0" y2="1">
@@ -862,21 +882,41 @@
         <filter id="f1-fmist" x="-50%" y="-300%" width="200%" height="700%"><feGaussianBlur stdDeviation="8"/></filter>
       </defs>
 
-      <!-- resto de aurora en el cielo del alba -->
-      <ellipse class="aur-pulso" cx="340" cy="40" rx="300" ry="42" fill="url(#f1-gaur)"/>
+      <!-- la aurora moribunda barre el cielo del alba -->
+      <g class="aur-pulso" transform="rotate(-5 400 44)">
+        <ellipse cx="400" cy="44" rx="360" ry="40" fill="url(#f1-gaur)"/>
+        <ellipse cx="780" cy="22" rx="280" ry="26" fill="url(#f1-gaur)" opacity=".7"/>
+      </g>
 
       <!-- cordilleras con perspectiva atmosférica, separadas por bancos de niebla -->
       <g class="capa" data-prof="0.10"><use href="#f1-far" fill="url(#f1-gfar)"/></g>
       <ellipse class="bruma b1" cx="480" cy="112" rx="280" ry="11" fill="#F3F5F4" opacity=".13" filter="url(#f1-fmist)"/>
       <g class="capa" data-prof="0.20"><use href="#f1-mid" fill="url(#f1-gmid)"/></g>
       <ellipse class="bruma b2" cx="1010" cy="138" rx="300" ry="10" fill="#F3F5F4" opacity=".11" filter="url(#f1-fmist)"/>
-      <g class="capa" data-prof="0.36"><use href="#f1-near" fill="url(#f1-gnear)"/></g>
+      <g class="capa" data-prof="0.36">
+        <use href="#f1-near" fill="url(#f1-gnear)"/>
+        <!-- nieve en las cumbres del macizo -->
+        <g fill="#F3F5F4" opacity=".14">
+          <path d="M1180,52 L1220,44 L1260,40 L1252,50 L1216,56 Z"/>
+          <path d="M1300,42 L1340,38 L1368,41 L1338,50 L1312,48 Z"/>
+          <path d="M215,104 L240,106 L262,99 L240,114 L222,112 Z"/>
+        </g>
+      </g>
 
       <!-- el agua: tapa la base de las cordilleras para que el parallax respire -->
       <rect x="0" y="170" width="1440" height="130" fill="url(#f1-gagua)"/>
 
+      <!-- vetas de agua en calma -->
+      <g class="brillo-agua">
+        <rect x="120" y="182" width="180" height="1.4" rx=".7" fill="#0E1B26" opacity=".10"/>
+        <rect x="430" y="192" width="90" height="1.2" rx=".6" fill="#0E1B26" opacity=".07"/>
+        <rect x="760" y="186" width="220" height="1.4" rx=".7" fill="#0E1B26" opacity=".09"/>
+        <rect x="1120" y="196" width="130" height="1.2" rx=".6" fill="#0E1B26" opacity=".07"/>
+        <rect x="300" y="201" width="70" height="1" rx=".5" fill="#3FCB94" opacity=".10"/>
+      </g>
+
       <!-- reflejo vivo: dos copias desfasadas meciéndose en contrafase -->
-      <g class="capa" data-prof="-0.12" mask="url(#f1-magua)">
+      <g class="capa agua" data-prof="-0.12" mask="url(#f1-magua)">
         <g transform="translate(0,340) scale(1,-1)">
           <g class="reflejo-a" filter="url(#f1-fsoft)" opacity=".26">
             <use href="#f1-far" fill="#4E7081" opacity=".5"/>
@@ -965,7 +1005,7 @@
   <section class="claro paraquien" style="padding-top:0">
     <div class="wrap">
       <p class="kicker reveal">Para quién</p>
-      <p class="reveal">Para el que busca lo que yo buscaba antes de venir a Noruega: <mark class="marcado">alguien que ya haya pasado por todo y cuente su verdad</mark>, además con datos. No el que llegó el jueves y ya es experto. No el que lleva años pero solo se mueve entre expats. Esa gente casi nunca tiene tiempo ni ganas de contarlo. Yo ahora sí, aprovecha Nexo Noruega.</p>
+      <p class="reveal">Para el que busca lo que yo buscaba antes de venir a Noruega: <mark class="marcado">alguien que ya haya pasado por todo y cuente su verdad</mark>, además con datos. No el que llegó anteayer y ya es experto. No el que lleva años pero solo se mueve entre expats. Esa gente casi nunca tiene tiempo ni ganas de contarlo. Yo ahora sí, aprovecha Nexo Noruega.</p>
     </div>
   </section>
 
@@ -1279,7 +1319,12 @@
         es.forEach(e => {
           const f = fiordos.find(x => x.el === e.target);
           if (!f) return;
-          e.isIntersecting ? visibles.add(f) : visibles.delete(f);
+          if (e.isIntersecting) {
+            visibles.add(f);
+            f.el.classList.add('viva');  /* la escena despierta una sola vez */
+          } else {
+            visibles.delete(f);
+          }
         });
         actualizar();
       }, { rootMargin: '60px' });
