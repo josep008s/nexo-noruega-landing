@@ -252,6 +252,18 @@
       to   { transform: translate3d(3%, 1.5%, 0) scale(1); }
     }
 
+    /* ============ Nieve en las secciones claras ============ */
+    .claro { position: relative; }
+    .claro .wrap { position: relative; z-index: 1; }
+    .cielo-claro {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .cielo-claro canvas { width: 100%; height: 100%; display: block; }
+
     /* ============ Estrellas y niebla ============ */
     .estrellas {
       position: absolute;
@@ -1271,6 +1283,68 @@
       { rgb: '55,158,134', alfa: 0.28, resp: 12000, fase: 2.9, base: 0.44, amp: 0.10, incl: 0.12, f1: 0.040, f2: 0.088, v1: V(44000), v2: V(35000) },
       { rgb: '63,203,148', alfa: 0.22, resp: 9000,  fase: 5.0, base: 0.66, amp: 0.08, incl: 0.10, f1: 0.055, f2: 0.115, v1: V(36000), v2: V(29000) }
     ]);
+
+    /* ============ Nieve serena en las secciones claras ============ */
+    function crearNieve(seccion) {
+      if (reduceMotion) return;
+      const cont = document.createElement('div');
+      cont.className = 'cielo-claro';
+      cont.setAttribute('aria-hidden', 'true');
+      seccion.prepend(cont);
+      const c = document.createElement('canvas');
+      cont.appendChild(c);
+      const ctx = c.getContext('2d');
+      let W = 1, H = 1, copos = [];
+
+      function nuevoCopo(inicial) {
+        return {
+          x: Math.random() * W,
+          y: inicial ? Math.random() * H : -6,
+          r: 1 + Math.random() * 2,
+          v: 14 + Math.random() * 10,
+          amp: 8 + Math.random() * 14,
+          per: 4000 + Math.random() * 4000,
+          fase: Math.random() * Math.PI * 2,
+          tono: Math.random() < 0.5 ? '44,90,114' : '141,161,171',
+          alfa: 0.12 + Math.random() * 0.18
+        };
+      }
+      function medirNieve() {
+        const r = cont.getBoundingClientRect();
+        W = Math.max(1, Math.round(r.width));
+        H = Math.max(1, Math.round(r.height));
+        c.width = W; c.height = H;
+        const n = Math.round(W / (esMovil ? 130 : 90));
+        copos = [];
+        for (let i = 0; i < n; i++) copos.push(nuevoCopo(true));
+      }
+      let ultimo = -100;
+      function pintar(t) {
+        if (t - ultimo < 33) return;
+        const dt = Math.min(100, t - ultimo) / 1000;
+        ultimo = t;
+        ctx.clearRect(0, 0, W, H);
+        for (const k of copos) {
+          k.y += k.v * dt;
+          if (k.y > H + 6) Object.assign(k, nuevoCopo(false));
+          const x = k.x + Math.sin(t * Math.PI * 2 / k.per + k.fase) * k.amp;
+          ctx.beginPath();
+          ctx.arc(x, k.y, k.r, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(' + k.tono + ',' + k.alfa.toFixed(2) + ')';
+          ctx.fill();
+        }
+      }
+      medirNieve();
+      hooksMedida.push(() => { medirNieve(); ultimo = -100; pintar(0); });
+      pintar(0);
+
+      const sub = Ticker.add(pintar);
+      const io = new IntersectionObserver(es => {
+        es[0].isIntersecting ? sub.on() : sub.off();
+      }, { rootMargin: '80px' });
+      io.observe(seccion);
+    }
+    document.querySelectorAll('section.claro').forEach(crearNieve);
 
     /* El único crescendo de la página: el cielo responde al contrato final */
     (function crescendo() {
