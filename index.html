@@ -292,14 +292,41 @@
       overflow: hidden;
       background: var(--nieve);
     }
-    .costura-1 { height: 120px; }
-    .costura-3 { height: 90px; }
+    /* Amanecer sobre el fiordo: la noche del hero se disuelve en el agua.
+       Todos los tonos son mezclas de noche, fiordo, niebla y nieve. */
+    .costura-1 {
+      height: clamp(150px, 21vw, 300px);
+      background: linear-gradient(180deg,
+        #0E1B26 0%, #16313F 7%, #38596B 16%, #6F8C99 26%,
+        #ABBDC2 36%, #D3DCDE 48%, #E6EBEC 56.4%, #EDF1F1 72%, #F3F5F4 88%);
+    }
+    /* Anochecer tierra adentro: el día se apaga hacia el cierre */
+    .costura-3 {
+      height: clamp(110px, 15.3vw, 220px);
+      background: linear-gradient(180deg,
+        #F3F5F4 0%, #E1E7E8 16%, #B9C6CA 34%, #7E96A1 50%,
+        #456378 66%, #1C3A4C 82%, #0E1B26 100%);
+    }
     .fiordo svg {
       position: absolute;
       inset: 0;
       width: 100%; height: 100%;
       overflow: visible;
-      will-change: transform;
+    }
+    .fiordo .capa { will-change: transform; }
+    .fiordo .bruma { animation: bruma-deriva 60s ease-in-out infinite alternate; }
+    .fiordo .bruma.b2 { animation-duration: 78s; animation-delay: -32s; }
+    @keyframes bruma-deriva {
+      from { transform: translate3d(-42px, 0, 0); }
+      to   { transform: translate3d(42px, 0, 0); }
+    }
+    .fiordo .aur-pulso { animation: aurora-respira 12s ease-in-out infinite alternate; }
+    @keyframes aurora-respira { from { opacity: .6; } to { opacity: 1; } }
+    .fiordo .reflejo-a { animation: reflejo-vaiven 14s ease-in-out infinite alternate; }
+    .fiordo .reflejo-b { animation: reflejo-vaiven 19s ease-in-out -9s infinite alternate-reverse; }
+    @keyframes reflejo-vaiven {
+      from { transform: translate3d(-6px, 0, 0); }
+      to   { transform: translate3d(6px, 0, 0); }
     }
 
     /* ============ Hero ============ */
@@ -727,6 +754,7 @@
       .reveal, .js .reveal { opacity: 1 !important; transform: none !important; transition: none !important; clip-path: none !important; }
       .cta:hover { transform: none; }
       .estrellas, .niebla, .veta, .cielo::before { animation: none !important; }
+      .fiordo .bruma, .fiordo .aur-pulso, .fiordo .reflejo-a, .fiordo .reflejo-b { animation: none !important; }
       .aurora { transition: none; }
       .js .runa-grande path { animation: none; stroke-dasharray: none; stroke-dashoffset: 0; }
       .celda { transition: none !important; animation: none !important; }
@@ -747,9 +775,6 @@
       section { padding: 76px 0; }
       .hero { padding-top: 110px; }
       .dato { padding-bottom: 0; }
-      .costura-1 { height: 72px; }
-      .costura-3 { height: 56px; }
-      .costura-1 .capa-fondo { display: none; }
       .lamina { height: 90px; margin-top: 54px; }
     }
   </style>
@@ -798,11 +823,79 @@
     </div>
   </section>
 
-  <!-- Costura 1: el fiordo baja del hero hacia la luz -->
+  <!-- Costura 1: el fiordo al amanecer. La noche se disuelve en el agua. -->
   <div class="fiordo costura-1" aria-hidden="true">
-    <svg class="capa capa-fondo" data-prof="0.27" viewBox="0 0 1440 140" preserveAspectRatio="none"><path fill="rgba(44,90,114,.22)" d="M0,-40 H1440 V78 H1330 L1280,112 H1080 L1020,76 H850 L800,118 H600 L550,84 H380 L330,120 H160 L120,92 H0 Z"/></svg>
-    <svg class="capa" data-prof="0.16" viewBox="0 0 1440 140" preserveAspectRatio="none"><path fill="rgba(44,90,114,.45)" d="M0,-40 H1440 V52 H1280 L1220,96 H1040 L990,60 H800 L750,100 H560 L510,68 H330 L280,104 H120 L80,70 H0 Z"/></svg>
-    <svg class="capa" data-prof="0" viewBox="0 0 1440 140" preserveAspectRatio="none"><path fill="#0E1B26" d="M0,-40 H1440 V34 H1180 L1120,72 H900 L850,40 H640 L590,80 H380 L330,48 H0 Z"/></svg>
+    <svg class="escena" viewBox="0 0 1440 300" preserveAspectRatio="none">
+      <defs>
+        <path id="f1-far" d="M0,102 L60,96 L120,86 L180,78 L230,72 L280,74 L330,82 L390,92 L450,100 L510,104 L570,100 L630,92 L690,84 L740,78 L790,80 L840,86 L900,94 L960,100 L1020,104 L1080,100 L1140,94 L1200,90 L1260,92 L1320,96 L1380,94 L1440,90 L1440,205 L0,205 Z"/>
+        <path id="f1-mid" d="M0,126 L50,122 L90,112 L130,104 L160,96 L190,98 L220,90 L250,94 L290,102 L340,114 L390,124 L450,130 L510,134 L570,130 L620,122 L670,112 L710,104 L750,100 L790,104 L830,112 L880,122 L930,130 L980,134 L1040,130 L1090,122 L1140,116 L1190,112 L1240,116 L1290,124 L1340,128 L1390,126 L1440,122 L1440,205 L0,205 Z"/>
+        <path id="f1-near" d="M0,150 L60,148 L110,140 L150,128 L185,114 L215,104 L240,106 L270,96 L300,98 L330,108 L370,124 L420,140 L480,152 L560,158 L640,160 L720,156 L780,148 L830,136 L880,120 L920,108 L960,100 L990,92 L1020,94 L1060,80 L1100,70 L1140,58 L1180,52 L1220,44 L1260,40 L1300,42 L1340,38 L1380,42 L1420,44 L1440,46 L1440,205 L0,205 Z"/>
+        <linearGradient id="f1-gfar" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#3E5D6F" stop-opacity=".85"/>
+          <stop offset="1" stop-color="#6D8794" stop-opacity=".75"/>
+        </linearGradient>
+        <linearGradient id="f1-gmid" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#24465A"/>
+          <stop offset="1" stop-color="#44687D" stop-opacity=".95"/>
+        </linearGradient>
+        <linearGradient id="f1-gnear" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#0E1B26"/>
+          <stop offset="1" stop-color="#1B3D4F"/>
+        </linearGradient>
+        <linearGradient id="f1-gagua" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#BFCCCF"/>
+          <stop offset=".5" stop-color="#DEE5E6"/>
+          <stop offset="1" stop-color="#F3F5F4"/>
+        </linearGradient>
+        <radialGradient id="f1-gaur" cx=".5" cy=".5" r=".5">
+          <stop offset="0" stop-color="#3FCB94" stop-opacity=".10"/>
+          <stop offset="1" stop-color="#3FCB94" stop-opacity="0"/>
+        </radialGradient>
+        <linearGradient id="f1-gfade" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#fff"/>
+          <stop offset="1" stop-color="#000"/>
+        </linearGradient>
+        <mask id="f1-magua">
+          <rect x="0" y="170" width="1440" height="95" fill="url(#f1-gfade)"/>
+        </mask>
+        <filter id="f1-fsoft" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="2.6"/></filter>
+        <filter id="f1-fmist" x="-50%" y="-300%" width="200%" height="700%"><feGaussianBlur stdDeviation="8"/></filter>
+      </defs>
+
+      <!-- resto de aurora en el cielo del alba -->
+      <ellipse class="aur-pulso" cx="340" cy="40" rx="300" ry="42" fill="url(#f1-gaur)"/>
+
+      <!-- cordilleras con perspectiva atmosférica, separadas por bancos de niebla -->
+      <g class="capa" data-prof="0.10"><use href="#f1-far" fill="url(#f1-gfar)"/></g>
+      <ellipse class="bruma b1" cx="480" cy="112" rx="280" ry="11" fill="#F3F5F4" opacity=".13" filter="url(#f1-fmist)"/>
+      <g class="capa" data-prof="0.20"><use href="#f1-mid" fill="url(#f1-gmid)"/></g>
+      <ellipse class="bruma b2" cx="1010" cy="138" rx="300" ry="10" fill="#F3F5F4" opacity=".11" filter="url(#f1-fmist)"/>
+      <g class="capa" data-prof="0.36"><use href="#f1-near" fill="url(#f1-gnear)"/></g>
+
+      <!-- el agua: tapa la base de las cordilleras para que el parallax respire -->
+      <rect x="0" y="170" width="1440" height="130" fill="url(#f1-gagua)"/>
+
+      <!-- reflejo vivo: dos copias desfasadas meciéndose en contrafase -->
+      <g class="capa" data-prof="-0.12" mask="url(#f1-magua)">
+        <g transform="translate(0,340) scale(1,-1)">
+          <g class="reflejo-a" filter="url(#f1-fsoft)" opacity=".26">
+            <use href="#f1-far" fill="#4E7081" opacity=".5"/>
+            <use href="#f1-mid" fill="#1F4254" opacity=".65"/>
+            <use href="#f1-near" fill="#0E1B26" opacity=".85"/>
+          </g>
+          <g class="reflejo-b" opacity=".10">
+            <use href="#f1-mid" fill="#1F4254" opacity=".7"/>
+            <use href="#f1-near" fill="#0E1B26" opacity=".9"/>
+          </g>
+        </g>
+        <!-- el reflejo verde de la aurora en el agua -->
+        <ellipse cx="350" cy="206" rx="110" ry="30" fill="url(#f1-gaur)" filter="url(#f1-fsoft)"/>
+      </g>
+
+      <!-- línea de agua -->
+      <rect x="0" y="169.2" width="1440" height="1.2" fill="#0E1B26" opacity=".28"/>
+      <rect x="0" y="172" width="1440" height="1" fill="#0E1B26" opacity=".07"/>
+    </svg>
   </div>
 
   <!-- ============ VERSIÓN C ============ -->
@@ -878,8 +971,31 @@
 
   <!-- Costura 3: la noche sube a buscar al lector -->
   <div class="fiordo costura-3" aria-hidden="true">
-    <svg class="capa" data-prof="0.16" viewBox="0 0 1440 90" preserveAspectRatio="none"><path fill="rgba(44,90,114,.45)" d="M0,130 H1440 V48 H1300 L1250,20 H1060 L1010,52 H840 L790,26 H600 L550,58 H380 L330,30 H150 L100,56 H0 Z"/></svg>
-    <svg class="capa" data-prof="0" viewBox="0 0 1440 90" preserveAspectRatio="none"><path fill="#0E1B26" d="M0,130 H1440 V64 H1220 L1170,32 H950 L900,66 H700 L650,40 H460 L410,72 H200 L150,46 H0 Z"/></svg>
+    <svg class="escena" viewBox="0 0 1440 220" preserveAspectRatio="none">
+      <defs>
+        <linearGradient id="f3-gmid" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#44687D" stop-opacity=".7"/>
+          <stop offset="1" stop-color="#7E96A1" stop-opacity=".5"/>
+        </linearGradient>
+        <linearGradient id="f3-gnear" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#15303F"/>
+          <stop offset="1" stop-color="#0E1B26"/>
+        </linearGradient>
+        <radialGradient id="f3-gaur" cx=".5" cy=".5" r=".5">
+          <stop offset="0" stop-color="#3FCB94" stop-opacity=".08"/>
+          <stop offset="1" stop-color="#3FCB94" stop-opacity="0"/>
+        </radialGradient>
+        <filter id="f3-fmist" x="-50%" y="-300%" width="200%" height="700%"><feGaussianBlur stdDeviation="10"/></filter>
+      </defs>
+      <g class="capa" data-prof="0.12">
+        <path fill="url(#f3-gmid)" d="M0,148 L60,144 L120,134 L180,124 L230,116 L280,112 L330,116 L380,124 L440,132 L500,138 L560,140 L620,134 L680,124 L730,114 L780,108 L830,110 L880,118 L940,128 L1000,136 L1060,140 L1120,136 L1180,130 L1240,126 L1300,128 L1360,132 L1440,130 L1440,224 L0,224 Z"/>
+      </g>
+      <ellipse class="bruma b1" cx="720" cy="128" rx="320" ry="13" fill="#F3F5F4" opacity=".14" filter="url(#f3-fmist)"/>
+      <g class="capa" data-prof="0">
+        <path fill="url(#f3-gnear)" d="M0,70 L40,62 L80,56 L120,52 L160,54 L200,50 L240,56 L280,64 L320,76 L360,90 L400,102 L450,116 L500,128 L560,138 L620,146 L690,150 L760,152 L840,152 L920,150 L1000,152 L1100,150 L1200,151 L1300,150 L1380,151 L1440,151 L1440,224 L0,224 Z"/>
+      </g>
+      <ellipse class="aur-pulso" cx="1100" cy="196" rx="340" ry="34" fill="url(#f3-gaur)"/>
+    </svg>
   </div>
 
   <!-- ============ CIERRE ============ -->
