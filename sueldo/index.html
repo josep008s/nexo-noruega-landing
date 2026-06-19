@@ -96,6 +96,7 @@
 
     .res-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:18px}
     .res-head .cat{font-family:var(--sg);font-weight:500;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--niebla);text-align:right}
+    .aprox-res{color:var(--aurora);font-family:var(--sg);font-size:.8rem;letter-spacing:.02em;margin:0 0 16px}
     .blk{border-top:1px solid var(--linea);padding-top:16px;margin-top:18px}
     .blk:first-of-type{border-top:none;padding-top:0;margin-top:0}
     .blk .lab{font-family:var(--sg);font-weight:700;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--niebla);margin-bottom:6px}
@@ -153,22 +154,7 @@
       <p class="sello" id="sello">SSB · Tabla 11418 · 2025</p>
     </section>
 
-    <!-- PANTALLA 2: gate de correo -->
-    <section id="s-gate" class="step hidden">
-      <button class="back" id="back">‹ otro oficio</button>
-      <p class="kicker">El cálculo está listo</p>
-      <p class="gate-of" id="gate-of">—<span class="cat" id="gate-cat"></span></p>
-      <p class="approx hidden" id="gate-approx"></p>
-      <p class="gate-text">Para ver lo que cobra este oficio en Noruega, dime a dónde te lo mando.</p>
-      <div class="field">
-        <input id="email" type="email" autocomplete="email" placeholder="tu@correo.com" aria-label="Tu correo">
-      </div>
-      <button class="btn" id="unlock">Ver lo que cobra</button>
-      <p class="micro">Te lo mando también por correo. Sin ruido. Te puedes ir cuando quieras.</p>
-      <p class="consent">Al continuar aceptas recibir el cálculo y la newsletter de Nexo Noruega. Datos de SSB y Skatteetaten.</p>
-    </section>
-
-    <!-- PANTALLA 3: resultado -->
+    <!-- PANTALLA 2: resultado -->
     <section id="s-result" class="step hidden" aria-live="polite"></section>
   </main>
 
