@@ -1,5 +1,6 @@
 // Calculadora de sueldos por oficio · Nexo Noruega
 // Datos: SSB tabla 11418 (2025) + Skatteetaten 2026. Todo client-side.
+// Flujo: el usuario escribe su oficio y ve el resultado directamente. Sin correo.
 
 (function () {
   "use strict";
@@ -7,19 +8,11 @@
   var DATA = null;
   var CATS = {};
   var current = null; // { o, s }
-  var UTM = parseUtm();
 
   var $ = function (id) { return document.getElementById(id); };
   var inp = $("oficio"), ac = $("ac"), go = $("go");
 
   // ---------- utilidades ----------
-  function parseUtm() {
-    var q = new URLSearchParams(location.search), o = {};
-    ["utm_source", "utm_medium", "utm_campaign", "t"].forEach(function (k) {
-      if (q.get(k)) o[k] = q.get(k);
-    });
-    return o;
-  }
   function norm(s) {
     return (s || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "")
       .replace(/\b(soy|un|una|el|la|los|las|de|del|trabajo|como|en|para|mi|hago|hacer|quiero|ser)\b/g, " ")
@@ -111,7 +104,7 @@
 
   // ---------- navegación entre pantallas ----------
   function show(id) {
-    ["s-input", "s-gate", "s-result"].forEach(function (s) { $(s).classList.toggle("hidden", s !== id); });
+    ["s-input", "s-result"].forEach(function (s) { $(s).classList.toggle("hidden", s !== id); });
     var el = $(id); el.classList.remove("step"); void el.offsetWidth; el.classList.add("step");
   }
 
@@ -131,45 +124,17 @@
         ev.preventDefault();
         var x = acItems[+b.getAttribute("data-i")];
         inp.value = cap1(x.o.nombre_es); ac.innerHTML = ""; acItems = [];
-        toGate(x);
+        pick(x);
       });
     });
   }
 
-  // ---------- ir al gate ----------
-  function toGate(match) {
+  // ---------- elegir oficio y mostrar resultado directamente ----------
+  function pick(match) {
     if (!match) { var r = rank(inp.value); if (!r.length) { inp.focus(); return; } match = r[0]; }
     current = match;
     ac.innerHTML = "";
-    $("gate-of").innerHTML = esc(cap1(match.o.nombre_es)) + '<span class="cat">' + esc(CATS[match.o.grupo] || "") + "</span>";
-    var ap = $("gate-approx");
-    if (match.s < 0.6) {
-      ap.textContent = "Te lo calculo como lo más parecido que hay en la tabla. Si no es tu oficio, prueba otra palabra.";
-      ap.classList.remove("hidden");
-    } else { ap.classList.add("hidden"); }
-    show("s-gate");
-    setTimeout(function () { $("email").focus(); }, 60);
-  }
-
-  // ---------- captura de lead (no bloquea la UX) ----------
-  function sendLead(email) {
-    try {
-      fetch("/api/lead", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          email: email,
-          oficio: current.o.nombre_es,
-          styrk: current.o.styrk,
-          confianza: Math.round(current.s * 100) / 100,
-          utm_source: UTM.utm_source || "",
-          utm_medium: UTM.utm_medium || "",
-          utm_campaign: UTM.utm_campaign || "",
-          token: UTM.t || ""
-        }),
-        keepalive: true
-      }).catch(function () {});
-    } catch (e) {}
+    renderResult(match.o, match.s);
   }
 
   // ---------- resultado ----------
@@ -190,16 +155,19 @@
     setTimeout(fin, dur + 250); // garantiza el valor final aunque rAF se pause
   }
 
-  function renderResult(o, email) {
+  function renderResult(o, conf) {
     var sal = o.salario;
     var netoM = netoMes(sal.mediana_mes);
     var serv = DATA.servicios_2026;
     var remate = REMATES[parseInt(o.styrk, 10) % REMATES.length];
     var cat = CATS[o.grupo] || "";
-    var sub = "https://nexonoruega.substack.com/subscribe" + (email ? "?email=" + encodeURIComponent(email) : "");
+    var aprox = conf < 0.6
+      ? '<p class="aprox-res">Es lo más parecido que encontré. Si no es tu oficio, prueba otra palabra.</p>'
+      : "";
 
     var h =
       '<div class="res-head"><span class="kicker" style="margin:0">Dato Nexo</span><span class="cat">' + esc(cap1(o.nombre_es)) + "<br>" + esc(cat) + "</span></div>" +
+      aprox +
 
       '<div class="blk"><p class="lab">Lo que preguntaste</p>' +
         '<p class="num" id="r-bruto">0 kr</p>' +
@@ -227,8 +195,8 @@
       '<div class="palabra"><span class="w">lønnsomt</span>' +
         '<span class="m">que sale a cuenta. No barato: rentable en el sentido honesto, lo que pones y lo que recibes en balance.</span></div>' +
 
-      '<div class="res-cta"><p>No te mando un sueldo. Te mando el cálculo completo, cada quince días.</p>' +
-        '<a class="btn" href="' + esc(sub) + '">Recibir la newsletter</a>' +
+      '<div class="res-cta"><p>Esto fue un número. El sistema entero, cada quince días, en la newsletter.</p>' +
+        '<a class="btn" href="https://nexonoruega.substack.com/subscribe">Quiero la newsletter</a>' +
         '<button class="btn ghost" id="otro">Probar otro oficio</button></div>' +
 
       '<p class="fuente">Sueldos: SSB tabla 11418 (' + DATA.meta.anio_datos + ") · Impuestos: Skatteetaten 2026<br>Cambio orientativo " + DATA.meta.nok_por_eur + " kr/€ · cifras aproximadas</p>";
@@ -243,7 +211,7 @@
   }
 
   function reset() {
-    inp.value = ""; $("email").value = ""; current = null;
+    inp.value = ""; current = null;
     show("s-input"); inp.focus();
   }
 
@@ -253,24 +221,14 @@
     inp.addEventListener("keydown", function (ev) {
       if (ev.key === "ArrowDown" && acItems.length) { ev.preventDefault(); acIdx = Math.min(acItems.length - 1, acIdx + 1); markAc(); }
       else if (ev.key === "ArrowUp" && acItems.length) { ev.preventDefault(); acIdx = Math.max(0, acIdx - 1); markAc(); }
-      else if (ev.key === "Enter") { ev.preventDefault(); if (acIdx >= 0 && acItems[acIdx]) { inp.value = cap1(acItems[acIdx].o.nombre_es); toGate(acItems[acIdx]); } else { toGate(null); } }
+      else if (ev.key === "Enter") { ev.preventDefault(); if (acIdx >= 0 && acItems[acIdx]) { inp.value = cap1(acItems[acIdx].o.nombre_es); pick(acItems[acIdx]); } else { pick(null); } }
       else if (ev.key === "Escape") { ac.innerHTML = ""; acItems = []; }
     });
     inp.addEventListener("blur", function () { setTimeout(function () { ac.innerHTML = ""; }, 150); });
-    go.addEventListener("click", function () { toGate(null); });
-    $("back").addEventListener("click", function () { show("s-input"); inp.focus(); });
-    $("unlock").addEventListener("click", unlock);
-    $("email").addEventListener("keydown", function (ev) { if (ev.key === "Enter") unlock(); });
+    go.addEventListener("click", function () { pick(null); });
   }
   function markAc() {
     Array.prototype.forEach.call(ac.querySelectorAll("button"), function (b, i) { b.classList.toggle("sel", i === acIdx); });
-  }
-  function unlock() {
-    var em = $("email").value.trim();
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)) { $("email").focus(); $("email").style.borderColor = "#ff6b6b"; return; }
-    if (!current) { show("s-input"); return; }
-    sendLead(em);
-    renderResult(current.o, em);
   }
 
   // ---------- arranque ----------

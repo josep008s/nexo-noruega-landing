@@ -1,8 +1,13 @@
 # Calculadora de sueldos (/sueldo) — Puesta en marcha
 
 Embudo: post en RRSS → comentario con palabra clave → ManyChat manda DM con enlace
-→ `/sueldo` → el usuario escribe su oficio + correo → ve sueldo bruto, rango real,
-neto y lo que deja de pagar → suscriptor de la newsletter.
+→ `/sueldo` → el usuario escribe su oficio y ve directamente sueldo bruto, rango
+real, neto y lo que deja de pagar. La newsletter es un botón opcional al final.
+
+Flujo actual SIN correo: no se pide ni se captura el email; el resultado se
+muestra directo. La conversión es el botón "Quiero la newsletter" (enlace a
+Substack). `api/lead.js` + Supabase quedan en el repo por si más adelante se
+quiere reactivar la captura de correo, pero ahora mismo no se usan.
 
 ## Qué hay aquí
 
