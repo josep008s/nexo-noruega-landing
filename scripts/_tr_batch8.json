@@ -1,0 +1,260 @@
+[
+  {
+    "styrk": "8142",
+    "nombre_no": "Operatører innen plastprodukter",
+    "nombre_es": "operario de fabricación de plásticos",
+    "alias_es": ["operario de plasticos", "operaria de plasticos", "operario de plastico", "operarios de plasticos", "operador de plasticos", "operadora de plasticos", "fabricacion de plasticos", "moldeo de plastico", "inyeccion de plastico", "extrusion de plastico", "industria del plastico", "procesado de plasticos"]
+  },
+  {
+    "styrk": "8143",
+    "nombre_no": "Operatører innen papirprodukter",
+    "nombre_es": "operario de fabricación de productos de papel",
+    "alias_es": ["operario de papel", "operaria de papel", "operarios de papel", "operador de papel", "operadora de papel", "fabricacion de papel", "industria papelera", "produccion de papel", "operario de carton", "fabricacion de carton", "papelero", "papelera"]
+  },
+  {
+    "styrk": "8151",
+    "nombre_no": "Spinne- og nøstemaskinoperatører",
+    "nombre_es": "operario de máquinas de hilado y devanado",
+    "alias_es": ["hilandero", "hilandera", "operario de hilado", "operaria de hilado", "operario de hilatura", "maquinista de hilado", "operario de bobinado", "operario de devanado", "operarios de hilado", "operador de maquina de hilar", "hilados textiles", "bobinadora"]
+  },
+  {
+    "styrk": "8152",
+    "nombre_no": "Operatører innen tekstilproduksjon mv.",
+    "nombre_es": "operario de producción textil",
+    "alias_es": ["operario textil", "operaria textil", "operarios textiles", "operador textil", "operadora textil", "produccion textil", "industria textil", "tejedor industrial", "tejedora industrial", "operario de telar", "maquinista textil", "trabajador textil"]
+  },
+  {
+    "styrk": "8153",
+    "nombre_no": "Industrisyere",
+    "nombre_es": "costurero industrial",
+    "alias_es": ["costurero industrial", "costurera industrial", "costureros industriales", "costureras industriales", "operario de confeccion", "operaria de confeccion", "maquinista de confeccion", "operario de costura", "costurera de fabrica", "confeccionista", "operario de maquina de coser", "costura industrial"]
+  },
+  {
+    "styrk": "8157",
+    "nombre_no": "Renseri- og vaskerimaskinoperatører",
+    "nombre_es": "operario de tintorería y lavandería",
+    "alias_es": ["operario de lavanderia", "operaria de lavanderia", "operario de tintoreria", "operaria de tintoreria", "trabajador de lavanderia", "trabajadora de lavanderia", "empleado de tintoreria", "operario de maquina de lavar", "lavandero", "lavandera", "tintorero", "tintorera", "operarios de lavanderia"]
+  },
+  {
+    "styrk": "8160",
+    "nombre_no": "Operatører innen næringsmiddelproduksjon",
+    "nombre_es": "operario de producción de alimentos",
+    "alias_es": ["operario de alimentacion", "operaria de alimentacion", "operario de alimentos", "operarios de alimentos", "operador de alimentos", "operadora de alimentos", "industria alimentaria", "operario de procesado de alimentos", "trabajador de fabrica de alimentos", "operario agroalimentario", "produccion de alimentos", "operario de planta alimentaria"]
+  },
+  {
+    "styrk": "8171",
+    "nombre_no": "Operatører innen treforedling",
+    "nombre_es": "operario de pasta de papel y celulosa",
+    "alias_es": ["operario de celulosa", "operaria de celulosa", "operario de pasta de papel", "operador de celulosa", "operadora de celulosa", "industria de la celulosa", "fabricacion de pasta de papel", "operario de pulpa de madera", "operario de planta de celulosa", "operarios de celulosa", "procesado de madera para papel", "operario papelero"]
+  },
+  {
+    "styrk": "8172",
+    "nombre_no": "Operatører innen trelastproduksjon",
+    "nombre_es": "operario de aserradero",
+    "alias_es": ["operario de aserradero", "operaria de aserradero", "operarios de aserradero", "operador de aserradero", "operadora de aserradero", "aserrador", "aserradora", "operario de la madera", "trabajador de aserradero", "operario de serreria", "industria maderera", "produccion de madera aserrada"]
+  },
+  {
+    "styrk": "8181",
+    "nombre_no": "Operatører innen glass- og keramisk produksjon",
+    "nombre_es": "operario de producción de vidrio y cerámica",
+    "alias_es": ["operario de vidrio", "operaria de vidrio", "operario de ceramica", "operaria de ceramica", "operario de cristal", "operador de vidrio", "operadora de ceramica", "fabricacion de vidrio", "fabricacion de ceramica", "industria del vidrio", "operarios de ceramica", "vidriero industrial"]
+  },
+  {
+    "styrk": "8182",
+    "nombre_no": "Fyrkjele- og turbinoperatører",
+    "nombre_es": "operario de calderas y turbinas",
+    "alias_es": ["operario de calderas", "operaria de calderas", "operario de turbinas", "operador de calderas", "operadora de calderas", "caldereta", "fogonero", "fogonera", "operario de turbina de vapor", "operario de sala de calderas", "operarios de calderas", "operador de turbinas"]
+  },
+  {
+    "styrk": "8183",
+    "nombre_no": "Pakke-, tappe- og etikettmaskinoperatører",
+    "nombre_es": "operario de máquinas de envasado y etiquetado",
+    "alias_es": ["operario de envasado", "operaria de envasado", "operario de embotellado", "operario de etiquetado", "operador de envasado", "operadora de envasado", "operario de empaquetado", "maquinista de envasado", "operario de linea de envasado", "operarios de envasado", "envasador", "etiquetadora"]
+  },
+  {
+    "styrk": "8211",
+    "nombre_no": "Montører av mekaniske produkter",
+    "nombre_es": "montador de productos mecánicos",
+    "alias_es": ["montador mecanico", "montadora mecanica", "montadores mecanicos", "ensamblador mecanico", "ensambladora mecanica", "montador de productos mecanicos", "operario de montaje mecanico", "armador de piezas mecanicas", "montador de maquinaria", "ensamblaje mecanico", "operario de ensamblaje", "montaje de productos mecanicos"]
+  },
+  {
+    "styrk": "8212",
+    "nombre_no": "Montører av elektriske og elektroniske produkter",
+    "nombre_es": "montador de productos eléctricos y electrónicos",
+    "alias_es": ["montador electronico", "montadora electronica", "montador electrico", "montadores electronicos", "ensamblador electronico", "ensambladora electronica", "montador de productos electricos", "operario de montaje electronico", "ensamblaje electronico", "montaje de componentes electronicos", "armador de productos electronicos", "operario de ensamblaje electronico"]
+  },
+  {
+    "styrk": "8311",
+    "nombre_no": "Lokomotiv og T-baneførere",
+    "nombre_es": "maquinista de tren y metro",
+    "alias_es": ["maquinista de tren", "maquinista de metro", "maquinista ferroviario", "maquinista ferroviaria", "conductor de tren", "conductora de tren", "conductor de metro", "conductor de locomotora", "maquinistas de tren", "operador de metro", "conductor ferroviario", "maquinista de trenes"]
+  },
+  {
+    "styrk": "8322",
+    "nombre_no": "Bil-, drosje- og varebilførere",
+    "nombre_es": "conductor de taxi y furgoneta",
+    "alias_es": ["taxista", "conductor de taxi", "conductora de taxi", "conductor de furgoneta", "chofer", "chofer de furgoneta", "conductor de reparto", "conductora de reparto", "conductor de vehiculo ligero", "conductores de furgoneta", "repartidor en furgoneta", "conductor de coche"]
+  },
+  {
+    "styrk": "8331",
+    "nombre_no": "Bussjåfører og trikkeførere",
+    "nombre_es": "conductor de autobús y tranvía",
+    "alias_es": ["conductor de autobus", "conductora de autobus", "chofer de autobus", "conductor de bus", "conductor de tranvia", "conductora de tranvia", "conductores de autobus", "chofer de bus", "operador de autobus", "conductor de colectivo", "conductor de guagua", "chofer de tranvia"]
+  },
+  {
+    "styrk": "8332",
+    "nombre_no": "Lastebil- og trailersjåfører",
+    "nombre_es": "conductor de camión y tráiler",
+    "alias_es": ["camionero", "camionera", "conductor de camion", "conductora de camion", "conductor de trailer", "chofer de camion", "transportista", "conductor de trailer", "conductores de camion", "trailero", "trailera", "conductor de tractocamion"]
+  },
+  {
+    "styrk": "8341",
+    "nombre_no": "Jordbruks- og skogbruksmaskinførere",
+    "nombre_es": "conductor de maquinaria agrícola y forestal",
+    "alias_es": ["maquinista agricola", "operario de maquinaria agricola", "conductor de tractor", "conductora de tractor", "tractorista", "operador de maquinaria agricola", "maquinista forestal", "operario de maquinaria forestal", "conductor de cosechadora", "operadores de maquinaria agricola", "conductor de maquinaria agraria", "operario de tractor"]
+  },
+  {
+    "styrk": "8342",
+    "nombre_no": "Anleggsmaskinførere",
+    "nombre_es": "operador de maquinaria de obra",
+    "alias_es": ["operador de maquinaria pesada", "operadora de maquinaria pesada", "operario de maquinaria de obra", "maquinista de obra", "conductor de excavadora", "operador de excavadora", "operador de retroexcavadora", "operador de bulldozer", "operadores de maquinaria pesada", "maquinista de construccion", "conductor de maquinaria pesada", "operario de excavadora"]
+  },
+  {
+    "styrk": "8343",
+    "nombre_no": "Kran- og heisførere mv.",
+    "nombre_es": "operador de grúa",
+    "alias_es": ["operador de grua", "operadora de grua", "gruista", "operario de grua", "conductor de grua", "manejador de grua", "operadores de grua", "operador de grua torre", "operador de montacargas", "operario de elevacion", "gruistas", "conductor de grua torre"]
+  },
+  {
+    "styrk": "8344",
+    "nombre_no": "Truckførere",
+    "nombre_es": "carretillero",
+    "alias_es": ["carretillero", "carretillera", "carretilleros", "conductor de carretilla", "operador de carretilla", "operario de carretilla elevadora", "conductor de carretilla elevadora", "conductor de toro", "operador de montacargas", "manejador de montacargas", "operario de toro mecanico", "carretillero de almacen"]
+  },
+  {
+    "styrk": "8350",
+    "nombre_no": "Dekks- og maskinmannskap (skip)",
+    "nombre_es": "marinero de cubierta y máquinas",
+    "alias_es": ["marinero", "marinera", "marinero de cubierta", "tripulante de cubierta", "personal de cubierta", "marinero de maquinas", "tripulacion de buque", "engrasador de barco", "marineros", "tripulante de maquinas", "personal de maquinas de barco", "marinero de barco"]
+  },
+  {
+    "styrk": "9111",
+    "nombre_no": "Renholdere i private hjem",
+    "nombre_es": "empleado de limpieza en hogares",
+    "alias_es": ["empleada del hogar", "empleado del hogar", "limpiadora a domicilio", "limpiador a domicilio", "empleada domestica", "empleado domestico", "personal de limpieza del hogar", "asistenta del hogar", "limpiadora de casas", "limpieza de hogares", "mucama", "trabajadora del hogar"]
+  },
+  {
+    "styrk": "9112",
+    "nombre_no": "Renholdere i bedrifter",
+    "nombre_es": "personal de limpieza en empresas",
+    "alias_es": ["limpiador", "limpiadora", "personal de limpieza", "limpiadores", "empleado de limpieza", "empleada de limpieza", "operario de limpieza", "operaria de limpieza", "limpieza de oficinas", "limpiador de empresas", "personal de limpieza industrial", "trabajador de limpieza"]
+  },
+  {
+    "styrk": "9122",
+    "nombre_no": "Bilvaskere",
+    "nombre_es": "lavacoches",
+    "alias_es": ["lavacoches", "lavador de coches", "lavadora de coches", "lavadores de coches", "empleado de lavadero de coches", "operario de lavado de coches", "lavador de autos", "lavador de vehiculos", "personal de lavado de coches", "lavacar", "trabajador de tunel de lavado", "limpiador de coches"]
+  },
+  {
+    "styrk": "9211",
+    "nombre_no": "Hjelpearbeidere i nyttevekstproduksjon",
+    "nombre_es": "peón agrícola de cultivos",
+    "alias_es": ["peon agricola", "peona agricola", "peones agricolas", "jornalero", "jornalera", "trabajador agricola", "trabajadora agricola", "peon de cultivos", "recolector agricola", "bracero", "obrero agricola", "peon de campo"]
+  },
+  {
+    "styrk": "9212",
+    "nombre_no": "Hjelpearbeidere i husdyrproduksjon",
+    "nombre_es": "peón ganadero",
+    "alias_es": ["peon ganadero", "peona ganadera", "peones ganaderos", "trabajador ganadero", "trabajadora ganadera", "peon de granja", "obrero ganadero", "operario de ganaderia", "ayudante de ganaderia", "peon de explotacion ganadera", "cuidador de ganado", "jornalero ganadero"]
+  },
+  {
+    "styrk": "9213",
+    "nombre_no": "Hjelpearbeidere i kombinasjonsbruk",
+    "nombre_es": "peón agropecuario",
+    "alias_es": ["peon agropecuario", "peona agropecuaria", "peones agropecuarios", "trabajador agropecuario", "peon de explotacion mixta", "peon de finca", "jornalero agropecuario", "obrero agropecuario", "ayudante agropecuario", "peon agricola y ganadero", "peon de granja mixta", "trabajador de finca"]
+  },
+  {
+    "styrk": "9214",
+    "nombre_no": "Hjelpearbeidere i gartneri mv.",
+    "nombre_es": "peón de jardinería y viveros",
+    "alias_es": ["peon de jardineria", "peona de jardineria", "peon de vivero", "ayudante de jardineria", "auxiliar de jardineria", "peones de jardineria", "trabajador de vivero", "operario de jardineria", "peon de invernadero", "jardinero auxiliar", "peon de horticultura", "ayudante de vivero"]
+  },
+  {
+    "styrk": "9312",
+    "nombre_no": "Hjelpearbeidere i anlegg",
+    "nombre_es": "peón de obra civil",
+    "alias_es": ["peon de obra civil", "peon de obra publica", "peones de obra civil", "peon de construccion civil", "ayudante de obra civil", "trabajador de obra civil", "peon de infraestructuras", "obrero de obra civil", "peon de carreteras", "operario de obra civil", "peon de movimiento de tierras", "peon de ingenieria civil"]
+  },
+  {
+    "styrk": "9313",
+    "nombre_no": "Hjelpearbeidere i bygg",
+    "nombre_es": "peón de construcción",
+    "alias_es": ["peon de construccion", "peona de construccion", "peones de construccion", "peon de albanil", "ayudante de albanil", "peon de obra", "ayudante de construccion", "obrero de construccion", "peon de edificacion", "trabajador de construccion", "auxiliar de obra", "peon de albanileria"]
+  },
+  {
+    "styrk": "9321",
+    "nombre_no": "Håndpakkere mv.",
+    "nombre_es": "empaquetador manual",
+    "alias_es": ["empaquetador manual", "empaquetadora manual", "empaquetadores", "embalador manual", "embaladora manual", "empacador", "empacadora", "operario de empaquetado manual", "envasador manual", "operario de embalaje", "peon de empaquetado", "personal de empaquetado"]
+  },
+  {
+    "styrk": "9329",
+    "nombre_no": "Andre hjelpearbeidere i industri",
+    "nombre_es": "peón de industria manufacturera",
+    "alias_es": ["peon de industria", "peona de industria", "peon industrial", "peones industriales", "peon de fabrica", "ayudante de produccion", "operario de produccion sin cualificar", "trabajador de fabrica", "peon de manufactura", "auxiliar de produccion", "peon de planta industrial", "obrero industrial"]
+  },
+  {
+    "styrk": "9333",
+    "nombre_no": "Laste- og lossearbeidere",
+    "nombre_es": "cargador y descargador",
+    "alias_es": ["cargador", "cargadora", "descargador", "descargadora", "estibador", "estibadora", "cargadores", "peon de carga y descarga", "mozo de carga", "operario de carga y descarga", "trabajador de estiba", "peon de descarga"]
+  },
+  {
+    "styrk": "9334",
+    "nombre_no": "Varepåfyllere",
+    "nombre_es": "reponedor",
+    "alias_es": ["reponedor", "reponedora", "reponedores", "repositor", "repositora", "reponedor de supermercado", "mozo de reposicion", "operario de reposicion", "encargado de reposicion", "reponedor de tienda", "personal de reposicion", "abastecedor de estanterias"]
+  },
+  {
+    "styrk": "9412",
+    "nombre_no": "Kjøkkenassistenter",
+    "nombre_es": "ayudante de cocina",
+    "alias_es": ["ayudante de cocina", "ayudanta de cocina", "ayudantes de cocina", "auxiliar de cocina", "pinche de cocina", "pinche", "asistente de cocina", "marmiton", "personal de cocina", "operario de cocina", "ayudante de cocinero", "fregaplatos"]
+  },
+  {
+    "styrk": "9510",
+    "nombre_no": "Reklamedistributører mv.",
+    "nombre_es": "repartidor de publicidad",
+    "alias_es": ["repartidor de publicidad", "repartidora de publicidad", "repartidores de publicidad", "buzoneador", "buzoneadora", "repartidor de folletos", "distribuidor de publicidad", "repartidor de propaganda", "reparto de buzoneo", "volantero", "volantera", "repartidor de panfletos"]
+  },
+  {
+    "styrk": "9611",
+    "nombre_no": "Renovasjonsarbeidere",
+    "nombre_es": "recogedor de basuras",
+    "alias_es": ["basurero", "basurera", "recogedor de basuras", "operario de recogida de residuos", "peon de basuras", "trabajador de limpieza viaria", "operario de limpieza urbana", "recolector de basura", "operario de recogida de basuras", "personal de recogida de residuos", "barrendero", "peon de recogida de residuos"]
+  },
+  {
+    "styrk": "9612",
+    "nombre_no": "Gjenvinningsarbeidere",
+    "nombre_es": "operario de reciclaje",
+    "alias_es": ["operario de reciclaje", "operaria de reciclaje", "operarios de reciclaje", "trabajador de reciclaje", "operario de planta de reciclaje", "clasificador de residuos", "operario de gestion de residuos", "reciclador", "recicladora", "operario de recuperacion de materiales", "peon de reciclaje", "operario de planta de recuperacion"]
+  },
+  {
+    "styrk": "9621",
+    "nombre_no": "Bud mv.",
+    "nombre_es": "mensajero",
+    "alias_es": ["mensajero", "mensajera", "mensajeros", "repartidor", "repartidora", "recadero", "recadera", "rider", "repartidor a domicilio", "mozo de reparto", "courier", "ordenanza"]
+  },
+  {
+    "styrk": "9622",
+    "nombre_no": "Altmuligmann",
+    "nombre_es": "personal de mantenimiento general",
+    "alias_es": ["personal de mantenimiento", "operario de mantenimiento", "operaria de mantenimiento", "manitas", "factotum", "personal de servicios generales", "encargado de mantenimiento general", "operario polivalente", "mantenimiento general", "hombre orquesta", "tecnico de mantenimiento general", "operario multitarea"]
+  },
+  {
+    "styrk": "9629",
+    "nombre_no": "Andre hjelpearbeidere",
+    "nombre_es": "peón de servicios diversos",
+    "alias_es": ["peon de servicios", "peona de servicios", "peones de servicios", "operario de servicios diversos", "ayudante general", "auxiliar de servicios", "peon sin cualificar", "trabajador no cualificado", "peon polivalente", "ayudante de servicios varios", "operario de tareas varias", "peon general"]
+  }
+]

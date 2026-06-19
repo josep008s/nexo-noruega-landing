@@ -1,0 +1,1757 @@
+[
+  {
+    "styrk": "0000",
+    "grupo": "0",
+    "nombre_no": "Uoppgitt / yrker som ikke kan identifiseres"
+  },
+  {
+    "styrk": "0110",
+    "grupo": "0",
+    "nombre_no": "Offiserer fra fenrik og høyere grad"
+  },
+  {
+    "styrk": "0210",
+    "grupo": "0",
+    "nombre_no": "Befal med sersjant grad"
+  },
+  {
+    "styrk": "0310",
+    "grupo": "0",
+    "nombre_no": "Menige"
+  },
+  {
+    "styrk": "1111",
+    "grupo": "1",
+    "nombre_no": "Politikere"
+  },
+  {
+    "styrk": "1112",
+    "grupo": "1",
+    "nombre_no": "Toppledere i offentlig administrasjon"
+  },
+  {
+    "styrk": "1114",
+    "grupo": "1",
+    "nombre_no": "Toppledere i interesseorganisasjoner"
+  },
+  {
+    "styrk": "1120",
+    "grupo": "1",
+    "nombre_no": "Administrerende direktører"
+  },
+  {
+    "styrk": "1211",
+    "grupo": "1",
+    "nombre_no": "Finans- og økonomisjefer"
+  },
+  {
+    "styrk": "1212",
+    "grupo": "1",
+    "nombre_no": "Personalsjefer"
+  },
+  {
+    "styrk": "1213",
+    "grupo": "1",
+    "nombre_no": "Strategi- og planleggingssjefer"
+  },
+  {
+    "styrk": "1219",
+    "grupo": "1",
+    "nombre_no": "Andre administrative ledere"
+  },
+  {
+    "styrk": "1221",
+    "grupo": "1",
+    "nombre_no": "Salgs- og markedssjefer"
+  },
+  {
+    "styrk": "1222",
+    "grupo": "1",
+    "nombre_no": "PR- og informasjonssjefer"
+  },
+  {
+    "styrk": "1223",
+    "grupo": "1",
+    "nombre_no": "Forsknings- og utviklingsledere"
+  },
+  {
+    "styrk": "1311",
+    "grupo": "1",
+    "nombre_no": "Ledere i skogbruk, gartnerier mv."
+  },
+  {
+    "styrk": "1312",
+    "grupo": "1",
+    "nombre_no": "Ledere innen akvakultur mv."
+  },
+  {
+    "styrk": "1321",
+    "grupo": "1",
+    "nombre_no": "Ledere av industriproduksjon mv."
+  },
+  {
+    "styrk": "1322",
+    "grupo": "1",
+    "nombre_no": "Ledere av olje- og gassutvinning mv."
+  },
+  {
+    "styrk": "1323",
+    "grupo": "1",
+    "nombre_no": "Ledere av bygge- og anleggsvirksomhet"
+  },
+  {
+    "styrk": "1324",
+    "grupo": "1",
+    "nombre_no": "Ledere av logistikk og transport mv."
+  },
+  {
+    "styrk": "1330",
+    "grupo": "1",
+    "nombre_no": "Ledere av IKT-enheter"
+  },
+  {
+    "styrk": "1341",
+    "grupo": "1",
+    "nombre_no": "Ledere av omsorgstjenester for barn"
+  },
+  {
+    "styrk": "1342",
+    "grupo": "1",
+    "nombre_no": "Ledere av helsetjenester"
+  },
+  {
+    "styrk": "1343",
+    "grupo": "1",
+    "nombre_no": "Ledere av eldreomsorg"
+  },
+  {
+    "styrk": "1344",
+    "grupo": "1",
+    "nombre_no": "Ledere av sosialomsorg"
+  },
+  {
+    "styrk": "1345",
+    "grupo": "1",
+    "nombre_no": "Ledere av utdanning og undervisning"
+  },
+  {
+    "styrk": "1346",
+    "grupo": "1",
+    "nombre_no": "Ledere av forsikring og finansvirksomhet"
+  },
+  {
+    "styrk": "1349",
+    "grupo": "1",
+    "nombre_no": "Andre ledere av produksjon og tjenesteyting"
+  },
+  {
+    "styrk": "1411",
+    "grupo": "1",
+    "nombre_no": "Hotellsjefer"
+  },
+  {
+    "styrk": "1412",
+    "grupo": "1",
+    "nombre_no": "Restaurantsjefer"
+  },
+  {
+    "styrk": "1420",
+    "grupo": "1",
+    "nombre_no": "Varehandelssjefer"
+  },
+  {
+    "styrk": "1431",
+    "grupo": "1",
+    "nombre_no": "Sports-, rekreasjons- og kultursenterledere"
+  },
+  {
+    "styrk": "1439",
+    "grupo": "1",
+    "nombre_no": "Andre daglige ledere i tjenesteytende virksomheter"
+  },
+  {
+    "styrk": "2111",
+    "grupo": "2",
+    "nombre_no": "Fysikere og astronomer"
+  },
+  {
+    "styrk": "2112",
+    "grupo": "2",
+    "nombre_no": "Meteorologer"
+  },
+  {
+    "styrk": "2113",
+    "grupo": "2",
+    "nombre_no": "Kjemikere"
+  },
+  {
+    "styrk": "2114",
+    "grupo": "2",
+    "nombre_no": "Geologer og geofysikere"
+  },
+  {
+    "styrk": "2120",
+    "grupo": "2",
+    "nombre_no": "Matematikere, statistikere mv."
+  },
+  {
+    "styrk": "2131",
+    "grupo": "2",
+    "nombre_no": "Biologer, botanikere, zoologer mv."
+  },
+  {
+    "styrk": "2132",
+    "grupo": "2",
+    "nombre_no": "Sivilagronomer mv."
+  },
+  {
+    "styrk": "2133",
+    "grupo": "2",
+    "nombre_no": "Miljøvernrådgivere"
+  },
+  {
+    "styrk": "2141",
+    "grupo": "2",
+    "nombre_no": "Sivilingeniører (industri og produksjon)"
+  },
+  {
+    "styrk": "2142",
+    "grupo": "2",
+    "nombre_no": "Sivilingeniører (bygg og anlegg)"
+  },
+  {
+    "styrk": "2143",
+    "grupo": "2",
+    "nombre_no": "Sivilingeniører (miljøteknikk)"
+  },
+  {
+    "styrk": "2144",
+    "grupo": "2",
+    "nombre_no": "Sivilingeniører (maskin- og marin-teknikk)"
+  },
+  {
+    "styrk": "2145",
+    "grupo": "2",
+    "nombre_no": "Sivilingeniører (kjemi)"
+  },
+  {
+    "styrk": "2146",
+    "grupo": "2",
+    "nombre_no": "Sivilingeniører (geofag, petro-leumsteknologi, metallurgi mv.)"
+  },
+  {
+    "styrk": "2149",
+    "grupo": "2",
+    "nombre_no": "Andre sivilingeniører (unntatt elektroteknologi)"
+  },
+  {
+    "styrk": "2151",
+    "grupo": "2",
+    "nombre_no": "Sivilingeniører (elkraftteknikk)"
+  },
+  {
+    "styrk": "2152",
+    "grupo": "2",
+    "nombre_no": "Sivilingeniører (elektronikk)"
+  },
+  {
+    "styrk": "2153",
+    "grupo": "2",
+    "nombre_no": "Sivilingeniører (telekommunikasjon)"
+  },
+  {
+    "styrk": "2161",
+    "grupo": "2",
+    "nombre_no": "Sivilarkitekter"
+  },
+  {
+    "styrk": "2162",
+    "grupo": "2",
+    "nombre_no": "Landskapsarkitekter"
+  },
+  {
+    "styrk": "2163",
+    "grupo": "2",
+    "nombre_no": "Produkt- og klesdesignere"
+  },
+  {
+    "styrk": "2164",
+    "grupo": "2",
+    "nombre_no": "Arealplanleggere"
+  },
+  {
+    "styrk": "2165",
+    "grupo": "2",
+    "nombre_no": "Landmålere, kartografer mv."
+  },
+  {
+    "styrk": "2166",
+    "grupo": "2",
+    "nombre_no": "Grafiske- og multimediadesignere"
+  },
+  {
+    "styrk": "2211",
+    "grupo": "2",
+    "nombre_no": "Allmennpraktiserende leger"
+  },
+  {
+    "styrk": "2212",
+    "grupo": "2",
+    "nombre_no": "Legespesialister"
+  },
+  {
+    "styrk": "2221",
+    "grupo": "2",
+    "nombre_no": "Spesialsykepleiere"
+  },
+  {
+    "styrk": "2222",
+    "grupo": "2",
+    "nombre_no": "Jordmødre"
+  },
+  {
+    "styrk": "2223",
+    "grupo": "2",
+    "nombre_no": "Sykepleiere"
+  },
+  {
+    "styrk": "2224",
+    "grupo": "2",
+    "nombre_no": "Vernepleiere"
+  },
+  {
+    "styrk": "2250",
+    "grupo": "2",
+    "nombre_no": "Veterinærer"
+  },
+  {
+    "styrk": "2261",
+    "grupo": "2",
+    "nombre_no": "Tannleger"
+  },
+  {
+    "styrk": "2262",
+    "grupo": "2",
+    "nombre_no": "Farmasøyter"
+  },
+  {
+    "styrk": "2263",
+    "grupo": "2",
+    "nombre_no": "Helse- og miljørådgivere"
+  },
+  {
+    "styrk": "2264",
+    "grupo": "2",
+    "nombre_no": "Fysioterapeuter"
+  },
+  {
+    "styrk": "2265",
+    "grupo": "2",
+    "nombre_no": "Ernæringsfysiologer"
+  },
+  {
+    "styrk": "2266",
+    "grupo": "2",
+    "nombre_no": "Audiografer og logopeder"
+  },
+  {
+    "styrk": "2267",
+    "grupo": "2",
+    "nombre_no": "Ergoterapeuter"
+  },
+  {
+    "styrk": "2269",
+    "grupo": "2",
+    "nombre_no": "Kiropraktorer mv."
+  },
+  {
+    "styrk": "2310",
+    "grupo": "2",
+    "nombre_no": "Universitets- og høyskolelektorer/-lærere"
+  },
+  {
+    "styrk": "2320",
+    "grupo": "2",
+    "nombre_no": "Yrkesfaglærere"
+  },
+  {
+    "styrk": "2330",
+    "grupo": "2",
+    "nombre_no": "Lektorer mv. (videregående skole)"
+  },
+  {
+    "styrk": "2341",
+    "grupo": "2",
+    "nombre_no": "Grunnskolelærere"
+  },
+  {
+    "styrk": "2342",
+    "grupo": "2",
+    "nombre_no": "Førskole-/barnehagelærere"
+  },
+  {
+    "styrk": "2351",
+    "grupo": "2",
+    "nombre_no": "Spesialister i pedagogikk"
+  },
+  {
+    "styrk": "2352",
+    "grupo": "2",
+    "nombre_no": "Spesiallærere / spesialpedagoger"
+  },
+  {
+    "styrk": "2354",
+    "grupo": "2",
+    "nombre_no": "Andre musikklærere"
+  },
+  {
+    "styrk": "2359",
+    "grupo": "2",
+    "nombre_no": "Andre lærere"
+  },
+  {
+    "styrk": "2411",
+    "grupo": "2",
+    "nombre_no": "Revisorer, regnskapsrådgivere"
+  },
+  {
+    "styrk": "2412",
+    "grupo": "2",
+    "nombre_no": "Finans- og investeringsrådgivere"
+  },
+  {
+    "styrk": "2413",
+    "grupo": "2",
+    "nombre_no": "Finansanalytikere"
+  },
+  {
+    "styrk": "2421",
+    "grupo": "2",
+    "nombre_no": "Organisasjonsrådgivere mv."
+  },
+  {
+    "styrk": "2422",
+    "grupo": "2",
+    "nombre_no": "Høyere saksbehandlere i offentlig og privat virksomhet"
+  },
+  {
+    "styrk": "2423",
+    "grupo": "2",
+    "nombre_no": "Personal- og karriererådgivere"
+  },
+  {
+    "styrk": "2424",
+    "grupo": "2",
+    "nombre_no": "Rådgivere innen kompetanseutvikling"
+  },
+  {
+    "styrk": "2431",
+    "grupo": "2",
+    "nombre_no": "Reklame- og markedsføringsrådgivere"
+  },
+  {
+    "styrk": "2432",
+    "grupo": "2",
+    "nombre_no": "Informasjonsrådgivere"
+  },
+  {
+    "styrk": "2433",
+    "grupo": "2",
+    "nombre_no": "Salgskonsulenter innen tekniske og medisinske produkter"
+  },
+  {
+    "styrk": "2434",
+    "grupo": "2",
+    "nombre_no": "Salgskonsulenter innen IKT-produkter"
+  },
+  {
+    "styrk": "2511",
+    "grupo": "2",
+    "nombre_no": "Systemanalytikere/-arkitekter"
+  },
+  {
+    "styrk": "2512",
+    "grupo": "2",
+    "nombre_no": "Programvareutviklere"
+  },
+  {
+    "styrk": "2513",
+    "grupo": "2",
+    "nombre_no": "Nett- og multimediautviklere"
+  },
+  {
+    "styrk": "2514",
+    "grupo": "2",
+    "nombre_no": "Applikasjonsprogrammerere"
+  },
+  {
+    "styrk": "2519",
+    "grupo": "2",
+    "nombre_no": "Andre programvare- og applikasjonsutviklere"
+  },
+  {
+    "styrk": "2521",
+    "grupo": "2",
+    "nombre_no": "Databasedesignere og -administratorer"
+  },
+  {
+    "styrk": "2522",
+    "grupo": "2",
+    "nombre_no": "Systemadministratorer"
+  },
+  {
+    "styrk": "2529",
+    "grupo": "2",
+    "nombre_no": "Sikkerhetsanalytikere mv."
+  },
+  {
+    "styrk": "2611",
+    "grupo": "2",
+    "nombre_no": "Jurister og advokater"
+  },
+  {
+    "styrk": "2612",
+    "grupo": "2",
+    "nombre_no": "Dommere"
+  },
+  {
+    "styrk": "2619",
+    "grupo": "2",
+    "nombre_no": "Andre juridiske yrker"
+  },
+  {
+    "styrk": "2621",
+    "grupo": "2",
+    "nombre_no": "Arkivarer og kuratorer"
+  },
+  {
+    "styrk": "2622",
+    "grupo": "2",
+    "nombre_no": "Bibliotekarer og andre informasjonsarbeidere"
+  },
+  {
+    "styrk": "2631",
+    "grupo": "2",
+    "nombre_no": "Rådgivere/forskere, samfunnsøkonomi"
+  },
+  {
+    "styrk": "2632",
+    "grupo": "2",
+    "nombre_no": "Rådgivere/forskere, samfunnsvitenskap"
+  },
+  {
+    "styrk": "2633",
+    "grupo": "2",
+    "nombre_no": "Rådgivere/forskere, humanistiske fag"
+  },
+  {
+    "styrk": "2634",
+    "grupo": "2",
+    "nombre_no": "Psykologer"
+  },
+  {
+    "styrk": "2635",
+    "grupo": "2",
+    "nombre_no": "Rådgivere innen sosiale fagfelt"
+  },
+  {
+    "styrk": "2636",
+    "grupo": "2",
+    "nombre_no": "Geistlige yrker"
+  },
+  {
+    "styrk": "2641",
+    "grupo": "2",
+    "nombre_no": "Forfattere mv."
+  },
+  {
+    "styrk": "2642",
+    "grupo": "2",
+    "nombre_no": "Journalister"
+  },
+  {
+    "styrk": "2643",
+    "grupo": "2",
+    "nombre_no": "Oversettere, tolker mv."
+  },
+  {
+    "styrk": "2651",
+    "grupo": "2",
+    "nombre_no": "Skulptører, kunstmalere og andre billedkunstnere"
+  },
+  {
+    "styrk": "2652",
+    "grupo": "2",
+    "nombre_no": "Dirigenter, komponister, musikere og sangere"
+  },
+  {
+    "styrk": "2653",
+    "grupo": "2",
+    "nombre_no": "Koreografer og dansere"
+  },
+  {
+    "styrk": "2654",
+    "grupo": "2",
+    "nombre_no": "Regissører"
+  },
+  {
+    "styrk": "2655",
+    "grupo": "2",
+    "nombre_no": "Skuespillere"
+  },
+  {
+    "styrk": "2656",
+    "grupo": "2",
+    "nombre_no": "Programledere i TV og radio"
+  },
+  {
+    "styrk": "2659",
+    "grupo": "2",
+    "nombre_no": "Andre utøvende kunstneriske yrker"
+  },
+  {
+    "styrk": "3112",
+    "grupo": "3",
+    "nombre_no": "Bygningsingeniører"
+  },
+  {
+    "styrk": "3113",
+    "grupo": "3",
+    "nombre_no": "Elkraftingeniører"
+  },
+  {
+    "styrk": "3114",
+    "grupo": "3",
+    "nombre_no": "Elektronikkingeniører"
+  },
+  {
+    "styrk": "3115",
+    "grupo": "3",
+    "nombre_no": "Maskiningeniører"
+  },
+  {
+    "styrk": "3116",
+    "grupo": "3",
+    "nombre_no": "Kjemiingeniører"
+  },
+  {
+    "styrk": "3117",
+    "grupo": "3",
+    "nombre_no": "Ingeniører innen petroleum, bergverk og metallurgi"
+  },
+  {
+    "styrk": "3118",
+    "grupo": "3",
+    "nombre_no": "Tekniske tegnere"
+  },
+  {
+    "styrk": "3119",
+    "grupo": "3",
+    "nombre_no": "Andre ingeniører"
+  },
+  {
+    "styrk": "3121",
+    "grupo": "3",
+    "nombre_no": "Arbeidsleder, bergfag"
+  },
+  {
+    "styrk": "3122",
+    "grupo": "3",
+    "nombre_no": "Arbeidsleder, industri"
+  },
+  {
+    "styrk": "3123",
+    "grupo": "3",
+    "nombre_no": "Arbeidsleder, bygg og anlegg"
+  },
+  {
+    "styrk": "3131",
+    "grupo": "3",
+    "nombre_no": "Energikontrolloperatører"
+  },
+  {
+    "styrk": "3133",
+    "grupo": "3",
+    "nombre_no": "Kontrolloperatører innen kjemisk prosessindustri"
+  },
+  {
+    "styrk": "3134",
+    "grupo": "3",
+    "nombre_no": "Kontrolloperatører ved olje- og naturgassraffineringsanlegg"
+  },
+  {
+    "styrk": "3135",
+    "grupo": "3",
+    "nombre_no": "Kontrolloperatører innen metallproduksjon"
+  },
+  {
+    "styrk": "3141",
+    "grupo": "3",
+    "nombre_no": "Bioteknikere (ikke-medisinske laboratorier)"
+  },
+  {
+    "styrk": "3142",
+    "grupo": "3",
+    "nombre_no": "Agroteknikere"
+  },
+  {
+    "styrk": "3143",
+    "grupo": "3",
+    "nombre_no": "Skogteknikere"
+  },
+  {
+    "styrk": "3151",
+    "grupo": "3",
+    "nombre_no": "Skipsmaskinister"
+  },
+  {
+    "styrk": "3152",
+    "grupo": "3",
+    "nombre_no": "Dekksoffiserer og loser"
+  },
+  {
+    "styrk": "3153",
+    "grupo": "3",
+    "nombre_no": "Flygere"
+  },
+  {
+    "styrk": "3154",
+    "grupo": "3",
+    "nombre_no": "Flygeledere"
+  },
+  {
+    "styrk": "3155",
+    "grupo": "3",
+    "nombre_no": "Teknikere innen luftfartssikkerhet"
+  },
+  {
+    "styrk": "3211",
+    "grupo": "3",
+    "nombre_no": "Radiografer mv."
+  },
+  {
+    "styrk": "3212",
+    "grupo": "3",
+    "nombre_no": "Bioingeniører"
+  },
+  {
+    "styrk": "3213",
+    "grupo": "3",
+    "nombre_no": "Reseptarer"
+  },
+  {
+    "styrk": "3214",
+    "grupo": "3",
+    "nombre_no": "Protese- og tannteknikere"
+  },
+  {
+    "styrk": "3230",
+    "grupo": "3",
+    "nombre_no": "Yrker innen alternativ medisin"
+  },
+  {
+    "styrk": "3240",
+    "grupo": "3",
+    "nombre_no": "Dyrepleiere"
+  },
+  {
+    "styrk": "3251",
+    "grupo": "3",
+    "nombre_no": "Tannpleiere"
+  },
+  {
+    "styrk": "3254",
+    "grupo": "3",
+    "nombre_no": "Optikere"
+  },
+  {
+    "styrk": "3256",
+    "grupo": "3",
+    "nombre_no": "Helsesekretærer"
+  },
+  {
+    "styrk": "3257",
+    "grupo": "3",
+    "nombre_no": "Helse- og miljøkontrollører"
+  },
+  {
+    "styrk": "3258",
+    "grupo": "3",
+    "nombre_no": "Ambulansepersonell"
+  },
+  {
+    "styrk": "3259",
+    "grupo": "3",
+    "nombre_no": "Andre helseyrker"
+  },
+  {
+    "styrk": "3311",
+    "grupo": "3",
+    "nombre_no": "Finansmeglere"
+  },
+  {
+    "styrk": "3312",
+    "grupo": "3",
+    "nombre_no": "Kundebehandlere lån og kreditt"
+  },
+  {
+    "styrk": "3313",
+    "grupo": "3",
+    "nombre_no": "Regnskapsførere"
+  },
+  {
+    "styrk": "3315",
+    "grupo": "3",
+    "nombre_no": "Takstmenn"
+  },
+  {
+    "styrk": "3321",
+    "grupo": "3",
+    "nombre_no": "Forsikringsagenter"
+  },
+  {
+    "styrk": "3322",
+    "grupo": "3",
+    "nombre_no": "Selgere (engros)"
+  },
+  {
+    "styrk": "3323",
+    "grupo": "3",
+    "nombre_no": "Innkjøpere"
+  },
+  {
+    "styrk": "3324",
+    "grupo": "3",
+    "nombre_no": "Handels- og skipsmeglere"
+  },
+  {
+    "styrk": "3331",
+    "grupo": "3",
+    "nombre_no": "Speditører og befraktere"
+  },
+  {
+    "styrk": "3332",
+    "grupo": "3",
+    "nombre_no": "Konferanse- og arrangementsplanleggere mv."
+  },
+  {
+    "styrk": "3333",
+    "grupo": "3",
+    "nombre_no": "Arbeidsformidlere"
+  },
+  {
+    "styrk": "3334",
+    "grupo": "3",
+    "nombre_no": "Eiendomsmeglere og - forvaltere"
+  },
+  {
+    "styrk": "3339",
+    "grupo": "3",
+    "nombre_no": "Andre yrker innen forretningstjenester"
+  },
+  {
+    "styrk": "3341",
+    "grupo": "3",
+    "nombre_no": "Arbeidsledere for kontorpersonell"
+  },
+  {
+    "styrk": "3342",
+    "grupo": "3",
+    "nombre_no": "Advokatsekretær"
+  },
+  {
+    "styrk": "3343",
+    "grupo": "3",
+    "nombre_no": "Sjefssekretærer"
+  },
+  {
+    "styrk": "3351",
+    "grupo": "3",
+    "nombre_no": "Tollere"
+  },
+  {
+    "styrk": "3352",
+    "grupo": "3",
+    "nombre_no": "Skattefunksjonærer"
+  },
+  {
+    "styrk": "3353",
+    "grupo": "3",
+    "nombre_no": "Saksbehandlere innen sosiale ytelser"
+  },
+  {
+    "styrk": "3355",
+    "grupo": "3",
+    "nombre_no": "Politibetjenter mv."
+  },
+  {
+    "styrk": "3359",
+    "grupo": "3",
+    "nombre_no": "Andre yrker innen offentlig forvaltning"
+  },
+  {
+    "styrk": "3412",
+    "grupo": "3",
+    "nombre_no": "Miljøarbeidere innen sosiale fagfelt"
+  },
+  {
+    "styrk": "3413",
+    "grupo": "3",
+    "nombre_no": "Religiøse yrker"
+  },
+  {
+    "styrk": "3421",
+    "grupo": "3",
+    "nombre_no": "Idrettsutøvere"
+  },
+  {
+    "styrk": "3422",
+    "grupo": "3",
+    "nombre_no": "Trenere og idrettsdommere"
+  },
+  {
+    "styrk": "3423",
+    "grupo": "3",
+    "nombre_no": "Sports- og aktivitetsinstruktører"
+  },
+  {
+    "styrk": "3431",
+    "grupo": "3",
+    "nombre_no": "Fotografer og filmfotografer"
+  },
+  {
+    "styrk": "3432",
+    "grupo": "3",
+    "nombre_no": "Interiørdesignere og dekoratører"
+  },
+  {
+    "styrk": "3433",
+    "grupo": "3",
+    "nombre_no": "Tekniske konservatorer"
+  },
+  {
+    "styrk": "3434",
+    "grupo": "3",
+    "nombre_no": "Sjefskokker"
+  },
+  {
+    "styrk": "3439",
+    "grupo": "3",
+    "nombre_no": "Andre yrker innen estetiske fag"
+  },
+  {
+    "styrk": "3511",
+    "grupo": "3",
+    "nombre_no": "Driftsteknikere, IKT"
+  },
+  {
+    "styrk": "3512",
+    "grupo": "3",
+    "nombre_no": "Brukerstøtte, IKT"
+  },
+  {
+    "styrk": "3513",
+    "grupo": "3",
+    "nombre_no": "Nettverks- og systemteknikere, IKT"
+  },
+  {
+    "styrk": "3514",
+    "grupo": "3",
+    "nombre_no": "Internett-teknikere"
+  },
+  {
+    "styrk": "3521",
+    "grupo": "3",
+    "nombre_no": "Teknikere innen radio og tv"
+  },
+  {
+    "styrk": "3522",
+    "grupo": "3",
+    "nombre_no": "Teknikere innen telekom"
+  },
+  {
+    "styrk": "4110",
+    "grupo": "4",
+    "nombre_no": "Kontormedarbeidere"
+  },
+  {
+    "styrk": "4132",
+    "grupo": "4",
+    "nombre_no": "Dataregistrere"
+  },
+  {
+    "styrk": "4211",
+    "grupo": "4",
+    "nombre_no": "Kundebehandlere, bank og postkontor"
+  },
+  {
+    "styrk": "4212",
+    "grupo": "4",
+    "nombre_no": "Bingoverter, bookmakere mv."
+  },
+  {
+    "styrk": "4214",
+    "grupo": "4",
+    "nombre_no": "Inkassomedarbeidere mv."
+  },
+  {
+    "styrk": "4221",
+    "grupo": "4",
+    "nombre_no": "Reisebyråmedarbeidere mv."
+  },
+  {
+    "styrk": "4222",
+    "grupo": "4",
+    "nombre_no": "Kundesentermedarbeidere"
+  },
+  {
+    "styrk": "4223",
+    "grupo": "4",
+    "nombre_no": "Sentralbordoperatører"
+  },
+  {
+    "styrk": "4224",
+    "grupo": "4",
+    "nombre_no": "Hotellresepsjonister"
+  },
+  {
+    "styrk": "4225",
+    "grupo": "4",
+    "nombre_no": "Informasjonsskrankemedarbeidere"
+  },
+  {
+    "styrk": "4226",
+    "grupo": "4",
+    "nombre_no": "Resepsjonister (ekskl. hotell)"
+  },
+  {
+    "styrk": "4229",
+    "grupo": "4",
+    "nombre_no": "Andre opplysningsmedarbeidere"
+  },
+  {
+    "styrk": "4311",
+    "grupo": "4",
+    "nombre_no": "Regnskapsmedarbeidere"
+  },
+  {
+    "styrk": "4312",
+    "grupo": "4",
+    "nombre_no": "Forsikrings- og finansmedarbeidere"
+  },
+  {
+    "styrk": "4313",
+    "grupo": "4",
+    "nombre_no": "Lønningsmedarbeidere"
+  },
+  {
+    "styrk": "4321",
+    "grupo": "4",
+    "nombre_no": "Lagermedarbeidere og material-forvaltere"
+  },
+  {
+    "styrk": "4322",
+    "grupo": "4",
+    "nombre_no": "Logistikkmedarbeidere"
+  },
+  {
+    "styrk": "4323",
+    "grupo": "4",
+    "nombre_no": "Transportfunksjonærer"
+  },
+  {
+    "styrk": "4412",
+    "grupo": "4",
+    "nombre_no": "Postbud og postsorterere"
+  },
+  {
+    "styrk": "4415",
+    "grupo": "4",
+    "nombre_no": "Arkivassistenter"
+  },
+  {
+    "styrk": "4416",
+    "grupo": "4",
+    "nombre_no": "Personalkontormedarbeidere"
+  },
+  {
+    "styrk": "5111",
+    "grupo": "5",
+    "nombre_no": "Flyverter, båtverter mv."
+  },
+  {
+    "styrk": "5112",
+    "grupo": "5",
+    "nombre_no": "Konduktører"
+  },
+  {
+    "styrk": "5113",
+    "grupo": "5",
+    "nombre_no": "Reiseledere og guider"
+  },
+  {
+    "styrk": "5120",
+    "grupo": "5",
+    "nombre_no": "Kokker"
+  },
+  {
+    "styrk": "5131",
+    "grupo": "5",
+    "nombre_no": "Servitører"
+  },
+  {
+    "styrk": "5132",
+    "grupo": "5",
+    "nombre_no": "Bartendere"
+  },
+  {
+    "styrk": "5141",
+    "grupo": "5",
+    "nombre_no": "Frisører"
+  },
+  {
+    "styrk": "5142",
+    "grupo": "5",
+    "nombre_no": "Kosmetologer mv."
+  },
+  {
+    "styrk": "5151",
+    "grupo": "5",
+    "nombre_no": "Renholdsledere i bedrifter"
+  },
+  {
+    "styrk": "5152",
+    "grupo": "5",
+    "nombre_no": "Husholdere"
+  },
+  {
+    "styrk": "5153",
+    "grupo": "5",
+    "nombre_no": "Vaktmestre"
+  },
+  {
+    "styrk": "5163",
+    "grupo": "5",
+    "nombre_no": "Begravelsesbyrå- og krematoriearbeidere"
+  },
+  {
+    "styrk": "5164",
+    "grupo": "5",
+    "nombre_no": "Dyrepassere og - trenere mv."
+  },
+  {
+    "styrk": "5165",
+    "grupo": "5",
+    "nombre_no": "Kjøreskolelærere"
+  },
+  {
+    "styrk": "5211",
+    "grupo": "5",
+    "nombre_no": "Torghandlere"
+  },
+  {
+    "styrk": "5222",
+    "grupo": "5",
+    "nombre_no": "Butikkavdelingssjefer"
+  },
+  {
+    "styrk": "5223",
+    "grupo": "5",
+    "nombre_no": "Butikkmedarbeidere"
+  },
+  {
+    "styrk": "5230",
+    "grupo": "5",
+    "nombre_no": "Billettselgere"
+  },
+  {
+    "styrk": "5243",
+    "grupo": "5",
+    "nombre_no": "Dørselgere"
+  },
+  {
+    "styrk": "5244",
+    "grupo": "5",
+    "nombre_no": "Telefon- og nettselgere"
+  },
+  {
+    "styrk": "5245",
+    "grupo": "5",
+    "nombre_no": "Servicemedarbeidere (bensinstasjon)"
+  },
+  {
+    "styrk": "5246",
+    "grupo": "5",
+    "nombre_no": "Gatekjøkken- og kafémedarbeidere mv."
+  },
+  {
+    "styrk": "5249",
+    "grupo": "5",
+    "nombre_no": "Andre salgsmedarbeidere"
+  },
+  {
+    "styrk": "5311",
+    "grupo": "5",
+    "nombre_no": "Barnehage- og skolefritidsassistenter mv."
+  },
+  {
+    "styrk": "5312",
+    "grupo": "5",
+    "nombre_no": "Skoleassistenter"
+  },
+  {
+    "styrk": "5321",
+    "grupo": "5",
+    "nombre_no": "Helsefagarbeidere"
+  },
+  {
+    "styrk": "5322",
+    "grupo": "5",
+    "nombre_no": "Hjemmehjelper"
+  },
+  {
+    "styrk": "5329",
+    "grupo": "5",
+    "nombre_no": "Andre pleiemedarbeidere"
+  },
+  {
+    "styrk": "5411",
+    "grupo": "5",
+    "nombre_no": "Brannkonstabler"
+  },
+  {
+    "styrk": "5413",
+    "grupo": "5",
+    "nombre_no": "Fengselsbetjenter"
+  },
+  {
+    "styrk": "5414",
+    "grupo": "5",
+    "nombre_no": "Vektere"
+  },
+  {
+    "styrk": "5419",
+    "grupo": "5",
+    "nombre_no": "Andre sikkerhetsarbeidere"
+  },
+  {
+    "styrk": "6113",
+    "grupo": "6",
+    "nombre_no": "Gartnere"
+  },
+  {
+    "styrk": "6121",
+    "grupo": "6",
+    "nombre_no": "Melke- og husdyrprodusenter"
+  },
+  {
+    "styrk": "6122",
+    "grupo": "6",
+    "nombre_no": "Egg- og fjærfeprodusenter"
+  },
+  {
+    "styrk": "6130",
+    "grupo": "6",
+    "nombre_no": "Plante- og husdyrprodusenter (kombinasjonsbruk)"
+  },
+  {
+    "styrk": "6210",
+    "grupo": "6",
+    "nombre_no": "Skogbrukere"
+  },
+  {
+    "styrk": "6221",
+    "grupo": "6",
+    "nombre_no": "Havbruksarbeidere"
+  },
+  {
+    "styrk": "6222",
+    "grupo": "6",
+    "nombre_no": "Fiskere"
+  },
+  {
+    "styrk": "7112",
+    "grupo": "7",
+    "nombre_no": "Murere"
+  },
+  {
+    "styrk": "7113",
+    "grupo": "7",
+    "nombre_no": "Steinhoggere mv."
+  },
+  {
+    "styrk": "7114",
+    "grupo": "7",
+    "nombre_no": "Betongarbeidere"
+  },
+  {
+    "styrk": "7115",
+    "grupo": "7",
+    "nombre_no": "Tømrere og snekkere"
+  },
+  {
+    "styrk": "7119",
+    "grupo": "7",
+    "nombre_no": "Andre bygningsarbeidere"
+  },
+  {
+    "styrk": "7121",
+    "grupo": "7",
+    "nombre_no": "Taktekkere"
+  },
+  {
+    "styrk": "7122",
+    "grupo": "7",
+    "nombre_no": "Gulv- og flisleggere"
+  },
+  {
+    "styrk": "7124",
+    "grupo": "7",
+    "nombre_no": "Isolatører mv."
+  },
+  {
+    "styrk": "7125",
+    "grupo": "7",
+    "nombre_no": "Glassarbeidere"
+  },
+  {
+    "styrk": "7126",
+    "grupo": "7",
+    "nombre_no": "Rørleggere og VVS-montører"
+  },
+  {
+    "styrk": "7127",
+    "grupo": "7",
+    "nombre_no": "Kuldemontører mv."
+  },
+  {
+    "styrk": "7131",
+    "grupo": "7",
+    "nombre_no": "Malere og byggtapetserere"
+  },
+  {
+    "styrk": "7132",
+    "grupo": "7",
+    "nombre_no": "Overflatebehandlere og lakkerere"
+  },
+  {
+    "styrk": "7133",
+    "grupo": "7",
+    "nombre_no": "Feiere, fasaderenholdere mv."
+  },
+  {
+    "styrk": "7211",
+    "grupo": "7",
+    "nombre_no": "Støpere"
+  },
+  {
+    "styrk": "7212",
+    "grupo": "7",
+    "nombre_no": "Sveisere"
+  },
+  {
+    "styrk": "7213",
+    "grupo": "7",
+    "nombre_no": "Kopper- og blikkenslagere"
+  },
+  {
+    "styrk": "7214",
+    "grupo": "7",
+    "nombre_no": "Platearbeidere"
+  },
+  {
+    "styrk": "7215",
+    "grupo": "7",
+    "nombre_no": "Riggere og spleisere"
+  },
+  {
+    "styrk": "7221",
+    "grupo": "7",
+    "nombre_no": "Smeder"
+  },
+  {
+    "styrk": "7222",
+    "grupo": "7",
+    "nombre_no": "Verktøymaker, låsesmeder mv."
+  },
+  {
+    "styrk": "7223",
+    "grupo": "7",
+    "nombre_no": "Metalldreiere mv."
+  },
+  {
+    "styrk": "7231",
+    "grupo": "7",
+    "nombre_no": "Bilmekanikere"
+  },
+  {
+    "styrk": "7232",
+    "grupo": "7",
+    "nombre_no": "Mekanikere innen flytekniske fag"
+  },
+  {
+    "styrk": "7233",
+    "grupo": "7",
+    "nombre_no": "Anleggsmaskin- og industrimekanikere"
+  },
+  {
+    "styrk": "7234",
+    "grupo": "7",
+    "nombre_no": "Sykkelreparatører mv."
+  },
+  {
+    "styrk": "7311",
+    "grupo": "7",
+    "nombre_no": "Presisjonsinstrumentmakere og -reparatører"
+  },
+  {
+    "styrk": "7313",
+    "grupo": "7",
+    "nombre_no": "Gull- og sølvsmeder, gravører mv."
+  },
+  {
+    "styrk": "7318",
+    "grupo": "7",
+    "nombre_no": "Vevere, strikkere mv. (innen husflidsproduksjon)"
+  },
+  {
+    "styrk": "7319",
+    "grupo": "7",
+    "nombre_no": "Andre kunsthåndverkere"
+  },
+  {
+    "styrk": "7321",
+    "grupo": "7",
+    "nombre_no": "Førtrykkere"
+  },
+  {
+    "styrk": "7322",
+    "grupo": "7",
+    "nombre_no": "Trykkere"
+  },
+  {
+    "styrk": "7323",
+    "grupo": "7",
+    "nombre_no": "Innbindere mv."
+  },
+  {
+    "styrk": "7411",
+    "grupo": "7",
+    "nombre_no": "Elektrikere"
+  },
+  {
+    "styrk": "7412",
+    "grupo": "7",
+    "nombre_no": "Automatikere"
+  },
+  {
+    "styrk": "7413",
+    "grupo": "7",
+    "nombre_no": "Energimontører"
+  },
+  {
+    "styrk": "7421",
+    "grupo": "7",
+    "nombre_no": "Serviceelektronikere"
+  },
+  {
+    "styrk": "7422",
+    "grupo": "7",
+    "nombre_no": "Tele- og IKT-installatører"
+  },
+  {
+    "styrk": "7511",
+    "grupo": "7",
+    "nombre_no": "Slaktere, fiskehandlere mv."
+  },
+  {
+    "styrk": "7512",
+    "grupo": "7",
+    "nombre_no": "Bakere, konditorer mv."
+  },
+  {
+    "styrk": "7522",
+    "grupo": "7",
+    "nombre_no": "Møbelsnekkere"
+  },
+  {
+    "styrk": "7531",
+    "grupo": "7",
+    "nombre_no": "Skreddere, buntmakere mv."
+  },
+  {
+    "styrk": "7534",
+    "grupo": "7",
+    "nombre_no": "Møbeltapetserere mv."
+  },
+  {
+    "styrk": "7541",
+    "grupo": "7",
+    "nombre_no": "Yrkesdykkere"
+  },
+  {
+    "styrk": "7542",
+    "grupo": "7",
+    "nombre_no": "Skytebaser og sprengningsarbeidere"
+  },
+  {
+    "styrk": "7544",
+    "grupo": "7",
+    "nombre_no": "Desinfeksjonsarbeidere og skadedyrbekjempere"
+  },
+  {
+    "styrk": "7549",
+    "grupo": "7",
+    "nombre_no": "Andre håndverkere"
+  },
+  {
+    "styrk": "8111",
+    "grupo": "8",
+    "nombre_no": "Bergfagarbeidere"
+  },
+  {
+    "styrk": "8112",
+    "grupo": "8",
+    "nombre_no": "Prosessoperatører (oppredning)"
+  },
+  {
+    "styrk": "8113",
+    "grupo": "8",
+    "nombre_no": "Operatører innen boring mv."
+  },
+  {
+    "styrk": "8114",
+    "grupo": "8",
+    "nombre_no": "Operatører innen produksjon av betong mv."
+  },
+  {
+    "styrk": "8121",
+    "grupo": "8",
+    "nombre_no": "Operatører innen metallurgiske prosessfag"
+  },
+  {
+    "styrk": "8131",
+    "grupo": "8",
+    "nombre_no": "Operatører innen kjemisk industri"
+  },
+  {
+    "styrk": "8141",
+    "grupo": "8",
+    "nombre_no": "Operatører innen produksjon av gummiprodukter"
+  },
+  {
+    "styrk": "8142",
+    "grupo": "8",
+    "nombre_no": "Operatører innen plastprodukter"
+  },
+  {
+    "styrk": "8143",
+    "grupo": "8",
+    "nombre_no": "Operatører innen papirprodukter"
+  },
+  {
+    "styrk": "8151",
+    "grupo": "8",
+    "nombre_no": "Spinne- og nøstemaskinoperatører"
+  },
+  {
+    "styrk": "8152",
+    "grupo": "8",
+    "nombre_no": "Operatører innen tekstilproduksjon mv."
+  },
+  {
+    "styrk": "8153",
+    "grupo": "8",
+    "nombre_no": "Industrisyere"
+  },
+  {
+    "styrk": "8157",
+    "grupo": "8",
+    "nombre_no": "Renseri- og vaskerimaskinoperatører"
+  },
+  {
+    "styrk": "8160",
+    "grupo": "8",
+    "nombre_no": "Operatører innen næringsmiddelproduksjon"
+  },
+  {
+    "styrk": "8171",
+    "grupo": "8",
+    "nombre_no": "Operatører innen treforedling"
+  },
+  {
+    "styrk": "8172",
+    "grupo": "8",
+    "nombre_no": "Operatører innen trelastproduksjon"
+  },
+  {
+    "styrk": "8181",
+    "grupo": "8",
+    "nombre_no": "Operatører innen glass- og keramisk produksjon"
+  },
+  {
+    "styrk": "8182",
+    "grupo": "8",
+    "nombre_no": "Fyrkjele- og turbinoperatører"
+  },
+  {
+    "styrk": "8183",
+    "grupo": "8",
+    "nombre_no": "Pakke-, tappe- og etikettmaskinoperatører"
+  },
+  {
+    "styrk": "8211",
+    "grupo": "8",
+    "nombre_no": "Montører av mekaniske produkter"
+  },
+  {
+    "styrk": "8212",
+    "grupo": "8",
+    "nombre_no": "Montører av elektriske og elektroniske produkter"
+  },
+  {
+    "styrk": "8311",
+    "grupo": "8",
+    "nombre_no": "Lokomotiv og T-baneførere"
+  },
+  {
+    "styrk": "8322",
+    "grupo": "8",
+    "nombre_no": "Bil-, drosje- og varebilførere"
+  },
+  {
+    "styrk": "8331",
+    "grupo": "8",
+    "nombre_no": "Bussjåfører og trikkeførere"
+  },
+  {
+    "styrk": "8332",
+    "grupo": "8",
+    "nombre_no": "Lastebil- og trailersjåfører"
+  },
+  {
+    "styrk": "8341",
+    "grupo": "8",
+    "nombre_no": "Jordbruks- og skogbruksmaskinførere"
+  },
+  {
+    "styrk": "8342",
+    "grupo": "8",
+    "nombre_no": "Anleggsmaskinførere"
+  },
+  {
+    "styrk": "8343",
+    "grupo": "8",
+    "nombre_no": "Kran- og heisførere mv."
+  },
+  {
+    "styrk": "8344",
+    "grupo": "8",
+    "nombre_no": "Truckførere"
+  },
+  {
+    "styrk": "8350",
+    "grupo": "8",
+    "nombre_no": "Dekks- og maskinmannskap (skip)"
+  },
+  {
+    "styrk": "9111",
+    "grupo": "9",
+    "nombre_no": "Renholdere i private hjem"
+  },
+  {
+    "styrk": "9112",
+    "grupo": "9",
+    "nombre_no": "Renholdere i bedrifter"
+  },
+  {
+    "styrk": "9122",
+    "grupo": "9",
+    "nombre_no": "Bilvaskere"
+  },
+  {
+    "styrk": "9211",
+    "grupo": "9",
+    "nombre_no": "Hjelpearbeidere i nyttevekstproduksjon"
+  },
+  {
+    "styrk": "9212",
+    "grupo": "9",
+    "nombre_no": "Hjelpearbeidere i husdyrproduksjon"
+  },
+  {
+    "styrk": "9213",
+    "grupo": "9",
+    "nombre_no": "Hjelpearbeidere i kombinasjonsbruk"
+  },
+  {
+    "styrk": "9214",
+    "grupo": "9",
+    "nombre_no": "Hjelpearbeidere i gartneri mv."
+  },
+  {
+    "styrk": "9312",
+    "grupo": "9",
+    "nombre_no": "Hjelpearbeidere i anlegg"
+  },
+  {
+    "styrk": "9313",
+    "grupo": "9",
+    "nombre_no": "Hjelpearbeidere i bygg"
+  },
+  {
+    "styrk": "9321",
+    "grupo": "9",
+    "nombre_no": "Håndpakkere mv."
+  },
+  {
+    "styrk": "9329",
+    "grupo": "9",
+    "nombre_no": "Andre hjelpearbeidere i industri"
+  },
+  {
+    "styrk": "9333",
+    "grupo": "9",
+    "nombre_no": "Laste- og lossearbeidere"
+  },
+  {
+    "styrk": "9334",
+    "grupo": "9",
+    "nombre_no": "Varepåfyllere"
+  },
+  {
+    "styrk": "9412",
+    "grupo": "9",
+    "nombre_no": "Kjøkkenassistenter"
+  },
+  {
+    "styrk": "9510",
+    "grupo": "9",
+    "nombre_no": "Reklamedistributører mv."
+  },
+  {
+    "styrk": "9611",
+    "grupo": "9",
+    "nombre_no": "Renovasjonsarbeidere"
+  },
+  {
+    "styrk": "9612",
+    "grupo": "9",
+    "nombre_no": "Gjenvinningsarbeidere"
+  },
+  {
+    "styrk": "9621",
+    "grupo": "9",
+    "nombre_no": "Bud mv."
+  },
+  {
+    "styrk": "9622",
+    "grupo": "9",
+    "nombre_no": "Altmuligmann"
+  },
+  {
+    "styrk": "9629",
+    "grupo": "9",
+    "nombre_no": "Andre hjelpearbeidere"
+  }
+]

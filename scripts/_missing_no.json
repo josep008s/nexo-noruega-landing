@@ -1,0 +1,232 @@
+[
+  {
+    "styrk": "3123",
+    "grupo": "3",
+    "nombre_no": "Arbeidsleder, bygg og anlegg"
+  },
+  {
+    "styrk": "3131",
+    "grupo": "3",
+    "nombre_no": "Energikontrolloperatører"
+  },
+  {
+    "styrk": "3133",
+    "grupo": "3",
+    "nombre_no": "Kontrolloperatører innen kjemisk prosessindustri"
+  },
+  {
+    "styrk": "3134",
+    "grupo": "3",
+    "nombre_no": "Kontrolloperatører ved olje- og naturgassraffineringsanlegg"
+  },
+  {
+    "styrk": "3135",
+    "grupo": "3",
+    "nombre_no": "Kontrolloperatører innen metallproduksjon"
+  },
+  {
+    "styrk": "3141",
+    "grupo": "3",
+    "nombre_no": "Bioteknikere (ikke-medisinske laboratorier)"
+  },
+  {
+    "styrk": "3142",
+    "grupo": "3",
+    "nombre_no": "Agroteknikere"
+  },
+  {
+    "styrk": "3143",
+    "grupo": "3",
+    "nombre_no": "Skogteknikere"
+  },
+  {
+    "styrk": "3151",
+    "grupo": "3",
+    "nombre_no": "Skipsmaskinister"
+  },
+  {
+    "styrk": "3152",
+    "grupo": "3",
+    "nombre_no": "Dekksoffiserer og loser"
+  },
+  {
+    "styrk": "3153",
+    "grupo": "3",
+    "nombre_no": "Flygere"
+  },
+  {
+    "styrk": "3154",
+    "grupo": "3",
+    "nombre_no": "Flygeledere"
+  },
+  {
+    "styrk": "3155",
+    "grupo": "3",
+    "nombre_no": "Teknikere innen luftfartssikkerhet"
+  },
+  {
+    "styrk": "3211",
+    "grupo": "3",
+    "nombre_no": "Radiografer mv."
+  },
+  {
+    "styrk": "3212",
+    "grupo": "3",
+    "nombre_no": "Bioingeniører"
+  },
+  {
+    "styrk": "3213",
+    "grupo": "3",
+    "nombre_no": "Reseptarer"
+  },
+  {
+    "styrk": "3214",
+    "grupo": "3",
+    "nombre_no": "Protese- og tannteknikere"
+  },
+  {
+    "styrk": "3230",
+    "grupo": "3",
+    "nombre_no": "Yrker innen alternativ medisin"
+  },
+  {
+    "styrk": "3240",
+    "grupo": "3",
+    "nombre_no": "Dyrepleiere"
+  },
+  {
+    "styrk": "3251",
+    "grupo": "3",
+    "nombre_no": "Tannpleiere"
+  },
+  {
+    "styrk": "3254",
+    "grupo": "3",
+    "nombre_no": "Optikere"
+  },
+  {
+    "styrk": "3256",
+    "grupo": "3",
+    "nombre_no": "Helsesekretærer"
+  },
+  {
+    "styrk": "3257",
+    "grupo": "3",
+    "nombre_no": "Helse- og miljøkontrollører"
+  },
+  {
+    "styrk": "3258",
+    "grupo": "3",
+    "nombre_no": "Ambulansepersonell"
+  },
+  {
+    "styrk": "3259",
+    "grupo": "3",
+    "nombre_no": "Andre helseyrker"
+  },
+  {
+    "styrk": "3311",
+    "grupo": "3",
+    "nombre_no": "Finansmeglere"
+  },
+  {
+    "styrk": "3312",
+    "grupo": "3",
+    "nombre_no": "Kundebehandlere lån og kreditt"
+  },
+  {
+    "styrk": "3313",
+    "grupo": "3",
+    "nombre_no": "Regnskapsførere"
+  },
+  {
+    "styrk": "3315",
+    "grupo": "3",
+    "nombre_no": "Takstmenn"
+  },
+  {
+    "styrk": "3321",
+    "grupo": "3",
+    "nombre_no": "Forsikringsagenter"
+  },
+  {
+    "styrk": "3322",
+    "grupo": "3",
+    "nombre_no": "Selgere (engros)"
+  },
+  {
+    "styrk": "3323",
+    "grupo": "3",
+    "nombre_no": "Innkjøpere"
+  },
+  {
+    "styrk": "3324",
+    "grupo": "3",
+    "nombre_no": "Handels- og skipsmeglere"
+  },
+  {
+    "styrk": "3331",
+    "grupo": "3",
+    "nombre_no": "Speditører og befraktere"
+  },
+  {
+    "styrk": "3332",
+    "grupo": "3",
+    "nombre_no": "Konferanse- og arrangementsplanleggere mv."
+  },
+  {
+    "styrk": "3333",
+    "grupo": "3",
+    "nombre_no": "Arbeidsformidlere"
+  },
+  {
+    "styrk": "3334",
+    "grupo": "3",
+    "nombre_no": "Eiendomsmeglere og - forvaltere"
+  },
+  {
+    "styrk": "3339",
+    "grupo": "3",
+    "nombre_no": "Andre yrker innen forretningstjenester"
+  },
+  {
+    "styrk": "3341",
+    "grupo": "3",
+    "nombre_no": "Arbeidsledere for kontorpersonell"
+  },
+  {
+    "styrk": "3342",
+    "grupo": "3",
+    "nombre_no": "Advokatsekretær"
+  },
+  {
+    "styrk": "3343",
+    "grupo": "3",
+    "nombre_no": "Sjefssekretærer"
+  },
+  {
+    "styrk": "3351",
+    "grupo": "3",
+    "nombre_no": "Tollere"
+  },
+  {
+    "styrk": "3352",
+    "grupo": "3",
+    "nombre_no": "Skattefunksjonærer"
+  },
+  {
+    "styrk": "3353",
+    "grupo": "3",
+    "nombre_no": "Saksbehandlere innen sosiale ytelser"
+  },
+  {
+    "styrk": "3355",
+    "grupo": "3",
+    "nombre_no": "Politibetjenter mv."
+  },
+  {
+    "styrk": "3359",
+    "grupo": "3",
+    "nombre_no": "Andre yrker innen offentlig forvaltning"
+  }
+]
