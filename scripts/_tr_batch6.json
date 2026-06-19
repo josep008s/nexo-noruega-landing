@@ -1,0 +1,266 @@
+[
+  {
+    "styrk": "5132",
+    "nombre_no": "Bartendere",
+    "nombre_es": "camarero de barra",
+    "alias_es": ["bartender", "bartenders", "barman", "barwoman", "camarero de barra", "camarera de barra", "camareros de barra", "barista de coctel", "coctelero", "coctelera", "mozo de barra", "tragos"]
+  },
+  {
+    "styrk": "5141",
+    "nombre_no": "Frisører",
+    "nombre_es": "peluquero",
+    "alias_es": ["peluquero", "peluquera", "peluqueros", "peluqueras", "estilista", "estilistas", "barbero", "barbera", "barberos", "peluqueria", "corte de pelo", "salon de belleza"]
+  },
+  {
+    "styrk": "5142",
+    "nombre_no": "Kosmetologer mv.",
+    "nombre_es": "esteticista",
+    "alias_es": ["esteticista", "esteticistas", "cosmetologo", "cosmetologa", "cosmetologos", "cosmetologa", "esteticien", "esteticienne", "tecnico de estetica", "manicurista", "centro de estetica", "tratamientos de belleza"]
+  },
+  {
+    "styrk": "5151",
+    "nombre_no": "Renholdsledere i bedrifter",
+    "nombre_es": "supervisor de limpieza",
+    "alias_es": ["supervisor de limpieza", "supervisora de limpieza", "supervisores de limpieza", "jefe de limpieza", "jefa de limpieza", "encargado de limpieza", "encargada de limpieza", "coordinador de limpieza", "responsable de limpieza", "gobernanta", "supervisor de aseo", "jefe de servicios de limpieza"]
+  },
+  {
+    "styrk": "5152",
+    "nombre_no": "Husholdere",
+    "nombre_es": "ama de llaves",
+    "alias_es": ["ama de llaves", "amas de llaves", "amo de llaves", "gobernante", "gobernanta", "encargado del hogar", "encargada del hogar", "personal domestico", "empleado domestico", "empleada domestica", "mayordomo", "administrador del hogar"]
+  },
+  {
+    "styrk": "5153",
+    "nombre_no": "Vaktmestre",
+    "nombre_es": "conserje",
+    "alias_es": ["conserje", "conserjes", "portero", "portera", "porteros", "bedel", "ordenanza", "encargado de mantenimiento", "encargada de mantenimiento", "vigilante de edificio", "mantenimiento de edificios", "guardian de edificio"]
+  },
+  {
+    "styrk": "5163",
+    "nombre_no": "Begravelsesbyrå- og krematoriearbeidere",
+    "nombre_es": "trabajador de funeraria",
+    "alias_es": ["trabajador de funeraria", "trabajadora de funeraria", "trabajadores de funeraria", "empleado de funeraria", "empleada de funeraria", "agente funerario", "agente funeraria", "operario de crematorio", "operador de crematorio", "tanatopractor", "personal de funeraria", "encargado de pompas funebres"]
+  },
+  {
+    "styrk": "5164",
+    "nombre_no": "Dyrepassere og - trenere mv.",
+    "nombre_es": "cuidador y adiestrador de animales",
+    "alias_es": ["cuidador de animales", "cuidadora de animales", "cuidadores de animales", "adiestrador de animales", "adiestradora de animales", "adiestrador canino", "entrenador de animales", "entrenadora de animales", "cuidador de mascotas", "guardia de zoologico", "domador", "educador canino"]
+  },
+  {
+    "styrk": "5165",
+    "nombre_no": "Kjøreskolelærere",
+    "nombre_es": "profesor de autoescuela",
+    "alias_es": ["profesor de autoescuela", "profesora de autoescuela", "profesores de autoescuela", "instructor de manejo", "instructora de manejo", "instructor de conduccion", "instructora de conduccion", "profesor de manejo", "maestro de manejo", "instructor de autoescuela", "monitor de conduccion", "instructor de conductores"]
+  },
+  {
+    "styrk": "5211",
+    "nombre_no": "Torghandlere",
+    "nombre_es": "vendedor de mercado",
+    "alias_es": ["vendedor de mercado", "vendedora de mercado", "vendedores de mercado", "vendedor ambulante", "vendedora ambulante", "puestero", "puestera", "feriante", "vendedor de puesto", "comerciante de mercado", "vendedor callejero", "tendero de mercado"]
+  },
+  {
+    "styrk": "5222",
+    "nombre_no": "Butikkavdelingssjefer",
+    "nombre_es": "jefe de sección de tienda",
+    "alias_es": ["jefe de seccion", "jefa de seccion", "jefes de seccion", "encargado de seccion", "encargada de seccion", "supervisor de seccion", "responsable de seccion", "jefe de departamento de tienda", "encargado de tienda", "jefe de area comercial", "supervisor de ventas", "coordinador de seccion"]
+  },
+  {
+    "styrk": "5223",
+    "nombre_no": "Butikkmedarbeidere",
+    "nombre_es": "dependiente de tienda",
+    "alias_es": ["dependiente", "dependienta", "dependientes", "vendedor de tienda", "vendedora de tienda", "vendedor", "vendedora", "empleado de comercio", "empleada de comercio", "cajero", "cajera", "auxiliar de tienda", "personal de tienda"]
+  },
+  {
+    "styrk": "5230",
+    "nombre_no": "Billettselgere",
+    "nombre_es": "vendedor de boletos",
+    "alias_es": ["vendedor de boletos", "vendedora de boletos", "vendedor de billetes", "vendedora de billetes", "taquillero", "taquillera", "taquilleros", "cajero de taquilla", "vendedor de entradas", "expendedor de boletos", "boletero", "boletera"]
+  },
+  {
+    "styrk": "5243",
+    "nombre_no": "Dørselgere",
+    "nombre_es": "vendedor a domicilio",
+    "alias_es": ["vendedor a domicilio", "vendedora a domicilio", "vendedores a domicilio", "vendedor puerta a puerta", "vendedora puerta a puerta", "vendedor ambulante", "comercial a domicilio", "promotor de ventas", "agente de ventas a domicilio", "vendedor de calle", "vendedor directo"]
+  },
+  {
+    "styrk": "5244",
+    "nombre_no": "Telefon- og nettselgere",
+    "nombre_es": "teleoperador de ventas",
+    "alias_es": ["teleoperador", "teleoperadora", "teleoperadores", "televendedor", "televendedora", "vendedor telefonico", "vendedora telefonica", "agente de telemarketing", "telemarketing", "vendedor online", "vendedora online", "comercial telefonico", "operador de call center"]
+  },
+  {
+    "styrk": "5245",
+    "nombre_no": "Servicemedarbeidere (bensinstasjon)",
+    "nombre_es": "empleado de gasolinera",
+    "alias_es": ["empleado de gasolinera", "empleada de gasolinera", "empleados de gasolinera", "despachador de gasolina", "despachadora de gasolina", "bombero de gasolinera", "expendedor de combustible", "operario de estacion de servicio", "empleado de estacion de servicio", "atendedor de gasolinera", "trabajador de gasolinera", "playero"]
+  },
+  {
+    "styrk": "5246",
+    "nombre_no": "Gatekjøkken- og kafémedarbeidere mv.",
+    "nombre_es": "empleado de comida rápida",
+    "alias_es": ["empleado de comida rapida", "empleada de comida rapida", "empleados de comida rapida", "empleado de cafeteria", "empleada de cafeteria", "dependiente de cafeteria", "personal de comida rapida", "trabajador de fast food", "empleado de kiosco de comida", "barista", "empleado de bar", "mozo de cafeteria"]
+  },
+  {
+    "styrk": "5249",
+    "nombre_no": "Andre salgsmedarbeidere",
+    "nombre_es": "otros empleados de ventas",
+    "alias_es": ["empleado de ventas", "empleada de ventas", "empleados de ventas", "vendedor", "vendedora", "personal de ventas", "auxiliar de ventas", "asesor de ventas", "asesora de ventas", "agente comercial", "dependiente", "otros vendedores"]
+  },
+  {
+    "styrk": "5311",
+    "nombre_no": "Barnehage- og skolefritidsassistenter mv.",
+    "nombre_es": "auxiliar de guardería",
+    "alias_es": ["auxiliar de guarderia", "auxiliares de guarderia", "asistente de guarderia", "auxiliar de jardin infantil", "auxiliar de jardin de infancia", "auxiliar de educacion infantil", "cuidador infantil", "cuidadora infantil", "monitor de actividades extraescolares", "auxiliar de preescolar", "niñera", "asistente de educacion infantil"]
+  },
+  {
+    "styrk": "5312",
+    "nombre_no": "Skoleassistenter",
+    "nombre_es": "auxiliar escolar",
+    "alias_es": ["auxiliar escolar", "auxiliares escolares", "asistente escolar", "ayudante de aula", "auxiliar de aula", "auxiliar de educacion", "monitor escolar", "asistente de profesor", "ayudante escolar", "auxiliar de apoyo escolar", "personal de apoyo escolar"]
+  },
+  {
+    "styrk": "5321",
+    "nombre_no": "Helsefagarbeidere",
+    "nombre_es": "auxiliar de enfermería",
+    "alias_es": ["auxiliar de enfermeria", "auxiliares de enfermeria", "auxiliar sanitario", "auxiliar sanitaria", "tecnico en cuidados auxiliares de enfermeria", "tcae", "asistente de salud", "auxiliar de salud", "ayudante de enfermeria", "auxiliar clinico", "cuidador sanitario", "tecnico de salud"]
+  },
+  {
+    "styrk": "5322",
+    "nombre_no": "Hjemmehjelper",
+    "nombre_es": "auxiliar de ayuda a domicilio",
+    "alias_es": ["auxiliar de ayuda a domicilio", "ayuda a domicilio", "cuidador a domicilio", "cuidadora a domicilio", "asistente domiciliario", "asistente domiciliaria", "auxiliar domiciliario", "cuidador de personas mayores", "asistente personal", "trabajador de ayuda a domicilio", "auxiliar de hogar", "cuidador domiciliario"]
+  },
+  {
+    "styrk": "5329",
+    "nombre_no": "Andre pleiemedarbeidere",
+    "nombre_es": "otros auxiliares de cuidados",
+    "alias_es": ["auxiliar de cuidados", "auxiliares de cuidados", "cuidador", "cuidadora", "asistente de cuidados", "auxiliar asistencial", "personal de cuidados", "auxiliar de atencion social", "cuidador personal", "auxiliar de geriatria", "asistente de pacientes", "otros cuidadores"]
+  },
+  {
+    "styrk": "5411",
+    "nombre_no": "Brannkonstabler",
+    "nombre_es": "bombero",
+    "alias_es": ["bombero", "bombera", "bomberos", "bomberas", "combatiente de incendios", "rescatista de bomberos", "extincion de incendios", "cuerpo de bomberos", "bombero forestal", "agente de bomberos", "servicio de bomberos"]
+  },
+  {
+    "styrk": "5413",
+    "nombre_no": "Fengselsbetjenter",
+    "nombre_es": "funcionario de prisiones",
+    "alias_es": ["funcionario de prisiones", "funcionaria de prisiones", "funcionarios de prisiones", "guardia de prision", "guardia penitenciario", "guardia penitenciaria", "agente penitenciario", "agente penitenciaria", "vigilante de prision", "celador de prisiones", "oficial penitenciario", "carcelero"]
+  },
+  {
+    "styrk": "5414",
+    "nombre_no": "Vektere",
+    "nombre_es": "vigilante de seguridad",
+    "alias_es": ["vigilante de seguridad", "vigilantes de seguridad", "guardia de seguridad", "guardias de seguridad", "guardia de seguridad privada", "agente de seguridad", "guarda de seguridad", "personal de seguridad", "vigilante", "seguridad privada", "guardia", "guardaespaldas"]
+  },
+  {
+    "styrk": "5419",
+    "nombre_no": "Andre sikkerhetsarbeidere",
+    "nombre_es": "otros trabajadores de seguridad",
+    "alias_es": ["trabajador de seguridad", "trabajadora de seguridad", "trabajadores de seguridad", "agente de seguridad", "personal de seguridad", "guardia", "vigilante", "controlador de acceso", "auxiliar de seguridad", "guarda", "oficial de seguridad", "otros agentes de seguridad"]
+  },
+  {
+    "styrk": "6113",
+    "nombre_no": "Gartnere",
+    "nombre_es": "jardinero",
+    "alias_es": ["jardinero", "jardinera", "jardineros", "jardineras", "horticultor", "horticultora", "paisajista", "encargado de jardines", "tecnico de jardineria", "jardineria", "viverista", "cuidador de jardines"]
+  },
+  {
+    "styrk": "6121",
+    "nombre_no": "Melke- og husdyrprodusenter",
+    "nombre_es": "ganadero de leche y vacuno",
+    "alias_es": ["ganadero", "ganadera", "ganaderos", "ganadero de leche", "productor de leche", "productora de leche", "lechero", "vaquero", "criador de ganado", "ganadero de vacuno", "productor lechero", "explotacion ganadera"]
+  },
+  {
+    "styrk": "6122",
+    "nombre_no": "Egg- og fjærfeprodusenter",
+    "nombre_es": "avicultor",
+    "alias_es": ["avicultor", "avicultora", "avicultores", "productor de huevos", "productora de huevos", "criador de aves", "criadora de aves", "granjero avicola", "productor avicola", "avicultura", "criador de pollos", "explotacion avicola"]
+  },
+  {
+    "styrk": "6130",
+    "nombre_no": "Plante- og husdyrprodusenter (kombinasjonsbruk)",
+    "nombre_es": "agricultor y ganadero mixto",
+    "alias_es": ["agricultor y ganadero", "agricultora y ganadera", "productor agropecuario", "productora agropecuaria", "agricultor mixto", "ganadero mixto", "explotacion mixta", "agropecuario", "campesino", "granjero", "productor agricola y ganadero", "agricultura y ganaderia"]
+  },
+  {
+    "styrk": "6210",
+    "nombre_no": "Skogbrukere",
+    "nombre_es": "trabajador forestal",
+    "alias_es": ["trabajador forestal", "trabajadora forestal", "trabajadores forestales", "silvicultor", "silvicultora", "leñador", "leñadora", "operario forestal", "explotacion forestal", "obrero forestal", "talador", "ingeniero forestal de campo"]
+  },
+  {
+    "styrk": "6221",
+    "nombre_no": "Havbruksarbeidere",
+    "nombre_es": "trabajador de acuicultura",
+    "alias_es": ["trabajador de acuicultura", "trabajadora de acuicultura", "trabajadores de acuicultura", "acuicultor", "acuicultora", "operario de piscifactoria", "operario de acuicultura", "trabajador de piscifactoria", "cultivador de peces", "operario de granja marina", "piscicultor", "trabajador de cultivo marino"]
+  },
+  {
+    "styrk": "6222",
+    "nombre_no": "Fiskere",
+    "nombre_es": "pescador",
+    "alias_es": ["pescador", "pescadora", "pescadores", "pescadoras", "pescador artesanal", "marinero pescador", "trabajador de pesca", "pescador de altura", "pescador de bajura", "tripulante de pesca", "pesca", "faenero"]
+  },
+  {
+    "styrk": "7112",
+    "nombre_no": "Murere",
+    "nombre_es": "albañil",
+    "alias_es": ["albañil", "albañiles", "albañila", "maestro albañil", "obrero de la construccion", "constructor", "oficial de albañileria", "peon albañil", "mamposteria", "albañileria", "ladrillero", "asentador de ladrillos"]
+  },
+  {
+    "styrk": "7113",
+    "nombre_no": "Steinhoggere mv.",
+    "nombre_es": "cantero",
+    "alias_es": ["cantero", "cantera", "canteros", "tallista de piedra", "labrante", "picapedrero", "tallador de piedra", "marmolista", "trabajador de la piedra", "escultor de piedra", "labrante de piedra", "operario de canteria"]
+  },
+  {
+    "styrk": "7114",
+    "nombre_no": "Betongarbeidere",
+    "nombre_es": "operario de hormigón",
+    "alias_es": ["operario de hormigon", "operaria de hormigon", "operarios de hormigon", "trabajador de hormigon", "encofrador", "encofradora", "hormigonero", "operario de concreto", "trabajador de concreto", "ferrallista", "obrero de hormigon", "albañil de hormigon"]
+  },
+  {
+    "styrk": "7115",
+    "nombre_no": "Tømrere og snekkere",
+    "nombre_es": "carpintero",
+    "alias_es": ["carpintero", "carpintera", "carpinteros", "carpinteras", "ebanista", "carpintero de obra", "carpintero de armar", "carpinteria", "carpintero de madera", "oficial carpintero", "trabajador de carpinteria", "carpintero de estructuras"]
+  },
+  {
+    "styrk": "7119",
+    "nombre_no": "Andre bygningsarbeidere",
+    "nombre_es": "otros trabajadores de la construcción",
+    "alias_es": ["trabajador de la construccion", "trabajadora de la construccion", "trabajadores de la construccion", "obrero de la construccion", "obrera de la construccion", "peon de construccion", "operario de obra", "albañil", "obrero de obra", "trabajador de obra", "personal de construccion", "otros obreros de construccion"]
+  },
+  {
+    "styrk": "7121",
+    "nombre_no": "Taktekkere",
+    "nombre_es": "techador",
+    "alias_es": ["techador", "techadora", "techadores", "instalador de tejados", "instalador de techos", "tejador", "colocador de tejas", "operario de cubiertas", "trabajador de tejados", "montador de cubiertas", "reparador de tejados", "especialista en tejados"]
+  },
+  {
+    "styrk": "7122",
+    "nombre_no": "Gulv- og flisleggere",
+    "nombre_es": "alicatador y solador",
+    "alias_es": ["alicatador", "alicatadora", "alicatadores", "solador", "soladora", "colocador de azulejos", "colocador de baldosas", "azulejero", "instalador de pisos", "embaldosador", "colocador de pisos", "ceramista de obra", "instalador de suelos"]
+  },
+  {
+    "styrk": "7124",
+    "nombre_no": "Isolatører mv.",
+    "nombre_es": "instalador de aislamiento",
+    "alias_es": ["instalador de aislamiento", "instaladora de aislamiento", "instaladores de aislamiento", "aislador", "aisladora", "operario de aislamiento", "tecnico de aislamiento", "montador de aislamiento", "aislante", "trabajador de aislamiento", "especialista en aislamiento termico", "operario aislante"]
+  },
+  {
+    "styrk": "7125",
+    "nombre_no": "Glassarbeidere",
+    "nombre_es": "cristalero",
+    "alias_es": ["cristalero", "cristalera", "cristaleros", "vidriero", "vidriera", "vidrieros", "instalador de vidrios", "colocador de cristales", "operario del vidrio", "montador de cristales", "trabajador del vidrio", "vidriero de obra"]
+  },
+  {
+    "styrk": "7126",
+    "nombre_no": "Rørleggere og VVS-montører",
+    "nombre_es": "fontanero",
+    "alias_es": ["fontanero", "fontanera", "fontaneros", "plomero", "plomera", "plomeros", "instalador de fontaneria", "instalador sanitario", "tecnico de climatizacion", "instalador de calefaccion", "gasfiter", "instalador hidraulico"]
+  }
+]

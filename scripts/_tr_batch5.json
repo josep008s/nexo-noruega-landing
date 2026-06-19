@@ -1,0 +1,266 @@
+[
+  {
+    "styrk": "3412",
+    "nombre_no": "Miljøarbeidere innen sosiale fagfelt",
+    "nombre_es": "trabajador social de calle",
+    "alias_es": ["trabajador social", "trabajadora social", "educador social", "educadora social", "monitor social", "tecnico de integracion social", "trabajadores sociales", "educadores sociales", "interventor social", "agente de intervencion social"]
+  },
+  {
+    "styrk": "3413",
+    "nombre_no": "Religiøse yrker",
+    "nombre_es": "trabajador religioso laico",
+    "alias_es": ["trabajador religioso", "catequista", "misionero", "misionera", "laico religioso", "agente de pastoral", "trabajadores religiosos", "predicador", "evangelista", "asistente religioso"]
+  },
+  {
+    "styrk": "3421",
+    "nombre_no": "Idrettsutøvere",
+    "nombre_es": "deportista profesional",
+    "alias_es": ["deportista", "atleta", "deportista profesional", "atleta profesional", "deportistas", "atletas", "futbolista", "jugador profesional", "competidor", "deportista de elite"]
+  },
+  {
+    "styrk": "3422",
+    "nombre_no": "Trenere og idrettsdommere",
+    "nombre_es": "entrenador deportivo",
+    "alias_es": ["entrenador", "entrenadora", "entrenador deportivo", "arbitro", "juez deportivo", "preparador fisico", "entrenadores", "coach deportivo", "tecnico deportivo", "colegiado"]
+  },
+  {
+    "styrk": "3423",
+    "nombre_no": "Sports- og aktivitetsinstruktører",
+    "nombre_es": "monitor deportivo",
+    "alias_es": ["monitor deportivo", "monitora deportiva", "instructor deportivo", "instructor de fitness", "monitor de gimnasio", "instructor de actividades", "monitores deportivos", "instructor de yoga", "monitor de tiempo libre", "animador deportivo"]
+  },
+  {
+    "styrk": "3431",
+    "nombre_no": "Fotografer og filmfotografer",
+    "nombre_es": "fotografo",
+    "alias_es": ["fotografo", "fotografa", "camara", "operador de camara", "fotografos", "filmador", "videografo", "director de fotografia", "reportero grafico", "camarografo"]
+  },
+  {
+    "styrk": "3432",
+    "nombre_no": "Interiørdesignere og dekoratører",
+    "nombre_es": "interiorista",
+    "alias_es": ["interiorista", "disenador de interiores", "disenadora de interiores", "decorador", "decoradora", "decorador de interiores", "interioristas", "diseno de interiores", "escaparatista", "ambientador"]
+  },
+  {
+    "styrk": "3433",
+    "nombre_no": "Tekniske konservatorer",
+    "nombre_es": "conservador de museo",
+    "alias_es": ["conservador", "conservadora", "restaurador", "restauradora", "conservador de museo", "tecnico de conservacion", "conservadores", "restaurador de arte", "tecnico en restauracion", "conservador restaurador"]
+  },
+  {
+    "styrk": "3434",
+    "nombre_no": "Sjefskokker",
+    "nombre_es": "jefe de cocina",
+    "alias_es": ["jefe de cocina", "jefa de cocina", "chef", "chef ejecutivo", "cocinero jefe", "primer cocinero", "jefes de cocina", "chef de cocina", "chef ejecutiva", "maestro cocinero"]
+  },
+  {
+    "styrk": "3439",
+    "nombre_no": "Andre yrker innen estetiske fag",
+    "nombre_es": "otros profesionales artisticos",
+    "alias_es": ["artista", "profesional artistico", "creativo", "creativa", "artistas", "profesional creativo", "artesano artistico", "tecnico artistico", "profesionales esteticos", "ayudante artistico"]
+  },
+  {
+    "styrk": "3511",
+    "nombre_no": "Driftsteknikere, IKT",
+    "nombre_es": "tecnico de operaciones informaticas",
+    "alias_es": ["tecnico de sistemas", "operador informatico", "tecnico de operaciones ti", "operador de sistemas", "tecnico informatico", "tecnicos de sistemas", "operador de ti", "tecnico de explotacion", "operador de centro de datos", "tecnico de operaciones"]
+  },
+  {
+    "styrk": "3512",
+    "nombre_no": "Brukerstøtte, IKT",
+    "nombre_es": "tecnico de soporte informatico",
+    "alias_es": ["soporte tecnico", "tecnico de soporte", "help desk", "mesa de ayuda", "soporte informatico", "tecnico de soporte ti", "tecnicos de soporte", "soporte al usuario", "tecnico de help desk", "agente de soporte"]
+  },
+  {
+    "styrk": "3513",
+    "nombre_no": "Nettverks- og systemteknikere, IKT",
+    "nombre_es": "tecnico de redes y sistemas",
+    "alias_es": ["tecnico de redes", "administrador de redes", "tecnico de sistemas y redes", "tecnico en redes", "tecnicos de redes", "tecnico de networking", "tecnico de comunicaciones", "operador de redes", "tecnico ti de redes", "tecnico de infraestructura"]
+  },
+  {
+    "styrk": "3514",
+    "nombre_no": "Internett-teknikere",
+    "nombre_es": "tecnico de internet",
+    "alias_es": ["tecnico de internet", "tecnico web", "webmaster", "tecnico de servicios web", "administrador web", "tecnicos de internet", "tecnico de sitios web", "operador web", "tecnico de plataformas web", "tecnico de hosting"]
+  },
+  {
+    "styrk": "3521",
+    "nombre_no": "Teknikere innen radio og tv",
+    "nombre_es": "tecnico de radio y television",
+    "alias_es": ["tecnico de radio", "tecnico de television", "tecnico audiovisual", "tecnico de sonido", "tecnico de tv", "tecnicos audiovisuales", "operador de equipos audiovisuales", "tecnico de broadcast", "tecnico de medios", "tecnico de imagen y sonido"]
+  },
+  {
+    "styrk": "3522",
+    "nombre_no": "Teknikere innen telekom",
+    "nombre_es": "tecnico de telecomunicaciones",
+    "alias_es": ["tecnico de telecomunicaciones", "tecnico de telecom", "tecnico de telefonia", "instalador de telecomunicaciones", "tecnico en telecomunicaciones", "tecnicos de telecom", "tecnico de redes telefonicas", "operador de telecomunicaciones", "tecnico de comunicaciones", "tecnico de fibra optica"]
+  },
+  {
+    "styrk": "4110",
+    "nombre_no": "Kontormedarbeidere",
+    "nombre_es": "administrativo",
+    "alias_es": ["administrativo", "administrativa", "auxiliar administrativo", "oficinista", "empleado de oficina", "personal administrativo", "administrativos", "auxiliar de oficina", "asistente administrativo", "secretario administrativo"]
+  },
+  {
+    "styrk": "4132",
+    "nombre_no": "Dataregistrere",
+    "nombre_es": "grabador de datos",
+    "alias_es": ["grabador de datos", "grabadora de datos", "operador de entrada de datos", "digitador", "captador de datos", "operador de datos", "grabadores de datos", "data entry", "tecleador de datos", "registrador de datos"]
+  },
+  {
+    "styrk": "4211",
+    "nombre_no": "Kundebehandlere, bank og postkontor",
+    "nombre_es": "cajero de banco",
+    "alias_es": ["cajero de banco", "cajera de banco", "empleado de banca", "cajero bancario", "empleado de banco", "cajero de ventanilla", "cajeros de banco", "empleado de correos", "atencion al cliente bancario", "empleado de oficina bancaria"]
+  },
+  {
+    "styrk": "4212",
+    "nombre_no": "Bingoverter, bookmakere mv.",
+    "nombre_es": "empleado de casa de apuestas",
+    "alias_es": ["empleado de apuestas", "corredor de apuestas", "crupier", "empleado de bingo", "cajero de apuestas", "operador de juego", "empleados de apuestas", "trabajador de casino", "agente de apuestas", "anfitrion de bingo"]
+  },
+  {
+    "styrk": "4214",
+    "nombre_no": "Inkassomedarbeidere mv.",
+    "nombre_es": "gestor de cobros",
+    "alias_es": ["gestor de cobros", "gestora de cobros", "agente de cobros", "cobrador", "gestor de recobro", "tecnico de cobros", "gestores de cobros", "empleado de recobro", "gestor de impagos", "agente de recuperacion de deudas"]
+  },
+  {
+    "styrk": "4221",
+    "nombre_no": "Reisebyråmedarbeidere mv.",
+    "nombre_es": "agente de viajes",
+    "alias_es": ["agente de viajes", "empleado de agencia de viajes", "asesor de viajes", "agente de turismo", "vendedor de viajes", "agentes de viajes", "tecnico de agencia de viajes", "consultor de viajes", "promotor turistico", "empleado de turismo"]
+  },
+  {
+    "styrk": "4222",
+    "nombre_no": "Kundesentermedarbeidere",
+    "nombre_es": "teleoperador",
+    "alias_es": ["teleoperador", "teleoperadora", "agente de call center", "operador de centralita", "agente telefonico", "teleoperadores", "agente de atencion al cliente", "operador de call center", "empleado de centro de llamadas", "telefonista"]
+  },
+  {
+    "styrk": "4223",
+    "nombre_no": "Sentralbordoperatører",
+    "nombre_es": "telefonista",
+    "alias_es": ["telefonista", "operador de centralita", "operadora de centralita", "recepcionista telefonico", "operador telefonico", "telefonistas", "operador de conmutador", "empleado de centralita", "atencion telefonica", "operador de switchboard"]
+  },
+  {
+    "styrk": "4224",
+    "nombre_no": "Hotellresepsjonister",
+    "nombre_es": "recepcionista de hotel",
+    "alias_es": ["recepcionista de hotel", "recepcionista", "empleado de recepcion", "recepcionistas de hotel", "personal de recepcion hotelera", "front desk", "recepcionista hotelero", "agente de recepcion", "empleado de hotel", "conserje de hotel"]
+  },
+  {
+    "styrk": "4225",
+    "nombre_no": "Informasjonsskrankemedarbeidere",
+    "nombre_es": "empleado de informacion",
+    "alias_es": ["empleado de informacion", "informador", "personal de informacion", "atencion al publico", "empleado de atencion al cliente", "agente de informacion", "empleados de informacion", "azafata de informacion", "punto de informacion", "informador turistico"]
+  },
+  {
+    "styrk": "4226",
+    "nombre_no": "Resepsjonister (ekskl. hotell)",
+    "nombre_es": "recepcionista",
+    "alias_es": ["recepcionista", "recepcionistas", "personal de recepcion", "empleado de recepcion", "auxiliar de recepcion", "recepcionista de oficina", "recepcionista de clinica", "atencion en recepcion", "agente de recepcion", "front desk"]
+  },
+  {
+    "styrk": "4229",
+    "nombre_no": "Andre opplysningsmedarbeidere",
+    "nombre_es": "otros empleados de informacion al cliente",
+    "alias_es": ["empleado de informacion", "agente de atencion al cliente", "personal de atencion al publico", "informador", "empleados de informacion", "asistente de informacion", "agente de servicio al cliente", "auxiliar de atencion al cliente", "atencion al usuario", "empleado de servicios de informacion"]
+  },
+  {
+    "styrk": "4311",
+    "nombre_no": "Regnskapsmedarbeidere",
+    "nombre_es": "auxiliar contable",
+    "alias_es": ["auxiliar contable", "auxiliar de contabilidad", "empleado de contabilidad", "administrativo contable", "tecnico contable", "auxiliares contables", "contable", "ayudante de contabilidad", "asistente contable", "empleado contable"]
+  },
+  {
+    "styrk": "4312",
+    "nombre_no": "Forsikrings- og finansmedarbeidere",
+    "nombre_es": "auxiliar de seguros y finanzas",
+    "alias_es": ["empleado de seguros", "administrativo de seguros", "auxiliar financiero", "empleado de finanzas", "tecnico de seguros", "empleados de seguros", "administrativo financiero", "auxiliar de banca", "tramitador de seguros", "gestor administrativo financiero"]
+  },
+  {
+    "styrk": "4313",
+    "nombre_no": "Lønningsmedarbeidere",
+    "nombre_es": "empleado de nominas",
+    "alias_es": ["empleado de nominas", "tecnico de nominas", "administrativo de nominas", "gestor de nominas", "empleado de payroll", "empleados de nominas", "auxiliar de nominas", "especialista en nominas", "responsable de nominas", "tramitador de nominas"]
+  },
+  {
+    "styrk": "4321",
+    "nombre_no": "Lagermedarbeidere og material-forvaltere",
+    "nombre_es": "empleado de almacen",
+    "alias_es": ["mozo de almacen", "empleado de almacen", "operario de almacen", "almacenero", "gestor de almacen", "personal de almacen", "mozos de almacen", "encargado de almacen", "auxiliar de almacen", "controlador de stock"]
+  },
+  {
+    "styrk": "4322",
+    "nombre_no": "Logistikkmedarbeidere",
+    "nombre_es": "empleado de logistica",
+    "alias_es": ["empleado de logistica", "operario de logistica", "tecnico de logistica", "auxiliar de logistica", "personal de logistica", "empleados de logistica", "operador logistico", "administrativo de logistica", "coordinador de logistica", "mozo de logistica"]
+  },
+  {
+    "styrk": "4323",
+    "nombre_no": "Transportfunksjonærer",
+    "nombre_es": "empleado de transporte",
+    "alias_es": ["empleado de transporte", "administrativo de transporte", "auxiliar de transporte", "tecnico de transporte", "coordinador de transporte", "empleados de transporte", "gestor de transporte", "operador de transporte", "planificador de transporte", "personal de transporte"]
+  },
+  {
+    "styrk": "4412",
+    "nombre_no": "Postbud og postsorterere",
+    "nombre_es": "cartero",
+    "alias_es": ["cartero", "cartera", "repartidor de correo", "clasificador de correo", "empleado de correos", "carteros", "distribuidor postal", "repartidor postal", "operario de clasificacion postal", "mensajero postal"]
+  },
+  {
+    "styrk": "4415",
+    "nombre_no": "Arkivassistenter",
+    "nombre_es": "auxiliar de archivo",
+    "alias_es": ["auxiliar de archivo", "ayudante de archivo", "empleado de archivo", "asistente de archivo", "tecnico auxiliar de archivo", "auxiliares de archivo", "archivero auxiliar", "personal de archivo", "auxiliar de documentacion", "ordenador de archivos"]
+  },
+  {
+    "styrk": "4416",
+    "nombre_no": "Personalkontormedarbeidere",
+    "nombre_es": "auxiliar de recursos humanos",
+    "alias_es": ["auxiliar de recursos humanos", "administrativo de recursos humanos", "empleado de rrhh", "auxiliar de personal", "tecnico de recursos humanos", "auxiliares de rrhh", "asistente de recursos humanos", "administrativo de personal", "gestor de personal", "empleado de departamento de personal"]
+  },
+  {
+    "styrk": "5111",
+    "nombre_no": "Flyverter, båtverter mv.",
+    "nombre_es": "auxiliar de vuelo",
+    "alias_es": ["auxiliar de vuelo", "azafata", "azafato", "tripulante de cabina", "asistente de vuelo", "auxiliares de vuelo", "azafata de vuelo", "tripulante de cabina de pasajeros", "sobrecargo", "personal de a bordo"]
+  },
+  {
+    "styrk": "5112",
+    "nombre_no": "Konduktører",
+    "nombre_es": "revisor de tren",
+    "alias_es": ["revisor de tren", "revisor", "interventor de tren", "cobrador de billetes", "revisor ferroviario", "revisores de tren", "interventor", "controlador de billetes", "auxiliar de tren", "acompanante de tren"]
+  },
+  {
+    "styrk": "5113",
+    "nombre_no": "Reiseledere og guider",
+    "nombre_es": "guia turistico",
+    "alias_es": ["guia turistico", "guia turistica", "guia de turismo", "guia", "acompanante de grupos", "guias turisticos", "guia de viajes", "coordinador de viajes", "guia local", "cicerone"]
+  },
+  {
+    "styrk": "5120",
+    "nombre_no": "Kokker",
+    "nombre_es": "cocinero",
+    "alias_es": ["cocinero", "cocinera", "chef", "cocineros", "cocinero profesional", "cocinero de restaurante", "ayudante de cocina", "personal de cocina", "cocinero de linea", "cocinera profesional"]
+  },
+  {
+    "styrk": "5131",
+    "nombre_no": "Servitører",
+    "nombre_es": "camarero",
+    "alias_es": ["camarero", "camarera", "mesero", "mesera", "camareros", "camarero de sala", "mozo de restaurante", "garzon", "camarera de mesa", "personal de sala"]
+  },
+  {
+    "styrk": "5132",
+    "nombre_no": "Bartendere",
+    "nombre_es": "barman",
+    "alias_es": ["barman", "barmaid", "bartender", "camarero de barra", "barwoman", "barmans", "coctelero", "camarero de bar", "barista", "mozo de barra"]
+  },
+  {
+    "styrk": "5141",
+    "nombre_no": "Frisører",
+    "nombre_es": "peluquero",
+    "alias_es": ["peluquero", "peluquera", "estilista", "barbero", "peluqueros", "estilista capilar", "peluquero de senoras", "peluquero de caballeros", "estilistas", "peluquero estilista"]
+  }
+]

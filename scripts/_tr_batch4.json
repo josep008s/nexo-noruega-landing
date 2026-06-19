@@ -1,0 +1,578 @@
+[
+  {
+    "styrk": "1345",
+    "nombre_no": "Ledere av utdanning og undervisning",
+    "nombre_es": "director de centro educativo",
+    "alias_es": ["director educativo", "directora educativa", "director de colegio", "directora de colegio", "director academico", "directora academica", "jefe de estudios", "jefa de estudios", "responsable de educacion", "director de escuela", "directores educativos", "gerente educativo"]
+  },
+  {
+    "styrk": "1346",
+    "nombre_no": "Ledere av forsikring og finansvirksomhet",
+    "nombre_es": "director de seguros y servicios financieros",
+    "alias_es": ["director financiero", "directora financiera", "director de seguros", "directora de seguros", "gerente financiero", "gerente de seguros", "responsable financiero", "jefe de finanzas", "director de banca", "directores financieros", "gerente de servicios financieros", "responsable de seguros"]
+  },
+  {
+    "styrk": "1349",
+    "nombre_no": "Andre ledere av produksjon og tjenesteyting",
+    "nombre_es": "otros directores de produccion y servicios",
+    "alias_es": ["director de produccion", "directora de produccion", "director de servicios", "gerente de produccion", "gerente de servicios", "responsable de produccion", "jefe de produccion", "directores de produccion", "responsable de servicios", "gerente de operaciones"]
+  },
+  {
+    "styrk": "1411",
+    "nombre_no": "Hotellsjefer",
+    "nombre_es": "director de hotel",
+    "alias_es": ["director de hotel", "directora de hotel", "gerente de hotel", "jefe de hotel", "jefa de hotel", "responsable de hotel", "gerente hotelero", "directores de hotel", "administrador de hotel", "encargado de hotel", "director hotelero"]
+  },
+  {
+    "styrk": "1412",
+    "nombre_no": "Restaurantsjefer",
+    "nombre_es": "encargado de restaurante",
+    "alias_es": ["encargado de restaurante", "encargada de restaurante", "gerente de restaurante", "director de restaurante", "jefe de restaurante", "jefa de restaurante", "responsable de restaurante", "encargados de restaurante", "administrador de restaurante", "gerente de sala", "maitre"]
+  },
+  {
+    "styrk": "1420",
+    "nombre_no": "Varehandelssjefer",
+    "nombre_es": "encargado de comercio minorista",
+    "alias_es": ["encargado de tienda", "encargada de tienda", "gerente de tienda", "jefe de tienda", "responsable de tienda", "director de tienda", "gerente de comercio", "encargado de comercio", "responsable de comercio minorista", "encargados de tienda", "store manager", "jefe de ventas tienda"]
+  },
+  {
+    "styrk": "1431",
+    "nombre_no": "Sports-, rekreasjons- og kultursenterledere",
+    "nombre_es": "director de centro deportivo y cultural",
+    "alias_es": ["director deportivo", "directora deportiva", "gerente de centro deportivo", "director de centro cultural", "gerente de instalaciones deportivas", "responsable de centro deportivo", "director de polideportivo", "gerente deportivo", "director de centro recreativo", "responsable de centro cultural", "directores deportivos"]
+  },
+  {
+    "styrk": "1439",
+    "nombre_no": "Andre daglige ledere i tjenesteytende virksomheter",
+    "nombre_es": "otros gerentes de empresas de servicios",
+    "alias_es": ["gerente de servicios", "director de servicios", "gerente general", "director general", "responsable de servicios", "jefe de servicios", "administrador de empresa", "gerentes de servicios", "encargado general", "director de operaciones"]
+  },
+  {
+    "styrk": "2111",
+    "nombre_no": "Fysikere og astronomer",
+    "nombre_es": "fisico y astronomo",
+    "alias_es": ["fisico", "fisica", "astronomo", "astronoma", "fisicos", "astronomos", "fisico teorico", "investigador en fisica", "cientifico fisico", "astrofisico", "astrofisica"]
+  },
+  {
+    "styrk": "2112",
+    "nombre_no": "Meteorologer",
+    "nombre_es": "meteorologo",
+    "alias_es": ["meteorologo", "meteorologa", "meteorologos", "experto en clima", "hombre del tiempo", "mujer del tiempo", "cientifico del clima", "climatologo", "pronosticador del tiempo", "especialista en meteorologia"]
+  },
+  {
+    "styrk": "2113",
+    "nombre_no": "Kjemikere",
+    "nombre_es": "quimico",
+    "alias_es": ["quimico", "quimica", "quimicos", "cientifico quimico", "investigador en quimica", "experto en quimica", "quimico de laboratorio", "licenciado en quimica", "profesional de quimica"]
+  },
+  {
+    "styrk": "2114",
+    "nombre_no": "Geologer og geofysikere",
+    "nombre_es": "geologo y geofisico",
+    "alias_es": ["geologo", "geologa", "geofisico", "geofisica", "geologos", "geofisicos", "cientifico de la tierra", "experto en geologia", "investigador en geologia", "especialista en geociencias"]
+  },
+  {
+    "styrk": "2120",
+    "nombre_no": "Matematikere, statistikere mv.",
+    "nombre_es": "matematico y estadistico",
+    "alias_es": ["matematico", "matematica", "estadistico", "estadistica", "matematicos", "estadisticos", "analista estadistico", "experto en estadistica", "investigador en matematicas", "actuario", "cientifico de datos"]
+  },
+  {
+    "styrk": "2131",
+    "nombre_no": "Biologer, botanikere, zoologer mv.",
+    "nombre_es": "biologo, botanico y zoologo",
+    "alias_es": ["biologo", "biologa", "botanico", "botanica", "zoologo", "zoologa", "biologos", "cientifico biologo", "investigador en biologia", "experto en biologia", "ecologo", "microbiologo"]
+  },
+  {
+    "styrk": "2132",
+    "nombre_no": "Sivilagronomer mv.",
+    "nombre_es": "ingeniero agronomo",
+    "alias_es": ["ingeniero agronomo", "ingeniera agronoma", "agronomo", "agronoma", "ingenieros agronomos", "tecnico agronomo", "especialista en agronomia", "ingeniero agricola", "experto agricola", "asesor agronomo"]
+  },
+  {
+    "styrk": "2133",
+    "nombre_no": "Miljøvernrådgivere",
+    "nombre_es": "asesor ambiental",
+    "alias_es": ["asesor ambiental", "asesora ambiental", "consultor ambiental", "consultora ambiental", "asesor medioambiental", "tecnico ambiental", "especialista en medio ambiente", "asesores ambientales", "experto en medio ambiente", "consultor medioambiental", "responsable de medio ambiente"]
+  },
+  {
+    "styrk": "2141",
+    "nombre_no": "Sivilingeniører (industri og produksjon)",
+    "nombre_es": "ingeniero industrial y de produccion",
+    "alias_es": ["ingeniero industrial", "ingeniera industrial", "ingeniero de produccion", "ingenieros industriales", "ingeniero de procesos", "experto en produccion industrial", "ingeniero de fabricacion", "especialista en produccion", "ingeniero de planta"]
+  },
+  {
+    "styrk": "2142",
+    "nombre_no": "Sivilingeniører (bygg og anlegg)",
+    "nombre_es": "ingeniero civil",
+    "alias_es": ["ingeniero civil", "ingeniera civil", "ingeniero de caminos", "ingenieros civiles", "ingeniero de construccion", "ingeniero de obra civil", "ingeniero de estructuras", "experto en obra civil", "ingeniero de obras publicas"]
+  },
+  {
+    "styrk": "2143",
+    "nombre_no": "Sivilingeniører (miljøteknikk)",
+    "nombre_es": "ingeniero ambiental",
+    "alias_es": ["ingeniero ambiental", "ingeniera ambiental", "ingeniero medioambiental", "ingenieros ambientales", "ingeniero de medio ambiente", "experto en ingenieria ambiental", "especialista en ingenieria ambiental", "ingeniero de sostenibilidad"]
+  },
+  {
+    "styrk": "2144",
+    "nombre_no": "Sivilingeniører (maskin- og marin-teknikk)",
+    "nombre_es": "ingeniero mecanico y naval",
+    "alias_es": ["ingeniero mecanico", "ingeniera mecanica", "ingeniero naval", "ingeniera naval", "ingenieros mecanicos", "ingeniero marino", "experto en ingenieria mecanica", "ingeniero de maquinas", "ingeniero marittimo", "especialista en mecanica"]
+  },
+  {
+    "styrk": "2145",
+    "nombre_no": "Sivilingeniører (kjemi)",
+    "nombre_es": "ingeniero quimico",
+    "alias_es": ["ingeniero quimico", "ingeniera quimica", "ingenieros quimicos", "ingeniero de procesos quimicos", "experto en ingenieria quimica", "especialista en ingenieria quimica", "ingeniero de quimica industrial"]
+  },
+  {
+    "styrk": "2146",
+    "nombre_no": "Sivilingeniører (geofag, petro-leumsteknologi, metallurgi mv.)",
+    "nombre_es": "ingeniero de petroleos, geologia y metalurgia",
+    "alias_es": ["ingeniero de petroleos", "ingeniera de petroleos", "ingeniero de minas", "ingeniero metalurgico", "ingeniero geologo", "ingenieros de petroleos", "experto en petroleo", "ingeniero de geociencias", "ingeniero de metalurgia", "especialista en mineria"]
+  },
+  {
+    "styrk": "2149",
+    "nombre_no": "Andre sivilingeniører (unntatt elektroteknologi)",
+    "nombre_es": "otros ingenieros superiores (excepto electrotecnia)",
+    "alias_es": ["ingeniero superior", "ingeniera superior", "ingeniero", "ingenieros", "otros ingenieros", "ingeniero tecnico superior", "experto en ingenieria", "ingeniero generalista", "especialista en ingenieria"]
+  },
+  {
+    "styrk": "2151",
+    "nombre_no": "Sivilingeniører (elkraftteknikk)",
+    "nombre_es": "ingeniero electrico",
+    "alias_es": ["ingeniero electrico", "ingeniera electrica", "ingenieros electricos", "ingeniero de potencia", "ingeniero electrotecnico", "experto en ingenieria electrica", "ingeniero de energia electrica", "especialista en electricidad"]
+  },
+  {
+    "styrk": "2152",
+    "nombre_no": "Sivilingeniører (elektronikk)",
+    "nombre_es": "ingeniero electronico",
+    "alias_es": ["ingeniero electronico", "ingeniera electronica", "ingenieros electronicos", "ingeniero en electronica", "experto en electronica", "especialista en electronica", "ingeniero de sistemas electronicos"]
+  },
+  {
+    "styrk": "2153",
+    "nombre_no": "Sivilingeniører (telekommunikasjon)",
+    "nombre_es": "ingeniero de telecomunicaciones",
+    "alias_es": ["ingeniero de telecomunicaciones", "ingeniera de telecomunicaciones", "ingeniero de telecom", "ingenieros de telecomunicaciones", "ingeniero de redes", "experto en telecomunicaciones", "especialista en telecomunicaciones", "ingeniero de comunicaciones"]
+  },
+  {
+    "styrk": "2161",
+    "nombre_no": "Sivilarkitekter",
+    "nombre_es": "arquitecto",
+    "alias_es": ["arquitecto", "arquitecta", "arquitectos", "arquitecto superior", "arquitecto de edificacion", "proyectista", "experto en arquitectura", "diseñador de edificios", "profesional de arquitectura"]
+  },
+  {
+    "styrk": "2162",
+    "nombre_no": "Landskapsarkitekter",
+    "nombre_es": "arquitecto paisajista",
+    "alias_es": ["arquitecto paisajista", "arquitecta paisajista", "paisajista", "arquitecto del paisaje", "arquitectos paisajistas", "diseñador de jardines", "diseñador de paisajes", "especialista en paisajismo", "experto en paisajismo"]
+  },
+  {
+    "styrk": "2163",
+    "nombre_no": "Produkt- og klesdesignere",
+    "nombre_es": "diseñador de producto y moda",
+    "alias_es": ["diseñador de producto", "diseñadora de producto", "diseñador de moda", "diseñadora de moda", "diseñador industrial", "diseñadores de producto", "modista de diseño", "experto en diseño de producto", "diseñador de ropa", "creador de moda"]
+  },
+  {
+    "styrk": "2164",
+    "nombre_no": "Arealplanleggere",
+    "nombre_es": "urbanista",
+    "alias_es": ["urbanista", "urbanistas", "planificador urbano", "planificadora urbana", "planificador territorial", "experto en urbanismo", "ordenacion del territorio", "planificador del territorio", "especialista en urbanismo", "tecnico urbanista"]
+  },
+  {
+    "styrk": "2165",
+    "nombre_no": "Landmålere, kartografer mv.",
+    "nombre_es": "topografo y cartografo",
+    "alias_es": ["topografo", "topografa", "cartografo", "cartografa", "topografos", "cartografos", "agrimensor", "experto en topografia", "tecnico en topografia", "especialista en cartografia", "ingeniero topografo"]
+  },
+  {
+    "styrk": "2166",
+    "nombre_no": "Grafiske- og multimediadesignere",
+    "nombre_es": "diseñador grafico y multimedia",
+    "alias_es": ["diseñador grafico", "diseñadora grafica", "diseñador multimedia", "diseñadores graficos", "diseñador web", "experto en diseño grafico", "grafista", "creativo grafico", "diseñador digital", "especialista en multimedia"]
+  },
+  {
+    "styrk": "2211",
+    "nombre_no": "Allmennpraktiserende leger",
+    "nombre_es": "medico de familia",
+    "alias_es": ["medico de familia", "medica de familia", "medico general", "medico de cabecera", "medico generalista", "doctor de familia", "medicos de familia", "medico de atencion primaria", "facultativo general", "medico de medicina general"]
+  },
+  {
+    "styrk": "2212",
+    "nombre_no": "Legespesialister",
+    "nombre_es": "medico especialista",
+    "alias_es": ["medico especialista", "medica especialista", "especialista medico", "medicos especialistas", "doctor especialista", "facultativo especialista", "medico de especialidad", "especialista clinico", "medico consultor"]
+  },
+  {
+    "styrk": "2221",
+    "nombre_no": "Spesialsykepleiere",
+    "nombre_es": "enfermero especialista",
+    "alias_es": ["enfermero especialista", "enfermera especialista", "enfermero especializado", "enfermera especializada", "enfermeros especialistas", "especialista en enfermeria", "enfermero clinico", "enfermera de cuidados especiales", "enfermero avanzado"]
+  },
+  {
+    "styrk": "2222",
+    "nombre_no": "Jordmødre",
+    "nombre_es": "matrona",
+    "alias_es": ["matrona", "matronas", "comadrona", "comadronas", "partera", "parteras", "enfermera obstetra", "obstetra de parto", "matrona de parto", "enfermera matrona"]
+  },
+  {
+    "styrk": "2223",
+    "nombre_no": "Sykepleiere",
+    "nombre_es": "enfermero",
+    "alias_es": ["enfermero", "enfermera", "enfermeros", "enfermeras", "profesional de enfermeria", "diplomado en enfermeria", "personal de enfermeria", "enfermero titulado", "ats"]
+  },
+  {
+    "styrk": "2224",
+    "nombre_no": "Vernepleiere",
+    "nombre_es": "educador en discapacidad",
+    "alias_es": ["educador en discapacidad", "educadora en discapacidad", "enfermero de discapacidad", "cuidador especializado", "educador social sanitario", "tecnico en atencion a la discapacidad", "especialista en discapacidad", "enfermero de salud y discapacidad", "profesional de apoyo a la discapacidad"]
+  },
+  {
+    "styrk": "2250",
+    "nombre_no": "Veterinærer",
+    "nombre_es": "veterinario",
+    "alias_es": ["veterinario", "veterinaria", "veterinarios", "veterinarias", "medico veterinario", "doctor veterinario", "profesional veterinario", "facultativo veterinario", "vet"]
+  },
+  {
+    "styrk": "2261",
+    "nombre_no": "Tannleger",
+    "nombre_es": "dentista",
+    "alias_es": ["dentista", "dentistas", "odontologo", "odontologa", "odontologos", "estomatologo", "cirujano dental", "doctor dentista", "medico dental", "profesional de odontologia"]
+  },
+  {
+    "styrk": "2262",
+    "nombre_no": "Farmasøyter",
+    "nombre_es": "farmaceutico",
+    "alias_es": ["farmaceutico", "farmaceutica", "farmaceuticos", "farmaceuticas", "boticario", "profesional de farmacia", "licenciado en farmacia", "farmacologo de oficina", "responsable de farmacia"]
+  },
+  {
+    "styrk": "2263",
+    "nombre_no": "Helse- og miljørådgivere",
+    "nombre_es": "asesor de salud y medio ambiente",
+    "alias_es": ["asesor de salud", "asesora de salud", "asesor ambiental y de salud", "tecnico de salud publica", "consultor de salud", "especialista en salud y medio ambiente", "asesores de salud", "experto en salud ambiental", "responsable de salud y medio ambiente", "tecnico de salud ambiental"]
+  },
+  {
+    "styrk": "2264",
+    "nombre_no": "Fysioterapeuter",
+    "nombre_es": "fisioterapeuta",
+    "alias_es": ["fisioterapeuta", "fisioterapeutas", "fisio", "terapeuta fisico", "rehabilitador", "profesional de fisioterapia", "tecnico en fisioterapia", "especialista en fisioterapia", "kinesiologo"]
+  },
+  {
+    "styrk": "2265",
+    "nombre_no": "Ernæringsfysiologer",
+    "nombre_es": "nutricionista",
+    "alias_es": ["nutricionista", "nutricionistas", "dietista", "dietistas", "dietista nutricionista", "experto en nutricion", "especialista en nutricion", "asesor nutricional", "profesional de la nutricion", "nutriologo"]
+  },
+  {
+    "styrk": "2266",
+    "nombre_no": "Audiografer og logopeder",
+    "nombre_es": "audiologo y logopeda",
+    "alias_es": ["audiologo", "audiologa", "logopeda", "logopedas", "audioprotesista", "fonoaudiologo", "terapeuta del lenguaje", "especialista en audicion", "experto en logopedia", "tecnico en audiologia"]
+  },
+  {
+    "styrk": "2267",
+    "nombre_no": "Ergoterapeuter",
+    "nombre_es": "terapeuta ocupacional",
+    "alias_es": ["terapeuta ocupacional", "terapeutas ocupacionales", "ergoterapeuta", "ergoterapeutas", "profesional de terapia ocupacional", "especialista en terapia ocupacional", "tecnico en terapia ocupacional", "experto en ergoterapia"]
+  },
+  {
+    "styrk": "2269",
+    "nombre_no": "Kiropraktorer mv.",
+    "nombre_es": "quiropractico",
+    "alias_es": ["quiropractico", "quiropractica", "quiropracticos", "quiropraxista", "osteopata", "osteopatas", "terapeuta manual", "especialista en quiropraxia", "experto en quiropractica", "profesional de quiropraxia"]
+  },
+  {
+    "styrk": "2310",
+    "nombre_no": "Universitets- og høyskolelektorer/-lærere",
+    "nombre_es": "profesor universitario",
+    "alias_es": ["profesor universitario", "profesora universitaria", "profesor de universidad", "docente universitario", "profesores universitarios", "catedratico", "profesor de educacion superior", "academico", "investigador docente", "profesor titular"]
+  },
+  {
+    "styrk": "2320",
+    "nombre_no": "Yrkesfaglærere",
+    "nombre_es": "profesor de formacion profesional",
+    "alias_es": ["profesor de formacion profesional", "profesora de formacion profesional", "profesor de fp", "docente de formacion profesional", "profesor tecnico", "profesores de fp", "instructor de oficios", "formador profesional", "profesor de ciclos formativos", "maestro de taller"]
+  },
+  {
+    "styrk": "2330",
+    "nombre_no": "Lektorer mv. (videregående skole)",
+    "nombre_es": "profesor de bachillerato",
+    "alias_es": ["profesor de bachillerato", "profesora de bachillerato", "profesor de secundaria", "docente de secundaria", "profesor de instituto", "profesores de bachillerato", "catedratico de instituto", "profesor de educacion secundaria", "maestro de secundaria"]
+  },
+  {
+    "styrk": "2341",
+    "nombre_no": "Grunnskolelærere",
+    "nombre_es": "maestro de primaria",
+    "alias_es": ["maestro de primaria", "maestra de primaria", "profesor de primaria", "profesora de primaria", "maestro de escuela", "docente de primaria", "maestros de primaria", "profesor de educacion primaria", "maestro de educacion basica", "profe de primaria"]
+  },
+  {
+    "styrk": "2342",
+    "nombre_no": "Førskole-/barnehagelærere",
+    "nombre_es": "maestro de educacion infantil",
+    "alias_es": ["maestro de educacion infantil", "maestra de educacion infantil", "profesor de infantil", "educador infantil", "educadora infantil", "maestro de preescolar", "maestro de guarderia", "maestros de infantil", "docente de educacion infantil", "maestro de jardin de infancia", "parvulario"]
+  },
+  {
+    "styrk": "2351",
+    "nombre_no": "Spesialister i pedagogikk",
+    "nombre_es": "especialista en pedagogia",
+    "alias_es": ["especialista en pedagogia", "pedagogo", "pedagoga", "pedagogos", "experto en pedagogia", "asesor pedagogico", "tecnico en pedagogia", "especialista pedagogico", "profesional de pedagogia", "investigador en pedagogia"]
+  },
+  {
+    "styrk": "2352",
+    "nombre_no": "Spesiallærere / spesialpedagoger",
+    "nombre_es": "profesor de educacion especial",
+    "alias_es": ["profesor de educacion especial", "profesora de educacion especial", "maestro de educacion especial", "pedagogo terapeutico", "profesor de pedagogia terapeutica", "educador especial", "profesores de educacion especial", "especialista en educacion especial", "maestro de apoyo", "pt"]
+  },
+  {
+    "styrk": "2354",
+    "nombre_no": "Andre musikklærere",
+    "nombre_es": "profesor de musica",
+    "alias_es": ["profesor de musica", "profesora de musica", "maestro de musica", "docente de musica", "profesores de musica", "profesor de conservatorio", "instructor de musica", "profe de musica", "educador musical", "maestro de instrumento"]
+  },
+  {
+    "styrk": "2359",
+    "nombre_no": "Andre lærere",
+    "nombre_es": "otros profesores y docentes",
+    "alias_es": ["profesor", "profesora", "docente", "docentes", "maestro", "maestra", "otros profesores", "educador", "formador", "instructor", "profesores"]
+  },
+  {
+    "styrk": "2411",
+    "nombre_no": "Revisorer, regnskapsrådgivere",
+    "nombre_es": "auditor y asesor contable",
+    "alias_es": ["auditor", "auditora", "asesor contable", "asesora contable", "auditor de cuentas", "censor jurado de cuentas", "auditores", "consultor contable", "experto contable", "asesor de contabilidad", "revisor de cuentas"]
+  },
+  {
+    "styrk": "2412",
+    "nombre_no": "Finans- og investeringsrådgivere",
+    "nombre_es": "asesor financiero y de inversiones",
+    "alias_es": ["asesor financiero", "asesora financiera", "asesor de inversiones", "consultor financiero", "asesores financieros", "planificador financiero", "experto en inversiones", "asesor patrimonial", "gestor de inversiones", "consultor de inversiones"]
+  },
+  {
+    "styrk": "2413",
+    "nombre_no": "Finansanalytikere",
+    "nombre_es": "analista financiero",
+    "alias_es": ["analista financiero", "analista financiera", "analistas financieros", "analista de inversiones", "analista de mercados", "experto en analisis financiero", "analista bursatil", "analista economico financiero", "especialista en analisis financiero"]
+  },
+  {
+    "styrk": "2421",
+    "nombre_no": "Organisasjonsrådgivere mv.",
+    "nombre_es": "consultor de organizacion",
+    "alias_es": ["consultor de organizacion", "consultora de organizacion", "consultor de gestion", "consultor de empresas", "asesor organizativo", "consultores de organizacion", "experto en gestion empresarial", "asesor de gestion", "consultor de negocio", "asesor empresarial"]
+  },
+  {
+    "styrk": "2422",
+    "nombre_no": "Høyere saksbehandlere i offentlig og privat virksomhet",
+    "nombre_es": "tecnico superior de administracion",
+    "alias_es": ["tecnico superior de administracion", "tecnica superior de administracion", "gestor administrativo superior", "tecnico de gestion", "tecnico superior administrativo", "funcionario superior", "tecnicos de administracion", "gestor publico", "tecnico de administracion publica", "analista de politicas"]
+  },
+  {
+    "styrk": "2423",
+    "nombre_no": "Personal- og karriererådgivere",
+    "nombre_es": "asesor de recursos humanos y orientacion profesional",
+    "alias_es": ["asesor de recursos humanos", "asesora de recursos humanos", "tecnico de recursos humanos", "orientador laboral", "asesor de rrhh", "consultor de recursos humanos", "tecnico de seleccion", "orientador profesional", "asesores de recursos humanos", "especialista en rrhh", "asesor de carrera"]
+  },
+  {
+    "styrk": "2424",
+    "nombre_no": "Rådgivere innen kompetanseutvikling",
+    "nombre_es": "asesor de formacion y desarrollo",
+    "alias_es": ["asesor de formacion", "asesora de formacion", "tecnico de formacion", "responsable de formacion", "consultor de formacion", "especialista en desarrollo de talento", "formador interno", "asesor de desarrollo profesional", "tecnico de capacitacion", "responsable de desarrollo"]
+  },
+  {
+    "styrk": "2431",
+    "nombre_no": "Reklame- og markedsføringsrådgivere",
+    "nombre_es": "asesor de publicidad y marketing",
+    "alias_es": ["asesor de marketing", "asesora de marketing", "asesor de publicidad", "consultor de marketing", "tecnico de marketing", "especialista en marketing", "experto en publicidad", "asesores de marketing", "consultor de publicidad", "responsable de marketing", "publicista"]
+  },
+  {
+    "styrk": "2432",
+    "nombre_no": "Informasjonsrådgivere",
+    "nombre_es": "asesor de comunicacion",
+    "alias_es": ["asesor de comunicacion", "asesora de comunicacion", "responsable de comunicacion", "tecnico de comunicacion", "consultor de comunicacion", "especialista en comunicacion", "dircom", "experto en relaciones publicas", "asesor de prensa", "asesores de comunicacion", "relaciones publicas"]
+  },
+  {
+    "styrk": "2433",
+    "nombre_no": "Salgskonsulenter innen tekniske og medisinske produkter",
+    "nombre_es": "consultor de ventas tecnicas y medicas",
+    "alias_es": ["consultor de ventas tecnicas", "comercial tecnico", "vendedor tecnico", "comercial de productos medicos", "delegado de ventas medicas", "asesor comercial tecnico", "representante medico", "comercial sanitario", "tecnico comercial", "especialista en ventas tecnicas", "visitador medico"]
+  },
+  {
+    "styrk": "2434",
+    "nombre_no": "Salgskonsulenter innen IKT-produkter",
+    "nombre_es": "consultor de ventas de productos tecnologicos",
+    "alias_es": ["consultor de ventas tic", "comercial de tecnologia", "vendedor de productos tecnologicos", "comercial de informatica", "asesor comercial tic", "representante de ventas it", "comercial de software", "especialista en ventas tecnologicas", "comercial informatico", "tecnico comercial tic"]
+  },
+  {
+    "styrk": "2511",
+    "nombre_no": "Systemanalytikere/-arkitekter",
+    "nombre_es": "analista de sistemas",
+    "alias_es": ["analista de sistemas", "analista de sistemas informaticos", "arquitecto de sistemas", "arquitecto de software", "analistas de sistemas", "ingeniero de sistemas", "analista funcional", "experto en analisis de sistemas", "arquitecto de soluciones", "especialista en sistemas"]
+  },
+  {
+    "styrk": "2512",
+    "nombre_no": "Programvareutviklere",
+    "nombre_es": "desarrollador de software",
+    "alias_es": ["desarrollador de software", "desarrolladora de software", "programador", "programadora", "desarrolladores de software", "ingeniero de software", "desarrollador", "programador de software", "developer", "experto en desarrollo de software"]
+  },
+  {
+    "styrk": "2513",
+    "nombre_no": "Nett- og multimediautviklere",
+    "nombre_es": "desarrollador web y multimedia",
+    "alias_es": ["desarrollador web", "desarrolladora web", "programador web", "desarrollador multimedia", "desarrolladores web", "web developer", "diseñador y desarrollador web", "programador front end", "experto en desarrollo web", "creador de contenidos web"]
+  },
+  {
+    "styrk": "2514",
+    "nombre_no": "Applikasjonsprogrammerere",
+    "nombre_es": "programador de aplicaciones",
+    "alias_es": ["programador de aplicaciones", "programadora de aplicaciones", "desarrollador de aplicaciones", "programador de apps", "desarrollador de apps", "programadores de aplicaciones", "experto en programacion de aplicaciones", "desarrollador movil", "app developer", "programador de software de aplicaciones"]
+  },
+  {
+    "styrk": "2519",
+    "nombre_no": "Andre programvare- og applikasjonsutviklere",
+    "nombre_es": "otros desarrolladores de software y aplicaciones",
+    "alias_es": ["desarrollador de software", "programador", "programadora", "desarrollador de aplicaciones", "otros desarrolladores", "ingeniero de software", "developer", "tester de software", "analista programador", "especialista en desarrollo"]
+  },
+  {
+    "styrk": "2521",
+    "nombre_no": "Databasedesignere og -administratorer",
+    "nombre_es": "administrador de bases de datos",
+    "alias_es": ["administrador de bases de datos", "administradora de bases de datos", "diseñador de bases de datos", "dba", "administrador de datos", "experto en bases de datos", "tecnico de bases de datos", "especialista en bases de datos", "responsable de base de datos", "gestor de bases de datos"]
+  },
+  {
+    "styrk": "2522",
+    "nombre_no": "Systemadministratorer",
+    "nombre_es": "administrador de sistemas",
+    "alias_es": ["administrador de sistemas", "administradora de sistemas", "sysadmin", "administrador de redes y sistemas", "tecnico de sistemas", "responsable de sistemas", "experto en administracion de sistemas", "administradores de sistemas", "gestor de sistemas", "especialista en sistemas informaticos"]
+  },
+  {
+    "styrk": "2529",
+    "nombre_no": "Sikkerhetsanalytikere mv.",
+    "nombre_es": "analista de seguridad informatica",
+    "alias_es": ["analista de seguridad informatica", "analista de ciberseguridad", "experto en ciberseguridad", "especialista en seguridad informatica", "analista de seguridad", "tecnico de ciberseguridad", "consultor de seguridad informatica", "auditor de seguridad", "ingeniero de seguridad", "hacker etico"]
+  },
+  {
+    "styrk": "2611",
+    "nombre_no": "Jurister og advokater",
+    "nombre_es": "abogado",
+    "alias_es": ["abogado", "abogada", "abogados", "abogadas", "jurista", "juristas", "letrado", "letrada", "asesor juridico", "licenciado en derecho", "profesional del derecho"]
+  },
+  {
+    "styrk": "2612",
+    "nombre_no": "Dommere",
+    "nombre_es": "juez",
+    "alias_es": ["juez", "jueza", "jueces", "magistrado", "magistrada", "magistrados", "juez de instruccion", "juzgador", "miembro del poder judicial", "juez togado"]
+  },
+  {
+    "styrk": "2619",
+    "nombre_no": "Andre juridiske yrker",
+    "nombre_es": "otros profesionales del derecho",
+    "alias_es": ["profesional del derecho", "jurista", "asesor juridico", "asesora juridica", "consultor legal", "experto legal", "notario", "procurador", "fiscal", "otros profesionales juridicos", "tecnico juridico"]
+  },
+  {
+    "styrk": "2621",
+    "nombre_no": "Arkivarer og kuratorer",
+    "nombre_es": "archivero y conservador de museo",
+    "alias_es": ["archivero", "archivera", "conservador de museo", "conservadora de museo", "curador", "curadora", "archiveros", "responsable de archivo", "conservador de patrimonio", "documentalista de archivo", "gestor de archivo"]
+  },
+  {
+    "styrk": "2622",
+    "nombre_no": "Bibliotekarer og andre informasjonsarbeidere",
+    "nombre_es": "bibliotecario y documentalista",
+    "alias_es": ["bibliotecario", "bibliotecaria", "documentalista", "documentalistas", "bibliotecarios", "responsable de biblioteca", "tecnico de biblioteca", "gestor de informacion", "experto en documentacion", "profesional de la informacion", "archivero bibliotecario"]
+  },
+  {
+    "styrk": "2631",
+    "nombre_no": "Rådgivere/forskere, samfunnsøkonomi",
+    "nombre_es": "economista",
+    "alias_es": ["economista", "economistas", "asesor economico", "investigador economista", "analista economico", "experto en economia", "consultor economico", "investigador en economia", "asesor en economia", "tecnico economista"]
+  },
+  {
+    "styrk": "2632",
+    "nombre_no": "Rådgivere/forskere, samfunnsvitenskap",
+    "nombre_es": "investigador en ciencias sociales",
+    "alias_es": ["investigador en ciencias sociales", "investigadora en ciencias sociales", "sociologo", "sociologa", "politologo", "antropologo", "asesor en ciencias sociales", "cientifico social", "experto en ciencias sociales", "investigadores sociales", "analista social"]
+  },
+  {
+    "styrk": "2633",
+    "nombre_no": "Rådgivere/forskere, humanistiske fag",
+    "nombre_es": "investigador en humanidades",
+    "alias_es": ["investigador en humanidades", "investigadora en humanidades", "historiador", "filosofo", "filologo", "asesor en humanidades", "experto en humanidades", "academico de humanidades", "investigadores en humanidades", "humanista", "estudioso de humanidades"]
+  },
+  {
+    "styrk": "2634",
+    "nombre_no": "Psykologer",
+    "nombre_es": "psicologo",
+    "alias_es": ["psicologo", "psicologa", "psicologos", "psicologas", "psicoterapeuta", "psicologo clinico", "profesional de la psicologia", "terapeuta psicologico", "experto en psicologia", "licenciado en psicologia"]
+  },
+  {
+    "styrk": "2635",
+    "nombre_no": "Rådgivere innen sosiale fagfelt",
+    "nombre_es": "trabajador social",
+    "alias_es": ["trabajador social", "trabajadora social", "asistente social", "trabajadores sociales", "educador social", "asesor social", "tecnico de servicios sociales", "profesional del trabajo social", "consultor social", "agente social"]
+  },
+  {
+    "styrk": "2636",
+    "nombre_no": "Geistlige yrker",
+    "nombre_es": "religioso ordenado",
+    "alias_es": ["sacerdote", "cura", "parroco", "pastor", "religioso", "clerigo", "ministro religioso", "obispo", "capellan", "sacerdotes", "miembro del clero", "imam"]
+  },
+  {
+    "styrk": "2641",
+    "nombre_no": "Forfattere mv.",
+    "nombre_es": "escritor",
+    "alias_es": ["escritor", "escritora", "escritores", "escritoras", "autor", "autora", "novelista", "redactor creativo", "literato", "guionista", "poeta"]
+  },
+  {
+    "styrk": "2642",
+    "nombre_no": "Journalister",
+    "nombre_es": "periodista",
+    "alias_es": ["periodista", "periodistas", "reportero", "reportera", "redactor", "redactora", "corresponsal", "informador", "profesional del periodismo", "cronista", "comunicador"]
+  },
+  {
+    "styrk": "2643",
+    "nombre_no": "Oversettere, tolker mv.",
+    "nombre_es": "traductor e interprete",
+    "alias_es": ["traductor", "traductora", "interprete", "interpretes", "traductores", "traductor jurado", "traductor e interprete", "linguista", "experto en traduccion", "profesional de la traduccion", "traductor profesional"]
+  },
+  {
+    "styrk": "2651",
+    "nombre_no": "Skulptører, kunstmalere og andre billedkunstnere",
+    "nombre_es": "artista plastico",
+    "alias_es": ["artista plastico", "artista plastica", "escultor", "escultora", "pintor", "pintora", "artista visual", "artistas plasticos", "creador artistico", "artista", "pintor artistico"]
+  },
+  {
+    "styrk": "2652",
+    "nombre_no": "Dirigenter, komponister, musikere og sangere",
+    "nombre_es": "musico, compositor y cantante",
+    "alias_es": ["musico", "musica", "compositor", "compositora", "cantante", "cantantes", "director de orquesta", "directora de orquesta", "interprete musical", "instrumentista", "musicos", "vocalista"]
+  },
+  {
+    "styrk": "2653",
+    "nombre_no": "Koreografer og dansere",
+    "nombre_es": "bailarin y coreografo",
+    "alias_es": ["bailarin", "bailarina", "coreografo", "coreografa", "bailarines", "danzante", "artista de danza", "bailaor", "bailaora", "profesional de la danza", "coreografos"]
+  },
+  {
+    "styrk": "2654",
+    "nombre_no": "Regissører",
+    "nombre_es": "director de cine y teatro",
+    "alias_es": ["director de cine", "directora de cine", "director de teatro", "director artistico", "realizador", "directores de cine", "cineasta", "director de escena", "director audiovisual", "director teatral", "regista"]
+  },
+  {
+    "styrk": "2655",
+    "nombre_no": "Skuespillere",
+    "nombre_es": "actor",
+    "alias_es": ["actor", "actriz", "actores", "actrices", "interprete", "interpretes", "comediante", "artista de teatro", "artista escenico", "interprete dramatico"]
+  },
+  {
+    "styrk": "2656",
+    "nombre_no": "Programledere i TV og radio",
+    "nombre_es": "presentador de television y radio",
+    "alias_es": ["presentador de television", "presentadora de television", "presentador de radio", "locutor", "locutora", "presentadores", "conductor de programa", "comunicador audiovisual", "presentador de tv", "animador de radio", "locutor de radio"]
+  },
+  {
+    "styrk": "2659",
+    "nombre_no": "Andre utøvende kunstneriske yrker",
+    "nombre_es": "otros artistas escenicos",
+    "alias_es": ["artista escenico", "artista escenica", "artista", "artistas escenicos", "interprete artistico", "humorista", "mago", "artista circense", "performer", "artista del espectaculo", "showman"]
+  }
+]

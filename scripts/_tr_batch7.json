@@ -1,0 +1,266 @@
+[
+  {
+    "styrk": "7127",
+    "nombre_no": "Kuldemontører mv.",
+    "nombre_es": "técnico de refrigeración y climatización",
+    "alias_es": ["tecnico de refrigeracion", "tecnica de refrigeracion", "tecnicos de refrigeracion", "instalador de aire acondicionado", "instaladora de aire acondicionado", "frigorista", "frigoristas", "montador de frio", "tecnico de climatizacion", "tecnico de clima", "instalador de refrigeracion", "tecnico frigorifico"]
+  },
+  {
+    "styrk": "7131",
+    "nombre_no": "Malere og byggtapetserere",
+    "nombre_es": "pintor y empapelador de obra",
+    "alias_es": ["pintor", "pintora", "pintores", "pintor de brocha gorda", "pintor de obra", "empapelador", "empapeladora", "empapeladores", "pintor de paredes", "pintor de construccion", "pintor de interiores", "pintor decorador"]
+  },
+  {
+    "styrk": "7132",
+    "nombre_no": "Overflatebehandlere og lakkerere",
+    "nombre_es": "pintor de superficies y lacador",
+    "alias_es": ["lacador", "lacadora", "lacadores", "barnizador", "barnizadora", "pintor de coches", "chapista pintor", "pintor de automoviles", "tratamiento de superficies", "tecnico de acabados", "lacador industrial", "pintor industrial"]
+  },
+  {
+    "styrk": "7133",
+    "nombre_no": "Feiere, fasaderenholdere mv.",
+    "nombre_es": "deshollinador y limpiador de fachadas",
+    "alias_es": ["deshollinador", "deshollinadora", "deshollinadores", "limpiachimeneas", "limpiador de fachadas", "limpiadora de fachadas", "limpiador de chimeneas", "limpieza de fachadas", "limpiador de cristales en altura", "limpiador de edificios", "limpieza de chimeneas", "fachadista limpiador"]
+  },
+  {
+    "styrk": "7211",
+    "nombre_no": "Støpere",
+    "nombre_es": "fundidor de metales",
+    "alias_es": ["fundidor", "fundidora", "fundidores", "operario de fundicion", "operaria de fundicion", "moldeador de metales", "colador de metales", "trabajador de fundicion", "fundidor de moldes", "moldeador", "operario de colada"]
+  },
+  {
+    "styrk": "7212",
+    "nombre_no": "Sveisere",
+    "nombre_es": "soldador",
+    "alias_es": ["soldador", "soldadora", "soldadores", "soldador industrial", "soldador mig", "soldador tig", "soldador por arco", "operario de soldadura", "soldador de estructuras", "soldador metalurgico", "tecnico soldador"]
+  },
+  {
+    "styrk": "7213",
+    "nombre_no": "Kopper- og blikkenslagere",
+    "nombre_es": "calderero y hojalatero",
+    "alias_es": ["hojalatero", "hojalatera", "hojalateros", "calderero", "calderera", "caldereros", "chapista", "chapistas", "lampista", "trabajador de chapa", "hojalatero de cobre", "tecnico de chapa metalica"]
+  },
+  {
+    "styrk": "7214",
+    "nombre_no": "Platearbeidere",
+    "nombre_es": "trabajador de chapa metálica",
+    "alias_es": ["chapista", "chapista metalico", "trabajador de chapa", "operario de chapa", "operaria de chapa", "montador de estructuras metalicas", "trabajador de estructuras metalicas", "tecnico de chapa", "ferrallista de chapa", "calderero de chapa", "operario metalurgico"]
+  },
+  {
+    "styrk": "7215",
+    "nombre_no": "Riggere og spleisere",
+    "nombre_es": "aparejador de cargas y empalmador de cables",
+    "alias_es": ["rigger", "riggers", "aparejador de cargas", "montador de aparejos", "empalmador de cables", "empalmador", "estrobador", "operario de izaje", "tecnico de aparejos", "rigger de cargas", "montador de andamios y aparejos", "trabajador de eslingas"]
+  },
+  {
+    "styrk": "7221",
+    "nombre_no": "Smeder",
+    "nombre_es": "herrero",
+    "alias_es": ["herrero", "herrera", "herreros", "herrero forjador", "forjador", "forjadora", "herrero de forja", "herrero artesano", "fragua", "herrero tradicional", "trabajador del hierro"]
+  },
+  {
+    "styrk": "7222",
+    "nombre_no": "Verktøymaker, låsesmeder mv.",
+    "nombre_es": "matricero y cerrajero",
+    "alias_es": ["cerrajero", "cerrajera", "cerrajeros", "matricero", "matricera", "fabricante de herramientas", "herramentista", "cerrajero de seguridad", "ajustador de utillaje", "tecnico de utillaje", "cerrajero metalico", "fabricante de moldes y matrices"]
+  },
+  {
+    "styrk": "7223",
+    "nombre_no": "Metalldreiere mv.",
+    "nombre_es": "tornero fresador de metales",
+    "alias_es": ["tornero", "tornera", "torneros", "fresador", "fresadora", "tornero fresador", "operario de torno", "operario de maquina herramienta", "ajustador mecanico", "mecanizador", "tornero mecanico", "operador de cnc"]
+  },
+  {
+    "styrk": "7231",
+    "nombre_no": "Bilmekanikere",
+    "nombre_es": "mecánico de automóviles",
+    "alias_es": ["mecanico de coches", "mecanica de coches", "mecanicos de coches", "mecanico de automoviles", "mecanico automotriz", "mecanico de autos", "mecanico de vehiculos", "tecnico de automocion", "mecanico de taller", "automotriz", "mecanico de carros", "tecnico mecanico automotriz"]
+  },
+  {
+    "styrk": "7232",
+    "nombre_no": "Mekanikere innen flytekniske fag",
+    "nombre_es": "mecánico de mantenimiento aeronáutico",
+    "alias_es": ["mecanico de aviones", "mecanica de aviones", "mecanicos de aviones", "mecanico aeronautico", "tecnico aeronautico", "mecanico de aeronaves", "tecnico de mantenimiento de aeronaves", "tecnico de mantenimiento aeronautico", "mecanico de aviacion", "tecnico de aviones", "mantenimiento aeronautico"]
+  },
+  {
+    "styrk": "7233",
+    "nombre_no": "Anleggsmaskin- og industrimekanikere",
+    "nombre_es": "mecánico de maquinaria industrial y de obra",
+    "alias_es": ["mecanico industrial", "mecanica industrial", "mecanicos industriales", "mecanico de maquinaria", "mecanico de maquinaria pesada", "mecanico de obra", "mecanico de maquinas industriales", "tecnico de mantenimiento industrial", "mecanico de maquinaria de construccion", "mantenimiento de maquinaria", "ajustador industrial"]
+  },
+  {
+    "styrk": "7234",
+    "nombre_no": "Sykkelreparatører mv.",
+    "nombre_es": "reparador de bicicletas",
+    "alias_es": ["reparador de bicicletas", "reparadora de bicicletas", "reparadores de bicicletas", "mecanico de bicicletas", "mecanica de bicicletas", "tecnico de bicicletas", "bicicletero", "mecanico de bicis", "reparador de bicis", "tecnico de bici", "mecanico de ciclos"]
+  },
+  {
+    "styrk": "7311",
+    "nombre_no": "Presisjonsinstrumentmakere og -reparatører",
+    "nombre_es": "fabricante y reparador de instrumentos de precisión",
+    "alias_es": ["relojero", "relojera", "relojeros", "fabricante de instrumentos de precision", "reparador de instrumentos de precision", "tecnico de instrumentos de precision", "ajustador de precision", "tecnico de aparatos de precision", "instrumentista de precision", "reparador de relojes", "tecnico de relojeria"]
+  },
+  {
+    "styrk": "7313",
+    "nombre_no": "Gull- og sølvsmeder, gravører mv.",
+    "nombre_es": "joyero y grabador",
+    "alias_es": ["joyero", "joyera", "joyeros", "orfebre", "orfebres", "platero", "platera", "grabador", "grabadora", "joyero orfebre", "fabricante de joyas", "grabador de metales"]
+  },
+  {
+    "styrk": "7318",
+    "nombre_no": "Vevere, strikkere mv. (innen husflidsproduksjon)",
+    "nombre_es": "tejedor artesanal",
+    "alias_es": ["tejedor", "tejedora", "tejedores", "tejedor artesanal", "artesano textil", "artesana textil", "tejedor de telar", "punto y ganchillo", "tejedor a mano", "artesano del tejido", "tejedor tradicional", "tricotador"]
+  },
+  {
+    "styrk": "7319",
+    "nombre_no": "Andre kunsthåndverkere",
+    "nombre_es": "artesano (otras artesanías)",
+    "alias_es": ["artesano", "artesana", "artesanos", "artesano artistico", "trabajador artesanal", "artesano manual", "maestro artesano", "otros artesanos", "artesania", "artesano tradicional", "trabajos artesanales"]
+  },
+  {
+    "styrk": "7321",
+    "nombre_no": "Førtrykkere",
+    "nombre_es": "técnico de preimpresión",
+    "alias_es": ["tecnico de preimpresion", "tecnica de preimpresion", "preimpresion", "operario de preimpresion", "maquetador de artes graficas", "tecnico de artes graficas", "preprensa", "tecnico de preprensa", "filmador", "montador de artes graficas", "operario de preprensa"]
+  },
+  {
+    "styrk": "7322",
+    "nombre_no": "Trykkere",
+    "nombre_es": "impresor",
+    "alias_es": ["impresor", "impresora", "impresores", "operario de imprenta", "operaria de imprenta", "tecnico de impresion", "operador de maquina de impresion", "operario de artes graficas", "minervista", "operador de impresion", "trabajador de imprenta", "impresor offset"]
+  },
+  {
+    "styrk": "7323",
+    "nombre_no": "Innbindere mv.",
+    "nombre_es": "encuadernador",
+    "alias_es": ["encuadernador", "encuadernadora", "encuadernadores", "operario de encuadernacion", "tecnico de encuadernacion", "encuadernador de libros", "trabajador de encuadernacion", "operario de acabados graficos", "encuadernador artesanal", "operador de encuadernadora", "guillotinero"]
+  },
+  {
+    "styrk": "7411",
+    "nombre_no": "Elektrikere",
+    "nombre_es": "electricista",
+    "alias_es": ["electricista", "electricistas", "electricista de obra", "instalador electrico", "instaladora electrica", "tecnico electricista", "electricista de mantenimiento", "montador electricista", "electricista residencial", "instalador electricista", "tecnico electrico"]
+  },
+  {
+    "styrk": "7412",
+    "nombre_no": "Automatikere",
+    "nombre_es": "técnico de automatización industrial",
+    "alias_es": ["tecnico de automatizacion", "tecnica de automatizacion", "automatizacion industrial", "tecnico en automatica", "instalador de automatismos", "tecnico de control industrial", "automatista", "tecnico de plc", "tecnico de automatismos", "electrico de automatizacion", "tecnico de instrumentacion y control"]
+  },
+  {
+    "styrk": "7413",
+    "nombre_no": "Energimontører",
+    "nombre_es": "montador de líneas eléctricas",
+    "alias_es": ["montador de lineas electricas", "montadora de lineas electricas", "linero", "lineros", "tecnico de redes electricas", "electricista de redes", "montador de redes electricas", "instalador de tendido electrico", "operario de lineas de alta tension", "tecnico de distribucion electrica", "montador electrico de redes"]
+  },
+  {
+    "styrk": "7421",
+    "nombre_no": "Serviceelektronikere",
+    "nombre_es": "técnico de electrónica y reparación",
+    "alias_es": ["tecnico electronico", "tecnica electronica", "tecnicos electronicos", "reparador de electronica", "tecnico de reparacion electronica", "tecnico de mantenimiento electronico", "electronico de servicio", "tecnico en electronica", "reparador de aparatos electronicos", "tecnico de equipos electronicos", "tecnico de servicio tecnico"]
+  },
+  {
+    "styrk": "7422",
+    "nombre_no": "Tele- og IKT-installatører",
+    "nombre_es": "instalador de telecomunicaciones y TIC",
+    "alias_es": ["instalador de telecomunicaciones", "instaladora de telecomunicaciones", "tecnico de telecomunicaciones", "instalador de redes", "tecnico de redes", "instalador de telefonia", "tecnico de tic", "instalador de fibra optica", "tecnico de telecom", "instalador de redes y telecomunicaciones", "antenista"]
+  },
+  {
+    "styrk": "7511",
+    "nombre_no": "Slaktere, fiskehandlere mv.",
+    "nombre_es": "carnicero y pescadero",
+    "alias_es": ["carnicero", "carnicera", "carniceros", "pescadero", "pescadera", "pescaderos", "carnicero charcutero", "matarife", "despiezador de carne", "vendedor de carne", "vendedor de pescado", "carnicero pescadero"]
+  },
+  {
+    "styrk": "7512",
+    "nombre_no": "Bakere, konditorer mv.",
+    "nombre_es": "panadero y pastelero",
+    "alias_es": ["panadero", "panadera", "panaderos", "pastelero", "pastelera", "pasteleros", "reposter", "repostero", "repostera", "confitero", "panadero pastelero", "maestro panadero"]
+  },
+  {
+    "styrk": "7522",
+    "nombre_no": "Møbelsnekkere",
+    "nombre_es": "ebanista",
+    "alias_es": ["ebanista", "ebanistas", "carpintero de muebles", "carpintera de muebles", "carpinteros de muebles", "fabricante de muebles", "mueblista", "carpintero ebanista", "artesano de muebles", "carpintero de mobiliario", "tecnico ebanista"]
+  },
+  {
+    "styrk": "7531",
+    "nombre_no": "Skreddere, buntmakere mv.",
+    "nombre_es": "sastre y peletero",
+    "alias_es": ["sastre", "sastra", "sastres", "modisto", "modista", "modistas", "peletero", "peletera", "costurero", "costurera", "sastre a medida", "confeccionista a medida"]
+  },
+  {
+    "styrk": "7534",
+    "nombre_no": "Møbeltapetserere mv.",
+    "nombre_es": "tapicero de muebles",
+    "alias_es": ["tapicero", "tapicera", "tapiceros", "tapicero de muebles", "tapizador", "tapizadora", "tapicero artesano", "restaurador de tapiceria", "tapicero de mobiliario", "tecnico tapicero", "tapicero de interiores"]
+  },
+  {
+    "styrk": "7541",
+    "nombre_no": "Yrkesdykkere",
+    "nombre_es": "buzo profesional",
+    "alias_es": ["buzo", "buza", "buzos", "buzo profesional", "buceador profesional", "buceadora profesional", "buzo industrial", "submarinista profesional", "buzo comercial", "buceador comercial", "escafandrista", "buzo de obra"]
+  },
+  {
+    "styrk": "7542",
+    "nombre_no": "Skytebaser og sprengningsarbeidere",
+    "nombre_es": "artillero y especialista en voladuras",
+    "alias_es": ["artillero", "artillera", "artilleros", "barrenista", "barrenero", "especialista en voladuras", "tecnico de voladuras", "dinamitero", "operario de explosivos", "tecnico de explosivos", "experto en voladuras", "pegador de barrenos"]
+  },
+  {
+    "styrk": "7544",
+    "nombre_no": "Desinfeksjonsarbeidere og skadedyrbekjempere",
+    "nombre_es": "técnico de control de plagas y desinfección",
+    "alias_es": ["fumigador", "fumigadora", "fumigadores", "tecnico de control de plagas", "controlador de plagas", "desinfectador", "tecnico de desinfeccion", "tecnico dd", "tecnico de plagas", "exterminador de plagas", "tecnico de fumigacion", "desinsectador"]
+  },
+  {
+    "styrk": "7549",
+    "nombre_no": "Andre håndverkere",
+    "nombre_es": "oficial de otros oficios artesanales",
+    "alias_es": ["artesano", "artesana", "artesanos", "oficial de oficios varios", "otros oficios artesanales", "trabajador de oficios manuales", "oficial artesano", "operario de oficios diversos", "otros artesanos cualificados", "oficial de oficio", "trabajador cualificado de oficios"]
+  },
+  {
+    "styrk": "8111",
+    "nombre_no": "Bergfagarbeidere",
+    "nombre_es": "minero",
+    "alias_es": ["minero", "minera", "mineros", "trabajador de mina", "trabajadora de mina", "operario de mina", "obrero minero", "trabajador minero", "operario de extraccion minera", "barrenista de mina", "operario de cantera"]
+  },
+  {
+    "styrk": "8112",
+    "nombre_no": "Prosessoperatører (oppredning)",
+    "nombre_es": "operador de planta de tratamiento de minerales",
+    "alias_es": ["operador de planta de minerales", "operadora de planta de minerales", "operario de tratamiento de minerales", "operador de proceso minero", "operario de concentracion de minerales", "tecnico de planta de minerales", "operador de planta de beneficio", "operario de procesado mineral", "operador de molienda de minerales", "tecnico de tratamiento de minerales"]
+  },
+  {
+    "styrk": "8113",
+    "nombre_no": "Operatører innen boring mv.",
+    "nombre_es": "operador de perforación",
+    "alias_es": ["operador de perforacion", "operadora de perforacion", "perforista", "sondista", "operario de sondeos", "operador de sondas", "operario de perforacion", "tecnico de perforacion", "operador de equipos de perforacion", "barrenista de sondeos", "perforador"]
+  },
+  {
+    "styrk": "8114",
+    "nombre_no": "Operatører innen produksjon av betong mv.",
+    "nombre_es": "operador de planta de hormigón",
+    "alias_es": ["operador de planta de hormigon", "operadora de planta de hormigon", "operario de hormigon", "fabricante de hormigon", "operario de planta de cemento", "operador de central hormigonera", "operario de prefabricados de hormigon", "tecnico de planta de hormigon", "operador de hormigonera", "operario de produccion de hormigon"]
+  },
+  {
+    "styrk": "8121",
+    "nombre_no": "Operatører innen metallurgiske prosessfag",
+    "nombre_es": "operador de procesos metalúrgicos",
+    "alias_es": ["operador metalurgico", "operadora metalurgica", "operario metalurgico", "operador de procesos metalurgicos", "operario de siderurgia", "operador de fundicion", "tecnico metalurgico", "operario de planta metalurgica", "operador de horno metalurgico", "trabajador siderurgico", "operario de metalurgia"]
+  },
+  {
+    "styrk": "8131",
+    "nombre_no": "Operatører innen kjemisk industri",
+    "nombre_es": "operador de industria química",
+    "alias_es": ["operador quimico", "operadora quimica", "operario quimico", "operador de planta quimica", "operario de industria quimica", "operador de procesos quimicos", "tecnico de planta quimica", "operario de produccion quimica", "operador de fabrica quimica", "operario de procesos quimicos", "operador de plantas quimicas"]
+  },
+  {
+    "styrk": "8141",
+    "nombre_no": "Operatører innen produksjon av gummiprodukter",
+    "nombre_es": "operador de fabricación de productos de caucho",
+    "alias_es": ["operador de caucho", "operadora de caucho", "operario de caucho", "operario de productos de caucho", "operador de fabrica de caucho", "operario de goma", "operador de planta de caucho", "tecnico de produccion de caucho", "operario de manufactura de caucho", "operador de productos de goma", "operario de industria del caucho"]
+  }
+]

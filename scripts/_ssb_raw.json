@@ -1,0 +1,3161 @@
+[
+  {
+    "styrk": "0000",
+    "grupo": "0",
+    "nombre_no": "Uoppgitt / yrker som ikke kan identifiseres",
+    "p25": 40640,
+    "mediana": 48440,
+    "media": 51320,
+    "p75": 56990
+  },
+  {
+    "styrk": "0110",
+    "grupo": "0",
+    "nombre_no": "Offiserer fra fenrik og høyere grad",
+    "p25": 72830,
+    "mediana": 88260,
+    "media": 93470,
+    "p75": 109260
+  },
+  {
+    "styrk": "0210",
+    "grupo": "0",
+    "nombre_no": "Befal med sersjant grad",
+    "p25": 65390,
+    "mediana": 80800,
+    "media": 85330,
+    "p75": 100080
+  },
+  {
+    "styrk": "0310",
+    "grupo": "0",
+    "nombre_no": "Menige",
+    "p25": 45380,
+    "mediana": 55780,
+    "media": 62010,
+    "p75": 75280
+  },
+  {
+    "styrk": "1111",
+    "grupo": "1",
+    "nombre_no": "Politikere",
+    "p25": 71750,
+    "mediana": 87330,
+    "media": 87690,
+    "p75": 101250
+  },
+  {
+    "styrk": "1112",
+    "grupo": "1",
+    "nombre_no": "Toppledere i offentlig administrasjon",
+    "p25": 95830,
+    "mediana": 120190,
+    "media": 124650,
+    "p75": 154600
+  },
+  {
+    "styrk": "1114",
+    "grupo": "1",
+    "nombre_no": "Toppledere i interesseorganisasjoner",
+    "p25": 63520,
+    "mediana": 77300,
+    "media": 82630,
+    "p75": 96490
+  },
+  {
+    "styrk": "1120",
+    "grupo": "1",
+    "nombre_no": "Administrerende direktører",
+    "p25": 65000,
+    "mediana": 87670,
+    "media": 112360,
+    "p75": 130000
+  },
+  {
+    "styrk": "1211",
+    "grupo": "1",
+    "nombre_no": "Finans- og økonomisjefer",
+    "p25": 83390,
+    "mediana": 103460,
+    "media": 120750,
+    "p75": 135370
+  },
+  {
+    "styrk": "1212",
+    "grupo": "1",
+    "nombre_no": "Personalsjefer",
+    "p25": 80420,
+    "mediana": 97620,
+    "media": 107170,
+    "p75": 121680
+  },
+  {
+    "styrk": "1213",
+    "grupo": "1",
+    "nombre_no": "Strategi- og planleggingssjefer",
+    "p25": 76700,
+    "mediana": 85570,
+    "media": 87230,
+    "p75": 95050
+  },
+  {
+    "styrk": "1219",
+    "grupo": "1",
+    "nombre_no": "Andre administrative ledere",
+    "p25": 67710,
+    "mediana": 80210,
+    "media": 90390,
+    "p75": 101500
+  },
+  {
+    "styrk": "1221",
+    "grupo": "1",
+    "nombre_no": "Salgs- og markedssjefer",
+    "p25": 73510,
+    "mediana": 89720,
+    "media": 98970,
+    "p75": 112550
+  },
+  {
+    "styrk": "1222",
+    "grupo": "1",
+    "nombre_no": "PR- og informasjonssjefer",
+    "p25": 66670,
+    "mediana": 84650,
+    "media": 92250,
+    "p75": 106780
+  },
+  {
+    "styrk": "1223",
+    "grupo": "1",
+    "nombre_no": "Forsknings- og utviklingsledere",
+    "p25": 80000,
+    "mediana": 97050,
+    "media": 105570,
+    "p75": 119970
+  },
+  {
+    "styrk": "1311",
+    "grupo": "1",
+    "nombre_no": "Ledere i skogbruk, gartnerier mv.",
+    "p25": 59880,
+    "mediana": 68950,
+    "media": 75210,
+    "p75": 83080
+  },
+  {
+    "styrk": "1312",
+    "grupo": "1",
+    "nombre_no": "Ledere innen akvakultur mv.",
+    "p25": 73980,
+    "mediana": 88440,
+    "media": 94590,
+    "p75": 105770
+  },
+  {
+    "styrk": "1321",
+    "grupo": "1",
+    "nombre_no": "Ledere av industriproduksjon mv.",
+    "p25": 67370,
+    "mediana": 83680,
+    "media": 93670,
+    "p75": 107030
+  },
+  {
+    "styrk": "1322",
+    "grupo": "1",
+    "nombre_no": "Ledere av olje- og gassutvinning mv.",
+    "p25": 95350,
+    "mediana": 120840,
+    "media": 133140,
+    "p75": 154600
+  },
+  {
+    "styrk": "1323",
+    "grupo": "1",
+    "nombre_no": "Ledere av bygge- og anleggsvirksomhet",
+    "p25": 60420,
+    "mediana": 74480,
+    "media": 82380,
+    "p75": 95000
+  },
+  {
+    "styrk": "1324",
+    "grupo": "1",
+    "nombre_no": "Ledere av logistikk og transport mv.",
+    "p25": 63000,
+    "mediana": 80000,
+    "media": 87750,
+    "p75": 101650
+  },
+  {
+    "styrk": "1330",
+    "grupo": "1",
+    "nombre_no": "Ledere av IKT-enheter",
+    "p25": 79050,
+    "mediana": 99920,
+    "media": 109190,
+    "p75": 124000
+  },
+  {
+    "styrk": "1341",
+    "grupo": "1",
+    "nombre_no": "Ledere av omsorgstjenester for barn",
+    "p25": 64530,
+    "mediana": 68760,
+    "media": 70050,
+    "p75": 72930
+  },
+  {
+    "styrk": "1342",
+    "grupo": "1",
+    "nombre_no": "Ledere av helsetjenester",
+    "p25": 65340,
+    "mediana": 71330,
+    "media": 79720,
+    "p75": 84560
+  },
+  {
+    "styrk": "1343",
+    "grupo": "1",
+    "nombre_no": "Ledere av eldreomsorg",
+    "p25": 67080,
+    "mediana": 74600,
+    "media": 76400,
+    "p75": 82920
+  },
+  {
+    "styrk": "1344",
+    "grupo": "1",
+    "nombre_no": "Ledere av sosialomsorg",
+    "p25": 61050,
+    "mediana": 67560,
+    "media": 72180,
+    "p75": 78810
+  },
+  {
+    "styrk": "1345",
+    "grupo": "1",
+    "nombre_no": "Ledere av utdanning og undervisning",
+    "p25": 69500,
+    "mediana": 76010,
+    "media": 77880,
+    "p75": 82810
+  },
+  {
+    "styrk": "1346",
+    "grupo": "1",
+    "nombre_no": "Ledere av forsikring og finansvirksomhet",
+    "p25": 87440,
+    "mediana": 108940,
+    "media": 128110,
+    "p75": 142970
+  },
+  {
+    "styrk": "1349",
+    "grupo": "1",
+    "nombre_no": "Andre ledere av produksjon og tjenesteyting",
+    "p25": 71930,
+    "mediana": 86200,
+    "media": 93890,
+    "p75": 108330
+  },
+  {
+    "styrk": "1411",
+    "grupo": "1",
+    "nombre_no": "Hotellsjefer",
+    "p25": 46420,
+    "mediana": 53180,
+    "media": 59260,
+    "p75": 66670
+  },
+  {
+    "styrk": "1412",
+    "grupo": "1",
+    "nombre_no": "Restaurantsjefer",
+    "p25": 45000,
+    "mediana": 51470,
+    "media": 56010,
+    "p75": 61300
+  },
+  {
+    "styrk": "1420",
+    "grupo": "1",
+    "nombre_no": "Varehandelssjefer",
+    "p25": 47020,
+    "mediana": 57000,
+    "media": 64940,
+    "p75": 73700
+  },
+  {
+    "styrk": "1431",
+    "grupo": "1",
+    "nombre_no": "Sports-, rekreasjons- og kultursenterledere",
+    "p25": 55000,
+    "mediana": 64140,
+    "media": 68580,
+    "p75": 75730
+  },
+  {
+    "styrk": "1439",
+    "grupo": "1",
+    "nombre_no": "Andre daglige ledere i tjenesteytende virksomheter",
+    "p25": 45920,
+    "mediana": 56400,
+    "media": 63590,
+    "p75": 70860
+  },
+  {
+    "styrk": "2111",
+    "grupo": "2",
+    "nombre_no": "Fysikere og astronomer",
+    "p25": 64880,
+    "mediana": 75210,
+    "media": 80420,
+    "p75": 91540
+  },
+  {
+    "styrk": "2112",
+    "grupo": "2",
+    "nombre_no": "Meteorologer",
+    "p25": 60630,
+    "mediana": 66900,
+    "media": 67100,
+    "p75": 73110
+  },
+  {
+    "styrk": "2113",
+    "grupo": "2",
+    "nombre_no": "Kjemikere",
+    "p25": 66030,
+    "mediana": 78110,
+    "media": 82630,
+    "p75": 94270
+  },
+  {
+    "styrk": "2114",
+    "grupo": "2",
+    "nombre_no": "Geologer og geofysikere",
+    "p25": 71980,
+    "mediana": 95040,
+    "media": 106150,
+    "p75": 127690
+  },
+  {
+    "styrk": "2120",
+    "grupo": "2",
+    "nombre_no": "Matematikere, statistikere mv.",
+    "p25": 58130,
+    "mediana": 66670,
+    "media": 72280,
+    "p75": 79750
+  },
+  {
+    "styrk": "2131",
+    "grupo": "2",
+    "nombre_no": "Biologer, botanikere, zoologer mv.",
+    "p25": 60210,
+    "mediana": 68810,
+    "media": 71490,
+    "p75": 79470
+  },
+  {
+    "styrk": "2132",
+    "grupo": "2",
+    "nombre_no": "Sivilagronomer mv.",
+    "p25": 53820,
+    "mediana": 62300,
+    "media": 64050,
+    "p75": 70470
+  },
+  {
+    "styrk": "2133",
+    "grupo": "2",
+    "nombre_no": "Miljøvernrådgivere",
+    "p25": 57990,
+    "mediana": 66570,
+    "media": 73210,
+    "p75": 82110
+  },
+  {
+    "styrk": "2141",
+    "grupo": "2",
+    "nombre_no": "Sivilingeniører (industri og produksjon)",
+    "p25": 62050,
+    "mediana": 68720,
+    "media": 75370,
+    "p75": 81320
+  },
+  {
+    "styrk": "2142",
+    "grupo": "2",
+    "nombre_no": "Sivilingeniører (bygg og anlegg)",
+    "p25": 64540,
+    "mediana": 76020,
+    "media": 81430,
+    "p75": 92790
+  },
+  {
+    "styrk": "2143",
+    "grupo": "2",
+    "nombre_no": "Sivilingeniører (miljøteknikk)",
+    "p25": 64650,
+    "mediana": 78180,
+    "media": 81970,
+    "p75": 97340
+  },
+  {
+    "styrk": "2144",
+    "grupo": "2",
+    "nombre_no": "Sivilingeniører (maskin- og marin-teknikk)",
+    "p25": 72080,
+    "mediana": 87360,
+    "media": 90620,
+    "p75": 106020
+  },
+  {
+    "styrk": "2145",
+    "grupo": "2",
+    "nombre_no": "Sivilingeniører (kjemi)",
+    "p25": 61300,
+    "mediana": 73080,
+    "media": 80930,
+    "p75": 95330
+  },
+  {
+    "styrk": "2146",
+    "grupo": "2",
+    "nombre_no": "Sivilingeniører (geofag, petro-leumsteknologi, metallurgi mv.)",
+    "p25": 79330,
+    "mediana": 98730,
+    "media": 103010,
+    "p75": 119520
+  },
+  {
+    "styrk": "2149",
+    "grupo": "2",
+    "nombre_no": "Andre sivilingeniører (unntatt elektroteknologi)",
+    "p25": 65910,
+    "mediana": 77880,
+    "media": 82660,
+    "p75": 93420
+  },
+  {
+    "styrk": "2151",
+    "grupo": "2",
+    "nombre_no": "Sivilingeniører (elkraftteknikk)",
+    "p25": 71670,
+    "mediana": 84760,
+    "media": 89780,
+    "p75": 101070
+  },
+  {
+    "styrk": "2152",
+    "grupo": "2",
+    "nombre_no": "Sivilingeniører (elektronikk)",
+    "p25": 68780,
+    "mediana": 83430,
+    "media": 87720,
+    "p75": 101590
+  },
+  {
+    "styrk": "2153",
+    "grupo": "2",
+    "nombre_no": "Sivilingeniører (telekommunikasjon)",
+    "p25": 68040,
+    "mediana": 81180,
+    "media": 86850,
+    "p75": 101370
+  },
+  {
+    "styrk": "2161",
+    "grupo": "2",
+    "nombre_no": "Sivilarkitekter",
+    "p25": 64180,
+    "mediana": 75590,
+    "media": 77420,
+    "p75": 87600
+  },
+  {
+    "styrk": "2162",
+    "grupo": "2",
+    "nombre_no": "Landskapsarkitekter",
+    "p25": 61670,
+    "mediana": 71860,
+    "media": 74110,
+    "p75": 84560
+  },
+  {
+    "styrk": "2163",
+    "grupo": "2",
+    "nombre_no": "Produkt- og klesdesignere",
+    "p25": 53880,
+    "mediana": 63260,
+    "media": 66980,
+    "p75": 76450
+  },
+  {
+    "styrk": "2164",
+    "grupo": "2",
+    "nombre_no": "Arealplanleggere",
+    "p25": 59320,
+    "mediana": 67830,
+    "media": 70970,
+    "p75": 78890
+  },
+  {
+    "styrk": "2165",
+    "grupo": "2",
+    "nombre_no": "Landmålere, kartografer mv.",
+    "p25": 58420,
+    "mediana": 63820,
+    "media": 65570,
+    "p75": 70780
+  },
+  {
+    "styrk": "2166",
+    "grupo": "2",
+    "nombre_no": "Grafiske- og multimediadesignere",
+    "p25": 51980,
+    "mediana": 61670,
+    "media": 64320,
+    "p75": 73710
+  },
+  {
+    "styrk": "2211",
+    "grupo": "2",
+    "nombre_no": "Allmennpraktiserende leger",
+    "p25": 64730,
+    "mediana": 78850,
+    "media": 91590,
+    "p75": 113820
+  },
+  {
+    "styrk": "2212",
+    "grupo": "2",
+    "nombre_no": "Legespesialister",
+    "p25": 88060,
+    "mediana": 107940,
+    "media": 110460,
+    "p75": 129640
+  },
+  {
+    "styrk": "2221",
+    "grupo": "2",
+    "nombre_no": "Spesialsykepleiere",
+    "p25": 58130,
+    "mediana": 63420,
+    "media": 63870,
+    "p75": 69030
+  },
+  {
+    "styrk": "2222",
+    "grupo": "2",
+    "nombre_no": "Jordmødre",
+    "p25": 61840,
+    "mediana": 67530,
+    "media": 68040,
+    "p75": 74680
+  },
+  {
+    "styrk": "2223",
+    "grupo": "2",
+    "nombre_no": "Sykepleiere",
+    "p25": 51430,
+    "mediana": 56660,
+    "media": 56720,
+    "p75": 61460
+  },
+  {
+    "styrk": "2224",
+    "grupo": "2",
+    "nombre_no": "Vernepleiere",
+    "p25": 52010,
+    "mediana": 57060,
+    "media": 56800,
+    "p75": 61270
+  },
+  {
+    "styrk": "2250",
+    "grupo": "2",
+    "nombre_no": "Veterinærer",
+    "p25": 54210,
+    "mediana": 66790,
+    "media": 69890,
+    "p75": 78890
+  },
+  {
+    "styrk": "2261",
+    "grupo": "2",
+    "nombre_no": "Tannleger",
+    "p25": 62500,
+    "mediana": 75410,
+    "media": 79910,
+    "p75": 89760
+  },
+  {
+    "styrk": "2262",
+    "grupo": "2",
+    "nombre_no": "Farmasøyter",
+    "p25": 56930,
+    "mediana": 62760,
+    "media": 65950,
+    "p75": 71680
+  },
+  {
+    "styrk": "2263",
+    "grupo": "2",
+    "nombre_no": "Helse- og miljørådgivere",
+    "p25": 59550,
+    "mediana": 68600,
+    "media": 72650,
+    "p75": 82730
+  },
+  {
+    "styrk": "2264",
+    "grupo": "2",
+    "nombre_no": "Fysioterapeuter",
+    "p25": 48130,
+    "mediana": 54500,
+    "media": 54920,
+    "p75": 59830
+  },
+  {
+    "styrk": "2265",
+    "grupo": "2",
+    "nombre_no": "Ernæringsfysiologer",
+    "p25": 54750,
+    "mediana": 60030,
+    "media": 63250,
+    "p75": 68380
+  },
+  {
+    "styrk": "2266",
+    "grupo": "2",
+    "nombre_no": "Audiografer og logopeder",
+    "p25": 50670,
+    "mediana": 54410,
+    "media": 57640,
+    "p75": 61800
+  },
+  {
+    "styrk": "2267",
+    "grupo": "2",
+    "nombre_no": "Ergoterapeuter",
+    "p25": 47570,
+    "mediana": 52780,
+    "media": 52510,
+    "p75": 57830
+  },
+  {
+    "styrk": "2269",
+    "grupo": "2",
+    "nombre_no": "Kiropraktorer mv.",
+    "p25": 58090,
+    "mediana": 66670,
+    "media": 66850,
+    "p75": 77000
+  },
+  {
+    "styrk": "2310",
+    "grupo": "2",
+    "nombre_no": "Universitets- og høyskolelektorer/-lærere",
+    "p25": 51020,
+    "mediana": 64100,
+    "media": 65660,
+    "p75": 76470
+  },
+  {
+    "styrk": "2320",
+    "grupo": "2",
+    "nombre_no": "Yrkesfaglærere",
+    "p25": 52590,
+    "mediana": 56970,
+    "media": 57700,
+    "p75": 61800
+  },
+  {
+    "styrk": "2330",
+    "grupo": "2",
+    "nombre_no": "Lektorer mv. (videregående skole)",
+    "p25": 57720,
+    "mediana": 62140,
+    "media": 62450,
+    "p75": 68270
+  },
+  {
+    "styrk": "2341",
+    "grupo": "2",
+    "nombre_no": "Grunnskolelærere",
+    "p25": 55110,
+    "mediana": 59010,
+    "media": 58710,
+    "p75": 63020
+  },
+  {
+    "styrk": "2342",
+    "grupo": "2",
+    "nombre_no": "Førskole-/barnehagelærere",
+    "p25": 48150,
+    "mediana": 53600,
+    "media": 52270,
+    "p75": 55830
+  },
+  {
+    "styrk": "2351",
+    "grupo": "2",
+    "nombre_no": "Spesialister i pedagogikk",
+    "p25": 55950,
+    "mediana": 67050,
+    "media": 64330,
+    "p75": 71080
+  },
+  {
+    "styrk": "2352",
+    "grupo": "2",
+    "nombre_no": "Spesiallærere / spesialpedagoger",
+    "p25": 53850,
+    "mediana": 56920,
+    "media": 56800,
+    "p75": 60880
+  },
+  {
+    "styrk": "2354",
+    "grupo": "2",
+    "nombre_no": "Andre musikklærere",
+    "p25": 53420,
+    "mediana": 58160,
+    "media": 58110,
+    "p75": 63860
+  },
+  {
+    "styrk": "2359",
+    "grupo": "2",
+    "nombre_no": "Andre lærere",
+    "p25": 51630,
+    "mediana": 58750,
+    "media": 62480,
+    "p75": 68520
+  },
+  {
+    "styrk": "2411",
+    "grupo": "2",
+    "nombre_no": "Revisorer, regnskapsrådgivere",
+    "p25": 59850,
+    "mediana": 72820,
+    "media": 78280,
+    "p75": 89150
+  },
+  {
+    "styrk": "2412",
+    "grupo": "2",
+    "nombre_no": "Finans- og investeringsrådgivere",
+    "p25": 62500,
+    "mediana": 75000,
+    "media": 87230,
+    "p75": 95120
+  },
+  {
+    "styrk": "2413",
+    "grupo": "2",
+    "nombre_no": "Finansanalytikere",
+    "p25": 62500,
+    "mediana": 76020,
+    "media": 85190,
+    "p75": 95830
+  },
+  {
+    "styrk": "2421",
+    "grupo": "2",
+    "nombre_no": "Organisasjonsrådgivere mv.",
+    "p25": 58710,
+    "mediana": 72000,
+    "media": 81490,
+    "p75": 92060
+  },
+  {
+    "styrk": "2422",
+    "grupo": "2",
+    "nombre_no": "Høyere saksbehandlere i offentlig og privat virksomhet",
+    "p25": 54230,
+    "mediana": 62110,
+    "media": 64980,
+    "p75": 71270
+  },
+  {
+    "styrk": "2423",
+    "grupo": "2",
+    "nombre_no": "Personal- og karriererådgivere",
+    "p25": 57500,
+    "mediana": 66750,
+    "media": 72610,
+    "p75": 80380
+  },
+  {
+    "styrk": "2424",
+    "grupo": "2",
+    "nombre_no": "Rådgivere innen kompetanseutvikling",
+    "p25": 57890,
+    "mediana": 65490,
+    "media": 71400,
+    "p75": 77540
+  },
+  {
+    "styrk": "2431",
+    "grupo": "2",
+    "nombre_no": "Reklame- og markedsføringsrådgivere",
+    "p25": 52910,
+    "mediana": 61740,
+    "media": 66380,
+    "p75": 74670
+  },
+  {
+    "styrk": "2432",
+    "grupo": "2",
+    "nombre_no": "Informasjonsrådgivere",
+    "p25": 56940,
+    "mediana": 65080,
+    "media": 70370,
+    "p75": 77030
+  },
+  {
+    "styrk": "2433",
+    "grupo": "2",
+    "nombre_no": "Salgskonsulenter innen tekniske og medisinske produkter",
+    "p25": 65020,
+    "mediana": 76150,
+    "media": 79870,
+    "p75": 88460
+  },
+  {
+    "styrk": "2434",
+    "grupo": "2",
+    "nombre_no": "Salgskonsulenter innen IKT-produkter",
+    "p25": 60840,
+    "mediana": 73970,
+    "media": 81270,
+    "p75": 95080
+  },
+  {
+    "styrk": "2511",
+    "grupo": "2",
+    "nombre_no": "Systemanalytikere/-arkitekter",
+    "p25": 64510,
+    "mediana": 76570,
+    "media": 80360,
+    "p75": 91590
+  },
+  {
+    "styrk": "2512",
+    "grupo": "2",
+    "nombre_no": "Programvareutviklere",
+    "p25": 64060,
+    "mediana": 78000,
+    "media": 81620,
+    "p75": 94230
+  },
+  {
+    "styrk": "2513",
+    "grupo": "2",
+    "nombre_no": "Nett- og multimediautviklere",
+    "p25": 52600,
+    "mediana": 63500,
+    "media": 67940,
+    "p75": 79320
+  },
+  {
+    "styrk": "2514",
+    "grupo": "2",
+    "nombre_no": "Applikasjonsprogrammerere",
+    "p25": 61930,
+    "mediana": 70830,
+    "media": 74260,
+    "p75": 84540
+  },
+  {
+    "styrk": "2519",
+    "grupo": "2",
+    "nombre_no": "Andre programvare- og applikasjonsutviklere",
+    "p25": 60380,
+    "mediana": 74560,
+    "media": 78770,
+    "p75": 91920
+  },
+  {
+    "styrk": "2521",
+    "grupo": "2",
+    "nombre_no": "Databasedesignere og -administratorer",
+    "p25": 62370,
+    "mediana": 75440,
+    "media": 79940,
+    "p75": 90840
+  },
+  {
+    "styrk": "2522",
+    "grupo": "2",
+    "nombre_no": "Systemadministratorer",
+    "p25": 56910,
+    "mediana": 66660,
+    "media": 73120,
+    "p75": 84580
+  },
+  {
+    "styrk": "2529",
+    "grupo": "2",
+    "nombre_no": "Sikkerhetsanalytikere mv.",
+    "p25": 66290,
+    "mediana": 78300,
+    "media": 82440,
+    "p75": 93250
+  },
+  {
+    "styrk": "2611",
+    "grupo": "2",
+    "nombre_no": "Jurister og advokater",
+    "p25": 65210,
+    "mediana": 81250,
+    "media": 90370,
+    "p75": 106660
+  },
+  {
+    "styrk": "2612",
+    "grupo": "2",
+    "nombre_no": "Dommere",
+    "p25": 84770,
+    "mediana": 118470,
+    "media": 104890,
+    "p75": 124370
+  },
+  {
+    "styrk": "2619",
+    "grupo": "2",
+    "nombre_no": "Andre juridiske yrker",
+    "p25": 59270,
+    "mediana": 73350,
+    "media": 84680,
+    "p75": 100440
+  },
+  {
+    "styrk": "2621",
+    "grupo": "2",
+    "nombre_no": "Arkivarer og kuratorer",
+    "p25": 51640,
+    "mediana": 57330,
+    "media": 58340,
+    "p75": 64000
+  },
+  {
+    "styrk": "2622",
+    "grupo": "2",
+    "nombre_no": "Bibliotekarer og andre informasjonsarbeidere",
+    "p25": 50570,
+    "mediana": 53790,
+    "media": 54460,
+    "p75": 58150
+  },
+  {
+    "styrk": "2631",
+    "grupo": "2",
+    "nombre_no": "Rådgivere/forskere, samfunnsøkonomi",
+    "p25": 62190,
+    "mediana": 71100,
+    "media": 82030,
+    "p75": 88500
+  },
+  {
+    "styrk": "2632",
+    "grupo": "2",
+    "nombre_no": "Rådgivere/forskere, samfunnsvitenskap",
+    "p25": 60980,
+    "mediana": 68780,
+    "media": 72670,
+    "p75": 81030
+  },
+  {
+    "styrk": "2633",
+    "grupo": "2",
+    "nombre_no": "Rådgivere/forskere, humanistiske fag",
+    "p25": 54690,
+    "mediana": 58560,
+    "media": 60300,
+    "p75": 66520
+  },
+  {
+    "styrk": "2634",
+    "grupo": "2",
+    "nombre_no": "Psykologer",
+    "p25": 58940,
+    "mediana": 66040,
+    "media": 69930,
+    "p75": 81390
+  },
+  {
+    "styrk": "2635",
+    "grupo": "2",
+    "nombre_no": "Rådgivere innen sosiale fagfelt",
+    "p25": 51670,
+    "mediana": 56020,
+    "media": 56260,
+    "p75": 60230
+  },
+  {
+    "styrk": "2636",
+    "grupo": "2",
+    "nombre_no": "Geistlige yrker",
+    "p25": 59080,
+    "mediana": 67430,
+    "media": 66680,
+    "p75": 74460
+  },
+  {
+    "styrk": "2641",
+    "grupo": "2",
+    "nombre_no": "Forfattere mv.",
+    "p25": 59810,
+    "mediana": 67500,
+    "media": 71420,
+    "p75": 80050
+  },
+  {
+    "styrk": "2642",
+    "grupo": "2",
+    "nombre_no": "Journalister",
+    "p25": 58990,
+    "mediana": 65300,
+    "media": 68120,
+    "p75": 74770
+  },
+  {
+    "styrk": "2643",
+    "grupo": "2",
+    "nombre_no": "Oversettere, tolker mv.",
+    "p25": 46110,
+    "mediana": 52930,
+    "media": 55370,
+    "p75": 62680
+  },
+  {
+    "styrk": "2651",
+    "grupo": "2",
+    "nombre_no": "Skulptører, kunstmalere og andre billedkunstnere",
+    "p25": 43500,
+    "mediana": 52700,
+    "media": 55700,
+    "p75": 62330
+  },
+  {
+    "styrk": "2652",
+    "grupo": "2",
+    "nombre_no": "Dirigenter, komponister, musikere og sangere",
+    "p25": 56980,
+    "mediana": 64330,
+    "media": 62800,
+    "p75": 68590
+  },
+  {
+    "styrk": "2653",
+    "grupo": "2",
+    "nombre_no": "Koreografer og dansere",
+    "p25": 50010,
+    "mediana": 56070,
+    "media": 56530,
+    "p75": 60490
+  },
+  {
+    "styrk": "2654",
+    "grupo": "2",
+    "nombre_no": "Regissører",
+    "p25": 54170,
+    "mediana": 64250,
+    "media": 68370,
+    "p75": 77060
+  },
+  {
+    "styrk": "2655",
+    "grupo": "2",
+    "nombre_no": "Skuespillere",
+    "p25": 50870,
+    "mediana": 56990,
+    "media": 56940,
+    "p75": 59130
+  },
+  {
+    "styrk": "2656",
+    "grupo": "2",
+    "nombre_no": "Programledere i TV og radio",
+    "p25": 62300,
+    "mediana": 74050,
+    "media": 75570,
+    "p75": 83820
+  },
+  {
+    "styrk": "2659",
+    "grupo": "2",
+    "nombre_no": "Andre utøvende kunstneriske yrker",
+    "p25": 46400,
+    "mediana": 62020,
+    "media": 63270,
+    "p75": 76250
+  },
+  {
+    "styrk": "3112",
+    "grupo": "3",
+    "nombre_no": "Bygningsingeniører",
+    "p25": 57350,
+    "mediana": 66880,
+    "media": 70830,
+    "p75": 80000
+  },
+  {
+    "styrk": "3113",
+    "grupo": "3",
+    "nombre_no": "Elkraftingeniører",
+    "p25": 63820,
+    "mediana": 72500,
+    "media": 75790,
+    "p75": 83660
+  },
+  {
+    "styrk": "3114",
+    "grupo": "3",
+    "nombre_no": "Elektronikkingeniører",
+    "p25": 60160,
+    "mediana": 70920,
+    "media": 74610,
+    "p75": 84630
+  },
+  {
+    "styrk": "3115",
+    "grupo": "3",
+    "nombre_no": "Maskiningeniører",
+    "p25": 56830,
+    "mediana": 65670,
+    "media": 69330,
+    "p75": 77400
+  },
+  {
+    "styrk": "3116",
+    "grupo": "3",
+    "nombre_no": "Kjemiingeniører",
+    "p25": 56170,
+    "mediana": 66970,
+    "media": 71240,
+    "p75": 81800
+  },
+  {
+    "styrk": "3117",
+    "grupo": "3",
+    "nombre_no": "Ingeniører innen petroleum, bergverk og metallurgi",
+    "p25": 68870,
+    "mediana": 85730,
+    "media": 94690,
+    "p75": 110840
+  },
+  {
+    "styrk": "3118",
+    "grupo": "3",
+    "nombre_no": "Tekniske tegnere",
+    "p25": 56250,
+    "mediana": 62720,
+    "media": 64930,
+    "p75": 70520
+  },
+  {
+    "styrk": "3119",
+    "grupo": "3",
+    "nombre_no": "Andre ingeniører",
+    "p25": 58330,
+    "mediana": 69060,
+    "media": 72930,
+    "p75": 82380
+  },
+  {
+    "styrk": "3121",
+    "grupo": "3",
+    "nombre_no": "Arbeidsleder, bergfag",
+    "p25": 65930,
+    "mediana": 72650,
+    "media": 76490,
+    "p75": 86240
+  },
+  {
+    "styrk": "3122",
+    "grupo": "3",
+    "nombre_no": "Arbeidsleder, industri",
+    "p25": 54640,
+    "mediana": 60440,
+    "media": 63030,
+    "p75": 69530
+  },
+  {
+    "styrk": "3123",
+    "grupo": "3",
+    "nombre_no": "Arbeidsleder, bygg og anlegg",
+    "p25": 58240,
+    "mediana": 66670,
+    "media": 69200,
+    "p75": 77920
+  },
+  {
+    "styrk": "3131",
+    "grupo": "3",
+    "nombre_no": "Energikontrolloperatører",
+    "p25": 63280,
+    "mediana": 72680,
+    "media": 76160,
+    "p75": 93170
+  },
+  {
+    "styrk": "3133",
+    "grupo": "3",
+    "nombre_no": "Kontrolloperatører innen kjemisk prosessindustri",
+    "p25": 55790,
+    "mediana": 67060,
+    "media": 67640,
+    "p75": 79620
+  },
+  {
+    "styrk": "3134",
+    "grupo": "3",
+    "nombre_no": "Kontrolloperatører ved olje- og naturgassraffineringsanlegg",
+    "p25": 67150,
+    "mediana": 78460,
+    "media": 84300,
+    "p75": 88470
+  },
+  {
+    "styrk": "3135",
+    "grupo": "3",
+    "nombre_no": "Kontrolloperatører innen metallproduksjon",
+    "p25": 52310,
+    "mediana": 58460,
+    "media": 59460,
+    "p75": 65000
+  },
+  {
+    "styrk": "3141",
+    "grupo": "3",
+    "nombre_no": "Bioteknikere (ikke-medisinske laboratorier)",
+    "p25": 46260,
+    "mediana": 52500,
+    "media": 54330,
+    "p75": 59120
+  },
+  {
+    "styrk": "3142",
+    "grupo": "3",
+    "nombre_no": "Agroteknikere",
+    "p25": 51310,
+    "mediana": 60300,
+    "media": 62580,
+    "p75": 70000
+  },
+  {
+    "styrk": "3143",
+    "grupo": "3",
+    "nombre_no": "Skogteknikere",
+    "p25": 55500,
+    "mediana": 60600,
+    "media": 62700,
+    "p75": 66670
+  },
+  {
+    "styrk": "3151",
+    "grupo": "3",
+    "nombre_no": "Skipsmaskinister",
+    "p25": 69850,
+    "mediana": 82120,
+    "media": 85310,
+    "p75": 98990
+  },
+  {
+    "styrk": "3152",
+    "grupo": "3",
+    "nombre_no": "Dekksoffiserer og loser",
+    "p25": 68940,
+    "mediana": 80720,
+    "media": 84150,
+    "p75": 93970
+  },
+  {
+    "styrk": "3153",
+    "grupo": "3",
+    "nombre_no": "Flygere",
+    "p25": 70120,
+    "mediana": 113360,
+    "media": 113520,
+    "p75": 151560
+  },
+  {
+    "styrk": "3154",
+    "grupo": "3",
+    "nombre_no": "Flygeledere",
+    "p25": 84130,
+    "mediana": 123350,
+    "media": 115710,
+    "p75": 146290
+  },
+  {
+    "styrk": "3155",
+    "grupo": "3",
+    "nombre_no": "Teknikere innen luftfartssikkerhet",
+    "p25": 77320,
+    "mediana": 87310,
+    "media": 86630,
+    "p75": 93960
+  },
+  {
+    "styrk": "3211",
+    "grupo": "3",
+    "nombre_no": "Radiografer mv.",
+    "p25": 51790,
+    "mediana": 58170,
+    "media": 57320,
+    "p75": 62010
+  },
+  {
+    "styrk": "3212",
+    "grupo": "3",
+    "nombre_no": "Bioingeniører",
+    "p25": 51180,
+    "mediana": 56430,
+    "media": 56810,
+    "p75": 61730
+  },
+  {
+    "styrk": "3213",
+    "grupo": "3",
+    "nombre_no": "Reseptarer",
+    "p25": 48230,
+    "mediana": 52770,
+    "media": 53890,
+    "p75": 58060
+  },
+  {
+    "styrk": "3214",
+    "grupo": "3",
+    "nombre_no": "Protese- og tannteknikere",
+    "p25": 49180,
+    "mediana": 57750,
+    "media": 59190,
+    "p75": 67950
+  },
+  {
+    "styrk": "3230",
+    "grupo": "3",
+    "nombre_no": "Yrker innen alternativ medisin",
+    "p25": 44890,
+    "mediana": 56500,
+    "media": 57400,
+    "p75": 66670
+  },
+  {
+    "styrk": "3240",
+    "grupo": "3",
+    "nombre_no": "Dyrepleiere",
+    "p25": 37840,
+    "mediana": 43020,
+    "media": 44400,
+    "p75": 48530
+  },
+  {
+    "styrk": "3251",
+    "grupo": "3",
+    "nombre_no": "Tannpleiere",
+    "p25": 45220,
+    "mediana": 51200,
+    "media": 51670,
+    "p75": 55150
+  },
+  {
+    "styrk": "3254",
+    "grupo": "3",
+    "nombre_no": "Optikere",
+    "p25": 50000,
+    "mediana": 55830,
+    "media": 59080,
+    "p75": 64360
+  },
+  {
+    "styrk": "3256",
+    "grupo": "3",
+    "nombre_no": "Helsesekretærer",
+    "p25": 44030,
+    "mediana": 45780,
+    "media": 45640,
+    "p75": 47670
+  },
+  {
+    "styrk": "3257",
+    "grupo": "3",
+    "nombre_no": "Helse- og miljøkontrollører",
+    "p25": 59520,
+    "mediana": 70050,
+    "media": 79500,
+    "p75": 91670
+  },
+  {
+    "styrk": "3258",
+    "grupo": "3",
+    "nombre_no": "Ambulansepersonell",
+    "p25": 53820,
+    "mediana": 59860,
+    "media": 57840,
+    "p75": 64660
+  },
+  {
+    "styrk": "3259",
+    "grupo": "3",
+    "nombre_no": "Andre helseyrker",
+    "p25": 48580,
+    "mediana": 52900,
+    "media": 55110,
+    "p75": 61790
+  },
+  {
+    "styrk": "3311",
+    "grupo": "3",
+    "nombre_no": "Finansmeglere",
+    "p25": 67680,
+    "mediana": 89080,
+    "media": 117820,
+    "p75": 124690
+  },
+  {
+    "styrk": "3312",
+    "grupo": "3",
+    "nombre_no": "Kundebehandlere lån og kreditt",
+    "p25": 54600,
+    "mediana": 63540,
+    "media": 71840,
+    "p75": 77760
+  },
+  {
+    "styrk": "3313",
+    "grupo": "3",
+    "nombre_no": "Regnskapsførere",
+    "p25": 53880,
+    "mediana": 62270,
+    "media": 67130,
+    "p75": 73860
+  },
+  {
+    "styrk": "3315",
+    "grupo": "3",
+    "nombre_no": "Takstmenn",
+    "p25": 51680,
+    "mediana": 60000,
+    "media": 66640,
+    "p75": 73330
+  },
+  {
+    "styrk": "3321",
+    "grupo": "3",
+    "nombre_no": "Forsikringsagenter",
+    "p25": 55040,
+    "mediana": 67160,
+    "media": 76850,
+    "p75": 88070
+  },
+  {
+    "styrk": "3322",
+    "grupo": "3",
+    "nombre_no": "Selgere (engros)",
+    "p25": 54490,
+    "mediana": 65610,
+    "media": 71630,
+    "p75": 81510
+  },
+  {
+    "styrk": "3323",
+    "grupo": "3",
+    "nombre_no": "Innkjøpere",
+    "p25": 55880,
+    "mediana": 66270,
+    "media": 71680,
+    "p75": 81700
+  },
+  {
+    "styrk": "3324",
+    "grupo": "3",
+    "nombre_no": "Handels- og skipsmeglere",
+    "p25": 74420,
+    "mediana": 106060,
+    "media": 173910,
+    "p75": 166670
+  },
+  {
+    "styrk": "3331",
+    "grupo": "3",
+    "nombre_no": "Speditører og befraktere",
+    "p25": 49960,
+    "mediana": 56650,
+    "media": 63860,
+    "p75": 67010
+  },
+  {
+    "styrk": "3332",
+    "grupo": "3",
+    "nombre_no": "Konferanse- og arrangementsplanleggere mv.",
+    "p25": 49580,
+    "mediana": 57460,
+    "media": 64580,
+    "p75": 70650
+  },
+  {
+    "styrk": "3333",
+    "grupo": "3",
+    "nombre_no": "Arbeidsformidlere",
+    "p25": 47380,
+    "mediana": 52060,
+    "media": 58430,
+    "p75": 63860
+  },
+  {
+    "styrk": "3334",
+    "grupo": "3",
+    "nombre_no": "Eiendomsmeglere og - forvaltere",
+    "p25": 58080,
+    "mediana": 76330,
+    "media": 88680,
+    "p75": 106560
+  },
+  {
+    "styrk": "3339",
+    "grupo": "3",
+    "nombre_no": "Andre yrker innen forretningstjenester",
+    "p25": 56400,
+    "mediana": 70000,
+    "media": 80750,
+    "p75": 88330
+  },
+  {
+    "styrk": "3341",
+    "grupo": "3",
+    "nombre_no": "Arbeidsledere for kontorpersonell",
+    "p25": 60000,
+    "mediana": 69780,
+    "media": 76300,
+    "p75": 84750
+  },
+  {
+    "styrk": "3342",
+    "grupo": "3",
+    "nombre_no": "Advokatsekretær",
+    "p25": 50830,
+    "mediana": 56250,
+    "media": 57900,
+    "p75": 64080
+  },
+  {
+    "styrk": "3343",
+    "grupo": "3",
+    "nombre_no": "Sjefssekretærer",
+    "p25": 50700,
+    "mediana": 57540,
+    "media": 63360,
+    "p75": 69190
+  },
+  {
+    "styrk": "3351",
+    "grupo": "3",
+    "nombre_no": "Tollere",
+    "p25": 49350,
+    "mediana": 53740,
+    "media": 53760,
+    "p75": 58530
+  },
+  {
+    "styrk": "3352",
+    "grupo": "3",
+    "nombre_no": "Skattefunksjonærer",
+    "p25": 49190,
+    "mediana": 52050,
+    "media": 53860,
+    "p75": 56190
+  },
+  {
+    "styrk": "3353",
+    "grupo": "3",
+    "nombre_no": "Saksbehandlere innen sosiale ytelser",
+    "p25": 48320,
+    "mediana": 50080,
+    "media": 50030,
+    "p75": 51800
+  },
+  {
+    "styrk": "3355",
+    "grupo": "3",
+    "nombre_no": "Politibetjenter mv.",
+    "p25": 56310,
+    "mediana": 64000,
+    "media": 64740,
+    "p75": 71620
+  },
+  {
+    "styrk": "3359",
+    "grupo": "3",
+    "nombre_no": "Andre yrker innen offentlig forvaltning",
+    "p25": 49280,
+    "mediana": 53750,
+    "media": 55680,
+    "p75": 59630
+  },
+  {
+    "styrk": "3412",
+    "grupo": "3",
+    "nombre_no": "Miljøarbeidere innen sosiale fagfelt",
+    "p25": 49160,
+    "mediana": 52800,
+    "media": 53330,
+    "p75": 57360
+  },
+  {
+    "styrk": "3413",
+    "grupo": "3",
+    "nombre_no": "Religiøse yrker",
+    "p25": 47480,
+    "mediana": 53450,
+    "media": 53540,
+    "p75": 59590
+  },
+  {
+    "styrk": "3421",
+    "grupo": "3",
+    "nombre_no": "Idrettsutøvere",
+    "p25": 39380,
+    "mediana": 55130,
+    "media": 94010,
+    "p75": 82500
+  },
+  {
+    "styrk": "3422",
+    "grupo": "3",
+    "nombre_no": "Trenere og idrettsdommere",
+    "p25": 42500,
+    "mediana": 50960,
+    "media": 55720,
+    "p75": 61690
+  },
+  {
+    "styrk": "3423",
+    "grupo": "3",
+    "nombre_no": "Sports- og aktivitetsinstruktører",
+    "p25": 38400,
+    "mediana": 45830,
+    "media": 48180,
+    "p75": 55480
+  },
+  {
+    "styrk": "3431",
+    "grupo": "3",
+    "nombre_no": "Fotografer og filmfotografer",
+    "p25": 46980,
+    "mediana": 57540,
+    "media": 59350,
+    "p75": 69380
+  },
+  {
+    "styrk": "3432",
+    "grupo": "3",
+    "nombre_no": "Interiørdesignere og dekoratører",
+    "p25": 43930,
+    "mediana": 48730,
+    "media": 53460,
+    "p75": 58370
+  },
+  {
+    "styrk": "3433",
+    "grupo": "3",
+    "nombre_no": "Tekniske konservatorer",
+    "p25": 50000,
+    "mediana": 55410,
+    "media": 55410,
+    "p75": 59790
+  },
+  {
+    "styrk": "3434",
+    "grupo": "3",
+    "nombre_no": "Sjefskokker",
+    "p25": 43000,
+    "mediana": 48520,
+    "media": 51100,
+    "p75": 55150
+  },
+  {
+    "styrk": "3439",
+    "grupo": "3",
+    "nombre_no": "Andre yrker innen estetiske fag",
+    "p25": 50970,
+    "mediana": 54900,
+    "media": 58010,
+    "p75": 63800
+  },
+  {
+    "styrk": "3511",
+    "grupo": "3",
+    "nombre_no": "Driftsteknikere, IKT",
+    "p25": 54170,
+    "mediana": 65200,
+    "media": 69140,
+    "p75": 80050
+  },
+  {
+    "styrk": "3512",
+    "grupo": "3",
+    "nombre_no": "Brukerstøtte, IKT",
+    "p25": 48820,
+    "mediana": 58330,
+    "media": 62870,
+    "p75": 72140
+  },
+  {
+    "styrk": "3513",
+    "grupo": "3",
+    "nombre_no": "Nettverks- og systemteknikere, IKT",
+    "p25": 58090,
+    "mediana": 71870,
+    "media": 73910,
+    "p75": 85750
+  },
+  {
+    "styrk": "3514",
+    "grupo": "3",
+    "nombre_no": "Internett-teknikere",
+    "p25": 53420,
+    "mediana": 63120,
+    "media": 67220,
+    "p75": 75460
+  },
+  {
+    "styrk": "3521",
+    "grupo": "3",
+    "nombre_no": "Teknikere innen radio og tv",
+    "p25": 51250,
+    "mediana": 59140,
+    "media": 60450,
+    "p75": 68130
+  },
+  {
+    "styrk": "3522",
+    "grupo": "3",
+    "nombre_no": "Teknikere innen telekom",
+    "p25": 41360,
+    "mediana": 48310,
+    "media": 52650,
+    "p75": 63010
+  },
+  {
+    "styrk": "4110",
+    "grupo": "4",
+    "nombre_no": "Kontormedarbeidere",
+    "p25": 45330,
+    "mediana": 50400,
+    "media": 53590,
+    "p75": 59100
+  },
+  {
+    "styrk": "4132",
+    "grupo": "4",
+    "nombre_no": "Dataregistrere",
+    "p25": 51240,
+    "mediana": 60260,
+    "media": 63260,
+    "p75": 71420
+  },
+  {
+    "styrk": "4211",
+    "grupo": "4",
+    "nombre_no": "Kundebehandlere, bank og postkontor",
+    "p25": 45870,
+    "mediana": 47550,
+    "media": 48220,
+    "p75": 49350
+  },
+  {
+    "styrk": "4212",
+    "grupo": "4",
+    "nombre_no": "Bingoverter, bookmakere mv.",
+    "p25": 34830,
+    "mediana": 38810,
+    "media": 44020,
+    "p75": 46760
+  },
+  {
+    "styrk": "4214",
+    "grupo": "4",
+    "nombre_no": "Inkassomedarbeidere mv.",
+    "p25": 44060,
+    "mediana": 49000,
+    "media": 50890,
+    "p75": 55560
+  },
+  {
+    "styrk": "4221",
+    "grupo": "4",
+    "nombre_no": "Reisebyråmedarbeidere mv.",
+    "p25": 42450,
+    "mediana": 48000,
+    "media": 50270,
+    "p75": 55960
+  },
+  {
+    "styrk": "4222",
+    "grupo": "4",
+    "nombre_no": "Kundesentermedarbeidere",
+    "p25": 42530,
+    "mediana": 47850,
+    "media": 50770,
+    "p75": 55780
+  },
+  {
+    "styrk": "4223",
+    "grupo": "4",
+    "nombre_no": "Sentralbordoperatører",
+    "p25": 43120,
+    "mediana": 47720,
+    "media": 48570,
+    "p75": 52270
+  },
+  {
+    "styrk": "4224",
+    "grupo": "4",
+    "nombre_no": "Hotellresepsjonister",
+    "p25": 36530,
+    "mediana": 40270,
+    "media": 40750,
+    "p75": 45120
+  },
+  {
+    "styrk": "4225",
+    "grupo": "4",
+    "nombre_no": "Informasjonsskrankemedarbeidere",
+    "p25": 45560,
+    "mediana": 52000,
+    "media": 52390,
+    "p75": 58350
+  },
+  {
+    "styrk": "4226",
+    "grupo": "4",
+    "nombre_no": "Resepsjonister (ekskl. hotell)",
+    "p25": 43480,
+    "mediana": 49520,
+    "media": 49980,
+    "p75": 55640
+  },
+  {
+    "styrk": "4229",
+    "grupo": "4",
+    "nombre_no": "Andre opplysningsmedarbeidere",
+    "p25": 40930,
+    "mediana": 48000,
+    "media": 51000,
+    "p75": 58350
+  },
+  {
+    "styrk": "4311",
+    "grupo": "4",
+    "nombre_no": "Regnskapsmedarbeidere",
+    "p25": 50000,
+    "mediana": 56100,
+    "media": 58980,
+    "p75": 64600
+  },
+  {
+    "styrk": "4312",
+    "grupo": "4",
+    "nombre_no": "Forsikrings- og finansmedarbeidere",
+    "p25": 53470,
+    "mediana": 59370,
+    "media": 61490,
+    "p75": 66030
+  },
+  {
+    "styrk": "4313",
+    "grupo": "4",
+    "nombre_no": "Lønningsmedarbeidere",
+    "p25": 51670,
+    "mediana": 57160,
+    "media": 58210,
+    "p75": 64080
+  },
+  {
+    "styrk": "4321",
+    "grupo": "4",
+    "nombre_no": "Lagermedarbeidere og material-forvaltere",
+    "p25": 44170,
+    "mediana": 48750,
+    "media": 50640,
+    "p75": 55800
+  },
+  {
+    "styrk": "4322",
+    "grupo": "4",
+    "nombre_no": "Logistikkmedarbeidere",
+    "p25": 47630,
+    "mediana": 56690,
+    "media": 60260,
+    "p75": 69170
+  },
+  {
+    "styrk": "4323",
+    "grupo": "4",
+    "nombre_no": "Transportfunksjonærer",
+    "p25": 47000,
+    "mediana": 55890,
+    "media": 54820,
+    "p75": 64050
+  },
+  {
+    "styrk": "4412",
+    "grupo": "4",
+    "nombre_no": "Postbud og postsorterere",
+    "p25": 43410,
+    "mediana": 45070,
+    "media": 44860,
+    "p75": 45480
+  },
+  {
+    "styrk": "4415",
+    "grupo": "4",
+    "nombre_no": "Arkivassistenter",
+    "p25": 48130,
+    "mediana": 52770,
+    "media": 54590,
+    "p75": 59970
+  },
+  {
+    "styrk": "4416",
+    "grupo": "4",
+    "nombre_no": "Personalkontormedarbeidere",
+    "p25": 51670,
+    "mediana": 59310,
+    "media": 62080,
+    "p75": 69130
+  },
+  {
+    "styrk": "5111",
+    "grupo": "5",
+    "nombre_no": "Flyverter, båtverter mv.",
+    "p25": 33750,
+    "mediana": 39530,
+    "media": 42980,
+    "p75": 50270
+  },
+  {
+    "styrk": "5112",
+    "grupo": "5",
+    "nombre_no": "Konduktører",
+    "p25": 61360,
+    "mediana": 66210,
+    "media": 64510,
+    "p75": 69820
+  },
+  {
+    "styrk": "5113",
+    "grupo": "5",
+    "nombre_no": "Reiseledere og guider",
+    "p25": 35720,
+    "mediana": 43000,
+    "media": 44890,
+    "p75": 51750
+  },
+  {
+    "styrk": "5120",
+    "grupo": "5",
+    "nombre_no": "Kokker",
+    "p25": 38160,
+    "mediana": 42290,
+    "media": 44000,
+    "p75": 48350
+  },
+  {
+    "styrk": "5131",
+    "grupo": "5",
+    "nombre_no": "Servitører",
+    "p25": 35210,
+    "mediana": 38970,
+    "media": 39940,
+    "p75": 43300
+  },
+  {
+    "styrk": "5132",
+    "grupo": "5",
+    "nombre_no": "Bartendere",
+    "p25": 36370,
+    "mediana": 39980,
+    "media": 40930,
+    "p75": 44110
+  },
+  {
+    "styrk": "5141",
+    "grupo": "5",
+    "nombre_no": "Frisører",
+    "p25": 33000,
+    "mediana": 40000,
+    "media": 41300,
+    "p75": 50000
+  },
+  {
+    "styrk": "5142",
+    "grupo": "5",
+    "nombre_no": "Kosmetologer mv.",
+    "p25": 34100,
+    "mediana": 40590,
+    "media": 43640,
+    "p75": 50330
+  },
+  {
+    "styrk": "5151",
+    "grupo": "5",
+    "nombre_no": "Renholdsledere i bedrifter",
+    "p25": 44420,
+    "mediana": 48340,
+    "media": 50440,
+    "p75": 54360
+  },
+  {
+    "styrk": "5152",
+    "grupo": "5",
+    "nombre_no": "Husholdere",
+    "p25": 45920,
+    "mediana": 52750,
+    "media": 53310,
+    "p75": 58210
+  },
+  {
+    "styrk": "5153",
+    "grupo": "5",
+    "nombre_no": "Vaktmestre",
+    "p25": 44700,
+    "mediana": 49180,
+    "media": 52000,
+    "p75": 56450
+  },
+  {
+    "styrk": "5163",
+    "grupo": "5",
+    "nombre_no": "Begravelsesbyrå- og krematoriearbeidere",
+    "p25": 49210,
+    "mediana": 53680,
+    "media": 55740,
+    "p75": 61050
+  },
+  {
+    "styrk": "5164",
+    "grupo": "5",
+    "nombre_no": "Dyrepassere og - trenere mv.",
+    "p25": 31100,
+    "mediana": 37080,
+    "media": 36320,
+    "p75": 42830
+  },
+  {
+    "styrk": "5165",
+    "grupo": "5",
+    "nombre_no": "Kjøreskolelærere",
+    "p25": 51960,
+    "mediana": 58620,
+    "media": 61760,
+    "p75": 70000
+  },
+  {
+    "styrk": "5211",
+    "grupo": "5",
+    "nombre_no": "Torghandlere",
+    "p25": 52700,
+    "mediana": 64790,
+    "media": 65140,
+    "p75": 76640
+  },
+  {
+    "styrk": "5222",
+    "grupo": "5",
+    "nombre_no": "Butikkavdelingssjefer",
+    "p25": 44800,
+    "mediana": 48150,
+    "media": 51440,
+    "p75": 55300
+  },
+  {
+    "styrk": "5223",
+    "grupo": "5",
+    "nombre_no": "Butikkmedarbeidere",
+    "p25": 39780,
+    "mediana": 43470,
+    "media": 45040,
+    "p75": 48390
+  },
+  {
+    "styrk": "5230",
+    "grupo": "5",
+    "nombre_no": "Billettselgere",
+    "p25": 35710,
+    "mediana": 45650,
+    "media": 45150,
+    "p75": 52320
+  },
+  {
+    "styrk": "5243",
+    "grupo": "5",
+    "nombre_no": "Dørselgere",
+    "p25": 42840,
+    "mediana": 52000,
+    "media": 56490,
+    "p75": 69320
+  },
+  {
+    "styrk": "5244",
+    "grupo": "5",
+    "nombre_no": "Telefon- og nettselgere",
+    "p25": 41570,
+    "mediana": 50670,
+    "media": 54900,
+    "p75": 63400
+  },
+  {
+    "styrk": "5245",
+    "grupo": "5",
+    "nombre_no": "Servicemedarbeidere (bensinstasjon)",
+    "p25": 35450,
+    "mediana": 40590,
+    "media": 44060,
+    "p75": 47250
+  },
+  {
+    "styrk": "5246",
+    "grupo": "5",
+    "nombre_no": "Gatekjøkken- og kafémedarbeidere mv.",
+    "p25": 34100,
+    "mediana": 37880,
+    "media": 38950,
+    "p75": 42970
+  },
+  {
+    "styrk": "5249",
+    "grupo": "5",
+    "nombre_no": "Andre salgsmedarbeidere",
+    "p25": 38970,
+    "mediana": 46000,
+    "media": 47510,
+    "p75": 53710
+  },
+  {
+    "styrk": "5311",
+    "grupo": "5",
+    "nombre_no": "Barnehage- og skolefritidsassistenter mv.",
+    "p25": 37870,
+    "mediana": 41610,
+    "media": 41090,
+    "p75": 44930
+  },
+  {
+    "styrk": "5312",
+    "grupo": "5",
+    "nombre_no": "Skoleassistenter",
+    "p25": 34010,
+    "mediana": 39510,
+    "media": 39790,
+    "p75": 43380
+  },
+  {
+    "styrk": "5321",
+    "grupo": "5",
+    "nombre_no": "Helsefagarbeidere",
+    "p25": 45250,
+    "mediana": 50780,
+    "media": 48720,
+    "p75": 53930
+  },
+  {
+    "styrk": "5322",
+    "grupo": "5",
+    "nombre_no": "Hjemmehjelper",
+    "p25": 40370,
+    "mediana": 43310,
+    "media": 44450,
+    "p75": 47710
+  },
+  {
+    "styrk": "5329",
+    "grupo": "5",
+    "nombre_no": "Andre pleiemedarbeidere",
+    "p25": 40420,
+    "mediana": 44860,
+    "media": 44940,
+    "p75": 48870
+  },
+  {
+    "styrk": "5411",
+    "grupo": "5",
+    "nombre_no": "Brannkonstabler",
+    "p25": 58170,
+    "mediana": 61690,
+    "media": 62720,
+    "p75": 66890
+  },
+  {
+    "styrk": "5413",
+    "grupo": "5",
+    "nombre_no": "Fengselsbetjenter",
+    "p25": 47340,
+    "mediana": 56470,
+    "media": 54570,
+    "p75": 62870
+  },
+  {
+    "styrk": "5414",
+    "grupo": "5",
+    "nombre_no": "Vektere",
+    "p25": 40630,
+    "mediana": 43710,
+    "media": 46170,
+    "p75": 47920
+  },
+  {
+    "styrk": "5419",
+    "grupo": "5",
+    "nombre_no": "Andre sikkerhetsarbeidere",
+    "p25": 39000,
+    "mediana": 44590,
+    "media": 45050,
+    "p75": 49100
+  },
+  {
+    "styrk": "6113",
+    "grupo": "6",
+    "nombre_no": "Gartnere",
+    "p25": 33940,
+    "mediana": 44470,
+    "media": 43550,
+    "p75": 50000
+  },
+  {
+    "styrk": "6121",
+    "grupo": "6",
+    "nombre_no": "Melke- og husdyrprodusenter",
+    "p25": 32000,
+    "mediana": 40000,
+    "media": 40430,
+    "p75": 49190
+  },
+  {
+    "styrk": "6122",
+    "grupo": "6",
+    "nombre_no": "Egg- og fjærfeprodusenter",
+    "p25": 39380,
+    "mediana": 47280,
+    "media": 48470,
+    "p75": 55000
+  },
+  {
+    "styrk": "6130",
+    "grupo": "6",
+    "nombre_no": "Plante- og husdyrprodusenter (kombinasjonsbruk)",
+    "p25": 33350,
+    "mediana": 39400,
+    "media": 40780,
+    "p75": 44650
+  },
+  {
+    "styrk": "6210",
+    "grupo": "6",
+    "nombre_no": "Skogbrukere",
+    "p25": 37350,
+    "mediana": 43190,
+    "media": 44950,
+    "p75": 50000
+  },
+  {
+    "styrk": "6221",
+    "grupo": "6",
+    "nombre_no": "Havbruksarbeidere",
+    "p25": 51550,
+    "mediana": 59710,
+    "media": 59510,
+    "p75": 67570
+  },
+  {
+    "styrk": "6222",
+    "grupo": "6",
+    "nombre_no": "Fiskere",
+    "p25": 32870,
+    "mediana": 50000,
+    "media": 50520,
+    "p75": 62500
+  },
+  {
+    "styrk": "7112",
+    "grupo": "7",
+    "nombre_no": "Murere",
+    "p25": 44570,
+    "mediana": 48710,
+    "media": 49750,
+    "p75": 53980
+  },
+  {
+    "styrk": "7113",
+    "grupo": "7",
+    "nombre_no": "Steinhoggere mv.",
+    "p25": 46640,
+    "mediana": 50390,
+    "media": 52340,
+    "p75": 58470
+  },
+  {
+    "styrk": "7114",
+    "grupo": "7",
+    "nombre_no": "Betongarbeidere",
+    "p25": 47410,
+    "mediana": 53270,
+    "media": 53940,
+    "p75": 60050
+  },
+  {
+    "styrk": "7115",
+    "grupo": "7",
+    "nombre_no": "Tømrere og snekkere",
+    "p25": 43840,
+    "mediana": 47940,
+    "media": 48050,
+    "p75": 52840
+  },
+  {
+    "styrk": "7119",
+    "grupo": "7",
+    "nombre_no": "Andre bygningsarbeidere",
+    "p25": 42690,
+    "mediana": 46320,
+    "media": 48030,
+    "p75": 52190
+  },
+  {
+    "styrk": "7121",
+    "grupo": "7",
+    "nombre_no": "Taktekkere",
+    "p25": 45250,
+    "mediana": 49480,
+    "media": 50230,
+    "p75": 53910
+  },
+  {
+    "styrk": "7122",
+    "grupo": "7",
+    "nombre_no": "Gulv- og flisleggere",
+    "p25": 44820,
+    "mediana": 48710,
+    "media": 50580,
+    "p75": 54070
+  },
+  {
+    "styrk": "7124",
+    "grupo": "7",
+    "nombre_no": "Isolatører mv.",
+    "p25": 43870,
+    "mediana": 47740,
+    "media": 48490,
+    "p75": 52100
+  },
+  {
+    "styrk": "7125",
+    "grupo": "7",
+    "nombre_no": "Glassarbeidere",
+    "p25": 42800,
+    "mediana": 47100,
+    "media": 48590,
+    "p75": 52430
+  },
+  {
+    "styrk": "7126",
+    "grupo": "7",
+    "nombre_no": "Rørleggere og VVS-montører",
+    "p25": 47270,
+    "mediana": 53750,
+    "media": 53030,
+    "p75": 59100
+  },
+  {
+    "styrk": "7127",
+    "grupo": "7",
+    "nombre_no": "Kuldemontører mv.",
+    "p25": 45000,
+    "mediana": 56830,
+    "media": 54310,
+    "p75": 65140
+  },
+  {
+    "styrk": "7131",
+    "grupo": "7",
+    "nombre_no": "Malere og byggtapetserere",
+    "p25": 42540,
+    "mediana": 46000,
+    "media": 47420,
+    "p75": 50420
+  },
+  {
+    "styrk": "7132",
+    "grupo": "7",
+    "nombre_no": "Overflatebehandlere og lakkerere",
+    "p25": 43840,
+    "mediana": 48650,
+    "media": 49140,
+    "p75": 53900
+  },
+  {
+    "styrk": "7133",
+    "grupo": "7",
+    "nombre_no": "Feiere, fasaderenholdere mv.",
+    "p25": 44530,
+    "mediana": 47960,
+    "media": 48540,
+    "p75": 53040
+  },
+  {
+    "styrk": "7211",
+    "grupo": "7",
+    "nombre_no": "Støpere",
+    "p25": 43510,
+    "mediana": 46630,
+    "media": 49800,
+    "p75": 51320
+  },
+  {
+    "styrk": "7212",
+    "grupo": "7",
+    "nombre_no": "Sveisere",
+    "p25": 45950,
+    "mediana": 50500,
+    "media": 51920,
+    "p75": 56820
+  },
+  {
+    "styrk": "7213",
+    "grupo": "7",
+    "nombre_no": "Kopper- og blikkenslagere",
+    "p25": 45000,
+    "mediana": 50340,
+    "media": 50220,
+    "p75": 56680
+  },
+  {
+    "styrk": "7214",
+    "grupo": "7",
+    "nombre_no": "Platearbeidere",
+    "p25": 44860,
+    "mediana": 48920,
+    "media": 49470,
+    "p75": 53990
+  },
+  {
+    "styrk": "7215",
+    "grupo": "7",
+    "nombre_no": "Riggere og spleisere",
+    "p25": 48080,
+    "mediana": 56700,
+    "media": 59260,
+    "p75": 68710
+  },
+  {
+    "styrk": "7221",
+    "grupo": "7",
+    "nombre_no": "Smeder",
+    "p25": 45540,
+    "mediana": 49180,
+    "media": 50250,
+    "p75": 53520
+  },
+  {
+    "styrk": "7222",
+    "grupo": "7",
+    "nombre_no": "Verktøymaker, låsesmeder mv.",
+    "p25": 45690,
+    "mediana": 52470,
+    "media": 51590,
+    "p75": 59590
+  },
+  {
+    "styrk": "7223",
+    "grupo": "7",
+    "nombre_no": "Metalldreiere mv.",
+    "p25": 44470,
+    "mediana": 50340,
+    "media": 50310,
+    "p75": 57440
+  },
+  {
+    "styrk": "7231",
+    "grupo": "7",
+    "nombre_no": "Bilmekanikere",
+    "p25": 41410,
+    "mediana": 48710,
+    "media": 48280,
+    "p75": 55380
+  },
+  {
+    "styrk": "7232",
+    "grupo": "7",
+    "nombre_no": "Mekanikere innen flytekniske fag",
+    "p25": 55760,
+    "mediana": 65850,
+    "media": 72040,
+    "p75": 82670
+  },
+  {
+    "styrk": "7233",
+    "grupo": "7",
+    "nombre_no": "Anleggsmaskin- og industrimekanikere",
+    "p25": 47050,
+    "mediana": 53670,
+    "media": 54110,
+    "p75": 61930
+  },
+  {
+    "styrk": "7234",
+    "grupo": "7",
+    "nombre_no": "Sykkelreparatører mv.",
+    "p25": 30850,
+    "mediana": 35000,
+    "media": 37350,
+    "p75": 42450
+  },
+  {
+    "styrk": "7311",
+    "grupo": "7",
+    "nombre_no": "Presisjonsinstrumentmakere og -reparatører",
+    "p25": 48330,
+    "mediana": 56110,
+    "media": 61980,
+    "p75": 79420
+  },
+  {
+    "styrk": "7313",
+    "grupo": "7",
+    "nombre_no": "Gull- og sølvsmeder, gravører mv.",
+    "p25": 42670,
+    "mediana": 48790,
+    "media": 49910,
+    "p75": 54720
+  },
+  {
+    "styrk": "7318",
+    "grupo": "7",
+    "nombre_no": "Vevere, strikkere mv. (innen husflidsproduksjon)",
+    "p25": 36980,
+    "mediana": 42370,
+    "media": 41710,
+    "p75": 45950
+  },
+  {
+    "styrk": "7319",
+    "grupo": "7",
+    "nombre_no": "Andre kunsthåndverkere",
+    "p25": 43390,
+    "mediana": 45750,
+    "media": 46990,
+    "p75": 48900
+  },
+  {
+    "styrk": "7321",
+    "grupo": "7",
+    "nombre_no": "Førtrykkere",
+    "p25": 42220,
+    "mediana": 48120,
+    "media": 49940,
+    "p75": 57030
+  },
+  {
+    "styrk": "7322",
+    "grupo": "7",
+    "nombre_no": "Trykkere",
+    "p25": 42000,
+    "mediana": 47680,
+    "media": 49170,
+    "p75": 56780
+  },
+  {
+    "styrk": "7323",
+    "grupo": "7",
+    "nombre_no": "Innbindere mv.",
+    "p25": 39170,
+    "mediana": 43290,
+    "media": 44440,
+    "p75": 46390
+  },
+  {
+    "styrk": "7411",
+    "grupo": "7",
+    "nombre_no": "Elektrikere",
+    "p25": 48250,
+    "mediana": 54800,
+    "media": 54230,
+    "p75": 61300
+  },
+  {
+    "styrk": "7412",
+    "grupo": "7",
+    "nombre_no": "Automatikere",
+    "p25": 48830,
+    "mediana": 59950,
+    "media": 60790,
+    "p75": 74920
+  },
+  {
+    "styrk": "7413",
+    "grupo": "7",
+    "nombre_no": "Energimontører",
+    "p25": 46430,
+    "mediana": 58140,
+    "media": 54460,
+    "p75": 64540
+  },
+  {
+    "styrk": "7421",
+    "grupo": "7",
+    "nombre_no": "Serviceelektronikere",
+    "p25": 46760,
+    "mediana": 53810,
+    "media": 56620,
+    "p75": 62500
+  },
+  {
+    "styrk": "7422",
+    "grupo": "7",
+    "nombre_no": "Tele- og IKT-installatører",
+    "p25": 37980,
+    "mediana": 48710,
+    "media": 45850,
+    "p75": 55740
+  },
+  {
+    "styrk": "7511",
+    "grupo": "7",
+    "nombre_no": "Slaktere, fiskehandlere mv.",
+    "p25": 39480,
+    "mediana": 45260,
+    "media": 47480,
+    "p75": 52780
+  },
+  {
+    "styrk": "7512",
+    "grupo": "7",
+    "nombre_no": "Bakere, konditorer mv.",
+    "p25": 38740,
+    "mediana": 42830,
+    "media": 43430,
+    "p75": 48890
+  },
+  {
+    "styrk": "7522",
+    "grupo": "7",
+    "nombre_no": "Møbelsnekkere",
+    "p25": 40970,
+    "mediana": 45540,
+    "media": 46630,
+    "p75": 50730
+  },
+  {
+    "styrk": "7531",
+    "grupo": "7",
+    "nombre_no": "Skreddere, buntmakere mv.",
+    "p25": 38320,
+    "mediana": 49640,
+    "media": 47310,
+    "p75": 53190
+  },
+  {
+    "styrk": "7534",
+    "grupo": "7",
+    "nombre_no": "Møbeltapetserere mv.",
+    "p25": 42300,
+    "mediana": 46570,
+    "media": 47100,
+    "p75": 50720
+  },
+  {
+    "styrk": "7541",
+    "grupo": "7",
+    "nombre_no": "Yrkesdykkere",
+    "p25": 50820,
+    "mediana": 58250,
+    "media": 59420,
+    "p75": 65080
+  },
+  {
+    "styrk": "7542",
+    "grupo": "7",
+    "nombre_no": "Skytebaser og sprengningsarbeidere",
+    "p25": 56080,
+    "mediana": 65090,
+    "media": 67170,
+    "p75": 79200
+  },
+  {
+    "styrk": "7544",
+    "grupo": "7",
+    "nombre_no": "Desinfeksjonsarbeidere og skadedyrbekjempere",
+    "p25": 41810,
+    "mediana": 46370,
+    "media": 50230,
+    "p75": 54190
+  },
+  {
+    "styrk": "7549",
+    "grupo": "7",
+    "nombre_no": "Andre håndverkere",
+    "p25": 37500,
+    "mediana": 42130,
+    "media": 40820,
+    "p75": 45010
+  },
+  {
+    "styrk": "8111",
+    "grupo": "8",
+    "nombre_no": "Bergfagarbeidere",
+    "p25": 50110,
+    "mediana": 55610,
+    "media": 58380,
+    "p75": 67280
+  },
+  {
+    "styrk": "8112",
+    "grupo": "8",
+    "nombre_no": "Prosessoperatører (oppredning)",
+    "p25": 60080,
+    "mediana": 66190,
+    "media": 66700,
+    "p75": 71530
+  },
+  {
+    "styrk": "8113",
+    "grupo": "8",
+    "nombre_no": "Operatører innen boring mv.",
+    "p25": 70280,
+    "mediana": 80300,
+    "media": 80440,
+    "p75": 91900
+  },
+  {
+    "styrk": "8114",
+    "grupo": "8",
+    "nombre_no": "Operatører innen produksjon av betong mv.",
+    "p25": 43630,
+    "mediana": 48130,
+    "media": 49150,
+    "p75": 54090
+  },
+  {
+    "styrk": "8121",
+    "grupo": "8",
+    "nombre_no": "Operatører innen metallurgiske prosessfag",
+    "p25": 43350,
+    "mediana": 48610,
+    "media": 50060,
+    "p75": 56070
+  },
+  {
+    "styrk": "8131",
+    "grupo": "8",
+    "nombre_no": "Operatører innen kjemisk industri",
+    "p25": 49590,
+    "mediana": 59030,
+    "media": 57710,
+    "p75": 67070
+  },
+  {
+    "styrk": "8141",
+    "grupo": "8",
+    "nombre_no": "Operatører innen produksjon av gummiprodukter",
+    "p25": 41800,
+    "mediana": 46490,
+    "media": 48670,
+    "p75": 51680
+  },
+  {
+    "styrk": "8142",
+    "grupo": "8",
+    "nombre_no": "Operatører innen plastprodukter",
+    "p25": 42130,
+    "mediana": 46690,
+    "media": 47630,
+    "p75": 51750
+  },
+  {
+    "styrk": "8143",
+    "grupo": "8",
+    "nombre_no": "Operatører innen papirprodukter",
+    "p25": 39220,
+    "mediana": 44240,
+    "media": 43140,
+    "p75": 47710
+  },
+  {
+    "styrk": "8151",
+    "grupo": "8",
+    "nombre_no": "Spinne- og nøstemaskinoperatører",
+    "p25": 40440,
+    "mediana": 45460,
+    "media": 44340,
+    "p75": 48030
+  },
+  {
+    "styrk": "8152",
+    "grupo": "8",
+    "nombre_no": "Operatører innen tekstilproduksjon mv.",
+    "p25": 39710,
+    "mediana": 43910,
+    "media": 44980,
+    "p75": 49250
+  },
+  {
+    "styrk": "8153",
+    "grupo": "8",
+    "nombre_no": "Industrisyere",
+    "p25": 38740,
+    "mediana": 43330,
+    "media": 42480,
+    "p75": 46800
+  },
+  {
+    "styrk": "8157",
+    "grupo": "8",
+    "nombre_no": "Renseri- og vaskerimaskinoperatører",
+    "p25": 40400,
+    "mediana": 41510,
+    "media": 41710,
+    "p75": 42840
+  },
+  {
+    "styrk": "8160",
+    "grupo": "8",
+    "nombre_no": "Operatører innen næringsmiddelproduksjon",
+    "p25": 39720,
+    "mediana": 43800,
+    "media": 46130,
+    "p75": 50220
+  },
+  {
+    "styrk": "8171",
+    "grupo": "8",
+    "nombre_no": "Operatører innen treforedling",
+    "p25": 42580,
+    "mediana": 46450,
+    "media": 47650,
+    "p75": 51850
+  },
+  {
+    "styrk": "8172",
+    "grupo": "8",
+    "nombre_no": "Operatører innen trelastproduksjon",
+    "p25": 41220,
+    "mediana": 43690,
+    "media": 45290,
+    "p75": 47160
+  },
+  {
+    "styrk": "8181",
+    "grupo": "8",
+    "nombre_no": "Operatører innen glass- og keramisk produksjon",
+    "p25": 41000,
+    "mediana": 45440,
+    "media": 47340,
+    "p75": 51060
+  },
+  {
+    "styrk": "8182",
+    "grupo": "8",
+    "nombre_no": "Fyrkjele- og turbinoperatører",
+    "p25": 49560,
+    "mediana": 55150,
+    "media": 56330,
+    "p75": 62030
+  },
+  {
+    "styrk": "8183",
+    "grupo": "8",
+    "nombre_no": "Pakke-, tappe- og etikettmaskinoperatører",
+    "p25": 42080,
+    "mediana": 48430,
+    "media": 49840,
+    "p75": 57360
+  },
+  {
+    "styrk": "8211",
+    "grupo": "8",
+    "nombre_no": "Montører av mekaniske produkter",
+    "p25": 44570,
+    "mediana": 48270,
+    "media": 51460,
+    "p75": 54600
+  },
+  {
+    "styrk": "8212",
+    "grupo": "8",
+    "nombre_no": "Montører av elektriske og elektroniske produkter",
+    "p25": 43520,
+    "mediana": 50060,
+    "media": 51400,
+    "p75": 57510
+  },
+  {
+    "styrk": "8311",
+    "grupo": "8",
+    "nombre_no": "Lokomotiv og T-baneførere",
+    "p25": 61650,
+    "mediana": 74900,
+    "media": 71520,
+    "p75": 80060
+  },
+  {
+    "styrk": "8322",
+    "grupo": "8",
+    "nombre_no": "Bil-, drosje- og varebilførere",
+    "p25": 37950,
+    "mediana": 42750,
+    "media": 44020,
+    "p75": 48470
+  },
+  {
+    "styrk": "8331",
+    "grupo": "8",
+    "nombre_no": "Bussjåfører og trikkeførere",
+    "p25": 45100,
+    "mediana": 47330,
+    "media": 47490,
+    "p75": 49620
+  },
+  {
+    "styrk": "8332",
+    "grupo": "8",
+    "nombre_no": "Lastebil- og trailersjåfører",
+    "p25": 43030,
+    "mediana": 47420,
+    "media": 49050,
+    "p75": 53650
+  },
+  {
+    "styrk": "8341",
+    "grupo": "8",
+    "nombre_no": "Jordbruks- og skogbruksmaskinførere",
+    "p25": 42700,
+    "mediana": 46310,
+    "media": 48000,
+    "p75": 51140
+  },
+  {
+    "styrk": "8342",
+    "grupo": "8",
+    "nombre_no": "Anleggsmaskinførere",
+    "p25": 46940,
+    "mediana": 51640,
+    "media": 52900,
+    "p75": 57540
+  },
+  {
+    "styrk": "8343",
+    "grupo": "8",
+    "nombre_no": "Kran- og heisførere mv.",
+    "p25": 49160,
+    "mediana": 54160,
+    "media": 56580,
+    "p75": 62340
+  },
+  {
+    "styrk": "8344",
+    "grupo": "8",
+    "nombre_no": "Truckførere",
+    "p25": 43360,
+    "mediana": 46550,
+    "media": 47920,
+    "p75": 51450
+  },
+  {
+    "styrk": "8350",
+    "grupo": "8",
+    "nombre_no": "Dekks- og maskinmannskap (skip)",
+    "p25": 48590,
+    "mediana": 59430,
+    "media": 56680,
+    "p75": 67060
+  },
+  {
+    "styrk": "9111",
+    "grupo": "9",
+    "nombre_no": "Renholdere i private hjem",
+    "p25": 38410,
+    "mediana": 39700,
+    "media": 41890,
+    "p75": 42630
+  },
+  {
+    "styrk": "9112",
+    "grupo": "9",
+    "nombre_no": "Renholdere i bedrifter",
+    "p25": 39330,
+    "mediana": 41930,
+    "media": 43790,
+    "p75": 45290
+  },
+  {
+    "styrk": "9122",
+    "grupo": "9",
+    "nombre_no": "Bilvaskere",
+    "p25": 35680,
+    "mediana": 40760,
+    "media": 42220,
+    "p75": 46890
+  },
+  {
+    "styrk": "9211",
+    "grupo": "9",
+    "nombre_no": "Hjelpearbeidere i nyttevekstproduksjon",
+    "p25": 28710,
+    "mediana": 30850,
+    "media": 35610,
+    "p75": 38100
+  },
+  {
+    "styrk": "9212",
+    "grupo": "9",
+    "nombre_no": "Hjelpearbeidere i husdyrproduksjon",
+    "p25": 28000,
+    "mediana": 32500,
+    "media": 34280,
+    "p75": 41050
+  },
+  {
+    "styrk": "9213",
+    "grupo": "9",
+    "nombre_no": "Hjelpearbeidere i kombinasjonsbruk",
+    "p25": 32420,
+    "mediana": 39120,
+    "media": 42230,
+    "p75": 48120
+  },
+  {
+    "styrk": "9214",
+    "grupo": "9",
+    "nombre_no": "Hjelpearbeidere i gartneri mv.",
+    "p25": 37360,
+    "mediana": 43720,
+    "media": 42350,
+    "p75": 47210
+  },
+  {
+    "styrk": "9312",
+    "grupo": "9",
+    "nombre_no": "Hjelpearbeidere i anlegg",
+    "p25": 43030,
+    "mediana": 48710,
+    "media": 49500,
+    "p75": 54630
+  },
+  {
+    "styrk": "9313",
+    "grupo": "9",
+    "nombre_no": "Hjelpearbeidere i bygg",
+    "p25": 40590,
+    "mediana": 43840,
+    "media": 44610,
+    "p75": 48220
+  },
+  {
+    "styrk": "9321",
+    "grupo": "9",
+    "nombre_no": "Håndpakkere mv.",
+    "p25": 39660,
+    "mediana": 44800,
+    "media": 46450,
+    "p75": 52000
+  },
+  {
+    "styrk": "9329",
+    "grupo": "9",
+    "nombre_no": "Andre hjelpearbeidere i industri",
+    "p25": 41980,
+    "mediana": 48000,
+    "media": 51010,
+    "p75": 57830
+  },
+  {
+    "styrk": "9333",
+    "grupo": "9",
+    "nombre_no": "Laste- og lossearbeidere",
+    "p25": 41830,
+    "mediana": 48200,
+    "media": 48480,
+    "p75": 54160
+  },
+  {
+    "styrk": "9334",
+    "grupo": "9",
+    "nombre_no": "Varepåfyllere",
+    "p25": 37100,
+    "mediana": 42460,
+    "media": 43340,
+    "p75": 49140
+  },
+  {
+    "styrk": "9412",
+    "grupo": "9",
+    "nombre_no": "Kjøkkenassistenter",
+    "p25": 35720,
+    "mediana": 38840,
+    "media": 39310,
+    "p75": 42390
+  },
+  {
+    "styrk": "9510",
+    "grupo": "9",
+    "nombre_no": "Reklamedistributører mv.",
+    "p25": 40000,
+    "mediana": 44170,
+    "media": 46150,
+    "p75": 50340
+  },
+  {
+    "styrk": "9611",
+    "grupo": "9",
+    "nombre_no": "Renovasjonsarbeidere",
+    "p25": 43270,
+    "mediana": 46580,
+    "media": 47720,
+    "p75": 50310
+  },
+  {
+    "styrk": "9612",
+    "grupo": "9",
+    "nombre_no": "Gjenvinningsarbeidere",
+    "p25": 40560,
+    "mediana": 44200,
+    "media": 44310,
+    "p75": 48390
+  },
+  {
+    "styrk": "9621",
+    "grupo": "9",
+    "nombre_no": "Bud mv.",
+    "p25": 31850,
+    "mediana": 41320,
+    "media": 40770,
+    "p75": 47870
+  },
+  {
+    "styrk": "9622",
+    "grupo": "9",
+    "nombre_no": "Altmuligmann",
+    "p25": 40050,
+    "mediana": 45330,
+    "media": 46180,
+    "p75": 50640
+  },
+  {
+    "styrk": "9629",
+    "grupo": "9",
+    "nombre_no": "Andre hjelpearbeidere",
+    "p25": 35340,
+    "mediana": 41710,
+    "media": 41420,
+    "p75": 46960
+  }
+]
