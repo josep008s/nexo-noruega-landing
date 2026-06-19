@@ -181,7 +181,7 @@
       '<div class="blk"><p class="lab acc">Lo que importa</p>' +
         '<p class="num hero" id="r-neto">0 kr</p>' +
         '<p class="eur">' + eeur(eur(netoM)) + ' al mes</p>' +
-        '<p class="cap">Después de impuestos (soltero, cálculo orientativo). Lo que entra en tu cuenta.</p></div>' +
+        '<p class="cap">Después de impuestos, lo que entra en tu cuenta. Cálculo orientativo; con deducciones (hipoteca, viaje al trabajo) suele quedar algo más.</p></div>' +
 
       '<div class="blk"><p class="lab">Lo que dejas de pagar</p>' +
         '<p class="lista">' +
