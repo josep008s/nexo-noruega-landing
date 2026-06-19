@@ -1,0 +1,23 @@
+{
+  "nok_por_eur": 11.2,
+  "fiscal_2026": {
+    "alminnelig_inntekt": 0.22,
+    "trygdeavgift": 0.076,
+    "personfradrag": 114540,
+    "minstefradrag_pct": 0.46,
+    "minstefradrag_tope": 95700,
+    "trinnskatt": [
+      { "desde": 226100, "hasta": 318300, "tasa": 0.017 },
+      { "desde": 318300, "hasta": 725050, "tasa": 0.040 },
+      { "desde": 725050, "hasta": 980100, "tasa": 0.137 },
+      { "desde": 980100, "hasta": 1467200, "tasa": 0.168 },
+      { "desde": 1467200, "hasta": null, "tasa": 0.178 }
+    ]
+  },
+  "servicios_2026": {
+    "barnehage_makspris_mes": 1200,
+    "egenandelstak_anio": 3278,
+    "universidad_gratis": true,
+    "nota_barnehage": "Tope general nacional. En municipios de distrito 700 kr/mes; gratis en Finnmark y el norte de Troms."
+  }
+}
