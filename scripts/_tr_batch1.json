@@ -1,0 +1,206 @@
+[
+  {
+    "styrk": "0000",
+    "nombre_no": "Uoppgitt / yrker som ikke kan identifiseres",
+    "nombre_es": "no especificado / ocupaciones no identificables",
+    "alias_es": ["no especificado", "sin especificar", "otros", "no clasificado", "desconocido", "sin clasificar"]
+  },
+  {
+    "styrk": "0110",
+    "nombre_no": "Offiserer fra fenrik og høyere grad",
+    "nombre_es": "oficial de las fuerzas armadas",
+    "alias_es": ["oficial", "oficiala", "oficial del ejercito", "militar", "militares", "teniente", "capitan", "comandante", "fuerzas armadas", "oficial militar"]
+  },
+  {
+    "styrk": "0210",
+    "nombre_no": "Befal med sersjant grad",
+    "nombre_es": "suboficial y sargento",
+    "alias_es": ["suboficial", "sargento", "sargenta", "cabo", "suboficiales", "graduado militar", "mando intermedio militar", "militar de tropa", "sargentos"]
+  },
+  {
+    "styrk": "0310",
+    "nombre_no": "Menige",
+    "nombre_es": "soldado de tropa",
+    "alias_es": ["soldado", "soldada", "soldados", "tropa", "militar raso", "recluta", "soldado profesional", "tropa militar"]
+  },
+  {
+    "styrk": "1111",
+    "nombre_no": "Politikere",
+    "nombre_es": "político",
+    "alias_es": ["politico", "politica", "politicos", "cargo politico", "diputado", "diputada", "concejal", "representante publico", "cargo electo"]
+  },
+  {
+    "styrk": "1112",
+    "nombre_no": "Toppledere i offentlig administrasjon",
+    "nombre_es": "alto directivo de administración pública",
+    "alias_es": ["directivo publico", "directiva publica", "alto cargo", "director general", "directora general", "gestor publico", "administracion publica", "funcionario directivo", "directivo administracion publica", "gerente publico"]
+  },
+  {
+    "styrk": "1114",
+    "nombre_no": "Toppledere i interesseorganisasjoner",
+    "nombre_es": "directivo de organizaciones e instituciones",
+    "alias_es": ["director de organizacion", "directora de organizacion", "directivo de asociacion", "secretario general", "gerente de asociacion", "directivo de ong", "presidente de asociacion", "dirigente", "directivo organizacion"]
+  },
+  {
+    "styrk": "1120",
+    "nombre_no": "Administrerende direktører",
+    "nombre_es": "director general / CEO",
+    "alias_es": ["director general", "directora general", "ceo", "gerente general", "director ejecutivo", "directora ejecutiva", "consejero delegado", "alta direccion", "directivo", "gerente"]
+  },
+  {
+    "styrk": "1211",
+    "nombre_no": "Finans- og økonomisjefer",
+    "nombre_es": "director financiero",
+    "alias_es": ["director financiero", "directora financiera", "cfo", "jefe de finanzas", "responsable financiero", "director economico", "gerente financiero", "jefe financiero", "controller", "director de finanzas"]
+  },
+  {
+    "styrk": "1212",
+    "nombre_no": "Personalsjefer",
+    "nombre_es": "director de recursos humanos",
+    "alias_es": ["director de recursos humanos", "directora de recursos humanos", "jefe de personal", "responsable de rrhh", "rrhh", "hr manager", "gerente de personal", "jefe de recursos humanos", "director de rrhh", "responsable de personal"]
+  },
+  {
+    "styrk": "1213",
+    "nombre_no": "Strategi- og planleggingssjefer",
+    "nombre_es": "director de estrategia y planificación",
+    "alias_es": ["director de estrategia", "directora de estrategia", "jefe de planificacion", "responsable de estrategia", "planificador", "gerente de planificacion", "director de planificacion", "estratega", "responsable de planificacion"]
+  },
+  {
+    "styrk": "1219",
+    "nombre_no": "Andre administrative ledere",
+    "nombre_es": "otros directivos administrativos",
+    "alias_es": ["director administrativo", "directora administrativa", "jefe administrativo", "responsable administrativo", "gerente administrativo", "directivo administrativo", "administracion", "otros directivos"]
+  },
+  {
+    "styrk": "1221",
+    "nombre_no": "Salgs- og markedssjefer",
+    "nombre_es": "director de ventas y marketing",
+    "alias_es": ["director de ventas", "directora de ventas", "director de marketing", "jefe de ventas", "responsable de marketing", "gerente comercial", "director comercial", "responsable de ventas", "jefe de marketing", "marketing manager"]
+  },
+  {
+    "styrk": "1222",
+    "nombre_no": "PR- og informasjonssjefer",
+    "nombre_es": "director de comunicación y relaciones públicas",
+    "alias_es": ["director de comunicacion", "directora de comunicacion", "responsable de comunicacion", "jefe de prensa", "relaciones publicas", "dircom", "responsable de prensa", "gerente de comunicacion", "pr manager", "director de relaciones publicas"]
+  },
+  {
+    "styrk": "1223",
+    "nombre_no": "Forsknings- og utviklingsledere",
+    "nombre_es": "director de I+D",
+    "alias_es": ["director de i+d", "directora de i+d", "responsable de id", "jefe de investigacion", "director de investigacion", "responsable de desarrollo", "gerente de id", "director de innovacion", "responsable de investigacion y desarrollo"]
+  },
+  {
+    "styrk": "1311",
+    "nombre_no": "Ledere i skogbruk, gartnerier mv.",
+    "nombre_es": "director de explotación agrícola y forestal",
+    "alias_es": ["director agricola", "responsable agricola", "jefe de explotacion forestal", "gerente agricola", "director forestal", "responsable de vivero", "encargado agricola", "director de explotacion agraria", "jefe agricola"]
+  },
+  {
+    "styrk": "1312",
+    "nombre_no": "Ledere innen akvakultur mv.",
+    "nombre_es": "director de acuicultura",
+    "alias_es": ["director de acuicultura", "responsable de acuicultura", "jefe de piscifactoria", "gerente de acuicultura", "encargado de piscicultura", "director de piscifactoria", "responsable de pesca", "jefe de acuicultura"]
+  },
+  {
+    "styrk": "1321",
+    "nombre_no": "Ledere av industriproduksjon mv.",
+    "nombre_es": "director de producción industrial",
+    "alias_es": ["director de produccion", "directora de produccion", "jefe de produccion", "responsable de produccion", "director industrial", "gerente de planta", "jefe de planta", "director de fabrica", "responsable de fabricacion", "jefe de fabrica"]
+  },
+  {
+    "styrk": "1322",
+    "nombre_no": "Ledere av olje- og gassutvinning mv.",
+    "nombre_es": "director de extracción de petróleo y gas",
+    "alias_es": ["director de petroleo", "responsable de gas", "jefe de extraccion", "director de plataforma", "gerente petrolero", "responsable de petroleo y gas", "jefe de produccion petrolera", "director de operaciones petroleras", "director petrolero"]
+  },
+  {
+    "styrk": "1323",
+    "nombre_no": "Ledere av bygge- og anleggsvirksomhet",
+    "nombre_es": "director de obra y construcción",
+    "alias_es": ["director de obra", "jefe de obra", "responsable de construccion", "director de construccion", "gerente de construccion", "encargado de obra", "jefe de construccion", "director de proyectos de construccion", "responsable de obra"]
+  },
+  {
+    "styrk": "1324",
+    "nombre_no": "Ledere av logistikk og transport mv.",
+    "nombre_es": "director de logística y transporte",
+    "alias_es": ["director de logistica", "directora de logistica", "responsable de logistica", "jefe de transporte", "director de transporte", "gerente de logistica", "responsable de transporte", "jefe de logistica", "supply chain manager", "responsable de almacen y transporte"]
+  },
+  {
+    "styrk": "1330",
+    "nombre_no": "Ledere av IKT-enheter",
+    "nombre_es": "director de TIC / sistemas",
+    "alias_es": ["director de sistemas", "directora de sistemas", "responsable de informatica", "jefe de informatica", "cto", "director de ti", "director tic", "gerente de informatica", "it manager", "responsable de tecnologia"]
+  },
+  {
+    "styrk": "1341",
+    "nombre_no": "Ledere av omsorgstjenester for barn",
+    "nombre_es": "director de servicios de atención a la infancia",
+    "alias_es": ["director de guarderia", "directora de guarderia", "responsable de servicios infantiles", "director de escuela infantil", "directora de escuela infantil", "responsable de atencion a la infancia", "jefe de servicios infantiles", "director de centro infantil", "directora de centro infantil"]
+  },
+  {
+    "styrk": "1342",
+    "nombre_no": "Ledere av helsetjenester",
+    "nombre_es": "director de servicios sanitarios",
+    "alias_es": ["director sanitario", "directora sanitaria", "responsable de servicios de salud", "jefe de servicios sanitarios", "gerente sanitario", "director de salud", "director de centro de salud", "responsable sanitario", "gerente hospitalario", "director medico"]
+  },
+  {
+    "styrk": "1343",
+    "nombre_no": "Ledere av eldreomsorg",
+    "nombre_es": "director de servicios de atención a mayores",
+    "alias_es": ["director de residencia", "directora de residencia", "responsable de atencion a mayores", "director de geriatrico", "directora de geriatrico", "responsable de residencia de ancianos", "jefe de atencion a mayores", "gerente de residencia", "director de centro de mayores"]
+  },
+  {
+    "styrk": "1344",
+    "nombre_no": "Ledere av sosialomsorg",
+    "nombre_es": "director de servicios sociales",
+    "alias_es": ["director de servicios sociales", "directora de servicios sociales", "responsable de servicios sociales", "jefe de servicios sociales", "director de asuntos sociales", "responsable de accion social", "gerente de servicios sociales", "director de bienestar social", "responsable de atencion social"]
+  },
+  {
+    "styrk": "1345",
+    "nombre_no": "Ledere av utdanning og undervisning",
+    "nombre_es": "director de centro educativo",
+    "alias_es": ["director de escuela", "directora de escuela", "director de colegio", "directora de colegio", "responsable educativo", "director de instituto", "jefe de estudios", "director academico", "directora academica", "responsable de formacion"]
+  },
+  {
+    "styrk": "1346",
+    "nombre_no": "Ledere av forsikring og finansvirksomhet",
+    "nombre_es": "director de servicios financieros y de seguros",
+    "alias_es": ["director de banca", "responsable de seguros", "director de seguros", "jefe de servicios financieros", "director de sucursal bancaria", "gerente de seguros", "responsable financiero", "director de oficina bancaria", "director de entidad financiera"]
+  },
+  {
+    "styrk": "1349",
+    "nombre_no": "Andre ledere av produksjon og tjenesteyting",
+    "nombre_es": "otros directivos de producción y servicios",
+    "alias_es": ["director de servicios", "responsable de produccion y servicios", "jefe de servicios", "gerente de servicios", "directivo de produccion", "otros directivos de servicios", "responsable de operaciones", "director de operaciones"]
+  },
+  {
+    "styrk": "1411",
+    "nombre_no": "Hotellsjefer",
+    "nombre_es": "director de hotel",
+    "alias_es": ["director de hotel", "directora de hotel", "gerente de hotel", "responsable de hotel", "jefe de hotel", "director hotelero", "encargado de hotel", "manager de hotel", "gerente hotelero"]
+  },
+  {
+    "styrk": "1412",
+    "nombre_no": "Restaurantsjefer",
+    "nombre_es": "director de restaurante",
+    "alias_es": ["director de restaurante", "encargado de restaurante", "gerente de restaurante", "responsable de restaurante", "jefe de sala", "maitre", "manager de restaurante", "director de local", "encargado de local de hosteleria"]
+  },
+  {
+    "styrk": "1420",
+    "nombre_no": "Varehandelssjefer",
+    "nombre_es": "director de comercio / gerente de tienda",
+    "alias_es": ["director de tienda", "gerente de tienda", "encargado de tienda", "responsable de tienda", "jefe de tienda", "director de comercio", "encargado de comercio", "store manager", "responsable de establecimiento", "gerente comercial minorista"]
+  },
+  {
+    "styrk": "1431",
+    "nombre_no": "Sports-, rekreasjons- og kultursenterledere",
+    "nombre_es": "director de centro deportivo, recreativo y cultural",
+    "alias_es": ["director deportivo", "directora deportiva", "responsable de centro deportivo", "director de centro cultural", "gerente de gimnasio", "responsable de instalaciones deportivas", "director de polideportivo", "jefe de centro recreativo", "responsable cultural"]
+  },
+  {
+    "styrk": "1439",
+    "nombre_no": "Andre daglige ledere i tjenesteytende virksomheter",
+    "nombre_es": "otros gerentes de empresas de servicios",
+    "alias_es": ["gerente de servicios", "director de empresa de servicios", "responsable de servicios", "jefe de servicios", "encargado de servicios", "gerente de pyme", "director gerente", "otros gerentes"]
+  }
+]

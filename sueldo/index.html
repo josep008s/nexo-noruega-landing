@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>¿Cuánto se cobra en Noruega? · Nexo Noruega</title>
+  <meta name="description" content="Escribe tu oficio y mira lo que cobra en Noruega: rango real con datos del SSB, neto después de impuestos y lo que dejas de pagar.">
+  <link rel="canonical" href="https://www.nexonoruega.com/sueldo/">
+
+  <meta property="og:title" content="¿Cuánto cobra tu oficio en Noruega?">
+  <meta property="og:description" content="El bruto es la pregunta equivocada. Mira el neto real y lo que dejas de pagar. Datos del SSB.">
+  <meta property="og:image" content="https://www.nexonoruega.com/og-image.png">
+  <meta property="og:url" content="https://www.nexonoruega.com/sueldo/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_ES">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 800'%3E%3Ccircle cx='400' cy='400' r='390' fill='%230E1B26'/%3E%3Cpath d='M223 532 L223 298 L320 402 L320 265' fill='none' stroke='%233FCB94' stroke-opacity='.45' stroke-width='26' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M478 532 L478 264 L577 398 L577 532' fill='none' stroke='%233FCB94' stroke-width='26' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caesar+Dressing&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --noche:#0E1B26; --nieve:#F3F5F4; --aurora:#3FCB94; --fiordo:#2C5A72; --niebla:#8DA1AB;
+      --linea:rgba(243,245,244,.12);
+      --sg:"Space Grotesk",system-ui,sans-serif;
+      --serif:"Source Serif 4",Georgia,serif;
+      --caesar:"Caesar Dressing",var(--sg);
+      --ease:cubic-bezier(0.16,1,0.3,1);
+    }
+    *{margin:0;padding:0;box-sizing:border-box}
+    html{scrollbar-color:rgba(141,161,171,.4) transparent}
+    body{font-family:var(--serif);background:var(--noche);color:var(--nieve);line-height:1.6;min-height:100svh;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden}
+    ::selection{background:var(--aurora);color:var(--noche)}
+    a{color:var(--aurora)}
+    a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--aurora);outline-offset:3px}
+
+    body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:80;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+      opacity:.035;mix-blend-mode:overlay}
+    .cielo{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+    .cielo::before{content:"";position:absolute;top:-12%;left:-10%;width:120%;height:60%;
+      background:radial-gradient(50% 60% at 30% 20%,rgba(63,203,148,.13),transparent 70%),
+                 radial-gradient(44% 50% at 78% 8%,rgba(50,124,124,.10),transparent 72%);
+      animation:deriva 46s ease-in-out infinite alternate}
+    @keyframes deriva{from{transform:translate3d(-2%,-1%,0) scale(1.03)}to{transform:translate3d(2%,1.5%,0) scale(1)}}
+
+    header{position:relative;z-index:10}
+    .head-inner{max-width:680px;margin:0 auto;padding:22px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .marca{display:flex;align-items:center;gap:11px;text-decoration:none;color:var(--nieve)}
+    .marca svg{width:28px;height:28px;flex:none}
+    .marca span{font-family:var(--sg);font-weight:700;font-size:.92rem;letter-spacing:.02em}
+    .head-cta{font-family:var(--sg);font-weight:500;font-size:.82rem;letter-spacing:.04em;color:var(--aurora);text-decoration:none}
+    .head-cta:hover{color:var(--nieve)}
+
+    main{position:relative;z-index:1;max-width:680px;margin:0 auto;padding:18px 24px 80px;min-height:72svh;display:flex;flex-direction:column;justify-content:center}
+
+    .kicker{font-family:var(--sg);font-weight:700;font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--aurora);margin-bottom:18px}
+    .ante{color:var(--niebla);font-size:1.12rem;margin-bottom:8px}
+    h1{font-family:var(--sg);font-weight:700;font-size:clamp(2rem,6vw,2.9rem);letter-spacing:-.02em;line-height:1.1;margin-bottom:26px}
+
+    .field{position:relative}
+    .field input{width:100%;background:rgba(243,245,244,.04);border:1px solid rgba(141,161,171,.5);border-radius:8px;
+      padding:16px 16px;color:var(--nieve);font-family:var(--serif);font-size:1.1rem;outline:none;transition:border-color .2s}
+    .field input::placeholder{color:rgba(141,161,171,.8)}
+    .field input:focus{border-color:var(--aurora)}
+    .ac{position:absolute;left:0;right:0;top:calc(100% + 6px);background:#15303F;border:1px solid rgba(141,161,171,.4);border-radius:10px;overflow:hidden;z-index:20;box-shadow:0 18px 40px rgba(0,0,0,.4)}
+    .ac:empty{display:none}
+    .ac button{display:flex;width:100%;justify-content:space-between;align-items:center;gap:12px;background:none;border:none;color:var(--nieve);
+      font-family:var(--serif);font-size:1rem;text-align:left;padding:12px 16px;cursor:pointer}
+    .ac button:hover,.ac button.sel{background:rgba(63,203,148,.12)}
+    .ac .cat{font-family:var(--sg);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--niebla);flex:none}
+
+    .micro{color:var(--niebla);font-size:.86rem;margin-top:10px}
+    .btn{display:inline-block;width:100%;font-family:var(--sg);font-weight:700;font-size:1rem;letter-spacing:.01em;color:var(--noche);
+      background:var(--aurora);border:none;text-decoration:none;text-align:center;padding:16px 24px;border-radius:8px;cursor:pointer;
+      margin-top:18px;transition:transform .2s var(--ease),filter .18s}
+    .btn:hover{transform:translateY(-2px);filter:brightness(1.06)}
+    .btn.ghost{background:none;border:1px solid rgba(141,161,171,.5);color:var(--nieve)}
+    .sello{font-family:var(--sg);font-weight:500;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--niebla);margin-top:28px}
+
+    .back{background:none;border:none;color:var(--niebla);font-family:var(--sg);font-size:.82rem;cursor:pointer;padding:0;margin-bottom:22px}
+    .back:hover{color:var(--nieve)}
+    .gate-of{font-family:var(--sg);font-weight:700;font-size:clamp(1.5rem,4.5vw,2.1rem);line-height:1.15;letter-spacing:-.01em}
+    .gate-of .cat{display:block;font-family:var(--sg);font-weight:500;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--niebla);margin-top:8px}
+    .approx{color:var(--aurora);font-family:var(--sg);font-size:.78rem;letter-spacing:.04em;margin-top:10px}
+    .gate-text{color:var(--niebla);font-size:1.08rem;margin:16px 0 20px;max-width:46ch}
+    .consent{color:var(--niebla);font-size:.78rem;margin-top:12px;max-width:48ch}
+
+    .step{animation:enter .5s var(--ease)}
+    @keyframes enter{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+    .res-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:18px}
+    .res-head .cat{font-family:var(--sg);font-weight:500;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--niebla);text-align:right}
+    .blk{border-top:1px solid var(--linea);padding-top:16px;margin-top:18px}
+    .blk:first-of-type{border-top:none;padding-top:0;margin-top:0}
+    .blk .lab{font-family:var(--sg);font-weight:700;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--niebla);margin-bottom:6px}
+    .blk .lab.acc{color:var(--aurora)}
+    .num{font-family:var(--sg);font-weight:700;font-size:clamp(2rem,7vw,2.8rem);line-height:1;letter-spacing:-.02em}
+    .num.hero{color:var(--aurora);font-size:clamp(2.6rem,9.5vw,3.7rem)}
+    .eur{color:var(--niebla);font-size:1rem;margin-top:6px}
+    .cap{color:var(--niebla);font-size:.92rem;margin-top:6px}
+    .rango{background:rgba(63,203,148,.06);border-radius:10px;padding:14px 16px;margin-top:16px}
+    .rango .lab{margin-bottom:4px}
+    .rango b{color:var(--nieve);font-family:var(--sg);font-weight:700}
+    .lista{font-size:1rem;line-height:1.95;margin-top:4px}
+    .lista .d{color:var(--aurora);font-family:var(--sg);font-weight:700}
+    .remate{font-family:var(--serif);font-style:italic;font-size:1.18rem;color:var(--nieve);text-align:center;line-height:1.4;margin:24px 6px 0}
+    .palabra{text-align:center;margin-top:18px}
+    .palabra .w{font-family:var(--caesar);color:var(--aurora);font-size:1.15rem;letter-spacing:.06em}
+    .palabra .m{color:var(--niebla);font-size:.84rem;display:block;margin-top:4px;max-width:42ch;margin-left:auto;margin-right:auto}
+    .fuente{font-family:var(--sg);font-weight:500;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--niebla);text-align:center;line-height:1.7;margin-top:24px;padding-top:16px;border-top:1px solid var(--linea)}
+    .res-cta{margin-top:22px}
+    .res-cta p{color:var(--niebla);font-size:.95rem;margin-bottom:8px}
+
+    .hidden{display:none}
+    @media (prefers-reduced-motion:reduce){.cielo::before{animation:none}.step{animation:none}.btn:hover{transform:none}}
+  </style>
+</head>
+<body>
+  <div class="cielo" aria-hidden="true"></div>
+
+  <header>
+    <div class="head-inner">
+      <a class="marca" href="https://www.nexonoruega.com" aria-label="Nexo Noruega, inicio">
+        <svg viewBox="0 0 800 800" aria-hidden="true">
+          <path d="M223 532 L223 298 L320 402 L320 265" fill="none" stroke="#3FCB94" stroke-opacity=".45" stroke-width="34" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M478 532 L478 264 L577 398 L577 532" fill="none" stroke="#3FCB94" stroke-width="34" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>Nexo Noruega</span>
+      </a>
+      <a class="head-cta" href="https://nexonoruega.substack.com/subscribe">Suscríbete</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- PANTALLA 1: oficio -->
+    <section id="s-input" class="step">
+      <p class="kicker">Calculadora de sueldos</p>
+      <p class="ante">La pregunta no es cuánto se cobra.</p>
+      <h1>¿A qué te dedicas?</h1>
+      <div class="field">
+        <input id="oficio" type="text" autocomplete="off" spellcheck="false"
+          placeholder="Fisioterapeuta, soldador, enfermera…" aria-label="Tu oficio" aria-expanded="false" role="combobox" aria-controls="ac">
+        <div class="ac" id="ac" role="listbox"></div>
+      </div>
+      <p class="micro">Escribe tu oficio. Te enseño el número real.</p>
+      <button class="btn" id="go">Ver el sueldo</button>
+      <p class="sello" id="sello">SSB · Tabla 11418 · 2025</p>
+    </section>
+
+    <!-- PANTALLA 2: gate de correo -->
+    <section id="s-gate" class="step hidden">
+      <button class="back" id="back">‹ otro oficio</button>
+      <p class="kicker">El cálculo está listo</p>
+      <p class="gate-of" id="gate-of">—<span class="cat" id="gate-cat"></span></p>
+      <p class="approx hidden" id="gate-approx"></p>
+      <p class="gate-text">Para ver lo que cobra este oficio en Noruega, dime a dónde te lo mando.</p>
+      <div class="field">
+        <input id="email" type="email" autocomplete="email" placeholder="tu@correo.com" aria-label="Tu correo">
+      </div>
+      <button class="btn" id="unlock">Ver lo que cobra</button>
+      <p class="micro">Te lo mando también por correo. Sin ruido. Te puedes ir cuando quieras.</p>
+      <p class="consent">Al continuar aceptas recibir el cálculo y la newsletter de Nexo Noruega. Datos de SSB y Skatteetaten.</p>
+    </section>
+
+    <!-- PANTALLA 3: resultado -->
+    <section id="s-result" class="step hidden" aria-live="polite"></section>
+  </main>
+
+  <script src="./app.js"></script>
+</body>
+</html>

@@ -1,0 +1,278 @@
+[
+  {
+    "styrk": "3123",
+    "nombre_no": "Arbeidsleder, bygg og anlegg",
+    "nombre_es": "encargado de obra y construcción",
+    "alias_es": ["encargado de obra", "encargada de obra", "jefe de obra", "jefa de obra", "capataz de obra", "capataz de construccion", "supervisor de obra", "supervisora de obra", "encargado de construccion", "encargados de obra", "maestro de obra", "responsable de obra"]
+  },
+  {
+    "styrk": "3131",
+    "nombre_no": "Energikontrolloperatører",
+    "nombre_es": "operador de control de plantas de energía",
+    "alias_es": ["operador de central electrica", "operadora de central electrica", "operador de planta de energia", "operador de control energetico", "operador de sala de control", "tecnico de central electrica", "operadores de central electrica", "operador de generacion electrica", "operador de planta electrica", "controlador de energia"]
+  },
+  {
+    "styrk": "3133",
+    "nombre_no": "Kontrolloperatører innen kjemisk prosessindustri",
+    "nombre_es": "operador de control de procesos químicos",
+    "alias_es": ["operador de planta quimica", "operadora de planta quimica", "operador de procesos quimicos", "operador de control quimico", "tecnico de planta quimica", "operador de sala de control quimica", "operadores de planta quimica", "operador de industria quimica", "controlador de procesos quimicos", "operador quimico"]
+  },
+  {
+    "styrk": "3134",
+    "nombre_no": "Kontrolloperatører ved olje- og naturgassraffineringsanlegg",
+    "nombre_es": "operador de refinería de petróleo y gas",
+    "alias_es": ["operador de refineria", "operadora de refineria", "operador de planta de gas", "operador de petroleo", "operador de refineria de petroleo", "tecnico de refineria", "operador de gas natural", "operadores de refineria", "operador de planta petroquimica", "controlador de refineria", "operador petroquimico"]
+  },
+  {
+    "styrk": "3135",
+    "nombre_no": "Kontrolloperatører innen metallproduksjon",
+    "nombre_es": "operador de control de producción de metales",
+    "alias_es": ["operador de fundicion", "operadora de fundicion", "operador metalurgico", "operador de planta metalurgica", "operador de produccion de metales", "tecnico metalurgico", "operador siderurgico", "operadores de fundicion", "operador de acereria", "controlador de fundicion", "operador de horno"]
+  },
+  {
+    "styrk": "3141",
+    "nombre_no": "Bioteknikere (ikke-medisinske laboratorier)",
+    "nombre_es": "técnico de laboratorio (biología, no clínico)",
+    "alias_es": ["tecnico de laboratorio", "tecnica de laboratorio", "tecnico de biologia", "biotecnologo", "tecnico biotecnologo", "tecnico de laboratorio biologico", "tecnicos de laboratorio", "auxiliar de laboratorio", "tecnico de laboratorio de investigacion", "ayudante de laboratorio", "tecnico en biotecnologia"]
+  },
+  {
+    "styrk": "3142",
+    "nombre_no": "Agroteknikere",
+    "nombre_es": "técnico agrícola",
+    "alias_es": ["tecnico agricola", "tecnica agricola", "tecnico agronomo", "perito agricola", "tecnico agropecuario", "tecnico en agricultura", "tecnicos agricolas", "agrotecnico", "tecnico de campo", "ingeniero tecnico agricola", "auxiliar agronomo"]
+  },
+  {
+    "styrk": "3143",
+    "nombre_no": "Skogteknikere",
+    "nombre_es": "técnico forestal",
+    "alias_es": ["tecnico forestal", "tecnica forestal", "perito forestal", "tecnico de montes", "tecnico en gestion forestal", "ingeniero tecnico forestal", "tecnicos forestales", "tecnico de silvicultura", "guarda forestal", "agente forestal", "auxiliar forestal"]
+  },
+  {
+    "styrk": "3151",
+    "nombre_no": "Skipsmaskinister",
+    "nombre_es": "maquinista naval / oficial de máquinas de barco",
+    "alias_es": ["maquinista naval", "oficial de maquinas", "jefe de maquinas", "mecanico naval", "maquinista de barco", "ingeniero de maquinas naval", "maquinistas navales", "oficial de maquinas de barco", "tecnico de maquinas naval", "maquinista de buque", "motorista naval"]
+  },
+  {
+    "styrk": "3152",
+    "nombre_no": "Dekksoffiserer og loser",
+    "nombre_es": "oficial de cubierta y práctico de puerto",
+    "alias_es": ["oficial de cubierta", "piloto de barco", "practico de puerto", "oficial de puente", "patron de barco", "oficial de navegacion", "oficiales de cubierta", "practico de costa", "piloto naval", "oficial de marina mercante", "capitan de barco"]
+  },
+  {
+    "styrk": "3153",
+    "nombre_no": "Flygere",
+    "nombre_es": "piloto de aviación",
+    "alias_es": ["piloto", "piloto de aviacion", "piloto de avion", "aviador", "aviadora", "copiloto", "piloto comercial", "pilotos", "piloto de linea aerea", "piloto de helicoptero", "comandante de aeronave"]
+  },
+  {
+    "styrk": "3154",
+    "nombre_no": "Flygeledere",
+    "nombre_es": "controlador aéreo",
+    "alias_es": ["controlador aereo", "controladora aerea", "controlador de trafico aereo", "controlador de torre", "controlador aereo de aeropuerto", "controladores aereos", "tecnico de control aereo", "operador de control aereo", "controlador de navegacion aerea", "controlador de vuelo"]
+  },
+  {
+    "styrk": "3155",
+    "nombre_no": "Teknikere innen luftfartssikkerhet",
+    "nombre_es": "técnico de seguridad aérea",
+    "alias_es": ["tecnico de seguridad aerea", "tecnica de seguridad aerea", "tecnico de aviacion", "tecnico de mantenimiento aeronautico", "tecnico aeronautico", "tecnico de navegacion aerea", "tecnicos de seguridad aerea", "tecnico de ayudas a la navegacion", "tecnico de sistemas aeronauticos", "tecnico de seguridad de vuelo", "tecnico de aeropuerto"]
+  },
+  {
+    "styrk": "3211",
+    "nombre_no": "Radiografer mv.",
+    "nombre_es": "técnico de radiología / radiógrafo",
+    "alias_es": ["tecnico de radiologia", "tecnica de radiologia", "radiografo", "radiografa", "tecnico de rayos x", "tecnico en imagen para el diagnostico", "tecnicos de radiologia", "tecnico de radiodiagnostico", "tecnico de imagen medica", "auxiliar de radiologia", "tecnico superior en imagen para el diagnostico"]
+  },
+  {
+    "styrk": "3212",
+    "nombre_no": "Bioingeniører",
+    "nombre_es": "técnico de laboratorio clínico",
+    "alias_es": ["tecnico de laboratorio clinico", "tecnica de laboratorio clinico", "tecnico de laboratorio", "tecnico de analisis clinicos", "tecnico de laboratorio sanitario", "bioanalista", "tecnicos de laboratorio clinico", "tecnico superior de laboratorio clinico", "tecnico en analisis clinicos", "auxiliar de laboratorio clinico", "tecnico de laboratorio biomedico"]
+  },
+  {
+    "styrk": "3213",
+    "nombre_no": "Reseptarer",
+    "nombre_es": "técnico de farmacia",
+    "alias_es": ["tecnico de farmacia", "tecnica de farmacia", "auxiliar de farmacia", "ayudante de farmacia", "tecnico en farmacia", "tecnico de farmacia y parafarmacia", "tecnicos de farmacia", "dependiente de farmacia", "asistente de farmacia", "tecnico superior en farmacia", "personal de farmacia"]
+  },
+  {
+    "styrk": "3214",
+    "nombre_no": "Protese- og tannteknikere",
+    "nombre_es": "protésico dental",
+    "alias_es": ["protesico dental", "protesica dental", "tecnico dental", "tecnico de protesis dental", "protesista dental", "tecnico de laboratorio dental", "protesicos dentales", "tecnico en protesis dentales", "ortoprotesico", "tecnico ortopedico", "fabricante de protesis dentales"]
+  },
+  {
+    "styrk": "3230",
+    "nombre_no": "Yrker innen alternativ medisin",
+    "nombre_es": "profesional de medicina alternativa",
+    "alias_es": ["medicina alternativa", "terapeuta alternativo", "terapeuta natural", "naturopata", "homeopata", "acupuntor", "terapeuta holistico", "profesional de terapias naturales", "osteopata", "terapeuta complementario", "sanador natural"]
+  },
+  {
+    "styrk": "3240",
+    "nombre_no": "Dyrepleiere",
+    "nombre_es": "auxiliar técnico veterinario",
+    "alias_es": ["auxiliar veterinario", "auxiliar de veterinaria", "tecnico veterinario", "asistente veterinario", "cuidador de animales", "auxiliar tecnico veterinario", "auxiliares veterinarios", "ayudante de veterinario", "enfermero veterinario", "tecnico en cuidados de animales", "atv"]
+  },
+  {
+    "styrk": "3251",
+    "nombre_no": "Tannpleiere",
+    "nombre_es": "higienista dental",
+    "alias_es": ["higienista dental", "higienista bucodental", "auxiliar de higiene dental", "tecnico de higiene bucodental", "higienistas dentales", "tecnico superior en higiene bucodental", "auxiliar dental", "higienista bucal", "tecnico de higiene dental", "asistente de higiene dental", "personal de higiene dental"]
+  },
+  {
+    "styrk": "3254",
+    "nombre_no": "Optikere",
+    "nombre_es": "óptico optometrista",
+    "alias_es": ["optico", "optica", "optometrista", "optico optometrista", "tecnico optico", "opticos", "optometristas", "tecnico en optica", "dependiente de optica", "optico de gafas", "asesor optico"]
+  },
+  {
+    "styrk": "3256",
+    "nombre_no": "Helsesekretærer",
+    "nombre_es": "secretario sanitario / administrativo de clínica",
+    "alias_es": ["secretario sanitario", "secretaria sanitaria", "administrativo de clinica", "auxiliar administrativo sanitario", "recepcionista de clinica", "secretaria de consulta medica", "administrativo de hospital", "secretario de salud", "auxiliar administrativo de salud", "recepcionista medico", "personal administrativo sanitario"]
+  },
+  {
+    "styrk": "3257",
+    "nombre_no": "Helse- og miljøkontrollører",
+    "nombre_es": "inspector de salud y medio ambiente",
+    "alias_es": ["inspector de sanidad", "inspectora de sanidad", "inspector de salud ambiental", "tecnico de salud ambiental", "inspector de medio ambiente", "controlador sanitario", "inspector de seguridad e higiene", "inspectores de sanidad", "tecnico de salud publica", "inspector de higiene", "inspector medioambiental"]
+  },
+  {
+    "styrk": "3258",
+    "nombre_no": "Ambulansepersonell",
+    "nombre_es": "personal de ambulancia / técnico en emergencias",
+    "alias_es": ["tecnico en emergencias sanitarias", "tecnico de emergencias", "personal de ambulancia", "conductor de ambulancia", "tecnico de ambulancia", "paramedico", "tes", "tecnico en emergencias medicas", "camillero de ambulancia", "tecnico de transporte sanitario", "socorrista sanitario"]
+  },
+  {
+    "styrk": "3259",
+    "nombre_no": "Andre helseyrker",
+    "nombre_es": "otros profesionales de la salud",
+    "alias_es": ["otros profesionales de la salud", "profesional sanitario", "personal sanitario", "otros oficios de salud", "profesional de la salud", "trabajador sanitario", "tecnico sanitario", "auxiliar sanitario", "otros profesionales sanitarios", "personal de salud", "profesional del sector salud"]
+  },
+  {
+    "styrk": "3311",
+    "nombre_no": "Finansmeglere",
+    "nombre_es": "agente o intermediario financiero",
+    "alias_es": ["agente financiero", "agente de bolsa", "broker", "corredor de bolsa", "intermediario financiero", "operador financiero", "agentes financieros", "asesor de inversiones", "corredor financiero", "trader", "agente de valores"]
+  },
+  {
+    "styrk": "3312",
+    "nombre_no": "Kundebehandlere lån og kreditt",
+    "nombre_es": "gestor de préstamos y créditos",
+    "alias_es": ["gestor de prestamos", "gestora de prestamos", "asesor de creditos", "gestor de creditos", "analista de creditos", "asesor bancario", "gestor bancario", "gestores de prestamos", "agente de creditos", "asesor de prestamos", "empleado de banca"]
+  },
+  {
+    "styrk": "3313",
+    "nombre_no": "Regnskapsførere",
+    "nombre_es": "contabilidad / teneduría de libros",
+    "alias_es": ["contable", "tenedor de libros", "auxiliar contable", "tecnico contable", "administrativo contable", "contador", "contables", "ayudante de contabilidad", "gestor contable", "asistente contable", "empleado de contabilidad"]
+  },
+  {
+    "styrk": "3315",
+    "nombre_no": "Takstmenn",
+    "nombre_es": "tasador / perito valorador",
+    "alias_es": ["tasador", "tasadora", "perito tasador", "perito valorador", "valorador", "tasador de inmuebles", "perito de seguros", "tasadores", "perito", "tasador de bienes", "valuador"]
+  },
+  {
+    "styrk": "3321",
+    "nombre_no": "Forsikringsagenter",
+    "nombre_es": "agente de seguros",
+    "alias_es": ["agente de seguros", "agente de seguro", "corredor de seguros", "mediador de seguros", "asesor de seguros", "comercial de seguros", "agentes de seguros", "vendedor de seguros", "gestor de seguros", "agente comercial de seguros", "broker de seguros"]
+  },
+  {
+    "styrk": "3322",
+    "nombre_no": "Selgere (engros)",
+    "nombre_es": "comercial / vendedor (venta al por mayor)",
+    "alias_es": ["comercial", "vendedor", "vendedora", "agente comercial", "representante comercial", "vendedor al por mayor", "comercial de ventas", "comerciales", "ejecutivo de ventas", "representante de ventas", "agente de ventas"]
+  },
+  {
+    "styrk": "3323",
+    "nombre_no": "Innkjøpere",
+    "nombre_es": "comprador / responsable de compras",
+    "alias_es": ["comprador", "compradora", "responsable de compras", "agente de compras", "gestor de compras", "tecnico de compras", "compradores", "jefe de compras", "encargado de compras", "comprador profesional", "purchasing"]
+  },
+  {
+    "styrk": "3324",
+    "nombre_no": "Handels- og skipsmeglere",
+    "nombre_es": "agente comercial y naviero",
+    "alias_es": ["agente comercial", "corredor de comercio", "agente naviero", "corredor maritimo", "broker maritimo", "agente de comercio", "agentes navieros", "consignatario de buques", "intermediario comercial", "corredor de mercancias", "agente de fletes"]
+  },
+  {
+    "styrk": "3331",
+    "nombre_no": "Speditører og befraktere",
+    "nombre_es": "transitario / agente de carga",
+    "alias_es": ["transitario", "agente de carga", "agente de transporte", "gestor de fletes", "agente de logistica", "fletador", "transitarios", "expedidor de mercancias", "agente de aduanas", "coordinador de transporte", "agente de expediciones"]
+  },
+  {
+    "styrk": "3332",
+    "nombre_no": "Konferanse- og arrangementsplanleggere mv.",
+    "nombre_es": "organizador de eventos y congresos",
+    "alias_es": ["organizador de eventos", "organizadora de eventos", "planificador de eventos", "coordinador de eventos", "organizador de congresos", "event planner", "organizadores de eventos", "gestor de eventos", "coordinador de congresos", "wedding planner", "tecnico de eventos"]
+  },
+  {
+    "styrk": "3333",
+    "nombre_no": "Arbeidsformidlere",
+    "nombre_es": "agente de colocación / intermediario laboral",
+    "alias_es": ["agente de empleo", "agente de colocacion", "intermediario laboral", "orientador laboral", "reclutador", "tecnico de seleccion", "agentes de empleo", "gestor de empleo", "consultor de empleo", "agente de recursos humanos", "headhunter"]
+  },
+  {
+    "styrk": "3334",
+    "nombre_no": "Eiendomsmeglere og - forvaltere",
+    "nombre_es": "agente y administrador inmobiliario",
+    "alias_es": ["agente inmobiliario", "agente inmobiliaria", "administrador de fincas", "agente de la propiedad inmobiliaria", "asesor inmobiliario", "gestor inmobiliario", "agentes inmobiliarios", "comercial inmobiliario", "administrador inmobiliario", "corredor de bienes raices", "vendedor de inmuebles"]
+  },
+  {
+    "styrk": "3339",
+    "nombre_no": "Andre yrker innen forretningstjenester",
+    "nombre_es": "otros profesionales de servicios empresariales",
+    "alias_es": ["otros servicios empresariales", "agente de servicios empresariales", "profesional de servicios a empresas", "agente de negocios", "consultor de empresas", "otros oficios empresariales", "tecnico de servicios empresariales", "profesional de servicios comerciales", "agente comercial de servicios", "gestor de servicios empresariales", "intermediario de negocios"]
+  },
+  {
+    "styrk": "3341",
+    "nombre_no": "Arbeidsledere for kontorpersonell",
+    "nombre_es": "supervisor de personal administrativo",
+    "alias_es": ["supervisor de oficina", "supervisora de oficina", "jefe de administracion", "responsable administrativo", "coordinador administrativo", "encargado de oficina", "supervisor administrativo", "supervisores de oficina", "jefe de oficina", "responsable de oficina", "coordinador de personal administrativo"]
+  },
+  {
+    "styrk": "3342",
+    "nombre_no": "Advokatsekretær",
+    "nombre_es": "secretario jurídico / de bufete",
+    "alias_es": ["secretario juridico", "secretaria juridica", "secretario de abogados", "secretaria de bufete", "auxiliar juridico", "asistente legal", "secretario legal", "paralegal", "auxiliar de abogado", "administrativo juridico", "secretaria de despacho de abogados"]
+  },
+  {
+    "styrk": "3343",
+    "nombre_no": "Sjefssekretærer",
+    "nombre_es": "secretario de dirección",
+    "alias_es": ["secretario de direccion", "secretaria de direccion", "asistente de direccion", "secretario ejecutivo", "secretaria ejecutiva", "asistente ejecutivo", "secretarios de direccion", "secretario de gerencia", "asistente personal", "ayudante de direccion", "personal assistant"]
+  },
+  {
+    "styrk": "3351",
+    "nombre_no": "Tollere",
+    "nombre_es": "funcionario de aduanas",
+    "alias_es": ["agente de aduanas", "funcionario de aduanas", "aduanero", "inspector de aduanas", "tecnico de aduanas", "agente aduanero", "agentes de aduanas", "oficial de aduanas", "empleado de aduanas", "personal de aduanas", "vista de aduanas"]
+  },
+  {
+    "styrk": "3352",
+    "nombre_no": "Skattefunksjonærer",
+    "nombre_es": "funcionario de hacienda / tributos",
+    "alias_es": ["funcionario de hacienda", "agente tributario", "inspector de hacienda", "tecnico de hacienda", "funcionario de tributos", "agente de la agencia tributaria", "funcionarios de hacienda", "tecnico tributario", "empleado de hacienda", "gestor tributario", "personal de hacienda"]
+  },
+  {
+    "styrk": "3353",
+    "nombre_no": "Saksbehandlere innen sosiale ytelser",
+    "nombre_es": "gestor de prestaciones sociales",
+    "alias_es": ["gestor de prestaciones sociales", "gestora de prestaciones", "tramitador de prestaciones", "tecnico de prestaciones sociales", "administrativo de la seguridad social", "gestor de ayudas sociales", "tramitador de la seguridad social", "tecnico de servicios sociales", "agente de prestaciones", "empleado de la seguridad social", "gestor de subsidios"]
+  },
+  {
+    "styrk": "3355",
+    "nombre_no": "Politibetjenter mv.",
+    "nombre_es": "policía",
+    "alias_es": ["policia", "agente de policia", "policia nacional", "policia local", "guardia civil", "agente de la autoridad", "policias", "oficial de policia", "agente policial", "inspector de policia", "funcionario de policia"]
+  },
+  {
+    "styrk": "3359",
+    "nombre_no": "Andre yrker innen offentlig forvaltning",
+    "nombre_es": "otros funcionarios de administración pública",
+    "alias_es": ["funcionario publico", "funcionaria publica", "empleado publico", "funcionario de administracion publica", "personal de administracion publica", "otros funcionarios", "tecnico de administracion publica", "administrativo de la administracion publica", "agente de la funcion publica", "trabajador del sector publico", "gestor publico"]
+  }
+]
