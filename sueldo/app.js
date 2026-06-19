@@ -166,40 +166,26 @@
       : "";
 
     var h =
-      '<div class="res-head"><span class="kicker" style="margin:0">Dato Nexo</span><span class="cat">' + esc(cap1(o.nombre_es)) + "<br>" + esc(cat) + "</span></div>" +
+      '<div class="res-head"><span class="kicker" style="margin:0">Dato Nexo</span><span class="cat">' + esc(cap1(o.nombre_es)) + "</span></div>" +
       aprox +
 
-      '<div class="blk"><p class="lab">Lo que preguntaste</p>' +
+      '<div class="blk"><p class="lab">Bruto al mes</p>' +
         '<p class="num" id="r-bruto">0 kr</p>' +
-        '<p class="eur">' + eeur(eur(sal.mediana_mes)) + ' al mes</p>' +
-        '<p class="cap">Mediana en jornada completa. La mitad cobra más, la mitad menos.</p></div>' +
+        '<p class="eur">' + eeur(eur(sal.mediana_mes)) + " · la mayoría entre " + kr(sal.p25_mes) + " y " + kr(sal.p75_mes) + "</p></div>" +
 
-      '<div class="rango"><p class="lab">El rango real</p>' +
-        '<p>La mayoría cobra entre <b>' + kr(sal.p25_mes) + "</b> y <b>" + kr(sal.p75_mes) + "</b> al mes.</p>" +
-        '<p class="cap" style="margin-top:6px">Cuartiles reales por oficio (SSB). No es una estimación.</p></div>' +
-
-      '<div class="blk"><p class="lab acc">Lo que importa</p>' +
+      '<div class="blk"><p class="lab acc">Neto, lo que te queda</p>' +
         '<p class="num hero" id="r-neto">0 kr</p>' +
-        '<p class="eur">' + eeur(eur(netoM)) + ' al mes</p>' +
-        '<p class="cap">Después de impuestos, lo que entra en tu cuenta. Cálculo orientativo; con deducciones (hipoteca, viaje al trabajo) suele quedar algo más.</p></div>' +
+        '<p class="eur">' + eeur(eur(netoM)) + " · después de impuestos</p></div>" +
 
-      '<div class="blk"><p class="lab">Lo que dejas de pagar</p>' +
-        '<p class="lista">' +
-          'Guardería: tope <span class="d">' + kr(serv.barnehage_makspris_mes) + "/mes</span> (gratis en Finnmark)<br>" +
-          'Universidad pública: <span class="d">0</span><br>' +
-          'Sanidad: tope <span class="d">' + kr(serv.egenandelstak_anio) + "/año</span>, luego nada</p>" +
-        '<p class="cap">Eso no sale de tu neto. Ya está dentro del sistema.</p></div>' +
+      '<p class="extra">Y no pagas aparte: guardería (tope ' + kr(serv.barnehage_makspris_mes) + "/mes), universidad gratis, sanidad (tope " + kr(serv.egenandelstak_anio) + "/año).</p>" +
 
       '<p class="remate">' + esc(remate) + "</p>" +
 
-      '<div class="palabra"><span class="w">lønnsomt</span>' +
-        '<span class="m">que sale a cuenta. No barato: rentable en el sentido honesto, lo que pones y lo que recibes en balance.</span></div>' +
-
-      '<div class="res-cta"><p>Esto fue un número. El sistema entero, cada quince días, en la newsletter.</p>' +
+      '<div class="res-cta">' +
         '<a class="btn" href="https://nexonoruega.substack.com/subscribe">Quiero la newsletter</a>' +
         '<button class="btn ghost" id="otro">Probar otro oficio</button></div>' +
 
-      '<p class="fuente">Sueldos: SSB tabla 11418 (' + DATA.meta.anio_datos + ") · Impuestos: Skatteetaten 2026<br>Cambio orientativo " + DATA.meta.nok_por_eur + " kr/€ · cifras aproximadas</p>";
+      '<p class="fuente">SSB tabla 11418 (' + DATA.meta.anio_datos + ") · Skatteetaten 2026 · cambio orient. " + DATA.meta.nok_por_eur + " kr/€</p>";
 
     var box = $("s-result");
     box.innerHTML = h;
