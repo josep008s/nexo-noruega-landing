@@ -171,7 +171,7 @@
       '<p class="reveal-intro">Esto es lo que ganarías haciendo tu oficio en Noruega.</p>' +
 
       '<div class="gate-card" id="gate-card">' +
-        '<p class="gate-copy">Si te interesa cómo funciona la vida donde las cosas funcionan, suscríbete. Te llega a tu correo información sobre Noruega que no cuelgo en redes, de alguien que ya ha pasado por todas las fases.</p>' +
+        '<p class="gate-copy">Si te interesa cómo funciona la vida <mark class="hi">donde las cosas funcionan</mark>, suscríbete. Te llega a tu correo información sobre Noruega que no cuelgo en redes, de alguien que ya ha pasado por todas las fases.</p>' +
         '<iframe class="sub-embed" src="https://nexonoruega.substack.com/embed" title="Suscríbete a Nexo Noruega" loading="lazy"></iframe>' +
         '<button class="reveal-link" id="reveal">Ya me he suscrito. Ver el cálculo</button>' +
       '</div>' +
