@@ -80,6 +80,15 @@ function main() {
     });
   }
 
+  // Correcciones ortográficas de nombre_es (tildes que faltaban en la traducción)
+  const nfPath = join(__dir, "_nombre_es_fixes.json");
+  if (existsSync(nfPath)) {
+    const fixes = new Map(read(nfPath).map((f) => [f.styrk, f.nombre_es]));
+    let nf = 0;
+    for (const o of oficios) if (fixes.has(o.styrk)) { o.nombre_es = fixes.get(o.styrk); nf++; }
+    console.log(`Correcciones de tildes en nombre_es: ${nf}`);
+  }
+
   // Overlay de alias curados (match exacto = prioridad para coloquialismos)
   const ovPath = join(__dir, "_alias_overrides.json");
   if (existsSync(ovPath)) {
