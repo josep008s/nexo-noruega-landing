@@ -182,7 +182,8 @@
       '<p class="remate">' + esc(remate) + "</p>" +
 
       '<div class="res-cta">' +
-        '<a class="btn" href="https://nexonoruega.substack.com/subscribe">Quiero la newsletter</a>' +
+        '<p class="cta-line">Esto fue un número. ¿Te mando el desglose completo y el próximo análisis del sistema noruego?</p>' +
+        '<iframe class="sub-embed" src="https://nexonoruega.substack.com/embed" title="Suscríbete a Nexo Noruega" loading="lazy"></iframe>' +
         '<button class="btn ghost" id="otro">Probar otro oficio</button></div>' +
 
       '<p class="fuente">SSB tabla 11418 (' + DATA.meta.anio_datos + ") · Skatteetaten 2026 · cambio orient. " + DATA.meta.nok_por_eur + " kr/€</p>";
