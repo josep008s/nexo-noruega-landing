@@ -120,16 +120,18 @@
     .res-cta p{color:var(--niebla);font-size:.95rem;margin-bottom:8px}
     .cta-line{color:var(--nieve)!important;font-size:1.05rem!important;line-height:1.5;margin-bottom:14px!important;max-width:42ch}
     .sub-embed{width:100%;height:215px;border:0;border-radius:12px;background:var(--noche);display:block;margin-bottom:6px}
-    .reveal-intro{color:var(--niebla);font-size:1.08rem;margin:4px 0 16px;max-width:42ch}
-    .gate-card{background:rgba(63,203,148,.06);border:1px solid rgba(63,203,148,.28);border-radius:14px;padding:18px 16px;margin:0}
-    .gate-copy{color:var(--nieve);font-size:1.05rem;line-height:1.55;margin:0 0 14px}
+    .reveal-intro{color:var(--niebla);font-size:1.08rem;margin:4px 0 16px;max-width:42ch;text-wrap:balance}
+    .gate-card{background:rgba(63,203,148,.07);border:1px solid rgba(63,203,148,.5);border-radius:14px;padding:20px 18px;margin:0;box-shadow:0 0 0 1px rgba(63,203,148,.12),0 0 28px rgba(63,203,148,.14);animation:gate-glow 3.4s ease-in-out infinite alternate}
+    @keyframes gate-glow{from{box-shadow:0 0 0 1px rgba(63,203,148,.10),0 0 18px rgba(63,203,148,.09);border-color:rgba(63,203,148,.40)}to{box-shadow:0 0 0 1px rgba(63,203,148,.22),0 0 36px rgba(63,203,148,.24);border-color:rgba(63,203,148,.64)}}
+    .gate-copy{color:var(--nieve);font-size:1.06rem;line-height:1.6;margin:0 0 14px;text-wrap:balance}
+    .gate-copy mark.hi{color:inherit;background:linear-gradient(180deg,rgba(63,203,148,.34),rgba(63,203,148,.20));background-repeat:no-repeat;border-radius:.25em .4em .3em .35em / .4em .25em .35em .3em;padding:.02em .16em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
     .reveal-link{display:block;width:100%;background:none;border:none;color:var(--niebla);font-family:var(--sg);font-size:.82rem;letter-spacing:.02em;cursor:pointer;padding:8px 0 0;text-align:center;text-decoration:underline}
     .reveal-link:hover{color:var(--aurora)}
     .locked{filter:blur(9px);pointer-events:none;user-select:none;transition:filter .6s ease;margin-top:20px}
     .res-foot{margin-top:8px}
 
     .hidden{display:none}
-    @media (prefers-reduced-motion:reduce){.cielo::before{animation:none}.step{animation:none}.btn:hover{transform:none}}
+    @media (prefers-reduced-motion:reduce){.cielo::before{animation:none}.step{animation:none}.btn:hover{transform:none}.gate-card{animation:none}}
   </style>
 </head>
 <body>
