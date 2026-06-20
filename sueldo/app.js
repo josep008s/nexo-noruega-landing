@@ -168,33 +168,41 @@
     var h =
       '<div class="res-head"><span class="kicker" style="margin:0">Dato Nexo</span><span class="cat">' + esc(cap1(o.nombre_es)) + "</span></div>" +
       aprox +
+      '<p class="reveal-intro">Esto es lo que ganarías haciendo tu oficio en Noruega.</p>' +
 
-      '<div class="blk"><p class="lab">Bruto al mes</p>' +
-        '<p class="num" id="r-bruto">0 kr</p>' +
-        '<p class="eur">' + eeur(eur(sal.mediana_mes)) + " · la mayoría entre " + kr(sal.p25_mes) + " y " + kr(sal.p75_mes) + "</p></div>" +
-
-      '<div class="blk"><p class="lab acc">Neto, lo que te queda</p>' +
-        '<p class="num hero" id="r-neto">0 kr</p>' +
-        '<p class="eur">' + eeur(eur(netoM)) + " · después de impuestos</p></div>" +
-
-      '<p class="extra">Y no pagas aparte: guardería (tope ' + kr(serv.barnehage_makspris_mes) + "/mes), universidad gratis, sanidad (tope " + kr(serv.egenandelstak_anio) + "/año).</p>" +
-
-      '<p class="remate">' + esc(remate) + "</p>" +
-
-      '<div class="res-cta">' +
-        '<p class="cta-line">Esto fue un número. ¿Te mando el desglose completo y el próximo análisis del sistema noruego?</p>' +
+      '<div class="gate-card" id="gate-card">' +
+        '<p class="gate-copy">Si te interesa cómo funciona la vida donde las cosas funcionan, suscríbete. Te llega a tu correo información sobre Noruega que no cuelgo en redes, de alguien que ya ha pasado por todas las fases.</p>' +
         '<iframe class="sub-embed" src="https://nexonoruega.substack.com/embed" title="Suscríbete a Nexo Noruega" loading="lazy"></iframe>' +
-        '<button class="btn ghost" id="otro">Probar otro oficio</button></div>' +
+        '<button class="reveal-link" id="reveal">Ya me he suscrito. Ver el cálculo</button>' +
+      '</div>' +
 
-      '<p class="fuente">SSB tabla 11418 (' + DATA.meta.anio_datos + ") · Skatteetaten 2026 · cambio orient. " + DATA.meta.nok_por_eur + " kr/€</p>";
+      '<div class="locked" id="locked">' +
+        '<div class="blk"><p class="lab">Bruto al mes</p>' +
+          '<p class="num" id="r-bruto">0 kr</p>' +
+          '<p class="eur">' + eeur(eur(sal.mediana_mes)) + " · la mayoría entre " + kr(sal.p25_mes) + " y " + kr(sal.p75_mes) + "</p></div>" +
+        '<div class="blk"><p class="lab acc">Neto, lo que te queda</p>' +
+          '<p class="num hero" id="r-neto">0 kr</p>' +
+          '<p class="eur">' + eeur(eur(netoM)) + " · después de impuestos</p></div>" +
+        '<p class="extra">Y no pagas aparte: guardería (tope ' + kr(serv.barnehage_makspris_mes) + "/mes), universidad gratis, sanidad (tope " + kr(serv.egenandelstak_anio) + "/año).</p>" +
+        '<p class="remate">' + esc(remate) + "</p></div>" +
+
+      '<div class="res-foot"><button class="btn ghost" id="otro">Probar otro oficio</button>' +
+        '<p class="fuente">SSB tabla 11418 (' + DATA.meta.anio_datos + ") · Skatteetaten 2026 · cambio orient. " + DATA.meta.nok_por_eur + " kr/€</p></div>";
 
     var box = $("s-result");
     box.innerHTML = h;
     box.querySelector("#otro").addEventListener("click", reset);
+    // Los números quedan listos pero borrosos hasta que desbloquea
+    $("r-bruto").textContent = kr(sal.mediana_mes);
+    $("r-neto").textContent = kr(netoM);
+    box.querySelector("#reveal").addEventListener("click", function () {
+      $("locked").classList.remove("locked");
+      var gc = $("gate-card"); if (gc) gc.style.display = "none";
+      animate($("r-bruto"), sal.mediana_mes, kr);
+      animate($("r-neto"), netoM, kr);
+    });
     show("s-result");
     window.scrollTo({ top: 0, behavior: "smooth" });
-    animate($("r-bruto"), sal.mediana_mes, kr);
-    animate($("r-neto"), netoM, kr);
   }
 
   function reset() {
