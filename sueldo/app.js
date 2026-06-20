@@ -183,7 +183,8 @@
           '<p class="eur">' + eeur(eur(sal.mediana_mes)) + " · la mayoría entre " + kr(sal.p25_mes) + " y " + kr(sal.p75_mes) + "</p></div>" +
         '<div class="blk"><p class="lab acc">Neto, lo que te queda</p>' +
           '<p class="num hero" id="r-neto">0 kr</p>' +
-          '<p class="eur">' + eeur(eur(netoM)) + " · después de impuestos</p></div>" +
+          '<p class="eur">' + eeur(eur(netoM)) + " · después de impuestos</p>" +
+          '<p class="cap">Es una aproximación. El neto exacto depende de tu kommune, tus deducciones y tu situación: con tantas variables, nadie puede clavarlo de antemano.</p></div>' +
         '<p class="extra">Y no pagas aparte: guardería (tope ' + kr(serv.barnehage_makspris_mes) + "/mes), universidad gratis, sanidad (tope " + kr(serv.egenandelstak_anio) + "/año).</p>" +
         '<p class="remate">' + esc(remate) + "</p></div>" +
 
