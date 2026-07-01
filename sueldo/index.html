@@ -132,6 +132,17 @@
     .locked{filter:blur(9px);pointer-events:none;user-select:none;transition:filter .6s ease;margin-top:20px}
     .res-foot{margin-top:8px}
 
+    .afinar{border-top:1px solid var(--linea);margin-top:26px;padding-top:20px}
+    .afinar-txt{color:var(--niebla);font-size:.95rem;margin:6px 0 12px}
+    .chips{display:flex;gap:8px;flex-wrap:wrap}
+    .chip{font-family:var(--sg);font-weight:500;font-size:.85rem;color:var(--nieve);background:rgba(243,245,244,.04);
+      border:1px solid rgba(141,161,171,.5);border-radius:999px;padding:8px 14px;cursor:pointer;transition:border-color .2s,background .2s}
+    .chip:hover{border-color:var(--aurora)}
+    .chip.sel{background:rgba(63,203,148,.14);border-color:var(--aurora)}
+    .sel-region{width:100%;margin-top:8px;background:rgba(243,245,244,.04);border:1px solid rgba(141,161,171,.5);border-radius:8px;
+      padding:12px;color:var(--nieve);font-family:var(--serif);font-size:1rem;outline:none;color-scheme:dark}
+    .sel-region:focus{border-color:var(--aurora)}
+
     .hidden{display:none}
     @media (prefers-reduced-motion:reduce){.cielo::before{animation:none}.step{animation:none}.btn:hover{transform:none}.gate-card{animation:none}}
   </style>

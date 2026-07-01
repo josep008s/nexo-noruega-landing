@@ -7,6 +7,8 @@
 
   var DATA = null;
   var CATS = {};
+  var REG = null;      // data/regiones.json (se carga al revelar el primer resultado)
+  var REG_FAIL = false;
   var current = null; // { o, s }
 
   var $ = function (id) { return document.getElementById(id); };
@@ -180,16 +182,32 @@
       '<div class="locked" id="locked">' +
         '<div class="blk"><p class="lab">Bruto al mes</p>' +
           '<p class="num" id="r-bruto">0 kr</p>' +
-          '<p class="eur">' + eeur(eur(sal.mediana_mes)) + " · la mayoría entre " + kr(sal.p25_mes) + " y " + kr(sal.p75_mes) + "</p></div>" +
+          '<p class="eur"><span id="e-bruto">' + eeur(eur(sal.mediana_mes)) + "</span> · la mayoría entre " + kr(sal.p25_mes) + " y " + kr(sal.p75_mes) + "</p></div>" +
         '<div class="blk"><p class="lab acc">Neto, lo que te queda</p>' +
           '<p class="num hero" id="r-neto">0 kr</p>' +
-          '<p class="eur">' + eeur(eur(netoM)) + " · después de impuestos</p>" +
+          '<p class="eur"><span id="e-neto">' + eeur(eur(netoM)) + "</span> · después de impuestos</p>" +
           '<p class="cap">Es una aproximación. El neto exacto depende de tu kommune, tus deducciones y tu situación: con tantas variables, nadie puede clavarlo de antemano.</p></div>' +
         '<p class="extra">Y no pagas aparte: guardería (tope ' + kr(serv.barnehage_makspris_mes) + "/mes), universidad gratis, sanidad (tope " + kr(serv.egenandelstak_anio) + "/año).</p>" +
         '<p class="remate">' + esc(remate) + "</p></div>" +
 
+      '<div class="afinar hidden" id="afinar">' +
+        '<p class="lab acc">¿Quieres afinar el tiro?</p>' +
+        '<p class="afinar-txt">El rango es real, pero dentro del rango no todos caen en el mismo sitio. Ajusta:</p>' +
+        '<div class="chips" role="group" aria-label="Tu momento en el oficio">' +
+          '<button type="button" class="chip" data-exp="p25">Empezando</button>' +
+          '<button type="button" class="chip sel" data-exp="med">Ya rodado</button>' +
+          '<button type="button" class="chip" data-exp="p75">Veterano</button>' +
+        '</div>' +
+        '<p class="cap" id="exp-cap">La mediana: la mitad de los que hacen tu oficio en Noruega cobra más y la otra mitad cobra menos.</p>' +
+        '<div id="reg-wrap" class="hidden">' +
+          '<label class="lab" for="region" style="display:block;margin-top:18px">¿En qué zona?</label>' +
+          '<select id="region" class="sel-region"></select>' +
+          '<p class="cap" id="reg-line"></p>' +
+        '</div>' +
+      '</div>' +
+
       '<div class="res-foot"><button class="btn ghost" id="otro">Probar otro oficio</button>' +
-        '<p class="fuente">SSB tabla 11418 (' + DATA.meta.anio_datos + ") · Skatteetaten 2026 · cambio orient. " + DATA.meta.nok_por_eur + " kr/€</p></div>";
+        '<p class="fuente">SSB tablas 11418 y 11422 (' + DATA.meta.anio_datos + ") · Skatteetaten 2026 · cambio orient. " + DATA.meta.nok_por_eur + " kr/€</p></div>";
 
     var box = $("s-result");
     box.innerHTML = h;
@@ -202,7 +220,64 @@
       var gc = $("gate-card"); if (gc) gc.style.display = "none";
       animate($("r-bruto"), sal.mediana_mes, kr);
       animate($("r-neto"), netoM, kr);
+      $("afinar").classList.remove("hidden");
+      bindAfinar();
     });
+
+    // ----- afinar el tiro (solo tras revelar) -----
+    var EXP_CAP = {
+      p25: "Parte baja del rango. Sin noruego, sin red de contactos y sin historial allí, se entra por aquí. La parte alta se gana con años, no con el billete de avión.",
+      med: "La mediana: la mitad de los que hacen tu oficio en Noruega cobra más y la otra mitad cobra menos.",
+      p75: "Parte alta del rango. Años de oficio, noruego fluido y saber lo que vales. Nadie aterriza aquí el primer año."
+    };
+    function applyExp(key) {
+      var bruto = key === "p25" ? sal.p25_mes : key === "p75" ? sal.p75_mes : sal.mediana_mes;
+      var neto = netoMes(bruto);
+      animate($("r-bruto"), bruto, kr);
+      animate($("r-neto"), neto, kr);
+      $("e-bruto").textContent = eeur(eur(bruto));
+      $("e-neto").textContent = eeur(eur(neto));
+      $("exp-cap").textContent = EXP_CAP[key];
+      Array.prototype.forEach.call(box.querySelectorAll(".chip"), function (c) {
+        c.classList.toggle("sel", c.getAttribute("data-exp") === key);
+      });
+    }
+    function buildRegion() {
+      var por = REG && REG.grupos[o.grupo];
+      if (!por || !por["0"]) return; // sin cruce regional para esta familia (p. ej. fuerzas armadas)
+      var sel = $("region");
+      sel.innerHTML = REG.regiones.filter(function (r) { return por[r.codigo] != null; })
+        .map(function (r) { return '<option value="' + r.codigo + '">' + esc(r.nombre) + "</option>"; }).join("");
+      var fam = (CATS[o.grupo] || "tu familia de oficios").toLowerCase();
+      function upd() {
+        var c = sel.value, v = por[c], base = por["0"], linea;
+        if (c === "0") {
+          linea = "Mediana nacional de tu familia de oficios (" + fam + "): " + kr(v) + ". Elige una zona para comparar.";
+        } else {
+          var pct = Math.round((v / base - 1) * 100);
+          var comp = pct > 0 ? "un " + pct + "% por encima de" : pct < 0 ? "un " + Math.abs(pct) + "% por debajo de" : "igual que";
+          linea = "Tu familia de oficios (" + fam + ") cobra ahí de mediana " + kr(v) + ", " + comp + " la mediana nacional del grupo. SSB no publica zonas por oficio exacto, solo por familia: úsalo como brújula, no como cifra.";
+        }
+        $("reg-line").textContent = linea;
+      }
+      sel.addEventListener("change", upd);
+      $("reg-wrap").classList.remove("hidden");
+      upd();
+    }
+    function bindAfinar() {
+      Array.prototype.forEach.call(box.querySelectorAll(".chip"), function (c) {
+        c.addEventListener("click", function () { applyExp(c.getAttribute("data-exp")); });
+      });
+      if (REG) { buildRegion(); }
+      else if (!REG_FAIL) {
+        fetch("/data/regiones.json").then(function (r) {
+          if (!r.ok) throw new Error("regiones " + r.status);
+          return r.json();
+        }).then(function (d) { REG = d; buildRegion(); })
+          .catch(function () { REG_FAIL = true; }); // sin regiones no pasa nada: la sección de experiencia sigue funcionando
+      }
+    }
+
     show("s-result");
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
