@@ -229,7 +229,7 @@
   }
 
   // ---------- arranque ----------
-  fetch("../data/data.json").then(function (r) {
+  fetch("/data/data.json").then(function (r) {
     if (!r.ok) throw new Error("data " + r.status);
     return r.json();
   }).then(function (d) {
@@ -241,6 +241,8 @@
     bind();
     inp.focus();
   }).catch(function () {
-    $("sello").textContent = "No se pudo cargar la tabla. Reintenta en un momento.";
+    var s = $("sello");
+    s.textContent = "No se pudo cargar la tabla de sueldos. Recarga la página para reintentar.";
+    s.style.color = "#3FCB94";
   });
 })();
