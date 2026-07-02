@@ -145,16 +145,22 @@ El canónico editorial vive en el Drive: `Business/Nexo Noruega/norsk/banco/BANC
 npm i -g vercel && vercel link            # una vez
 vercel env pull .env.local                # trae las env vars de Development
 vercel dev                                # localhost:3000 con api/ funcionando
-stripe listen --forward-to localhost:3000/api/norsk-webhook   # da el whsec_ de dev
+stripe listen --forward-to localhost:3000/api/norsk-webhook/   # da el whsec_ de dev
 ```
 Tarjeta de test: `4242 4242 4242 4242`, cualquier fecha futura y CVC.
 
+> **Barra final en /api/ (importante).** `vercel.json` tiene `trailingSlash: true`, que
+> 308-redirige `/api/x` a `/api/x/`. El frontend ya llama a todas las rutas CON barra final
+> (`/api/norsk-checkout/`, etc.) para evitar el redirect. Al registrar el **webhook de Stripe
+> en producción**, usa la URL **con barra**: `https://www.nexonoruega.com/api/norsk-webhook/`.
+> Si la registras sin barra, Stripe recibe un 308 en el POST y podría no reintentar en la URL nueva.
+
 ## Checklist E2E antes de lanzar
 
-- [ ] `curl -X POST localhost:3000/api/norsk-checkout -d '{"plan":"p30"}' -H 'Content-Type: application/json'` → 200 con url; `{"plan":"px"}` → 400.
+- [ ] `curl -X POST localhost:3000/api/norsk-checkout/ -d '{"plan":"p30"}' -H 'Content-Type: application/json'` → 200 con url; `{"plan":"px"}` → 400. (Usa la barra final; sin ella hay 308.)
 - [ ] Compra test completa → 1 fila en `norsk_compras` + 1 email de Resend + `/norsk/gracias/?session_id=…` pone cookie y da acceso.
 - [ ] Replay del mismo evento (`stripe events resend …` o reenvío desde el Dashboard) → sigue habiendo 1 fila y 1 email.
-- [ ] `/api/norsk-preguntas?modo=practica` sin cookie → 401; con cookie → 10 preguntas; `?modo=simulacro&examen=statsborger` → 36 con 4 `piloto:true`; `?examen=samfunns` → 38 con 4 piloto.
+- [ ] `/api/norsk-preguntas/?modo=practica` sin cookie → 401; con cookie → 10 preguntas; `?modo=simulacro&examen=statsborger` → 36 con 4 `piloto:true`; `?examen=samfunns` → 38 con 4 piloto.
 - [ ] Petición 121 del día → 429.
 - [ ] Webhook con firma manipulada → 400.
 - [ ] Token caducado en `/api/norsk-activar` → redirect a `/norsk/acceso/?e=expirado`.

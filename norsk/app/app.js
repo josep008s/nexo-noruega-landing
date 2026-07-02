@@ -86,6 +86,9 @@
     } catch (e) { return ""; }
   }
 
+  // Nota: todas las rutas de /api/ llevan barra final. vercel.json tiene
+  // trailingSlash:true, que 308-redirige /api/x -> /api/x/. El navegador sigue
+  // el redirect, pero lo evitamos para no depender de ello (y por el webhook).
   function api(path) {
     return fetch(path, { credentials: "same-origin" }).then(function (r) {
       if (r.status === 401) { var e = new Error("acceso"); e.code = 401; throw e; }
@@ -98,9 +101,9 @@
   // ---------- arranque ----------
 
   function boot() {
-    var pingP = api("/api/norsk-preguntas?modo=ping").catch(function () { return null; });
+    var pingP = api("/api/norsk-preguntas/?modo=ping").catch(function () { return null; });
     var demoP = fetch("/data/norsk-demo.json").then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; });
-    var lecP = api("/api/norsk-leccion").catch(function () { return null; });
+    var lecP = api("/api/norsk-leccion/").catch(function () { return null; });
 
     Promise.all([pingP, demoP, lecP]).then(function (rs) {
       state.acceso = rs[0] && rs[0].ok ? rs[0] : null;
@@ -239,7 +242,7 @@
   function empezarPractica(filtro) {
     if (state.acceso) {
       var q = filtro.leccion ? "&leccion=" + filtro.leccion : "";
-      api("/api/norsk-preguntas?modo=practica" + q)
+      api("/api/norsk-preguntas/?modo=practica" + q)
         .then(function (d) { arrancarSesion("practica", d.preguntas, filtro); })
         .catch(errorAcceso);
     } else {
@@ -252,7 +255,7 @@
   function empezarFalladas() {
     var ids = state.prog.falladas.slice(-20);
     if (state.acceso) {
-      api("/api/norsk-preguntas?modo=practica&ids=" + encodeURIComponent(ids.join(",")))
+      api("/api/norsk-preguntas/?modo=practica&ids=" + encodeURIComponent(ids.join(",")))
         .then(function (d) { arrancarSesion("practica", d.preguntas, { titulo: "Repaso de falladas" }); })
         .catch(errorAcceso);
     } else {
@@ -264,7 +267,7 @@
 
   function empezarSimulacro() {
     if (state.acceso) {
-      api("/api/norsk-preguntas?modo=simulacro&examen=" + state.examen)
+      api("/api/norsk-preguntas/?modo=simulacro&examen=" + state.examen)
         .then(function (d) {
           arrancarSesion("simulacro", d.preguntas, { mecanica: d.mecanica, examen: state.examen });
         })
@@ -678,7 +681,7 @@
       renderLector(state.demo.leccion0);
       return;
     }
-    api("/api/norsk-leccion?slug=" + encodeURIComponent(l.slug))
+    api("/api/norsk-leccion/?slug=" + encodeURIComponent(l.slug))
       .then(function (d) { renderLector(d.leccion); })
       .catch(errorAcceso);
   }
@@ -726,7 +729,7 @@
       var b = el("button", { class: "btn", text: "Empezar hoy" });
       b.addEventListener("click", function () {
         b.disabled = true; b.textContent = "Abriendo el pago…";
-        fetch("/api/norsk-checkout", {
+        fetch("/api/norsk-checkout/", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ plan: d[0] }),

@@ -513,7 +513,7 @@
       btn.addEventListener("click", function () {
         btn.disabled = true;
         btn.textContent = "Abriendo el pago…";
-        fetch("/api/norsk-checkout", {
+        fetch("/api/norsk-checkout/", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ plan: btn.getAttribute("data-plan") }),
