@@ -1,3 +1,9 @@
 .DS_Store
 node_modules/
 *.log
+
+# NEXO NORSK: el banco de preguntas es contenido de pago y el repo es público
+scripts/_norsk_banco/
+.env.local
+.vercel
+.claude/
