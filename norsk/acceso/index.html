@@ -56,7 +56,7 @@
     f.addEventListener("submit", function (ev) {
       ev.preventDefault();
       btn.disabled = true;
-      fetch("/api/norsk-reenviar", {
+      fetch("/api/norsk-reenviar/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: document.getElementById("email").value }),

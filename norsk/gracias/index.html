@@ -50,7 +50,7 @@
       error("Falta la referencia del pago. Si acabas de comprar, entra con el enlace que te ha llegado por correo o <a href=\"/norsk/acceso/\">pide que te lo reenviemos</a>.");
       return;
     }
-    fetch("/api/norsk-gracias?session_id=" + encodeURIComponent(sid), { credentials: "same-origin" })
+    fetch("/api/norsk-gracias/?session_id=" + encodeURIComponent(sid), { credentials: "same-origin" })
       .then(function (r) { return r.json().then(function (d) { return { s: r.status, d: d }; }); })
       .then(function (res) {
         if (res.d && res.d.ok) {

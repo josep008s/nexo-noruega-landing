@@ -194,7 +194,7 @@ export async function sendMagicLink(email, compraId, expiresAtMs) {
   const secret = process.env.NORSK_JWT_SECRET;
   const exp = Math.floor(expiresAtMs / 1000);
   const token = jwtSign({ sub: compraId, email, exp, uso: "activar" }, secret);
-  const enlace = `${siteUrl()}/api/norsk-activar?token=${encodeURIComponent(token)}`;
+  const enlace = `${siteUrl()}/api/norsk-activar/?token=${encodeURIComponent(token)}`;
   const caduca = new Date(expiresAtMs).toLocaleDateString("es-ES", { day: "numeric", month: "long", year: "numeric" });
 
   const html = [
