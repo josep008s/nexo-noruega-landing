@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Acceso confirmado · NEXO NORSK</title>
+  <meta name="robots" content="noindex">
+  <link rel="canonical" href="https://www.nexonoruega.com/norsk/gracias/">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--noche:#0E1B26;--nieve:#F3F5F4;--aurora:#3FCB94;--fiordo:#2C5A72;--niebla:#8DA1AB;
+      --sg:"Space Grotesk",system-ui,sans-serif;--serif:"Source Serif 4",Georgia,serif}
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:var(--serif);background:var(--noche);color:var(--nieve);line-height:1.6;min-height:100svh;display:grid;place-items:center;padding:24px;-webkit-font-smoothing:antialiased}
+    main{max-width:520px;text-align:left}
+    .kicker{font-family:var(--sg);font-weight:700;font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--aurora);margin-bottom:16px}
+    h1{font-family:var(--sg);font-weight:700;font-size:clamp(1.7rem,5vw,2.3rem);letter-spacing:-.02em;line-height:1.15;margin-bottom:14px}
+    p{color:var(--niebla);font-size:1.05rem;margin-bottom:12px}
+    b{color:var(--nieve)}
+    a:focus-visible,button:focus-visible{outline:2px solid var(--aurora);outline-offset:3px}
+    .btn{display:inline-block;font-family:var(--sg);font-weight:700;font-size:1rem;color:var(--noche);background:var(--aurora);border:none;text-decoration:none;text-align:center;padding:15px 30px;border-radius:8px;cursor:pointer;margin-top:16px}
+    .btn.oculto{display:none}
+    .error a{color:var(--aurora)}
+  </style>
+</head>
+<body>
+  <main>
+    <p class="kicker">Nexo Norsk</p>
+    <h1 id="titulo">Confirmando tu pago…</h1>
+    <div id="cuerpo"><p>Un segundo.</p></div>
+    <a class="btn oculto" id="entrar" href="/norsk/app/">Empezar a practicar</a>
+  </main>
+  <script>
+  (function () {
+    "use strict";
+    var titulo = document.getElementById("titulo");
+    var cuerpo = document.getElementById("cuerpo");
+    var entrar = document.getElementById("entrar");
+    var sid = new URLSearchParams(window.location.search).get("session_id") || "";
+
+    function error(html) {
+      titulo.textContent = "No hemos podido confirmar el pago";
+      cuerpo.innerHTML = "<p class=\"error\">" + html + "</p>";
+    }
+
+    if (!sid) {
+      error("Falta la referencia del pago. Si acabas de comprar, entra con el enlace que te ha llegado por correo o <a href=\"/norsk/acceso/\">pide que te lo reenviemos</a>.");
+      return;
+    }
+    fetch("/api/norsk-gracias?session_id=" + encodeURIComponent(sid), { credentials: "same-origin" })
+      .then(function (r) { return r.json().then(function (d) { return { s: r.status, d: d }; }); })
+      .then(function (res) {
+        if (res.d && res.d.ok) {
+          var caduca = new Date(res.d.expires_at).toLocaleDateString("es-ES", { day: "numeric", month: "long" });
+          titulo.textContent = "Dentro. Tu acceso está abierto.";
+          cuerpo.innerHTML = "<p>Tienes el curso completo hasta el <b>" + caduca + "</b>.</p>" +
+            "<p>Te hemos enviado un enlace de entrada a <b>" + (res.d.email || "tu correo") + "</b>. Guárdalo: es tu llave para volver desde cualquier dispositivo.</p>";
+          entrar.classList.remove("oculto");
+          entrar.focus();
+        } else if (res.s === 402) {
+          error("El pago aún no aparece como completado. Si el banco lo está procesando, recarga esta página en un minuto.");
+        } else {
+          error("Algo se ha cruzado. Escríbenos a norsk@nexonoruega.com con tu correo de compra y lo resolvemos.");
+        }
+      })
+      .catch(function () {
+        error("No hay conexión con el servidor. Recarga la página; si sigue, escríbenos a norsk@nexonoruega.com.");
+      });
+  })();
+  </script>
+</body>
+</html>
