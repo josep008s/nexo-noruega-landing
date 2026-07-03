@@ -140,6 +140,9 @@
       ? "Todo el banco está abierto. Elige examen y modo."
       : "Estás en la demo: la Lección 0 y un simulacro de 12 preguntas, gratis. El curso completo se abre al comprar." }));
 
+    var med = medidorPreparacion();
+    if (med) s.appendChild(med);
+
     // Examen
     var cards = el("div", { class: "cards", role: "radiogroup", "aria-label": "Elige examen" });
     [["statsborger", "Para la ciudadanía. Solo en noruego.", "36 preguntas · puntúan 32 · apruebas con 24 · 60 min"],
@@ -190,6 +193,39 @@
         text: "Último simulacro: " + ult.puntos + " puntuables correctas, " + (ult.aprobado ? "aprobado." : "aún no.") }));
     }
     $app.appendChild(s);
+  }
+
+  // Medidor de preparación: verdicto honesto según el mejor de los últimos simulacros.
+  // El umbral de aprobado ronda el 75-76% (24/32 y 26/34). Sin datos, no se muestra.
+  function medidorPreparacion() {
+    var conPct = state.prog.simulacros.filter(function (s) { return typeof s.pct === "number"; });
+    if (!conPct.length) return null;
+    var recientes = conPct.slice(-3);
+    var mejor = recientes.reduce(function (m, s) { return Math.max(m, s.pct); }, 0);
+    var aprobados = {};
+    state.prog.simulacros.forEach(function (s) { if (s.aprobado && s.examen !== "demo") aprobados[s.examen + s.fecha + s.puntos] = 1; });
+    var nAprob = Object.keys(aprobados).length;
+
+    var banda, verdicto, msg;
+    if (mejor >= 85) { banda = "listo"; verdicto = "Listo para el examen"; msg = "Apruebas con margen. Un repaso corto el día antes y a por el pasaporte."; }
+    else if (mejor >= 76) { banda = "listo"; verdicto = "Casi listo"; msg = "Ya apruebas, pero justo. Un par de simulacros más y vas sobrado."; }
+    else if (mejor >= 60) { banda = "cerca"; verdicto = "Cerca"; msg = "Te falta poco. Insiste en los temas donde más fallas."; }
+    else { banda = "lejos"; verdicto = "Aún no"; msg = "Practica por temas sin prisa. El examen premia entender, no memorizar."; }
+
+    var card = el("div", { class: "medidor " + banda });
+    card.appendChild(el("p", { class: "med-lab", text: "Tu preparación" }));
+    card.appendChild(el("p", { class: "med-verdicto", text: verdicto }));
+    var barra = el("div", { class: "med-barra", "aria-hidden": "true" }, [
+      el("span", { class: "med-fill", style: "width:" + Math.min(100, mejor) + "%" }),
+      el("span", { class: "med-linea", title: "línea de aprobado" }),
+    ]);
+    card.appendChild(barra);
+    card.appendChild(el("p", { class: "med-num", text: "Mejor simulacro: " + mejor + "% · aprobado en el 76%" }));
+    card.appendChild(el("p", { class: "med-msg", text: msg }));
+    if (state.acceso && nAprob > 0) {
+      card.appendChild(el("p", { class: "med-gar", text: "Simulacros aprobados: " + nAprob + " de 5 (garantía)" }));
+    }
+    return card;
   }
 
   // ---------- pantalla: temas ----------
@@ -598,7 +634,8 @@
 
     var mec = ses.mecanica;
     var aprobado = correctasPunt >= mec.aprobado;
-    state.prog.simulacros.push({ fecha: new Date().toISOString().slice(0, 10), examen: ses.examen, puntos: correctasPunt, aprobado: aprobado });
+    var pct = Math.round((correctasPunt / mec.puntuables) * 100);
+    state.prog.simulacros.push({ fecha: new Date().toISOString().slice(0, 10), examen: ses.examen, puntos: correctasPunt, pct: pct, aprobado: aprobado });
     guardarProg();
 
     limpiar();

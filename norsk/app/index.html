@@ -152,6 +152,20 @@
     .aviso{background:rgba(243,245,244,.04);border:1px solid var(--linea);border-radius:10px;padding:14px 16px;margin-bottom:20px;font-size:.95rem;color:var(--niebla)}
     .aviso a{color:var(--aurora)}
 
+    .medidor{border:1px solid rgba(141,161,171,.35);border-radius:12px;padding:16px 18px;margin:6px 0 24px;background:rgba(243,245,244,.02)}
+    .medidor .med-lab{font-family:var(--sg);font-weight:700;font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--niebla);margin:0 0 6px}
+    .medidor .med-verdicto{font-family:var(--sg);font-weight:700;font-size:1.25rem;margin:0 0 12px}
+    .medidor.listo .med-verdicto{color:var(--aurora)}
+    .medidor.cerca .med-verdicto{color:#E0A458}
+    .medidor.lejos .med-verdicto{color:var(--niebla)}
+    .med-barra{position:relative;height:8px;border-radius:6px;background:rgba(141,161,171,.22);overflow:visible;margin:0 0 8px}
+    .med-fill{position:absolute;left:0;top:0;bottom:0;border-radius:6px;background:var(--aurora)}
+    .medidor.cerca .med-fill{background:#E0A458}
+    .medidor.lejos .med-fill{background:var(--fiordo)}
+    .med-linea{position:absolute;left:76%;top:-3px;bottom:-3px;width:2px;background:var(--nieve);opacity:.7}
+    .med-num{font-family:var(--sg);font-size:.76rem;color:var(--niebla);margin:0 0 6px}
+    .med-msg{font-size:.98rem;color:var(--nieve);margin:0}
+    .med-gar{font-family:var(--sg);font-size:.76rem;color:var(--aurora);margin:8px 0 0}
     .captura{border-top:1px solid var(--linea);margin-top:26px;padding-top:22px}
     .captura h2{font-size:1.1rem;margin-bottom:8px}
     .captura p{color:var(--niebla);font-size:.98rem;margin-bottom:14px;max-width:48ch}
