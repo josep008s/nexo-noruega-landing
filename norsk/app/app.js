@@ -636,7 +636,60 @@
       s.appendChild(el("button", { class: "btn ghost", text: "Otro simulacro", onclick: empezarSimulacro }));
     }
     s.appendChild(el("button", { class: "btn ghost", text: "Volver al inicio", onclick: renderInicio }));
+
+    // Captura de email opcional (solo demo): lead magnet para la futura newsletter.
+    if (!state.acceso && ses.examen === "demo") {
+      s.appendChild(capturaEmail(correctasPunt, mec.puntuables));
+    }
     $app.appendChild(s);
+  }
+
+  // Captura de email opcional al terminar la demo. Consentimiento explícito.
+  // Reutiliza /api/lead/ (Supabase). Sin backend configurado, degrada a "guardado" igualmente.
+  function capturaEmail(aciertos, total) {
+    var box = el("div", { class: "captura" });
+    box.appendChild(el("h2", { text: "Guarda tu resultado y prepárate mejor" }));
+    box.appendChild(el("p", { text: "Te enviamos tu resultado y un plan de estudio de 10 días para el examen. Y, si quieres, NEXO NORUEGA cuando arranque: cómo funciona de verdad la vida aquí." }));
+
+    var input = el("input", { type: "email", autocomplete: "email", placeholder: "tu@correo.com", "aria-label": "Tu correo" });
+    box.appendChild(input);
+
+    var lbl = el("label", { class: "consent" });
+    var chk = el("input", { type: "checkbox" });
+    lbl.appendChild(chk);
+    lbl.appendChild(el("span", { text: "Quiero recibir la newsletter NEXO NORUEGA cuando arranque." }));
+    box.appendChild(lbl);
+
+    var msg = el("p", { class: "ok", role: "status", "aria-live": "polite", text: "" });
+    var btn = el("button", { class: "btn", text: "Guardar mi resultado" });
+    btn.addEventListener("click", function () {
+      var email = (input.value || "").trim();
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { msg.textContent = "Escribe un correo válido."; input.focus(); return; }
+      btn.disabled = true; btn.textContent = "Guardando…";
+      var params = new URLSearchParams(window.location.search);
+      fetch("/api/lead/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: email,
+          source: "norsk-demo",
+          confianza: total ? Math.round((aciertos / total) * 100) : null,
+          newsletter: chk.checked,
+          utm_source: params.get("utm_source") || "",
+          utm_medium: params.get("utm_medium") || "",
+          utm_campaign: params.get("utm_campaign") || "norsk",
+        }),
+      }).then(function () {
+        msg.textContent = "Guardado. Cuando el curso o la newsletter arranquen, te escribimos.";
+        input.disabled = true; chk.disabled = true; btn.style.display = "none";
+      }).catch(function () {
+        btn.disabled = false; btn.textContent = "Guardar mi resultado";
+        msg.textContent = "No se pudo guardar. Prueba de nuevo en un momento.";
+      });
+    });
+    box.appendChild(btn);
+    box.appendChild(msg);
+    return box;
   }
 
   // ---------- pantalla: lecciones ----------

@@ -116,6 +116,19 @@ returns table (
 $$;
 ```
 
+## Captura de leads de la demo (opcional)
+
+Al terminar el simulacro de la demo, la app ofrece guardar el resultado por email
+(consentimiento explícito para la newsletter). Usa `api/lead.js` → tabla `leads`.
+Para activarlo cuando configures Supabase, añade dos columnas a `leads`:
+
+```sql
+alter table leads add column if not exists source text;
+alter table leads add column if not exists newsletter boolean default false;
+```
+Sin `SUPABASE_URL`/`SUPABASE_SERVICE_KEY`, la captura degrada a "guardado" sin persistir
+(no rompe la experiencia). El embudo previsto: demo → email (source `norsk-demo`) → newsletter.
+
 ## Runbook: publicar/actualizar el banco
 
 El canónico editorial vive en el Drive: `Business/Nexo Noruega/norsk/banco/BANCO_PREGUNTAS_NORSK_v1.xlsx`
