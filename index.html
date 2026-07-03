@@ -164,6 +164,7 @@
       transition: background-size 0.25s ease, color 0.2s ease;
     }
     .header-cta:hover { background-size: 100% 1px; color: var(--nieve); }
+    .header-nav { display: flex; align-items: center; gap: 20px; }
 
     /* ============ Bloques base ============ */
     .oscuro { background: var(--noche); color: var(--nieve); position: relative; }
@@ -827,7 +828,10 @@
         </svg>
         <span>Nexo Noruega</span>
       </a>
-      <a class="header-cta" href="https://nexonoruega.substack.com/subscribe">Suscríbete</a>
+      <nav class="header-nav">
+        <a class="header-cta" href="/norsk/">Norsk</a>
+        <a class="header-cta" href="https://nexonoruega.substack.com/subscribe">Suscríbete</a>
+      </nav>
     </div>
   </header>
 
@@ -1082,6 +1086,7 @@
       </div>
       <nav class="footer-links">
         <a href="https://nexonoruega.substack.com">Ediciones</a>
+        <a href="/norsk/">Examen de ciudadanía</a>
         <a href="https://substack.com/privacy">Privacidad</a>
       </nav>
     </div>
