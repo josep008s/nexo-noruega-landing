@@ -28,7 +28,7 @@
     "@context": "https://schema.org",
     "@type": "Course",
     "name": "NEXO NORSK: preparación de la statsborgerprøven y la samfunnskunnskapsprøven en español",
-    "description": "Curso en español para aprobar el examen de ciudadanía noruega (statsborgerprøven) y la prueba de conocimientos sociales (samfunnskunnskapsprøven): 13 lecciones del temario oficial, 400 preguntas bilingües verificadas y simulacros con el formato oficial exacto.",
+    "description": "Curso en español para aprobar el examen de ciudadanía noruega (statsborgerprøven) y la prueba de conocimientos sociales (samfunnskunnskapsprøven): 12 lecciones del temario oficial más la Lección 0 gratuita, más de 400 preguntas bilingües verificadas y simulacros con el formato oficial exacto.",
     "url": "https://www.nexonoruega.com/norsk/",
     "inLanguage": ["es", "no"],
     "provider": { "@type": "Organization", "name": "Nexo Noruega", "url": "https://www.nexonoruega.com" },
@@ -346,11 +346,11 @@
         <div class="piezas">
           <div class="pieza reveal" style="--d:.14s">
             <p class="titulo">El curso</p>
-            <p>13 lecciones que cubren el temario oficial completo. Con el vocabulario que te vas a encontrar en noruego y el porqué de cada cosa, que es lo que hace que se recuerde.</p>
+            <p>12 lecciones que cubren el temario oficial completo, más la Lección 0 gratuita. Con el vocabulario que te vas a encontrar en noruego y el porqué de cada cosa, que es lo que hace que se recuerde.</p>
           </div>
           <div class="pieza reveal" style="--d:.22s">
             <p class="titulo">El banco</p>
-            <p>400 preguntas verificadas contra fuentes oficiales. Cada una en noruego y en español. Cada una con su explicación y su fuente, no solo la letra correcta.</p>
+            <p>Más de 400 preguntas verificadas contra fuentes oficiales. Cada una en noruego y en español. Cada una con su explicación y su fuente, no solo la letra correcta.</p>
           </div>
           <div class="pieza reveal" style="--d:.3s">
             <p class="titulo">Los simulacros</p>
@@ -377,7 +377,7 @@
       <div class="wrap">
         <p class="kicker reveal">Precios</p>
         <h2 class="reveal" style="--d:.08s">Pagas una vez. Caduca solo. Sin suscripción que olvidar.</h2>
-        <p class="nota-planes reveal" style="--d:.14s">Los tres planes incluyen exactamente lo mismo: las 13 lecciones, las 400 preguntas y simulacros ilimitados de los dos exámenes. Solo cambia cuántos días lo tienes abierto.</p>
+        <p class="nota-planes reveal" style="--d:.14s">Los tres planes incluyen exactamente lo mismo: las 12 lecciones del curso, la Lección 0, más de 400 preguntas y simulacros ilimitados de los dos exámenes. Solo cambia cuántos días lo tienes abierto.</p>
 
         <div class="planes">
           <div class="plan reveal" style="--d:.18s">
@@ -416,7 +416,7 @@
             <li>Aprobaste 5 simulacros completos distintos dentro de tu ventana de acceso.</li>
             <li>Nos envías el resultado oficial del centro de examen en un plazo de 30 días.</li>
           </ol>
-          <p class="letra">Con eso nos basta. Quien llega así al examen, aprueba. Lo dice el 92,4% de 2025.</p>
+          <p class="letra">Con eso nos basta. Quien llega así al examen, aprueba. Lo dice el 92,4% de 2025. Las <a href="/norsk/condiciones/">condiciones completas de compra y garantía</a> están publicadas, enteras.</p>
         </div>
 
         <div class="faq reveal" style="--d:.46s">
@@ -431,11 +431,11 @@
           </details>
           <details>
             <summary>¿Y si cambia mi fecha de examen?</summary>
-            <p>Tu acceso son días naturales desde la compra. Si la fecha se te va más allá de tu ventana, escríbenos antes de que caduque y lo movemos una vez sin coste.</p>
+            <p>Tu acceso son días naturales desde la compra. Si la fecha se te va más allá de tu ventana, escríbenos a norsk@nexonoruega.com antes de que caduque y lo movemos una vez sin coste.</p>
           </details>
           <details>
             <summary>¿Cómo recibo el acceso?</summary>
-            <p>Al pagar entras directamente, sin crear cuenta. Además te llega un enlace de entrada por correo que funciona en cualquier dispositivo durante toda tu ventana. Pago con tarjeta a través de Stripe.</p>
+            <p>Al pagar entras directamente, sin crear cuenta. Además te llega un enlace de entrada por correo que funciona en cualquier dispositivo durante toda tu ventana. Pago con tarjeta a través de Stripe. Tienes 14 días de desistimiento mientras no uses el contenido de pago (<a href="/norsk/condiciones/">condiciones</a>).</p>
           </details>
         </div>
       </div>
@@ -464,6 +464,8 @@
       <nav class="footer-links" aria-label="Enlaces">
         <a href="https://www.nexonoruega.com">Inicio</a>
         <a href="/norsk/que-examen-necesitas/">Guías</a>
+        <a href="/norsk/condiciones/">Condiciones</a>
+        <a href="/norsk/privacidad/">Privacidad</a>
         <a href="https://nexonoruega.substack.com">Newsletter</a>
       </nav>
     </div>
@@ -507,6 +509,16 @@
         io2.observe(ret);
       } else { activar(); }
     }
+
+    // Al volver de Stripe con el botón atrás (bfcache), los botones quedarían atascados
+    window.addEventListener("pageshow", function (e) {
+      if (e.persisted) {
+        document.querySelectorAll(".comprar").forEach(function (b) {
+          b.disabled = false;
+          b.textContent = "Empezar hoy";
+        });
+      }
+    });
 
     // Compra: POST al checkout y redirect a Stripe
     document.querySelectorAll(".comprar").forEach(function (btn) {

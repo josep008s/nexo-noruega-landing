@@ -109,6 +109,15 @@ export async function sbUpsert(table, rows, onConflict, prefer) {
   return text ? JSON.parse(text) : [];
 }
 
+export async function sbPatch(table, filterQuery, patch) {
+  const r = await fetch(`${process.env.SUPABASE_URL}/rest/v1/${table}?${filterQuery}`, {
+    method: "PATCH",
+    headers: sbHeaders({ Prefer: "return=minimal" }),
+    body: JSON.stringify(patch),
+  });
+  if (!r.ok) throw new Error(`supabase patch ${table} ${r.status}: ${await r.text()}`);
+}
+
 export async function sbRpc(fn, args) {
   const r = await fetch(`${process.env.SUPABASE_URL}/rest/v1/rpc/${fn}`, {
     method: "POST",
@@ -130,9 +139,11 @@ export async function compraActiva(compraId) {
   return c;
 }
 
-// Rate limit persistente vía RPC (ver SQL en NORSK_SETUP.md). Devuelve el contador del día.
-export async function tickUso(compraId) {
-  return sbRpc("norsk_incr_uso", { p_compra: compraId });
+// Rate limit persistente vía RPC (ver SQL en NORSK_SETUP.md). Devuelve el contador del día
+// para ese tipo. Tipos separados: "api" (práctica/simulacros) y "reenvio" (magic links),
+// para que reenviar un enlace nunca queme la cuota de estudio ni al revés.
+export async function tickUso(compraId, tipo) {
+  return sbRpc("norsk_incr_uso", { p_compra: compraId, p_tipo: tipo || "api" });
 }
 
 // ---------- Stripe REST (form-encoded, sin SDK) ----------
@@ -176,16 +187,27 @@ export async function stripe(path, params, method) {
 }
 
 // Verificación de firma del webhook (cabecera stripe-signature) sobre el body RAW.
+// Durante la rotación del secreto, Stripe firma con ambos y manda VARIAS entradas v1:
+// se acepta si cualquiera coincide (mismo criterio que el SDK oficial).
 export function stripeVerifySignature(rawBody, sigHeader, secret, toleranceSec) {
   if (!sigHeader) return false;
-  const parts = Object.fromEntries(sigHeader.split(",").map((p) => p.split("=")));
-  const t = parseInt(parts.t, 10);
+  let t = 0;
+  const v1s = [];
+  sigHeader.split(",").forEach((p) => {
+    const i = p.indexOf("=");
+    if (i === -1) return;
+    const k = p.slice(0, i).trim();
+    const v = p.slice(i + 1).trim();
+    if (k === "t") t = parseInt(v, 10);
+    else if (k === "v1") v1s.push(v);
+  });
   if (!t || Math.abs(Date.now() / 1000 - t) > (toleranceSec || 300)) return false;
-  const expected = crypto.createHmac("sha256", secret).update(`${t}.${rawBody}`).digest("hex");
-  const given = parts.v1 || "";
-  const a = Buffer.from(expected, "utf8");
-  const b = Buffer.from(given, "utf8");
-  return a.length === b.length && crypto.timingSafeEqual(a, b);
+  const expected = Buffer.from(
+    crypto.createHmac("sha256", secret).update(`${t}.${rawBody}`).digest("hex"), "utf8");
+  return v1s.some((given) => {
+    const b = Buffer.from(given, "utf8");
+    return b.length === expected.length && crypto.timingSafeEqual(expected, b);
+  });
 }
 
 // ---------- Resend ----------

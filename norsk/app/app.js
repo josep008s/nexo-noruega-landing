@@ -72,7 +72,13 @@
     (children || []).forEach(function (c) { if (c) n.appendChild(c); });
     return n;
   }
-  function limpiar() { $app.innerHTML = ""; window.scrollTo(0, 0); }
+  function limpiar() {
+    // Todo cambio de pantalla mata el reloj del simulacro: sin esto, un timer
+    // fugado puede "entregar" una sesión vieja desde otra pantalla.
+    if (relojTimer) { clearInterval(relojTimer); relojTimer = null; }
+    $app.innerHTML = "";
+    window.scrollTo(0, 0);
+  }
   function barajar(a) {
     for (var i = a.length - 1; i > 0; i--) {
       var j = Math.floor(Math.random() * (i + 1));
@@ -176,7 +182,28 @@
 
     // Menú
     var menu = el("div", { class: "menu" });
-    menu.appendChild(el("button", { class: "btn", text: "Simulacro completo", onclick: empezarSimulacro }));
+    var guardado = simulacroGuardado();
+    if (guardado) {
+      var respondidas = (guardado.respuestas || []).filter(function (r) { return r !== null; }).length;
+      menu.appendChild(el("button", {
+        class: "btn",
+        text: "Continuar simulacro (" + respondidas + " respondidas)",
+        onclick: function () { var g = simulacroGuardado(); if (g) reanudarSimulacro(g); else renderInicio(); },
+      }));
+      var nuevoBtn = el("button", { class: "btn ghost", text: "Empezar un simulacro nuevo" });
+      nuevoBtn.addEventListener("click", function () {
+        if (!nuevoBtn._confirmado) {
+          nuevoBtn._confirmado = true;
+          nuevoBtn.textContent = "¿Seguro? Borra el guardado. Pulsa otra vez";
+          return;
+        }
+        borrarSimulacro();
+        empezarSimulacro();
+      });
+      menu.appendChild(nuevoBtn);
+    } else {
+      menu.appendChild(el("button", { class: "btn", text: "Simulacro completo", onclick: empezarSimulacro }));
+    }
     menu.appendChild(el("button", { class: "btn ghost", text: "Práctica por temas", onclick: renderTemas }));
     menu.appendChild(el("button", { class: "btn ghost", text: "Las lecciones del curso", onclick: renderLecciones }));
     if (state.prog.falladas.length) {
@@ -198,29 +225,39 @@
   // Medidor de preparación: verdicto honesto según el mejor de los últimos simulacros.
   // El umbral de aprobado ronda el 75-76% (24/32 y 26/34). Sin datos, no se muestra.
   function medidorPreparacion() {
-    var conPct = state.prog.simulacros.filter(function (s) { return typeof s.pct === "number"; });
-    if (!conPct.length) return null;
-    var recientes = conPct.slice(-3);
+    // El veredicto de verdad sale SOLO de simulacros completos (36/38 preguntas).
+    // La demo (12) se muestra aparte, etiquetada, y nunca declara "Listo".
+    var reales = state.prog.simulacros.filter(function (s) { return typeof s.pct === "number" && s.examen !== "demo"; });
+    var demos = state.prog.simulacros.filter(function (s) { return typeof s.pct === "number" && s.examen === "demo"; });
+    var esDemo = !reales.length;
+    var base = esDemo ? demos : reales;
+    if (!base.length) return null;
+    var recientes = base.slice(-3);
     var mejor = recientes.reduce(function (m, s) { return Math.max(m, s.pct); }, 0);
     var aprobados = {};
     state.prog.simulacros.forEach(function (s) { if (s.aprobado && s.examen !== "demo") aprobados[s.examen + s.fecha + s.puntos] = 1; });
     var nAprob = Object.keys(aprobados).length;
 
     var banda, verdicto, msg;
-    if (mejor >= 85) { banda = "listo"; verdicto = "Listo para el examen"; msg = "Apruebas con margen. Un repaso corto el día antes y a por el pasaporte."; }
+    if (esDemo) {
+      if (mejor >= 76) { banda = "cerca"; verdicto = "La demo, dominada"; }
+      else if (mejor >= 60) { banda = "cerca"; verdicto = "Buen arranque"; }
+      else { banda = "lejos"; verdicto = "Calentando"; }
+      msg = "La demo son 12 preguntas de muestra. El veredicto real sale de los simulacros completos de 36, que se abren con el curso.";
+    } else if (mejor >= 85) { banda = "listo"; verdicto = "Listo para el examen"; msg = "Apruebas con margen. Un repaso corto el día antes y a por el pasaporte."; }
     else if (mejor >= 76) { banda = "listo"; verdicto = "Casi listo"; msg = "Ya apruebas, pero justo. Un par de simulacros más y vas sobrado."; }
     else if (mejor >= 60) { banda = "cerca"; verdicto = "Cerca"; msg = "Te falta poco. Insiste en los temas donde más fallas."; }
     else { banda = "lejos"; verdicto = "Aún no"; msg = "Practica por temas sin prisa. El examen premia entender, no memorizar."; }
 
     var card = el("div", { class: "medidor " + banda });
-    card.appendChild(el("p", { class: "med-lab", text: "Tu preparación" }));
+    card.appendChild(el("p", { class: "med-lab", text: esDemo ? "Tu preparación · demo (12 preguntas)" : "Tu preparación" }));
     card.appendChild(el("p", { class: "med-verdicto", text: verdicto }));
     var barra = el("div", { class: "med-barra", "aria-hidden": "true" }, [
       el("span", { class: "med-fill", style: "width:" + Math.min(100, mejor) + "%" }),
       el("span", { class: "med-linea", title: "línea de aprobado" }),
     ]);
     card.appendChild(barra);
-    card.appendChild(el("p", { class: "med-num", text: "Mejor simulacro: " + mejor + "% · aprobado en el 76%" }));
+    card.appendChild(el("p", { class: "med-num", text: (esDemo ? "Mejor demo: " : "Mejor simulacro: ") + mejor + "% · aprobado en el 76%" }));
     card.appendChild(el("p", { class: "med-msg", text: msg }));
     if (state.acceso && nAprob > 0) {
       card.appendChild(el("p", { class: "med-gar", text: "Simulacros aprobados: " + nAprob + " de 5 (garantía)" }));
@@ -473,10 +510,12 @@
     });
     frag.appendChild(ops);
 
-    // teclado 1/2/3
+    // teclado 1/2/3 (sin modificadores: Cmd+1 cambia de pestaña, no responde preguntas)
     var handler = function (e) {
+      if (e.ctrlKey || e.metaKey || e.altKey) return;
       if (["1", "2", "3"].indexOf(e.key) !== -1 && !elegidaYa) {
-        botones[parseInt(e.key, 10) - 1].click();
+        var b = botones[parseInt(e.key, 10) - 1];
+        if (b) b.click();
       }
     };
     document.addEventListener("keydown", handler, { once: false });
@@ -499,7 +538,7 @@
     try {
       localStorage.setItem(LS_SIM, JSON.stringify({
         examen: ses.examen, mecanica: ses.mecanica, preguntas: ses.preguntas,
-        respuestas: ses.respuestas, inicio: ses.inicio,
+        respuestas: ses.respuestas, inicio: ses.inicio, i: ses.i,
       }));
     } catch (e) {}
   }
@@ -516,7 +555,8 @@
     state.sesion = {
       modo: "simulacro", examen: guardado.examen, mecanica: guardado.mecanica,
       preguntas: guardado.preguntas, respuestas: guardado.respuestas,
-      i: 0, inicio: guardado.inicio, filtro: {},
+      i: Math.min(Math.max(guardado.i || 0, 0), guardado.preguntas.length - 1),
+      inicio: guardado.inicio, filtro: {},
     };
     var mins = state.sesion.mecanica.minutos;
     if (Date.now() - state.sesion.inicio > mins * 60000) { entregarSimulacro(); return; }
@@ -542,6 +582,8 @@
     var avisoTiempo = el("p", { class: "toggle-nota", role: "status", "aria-live": "polite", text: "" });
 
     function tic() {
+      // Si la sesión en pantalla ya no es esta, el reloj se desarma solo.
+      if (state.sesion !== ses) { clearInterval(relojTimer); return; }
       var restan = ses.mecanica.minutos * 60000 - (Date.now() - ses.inicio);
       if (restan <= 0) { clearInterval(relojTimer); entregarSimulacro(); return; }
       var m = Math.floor(restan / 60000), sg = Math.floor((restan % 60000) / 1000);
@@ -578,7 +620,11 @@
     s.appendChild(avisoTiempo);
 
     var kbd = function (e) {
-      if (["1", "2", "3"].indexOf(e.key) !== -1) botones[parseInt(e.key, 10) - 1].click();
+      if (e.ctrlKey || e.metaKey || e.altKey) return;
+      if (["1", "2", "3"].indexOf(e.key) !== -1) {
+        var b = botones[parseInt(e.key, 10) - 1];
+        if (b) b.click();
+      }
     };
     document.addEventListener("keydown", kbd);
     var obs = new MutationObserver(function () {
@@ -617,6 +663,9 @@
   function entregarSimulacro() {
     if (relojTimer) { clearInterval(relojTimer); relojTimer = null; }
     var ses = state.sesion;
+    // Guardia: solo se entrega un simulacro vivo. Nunca borrar el guardado
+    // ni corromper una práctica por una entrega fantasma.
+    if (!ses || ses.modo !== "simulacro") return;
     borrarSimulacro();
 
     var puntuables = 0, correctasPunt = 0;
@@ -716,7 +765,8 @@
           utm_medium: params.get("utm_medium") || "",
           utm_campaign: params.get("utm_campaign") || "norsk",
         }),
-      }).then(function () {
+      }).then(function (r) {
+        if (!r.ok) throw new Error("lead " + r.status);
         msg.textContent = "Guardado. Cuando el curso o la newsletter arranquen, te escribimos.";
         input.disabled = true; chk.disabled = true; btn.style.display = "none";
       }).catch(function () {
@@ -804,7 +854,7 @@
     var s = el("section", { class: "step" });
     s.appendChild(el("button", { class: "back", text: "← Volver", onclick: renderInicio }));
     s.appendChild(el("h1", { text: "Abrir el curso completo" }));
-    s.appendChild(el("p", { class: "intro", text: "Las 13 lecciones, las 400 preguntas y simulacros ilimitados de los dos exámenes. Pagas una vez y caduca solo: sin suscripción." }));
+    s.appendChild(el("p", { class: "intro", text: "Las 12 lecciones del curso, más de 400 preguntas y simulacros ilimitados de los dos exámenes. Pagas una vez y caduca solo: sin suscripción." }));
 
     s.appendChild(el("div", { class: "aviso", html: "¿Ya lo compraste? Entra con el enlace de tu correo o <a href=\"/norsk/acceso/\">pide que te lo reenviemos</a>." }));
 
@@ -835,9 +885,15 @@
       planes.appendChild(plan);
     });
     s.appendChild(planes);
-    s.appendChild(el("p", { class: "toggle-nota", style: "margin-top:16px", text: "Garantía sin letra enana: si completas el curso, apruebas 5 simulacros y aun así suspendes, te devolvemos el dinero y sigues gratis hasta aprobar. Condiciones completas en la página del curso." }));
+    s.appendChild(el("p", { class: "toggle-nota", style: "margin-top:16px", text: "Garantía sin letra enana: si completas el curso, apruebas 5 simulacros y aun así suspendes, te devolvemos el dinero y sigues gratis hasta aprobar." }));
+    s.appendChild(el("p", { class: "toggle-nota", html: 'Pago único, sin suscripción. <a href="/norsk/condiciones/">Condiciones y garantía</a> · <a href="/norsk/privacidad/">Privacidad</a>' }));
     $app.appendChild(s);
   }
+
+  // Al volver de Stripe con el botón atrás (bfcache), re-render limpio
+  window.addEventListener("pageshow", function (e) {
+    if (e.persisted) window.location.reload();
+  });
 
   boot();
 })();

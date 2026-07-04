@@ -27,6 +27,33 @@ if (preguntas.length < 10) {
   process.exit(1);
 }
 
+// Validación del artefacto PÚBLICO: la demo es el escaparate, nada roto sale de aquí.
+const PROHIBIDAS = /increíble|brutal|paraíso|trucos|hola chicos/i;
+const NO_PENINSULAR = /\b(celular|manejar|acá|computadora|plata|carro)\b/i;
+const errores = [];
+for (const p of preguntas) {
+  const id = p.codigo || "(sin codigo)";
+  if (!Array.isArray(p.opciones_no) || p.opciones_no.length !== 3 ||
+      !Array.isArray(p.opciones_es) || p.opciones_es.length !== 3) errores.push(`${id}: opciones != 3`);
+  if (![0, 1, 2].includes(p.correcta)) errores.push(`${id}: correcta inválida`);
+  if (!p.pregunta_no || !p.pregunta_es || !p.explicacion_es) errores.push(`${id}: campos vacíos`);
+  const es = [p.pregunta_es, p.explicacion_es, ...(p.opciones_es || [])].join(" ");
+  if (es.includes("—")) errores.push(`${id}: em dash`);
+  if (PROHIBIDAS.test(es)) errores.push(`${id}: palabra prohibida`);
+  if (NO_PENINSULAR.test(es)) errores.push(`${id}: no peninsular`);
+}
+if (publica) {
+  const esL = [publica.titulo, publica.resumen, publica.cuerpo_html,
+    ...(publica.vocab || []).map((v) => `${v.es || ""} ${v.frase_a2 || ""}`)].join(" ");
+  if (esL.includes("—")) errores.push("leccion0: em dash");
+  if (PROHIBIDAS.test(esL)) errores.push("leccion0: palabra prohibida");
+  if ((publica.vocab || []).some((v) => !v.no || !v.es)) errores.push("leccion0: vocab incompleto");
+}
+if (errores.length) {
+  console.error(`ERRORES en la demo (no se escribe nada):\n- ${errores.join("\n- ")}`);
+  process.exit(1);
+}
+
 const salida = {
   meta: {
     producto: "NEXO NORSK",
