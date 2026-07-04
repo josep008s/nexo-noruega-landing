@@ -63,7 +63,21 @@ function validarLeccion(l, errores, vistos) {
   if (!(l.orden >= 0 && l.orden <= 12)) fallo(errores, id, "orden fuera de 0-12");
   if (![1, 2, 3].includes(l.modulo) && l.orden !== 0) fallo(errores, id, "modulo fuera de 1-3");
   if (!l.titulo || !l.resumen || !l.cuerpo_html) fallo(errores, id, "faltan titulo/resumen/cuerpo_html");
-  const texto = [l.titulo, l.resumen, l.cuerpo_html].join(" ");
+
+  // vocab: estructura {no, es[, frase_a2]} y marca en la parte en español
+  if (l.vocab !== undefined && !Array.isArray(l.vocab)) fallo(errores, id, "vocab no es un array");
+  const vocab = Array.isArray(l.vocab) ? l.vocab : [];
+  vocab.forEach((v, i) => {
+    if (!v || typeof v.no !== "string" || !v.no.trim() || typeof v.es !== "string" || !v.es.trim()) {
+      fallo(errores, id, `vocab[${i}]: falta 'no' o 'es'`);
+    }
+    if (v && v.frase_a2 !== undefined && typeof v.frase_a2 !== "string") {
+      fallo(errores, id, `vocab[${i}]: frase_a2 no es texto`);
+    }
+  });
+  const vocabEs = vocab.map((v) => `${(v && v.es) || ""} ${(v && v.frase_a2) || ""}`).join(" ");
+
+  const texto = [l.titulo, l.resumen, l.cuerpo_html, vocabEs].join(" ");
   if (texto.includes("—")) fallo(errores, id, "em dash (—) en la lección");
   if (PROHIBIDAS.test(texto)) fallo(errores, id, "palabra prohibida de marca");
   if (NO_PENINSULAR.test(texto)) fallo(errores, id, "marcador no peninsular");
@@ -130,6 +144,31 @@ const filas = verificadas.map((p) => ({
 
 await subir("norsk_preguntas", filas, "codigo");
 console.log(`Subidas ${filas.length} preguntas a norsk_preguntas.`);
+
+// Desactivar lo retirado: cualquier pregunta activa en Supabase que ya no esté
+// "verificada" en el canónico deja de servirse (norsk_muestra filtra por activa).
+{
+  const url = process.env.SUPABASE_URL;
+  const key = process.env.SUPABASE_SERVICE_KEY;
+  const canonicos = new Set(filas.map((f) => f.codigo));
+  const r = await fetch(`${url}/rest/v1/norsk_preguntas?select=codigo&activa=is.true&limit=10000`, {
+    headers: { apikey: key, Authorization: `Bearer ${key}` },
+  });
+  if (!r.ok) throw new Error(`Supabase listar codigos ${r.status}: ${await r.text()}`);
+  const enDb = await r.json();
+  const huerfanas = enDb.map((x) => x.codigo).filter((c) => !canonicos.has(c));
+  for (const codigo of huerfanas) {
+    const p = await fetch(`${url}/rest/v1/norsk_preguntas?codigo=eq.${encodeURIComponent(codigo)}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json", apikey: key, Authorization: `Bearer ${key}`, Prefer: "return=minimal" },
+      body: JSON.stringify({ activa: false, updated_at: new Date().toISOString() }),
+    });
+    if (!p.ok) throw new Error(`Supabase desactivar ${codigo} ${p.status}: ${await p.text()}`);
+  }
+  console.log(huerfanas.length
+    ? `Desactivadas ${huerfanas.length} preguntas retiradas: ${huerfanas.join(", ")}`
+    : "Sin preguntas retiradas que desactivar.");
+}
 
 if (lecciones.length) {
   await subir("norsk_lecciones", lecciones.map((l) => ({

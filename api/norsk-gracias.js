@@ -14,7 +14,12 @@ export default async function handler(req, res) {
     const session = await stripe(`checkout/sessions/${encodeURIComponent(sessionId)}`);
     if (session.payment_status !== "paid") { res.status(402).json({ ok: false, error: "impago" }); return; }
 
-    const plan = PLANES[session.metadata && session.metadata.plan] ? session.metadata.plan : "p30";
+    // Solo sesiones NORSK (metadata.plan la pone api/norsk-checkout.js).
+    const plan = session.metadata && session.metadata.plan;
+    if (!Object.prototype.hasOwnProperty.call(PLANES, plan)) {
+      res.status(400).json({ ok: false, error: "producto" });
+      return;
+    }
     const email = ((session.customer_details && session.customer_details.email) || "").toLowerCase();
     const expiresAt = new Date(Date.now() + PLANES[plan].dias * 86400000);
 

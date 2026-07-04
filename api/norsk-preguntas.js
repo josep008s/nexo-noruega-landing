@@ -44,11 +44,15 @@ export default async function handler(req, res) {
     return;
   }
 
+  // Fail-closed: si el rate limit no funciona (RPC ausente, permisos), NO se sirve
+  // el banco sin tope. compraActiva ya pasó por Supabase, así que esto es config rota.
   try {
-    const usos = await tickUso(compra.id);
+    const usos = await tickUso(compra.id, "api");
     if (usos > 120) { res.status(429).json({ ok: false, error: "limite" }); return; }
   } catch (e) {
     console.error("norsk-preguntas uso", e);
+    res.status(503).json({ ok: false, error: "uso" });
+    return;
   }
 
   const q = req.query || {};
@@ -69,7 +73,7 @@ export default async function handler(req, res) {
       return;
     }
 
-    const examen = SIMULACROS[q.examen] ? q.examen : "statsborger";
+    const examen = Object.prototype.hasOwnProperty.call(SIMULACROS, q.examen) ? q.examen : "statsborger";
     const spec = SIMULACROS[examen];
     const bloques = await Promise.all(
       Object.entries(spec.porModulo).map(([mod, n]) =>

@@ -8,7 +8,8 @@ export default async function handler(req, res) {
   if (req.method !== "POST") { res.status(405).json({ ok: false, error: "method" }); return; }
 
   const body = await readBody(req);
-  const plan = PLANES[body.plan] ? body.plan : null;
+  // hasOwnProperty: "constructor" y compañía no son planes.
+  const plan = Object.prototype.hasOwnProperty.call(PLANES, body.plan) ? body.plan : null;
   if (!plan) { res.status(400).json({ ok: false, error: "plan" }); return; }
 
   try {
@@ -17,6 +18,15 @@ export default async function handler(req, res) {
       locale: "es",
       customer_creation: "if_required",
       metadata: { plan },
+      // Consentimiento expreso (angrerettloven): checkbox obligatorio de condiciones
+      // + texto de entrega inmediata. Requiere la URL de condiciones configurada en
+      // el Dashboard de Stripe (ver NORSK_SETUP.md).
+      consent_collection: { terms_of_service: "required" },
+      custom_text: {
+        terms_of_service_acceptance: {
+          message: "Acepto que el acceso empiece de inmediato y que, al usar el contenido de pago, pierdo el derecho de desistimiento de 14 días. [Condiciones](https://www.nexonoruega.com/norsk/condiciones/)",
+        },
+      },
       line_items: [{
         quantity: 1,
         price_data: {

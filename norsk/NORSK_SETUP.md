@@ -71,14 +71,18 @@ create table if not exists norsk_compras (
   starts_at             timestamptz not null default now(),
   expires_at            timestamptz not null,
   status                text not null default 'activa',
+  email_enviado         boolean not null default false,
   created_at            timestamptz default now()
 );
 
+-- Contadores separados por tipo: 'api' (práctica/simulacros, tope 120/día)
+-- y 'reenvio' (magic links, tope 3/día). Así reenviar no quema estudio ni al revés.
 create table if not exists norsk_uso (
   compra_id  uuid references norsk_compras(id),
   dia        date not null default current_date,
+  tipo       text not null default 'api',
   peticiones integer not null default 0,
-  primary key (compra_id, dia)
+  primary key (compra_id, dia, tipo)
 );
 
 alter table norsk_preguntas enable row level security;
@@ -87,13 +91,14 @@ alter table norsk_compras   enable row level security;
 alter table norsk_uso       enable row level security;
 -- Sin políticas anon: solo la service_role key (desde api/) lee y escribe.
 
--- Rate limit atómico. p_coste 1 por petición normal, 40 por reenvío de magic link.
-create or replace function norsk_incr_uso(p_compra uuid, p_coste int default 1)
+-- Rate limit atómico por tipo de uso.
+create or replace function norsk_incr_uso(p_compra uuid, p_tipo text default 'api', p_coste int default 1)
 returns integer language plpgsql security definer as $$
 declare v int;
 begin
-  insert into norsk_uso (compra_id, dia, peticiones) values (p_compra, current_date, p_coste)
-  on conflict (compra_id, dia) do update set peticiones = norsk_uso.peticiones + p_coste
+  insert into norsk_uso (compra_id, dia, tipo, peticiones)
+  values (p_compra, current_date, coalesce(p_tipo, 'api'), p_coste)
+  on conflict (compra_id, dia, tipo) do update set peticiones = norsk_uso.peticiones + p_coste
   returning peticiones into v;
   return v;
 end $$;
@@ -168,11 +173,29 @@ Tarjeta de test: `4242 4242 4242 4242`, cualquier fecha futura y CVC.
 > en producción**, usa la URL **con barra**: `https://www.nexonoruega.com/api/norsk-webhook/`.
 > Si la registras sin barra, Stripe recibe un 308 en el POST y podría no reintentar en la URL nueva.
 
+## Legales (obligatorio antes de la primera venta)
+
+- Páginas publicadas: `/norsk/condiciones/` (compra, angrerett, garantía formal, reclamaciones)
+  y `/norsk/privacidad/` (RGPD, encargados, derechos). Enlazadas desde el footer de /norsk,
+  la pantalla de compra de la app y la FAQ.
+- **Rellenar el bloque [RAZÓN SOCIAL · org.nr./NIF · dirección]** en ambas páginas con la
+  entidad que facture (LLC/ENK/autónomo). Sin esto NO se lanza.
+- **Stripe Dashboard** → Settings → Business → Public details: poner la URL de términos
+  `https://www.nexonoruega.com/norsk/condiciones/` y la de privacidad. El checkout usa
+  `consent_collection.terms_of_service=required` (checkbox obligatorio) + texto de
+  consentimiento de entrega inmediata (angrerett): si la URL no está configurada,
+  la creación de la Checkout Session FALLA. Probar en test mode.
+- Crear el buzón **norsk@nexonoruega.com** (o alias) y que lo lea alguien: es el canal de
+  desistimiento, garantía y derechos RGPD.
+
 ## Checklist E2E antes de lanzar
 
 - [ ] `curl -X POST localhost:3000/api/norsk-checkout/ -d '{"plan":"p30"}' -H 'Content-Type: application/json'` → 200 con url; `{"plan":"px"}` → 400. (Usa la barra final; sin ella hay 308.)
-- [ ] Compra test completa → 1 fila en `norsk_compras` + 1 email de Resend + `/norsk/gracias/?session_id=…` pone cookie y da acceso.
-- [ ] Replay del mismo evento (`stripe events resend …` o reenvío desde el Dashboard) → sigue habiendo 1 fila y 1 email.
+- [ ] Compra test completa → 1 fila en `norsk_compras` + 1 email de Resend (`email_enviado=true`) + `/norsk/gracias/?session_id=…` pone cookie y da acceso.
+- [ ] Replay del mismo evento (`stripe events resend …` o reenvío desde el Dashboard) → sigue habiendo 1 fila y 1 email (el flag `email_enviado` lo garantiza aunque /gracias insertara primero).
+- [ ] Un `checkout.session.completed` SIN `metadata.plan` (p. ej. creado a mano en el Dashboard) → el webhook responde `ignored: not-norsk` y NO crea acceso.
+- [ ] `stripe trigger charge.refunded` sobre la compra test → la fila pasa a `status=revocada` y la API devuelve 401.
+- [ ] 4º POST del día a `/api/norsk-reenviar/` con el mismo email → responde ok constante pero NO envía email (contador `reenvio` a 3); la cuota de práctica NO baja por reenviar.
 - [ ] `/api/norsk-preguntas/?modo=practica` sin cookie → 401; con cookie → 10 preguntas; `?modo=simulacro&examen=statsborger` → 36 con 4 `piloto:true`; `?examen=samfunns` → 38 con 4 piloto.
 - [ ] Petición 121 del día → 429.
 - [ ] Webhook con firma manipulada → 400.

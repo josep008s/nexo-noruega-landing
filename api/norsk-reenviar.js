@@ -16,9 +16,11 @@ export default async function handler(req, res) {
     const rows = await sbSelect(
       `norsk_compras?email=eq.${encodeURIComponent(email)}&status=eq.activa&expires_at=gt.${encodeURIComponent(new Date().toISOString())}&select=id,expires_at&order=expires_at.desc&limit=1`);
     if (rows.length) {
-      // Máx 3 reenvíos/día por compra (mismo contador de uso, coste 40 por reenvío sobre el tope de 120).
-      const usos = await sbRpc("norsk_incr_uso", { p_compra: rows[0].id, p_coste: 40 });
-      if (usos <= 120) {
+      // Máx 3 reenvíos/día por compra, en contador PROPIO (tipo "reenvio"): ni un
+      // atacante con tu email puede quemarte la cuota de estudio, ni reenviar el
+      // enlace te descuenta práctica. Peor caso de abuso: 3 correos/día a su dueño.
+      const usos = await sbRpc("norsk_incr_uso", { p_compra: rows[0].id, p_tipo: "reenvio", p_coste: 1 });
+      if (usos <= 3) {
         await sendMagicLink(email, rows[0].id, new Date(rows[0].expires_at).getTime());
       }
     }
