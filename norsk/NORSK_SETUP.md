@@ -26,7 +26,20 @@ URL: https://www.nexonoruega.com/norsk/ · Rector: `Business/Nexo Noruega/norsk/
 | `RESEND_API_KEY` | Prod/Preview | dominio nexonoruega.com verificado (SPF/DKIM) |
 | `NORSK_SITE_URL` | opcional | por defecto https://www.nexonoruega.com |
 
-## SQL (Supabase → SQL Editor, ejecutar una vez)
+## Aplicar el esquema (una vez)
+
+El esquema completo y al día está en `supabase/migrations/0001_norsk_schema.sql`. Dos vías:
+- **Studio**: Supabase → SQL Editor → pegar el archivo → Run.
+- **CLI**: `supabase link --project-ref <ref>` (con `SUPABASE_ACCESS_TOKEN`) y `supabase db push`.
+
+Después, verificar el backend SIN Stripe:
+```bash
+SUPABASE_URL=… SUPABASE_SERVICE_KEY=… node scripts/norsk_selftest.mjs
+```
+Comprueba el esquema, las RPCs, el muestreo 36/38 por módulo, los contadores separados
+api/reenvio y la revocación. Luego subir el contenido con `norsk_build_banco.mjs`.
+
+## SQL (referencia; la fuente es supabase/migrations/0001_norsk_schema.sql)
 
 ```sql
 create table if not exists norsk_preguntas (
