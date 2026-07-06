@@ -109,13 +109,17 @@ export async function sbUpsert(table, rows, onConflict, prefer) {
   return text ? JSON.parse(text) : [];
 }
 
+// Devuelve las filas afectadas (return=representation): sirve para un compare-and-swap
+// (PATCH con filtro condicional → si vuelve fila, esta invocación "ganó").
 export async function sbPatch(table, filterQuery, patch) {
   const r = await fetch(`${process.env.SUPABASE_URL}/rest/v1/${table}?${filterQuery}`, {
     method: "PATCH",
-    headers: sbHeaders({ Prefer: "return=minimal" }),
+    headers: sbHeaders({ Prefer: "return=representation" }),
     body: JSON.stringify(patch),
   });
   if (!r.ok) throw new Error(`supabase patch ${table} ${r.status}: ${await r.text()}`);
+  const t = await r.text();
+  return t ? JSON.parse(t) : [];
 }
 
 export async function sbRpc(fn, args) {

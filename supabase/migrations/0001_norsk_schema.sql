@@ -108,6 +108,7 @@ returns table (
          correcta, explicacion_es, fuente, nivel
   from norsk_preguntas
   where activa
+    and leccion > 0   -- las 12 de lección 0 son la demo pública, nunca entran al muro de pago
     and (p_modulo is null or modulo = p_modulo)
     and (p_leccion is null or leccion = p_leccion)
   order by random()
