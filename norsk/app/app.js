@@ -98,6 +98,12 @@
       return new Date(iso).toLocaleDateString("es-ES", { day: "numeric", month: "long" });
     } catch (e) { return ""; }
   }
+  // Nombre del examen para el encabezado del simulacro. La API no envía 'nombre' en
+  // su mecánica, así que se deriva de examen (Statsborgerprøven / Samfunnskunnskapsprøven).
+  function nombreExamen(ses) {
+    return (ses.mecanica && ses.mecanica.nombre) ||
+      (MECANICA[ses.examen] && MECANICA[ses.examen].nombre) || "Simulacro";
+  }
 
   // Nota: todas las rutas de /api/ llevan barra final. vercel.json tiene
   // trailingSlash:true, que 308-redirige /api/x -> /api/x/. El navegador sigue
@@ -581,7 +587,7 @@
     var s = el("section", { class: "step" });
 
     var prog = el("div", { class: "progreso" });
-    prog.appendChild(el("span", { text: (ses.mecanica.nombre || "Simulacro") + " · " + (ses.i + 1) + " de " + ses.preguntas.length }));
+    prog.appendChild(el("span", { text: nombreExamen(ses) + " · " + (ses.i + 1) + " de " + ses.preguntas.length }));
     var reloj = el("span", { class: "reloj", "aria-hidden": "true", text: "" });
     prog.appendChild(reloj);
     s.appendChild(prog);
@@ -696,7 +702,7 @@
 
     limpiar();
     var s = el("section", { class: "step" });
-    s.appendChild(el("p", { class: "kicker", text: mec.nombre || "Simulacro" }));
+    s.appendChild(el("p", { class: "kicker", text: nombreExamen(ses) }));
     s.appendChild(el("p", { class: "res-num" + (aprobado ? "" : " mal"), text: correctasPunt + "/" + mec.puntuables }));
     s.appendChild(el("p", { class: "res-veredicto", text: aprobado ? "Aprobado." : "Todavía no." }));
 
