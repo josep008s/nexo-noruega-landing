@@ -21,7 +21,13 @@ export default async function handler(req, res) {
       // enlace te descuenta práctica. Peor caso de abuso: 3 correos/día a su dueño.
       const usos = await sbRpc("norsk_incr_uso", { p_compra: rows[0].id, p_tipo: "reenvio", p_coste: 1 });
       if (usos <= 3) {
-        await sendMagicLink(email, rows[0].id, new Date(rows[0].expires_at).getTime());
+        try {
+          await sendMagicLink(email, rows[0].id, new Date(rows[0].expires_at).getTime());
+        } catch (e) {
+          // El correo no salió: se devuelve el crédito para no quemar la cuota.
+          await sbRpc("norsk_incr_uso", { p_compra: rows[0].id, p_tipo: "reenvio", p_coste: -1 }).catch(() => {});
+          throw e;
+        }
       }
     }
   } catch (e) {

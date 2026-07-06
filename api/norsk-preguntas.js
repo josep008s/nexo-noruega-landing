@@ -44,15 +44,22 @@ export default async function handler(req, res) {
     return;
   }
 
-  // Fail-closed: si el rate limit no funciona (RPC ausente, permisos), NO se sirve
-  // el banco sin tope. compraActiva ya pasó por Supabase, así que esto es config rota.
+  // Rate limit con reintento: un hipo transitorio de la RPC no debe echar a un
+  // comprador legítimo. Se reintenta 2 veces; si aún falla (Supabase caído), se
+  // sirve igualmente (fail-open) porque el usuario ya pagó: bloquearlo es peor que
+  // un rato sin tope. El tope real se restablece en cuanto la RPC responde.
   try {
-    const usos = await tickUso(compra.id, "api");
-    if (usos > 120) { res.status(429).json({ ok: false, error: "limite" }); return; }
+    let usos = null;
+    for (let intento = 0; intento < 3 && usos === null; intento++) {
+      try { usos = await tickUso(compra.id, "api"); }
+      catch (e) {
+        if (intento === 2) { console.error("norsk-preguntas uso (fail-open)", e); break; }
+        await new Promise((r) => setTimeout(r, 200));
+      }
+    }
+    if (usos !== null && usos > 120) { res.status(429).json({ ok: false, error: "limite" }); return; }
   } catch (e) {
     console.error("norsk-preguntas uso", e);
-    res.status(503).json({ ok: false, error: "uso" });
-    return;
   }
 
   const q = req.query || {};

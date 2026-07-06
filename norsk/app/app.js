@@ -40,6 +40,13 @@
       p.temas = p.temas || {};
       p.falladas = p.falladas || [];
       p.simulacros = p.simulacros || [];
+      // Backfill: simulacros de versiones anteriores no guardaban pct. Se reconstruye
+      // desde puntos + mecánica para que el medidor no se quede en blanco.
+      p.simulacros.forEach(function (s) {
+        if (typeof s.pct !== "number" && s && MECANICA[s.examen] && typeof s.puntos === "number") {
+          s.pct = Math.round((s.puntos / MECANICA[s.examen].puntuables) * 100);
+        }
+      });
       return p;
     } catch (e) { return { temas: {}, falladas: [], simulacros: [] }; }
   }
@@ -304,7 +311,7 @@
         ]));
       });
       lista.appendChild(el("p", { class: "toggle-nota", style: "margin-top:10px",
-        text: "En la demo practicas con 12 preguntas de muestra. Las 400 del banco se abren con el curso." }));
+        text: "En la demo practicas con 12 preguntas de muestra. Las más de 400 del banco se abren con el curso." }));
     }
     s.appendChild(lista);
     $app.appendChild(s);
@@ -734,8 +741,8 @@
   // Reutiliza /api/lead/ (Supabase). Sin backend configurado, degrada a "guardado" igualmente.
   function capturaEmail(aciertos, total) {
     var box = el("div", { class: "captura" });
-    box.appendChild(el("h2", { text: "Guarda tu resultado y prepárate mejor" }));
-    box.appendChild(el("p", { text: "Te enviamos tu resultado y un plan de estudio de 10 días para el examen. Y, si quieres, NEXO NORUEGA cuando arranque: cómo funciona de verdad la vida aquí." }));
+    box.appendChild(el("h2", { text: "Guarda tu resultado" }));
+    box.appendChild(el("p", { text: "Deja tu correo y guardamos cómo te ha ido. Si marcas la casilla, te escribimos cuando arranque NEXO NORUEGA: cómo funciona de verdad la vida aquí." }));
 
     var input = el("input", { type: "email", autocomplete: "email", placeholder: "tu@correo.com", "aria-label": "Tu correo" });
     box.appendChild(input);
@@ -745,6 +752,7 @@
     lbl.appendChild(chk);
     lbl.appendChild(el("span", { text: "Quiero recibir la newsletter NEXO NORUEGA cuando arranque." }));
     box.appendChild(lbl);
+    box.appendChild(el("p", { class: "consent", html: 'Tratamos tu correo para guardar tu resultado y, si lo marcas, enviarte la newsletter. Detalles en <a href="/norsk/privacidad/">privacidad</a>.' }));
 
     var msg = el("p", { class: "ok", role: "status", "aria-live": "polite", text: "" });
     var btn = el("button", { class: "btn", text: "Guardar mi resultado" });
@@ -786,7 +794,7 @@
     var s = el("section", { class: "step" });
     s.appendChild(el("button", { class: "back", text: "← Volver", onclick: renderInicio }));
     s.appendChild(el("h1", { text: "El curso" }));
-    s.appendChild(el("p", { class: "intro", text: "Trece lecciones que cubren el temario oficial. La Lección 0 es gratis, la compres o no." }));
+    s.appendChild(el("p", { class: "intro", text: "12 lecciones que cubren el temario oficial, más la Lección 0 gratuita, la compres o no." }));
 
     var lista = el("div", { class: "lecciones" });
     var idx = state.lecciones.length ? state.lecciones : fallbackLecciones();

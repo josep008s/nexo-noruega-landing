@@ -8,7 +8,7 @@
 // Registrar el endpoint en Stripe CON barra final: /api/norsk-webhook/
 
 import {
-  PLANES, sbUpsert, sbSelect, sbPatch, sendMagicLink, stripeVerifySignature, readRawBody,
+  PLANES, sbUpsert, sbPatch, sendMagicLink, stripeVerifySignature, readRawBody,
 } from "./_norsk_lib.js";
 
 export const config = { api: { bodyParser: false } };
@@ -62,7 +62,7 @@ export default async function handler(req, res) {
 
   try {
     // Idempotencia por stripe_session_id UNIQUE. Da igual quién inserte primero
-    // (este webhook o /api/norsk-gracias): el email se decide por el flag.
+    // (este webhook o /api/norsk-gracias).
     await sbUpsert("norsk_compras", [{
       email,
       stripe_session_id: session.id,
@@ -73,18 +73,25 @@ export default async function handler(req, res) {
       expires_at: expiresAt.toISOString(),
     }], "stripe_session_id", "resolution=ignore-duplicates,return=minimal");
 
-    const rows = await sbSelect(
-      `norsk_compras?stripe_session_id=eq.${encodeURIComponent(session.id)}&select=id,email,expires_at,email_enviado,status`);
-    if (!rows.length) throw new Error("compra no encontrada tras upsert");
-    const compra = rows[0];
+    // Compare-and-swap: solo UNA invocación (aunque Stripe entregue el evento dos
+    // veces a la vez) pasa email_enviado de false→true y envía el correo.
+    const sid = encodeURIComponent(session.id);
+    const won = await sbPatch(
+      `norsk_compras`,
+      `stripe_session_id=eq.${sid}&email_enviado=is.false&status=eq.activa&select=id,email,expires_at`,
+      { email_enviado: true });
 
-    let enviado = false;
-    if (!compra.email_enviado && compra.status === "activa") {
-      await sendMagicLink(compra.email, compra.id, new Date(compra.expires_at).getTime());
-      await sbPatch("norsk_compras", `id=eq.${compra.id}`, { email_enviado: true });
-      enviado = true;
+    if (won.length) {
+      const c = won[0];
+      try {
+        await sendMagicLink(c.email, c.id, new Date(c.expires_at).getTime());
+      } catch (e) {
+        // Rollback del flag para que un reintento (o /acceso) pueda reenviar.
+        await sbPatch(`norsk_compras`, `id=eq.${c.id}`, { email_enviado: false }).catch(() => {});
+        throw e;
+      }
     }
-    res.status(200).json({ ok: true, email_enviado: enviado });
+    res.status(200).json({ ok: true, email_enviado: won.length > 0 });
   } catch (e) {
     // 500 a propósito: Stripe reintenta durante 3 días si Supabase o Resend fallan.
     console.error("norsk-webhook", e);
