@@ -12,8 +12,8 @@ import { readSessionCookie, compraActiva, tickUso, sbRpc, sbSelect } from "./_no
 
 // Reparto por módulo (proporcional al peso del banco 26/37/37).
 const SIMULACROS = {
-  statsborger: { total: 36, piloto: 4, porModulo: { 1: 9, 2: 13, 3: 14 } },
-  samfunns: { total: 38, piloto: 4, porModulo: { 1: 10, 2: 14, 3: 14 } },
+  statsborger: { nombre: "Statsborgerprøven", total: 36, piloto: 4, porModulo: { 1: 9, 2: 13, 3: 14 } },
+  samfunns: { nombre: "Samfunnskunnskapsprøven", total: 38, piloto: 4, porModulo: { 1: 10, 2: 14, 3: 14 } },
 };
 
 const CAMPOS = "codigo,modulo,leccion,tema,pregunta_no,pregunta_es,opciones_no,opciones_es,correcta,explicacion_es,fuente,nivel";
@@ -95,7 +95,7 @@ export default async function handler(req, res) {
 
     res.status(200).json({
       ok: true, modo, examen,
-      mecanica: { total: spec.total, puntuables: spec.total - spec.piloto, aprobado: examen === "statsborger" ? 24 : 26, minutos: 60 },
+      mecanica: { nombre: spec.nombre, total: spec.total, puntuables: spec.total - spec.piloto, aprobado: examen === "statsborger" ? 24 : 26, minutos: 60 },
       preguntas,
     });
   } catch (e) {
