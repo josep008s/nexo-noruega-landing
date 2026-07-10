@@ -212,6 +212,9 @@
     .plan .dias{color:var(--fiordo);font-size:.98rem}
     .plan .lema{color:var(--fiordo);font-size:.95rem;font-style:italic;min-height:3em}
     .plan button{margin-top:10px}
+    .plan .pronto{font-family:var(--sg);font-weight:700;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--fiordo);border:1px dashed rgba(44,90,114,.5);border-radius:6px;text-align:center;padding:12px;margin-top:10px}
+    .espera{background:rgba(63,203,148,.10);border:1px solid rgba(63,203,148,.45);border-radius:14px;padding:24px;margin:6px 0 26px;max-width:70ch}
+    .espera p{font-size:1.08rem;color:var(--noche);margin-bottom:14px}
     .ancla{font-size:1.05rem;max-width:58ch}
     .garantia{background:rgba(44,90,114,.06);border:1px solid var(--linea-clara);border-radius:14px;padding:24px;margin-top:30px;max-width:70ch}
     .garantia h3{font-family:var(--sg);font-weight:700;font-size:1.05rem;margin-bottom:10px;color:var(--noche)}
@@ -386,7 +389,7 @@
             <p class="precio">249 <small>kr</small></p>
             <p class="dias">10 días de acceso</p>
             <p class="lema">Tienes fecha y está cerca.</p>
-            <button class="cta comprar" data-plan="p10">Empezar hoy</button>
+            <p class="pronto">Abre muy pronto</p>
           </div>
           <div class="plan reco reveal" style="--d:.26s">
             <p class="badge">Recomendado</p>
@@ -394,7 +397,7 @@
             <p class="precio">349 <small>kr</small></p>
             <p class="dias">30 días de acceso</p>
             <p class="lema">La preparación normal. A nadie le hace falta más de un mes.</p>
-            <button class="cta comprar" data-plan="p30">Empezar hoy</button>
+            <p class="pronto">Abre muy pronto</p>
           </div>
           <div class="plan reveal" style="--d:.34s">
             <p class="badge">&nbsp;</p>
@@ -402,8 +405,13 @@
             <p class="precio">449 <small>kr</small></p>
             <p class="dias">90 días de acceso</p>
             <p class="lema">Aún no tienes fecha. Empieza ya y resérvala con el temario fresco.</p>
-            <button class="cta comprar" data-plan="p90">Empezar hoy</button>
+            <p class="pronto">Abre muy pronto</p>
           </div>
+        </div>
+
+        <div class="espera reveal" style="--d:.36s">
+          <p><b>La venta abre muy pronto.</b> El curso está terminado y verificado; estamos cerrando los últimos trámites. Suscríbete a la newsletter y te avisamos el día que abra. Mientras tanto, el simulacro y la Lección 0 son gratis y ya funcionan.</p>
+          <a class="cta" href="https://nexonoruega.substack.com/subscribe">Avísame cuando abra</a>
         </div>
 
         <p class="ancla reveal" style="--d:.38s">Cada intento del examen oficial se paga: 1.100 coronas en Oslo, 1.200 en Trondheim, y entre 300 y 1.800 según el municipio. Prepararlo bien cuesta menos que un solo intento. Y se paga una vez.</p>

@@ -26,6 +26,11 @@ function duro(msg) { duros.push(msg); }
 function aviso(msg) { avisos.push(msg); }
 function ok(msg) { oks.push(msg); }
 
+// Modo: pre-venta (venta:false) o venta abierta (venta:true). Fuente: norsk/MODO.json.
+let VENTA = false;
+try { VENTA = JSON.parse(read("norsk/MODO.json")).venta === true; } catch (e) { /* sin MODO.json = pre-venta */ }
+ok(`modo: ${VENTA ? "VENTA ABIERTA" : "pre-venta (lista de espera, sin checkout)"}`);
+
 // Páginas publicables (indexables o de venta). Excluye app/gracias/acceso.
 const PUBLICABLES = [
   "norsk/index.html", "norsk/leccion-0/index.html", "norsk/preguntas-de-ejemplo/index.html",
@@ -36,12 +41,30 @@ const PUBLICABLES = [
 const LEGALES = ["norsk/condiciones/index.html", "norsk/privacidad/index.html"];
 const PROHIBIDAS = /increíble|brutal|paraíso|hola chicos/i;
 
-// 1) Placeholders legales
+// 1) Placeholders legales (duro con venta abierta; aviso en pre-venta, donde las
+// condiciones declaran que entran en vigor con la primera venta)
 for (const f of LEGALES) {
   if (!exists(f)) { duro(`Falta la página legal ${f}`); continue; }
   const h = read(f);
-  if (/\[RAZ[OÓ]N SOCIAL/i.test(h)) duro(`${f}: sigue el placeholder [RAZÓN SOCIAL · org.nr. · dirección] sin rellenar`);
-  else ok(`${f}: titular rellenado`);
+  if (/\[RAZ[OÓ]N SOCIAL/i.test(h)) {
+    if (VENTA) duro(`${f}: placeholder [RAZÓN SOCIAL] sin rellenar y la venta está ABIERTA`);
+    else aviso(`${f}: placeholder del titular pendiente (obligatorio antes de abrir la venta)`);
+  } else ok(`${f}: titular rellenado`);
+}
+
+// 1b) Coherencia del modo en el código
+{
+  const landing = read("norsk/index.html");
+  const app = read("norsk/app/app.js");
+  const hayBotones = landing.includes('class="cta comprar"');
+  const appFlag = /var VENTA_ABIERTA = (true|false);/.exec(app);
+  const appVenta = appFlag ? appFlag[1] === "true" : null;
+  if (appVenta === null) duro("norsk/app/app.js: falta el flag VENTA_ABIERTA");
+  else if (appVenta !== VENTA) duro(`incoherencia de modo: MODO.json venta=${VENTA} pero app.js VENTA_ABIERTA=${appVenta}`);
+  else ok(`app.js VENTA_ABIERTA=${appVenta} coherente con MODO.json`);
+  if (!VENTA && hayBotones) duro("pre-venta: la landing aún tiene botones de compra activos (.cta comprar)");
+  if (VENTA && !hayBotones) duro("venta abierta: la landing no tiene botones de compra");
+  if (!VENTA && !hayBotones) ok("landing sin checkout en pre-venta (lista de espera)");
 }
 
 // 2) Enlaces internos resuelven en TODAS las páginas
