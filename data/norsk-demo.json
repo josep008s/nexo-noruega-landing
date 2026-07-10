@@ -1,0 +1,372 @@
+{
+ "meta": {
+  "producto": "NEXO NORSK",
+  "actualizado": "2026-07-04",
+  "fuente_temario": "Forskrift om læreplan i samfunnskunnskap for voksne innvandrere (FOR-2021-06-20-2054)",
+  "mecanica": {
+   "statsborger": {
+    "total": 36,
+    "puntuables": 32,
+    "aprobado": 24,
+    "minutos": 60,
+    "idioma": "solo noruego (bokmål/nynorsk)"
+   },
+   "samfunns": {
+    "total": 38,
+    "puntuables": 34,
+    "aprobado": 26,
+    "minutos": 60,
+    "idioma": "23 idiomas, incluido español"
+   }
+  }
+ },
+ "preguntas": [
+  {
+   "codigo": "NORSK-M1-L00-D01",
+   "modulo": 1,
+   "leccion": 0,
+   "tema": "Educación: Lånekassen",
+   "pregunta_no": "Hva er Lånekassen?",
+   "pregunta_es": "¿Qué es Lånekassen?",
+   "opciones_no": [
+    "En bank som gir boliglån til familier",
+    "En statlig etat som gir stipend og lån til elever og studenter",
+    "En del av Nav som betaler penger til arbeidsledige"
+   ],
+   "opciones_es": [
+    "Un banco que da hipotecas a las familias",
+    "Un organismo estatal que da becas y préstamos a alumnos y estudiantes",
+    "Una parte de NAV que paga prestaciones a los parados"
+   ],
+   "correcta": 1,
+   "explicacion_es": "Lånekassen existe desde 1947, depende del Ministerio de Educación y financia a quien estudia, desde videregående hasta la universidad y la formación de adultos. No es un banco ni es NAV, aunque los tres mueven dinero público, y ahí caen muchos candidatos. Su lema lo dice todo: 'hacemos posible la educación'. El sistema está diseñado para que nadie deje de estudiar por falta de dinero.",
+   "fuente": "https://lanekassen.no/nb-NO/presse-og-samfunnskontakt/om-lanekassen/ (consultado 2026-07-02)",
+   "nivel": 1
+  },
+  {
+   "codigo": "NORSK-M1-L00-D02",
+   "modulo": 1,
+   "leccion": 0,
+   "tema": "Trabajo: contrato escrito",
+   "pregunta_no": "Hvem har rett til skriftlig arbeidsavtale?",
+   "pregunta_es": "¿Quién tiene derecho a un contrato de trabajo por escrito?",
+   "opciones_no": [
+    "Bare de som har fast jobb",
+    "Bare de som jobber mer enn én måned",
+    "Alle arbeidstakere, i alle arbeidsforhold"
+   ],
+   "opciones_es": [
+    "Solo quien tiene un puesto fijo",
+    "Solo quien trabaja más de un mes",
+    "Todos los trabajadores, en cualquier relación laboral"
+   ],
+   "correcta": 2,
+   "explicacion_es": "La arbeidsmiljøloven § 14-5 no deja grietas: contrato escrito en todas las relaciones laborales, sin excepciones, y redactarlo es responsabilidad del empleador. El distractor del mes confunde el derecho con el plazo: si el empleo dura más de un mes, el contrato debe estar listo como muy tarde 7 días después de empezar; si dura menos, de inmediato. Ese plazo de 7 días es el vigente tras la reforma de 2024, así que ojo con los test antiguos.",
+   "fuente": "https://www.arbeidstilsynet.no/arbeidsforhold/arbeidsavtale/ (consultado 2026-07-02)",
+   "nivel": 2
+  },
+  {
+   "codigo": "NORSK-M1-L00-D03",
+   "modulo": 1,
+   "leccion": 0,
+   "tema": "Impuestos: skattekort",
+   "pregunta_no": "Hva er et skattekort?",
+   "pregunta_es": "¿Qué es un skattekort?",
+   "opciones_no": [
+    "Et dokument som viser hvor mye skatt arbeidsgiveren skal trekke fra lønnen din",
+    "En oversikt over inntekt, fradrag og formue for året som gikk",
+    "Et fritak fra skatt for dem som tjener lite"
+   ],
+   "opciones_es": [
+    "Un documento que indica cuánto impuesto debe retener tu empleador del salario",
+    "Un resumen de ingresos, deducciones y patrimonio del año anterior",
+    "Una exención de impuestos para quien gana poco"
+   ],
+   "correcta": 0,
+   "explicacion_es": "El skattekort lo emite Skatteetaten y actúa antes de cobrar: le dice a tu empleador cuánto retener de cada nómina. La segunda opción describe la skattemelding, la declaración que compruebas y entregas como muy tarde el 30 de abril; la tercera es el frikort, la exención para quien gana poco. Tres piezas del mismo engranaje, y el examen adora que las confundas. En Noruega el impuesto se ajusta mes a mes, no de golpe a final de año.",
+   "fuente": "https://www.skatteetaten.no/person/skatt/skattekort/ (consultado 2026-07-02)",
+   "nivel": 2
+  },
+  {
+   "codigo": "NORSK-M2-L00-D04",
+   "modulo": 2,
+   "leccion": 0,
+   "tema": "Salud: legevakt y números de emergencia",
+   "pregunta_no": "Du er syk om natten, men det er ikke fare for livet. Hvem ringer du?",
+   "pregunta_es": "Estás enfermo por la noche, pero tu vida no corre peligro. ¿A quién llamas?",
+   "opciones_no": [
+    "113",
+    "Legevakten på 116 117",
+    "Politiet på 112"
+   ],
+   "opciones_es": [
+    "Al 113",
+    "A la legevakt, al 116 117",
+    "A la policía, al 112"
+   ],
+   "correcta": 1,
+   "explicacion_es": "Todos los municipios tienen legevakt las 24 horas, y el 116 117 te conecta con la de la zona donde estés. El 113 se reserva para emergencias con riesgo vital, como un dolor de pecho de más de cinco minutos, y el 112 es la policía. La división no es burocracia: es diseño para que las urgencias vitales nunca encuentren la línea ocupada.",
+   "fuente": "https://www.helsenorge.no/hjelpetilbud-i-kommunene/legevakt/ (consultado 2026-07-02)",
+   "nivel": 1
+  },
+  {
+   "codigo": "NORSK-M2-L00-D05",
+   "modulo": 2,
+   "leccion": 0,
+   "tema": "Familia: barnevernet",
+   "pregunta_no": "Hva er den viktigste oppgaven til barnevernet?",
+   "pregunta_es": "¿Cuál es la tarea principal del barnevernet?",
+   "opciones_no": [
+    "Å flytte barn til fosterhjem så fort som mulig",
+    "Å betale barnetrygd til familier med barn",
+    "Å hjelpe familier og gi barn en trygg oppvekst"
+   ],
+   "opciones_es": [
+    "Llevar a los niños a familias de acogida lo antes posible",
+    "Pagar la prestación por hijo a las familias",
+    "Ayudar a las familias y dar a los niños una infancia segura"
+   ],
+   "correcta": 2,
+   "explicacion_es": "La misión legal del barnevernet es promover una infancia segura, y su primera línea de trabajo es apoyar a la familia con medidas en el propio hogar. La acogida en fosterhjem existe, pero solo cuando es necesaria, justo lo contrario del miedo que arrastra la primera opción. Las prestaciones por hijo son cosa de NAV, otra institución. Separar quién ayuda y quién paga es entender cómo reparte funciones el sistema noruego.",
+   "fuente": "https://www.bufdir.no/barnevern/ (consultado 2026-07-02)",
+   "nivel": 2
+  },
+  {
+   "codigo": "NORSK-M2-L00-D06",
+   "modulo": 2,
+   "leccion": 0,
+   "tema": "Familia: castigo físico",
+   "pregunta_no": "Er det lov å slå barn som en del av oppdragelsen?",
+   "pregunta_es": "¿Está permitido pegar a los niños como parte de su educación?",
+   "opciones_no": [
+    "Ja, hvis barnet gjør noe veldig galt",
+    "Ja, men bare en lett klaps",
+    "Nei, all vold mot barn er forbudt"
+   ],
+   "opciones_es": [
+    "Sí, si el niño hace algo muy grave",
+    "Sí, pero solo un cachete suave",
+    "No, toda violencia contra los niños está prohibida"
+   ],
+   "correcta": 2,
+   "explicacion_es": "La barnelova § 30 prohíbe toda violencia física y psíquica contra los niños, y añade en negro sobre blanco que la prohibición vale también cuando la violencia se usa como parte de la crianza. Los dos distractores recogen la excepción que muchos candidatos traen de casa: aquí no existe, ni por gravedad ni por intensidad. Un cachete también es ilegal. La ley no regula cuánto se puede pegar, regula que no se pega.",
+   "fuente": "https://lovdata.no/dokument/NL/lov/1981-04-08-7/KAPITTEL_6 (consultado 2026-07-02)",
+   "nivel": 2
+  },
+  {
+   "codigo": "NORSK-M2-L00-D07",
+   "modulo": 2,
+   "leccion": 0,
+   "tema": "Sociedad: dugnad",
+   "pregunta_no": "Hva er en dugnad?",
+   "pregunta_es": "¿Qué es un dugnad?",
+   "opciones_no": [
+    "Frivillig arbeid som folk gjør sammen for fellesskapet",
+    "En fest for naboene i mai",
+    "En avgift alle må betale til borettslaget"
+   ],
+   "opciones_es": [
+    "Trabajo voluntario que la gente hace junta por la comunidad",
+    "Una fiesta de vecinos en mayo",
+    "Una cuota obligatoria que se paga a la comunidad de vecinos"
+   ],
+   "correcta": 0,
+   "explicacion_es": "El dugnad es trabajo voluntario colectivo sin pagar: la comunidad de vecinos, la barnehage o el club deportivo se arreglan entre todos. No es una fiesta ni una cuota, aunque a veces lo parezca porque suele acabar con café y bollos. No es obligación legal, pero sí expectativa social, y esa diferencia es muy noruega: el sistema funciona porque la gente aparece sin que una ley la obligue.",
+   "fuente": "https://samfunnskunnskap.no/nb/fritid/dugnad.html (pensum oficial de samfunnskunnskap; consultado 2026-07-02)",
+   "nivel": 1
+  },
+  {
+   "codigo": "NORSK-M2-L00-D08",
+   "modulo": 2,
+   "leccion": 0,
+   "tema": "Salud: aborto",
+   "pregunta_no": "Til og med hvilken uke kan kvinnen selv bestemme om hun vil ta abort?",
+   "pregunta_es": "¿Hasta qué semana, incluida, puede la mujer decidir por sí misma si aborta?",
+   "opciones_no": [
+    "Uke 12",
+    "Uke 18",
+    "Uke 22"
+   ],
+   "opciones_es": [
+    "La semana 12",
+    "La semana 18",
+    "La semana 22"
+   ],
+   "correcta": 1,
+   "explicacion_es": "La nueva abortloven, en vigor desde el 1 de junio de 2025, fija la autodeterminación hasta el final de la semana 18; después hace falta el permiso de una abortnemnd. La semana 12 era el límite de la ley de 1975 y sigue apareciendo en materiales desactualizados, así que es la trampa perfecta en 2026. Si un test te da 12 como respuesta correcta, ese test es viejo.",
+   "fuente": "https://lovdata.no/dokument/NL/lov/2024-12-20-96/KAPITTEL_2 (consultado 2026-07-02)",
+   "nivel": 3
+  },
+  {
+   "codigo": "NORSK-M3-L00-D09",
+   "modulo": 3,
+   "leccion": 0,
+   "tema": "Historia: 17 de mayo y la Grunnloven",
+   "pregunta_no": "Hvorfor feirer Norge nasjonaldag 17. mai?",
+   "pregunta_es": "¿Por qué celebra Noruega su fiesta nacional el 17 de mayo?",
+   "opciones_no": [
+    "Fordi Norge ble fritt fra unionen med Sverige den dagen",
+    "Fordi krigen i Norge sluttet i mai 1945",
+    "Fordi Grunnloven ble ferdig 17. mai 1814"
+   ],
+   "opciones_es": [
+    "Porque Noruega se separó de la unión con Suecia ese día",
+    "Porque la guerra terminó en Noruega en mayo de 1945",
+    "Porque la Constitución quedó terminada el 17 de mayo de 1814"
+   ],
+   "correcta": 2,
+   "explicacion_es": "El 17 de mayo se celebra la Grunnloven, redactada en Eidsvoll y fechada ese día de 1814; es una de las constituciones en vigor más antiguas del mundo. Los distractores usan fechas reales pero de otras historias: la separación de Suecia fue en 1905 y la liberación tras la guerra se conmemora el 8 de mayo. Noruega no celebra una batalla ni una independencia, celebra un texto legal. Eso ya te dice mucho del país.",
+   "fuente": "https://undervisning.stortinget.no/grunnloven/norges_grunnlov/ (consultado 2026-07-02)",
+   "nivel": 1
+  },
+  {
+   "codigo": "NORSK-M3-L00-D10",
+   "modulo": 3,
+   "leccion": 0,
+   "tema": "Democracia: derecho a voto de extranjeros",
+   "pregunta_no": "Når kan utenlandske statsborgere stemme ved kommunevalg?",
+   "pregunta_es": "¿Cuándo pueden votar los extranjeros en las elecciones municipales?",
+   "opciones_no": [
+    "Når de har vært folkeregistrert i Norge de tre siste årene",
+    "Når de har fått norsk statsborgerskap",
+    "Når de har bodd i Norge i ett år"
+   ],
+   "opciones_es": [
+    "Cuando llevan empadronados en Noruega los tres últimos años",
+    "Cuando han obtenido la ciudadanía noruega",
+    "Cuando llevan un año viviendo en Noruega"
+   ],
+   "correcta": 0,
+   "explicacion_es": "La valgloven § 2-2 lo fija: tres años seguidos registrado como residente antes del día de las elecciones, además de cumplir 18 dentro del año electoral. La ciudadanía solo se exige para el stortingsvalg, y ese cruce es el error clásico; el año suelto es una cifra inventada que suena razonable. Detalle fino: a los ciudadanos nórdicos les basta con estar registrados como muy tarde el 30 de junio del año electoral. Aquí votas en tu municipio antes de ser noruego: el sistema te da voz local antes que pasaporte.",
+   "fuente": "https://lovdata.no/lov/2023-06-16-62/§2-2 (consultado 2026-07-02)",
+   "nivel": 3
+  },
+  {
+   "codigo": "NORSK-M3-L00-D11",
+   "modulo": 3,
+   "leccion": 0,
+   "tema": "Los samis: Sametinget",
+   "pregunta_no": "Hva er Sametinget?",
+   "pregunta_es": "¿Qué es el Sametinget?",
+   "opciones_no": [
+    "En domstol som dømmer i samiske saker",
+    "Et folkevalgt organ for samene i Norge",
+    "En del av Stortinget med samiske representanter"
+   ],
+   "opciones_es": [
+    "Un tribunal que juzga asuntos samis",
+    "Un órgano electo que representa al pueblo sami en Noruega",
+    "Una parte del Stortinget con representantes samis"
+   ],
+   "correcta": 1,
+   "explicacion_es": "El Sametinget es el parlamento elegido por el pueblo sami, inaugurado por el rey Olav V en 1989, con elecciones cada cuatro años el mismo día que el stortingsvalg. No es un tribunal ni una sección del Stortinget: es una institución propia, y ese matiz es justo lo que mide la pregunta. Detrás hay un reconocimiento constitucional: la Grunnloven § 108 define a los samis como urfolk, pueblo indígena de Noruega.",
+   "fuente": "https://sametinget.no/om-sametinget/om-sametinget/ (consultado 2026-07-02)",
+   "nivel": 2
+  },
+  {
+   "codigo": "NORSK-M3-L00-D12",
+   "modulo": 3,
+   "leccion": 0,
+   "tema": "Noruega y el mundo: UE y EØS",
+   "pregunta_no": "Er Norge medlem av EU?",
+   "pregunta_es": "¿Es Noruega miembro de la UE?",
+   "opciones_no": [
+    "Ja, Norge har vært medlem siden 1994",
+    "Nei, men Norge er med i EØS-avtalen",
+    "Nei, og Norge har ingen avtale med EU"
+   ],
+   "opciones_es": [
+    "Sí, es miembro desde 1994",
+    "No, pero participa en el Acuerdo EEE",
+    "No, y no tiene ningún acuerdo con la UE"
+   ],
+   "correcta": 1,
+   "explicacion_es": "Noruega dijo no a la UE en el referéndum de 1994, pero participa en el mercado interior a través del EØS-avtalen, en vigor desde el 1 de enero de ese mismo año, con las cuatro libertades incluidas. El año 1994 es la trampa: es real, solo que marca el acuerdo y el no, no una adhesión. Y la tercera opción ignora que medio ordenamiento noruego respira normativa europea vía EØS. Fuera del club, pero dentro del mercado: muy noruego.",
+   "fuente": "https://www.regjeringen.no/no/tema/europapolitikk/eos1/id115261/ (consultado 2026-07-02)",
+   "nivel": 2
+  }
+ ],
+ "leccion0": {
+  "slug": "leccion-0",
+  "titulo": "Qué examen necesitas y cómo se entra",
+  "resumen": "La mayoría llega aquí con la pregunta equivocada: \"¿aprobaré?\". Antes de eso hay otra que casi nadie se hace y que decide todo lo demás: ¿qué examen te pide tu caso? Porque en Noruega hay dos pruebas parecidas que no abren las mismas puertas, y presentarte a la que no toca es la ",
+  "cuerpo_html": "<p>La mayoría llega aquí con la pregunta equivocada: \"¿aprobaré?\". Antes de eso hay otra que casi nadie se hace y que decide todo lo demás: ¿qué examen te pide tu caso? Porque en Noruega hay dos pruebas parecidas que no abren las mismas puertas, y presentarte a la que no toca es la forma más cara de aprobar.</p>\n<h2>Dos exámenes, dos puertas</h2>\n<p>Noruega tiene dos exámenes de conocimiento de la sociedad: la <b>statsborgerprøven</b> (examen de ciudadanía) y la <b>samfunnskunnskapsprøven</b> (examen de conocimiento social). Se parecen tanto que mucha gente los confunde, pero la ley los trata distinto. La statsborgerprøven solo existe en noruego y solo sirve para la ciudadanía. La samfunnskunnskapsprøven existe en 23 idiomas, incluido el español, y aquí viene el matiz que lo cambia todo: según UDI, para la ciudadanía tiene que estar hecha en noruego; en cualquier otro idioma solo vale para la residencia permanente (UDI, 2026).</p>\n<table><thead><tr><th></th><th>Statsborgerprøven</th><th>Samfunnskunnskapsprøven</th></tr></thead><tbody>\n<tr><td>Preguntas</td><td>36 (solo 32 puntúan)</td><td>38 (solo 34 puntúan)</td></tr>\n<tr><td>Aciertos para aprobar</td><td>24 de las 32 que puntúan</td><td>26 de las 34 que puntúan</td></tr>\n<tr><td>Duración</td><td>Máximo 60 minutos</td><td>Máximo 60 minutos</td></tr>\n<tr><td>Idioma</td><td>Solo noruego (bokmål o nynorsk), nivel A2</td><td>23 idiomas, incluido el español</td></tr>\n<tr><td>Sirve para</td><td>Ciudadanía</td><td>En noruego: residencia permanente y ciudadanía. En español: solo residencia permanente</td></tr>\n<tr><td>Precio</td><td>Entre 300 y 1.800 kr según municipio</td><td>Entre 500 y 1.300 kr según municipio</td></tr>\n</tbody></table>\n<p>(Cifras oficiales de HK-dir, 2026, y requisitos de UDI, 2026. Para la ciudadanía necesitas además el noruego oral B1, con excepciones tasadas. Para la residencia permanente solicitada desde el 1 de septiembre de 2025, oral A2 más la prueba de samfunnskunnskap en un idioma que entiendas.)</p>\n<p><b>Consejo NEXO: si tu noruego llega, haz la samfunns en noruego. Un examen, dos puertas.</b></p>\n<h2>Cómo te inscribes</h2>\n<p>No hay ventanilla ni papel. Todo pasa por <b>prove.hkdir.no</b>: buscas tu prueba, pulsas \"Meld deg på\" y entras en el portal nacional de inscripción. Los pasos reales (HK-dir, 2026):</p>\n<ol>\n<li>Eliges el fylke donde vives.</li>\n<li>Ves la lista de centros examinadores (prøvesteder). Los que tienen fecha abierta salen primero.</li>\n<li>Eliges prueba y fecha, y ahí ves el precio exacto de tu municipio.</li>\n<li>Eliges cómo pagar: tarjeta, nettbank, factura o acuerdo con el centro.</li>\n<li>Registras la inscripción.</li>\n</ol>\n<p>Ojo con dos detalles. Primero: no estás inscrito hasta que eliges forma de pago y recibes confirmación por SMS y correo. Segundo: la inscripción es vinculante. Si te inscribes y no te presentas, pagas igual, salvo baja médica (HK-dir, 2026). La citación con fecha, hora y lugar llega dos semanas antes. Si necesitas adaptaciones, tienes tres días desde la inscripción para pedirlas.</p>\n<p>¿Precios? Los fija cada municipio. Verificados: Oslo cobra 1.100 kr por cualquiera de las dos pruebas (Oslo VO, 2026) y Trondheim 1.200 kr por cada una (Trondheim kommune, 2026). Para el resto, el precio de tu municipio aparece en el propio portal al elegir centro.</p>\n<p>Dos matices que ahorran dinero y disgustos:</p>\n<ul>\n<li>Si tienes \"rett og plikt\" a la formación en samfunnskunnskap, puedes hacer la samfunnskunnskapsprøven <b>gratis una vez</b>. En ese caso no te inscribes tú: contactas con el centro de tu municipio y ellos te apuntan (HK-dir, 2026). La statsborgerprøven la paga todo el mundo, siempre.</li>\n<li>Circula el mito de que en Oslo solo pueden examinarse los empadronados en Oslo. Para estas dos pruebas es falso: Oslo VO responde literalmente que sí puedes examinarte allí viviendo en otro municipio, aunque si tienes derecho a prueba gratuita en tu kommune, en Oslo la pagas (Oslo VO, 2026). La restricción por empadronamiento existe, pero es de la norskprøve, el examen de idioma. No los mezcles.</li>\n</ul>\n<h2>El día del examen</h2>\n<p>Llevas una sola cosa, pero sin ella no entras: <b>identificación física válida</b>. La lista oficial: pasaporte, tarjeta bancaria noruega con foto, carnet de conducir noruego físico, documento nacional de identidad del EEE, documentos de viaje para refugiados, tarjeta de residencia o documento de solicitante de asilo (HK-dir, 2026). El detalle que pilla a más de uno: el carnet de conducir digital del móvil <b>no vale</b>. Solo el físico.</p>\n<p>El examen se hace en un ordenador del centro. No puedes llevar el tuyo, el responsable de sala te asigna sitio, puede haber más candidatos a la vez y no se permite ningún material de ayuda. El reloj: máximo 60 minutos (HK-dir, 2026). Si haces la samfunnskunnskapsprøven, el idioma no lo elegiste al inscribirte: lo eliges allí mismo, delante de la pantalla. Y un aviso honesto: hay audio de las preguntas en 10 idiomas, pero el español no está entre ellos. En español, lees.</p>\n<p>Y el detalle que casi nadie cuenta: las dos pruebas llevan preguntas piloto escondidas. De las 38 preguntas de la samfunnskunnskapsprøven solo puntúan 34, y de las 36 de la statsborgerprøven solo puntúan 32. Las que sobran son preguntas que HK-dir está probando para exámenes futuros, y no sabes cuáles son (HK-dir, 2026). Eso también mueve el listón real: en la statsborgerprøven necesitas 24 aciertos de 32 que puntúan, un 75%, no 24 de 36. Traducción práctica: esa pregunta imposible que te hunde la moral a mitad de examen puede que no cuente para nada. Contéstala y sigue.</p>\n<h2>El resultado y qué pasa si suspendes</h2>\n<p>Aquí las dos pruebas se separan otra vez. El resultado de la statsborgerprøven lo ves <b>al día siguiente</b>, por correo electrónico y en Min side. El de la samfunnskunnskapsprøven tarda <b>de 2 a 4 semanas</b> (HK-dir, 2026). Si apruebas, el certificado (prøvebevis) llega por correo postal en 2 a 4 semanas. Guárdalo: si lo pierdes, la copia se pide al centro examinador.</p>\n<p>¿Y si suspendes? La FAQ de Oslo VO lo responde con una palabra: \"Ingenting\". Nada. Te inscribes a la siguiente convocatoria (Oslo VO, 2026). No hay límite de intentos publicado ni plazo de espera, aunque cada inscripción se paga. El único castigo con plazo es por hacer trampas: un año sin poder repetir (HK-dir, 2026).</p>\n<blockquote><b>DATO NEXO</b>: el 92,4% de quienes se presentaron a la statsborgerprøven en 2025 la aprobaron (HK-dir/NTB, marzo 2026). No es un filtro para dejarte fuera. Es un peaje de conocimiento, y la inmensa mayoría lo cruza.</blockquote>\n<h2>Antes de irte</h2>\n<p>Ya sabes más que la mayoría de los que se inscriben: qué examen pide tu caso, cuánto cuesta en tu municipio y qué pasa el día D. En Noruega no suspende quien no estudió. Suspende quien no sabía a qué examen se estaba presentando. Tú ya no eres esa persona.</p>\n<p>Cuando quieras comprobar dónde estás, tienes el simulacro gratis esperándote en la siguiente lección.</p>",
+  "vocab": [
+   {
+    "no": "prøve",
+    "es": "examen, prueba",
+    "frase_a2": "Jeg skal ta en prøve i morgen."
+   },
+   {
+    "no": "prøvested",
+    "es": "centro examinador",
+    "frase_a2": "Prøvestedet mitt er i Oslo."
+   },
+   {
+    "no": "gyldig legitimasjon",
+    "es": "identificación válida",
+    "frase_a2": "Du må ha gyldig legitimasjon på prøvedagen."
+   },
+   {
+    "no": "bestått",
+    "es": "aprobado",
+    "frase_a2": "Jeg fikk bestått på prøven!"
+   },
+   {
+    "no": "ikke bestått",
+    "es": "no aprobado, suspenso",
+    "frase_a2": "Ikke bestått betyr at du kan prøve igjen."
+   },
+   {
+    "no": "prøvebevis",
+    "es": "certificado del examen",
+    "frase_a2": "Prøvebeviset kommer i posten."
+   },
+   {
+    "no": "påmelding",
+    "es": "inscripción",
+    "frase_a2": "Påmelding er bindende."
+   },
+   {
+    "no": "statsborgerskap",
+    "es": "ciudadanía",
+    "frase_a2": "Jeg vil søke om norsk statsborgerskap."
+   },
+   {
+    "no": "permanent oppholdstillatelse",
+    "es": "residencia permanente",
+    "frase_a2": "Hun har permanent oppholdstillatelse i Norge."
+   },
+   {
+    "no": "samfunnskunnskap",
+    "es": "conocimiento de la sociedad",
+    "frase_a2": "Jeg leser om samfunnskunnskap hver dag."
+   },
+   {
+    "no": "statsborgerprøven",
+    "es": "el examen de ciudadanía",
+    "frase_a2": "Statsborgerprøven er bare på norsk."
+   },
+   {
+    "no": "fylke",
+    "es": "provincia, región",
+    "frase_a2": "Hvilket fylke bor du i?"
+   },
+   {
+    "no": "kommune",
+    "es": "municipio",
+    "frase_a2": "Kommunen bestemmer prisen på prøven."
+   },
+   {
+    "no": "hjelpemidler",
+    "es": "materiales de ayuda",
+    "frase_a2": "Hjelpemidler er ikke tillatt på prøven."
+   },
+   {
+    "no": "innkalling",
+    "es": "citación, convocatoria",
+    "frase_a2": "Innkallingen kommer to uker før prøven."
+   }
+  ]
+ }
+}
