@@ -12,6 +12,11 @@
   var LS = "nexo_norsk_v1";
   var LS_SIM = "nexo_norsk_simulacro";
 
+  // Pre-venta: mientras sea false, no hay checkout ni captura propia de emails;
+  // la lista de espera va por Substack. Abrir la venta = poner true (y tener
+  // backend + legales completos; lo vigila scripts/norsk_prelaunch_check.mjs).
+  var VENTA_ABIERTA = false;
+
   var MECANICA = {
     statsborger: { total: 36, puntuables: 32, aprobado: 24, minutos: 60, nombre: "Statsborgerprøven" },
     samfunns: { total: 38, puntuables: 34, aprobado: 26, minutos: 60, nombre: "Samfunnskunnskapsprøven" },
@@ -744,8 +749,16 @@
   }
 
   // Captura de email opcional al terminar la demo. Consentimiento explícito.
-  // Reutiliza /api/lead/ (Supabase). Sin backend configurado, degrada a "guardado" igualmente.
+  // Reutiliza /api/lead/ (Supabase). En pre-venta no hay backend que guarde nada:
+  // la lista de espera va por Substack (honesto, y captura de verdad).
   function capturaEmail(aciertos, total) {
+    if (!VENTA_ABIERTA) {
+      var caja = el("div", { class: "captura" });
+      caja.appendChild(el("h2", { text: "El curso completo abre muy pronto" }));
+      caja.appendChild(el("p", { text: "Suscríbete a la newsletter y te avisamos el día que abra. Es también donde contamos cómo funciona de verdad la vida aquí." }));
+      caja.appendChild(el("a", { class: "btn", href: "https://nexonoruega.substack.com/subscribe", text: "Avísame cuando abra" }));
+      return caja;
+    }
     var box = el("div", { class: "captura" });
     box.appendChild(el("h2", { text: "Guarda tu resultado" }));
     box.appendChild(el("p", { text: "Deja tu correo y guardamos cómo te ha ido. Si marcas la casilla, te escribimos cuando arranque NEXO NORUEGA: cómo funciona de verdad la vida aquí." }));
@@ -867,6 +880,17 @@
     limpiar();
     var s = el("section", { class: "step" });
     s.appendChild(el("button", { class: "back", text: "← Volver", onclick: renderInicio }));
+
+    if (!VENTA_ABIERTA) {
+      s.appendChild(el("h1", { text: "El curso abre muy pronto" }));
+      s.appendChild(el("p", { class: "intro", text: "Está terminado y verificado: las 12 lecciones, más de 400 preguntas y los simulacros con el formato oficial exacto. Estamos cerrando los últimos trámites antes de abrir la venta." }));
+      s.appendChild(el("p", { class: "intro", text: "Suscríbete a la newsletter y te avisamos el día que abra. Mientras tanto, la demo y la Lección 0 son gratis." }));
+      s.appendChild(el("a", { class: "btn", href: "https://nexonoruega.substack.com/subscribe", text: "Avísame cuando abra" }));
+      s.appendChild(el("button", { class: "btn ghost", text: "Volver a practicar", onclick: renderInicio }));
+      $app.appendChild(s);
+      return;
+    }
+
     s.appendChild(el("h1", { text: "Abrir el curso completo" }));
     s.appendChild(el("p", { class: "intro", text: "Las 12 lecciones del curso, más de 400 preguntas y simulacros ilimitados de los dos exámenes. Pagas una vez y caduca solo: sin suscripción." }));
 
