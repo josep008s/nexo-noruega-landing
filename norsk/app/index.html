@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Practicar · NEXO NORSK</title>
+  <meta name="description" content="Práctica y simulacros de la statsborgerprøven y la samfunnskunnskapsprøven, en noruego y en español.">
+  <meta name="robots" content="noindex">
+  <link rel="canonical" href="https://www.nexonoruega.com/norsk/app/">
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 800'%3E%3Ccircle cx='400' cy='400' r='390' fill='%230E1B26'/%3E%3Cpath d='M223 532 L223 298 L320 402 L320 265' fill='none' stroke='%233FCB94' stroke-opacity='.45' stroke-width='26' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M478 532 L478 264 L577 398 L577 532' fill='none' stroke='%233FCB94' stroke-width='26' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caesar+Dressing&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --noche:#0E1B26; --nieve:#F3F5F4; --aurora:#3FCB94; --fiordo:#2C5A72; --niebla:#8DA1AB;
+      --linea:rgba(243,245,244,.12);
+      --sg:"Space Grotesk",system-ui,sans-serif;
+      --serif:"Source Serif 4",Georgia,serif;
+      --caesar:"Caesar Dressing",var(--sg);
+      --ease:cubic-bezier(0.16,1,0.3,1);
+    }
+    *{margin:0;padding:0;box-sizing:border-box}
+    html{scrollbar-color:rgba(141,161,171,.4) transparent}
+    body{font-family:var(--serif);background:var(--noche);color:var(--nieve);line-height:1.6;min-height:100svh;-webkit-font-smoothing:antialiased}
+    ::selection{background:var(--aurora);color:var(--noche)}
+    a{color:var(--aurora)}
+    a:focus-visible,button:focus-visible{outline:2px solid var(--aurora);outline-offset:3px}
+
+    header{border-bottom:1px solid var(--linea)}
+    .head-inner{max-width:680px;margin:0 auto;padding:18px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .marca{display:flex;align-items:center;gap:11px;text-decoration:none;color:var(--nieve)}
+    .marca svg{width:26px;height:26px;flex:none}
+    .marca span{font-family:var(--sg);font-weight:700;font-size:.9rem}
+    .estado{font-family:var(--sg);font-weight:500;font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--niebla)}
+    .estado.activo{color:var(--aurora)}
+
+    main{max-width:680px;margin:0 auto;padding:28px 24px 90px}
+
+    .kicker{font-family:var(--sg);font-weight:700;font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--aurora);margin-bottom:16px}
+    h1{font-family:var(--sg);font-weight:700;font-size:clamp(1.6rem,5vw,2.2rem);letter-spacing:-.02em;line-height:1.15;margin-bottom:10px}
+    h2{font-family:var(--sg);font-weight:700;font-size:1.2rem;letter-spacing:-.01em;margin-bottom:14px}
+    .intro{color:var(--niebla);font-size:1.05rem;margin-bottom:26px;max-width:52ch}
+
+    .back{background:none;border:none;color:var(--niebla);font-family:var(--sg);font-size:.82rem;cursor:pointer;padding:0;margin-bottom:20px}
+    .back:hover{color:var(--nieve)}
+
+    .step{animation:enter .45s var(--ease)}
+    @keyframes enter{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+    .hidden{display:none}
+
+    /* Cards de elección */
+    .cards{display:grid;gap:14px}
+    .card{background:rgba(243,245,244,.03);border:1px solid rgba(141,161,171,.45);border-radius:12px;padding:18px;cursor:pointer;text-align:left;color:var(--nieve);font-family:var(--serif);transition:border-color .2s,background .2s;width:100%}
+    .card:hover,.card.sel{border-color:var(--aurora);background:rgba(63,203,148,.07)}
+    .card .t{font-family:var(--sg);font-weight:700;font-size:1.05rem;display:block;margin-bottom:4px}
+    .card .m{color:var(--niebla);font-size:.9rem;display:block}
+    .card .mec{font-family:var(--sg);font-weight:500;font-size:.74rem;letter-spacing:.06em;color:var(--aurora);display:block;margin-top:8px}
+
+    .toggle{display:inline-flex;border:1px solid rgba(141,161,171,.45);border-radius:999px;overflow:hidden;margin:18px 0 6px}
+    .toggle button{background:none;border:none;color:var(--niebla);font-family:var(--sg);font-weight:700;font-size:.82rem;letter-spacing:.04em;padding:8px 18px;cursor:pointer}
+    .toggle button.sel{background:var(--aurora);color:var(--noche)}
+    .toggle-nota{color:var(--niebla);font-size:.82rem;margin-bottom:14px}
+
+    .menu{display:grid;gap:12px;margin-top:22px}
+
+    /* Lista de temas */
+    .temas{display:grid;gap:10px}
+    .tema{display:flex;justify-content:space-between;align-items:center;gap:12px;background:rgba(243,245,244,.03);border:1px solid rgba(141,161,171,.4);border-radius:10px;padding:14px 16px;cursor:pointer;color:var(--nieve);font-family:var(--serif);font-size:1rem;text-align:left;width:100%;transition:border-color .2s}
+    .tema:hover{border-color:var(--aurora)}
+    .tema .pct{font-family:var(--sg);font-weight:700;font-size:.82rem;color:var(--niebla);flex:none}
+    .tema .pct.bien{color:var(--aurora)}
+
+    /* Pregunta */
+    .progreso{font-family:var(--sg);font-weight:500;font-size:.76rem;letter-spacing:.1em;text-transform:uppercase;color:var(--niebla);margin-bottom:18px;display:flex;justify-content:space-between;gap:10px}
+    .reloj{font-variant-numeric:tabular-nums;color:var(--nieve)}
+    .reloj.poco{color:#E0A458}
+    .q-no{font-family:var(--sg);font-weight:700;font-size:1.3rem;line-height:1.3;margin-bottom:6px}
+    .q-es{color:var(--niebla);font-size:1rem;font-style:italic;margin-bottom:20px}
+    .ops{display:grid;gap:10px}
+    .op{position:relative;background:rgba(243,245,244,.03);border:1px solid rgba(141,161,171,.45);border-radius:10px;padding:14px 16px 14px 46px;cursor:pointer;color:var(--nieve);font-family:var(--serif);font-size:1.05rem;text-align:left;width:100%;transition:border-color .15s,background .15s}
+    .op .tecla{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-family:var(--sg);font-weight:700;font-size:.78rem;color:var(--niebla);border:1px solid rgba(141,161,171,.4);border-radius:4px;width:20px;height:20px;display:grid;place-items:center}
+    .op:hover:not(:disabled){border-color:var(--aurora)}
+    .op.elegida{border-color:var(--nieve)}
+    .op.acierto{border-color:var(--aurora);background:rgba(63,203,148,.12)}
+    .op.fallo{border-color:var(--fiordo);background:rgba(44,90,114,.22)}
+    .op:disabled{cursor:default}
+
+    .explica{margin-top:18px;background:rgba(63,203,148,.06);border-left:3px solid var(--aurora);border-radius:0 10px 10px 0;padding:16px 18px}
+    .explica.mal{background:rgba(44,90,114,.14);border-left-color:var(--fiordo)}
+    .explica .lab{font-family:var(--sg);font-weight:700;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--aurora);margin-bottom:6px}
+    .explica.mal .lab{color:var(--niebla)}
+    .explica p{font-size:1rem}
+    .explica .src{font-family:var(--sg);font-size:.72rem;letter-spacing:.06em;color:var(--niebla);margin-top:10px;word-break:break-all}
+    .ver-idioma{background:none;border:none;color:var(--niebla);font-family:var(--sg);font-size:.8rem;cursor:pointer;text-decoration:underline;padding:0;margin-top:10px}
+    .ver-idioma:hover{color:var(--aurora)}
+
+    .btn{display:inline-block;width:100%;font-family:var(--sg);font-weight:700;font-size:1rem;color:var(--noche);background:var(--aurora);border:none;text-align:center;padding:15px 24px;border-radius:8px;cursor:pointer;margin-top:20px;transition:transform .2s var(--ease),filter .18s;text-decoration:none}
+    .btn:hover{transform:translateY(-2px);filter:brightness(1.06)}
+    .btn.ghost{background:none;border:1px solid rgba(141,161,171,.5);color:var(--nieve)}
+    .btn:disabled{opacity:.55;cursor:default;transform:none}
+
+    /* Rejilla simulacro */
+    .rejilla{display:grid;grid-template-columns:repeat(auto-fill,minmax(38px,1fr));gap:6px;margin:16px 0}
+    .rejilla button{aspect-ratio:1;border-radius:6px;border:1px solid rgba(141,161,171,.4);background:none;color:var(--niebla);font-family:var(--sg);font-weight:700;font-size:.8rem;cursor:pointer}
+    .rejilla button.resp{background:rgba(63,203,148,.18);border-color:rgba(63,203,148,.5);color:var(--nieve)}
+    .rejilla button.act{outline:2px solid var(--aurora);outline-offset:1px}
+
+    /* Resultado */
+    .res-num{font-family:var(--caesar);font-size:clamp(3.4rem,14vw,5.5rem);color:var(--aurora);line-height:1;letter-spacing:.04em;margin:10px 0 6px}
+    .res-num.mal{color:var(--niebla)}
+    .res-veredicto{font-family:var(--sg);font-weight:700;font-size:1.3rem;margin-bottom:10px}
+    .res-nota{color:var(--niebla);font-size:1rem;max-width:50ch;margin-bottom:8px}
+    .res-mecanica{background:rgba(243,245,244,.04);border:1px solid var(--linea);border-radius:10px;padding:14px 16px;margin:18px 0;font-size:.95rem;color:var(--niebla)}
+    .res-mecanica b{color:var(--nieve);font-family:var(--sg)}
+    .desglose{display:grid;gap:6px;margin:14px 0}
+    .desglose div{display:flex;justify-content:space-between;font-family:var(--sg);font-size:.9rem;color:var(--niebla)}
+    .desglose b{color:var(--nieve)}
+
+    /* Lecciones */
+    .lecciones{display:grid;gap:10px}
+    .leccion-item{display:flex;justify-content:space-between;align-items:baseline;gap:12px;background:rgba(243,245,244,.03);border:1px solid rgba(141,161,171,.4);border-radius:10px;padding:14px 16px;cursor:pointer;color:var(--nieve);font-family:var(--serif);font-size:1rem;text-align:left;width:100%;transition:border-color .2s}
+    .leccion-item:hover{border-color:var(--aurora)}
+    .leccion-item .num{font-family:var(--sg);font-weight:700;color:var(--niebla);flex:none}
+    .leccion-item .cand{font-family:var(--sg);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--niebla);flex:none}
+    .lector{max-width:68ch}
+    .lector h2{font-size:1.5rem;margin:22px 0 12px}
+    .lector h3{font-family:var(--sg);font-size:1.1rem;margin:20px 0 8px}
+    .lector p{margin-bottom:14px;font-size:1.08rem}
+    .lector table{border-collapse:collapse;width:100%;margin:14px 0;font-size:.98rem}
+    .lector th,.lector td{border:1px solid var(--linea);padding:8px 10px;text-align:left}
+    .lector th{font-family:var(--sg);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--niebla)}
+    .lector ul,.lector ol{margin:0 0 14px 22px}
+    .lector li{margin-bottom:6px}
+    .lector blockquote{background:rgba(63,203,148,.07);border-left:3px solid var(--aurora);border-radius:0 10px 10px 0;padding:16px 18px;margin:18px 0;font-size:1.05rem;color:var(--nieve)}
+    .vocab{margin-top:26px;border-top:1px solid var(--linea);padding-top:18px}
+    .vocab dt{font-family:var(--sg);font-weight:700;color:var(--aurora)}
+    .vocab dd{color:var(--niebla);margin:0 0 10px;font-size:.98rem}
+
+    /* Compra */
+    .planes{display:grid;gap:12px;margin-top:20px}
+    .plan{border:1px solid rgba(141,161,171,.45);border-radius:12px;padding:18px}
+    .plan.reco{border-color:var(--aurora)}
+    .plan .n{font-family:var(--sg);font-weight:700}
+    .plan .p{font-family:var(--sg);font-weight:700;font-size:1.6rem}
+    .plan .d{color:var(--niebla);font-size:.9rem}
+    .aviso{background:rgba(243,245,244,.04);border:1px solid var(--linea);border-radius:10px;padding:14px 16px;margin-bottom:20px;font-size:.95rem;color:var(--niebla)}
+    .aviso a{color:var(--aurora)}
+
+    .medidor{border:1px solid rgba(141,161,171,.35);border-radius:12px;padding:16px 18px;margin:6px 0 24px;background:rgba(243,245,244,.02)}
+    .medidor .med-lab{font-family:var(--sg);font-weight:700;font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--niebla);margin:0 0 6px}
+    .medidor .med-verdicto{font-family:var(--sg);font-weight:700;font-size:1.25rem;margin:0 0 12px}
+    .medidor.listo .med-verdicto{color:var(--aurora)}
+    .medidor.cerca .med-verdicto{color:#E0A458}
+    .medidor.lejos .med-verdicto{color:var(--niebla)}
+    .med-barra{position:relative;height:8px;border-radius:6px;background:rgba(141,161,171,.22);overflow:visible;margin:0 0 8px}
+    .med-fill{position:absolute;left:0;top:0;bottom:0;border-radius:6px;background:var(--aurora)}
+    .medidor.cerca .med-fill{background:#E0A458}
+    .medidor.lejos .med-fill{background:var(--fiordo)}
+    .med-linea{position:absolute;left:76%;top:-3px;bottom:-3px;width:2px;background:var(--nieve);opacity:.7}
+    .med-num{font-family:var(--sg);font-size:.76rem;color:var(--niebla);margin:0 0 6px}
+    .med-msg{font-size:.98rem;color:var(--nieve);margin:0}
+    .med-gar{font-family:var(--sg);font-size:.76rem;color:var(--aurora);margin:8px 0 0}
+    .captura{border-top:1px solid var(--linea);margin-top:26px;padding-top:22px}
+    .captura h2{font-size:1.1rem;margin-bottom:8px}
+    .captura p{color:var(--niebla);font-size:.98rem;margin-bottom:14px;max-width:48ch}
+    .captura input[type=email]{width:100%;background:rgba(243,245,244,.04);border:1px solid rgba(141,161,171,.5);border-radius:8px;padding:14px 16px;color:var(--nieve);font-family:var(--serif);font-size:1.05rem;outline:none}
+    .captura input[type=email]:focus{border-color:var(--aurora)}
+    .captura .consent{display:flex;gap:10px;align-items:flex-start;margin-top:12px;color:var(--niebla);font-size:.88rem;cursor:pointer}
+    .captura .consent input{margin-top:3px;accent-color:var(--aurora);flex:none}
+    .captura .ok{color:var(--aurora);font-family:var(--sg);font-size:.95rem;margin-top:8px}
+
+    @media (prefers-reduced-motion:reduce){.step{animation:none}.btn:hover{transform:none}}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="head-inner">
+      <a class="marca" href="/norsk/" aria-label="NEXO NORSK">
+        <svg viewBox="0 0 800 800" aria-hidden="true">
+          <path d="M223 532 L223 298 L320 402 L320 265" fill="none" stroke="#3FCB94" stroke-opacity=".45" stroke-width="34" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M478 532 L478 264 L577 398 L577 532" fill="none" stroke="#3FCB94" stroke-width="34" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>NEXO NORSK</span>
+      </a>
+      <span class="estado" id="estado">Demo</span>
+    </div>
+  </header>
+
+  <main id="app" aria-live="polite">
+    <h1 class="visually-hidden" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">NEXO NORSK · práctica</h1>
+    <noscript><p>La práctica necesita JavaScript. Puedes leer la <a href="/norsk/leccion-0/">Lección 0</a> sin él.</p></noscript>
+  </main>
+
+  <script src="/norsk/app/app.js"></script>
+</body>
+</html>

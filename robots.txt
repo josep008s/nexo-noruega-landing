@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /norsk/app/
+Disallow: /norsk/gracias/
+Disallow: /norsk/acceso/
+
+Sitemap: https://www.nexonoruega.com/sitemap.xml
