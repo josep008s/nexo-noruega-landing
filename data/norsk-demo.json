@@ -1,7 +1,7 @@
 {
  "meta": {
   "producto": "NEXO NORSK",
-  "actualizado": "2026-07-04",
+  "actualizado": "2026-07-11",
   "fuente_temario": "Forskrift om læreplan i samfunnskunnskap for voksne innvandrere (FOR-2021-06-20-2054)",
   "mecanica": {
    "statsborger": {
@@ -31,7 +31,7 @@
    "opciones_no": [
     "En bank som gir boliglån til familier",
     "En statlig etat som gir stipend og lån til elever og studenter",
-    "En del av Nav som betaler penger til arbeidsledige"
+    "En del av NAV som betaler penger til arbeidsledige"
    ],
    "opciones_es": [
     "Un banco que da hipotecas a las familias",
@@ -180,8 +180,8 @@
    "modulo": 2,
    "leccion": 0,
    "tema": "Salud: aborto",
-   "pregunta_no": "Til og med hvilken uke kan kvinnen selv bestemme om hun vil ta abort?",
-   "pregunta_es": "¿Hasta qué semana, incluida, puede la mujer decidir por sí misma si aborta?",
+   "pregunta_no": "Etter dagens abortlov: til og med hvilken uke kan kvinnen selv bestemme om hun vil ta abort?",
+   "pregunta_es": "Según la ley de aborto vigente: ¿hasta qué semana, incluida, puede la mujer decidir por sí misma si aborta?",
    "opciones_no": [
     "Uke 12",
     "Uke 18",
@@ -202,7 +202,7 @@
    "modulo": 3,
    "leccion": 0,
    "tema": "Historia: 17 de mayo y la Grunnloven",
-   "pregunta_no": "Hvorfor feirer Norge nasjonaldag 17. mai?",
+   "pregunta_no": "Hvorfor feirer Norge nasjonaldagen 17. mai?",
    "pregunta_es": "¿Por qué celebra Noruega su fiesta nacional el 17 de mayo?",
    "opciones_no": [
     "Fordi Norge ble fritt fra unionen med Sverige den dagen",
