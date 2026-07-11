@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>El Mapa de los Primeros 90 Días · NEXO NORUEGA</title>
+  <meta name="description" content="La secuencia completa de trámites de tu llegada a Noruega, con fuentes oficiales.">
+  <meta name="robots" content="noindex,follow">
+  <link rel="canonical" href="https://www.nexonoruega.com/mapa/guia/">
+
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --noche:#0E1B26; --nieve:#F3F5F4; --aurora:#3FCB94; --fiordo:#2C5A72; --niebla:#8DA1AB;
+      --linea:rgba(243,245,244,.12);
+      --sg:"Space Grotesk",system-ui,sans-serif;
+      --serif:"Source Serif 4",Georgia,serif;
+      --ancho:760px;
+    }
+    *{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{font-family:var(--serif);background:var(--noche);color:var(--nieve);line-height:1.7;-webkit-font-smoothing:antialiased}
+    ::selection{background:var(--aurora);color:var(--noche)}
+    a{color:var(--aurora)}
+    a:focus-visible,button:focus-visible{outline:2px solid var(--aurora);outline-offset:3px}
+    .wrap{max-width:var(--ancho);margin:0 auto;padding:0 24px}
+
+    header.top{padding:22px 0;border-bottom:1px solid var(--linea)}
+    header.top .wrap{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+    .logo{font-family:var(--sg);font-weight:700;letter-spacing:.14em;font-size:.82rem;color:var(--nieve);text-decoration:none}
+    .logo b{color:var(--aurora)}
+    .acciones{display:flex;gap:10px;align-items:center}
+    .btn-mini{font-family:var(--sg);font-size:.78rem;font-weight:700;color:var(--nieve);background:transparent;border:1px solid var(--linea);border-radius:8px;padding:7px 13px;cursor:pointer;text-decoration:none}
+    .btn-mini:hover{border-color:var(--aurora)}
+
+    .cab{padding:56px 0 8px}
+    .kicker{font-family:var(--sg);font-size:.75rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--aurora);margin-bottom:14px}
+    h1{font-size:clamp(1.9rem,5vw,2.8rem);line-height:1.14;font-weight:600;margin-bottom:14px}
+    .verificado{display:inline-block;font-family:var(--sg);font-size:.75rem;font-weight:700;color:var(--noche);background:var(--aurora);border-radius:6px;padding:3px 10px;margin-bottom:22px}
+    .lede{color:var(--niebla);max-width:58ch;margin-bottom:8px}
+    .lede b{color:var(--nieve)}
+
+    .selector{position:sticky;top:0;z-index:20;background:rgba(14,27,38,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--linea);padding:12px 0;margin-top:30px}
+    .selector .wrap{display:flex;gap:10px;align-items:center}
+    .selector span{font-family:var(--sg);font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--niebla)}
+    .seg-btn{font-family:var(--sg);font-size:.85rem;font-weight:700;padding:8px 16px;border-radius:999px;border:1px solid var(--linea);background:transparent;color:var(--niebla);cursor:pointer;transition:.15s}
+    .seg-btn.activa{background:var(--aurora);color:var(--noche);border-color:var(--aurora)}
+
+    .relojes{margin:40px 0 8px;background:rgba(44,90,114,.25);border:1px solid rgba(141,161,171,.35);border-radius:16px;padding:26px 28px}
+    .relojes h2{font-family:var(--sg);font-size:1rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:16px}
+    .reloj{display:flex;gap:14px;margin-bottom:14px;align-items:flex-start}
+    .reloj:last-child{margin-bottom:0}
+    .reloj .num{font-family:var(--sg);font-weight:700;font-size:1.15rem;color:var(--aurora);flex-shrink:0;min-width:96px}
+    .reloj p{font-size:.96rem;color:var(--niebla)}
+    .reloj p b{color:var(--nieve)}
+
+    .pasos{padding:36px 0 20px;counter-reset:paso}
+    .paso{border:1px solid var(--linea);border-radius:16px;padding:26px 28px;margin-bottom:18px;counter-increment:paso}
+    .paso h3{font-family:var(--sg);font-size:1.12rem;font-weight:700;margin-bottom:10px;display:flex;gap:12px;align-items:baseline}
+    .paso h3::before{content:counter(paso,decimal-leading-zero);font-size:.85rem;color:var(--aurora);letter-spacing:.06em}
+    .paso p{font-size:.98rem;color:var(--niebla);margin-bottom:10px}
+    .paso p b{color:var(--nieve)}
+    .paso .porque{font-style:italic}
+    .badge{display:inline-block;font-family:var(--sg);font-style:normal;font-size:.7rem;font-weight:700;letter-spacing:.08em;border-radius:5px;padding:2px 8px;margin-right:6px;vertical-align:middle}
+    .badge.ue{background:rgba(63,203,148,.18);color:var(--aurora);border:1px solid rgba(63,203,148,.5)}
+    .badge.noue{background:rgba(255,157,138,.14);color:#ffb3a3;border:1px solid rgba(255,157,138,.45)}
+    .fuente{font-family:var(--sg);font-size:.78rem;color:var(--niebla);border-top:1px dashed var(--linea);padding-top:10px;margin-top:14px}
+    .fuente a{color:var(--niebla)}
+    .fuente a:hover{color:var(--nieve)}
+    .solo-ue,.solo-noue{display:none}
+    body[data-ruta="ue"] .solo-ue{display:block}
+    body[data-ruta="no-ue"] .solo-noue{display:block}
+    span.solo-ue,span.solo-noue{display:none}
+    body[data-ruta="ue"] span.solo-ue{display:inline}
+    body[data-ruta="no-ue"] span.solo-noue{display:inline}
+
+    .cierre{margin:44px 0 20px;background:rgba(63,203,148,.07);border:1px solid rgba(63,203,148,.4);border-radius:16px;padding:28px}
+    .cierre h2{font-family:var(--sg);font-size:1.05rem;font-weight:700;margin-bottom:10px}
+    .cierre p{color:var(--niebla);font-size:.96rem;margin-bottom:12px}
+    .cierre a.cta{display:inline-block;background:var(--aurora);color:var(--noche);font-family:var(--sg);font-weight:700;padding:12px 22px;border-radius:10px;text-decoration:none;margin-right:10px;margin-top:6px}
+    .cierre a.secundaria{display:inline-block;font-family:var(--sg);font-weight:700;color:var(--nieve);border:1px solid var(--linea);padding:12px 22px;border-radius:10px;text-decoration:none;margin-top:6px}
+
+    .aviso-legal{font-size:.82rem;color:var(--niebla);border-top:1px solid var(--linea);padding:26px 0 10px;margin-top:20px}
+
+    footer{border-top:1px solid var(--linea);padding:28px 0 44px;font-family:var(--sg);font-size:.8rem;color:var(--niebla)}
+    footer .wrap{display:flex;gap:18px;flex-wrap:wrap;justify-content:space-between}
+    footer a{color:var(--niebla)}
+
+    @media print{
+      body{background:#fff;color:#111}
+      .selector,.acciones,.cierre,footer{display:none}
+      .paso{break-inside:avoid;border-color:#ccc}
+      a{color:#111;text-decoration:none}
+      .fuente a::after{content:" (" attr(href) ")";font-size:.7rem}
+    }
+  </style>
+</head>
+<body data-ruta="ue">
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="/">NEXO <b>NORUEGA</b></a>
+    <div class="acciones">
+      <button class="btn-mini" onclick="window.print()">Imprimir / PDF</button>
+      <a class="btn-mini" href="/empezar/">Todo lo de NEXO</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="cab">
+    <div class="wrap">
+      <p class="kicker">El Mapa de los Primeros 90 Días</p>
+      <h1>La secuencia. El porqué de cada posición. La fuente de cada dato.</h1>
+      <span class="verificado">Verificado contra fuentes oficiales · julio 2026</span>
+      <p class="lede">Esto no es una lista de trámites, es un <b>orden</b>. Cada paso desbloquea el siguiente. Si los haces desordenados, el sistema no te castiga con un no: te castiga con semanas de espera en un limbo donde no puedes cobrar, firmar ni existir digitalmente.</p>
+    </div>
+  </section>
+
+  <div class="selector" role="tablist" aria-label="Elige tu ruta">
+    <div class="wrap">
+      <span>Tu ruta:</span>
+      <button class="seg-btn activa" id="btn-ue" role="tab" aria-selected="true">Pasaporte UE / EEE</button>
+      <button class="seg-btn" id="btn-noue" role="tab" aria-selected="false">Fuera de la UE</button>
+    </div>
+  </div>
+
+  <section>
+    <div class="wrap">
+      <div class="relojes">
+        <h2>Los 3 relojes que no perdonan</h2>
+        <div class="reloj"><span class="num">3 meses</span><p><span class="solo-ue"><b>Registro en la policía.</b> Como ciudadano UE/EEE puedes entrar sin permiso, pero si te quedas más de 3 meses estás obligado a registrarte en UDI y recoger tu registreringsbevis en la policía. Las citas escasean: pídela la primera semana.</span><span class="solo-noue"><b>Tu carné de conducir.</b> Puedes conducir con tu carné 3 meses desde la llegada. Después, para la mayoría de países fuera del EEE no hay canje: examen teórico y práctico noruego desde cero.</span></p></div>
+        <div class="reloj"><span class="num">1 de marzo</span><p><b>Barnehage (guardería).</b> Plazo único nacional de solicitud para la asignación principal de agosto. Si llegas con hijos y se te pasa, la siguiente ventana real es un año después.</p></div>
+        <div class="reloj"><span class="num">5 días</span><p><b>Skattekort.</b> Es lo que suele tardar la tarjeta fiscal una vez la pides. Sin ella tu empresa te retiene el 50% de la nómina. Pídela en cuanto tengas tu número.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pasos">
+    <div class="wrap">
+
+      <div class="paso">
+        <h3>Antes de volar: los papeles de origen</h3>
+        <p>Pasaporte vigente, partidas de nacimiento y matrimonio <b>apostilladas y traducidas</b>, títulos académicos y vida laboral. Conseguirlos desde Noruega multiplica el tiempo y el coste.</p>
+        <p class="porque solo-noue"><span class="badge noue">FUERA DE UE</span>Tu permiso de residencia y trabajo se solicita y aprueba <b>antes de viajar</b>. Para el permiso de trabajador cualificado necesitas una oferta concreta, y la resolución tarda de 1 a 4 meses según el caso. Sin permiso aprobado no hay mudanza, hay turismo.</p>
+        <p class="porque solo-ue"><span class="badge ue">UE / EEE</span>Tú puedes entrar y buscar trabajo sobre el terreno: es tu derecho de libre circulación. La preparación documental sigue siendo la misma.</p>
+        <p class="fuente">Fuente: <a href="https://www.udi.no/en/want-to-apply/work-immigration/" rel="noopener">UDI · Work immigration</a> · <a href="https://www.udi.no/en/want-to-apply/residence-under-the-eueeu-regulations/" rel="noopener">UDI · Residence under EU/EEA regulations</a></p>
+      </div>
+
+      <div class="paso">
+        <h3>El derecho a estar: registro o permiso</h3>
+        <p class="solo-ue"><span class="badge ue">UE / EEE</span>Registro online en UDI + cita presencial en la policía para el <b>registreringsbevis</b>. Es gratis y no caduca. Ojo: el papel no "te da" el derecho, lo documenta; el derecho lo da tu pasaporte y tu actividad (trabajo, estudios, medios propios).</p>
+        <p class="solo-noue"><span class="badge noue">FUERA DE UE</span>Con el permiso aprobado, al llegar tienes plazo para presentarte en la policía o el SUA a <b>recoger la tarjeta de residencia</b> y registrar biometría. Tu permiso suele estar vinculado a tu empleador: cambiar de trabajo puede exigir trámite nuevo.</p>
+        <p class="porque">Por qué aquí: todo lo que viene después (número, padrón, banco) presupone que tu estancia es legal y documentada.</p>
+        <p class="fuente">Fuente: <a href="https://www.udi.no/en/want-to-apply/residence-under-the-eueeu-regulations/" rel="noopener">UDI</a> · <a href="https://www.politiet.no/en/services/residence-permits-and-protection/" rel="noopener">Politiet · Residence</a></p>
+      </div>
+
+      <div class="paso">
+        <h3>Tu número: fødselsnummer o D-number</h3>
+        <p>El país entero funciona con un número de identidad de 11 dígitos. <b>No lo eliges tú</b>: si tu estancia va a superar los 6 meses te corresponde el fødselsnummer (el definitivo); para estancias cortas o trámites previos existe el D-number (el provisional).</p>
+        <p class="porque">Por qué importa: con D-number muchos servicios se atascan, sobre todo la banca. Si tu plan es quedarte, empuja hacia el fødselsnummer desde el primer día. Es el requisito silencioso de casi todo lo que sigue.</p>
+        <p class="fuente">Fuente: <a href="https://www.skatteetaten.no/en/person/national-registry/identitetsnummer-og-elektronisk-id/" rel="noopener">Skatteetaten · Identity numbers</a></p>
+      </div>
+
+      <div class="paso">
+        <h3>Empadronarte: el folkeregisteret</h3>
+        <p>Notificar la mudanza a Noruega exige <b>cita presencial</b> en una oficina de Skatteetaten con pasaporte y documentación de vivienda y trabajo. Las citas pueden tardar semanas: pídela nada más llegar.</p>
+        <p class="porque">Por qué aquí: del padrón cuelgan el fastlege, la barnehage y la vida municipal. Un subarriendo informal sin contrato puede bloquearte el empadronamiento: exige siempre contrato escrito.</p>
+        <p class="fuente">Fuente: <a href="https://www.skatteetaten.no/en/person/national-registry/moving/to-norway/" rel="noopener">Skatteetaten · Moving to Norway</a></p>
+      </div>
+
+      <div class="paso">
+        <h3>Skattekort: que no te retengan la mitad</h3>
+        <p>La tarjeta fiscal le dice a tu empresa cuánto retenerte. <b>Sin skattekort, la retención por defecto es del 50%.</b> Se solicita online con tu número de identidad y suele tardar unos 5 días laborables.</p>
+        <p class="porque">Por qué aquí: es rápido, es online y depende solo del paso anterior. Hazlo la misma semana en que tengas el número y tu primera nómina llegará entera.</p>
+        <p class="fuente">Fuente: <a href="https://www.skatteetaten.no/en/person/taxes/tax-deduction-card-and-advance-tax/" rel="noopener">Skatteetaten · Tax deduction card</a></p>
+      </div>
+
+      <div class="paso">
+        <h3>Banco y BankID: el cuello de botella</h3>
+        <p>Este es el trámite que a más gente atasca. Para abrir cuenta necesitas el número de identidad y verificación presencial; los bancos grandes reconocen <b>de 4 a 6 semanas</b> para clientes nuevos extranjeros. Y el BankID (tu identidad digital, emitida por el banco) es la llave de todo: Skatteetaten online, NAV, Helsenorge, Altinn, Vipps.</p>
+        <p class="porque">Por qué aquí y con prisa: empieza el proceso del banco <b>el mismo día</b> que tengas el fødselsnummer. Cada semana de retraso aquí es una semana más sin existir digitalmente.</p>
+        <p class="fuente">Fuente: <a href="https://www.bankid.no/en/private/" rel="noopener">BankID</a> · <a href="https://www.skatteetaten.no/en/person/national-registry/identitetsnummer-og-elektronisk-id/" rel="noopener">Skatteetaten</a></p>
+      </div>
+
+      <div class="paso">
+        <h3>Fastlege: tu médico de cabecera</h3>
+        <p>Con el padrón hecho tienes derecho a fastlege y lo eliges en Helsenorge (necesita BankID). En las ciudades las listas buenas están llenas: <b>apúntate a una lista aunque el médico no te convenza</b> y cámbiate después, porque sin fastlege cada consulta es más cara y más lenta.</p>
+        <p class="porque">Choque cultural incluido: el fastlege es el filtro de todo el sistema. No se va a urgencias (legevakt) por lo que resuelve el médico de cabecera.</p>
+        <p class="fuente">Fuente: <a href="https://www.helsenorge.no/en/gp/" rel="noopener">Helsenorge · GP scheme</a></p>
+      </div>
+
+      <div class="paso">
+        <h3>NAV y la folketrygden</h3>
+        <p>Si vienes a quedarte 12 meses o más, entras en la seguridad social noruega (folketrygden), normalmente de forma automática al residir y trabajar. Si tienes hijos, la <b>barnetrygd</b> (prestación por hijo) suele activarse al registrarlos, pero compruébalo: a veces hay que solicitarla.</p>
+        <p class="porque solo-ue"><span class="badge ue">UE / EEE</span>Vienes de un sistema coordinado: los formularios europeos (A1, S1, U1) evitan limbos de cobertura entre España y Noruega. Pídelos antes de salir.</p>
+        <p class="porque solo-noue"><span class="badge noue">FUERA DE UE</span>Tu cobertura depende del permiso y del tiempo de estancia previsto. Verifica tu situación concreta con NAV antes de contar con ninguna prestación.</p>
+        <p class="fuente">Fuente: <a href="https://www.nav.no/en/home/rules-and-regulations/membership-of-the-national-insurance-scheme" rel="noopener">NAV · Membership</a> · <a href="https://www.nav.no/barnetrygd/en" rel="noopener">NAV · Barnetrygd</a></p>
+      </div>
+
+      <div class="paso">
+        <h3>Vivienda estable: finn.no y el depósito</h3>
+        <p>El mercado del alquiler vive en finn.no. La regla de oro: el depósito (habitualmente 2 o 3 meses) va a una <b>depositumskonto</b>, una cuenta bloqueada a tu nombre que ni tú ni el casero podéis tocar unilateralmente. <b>Nunca por transferencia al bolsillo del casero.</b></p>
+        <p class="porque">Por qué aquí: la depositumskonto necesita banco, otro motivo para no retrasar el paso del banco. Contrato siempre por escrito; la husleieloven (ley de alquiler) te protege más de lo que crees.</p>
+        <p class="fuente">Fuente: <a href="https://www.forbrukerradet.no/" rel="noopener">Forbrukerrådet</a> · <a href="https://www.husleietvistutvalget.no/" rel="noopener">Husleietvistutvalget</a></p>
+      </div>
+
+      <div class="paso">
+        <h3>Los extras según tu caso</h3>
+        <p><b>Carné de conducir.</b> <span class="solo-ue"><span class="badge ue">UE / EEE</span>Canjeas el tuyo sin examen.</span><span class="solo-noue"><span class="badge noue">FUERA DE UE</span>La mayoría de países de Latinoamérica no están en la lista de canje: tras 3 meses toca examen noruego desde cero, y el proceso completo cuesta decenas de miles de coronas. Planifícalo como el gasto grande que es.</span></p>
+        <p><b>Homologación de títulos.</b> La gestiona HK-dir; las profesiones reguladas (sanidad, docencia y otras) tienen proceso propio con requisitos extra. Empieza pronto: son meses.</p>
+        <p><b>Barnehage.</b> Solicitud a través de tu kommune, hasta 5 centros por orden de preferencia. El plazo del 1 de marzo manda (reloj nº 2).</p>
+        <p><b>El idioma.</b> <span class="solo-ue"><span class="badge ue">UE / EEE</span>Aquí viene la paradoja: como europeo tienes la puerta abierta, pero nadie te paga el noruego. No tienes derecho a las clases gratuitas, y aun así la norskprøve y la prueba de conocimientos sociales son requisito para la residencia permanente y la ciudadanía.</span><span class="solo-noue"><span class="badge noue">FUERA DE UE</span>Según tu permiso, puedes tener derecho y obligación de horas de noruego y samfunnskunnskap. Y para la permanente y la ciudadanía hay examen.</span> Cuando llegues a ese puente, <a href="/norsk/">NEXO NORSK</a> es nuestro curso en español para la prueba.</p>
+        <p class="fuente">Fuente: <a href="https://www.vegvesen.no/en/driving-licences/driving-licence-holders/foreign-driving-licence-in-norway/" rel="noopener">Statens vegvesen</a> · <a href="https://hkdir.no/en/foreign-education" rel="noopener">HK-dir</a> · <a href="https://www.oslo.kommune.no/english/kindergarten/" rel="noopener">Oslo kommune · Kindergarten</a> · <a href="https://www.imdi.no/" rel="noopener">IMDi</a></p>
+      </div>
+
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="cierre">
+        <h2>El mapa te dice el orden. El siguiente paso es no caminar solo.</h2>
+        <p>Cada dos semanas escribo sobre cómo funciona este país por dentro, con datos verificados y sin venderte ningún cuento. Y estoy preparando el <b>Kit de los Primeros 90 Días</b>: la versión con checklists, plantillas y calendario de plazos de todo lo que acabas de leer.</p>
+        <a class="cta" href="https://nexonoruega.substack.com/subscribe">Suscribirme a la newsletter</a>
+        <a class="secundaria" href="/kit/">Ver el Kit (lista de espera)</a>
+      </div>
+      <p class="aviso-legal"><b>Lo honesto en letra pequeña:</b> esto es información y orientación general, no asesoría legal. Los datos están verificados contra las fuentes oficiales enlazadas a julio de 2026, y los trámites cambian: la fuente oficial manda siempre sobre esta guía. Para decisiones sobre tu caso concreto (permisos, recursos, plazos vencidos), consulta UDI, Skatteetaten o un advokat de extranjería.</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© NEXO NORUEGA · nexonoruega.com</span>
+    <span>
+      <a href="https://nexonoruega.substack.com">Newsletter</a> ·
+      <a href="/sueldo/">Calculadora de sueldos</a> ·
+      <a href="/legal/privacidad/">Privacidad</a>
+    </span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var btnUe = document.getElementById("btn-ue");
+  var btnNoue = document.getElementById("btn-noue");
+
+  function setRuta(r){
+    document.body.setAttribute("data-ruta", r);
+    btnUe.classList.toggle("activa", r === "ue");
+    btnNoue.classList.toggle("activa", r === "no-ue");
+    btnUe.setAttribute("aria-selected", r === "ue" ? "true" : "false");
+    btnNoue.setAttribute("aria-selected", r === "no-ue" ? "true" : "false");
+    try { localStorage.setItem("nexo_mapa_ruta", r); } catch(e){}
+  }
+
+  btnUe.addEventListener("click", function(){ setRuta("ue"); });
+  btnNoue.addEventListener("click", function(){ setRuta("no-ue"); });
+
+  var q = new URLSearchParams(window.location.search).get("ruta");
+  var guardada = null;
+  try { guardada = localStorage.getItem("nexo_mapa_ruta"); } catch(e){}
+  var inicial = (q === "no-ue" || q === "ue") ? q : (guardada === "no-ue" ? "no-ue" : "ue");
+  setRuta(inicial);
+})();
+</script>
+
+</body>
+</html>

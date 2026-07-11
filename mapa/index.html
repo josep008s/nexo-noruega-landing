@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>El Mapa de los Primeros 90 Días en Noruega · NEXO NORUEGA</title>
+  <meta name="description" content="Los trámites de tu llegada a Noruega en el orden correcto: fødselsnummer, empadronamiento, skattekort, banco, BankID, fastlege y NAV. Ruta UE y ruta no UE, con fuentes oficiales. Gratis.">
+  <link rel="canonical" href="https://www.nexonoruega.com/mapa/">
+
+  <meta property="og:title" content="Los primeros 90 días en Noruega, en el orden correcto">
+  <meta property="og:description" content="Nadie te dice el orden de los trámites. El orden es lo que te ahorra semanas. Ruta UE y ruta no UE, verificado contra fuentes oficiales.">
+  <meta property="og:image" content="https://www.nexonoruega.com/og-image.png">
+  <meta property="og:url" content="https://www.nexonoruega.com/mapa/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_ES">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --noche:#0E1B26; --nieve:#F3F5F4; --aurora:#3FCB94; --fiordo:#2C5A72; --niebla:#8DA1AB;
+      --linea:rgba(243,245,244,.12);
+      --sg:"Space Grotesk",system-ui,sans-serif;
+      --serif:"Source Serif 4",Georgia,serif;
+      --ancho:760px;
+    }
+    *{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{font-family:var(--serif);background:var(--noche);color:var(--nieve);line-height:1.7;-webkit-font-smoothing:antialiased}
+    ::selection{background:var(--aurora);color:var(--noche)}
+    a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--aurora);outline-offset:3px}
+    .wrap{max-width:var(--ancho);margin:0 auto;padding:0 24px}
+
+    header.top{padding:22px 0;border-bottom:1px solid var(--linea)}
+    header.top .wrap{display:flex;justify-content:space-between;align-items:center}
+    .logo{font-family:var(--sg);font-weight:700;letter-spacing:.14em;font-size:.82rem;color:var(--nieve);text-decoration:none}
+    .logo b{color:var(--aurora)}
+    .top a.vuelta{font-family:var(--sg);font-size:.8rem;color:var(--niebla);text-decoration:none}
+    .top a.vuelta:hover{color:var(--nieve)}
+
+    .hero{padding:72px 0 40px}
+    .kicker{font-family:var(--sg);font-size:.75rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--aurora);margin-bottom:18px}
+    h1{font-size:clamp(2rem,5.4vw,3.1rem);line-height:1.12;font-weight:600;letter-spacing:-.01em;margin-bottom:20px}
+    h1 em{color:var(--aurora);font-style:italic}
+    .lede{font-size:1.12rem;color:var(--niebla);max-width:56ch}
+    .lede b{color:var(--nieve)}
+
+    .puntos{padding:34px 0 8px;display:grid;gap:12px}
+    .punto{display:flex;gap:14px;align-items:flex-start;font-size:1.02rem}
+    .punto .tick{color:var(--aurora);font-family:var(--sg);font-weight:700;flex-shrink:0}
+    .punto span b{color:var(--nieve)}
+    .punto span{color:var(--niebla)}
+
+    .form-card{margin:44px 0 26px;background:rgba(63,203,148,.07);border:1px solid rgba(63,203,148,.4);border-radius:16px;padding:30px 28px}
+    .form-card h2{font-family:var(--sg);font-size:1.05rem;font-weight:700;margin-bottom:6px}
+    .form-card .sub{font-size:.95rem;color:var(--niebla);margin-bottom:20px}
+    .campo{margin-bottom:16px}
+    .campo label{display:block;font-family:var(--sg);font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--niebla);margin-bottom:8px}
+    input[type=email]{width:100%;padding:13px 15px;border-radius:10px;border:1px solid var(--linea);background:rgba(14,27,38,.7);color:var(--nieve);font-family:var(--sg);font-size:1rem}
+    input[type=email]::placeholder{color:rgba(141,161,171,.6)}
+    .rutas{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    @media(max-width:560px){.rutas{grid-template-columns:1fr}}
+    .ruta{position:relative}
+    .ruta input{position:absolute;opacity:0}
+    .ruta label{display:block;cursor:pointer;border:1px solid var(--linea);border-radius:10px;padding:13px 15px;font-family:var(--sg);font-size:.9rem;font-weight:500;letter-spacing:0;text-transform:none;color:var(--nieve);transition:.15s}
+    .ruta label small{display:block;color:var(--niebla);font-weight:400;font-size:.78rem;margin-top:2px}
+    .ruta input:checked + label{border-color:var(--aurora);background:rgba(63,203,148,.12)}
+    .consent{display:flex;gap:10px;align-items:flex-start;font-size:.85rem;color:var(--niebla);margin:18px 0 20px}
+    .consent input{margin-top:5px;accent-color:var(--aurora)}
+    .cta{display:inline-block;width:100%;text-align:center;background:var(--aurora);color:var(--noche);font-family:var(--sg);font-weight:700;font-size:1.02rem;padding:15px 26px;border-radius:12px;border:0;cursor:pointer;transition:.15s}
+    .cta:hover{transform:translateY(-1px);filter:brightness(1.06)}
+    .cta[disabled]{opacity:.6;cursor:wait;transform:none}
+    .nota-form{font-size:.8rem;color:var(--niebla);margin-top:14px}
+    .nota-form a{color:var(--niebla)}
+    .error{display:none;color:#ff9d8a;font-family:var(--sg);font-size:.85rem;margin-top:10px}
+
+    .quien{padding:30px 0 60px;border-top:1px solid var(--linea);margin-top:36px}
+    .quien p{color:var(--niebla);font-size:.98rem;max-width:58ch}
+    .quien b{color:var(--nieve)}
+
+    footer{border-top:1px solid var(--linea);padding:28px 0 44px;font-family:var(--sg);font-size:.8rem;color:var(--niebla)}
+    footer .wrap{display:flex;gap:18px;flex-wrap:wrap;justify-content:space-between}
+    footer a{color:var(--niebla)}
+    footer a:hover{color:var(--nieve)}
+  </style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="/">NEXO <b>NORUEGA</b></a>
+    <a class="vuelta" href="/empezar/">← Todo lo de NEXO</a>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <p class="kicker">Guía gratuita · Ruta UE y ruta no UE</p>
+      <h1>Los primeros 90 días en Noruega, <em>en el orden correcto</em>.</h1>
+      <p class="lede">Todo el mundo te dice qué trámites hay. <b>Nadie te dice el orden.</b> Y aquí el orden lo es todo: sin número no hay banco, sin banco no hay BankID, y sin BankID no existes para el sistema. Este mapa te da la secuencia exacta, verificada contra las fuentes oficiales.</p>
+    </div>
+  </section>
+
+  <section class="puntos">
+    <div class="wrap" style="display:grid;gap:12px">
+      <div class="punto"><span class="tick">→</span><span><b>La secuencia completa en 10 pasos:</b> del registro en UDI al fastlege, con el porqué de cada posición.</span></div>
+      <div class="punto"><span class="tick">→</span><span><b>Dos rutas separadas:</b> con pasaporte UE/EEE el camino es uno; sin él, otro. El mismo trámite duele distinto según tu pasaporte.</span></div>
+      <div class="punto"><span class="tick">→</span><span><b>Los 3 relojes que no perdonan:</b> los plazos que, si se te pasan, cuestan meses o dinero.</span></div>
+      <div class="punto"><span class="tick">→</span><span><b>Cada dato con su fuente oficial:</b> UDI, Skatteetaten, NAV, Helsenorge. Nada de "me han dicho que".</span></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="form-card">
+        <h2>Dime tu ruta y te llevo al mapa</h2>
+        <p class="sub">Acceso inmediato, sin esperas. Tu correo sirve para avisarte cuando el mapa se actualice (los trámites cambian).</p>
+        <form id="form-mapa" novalidate>
+          <div class="campo">
+            <label for="email">Tu correo</label>
+            <input type="email" id="email" name="email" placeholder="tu@correo.com" autocomplete="email" required>
+          </div>
+          <div class="campo">
+            <label>Tu pasaporte</label>
+            <div class="rutas">
+              <div class="ruta">
+                <input type="radio" id="ruta-ue" name="segmento" value="ue" checked>
+                <label for="ruta-ue">UE / EEE <small>España y resto de la Unión</small></label>
+              </div>
+              <div class="ruta">
+                <input type="radio" id="ruta-noue" name="segmento" value="no-ue">
+                <label for="ruta-noue">Fuera de la UE <small>Latinoamérica y resto del mundo</small></label>
+              </div>
+            </div>
+          </div>
+          <div class="consent">
+            <input type="checkbox" id="newsletter" checked>
+            <label for="newsletter">Quiero recibir también la newsletter de NEXO NORUEGA, quincenal y en español, sobre cómo funciona la vida aquí. Sin ruido, te das de baja cuando quieras.</label>
+          </div>
+          <button class="cta" id="btn-mapa" type="submit">Dame el mapa</button>
+          <p class="error" id="err-email">Revisa el correo, no parece válido.</p>
+          <p class="nota-form">Al enviar aceptas la <a href="/legal/privacidad/">política de privacidad</a>. El acceso a la guía es inmediato aunque el envío falle: aquí no hay rehenes.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section class="quien">
+    <div class="wrap">
+      <p><b>Quién firma esto.</b> Soy Rocky, ingeniero español, más de 7 años en Oslo, padre criando aquí. He pasado por cada uno de estos trámites y por el limbo que provocan cuando los haces en el orden equivocado. Esto es información y orientación, no asesoría legal: para tu caso concreto, la fuente oficial manda y un advokat decide.</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© NEXO NORUEGA · nexonoruega.com</span>
+    <span>
+      <a href="https://nexonoruega.substack.com">Newsletter</a> ·
+      <a href="/sueldo/">Calculadora de sueldos</a> ·
+      <a href="/legal/privacidad/">Privacidad</a>
+    </span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var form = document.getElementById("form-mapa");
+  var btn = document.getElementById("btn-mapa");
+  var err = document.getElementById("err-email");
+
+  function irALaGuia(seg){
+    try { localStorage.setItem("nexo_mapa_ruta", seg); } catch(e){}
+    window.location.href = "/mapa/guia/?ruta=" + encodeURIComponent(seg);
+  }
+
+  form.addEventListener("submit", function(ev){
+    ev.preventDefault();
+    err.style.display = "none";
+    var email = document.getElementById("email").value.trim().toLowerCase();
+    var seg = (form.querySelector('input[name="segmento"]:checked') || {}).value || "ue";
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ err.style.display = "block"; return; }
+    btn.disabled = true; btn.textContent = "Abriendo el mapa…";
+
+    var params = new URLSearchParams(window.location.search);
+    var payload = {
+      email: email,
+      source: "mapa",
+      segmento: seg,
+      newsletter: document.getElementById("newsletter").checked,
+      utm_source: params.get("utm_source") || "",
+      utm_medium: params.get("utm_medium") || "",
+      utm_campaign: params.get("utm_campaign") || ""
+    };
+
+    // Captura sin rehenes: el lector entra a la guía pase lo que pase con el envío.
+    var fin = false;
+    function terminar(){ if(!fin){ fin = true; irALaGuia(seg); } }
+    setTimeout(terminar, 2500);
+    fetch("/api/lead", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    }).then(terminar, terminar);
+  });
+})();
+</script>
+
+</body>
+</html>

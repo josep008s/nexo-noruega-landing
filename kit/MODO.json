@@ -1,0 +1,4 @@
+{
+  "venta": false,
+  "nota": "Pre-venta: lista de espera via api/lead (source kit-espera), sin checkout. Abrir la venta = venta:true aqui + VENTA_ABIERTA=true y CHECKOUT_URL en kit/index.html + titular en legal/privacidad. Ver PENDIENTES_EMPRESA.md."
+}

@@ -1,12 +1,13 @@
-// Captura de leads de la calculadora de sueldos -> Supabase.
+// Captura de leads (calculadora de sueldos, Mapa 90 días, lista de espera del Kit) -> Supabase.
 // Función serverless de Vercel, sin dependencias (usa fetch global, Node 18+).
 //
 // Variables de entorno necesarias (Vercel -> Settings -> Environment Variables):
 //   SUPABASE_URL          p.ej. https://xxxx.supabase.co
 //   SUPABASE_SERVICE_KEY  service_role key (solo en servidor, nunca en el cliente)
 //
-// Tabla esperada (ver SUELDO_SETUP.md):
+// Tabla esperada (ver SUELDO_SETUP.md y PENDIENTES_EMPRESA.md):
 //   leads(email text, oficio text, styrk text, confianza numeric,
+//         source text, newsletter boolean default false, segmento text,
 //         utm_source text, utm_medium text, utm_campaign text, token text,
 //         created_at timestamptz default now())
 
@@ -44,10 +45,14 @@ export default async function handler(req, res) {
     oficio: (body.oficio || "").toString().slice(0, 120),
     styrk: (body.styrk || "").toString().slice(0, 8),
     confianza: typeof body.confianza === "number" ? body.confianza : null,
-    // source distingue el embudo (p.ej. "sueldo", "norsk-demo"); newsletter = consentimiento explícito.
+    // source distingue el embudo (p.ej. "sueldo", "norsk-demo", "mapa", "kit-espera");
+    // newsletter = consentimiento explícito.
     // Requiere en la tabla leads: source text, newsletter boolean default false (ver norsk/NORSK_SETUP.md).
     source: (body.source || "").toString().slice(0, 40),
     newsletter: body.newsletter === true,
+    // segmento: la ruta del lector ("ue" | "no-ue"), el eje del catálogo de aterrizaje.
+    // Requiere en la tabla leads: segmento text.
+    segmento: (body.segmento || "").toString().slice(0, 10),
     utm_source: (body.utm_source || "").toString().slice(0, 60),
     utm_medium: (body.utm_medium || "").toString().slice(0, 60),
     utm_campaign: (body.utm_campaign || "").toString().slice(0, 120),
