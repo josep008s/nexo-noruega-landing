@@ -141,12 +141,12 @@
     <div class="wrap">
       <div class="form-card" id="bloque-espera">
         <h2>La venta todavía no está abierta</h2>
-        <p class="sub">Déjame tu correo y te aviso el día que abra, con el precio de salida de 299 NOK. Sin cuenta atrás falsa ni plazas fantasma: se abre cuando esté listo.</p>
+        <p class="sub">Déjame tu correo y en el paso siguiente confirmas el aviso, con el precio de salida de 299 NOK. Sin cuenta atrás falsa ni plazas fantasma: se abre cuando esté listo.</p>
         <form id="form-kit" novalidate>
           <input type="email" id="email-kit" placeholder="tu@correo.com" autocomplete="email" required>
           <div class="consent">
-            <input type="checkbox" id="newsletter-kit" checked>
-            <label for="newsletter-kit">Quiero recibir también la newsletter quincenal de NEXO NORUEGA mientras espero.</label>
+            <input type="checkbox" id="newsletter-kit">
+            <label for="newsletter-kit">Quiero también la newsletter quincenal de NEXO NORUEGA mientras espero.</label>
           </div>
           <button class="cta-btn" id="btn-kit" type="submit">Avísame cuando abra</button>
           <p class="error" id="err-kit">Revisa el correo, no parece válido.</p>
@@ -200,6 +200,9 @@
   // + "venta": true en kit/MODO.json (el guard comprueba la coherencia).
   var VENTA_ABIERTA = false;
   var CHECKOUT_URL = "";
+  // Dónde se entrega el Kit tras pagar. El guard bloquea abrir la venta sin esto:
+  // cobrar sin entrega es lo único que no se puede deshacer con un commit.
+  var ENTREGA_URL = "";
 
   if (VENTA_ABIERTA && CHECKOUT_URL) {
     document.getElementById("bloque-espera").style.display = "none";
@@ -221,9 +224,10 @@
     btn.disabled = true; btn.textContent = "Apuntando…";
 
     var params = new URLSearchParams(window.location.search);
-    fetch("/api/lead", {
+    fetch("/api/lead/", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
+      keepalive: true,
       body: JSON.stringify({
         email: email,
         source: "kit-espera",

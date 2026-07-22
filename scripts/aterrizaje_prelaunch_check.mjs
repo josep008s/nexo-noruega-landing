@@ -38,7 +38,7 @@ const PUBLICABLES = [
   "kit/index.html",
   "legal/privacidad/index.html",
 ];
-const PROHIBIDAS = /increíble|brutal|paraíso|hola chicos/i;
+const PROHIBIDAS = /increíble|brutal|paraíso|trucos|hola chicos/i;
 
 // Enlaces internos a islas de otra rama pendiente de merge (aviso, no bloqueo).
 // Vacío desde que feat/norsk entró en main: /norsk/ ya existe y sus enlaces
@@ -97,6 +97,19 @@ if (!duros.some((d) => d.includes("em dash") || d.includes("prohibida"))) {
   else ok("CHECKOUT_URL coherente con el modo");
 }
 
+// 4b) Con la venta ABIERTA tiene que existir la ENTREGA. Abrir el checkout sin
+// producto ni flujo de entrega sería cobrar por algo que nadie recibe.
+if (VENTA) {
+  const h = exists("kit/index.html") ? read("kit/index.html") : "";
+  const entrega = /var ENTREGA_URL = "([^"]+)";/.exec(h);
+  if (!entrega || !entrega[1]) {
+    duro("venta del Kit ABIERTA pero sin ENTREGA_URL en kit/index.html: el comprador pagaría y no recibiría nada");
+  } else ok(`entrega configurada: ${entrega[1]}`);
+  if (!exists("kit/gracias/index.html")) {
+    duro("venta del Kit ABIERTA pero falta kit/gracias/ (página de post-pago con el acceso)");
+  } else ok("kit/gracias/ existe");
+}
+
 // 5) Enlaces internos resuelven (en las páginas nuevas)
 {
   let rotos = 0;
@@ -117,7 +130,7 @@ if (!duros.some((d) => d.includes("em dash") || d.includes("prohibida"))) {
       }
     }
   }
-  if (!rotos) ok("enlaces internos correctos (los de /norsk/ quedan avisados hasta su merge)");
+  if (!rotos) ok("enlaces internos correctos (incluidos los de /norsk/, ya en main)");
 }
 
 // 6) api/lead.js tiene el campo segmento
@@ -125,6 +138,31 @@ if (!duros.some((d) => d.includes("em dash") || d.includes("prohibida"))) {
   const h = exists("api/lead.js") ? read("api/lead.js") : "";
   if (!h.includes("segmento")) duro("api/lead.js: falta el campo segmento (lo usa /mapa)");
   else ok("api/lead.js con campo segmento");
+}
+
+// 6b) Los formularios llaman a la API con barra final (trailingSlash: true en
+// vercel.json convierte /api/lead en un 308 innecesario en cada envío)
+for (const f of ["mapa/index.html", "kit/index.html"]) {
+  if (!exists(f)) continue;
+  const h = read(f);
+  if (/fetch\("\/api\/[a-z-]+"/.test(h)) duro(`${f}: fetch a /api/... sin barra final (trailingSlash provoca redirección 308)`);
+}
+if (!duros.some((d) => d.includes("barra final"))) ok("los formularios llaman a /api/lead/ con barra final");
+
+// 6c) DESTINO DE LOS LEADS. Sin Supabase, api/lead.js degrada a console.log:
+// el correo capturado no es recuperable en la práctica. No bloquea el repo,
+// pero quien publique tiene que saber que hoy el único canal real es Substack.
+{
+  const conSupabase = Boolean(process.env.SUPABASE_URL && process.env.SUPABASE_SERVICE_KEY);
+  const paginasConEmbed = ["mapa/guia/index.html", "kit/index.html"]
+    .filter((f) => exists(f) && read(f).includes("substack.com/embed"));
+  if (!conSupabase) {
+    if (paginasConEmbed.length === 2) {
+      aviso("sin Supabase: los leads de /api/lead solo van a log. El alta real la salva el embed de Substack en /mapa/guia y /kit (verificado). El dato de segmento UE/no-UE SÍ se pierde hasta activar Supabase.");
+    } else {
+      duro("sin Supabase y sin embed de Substack en /mapa/guia y /kit: los correos capturados se perderían sin ningún canal real de alta");
+    }
+  } else ok("Supabase configurado: los leads se almacenan");
 }
 
 // 7) Env vars (solo con --env)

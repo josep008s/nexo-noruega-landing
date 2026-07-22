@@ -141,8 +141,8 @@
             </div>
           </div>
           <div class="consent">
-            <input type="checkbox" id="newsletter" checked>
-            <label for="newsletter">Quiero recibir también la newsletter de NEXO NORUEGA, quincenal y en español, sobre cómo funciona la vida aquí. Sin ruido, te das de baja cuando quieras.</label>
+            <input type="checkbox" id="newsletter">
+            <label for="newsletter">Quiero también la newsletter de NEXO NORUEGA, quincenal y en español, sobre cómo funciona la vida aquí. Te la confirmas en el paso siguiente, en un clic. Sin ruido, te das de baja cuando quieras.</label>
           </div>
           <button class="cta" id="btn-mapa" type="submit">Dame el mapa</button>
           <p class="error" id="err-email">Revisa el correo, no parece válido.</p>
@@ -207,13 +207,16 @@
     };
 
     // Captura sin rehenes: el lector entra a la guía pase lo que pase con el envío.
+    // keepalive permite que la petición sobreviva a la navegación, así que el
+    // corte a los 2500 ms no cancela el envío en vuelo.
     var fin = false;
     function terminar(){ if(!fin){ fin = true; irALaGuia(seg, quiereNl); } }
     setTimeout(terminar, 2500);
-    fetch("/api/lead", {
+    fetch("/api/lead/", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload)
+      body: JSON.stringify(payload),
+      keepalive: true
     }).then(terminar, terminar);
   });
 })();

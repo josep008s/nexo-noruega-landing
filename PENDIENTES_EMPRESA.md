@@ -85,11 +85,23 @@ El guard bloquea cualquier incoherencia entre los tres (y exige el PASO 1 hecho)
 
 ---
 
-## Notas de coordinación entre ramas
+## Qué pasa HOY con los correos (importante)
 
-- **El sitemap** vive en la rama feat/norsk. Al mergear las dos ramas, añadir
-  `/mapa/` y `/kit/` al `sitemap.xml` (son indexables; /empezar y /mapa/guia son noindex).
-- **Los enlaces a /norsk/** en /empezar y /mapa/guia dan 404 hasta que feat/norsk
-  (PR #17) entre en main. El guard lo avisa. Orden recomendado: mergear norsk primero.
+Sin Supabase, `api/lead.js` **descarta el correo** (solo cuenta de qué formulario
+vino). Por eso el alta real la hace el **embed de Substack** que aparece en
+`/mapa/guia/` y en `/kit/` tras enviar: funciona hoy, sin empresa y sin Supabase.
+
+Consecuencia a tener clara: **el dato de segmento UE / no-UE se pierde** hasta que
+actives Supabase (PASO 2). Ese paso NO necesita empresa: un proyecto gratuito de
+Supabase basta para empezar a acumular la lista propia con su segmentación.
+
+## Notas de coordinación
+
+- **feat/norsk ya está en main** (PRs #19 y #20) y `/norsk/` responde en producción,
+  así que los enlaces a `/norsk/` son válidos y el guard los trata como bloqueantes.
+- **El sitemap** ya incluye `/mapa/` y `/kit/` (`/empezar` y `/mapa/guia` son noindex).
 - **Re-verificar los datos de la guía** (`mapa/guia/index.html`) contra las fuentes
   oficiales antes del empujón público: llevan fecha "julio 2026" en el copy.
+- **Antes de mandar tráfico**: la newsletter tiene 0 ediciones publicadas. Todas las
+  llamadas a la acción llevan allí, así que conviene publicar una o dos ediciones y
+  dejar pegada la secuencia de bienvenida antes del empujón en redes.

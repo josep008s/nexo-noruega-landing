@@ -62,9 +62,11 @@ export default async function handler(req, res) {
   const url = process.env.SUPABASE_URL;
   const key = process.env.SUPABASE_SERVICE_KEY;
 
-  // Sin Supabase configurado todavía: no rompemos la experiencia, registramos en log.
+  // Sin Supabase configurado todavía: no rompemos la experiencia. NO se registra
+  // el correo (dato personal) en los logs del proveedor: solo el embudo, para
+  // poder medir volumen. Mientras tanto el alta real la hace el embed de Substack.
   if (!url || !key) {
-    console.log("LEAD (sin Supabase):", JSON.stringify(row));
+    console.log("LEAD sin destino (falta Supabase). source:", row.source, "segmento:", row.segmento);
     res.status(200).json({ ok: true, stored: false });
     return;
   }
