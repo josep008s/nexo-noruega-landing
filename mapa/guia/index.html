@@ -96,10 +96,19 @@
 
     @media print{
       body{background:#fff;color:#111}
+      /* Los descendientes declaran su propio color, así que la herencia no basta:
+         sin este reset la guía se imprime en gris claro sobre blanco. */
+      .cab *,.relojes *,.pasos *,.aviso-legal,.aviso-legal *{color:#111 !important;background:transparent !important}
+      .verificado{border:1px solid #111}
+      .relojes,.paso{border:1px solid #ccc}
       .selector,.acciones,.cierre,footer{display:none}
-      .paso{break-inside:avoid;border-color:#ccc}
+      .paso{break-inside:avoid}
       a{color:#111;text-decoration:none}
       .fuente a::after{content:" (" attr(href) ")";font-size:.7rem}
+      /* En papel no hay selector: se imprimen las dos rutas, cada una etiquetada
+         con su badge. Los <span> siguen en línea; el resto, en bloque. */
+      p.solo-ue,p.solo-noue,div.solo-ue,div.solo-noue{display:block !important}
+      span.solo-ue,span.solo-noue{display:inline !important}
     }
   </style>
 </head>
@@ -120,7 +129,7 @@
     <div class="wrap">
       <p class="kicker">El Mapa de los Primeros 90 Días</p>
       <h1>La secuencia. El porqué de cada posición. La fuente de cada dato.</h1>
-      <span class="verificado">Verificado contra fuentes oficiales · julio 2026</span>
+      <span class="verificado">Cada paso con su fuente oficial enlazada · julio 2026</span>
       <p class="lede">Esto no es una lista de trámites, es un <b>orden</b>. Cada paso desbloquea el siguiente. Si los haces desordenados, el sistema no te castiga con un no: te castiga con semanas de espera en un limbo donde no puedes cobrar, firmar ni existir digitalmente.</p>
     </div>
   </section>
@@ -138,7 +147,7 @@
       <div class="relojes">
         <h2>Los 3 relojes que no perdonan</h2>
         <div class="reloj"><span class="num">3 meses</span><p><span class="solo-ue"><b>Registro en la policía.</b> Como ciudadano UE/EEE puedes entrar sin permiso, pero si te quedas más de 3 meses estás obligado a registrarte en UDI y recoger tu registreringsbevis en la policía. Las citas escasean: pídela la primera semana.</span><span class="solo-noue"><b>Tu carné de conducir.</b> Puedes conducir con tu carné 3 meses desde la llegada. Después, para la mayoría de países fuera del EEE no hay canje: examen teórico y práctico noruego desde cero.</span></p></div>
-        <div class="reloj"><span class="num">1 de marzo</span><p><b>Barnehage (guardería).</b> Plazo único nacional de solicitud para la asignación principal de agosto. Si llegas con hijos y se te pasa, la siguiente ventana real es un año después.</p></div>
+        <div class="reloj"><span class="num">1 de marzo</span><p><b>Barnehage (guardería).</b> Fecha habitual de cierre de solicitudes para la asignación principal de agosto (la fija cada kommune, así que confirma la tuya). Si llegas con hijos y se te pasa, dependes de vacantes sueltas hasta la siguiente ronda.</p></div>
         <div class="reloj"><span class="num">5 días</span><p><b>Skattekort.</b> Es lo que suele tardar la tarjeta fiscal una vez la pides. Sin ella tu empresa te retiene el 50% de la nómina. Pídela en cuanto tengas tu número.</p></div>
         <p class="fuente" style="border-color:rgba(141,161,171,.35)">Fuentes: <a href="https://www.udi.no/en/want-to-apply/residence-under-the-eueeu-regulations/" rel="noopener">UDI</a> · <a href="https://www.vegvesen.no/en/driving-licences/driving-licence-holders/foreign-driving-licence-in-norway/" rel="noopener">Statens vegvesen</a> · <a href="https://www.regjeringen.no/en/topics/families-and-children/kindergarden/id1029/" rel="noopener">Regjeringen (barnehage)</a> · <a href="https://www.skatteetaten.no/en/person/taxes/tax-deduction-card-and-advance-tax/" rel="noopener">Skatteetaten</a>. El plazo de barnehage y los tiempos de tramitación varían según la kommune y la carga de trabajo: confirma siempre en la tuya.</p>
       </div>
@@ -201,7 +210,7 @@
 
       <div class="paso">
         <h3>NAV y la folketrygden</h3>
-        <p>Si vienes a quedarte 12 meses o más, entras en la seguridad social noruega (folketrygden), normalmente de forma automática al residir y trabajar. Si tienes hijos, la <b>barnetrygd</b> (prestación por hijo) suele activarse al registrarlos, pero compruébalo: a veces hay que solicitarla.</p>
+        <p>Si vienes a quedarte 12 meses o más, entras en la seguridad social noruega (folketrygden), normalmente de forma automática al residir y trabajar. Con hijos, ojo con la <b>barnetrygd</b> (prestación por hijo): el alta automática es para quien nace aquí de padres ya registrados. <b>Si llegas de fuera con hijos, da por hecho que tienes que solicitarla tú</b> y compruébalo en NAV. Nadie te avisa de que no la estás cobrando.</p>
         <p class="porque solo-ue"><span class="badge ue">UE / EEE</span>Vienes de un sistema coordinado: los formularios europeos (A1, S1, U1) evitan limbos de cobertura entre España y Noruega. Pídelos antes de salir.</p>
         <p class="porque solo-noue"><span class="badge noue">FUERA DE UE</span>Tu cobertura depende del permiso y del tiempo de estancia previsto. Verifica tu situación concreta con NAV antes de contar con ninguna prestación.</p>
         <p class="fuente">Fuente: <a href="https://www.nav.no/en/home/rules-and-regulations/membership-of-the-national-insurance-scheme" rel="noopener">NAV · Membership</a> · <a href="https://www.nav.no/barnetrygd/en" rel="noopener">NAV · Barnetrygd</a></p>

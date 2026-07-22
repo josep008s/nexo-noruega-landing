@@ -76,6 +76,7 @@
     .cta-btn{display:inline-block;width:100%;text-align:center;background:var(--aurora);color:var(--noche);font-family:var(--sg);font-weight:700;font-size:1.02rem;padding:15px 26px;border-radius:12px;border:0;cursor:pointer;transition:.15s;text-decoration:none}
     .cta-btn:hover{transform:translateY(-1px);filter:brightness(1.06)}
     .cta-btn[disabled]{opacity:.6;cursor:wait;transform:none}
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
     .gracias-tit{font-family:var(--sg);color:var(--aurora);font-weight:700;font-size:1.05rem;margin-bottom:6px}
     .sub-embed{width:100%;max-width:480px;height:215px;border:0;border-radius:12px;background:var(--noche);display:block;margin-top:16px}
     .error{display:none;color:#ff9d8a;font-family:var(--sg);font-size:.85rem;margin-top:10px}
@@ -143,13 +144,14 @@
         <h2>La venta todavía no está abierta</h2>
         <p class="sub">Déjame tu correo y en el paso siguiente confirmas el aviso, con el precio de salida de 299 NOK. Sin cuenta atrás falsa ni plazas fantasma: se abre cuando esté listo.</p>
         <form id="form-kit" novalidate>
-          <input type="email" id="email-kit" placeholder="tu@correo.com" autocomplete="email" required>
+          <label class="sr-only" for="email-kit">Tu correo</label>
+          <input type="email" id="email-kit" name="email" placeholder="tu@correo.com" autocomplete="email" required aria-describedby="err-kit">
           <div class="consent">
             <input type="checkbox" id="newsletter-kit">
             <label for="newsletter-kit">Quiero también la newsletter quincenal de NEXO NORUEGA mientras espero.</label>
           </div>
           <button class="cta-btn" id="btn-kit" type="submit">Avísame cuando abra</button>
-          <p class="error" id="err-kit">Revisa el correo, no parece válido.</p>
+          <p class="error" id="err-kit" role="alert">Revisa el correo, no parece válido.</p>
           <p class="nota-form">Al enviar aceptas la <a href="/legal/privacidad/">política de privacidad</a>.</p>
         </form>
         <div id="gracias-kit" style="display:none">
@@ -157,7 +159,6 @@
           <p class="sub">Mientras la tienda no esté montada, el canal por el que de verdad te llega el aviso es la newsletter. Confírmala aquí y no te pierdes la apertura.</p>
           <iframe class="sub-embed" src="https://nexonoruega.substack.com/embed" loading="lazy" title="Suscríbete a NEXO NORUEGA"></iframe>
         </div>
-        </form>
       </div>
 
       <div class="form-card" id="bloque-compra" style="display:none">

@@ -75,7 +75,11 @@ if (!duros.some((d) => d.includes("em dash") || d.includes("prohibida"))) {
     const hayCorreo = /\[CORREO DE CONTACTO\]/i.test(h);
     if (hayRazon || hayCorreo) {
       const msg = `${f}: placeholder pendiente (${[hayRazon && "[RAZÓN SOCIAL]", hayCorreo && "[CORREO DE CONTACTO]"].filter(Boolean).join(" y ")})`;
+      // Escala a bloqueo en cuanto se empiezan a GUARDAR datos personales, no solo
+      // al vender: con Supabase activo ya hay responsable del tratamiento real.
+      const guardandoDatos = Boolean(process.env.SUPABASE_URL && process.env.SUPABASE_SERVICE_KEY);
       if (VENTA) duro(`${msg} y la venta del Kit está ABIERTA`);
+      else if (guardandoDatos) duro(`${msg} y Supabase está activo: ya se almacenan datos personales sin responsable identificado`);
       else aviso(`${msg}; obligatorio antes de abrir la venta o activar Supabase`);
     } else ok(`${f}: titular y contacto rellenados`);
   }
@@ -109,6 +113,19 @@ if (VENTA) {
     duro("venta del Kit ABIERTA pero falta kit/gracias/ (página de post-pago con el acceso)");
   } else ok("kit/gracias/ existe");
 }
+
+// 4c) Etiquetas estructurales balanceadas. Un </form> huérfano no rompe la página
+// de forma visible pero sí el formulario en algunos navegadores.
+for (const f of PUBLICABLES) {
+  if (!exists(f)) continue;
+  const h = read(f);
+  for (const tag of ["form", "div", "section"]) {
+    const abre = (h.match(new RegExp(`<${tag}[\\s>]`, "g")) || []).length;
+    const cierra = (h.match(new RegExp(`</${tag}>`, "g")) || []).length;
+    if (abre !== cierra) duro(`${f}: <${tag}> desbalanceado (${abre} aperturas, ${cierra} cierres)`);
+  }
+}
+if (!duros.some((d) => d.includes("desbalanceado"))) ok("etiquetas form/div/section balanceadas");
 
 // 5) Enlaces internos resuelven (en las páginas nuevas)
 {

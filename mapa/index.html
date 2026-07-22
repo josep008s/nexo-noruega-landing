@@ -71,6 +71,8 @@
     .ruta label{display:block;cursor:pointer;border:1px solid var(--linea);border-radius:10px;padding:13px 15px;font-family:var(--sg);font-size:.9rem;font-weight:500;letter-spacing:0;text-transform:none;color:var(--nieve);transition:.15s}
     .ruta label small{display:block;color:var(--niebla);font-weight:400;font-size:.78rem;margin-top:2px}
     .ruta input:checked + label{border-color:var(--aurora);background:rgba(63,203,148,.12)}
+    /* El input real está oculto: el foco de teclado se pinta sobre su etiqueta. */
+    .ruta input:focus-visible + label{outline:2px solid var(--aurora);outline-offset:3px}
     .consent{display:flex;gap:10px;align-items:flex-start;font-size:.85rem;color:var(--niebla);margin:18px 0 20px}
     .consent input{margin-top:5px;accent-color:var(--aurora)}
     .cta{display:inline-block;width:100%;text-align:center;background:var(--aurora);color:var(--noche);font-family:var(--sg);font-weight:700;font-size:1.02rem;padding:15px 26px;border-radius:12px;border:0;cursor:pointer;transition:.15s}
@@ -121,15 +123,15 @@
     <div class="wrap">
       <div class="form-card">
         <h2>Dime tu ruta y te llevo al mapa</h2>
-        <p class="sub">Acceso inmediato, sin esperas. Tu correo sirve para avisarte cuando el mapa se actualice (los trámites cambian).</p>
+        <p class="sub">Acceso inmediato, sin esperas. Si además quieres que te avise cuando el mapa cambie (los trámites cambian), marca la newsletter: la confirmas en el paso siguiente, en un clic.</p>
         <form id="form-mapa" novalidate>
           <div class="campo">
             <label for="email">Tu correo</label>
             <input type="email" id="email" name="email" placeholder="tu@correo.com" autocomplete="email" required>
           </div>
           <div class="campo">
-            <label>Tu pasaporte</label>
-            <div class="rutas">
+            <label id="lbl-pasaporte">Tu pasaporte</label>
+            <div class="rutas" role="radiogroup" aria-labelledby="lbl-pasaporte">
               <div class="ruta">
                 <input type="radio" id="ruta-ue" name="segmento" value="ue" checked>
                 <label for="ruta-ue">UE / EEE <small>España y resto de la Unión</small></label>
@@ -145,7 +147,7 @@
             <label for="newsletter">Quiero también la newsletter de NEXO NORUEGA, quincenal y en español, sobre cómo funciona la vida aquí. Te la confirmas en el paso siguiente, en un clic. Sin ruido, te das de baja cuando quieras.</label>
           </div>
           <button class="cta" id="btn-mapa" type="submit">Dame el mapa</button>
-          <p class="error" id="err-email">Revisa el correo, no parece válido.</p>
+          <p class="error" id="err-email" role="alert">Revisa el correo, no parece válido.</p>
           <p class="nota-form">Al enviar aceptas la <a href="/legal/privacidad/">política de privacidad</a>. El acceso a la guía es inmediato aunque el envío falle: aquí no hay rehenes.</p>
         </form>
       </div>
