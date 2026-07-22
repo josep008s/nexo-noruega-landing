@@ -30,31 +30,26 @@ placeholders del titular. Son 3 archivos, mismo formato en todos:
 MVA: el umbral de registro es 50.000 NOK de ventas en 12 meses. Decidir con el asesor
 si conviene registro voluntario desde el inicio.
 
-## PASO 2 · Supabase (los leads empiezan a guardarse)
+## PASO 2 · Supabase (los leads empiezan a guardarse) — NO NECESITA EMPRESA
 
-1. Crear el proyecto en supabase.com.
-2. Aplicar el esquema NORSK: `supabase/migrations/0001_norsk_schema.sql` (SQL Editor → Run).
-3. Crear/ampliar la tabla de leads (la usan /sueldo, /mapa y /kit):
+Está automatizado. El SQL ya está escrito (`supabase/migrations/0002_leads.sql`)
+y el script hace el resto: login, link, aplicar esquema, subir las variables a
+Vercel en los 3 entornos y verificar que la tabla responde.
 
-```sql
-create table if not exists leads (
-  id uuid primary key default gen_random_uuid(),
-  email text not null,
-  oficio text, styrk text, confianza numeric,
-  source text,                       -- "mapa" | "kit-espera" | "sueldo" | "norsk-demo"
-  newsletter boolean default false,  -- consentimiento explícito
-  segmento text,                     -- "ue" | "no-ue" (el eje del catálogo)
-  utm_source text, utm_medium text, utm_campaign text, token text,
-  created_at timestamptz default now()
-);
-alter table leads enable row level security;  -- sin políticas: solo service key
+```bash
+bash scripts/setup_supabase.sh
 ```
 
-4. En Vercel → Settings → Environment Variables (todos los entornos):
-   - `SUPABASE_URL`
-   - `SUPABASE_SERVICE_KEY` (service_role; jamás en el cliente)
+Lo **único** que no puede hacer solo es tu login en el navegador. El script se
+para ahí, te espera, y sigue. Si ya tienes un proyecto, pásale su ref:
+`bash scripts/setup_supabase.sh <project-ref>`.
 
-Sin este paso NADA se rompe: `api/lead.js` degrada a log y las páginas funcionan igual.
+Plan gratuito suficiente para empezar. Sin este paso nada se rompe (`api/lead.js`
+degrada y las páginas funcionan), pero **se pierde el segmento UE / no UE**, que
+es el eje de todo el catálogo.
+
+⚠️ En cuanto Supabase esté activo ya guardas datos personales: el guard pasa a
+**bloquear** hasta que rellenes el titular del PASO 1.
 
 ## PASO 3 · Resend (los magic links de NORSK)
 
