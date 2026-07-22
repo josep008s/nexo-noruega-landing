@@ -83,8 +83,10 @@
     .cierre{margin:44px 0 20px;background:rgba(63,203,148,.07);border:1px solid rgba(63,203,148,.4);border-radius:16px;padding:28px}
     .cierre h2{font-family:var(--sg);font-size:1.05rem;font-weight:700;margin-bottom:10px}
     .cierre p{color:var(--niebla);font-size:.96rem;margin-bottom:12px}
-    .cierre a.cta{display:inline-block;background:var(--aurora);color:var(--noche);font-family:var(--sg);font-weight:700;padding:12px 22px;border-radius:10px;text-decoration:none;margin-right:10px;margin-top:6px}
-    .cierre a.secundaria{display:inline-block;font-family:var(--sg);font-weight:700;color:var(--nieve);border:1px solid var(--linea);padding:12px 22px;border-radius:10px;text-decoration:none;margin-top:6px}
+    .cierre a.secundaria{display:inline-block;font-family:var(--sg);font-weight:700;color:var(--nieve);border:1px solid var(--linea);padding:12px 22px;border-radius:10px;text-decoration:none;margin-top:16px}
+    .cierre .sub-embed{width:100%;max-width:480px;height:215px;border:0;border-radius:12px;background:var(--noche);display:block;margin-top:18px}
+    .cierre .confirma{display:none;background:rgba(63,203,148,.16);border:1px solid rgba(63,203,148,.55);border-radius:10px;padding:12px 16px;font-size:.92rem;color:var(--nieve);margin-bottom:16px}
+    .cierre .confirma b{color:var(--aurora)}
 
     .aviso-legal{font-size:.82rem;color:var(--niebla);border-top:1px solid var(--linea);padding:26px 0 10px;margin-top:20px}
 
@@ -226,9 +228,10 @@
   <section>
     <div class="wrap">
       <div class="cierre">
+        <p class="confirma" id="confirma-nl">Marcaste que querías la newsletter: <b>te falta un clic</b>. Confírmalo aquí abajo y listo.</p>
         <h2>El mapa te dice el orden. El siguiente paso es no caminar solo.</h2>
         <p>Cada dos semanas escribo sobre cómo funciona este país por dentro, con datos verificados y sin venderte ningún cuento. Y estoy preparando el <b>Kit de los Primeros 90 Días</b>: la versión con checklists, plantillas y calendario de plazos de todo lo que acabas de leer.</p>
-        <a class="cta" href="https://nexonoruega.substack.com/subscribe">Suscribirme a la newsletter</a>
+        <iframe class="sub-embed" src="https://nexonoruega.substack.com/embed" loading="lazy" title="Suscríbete a NEXO NORUEGA"></iframe>
         <a class="secundaria" href="/kit/">Ver el Kit (lista de espera)</a>
       </div>
       <p class="aviso-legal"><b>Lo honesto en letra pequeña:</b> esto es información y orientación general, no asesoría legal. Los datos están verificados contra las fuentes oficiales enlazadas a julio de 2026, y los trámites cambian: la fuente oficial manda siempre sobre esta guía. Para decisiones sobre tu caso concreto (permisos, recursos, plazos vencidos), consulta UDI, Skatteetaten o un advokat de extranjería.</p>
@@ -269,6 +272,16 @@
   try { guardada = localStorage.getItem("nexo_mapa_ruta"); } catch(e){}
   var inicial = (q === "no-ue" || q === "ue") ? q : (guardada === "no-ue" ? "no-ue" : "ue");
   setRuta(inicial);
+
+  // Si marcó la newsletter en /mapa/, aquí se cierra el círculo: el alta real
+  // la hace Substack (no depende de Supabase ni de la entidad legal).
+  try {
+    if (localStorage.getItem("nexo_nl_pendiente") === "1") {
+      var aviso = document.getElementById("confirma-nl");
+      if (aviso) aviso.style.display = "block";
+      localStorage.removeItem("nexo_nl_pendiente");
+    }
+  } catch(e){}
 })();
 </script>
 

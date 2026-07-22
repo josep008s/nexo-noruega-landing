@@ -76,7 +76,8 @@
     .cta-btn{display:inline-block;width:100%;text-align:center;background:var(--aurora);color:var(--noche);font-family:var(--sg);font-weight:700;font-size:1.02rem;padding:15px 26px;border-radius:12px;border:0;cursor:pointer;transition:.15s;text-decoration:none}
     .cta-btn:hover{transform:translateY(-1px);filter:brightness(1.06)}
     .cta-btn[disabled]{opacity:.6;cursor:wait;transform:none}
-    .gracias{display:none;font-family:var(--sg);color:var(--aurora);font-weight:700;margin-top:14px}
+    .gracias-tit{font-family:var(--sg);color:var(--aurora);font-weight:700;font-size:1.05rem;margin-bottom:6px}
+    .sub-embed{width:100%;max-width:480px;height:215px;border:0;border-radius:12px;background:var(--noche);display:block;margin-top:16px}
     .error{display:none;color:#ff9d8a;font-family:var(--sg);font-size:.85rem;margin-top:10px}
     .nota-form{font-size:.8rem;color:var(--niebla);margin-top:14px}
     .nota-form a{color:var(--niebla)}
@@ -148,9 +149,14 @@
             <label for="newsletter-kit">Quiero recibir también la newsletter quincenal de NEXO NORUEGA mientras espero.</label>
           </div>
           <button class="cta-btn" id="btn-kit" type="submit">Avísame cuando abra</button>
-          <p class="gracias" id="gracias-kit">Apuntado. Te escribo el día que abra la venta.</p>
           <p class="error" id="err-kit">Revisa el correo, no parece válido.</p>
           <p class="nota-form">Al enviar aceptas la <a href="/legal/privacidad/">política de privacidad</a>.</p>
+        </form>
+        <div id="gracias-kit" style="display:none">
+          <p class="gracias-tit">Anotado. Ahora asegura el aviso.</p>
+          <p class="sub">Mientras la tienda no esté montada, el canal por el que de verdad te llega el aviso es la newsletter. Confírmala aquí y no te pierdes la apertura.</p>
+          <iframe class="sub-embed" src="https://nexonoruega.substack.com/embed" loading="lazy" title="Suscríbete a NEXO NORUEGA"></iframe>
+        </div>
         </form>
       </div>
 
@@ -226,9 +232,10 @@
         utm_medium: params.get("utm_medium") || "",
         utm_campaign: params.get("utm_campaign") || ""
       })
-    }).catch(function(){}).finally(function(){
-      btn.style.display = "none";
+    }).catch(function(){}).then(function(){
+      form.style.display = "none";
       gracias.style.display = "block";
+      gracias.scrollIntoView({ block: "center" });
     });
   });
 })();

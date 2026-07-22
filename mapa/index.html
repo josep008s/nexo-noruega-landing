@@ -176,8 +176,13 @@
   var btn = document.getElementById("btn-mapa");
   var err = document.getElementById("err-email");
 
-  function irALaGuia(seg){
-    try { localStorage.setItem("nexo_mapa_ruta", seg); } catch(e){}
+  function irALaGuia(seg, quiereNl){
+    try {
+      localStorage.setItem("nexo_mapa_ruta", seg);
+      // El alta real de la newsletter la hace Substack en la guía (funciona hoy,
+      // sin Supabase ni entidad legal). Aquí solo se marca la intención.
+      if (quiereNl) localStorage.setItem("nexo_nl_pendiente", "1");
+    } catch(e){}
     window.location.href = "/mapa/guia/?ruta=" + encodeURIComponent(seg);
   }
 
@@ -189,12 +194,13 @@
     if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ err.style.display = "block"; return; }
     btn.disabled = true; btn.textContent = "Abriendo el mapa…";
 
+    var quiereNl = document.getElementById("newsletter").checked;
     var params = new URLSearchParams(window.location.search);
     var payload = {
       email: email,
       source: "mapa",
       segmento: seg,
-      newsletter: document.getElementById("newsletter").checked,
+      newsletter: quiereNl,
       utm_source: params.get("utm_source") || "",
       utm_medium: params.get("utm_medium") || "",
       utm_campaign: params.get("utm_campaign") || ""
@@ -202,7 +208,7 @@
 
     // Captura sin rehenes: el lector entra a la guía pase lo que pase con el envío.
     var fin = false;
-    function terminar(){ if(!fin){ fin = true; irALaGuia(seg); } }
+    function terminar(){ if(!fin){ fin = true; irALaGuia(seg, quiereNl); } }
     setTimeout(terminar, 2500);
     fetch("/api/lead", {
       method: "POST",

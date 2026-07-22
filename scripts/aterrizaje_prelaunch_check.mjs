@@ -40,9 +40,10 @@ const PUBLICABLES = [
 ];
 const PROHIBIDAS = /increíble|brutal|paraíso|hola chicos/i;
 
-// Enlaces internos que apuntan a islas de OTRA rama pendiente de merge.
-// Existen en producción solo cuando esa rama entre. Aviso, no bloqueo.
-const PENDIENTES_MERGE = ["norsk/"];
+// Enlaces internos a islas de otra rama pendiente de merge (aviso, no bloqueo).
+// Vacío desde que feat/norsk entró en main: /norsk/ ya existe y sus enlaces
+// se comprueban como cualquier otro (si se rompen, bloquean).
+const PENDIENTES_MERGE = [];
 
 // 1) Todas las páginas existen
 for (const f of PUBLICABLES) {
