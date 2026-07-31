@@ -415,6 +415,47 @@
     }
     @keyframes trazar { to { stroke-dashoffset: 0; } }
 
+    /* ============ Cinta de fases: el camino pasa despacio por el borde de la noche ============ */
+    .cinta {
+      position: absolute;
+      left: 0; right: 0; bottom: 28px;
+      z-index: 1;
+      overflow: hidden;
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 16%, #000 84%, transparent);
+      mask-image: linear-gradient(90deg, transparent, #000 16%, #000 84%, transparent);
+    }
+    .cinta-pista {
+      display: flex;
+      width: max-content;
+      animation: cinta-desfile 78s linear infinite;
+    }
+    .cinta:hover .cinta-pista { animation-play-state: paused; }
+    .js .cinta:not(.andando) .cinta-pista { animation-play-state: paused; }
+    .cinta-grupo {
+      display: flex;
+      align-items: center;
+      white-space: nowrap;
+      font-family: var(--sg);
+      font-weight: 500;
+      font-size: 0.78rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--niebla);
+    }
+    .cinta-grupo span { display: inline-flex; align-items: center; }
+    .cinta-grupo span::after {
+      content: "";
+      width: 4px; height: 4px;
+      border-radius: 50%;
+      background: var(--aurora);
+      opacity: 0.55;
+      margin: 0 26px;
+    }
+    @keyframes cinta-desfile {
+      from { transform: translate3d(0, 0, 0); }
+      to   { transform: translate3d(-50%, 0, 0); }
+    }
+
     /* ============ CTA ============ */
     .cta {
       position: relative;
@@ -787,6 +828,7 @@
       .reveal, .js .reveal { opacity: 1 !important; transform: none !important; transition: none !important; clip-path: none !important; }
       .cta:hover { transform: none; }
       .estrellas, .niebla, .veta, .cielo::before { animation: none !important; }
+      .cinta-pista { animation: none !important; }
       .fiordo .bruma, .fiordo .aur-pulso, .fiordo .reflejo-a, .fiordo .reflejo-b, .fiordo .brillo-agua rect { animation: none !important; }
       .aurora { transition: none; }
       .js .runa-grande path { animation: none; stroke-dasharray: none; stroke-dashoffset: 0; }
@@ -807,6 +849,9 @@
     @media (max-width: 640px) {
       section { padding: 76px 0; }
       .hero { padding-top: 110px; }
+      .cinta { bottom: 24px; }
+      .cinta-grupo { font-size: 0.72rem; }
+      .cinta-grupo span::after { margin: 0 18px; }
       .dato { padding-bottom: 0; }
       .lamina { height: 90px; margin-top: 54px; }
     }
@@ -856,6 +901,49 @@
         <p class="microcopy">Sin trucos, sin paraíso, sin clickbait.</p>
       </div>
       <p class="prueba reveal" style="transition-delay:.46s">En mi pasaporte pone nacionalidad noruega. Y todavía tomo notas.</p>
+    </div>
+    <!-- La cinta: las fases del camino, pasando despacio. El detalle, no el discurso. -->
+    <div class="cinta reveal" style="transition-delay:.6s" aria-hidden="true">
+      <div class="cinta-pista">
+        <div class="cinta-grupo">
+          <span>Elegir ciudad</span>
+          <span>El papeleo</span>
+          <span>Encontrar trabajo</span>
+          <span>Alquilar casa</span>
+          <span>La cesta de la compra</span>
+          <span>Aprender noruego</span>
+          <span>La primera nómina</span>
+          <span>Impuestos</span>
+          <span>Médico de cabecera</span>
+          <span>El primer invierno</span>
+          <span>Hacer amigos</span>
+          <span>Baja de paternidad</span>
+          <span>Guardería</span>
+          <span>Comprar casa</span>
+          <span>Montar empresa</span>
+          <span>Vender casa</span>
+          <span>Jubilarse aquí</span>
+        </div>
+        <div class="cinta-grupo">
+          <span>Elegir ciudad</span>
+          <span>El papeleo</span>
+          <span>Encontrar trabajo</span>
+          <span>Alquilar casa</span>
+          <span>La cesta de la compra</span>
+          <span>Aprender noruego</span>
+          <span>La primera nómina</span>
+          <span>Impuestos</span>
+          <span>Médico de cabecera</span>
+          <span>El primer invierno</span>
+          <span>Hacer amigos</span>
+          <span>Baja de paternidad</span>
+          <span>Guardería</span>
+          <span>Comprar casa</span>
+          <span>Montar empresa</span>
+          <span>Vender casa</span>
+          <span>Jubilarse aquí</span>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -1524,6 +1612,17 @@
           apagado = setTimeout(() => sub.off(), 450);
         });
       });
+    })();
+
+    /* ============ Cinta de fases: desfila solo cuando se la ve ============ */
+    (function cintaFases() {
+      const cinta = document.querySelector('.cinta');
+      if (!cinta) return;
+      if (!('IntersectionObserver' in window)) { cinta.classList.add('andando'); return; }
+      const io = new IntersectionObserver(es => {
+        cinta.classList.toggle('andando', es[0].isIntersecting);
+      });
+      io.observe(cinta);
     })();
 
     /* ============ CTA magnético: se inclina hacia la mano, sin perseguirla ============ */
