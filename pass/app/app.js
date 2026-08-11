@@ -897,7 +897,7 @@
     s.appendChild(el("div", { class: "aviso", html: "¿Ya lo compraste? Entra con el enlace de tu correo o <a href=\"/pass/acceso/\">pide que te lo reenviemos</a>." }));
 
     var planes = el("div", { class: "planes" });
-    [["p10", "Intensivo", "249", "10 días", false],
+    [["p3", "Intensivo", "99", "3 días", false],
      ["p30", "Con Calma", "349", "30 días", true],
      ["p90", "Sin Prisa", "449", "90 días", false]].forEach(function (d) {
       var plan = el("div", { class: "plan" + (d[4] ? " reco" : "") });
