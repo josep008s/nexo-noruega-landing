@@ -1,7 +1,7 @@
-// Helpers compartidos de NEXO NORSK (los archivos api/_* no se exponen como endpoint).
+// Helpers compartidos de NEXO PASS (los archivos api/_* no se exponen como endpoint).
 // Sin dependencias: node:crypto + fetch global (Node 18+).
 //
-// Variables de entorno (ver norsk/NORSK_SETUP.md):
+// Variables de entorno (ver pass/PASS_SETUP.md):
 //   STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET, SUPABASE_URL, SUPABASE_SERVICE_KEY,
 //   NORSK_JWT_SECRET, RESEND_API_KEY, NORSK_SITE_URL
 
@@ -143,7 +143,7 @@ export async function compraActiva(compraId) {
   return c;
 }
 
-// Rate limit persistente vía RPC (ver SQL en NORSK_SETUP.md). Devuelve el contador del día
+// Rate limit persistente vía RPC (ver SQL en pass/PASS_SETUP.md). Devuelve el contador del día
 // para ese tipo. Tipos separados: "api" (práctica/simulacros) y "reenvio" (magic links),
 // para que reenviar un enlace nunca queme la cuota de estudio ni al revés.
 export async function tickUso(compraId, tipo) {
@@ -225,7 +225,7 @@ export async function sendMagicLink(email, compraId, expiresAtMs) {
 
   const html = [
     `<div style="font-family:Georgia,serif;max-width:520px;margin:0 auto;color:#0E1B26;line-height:1.6">`,
-    `<p style="font-family:system-ui,sans-serif;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#2C5A72">NEXO NORSK</p>`,
+    `<p style="font-family:system-ui,sans-serif;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#2C5A72">NEXO PASS</p>`,
     `<h1 style="font-family:system-ui,sans-serif;font-size:22px;letter-spacing:-.01em">Tu acceso está listo.</h1>`,
     `<p>Este es tu enlace de entrada. Funciona en cualquier dispositivo y todas las veces que lo necesites hasta el <b>${caduca}</b>.</p>`,
     `<p style="margin:28px 0"><a href="${enlace}" style="background:#3FCB94;color:#0E1B26;font-family:system-ui,sans-serif;font-weight:700;text-decoration:none;padding:14px 26px;border-radius:6px;display:inline-block">Entrar al curso</a></p>`,
@@ -241,9 +241,9 @@ export async function sendMagicLink(email, compraId, expiresAtMs) {
       Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
     },
     body: JSON.stringify({
-      from: "NEXO NORSK <norsk@nexonoruega.com>",
+      from: "NEXO PASS <pass@nexonoruega.com>",
       to: [email],
-      subject: "Tu acceso a NEXO NORSK",
+      subject: "Tu acceso a NEXO PASS",
       html,
     }),
   });

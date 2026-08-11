@@ -1,4 +1,4 @@
-// Sirve preguntas del banco a compradores con acceso activo. El muro real de NEXO NORSK.
+// Sirve preguntas del banco a compradores con acceso activo. El muro real de NEXO PASS.
 // GET ?modo=ping                          -> comprueba acceso (sin gastar cuota)
 // GET ?modo=practica&leccion=<1-12>       -> 10 preguntas aleatorias (de la lección, o de todo)
 // GET ?modo=practica&ids=CODIGO,CODIGO    -> repetir falladas (máx 20)

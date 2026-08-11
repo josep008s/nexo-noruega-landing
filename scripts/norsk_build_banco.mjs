@@ -1,11 +1,11 @@
-// Valida el banco canónico de NEXO NORSK y lo sube a Supabase.
+// Valida el banco canónico de NEXO PASS y lo sube a Supabase.
 // Uso:  SUPABASE_URL=... SUPABASE_SERVICE_KEY=... node scripts/norsk_build_banco.mjs [--dry]
 //
 // Entrada (GITIGNORED, el repo es público y el banco es contenido de pago):
 //   scripts/_norsk_banco/banco.json      <- export del canónico BANCO_PREGUNTAS_NORSK_v1.xlsx (Drive)
 //   scripts/_norsk_banco/lecciones.json  <- export de norsk/curso/ (Drive)
 //
-// El export desde el Drive se hace con el runbook de norsk/NORSK_SETUP.md.
+// El export desde el Drive se hace con el runbook de pass/PASS_SETUP.md.
 
 import fs from "node:fs";
 import path from "node:path";
@@ -103,7 +103,7 @@ async function subir(tabla, filas, onConflict) {
 // ---------- main ----------
 
 if (!fs.existsSync(BANCO)) {
-  console.error(`No existe ${BANCO}. Exporta el banco canónico del Drive (ver norsk/NORSK_SETUP.md).`);
+  console.error(`No existe ${BANCO}. Exporta el banco canónico del Drive (ver pass/PASS_SETUP.md).`);
   process.exit(1);
 }
 

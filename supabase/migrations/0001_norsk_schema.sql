@@ -1,4 +1,4 @@
--- NEXO NORSK · esquema completo.
+-- NEXO PASS · esquema completo.
 -- Aplicar UNA vez. Dos formas:
 --   A) Supabase Studio → SQL Editor → pegar todo → Run.
 --   B) supabase link --project-ref <ref> && supabase db push  (necesita SUPABASE_ACCESS_TOKEN).

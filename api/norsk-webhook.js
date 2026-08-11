@@ -1,4 +1,4 @@
-// Webhook de Stripe para NEXO NORSK.
+// Webhook de Stripe para NEXO PASS.
 // - checkout.session.completed (solo sesiones NORSK, con metadata.plan válido):
 //   alta idempotente en norsk_compras + email con magic link (flag email_enviado,
 //   así el email sale aunque /gracias haya insertado la fila primero).

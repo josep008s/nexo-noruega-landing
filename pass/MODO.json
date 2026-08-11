@@ -1,0 +1,4 @@
+{
+  "venta": false,
+  "nota": "Pre-venta: sin checkout ni captura propia; lista de espera via Substack. Abrir la venta = venta:true + VENTA_ABIERTA=true en pass/app/app.js + botones .comprar en la landing + titular en legales + claves (--env)."
+}

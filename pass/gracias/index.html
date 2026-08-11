@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Acceso confirmado · NEXO NORSK</title>
-  <meta name="description" content="Confirmación de tu acceso a NEXO NORSK tras el pago.">
+  <title>Acceso confirmado · NEXO PASS</title>
+  <meta name="description" content="Confirmación de tu acceso a NEXO PASS tras el pago.">
   <meta name="robots" content="noindex">
-  <link rel="canonical" href="https://www.nexonoruega.com/norsk/gracias/">
+  <link rel="canonical" href="https://www.nexonoruega.com/pass/gracias/">
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -29,10 +29,10 @@
 </head>
 <body>
   <main>
-    <p class="kicker">Nexo Norsk</p>
+    <p class="kicker">Nexo Pass</p>
     <h1 id="titulo">Confirmando tu pago…</h1>
     <div id="cuerpo"><p>Un segundo.</p></div>
-    <a class="btn oculto" id="entrar" href="/norsk/app/">Empezar a practicar</a>
+    <a class="btn oculto" id="entrar" href="/pass/app/">Empezar a practicar</a>
   </main>
   <script>
   (function () {
@@ -48,7 +48,7 @@
     }
 
     if (!sid) {
-      error("Falta la referencia del pago. Si acabas de comprar, entra con el enlace que te ha llegado por correo o <a href=\"/norsk/acceso/\">pide que te lo reenviemos</a>.");
+      error("Falta la referencia del pago. Si acabas de comprar, entra con el enlace que te ha llegado por correo o <a href=\"/pass/acceso/\">pide que te lo reenviemos</a>.");
       return;
     }
     fetch("/api/norsk-gracias/?session_id=" + encodeURIComponent(sid), { credentials: "same-origin" })
@@ -64,11 +64,11 @@
         } else if (res.s === 402) {
           error("El pago aún no aparece como completado. Si el banco lo está procesando, recarga esta página en un minuto.");
         } else {
-          error("Algo se ha cruzado. Escríbenos a norsk@nexonoruega.com con tu correo de compra y lo resolvemos.");
+          error("Algo se ha cruzado. Escríbenos a pass@nexonoruega.com con tu correo de compra y lo resolvemos.");
         }
       })
       .catch(function () {
-        error("No hay conexión con el servidor. Recarga la página; si sigue, escríbenos a norsk@nexonoruega.com.");
+        error("No hay conexión con el servidor. Recarga la página; si sigue, escríbenos a pass@nexonoruega.com.");
       });
   })();
   </script>

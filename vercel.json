@@ -1,3 +1,16 @@
 {
-  "trailingSlash": true
+  "trailingSlash": true,
+  "redirects": [
+    { "source": "/norsk/app/app.js", "destination": "/pass/app/app.js", "permanent": true },
+    { "source": "/norsk/app/", "destination": "/pass/app/", "permanent": true },
+    { "source": "/norsk/acceso/", "destination": "/pass/acceso/", "permanent": true },
+    { "source": "/norsk/gracias/", "destination": "/pass/gracias/", "permanent": true },
+    { "source": "/norsk/leccion-0/", "destination": "/pass/leccion-0/", "permanent": true },
+    { "source": "/norsk/preguntas-de-ejemplo/", "destination": "/pass/preguntas-de-ejemplo/", "permanent": true },
+    { "source": "/norsk/que-examen-necesitas/", "destination": "/pass/que-examen-necesitas/", "permanent": true },
+    { "source": "/norsk/como-inscribirse/", "destination": "/pass/como-inscribirse/", "permanent": true },
+    { "source": "/norsk/requisitos-ciudadania-noruega/", "destination": "/pass/requisitos-ciudadania-noruega/", "permanent": true },
+    { "source": "/norsk/condiciones/", "destination": "/pass/condiciones/", "permanent": true },
+    { "source": "/norsk/privacidad/", "destination": "/pass/privacidad/", "permanent": true }
+  ]
 }
