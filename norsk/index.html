@@ -66,6 +66,11 @@
       },
       {
         "@type": "Question",
+        "name": "¿Aprobar este examen me da la nacionalidad o el pasaporte noruego?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No por sí solo. Para solicitantes de 18 a 67 años, aprobar la statsborgerprøven o la samfunnskunnskapsprøven en noruego es normalmente uno de los requisitos de la ciudadanía. También debes cumplir los requisitos de noruego oral B1, residencia, situación legal, identidad y conducta que correspondan a tu caso. Cuando te concedan la ciudadanía noruega podrás solicitar el pasaporte a la Policía. Fuente: UDI y Politiet." }
+      },
+      {
+        "@type": "Question",
         "name": "¿Cuántas preguntas tiene la statsborgerprøven y con cuántas se aprueba?",
         "acceptedAnswer": { "@type": "Answer", "text": "Ves 36 preguntas, pero solo 32 puntúan: 4 son preguntas piloto en prueba. Apruebas con 24 correctas de las 32 que puntúan. Tienes 60 minutos. La samfunnskunnskapsprøven muestra 38, puntúan 34 y se aprueba con 26. Fuente: HK-dir, 2026." }
       },
@@ -173,6 +178,15 @@
     .consejo p{font-size:1.1rem;color:var(--noche);margin:0}
     .consejo ul{margin:10px 0 14px;padding-left:20px}
     .consejo li+li{margin-top:9px}
+    .pasaporte{background:var(--noche);color:var(--nieve);border-radius:14px;padding:28px 26px;margin-top:32px;max-width:70ch;box-shadow:0 18px 42px rgba(14,27,38,.14)}
+    .pasaporte .etiqueta{font-family:var(--sg);font-weight:700;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--aurora);margin-bottom:12px}
+    .pasaporte h3{font-family:var(--sg);font-size:clamp(1.35rem,2.8vw,1.75rem);line-height:1.22;max-width:26ch;margin-bottom:16px}
+    .pasaporte p{color:var(--niebla);font-size:1.05rem;margin-bottom:14px}
+    .pasaporte ul{margin:16px 0 20px;padding-left:20px}
+    .pasaporte li{color:var(--nieve)}
+    .pasaporte li+li{margin-top:10px}
+    .pasaporte .ruta{color:var(--nieve);border-top:1px solid var(--linea-oscura);padding-top:16px;margin-top:18px}
+    .pasaporte a{font-family:var(--sg);font-weight:700;color:var(--aurora);text-underline-offset:3px}
 
     /* ===== DATO NEXO ===== */
     .dato{text-align:left;padding-bottom:96px}
@@ -337,6 +351,20 @@
             <li><b>¿En inglés?</b> No está reservado a ciertos pasaportes. Puedes elegirlo si lo entiendes, pero solo puede contar para residencia permanente por la vía general, igual que el español. Para ciudadanía, la prueba de conocimientos debe ser en noruego.</li>
           </ul>
           <p>Aquí te preparamos para las dos pruebas: cada pregunta existe en noruego y en español.</p>
+        </div>
+
+        <div class="pasaporte reveal" style="--d:.36s">
+          <p class="etiqueta">De la prueba al pasaporte</p>
+          <h3>Este examen cierra un requisito. No concede el pasaporte por sí solo.</h3>
+          <p>Si tienes entre 18 y 67 años, aprobar la statsborgerprøven, o la samfunns en noruego, es normalmente uno de los requisitos para obtener la ciudadanía noruega. Además debes cumplir:</p>
+          <ul>
+            <li><b>Tiempo de residencia:</b> la regla general son 8 de los últimos 11 años. Baja a 6 de los últimos 10 con ingresos suficientes. Hay plazos distintos para algunos grupos.</li>
+            <li><b>Situación legal:</b> por la vía general, residencia permanente o cumplir sus condiciones. Por la vía UE/EEE, derecho de residencia permanente o, normalmente, derecho de residencia continuado durante los últimos 3 años.</li>
+            <li><b>Noruego:</b> prueba oral B1, con excepciones tasadas.</li>
+            <li><b>Identidad y conducta:</b> identidad acreditada, vivir en Noruega y querer seguir viviendo aquí, pagar la tasa y presentar certificado policial desde los 15 años. Las condenas o multas pueden alargar el plazo.</li>
+          </ul>
+          <p class="ruta"><b>El orden real:</b> apruebas la prueba, cumples los demás requisitos, UDI concede la ciudadanía y entonces pides cita a la Policía para solicitar el pasaporte noruego. Solo un ciudadano noruego puede obtenerlo.</p>
+          <a href="/norsk/requisitos-ciudadania-noruega/">Ver todos los requisitos de ciudadanía</a>
         </div>
       </div>
     </section>
