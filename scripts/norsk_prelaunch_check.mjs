@@ -1,4 +1,4 @@
-// Guard de pre-lanzamiento de NEXO NORSK.
+// Guard de pre-lanzamiento de NEXO PASS.
 // Falla (exit 1) si algo NO está listo para vender. Convierte los "pendientes"
 // en una barrera: nadie mergea/lanza con placeholders, enlaces rotos o copy roto.
 //
@@ -26,19 +26,19 @@ function duro(msg) { duros.push(msg); }
 function aviso(msg) { avisos.push(msg); }
 function ok(msg) { oks.push(msg); }
 
-// Modo: pre-venta (venta:false) o venta abierta (venta:true). Fuente: norsk/MODO.json.
+// Modo: pre-venta (venta:false) o venta abierta (venta:true). Fuente: pass/MODO.json.
 let VENTA = false;
-try { VENTA = JSON.parse(read("norsk/MODO.json")).venta === true; } catch (e) { /* sin MODO.json = pre-venta */ }
+try { VENTA = JSON.parse(read("pass/MODO.json")).venta === true; } catch (e) { /* sin MODO.json = pre-venta */ }
 ok(`modo: ${VENTA ? "VENTA ABIERTA" : "pre-venta (lista de espera, sin checkout)"}`);
 
 // Páginas publicables (indexables o de venta). Excluye app/gracias/acceso.
 const PUBLICABLES = [
-  "norsk/index.html", "norsk/leccion-0/index.html", "norsk/preguntas-de-ejemplo/index.html",
-  "norsk/que-examen-necesitas/index.html", "norsk/como-inscribirse/index.html",
-  "norsk/requisitos-ciudadania-noruega/index.html",
-  "norsk/condiciones/index.html", "norsk/privacidad/index.html",
+  "pass/index.html", "pass/leccion-0/index.html", "pass/preguntas-de-ejemplo/index.html",
+  "pass/que-examen-necesitas/index.html", "pass/como-inscribirse/index.html",
+  "pass/requisitos-ciudadania-noruega/index.html",
+  "pass/condiciones/index.html", "pass/privacidad/index.html",
 ];
-const LEGALES = ["norsk/condiciones/index.html", "norsk/privacidad/index.html"];
+const LEGALES = ["pass/condiciones/index.html", "pass/privacidad/index.html"];
 const PROHIBIDAS = /increíble|brutal|paraíso|hola chicos/i;
 
 // 1) Placeholders legales (duro con venta abierta; aviso en pre-venta, donde las
@@ -54,12 +54,12 @@ for (const f of LEGALES) {
 
 // 1b) Coherencia del modo en el código
 {
-  const landing = read("norsk/index.html");
-  const app = read("norsk/app/app.js");
+  const landing = read("pass/index.html");
+  const app = read("pass/app/app.js");
   const hayBotones = landing.includes('class="cta comprar"');
   const appFlag = /var VENTA_ABIERTA = (true|false);/.exec(app);
   const appVenta = appFlag ? appFlag[1] === "true" : null;
-  if (appVenta === null) duro("norsk/app/app.js: falta el flag VENTA_ABIERTA");
+  if (appVenta === null) duro("pass/app/app.js: falta el flag VENTA_ABIERTA");
   else if (appVenta !== VENTA) duro(`incoherencia de modo: MODO.json venta=${VENTA} pero app.js VENTA_ABIERTA=${appVenta}`);
   else ok(`app.js VENTA_ABIERTA=${appVenta} coherente con MODO.json`);
   if (!VENTA && hayBotones) duro("pre-venta: la landing aún tiene botones de compra activos (.cta comprar)");
@@ -75,6 +75,7 @@ for (const f of LEGALES) {
     if (e.isDirectory()) walk(p);
     else if (e.name === "index.html") pages.push(p);
   });
+  walk("pass");
   walk("norsk");
   pages.push("index.html");
   let rotos = 0;
@@ -132,8 +133,8 @@ if (exists("sitemap.xml")) {
 
 // 6) Contacto: hay que crear el buzón (no verificable aquí)
 {
-  const usaCorreo = LEGALES.some((f) => exists(f) && read(f).includes("norsk@nexonoruega.com"));
-  if (usaCorreo) aviso("Crear y monitorizar el buzón norsk@nexonoruega.com (canal de desistimiento/garantía/RGPD)");
+  const usaCorreo = LEGALES.some((f) => exists(f) && read(f).includes("pass@nexonoruega.com"));
+  if (usaCorreo) aviso("Crear y monitorizar el buzón pass@nexonoruega.com (canal de desistimiento/garantía/RGPD)");
 }
 
 // 7) Env de producción (solo con --env)
@@ -144,11 +145,11 @@ if (process.argv.includes("--env")) {
   else ok("env vars de producción presentes");
   aviso("Verificar en el Dashboard de Stripe la URL de condiciones (consent_collection) y el webhook con barra final");
 } else {
-  aviso("Stripe/Supabase/Resend + entidad legal: pendientes de Rocky (ver NORSK_SETUP.md). Ejecuta con --env cuando estén.");
+  aviso("Stripe/Supabase/Resend + entidad legal: pendientes de Rocky (ver pass/PASS_SETUP.md). Ejecuta con --env cuando estén.");
 }
 
 // ---------- Informe ----------
-console.log("\n== NEXO NORSK · check de pre-lanzamiento ==\n");
+console.log("\n== NEXO PASS · check de pre-lanzamiento ==\n");
 oks.forEach((m) => console.log("  ✅ " + m));
 avisos.forEach((m) => console.log("  ⏳ " + m));
 duros.forEach((m) => console.log("  ❌ " + m));

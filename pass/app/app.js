@@ -1,4 +1,4 @@
-// NEXO NORSK · app de práctica. Vanilla, sin dependencias.
+// NEXO PASS · app de práctica. Vanilla, sin dependencias.
 // Sin cookie de acceso: modo demo con /data/norsk-demo.json.
 // Con acceso: sesiones servidas por /api/norsk-preguntas y /api/norsk-leccion.
 
@@ -771,7 +771,7 @@
     lbl.appendChild(chk);
     lbl.appendChild(el("span", { text: "Quiero recibir la newsletter NEXO NORUEGA cuando arranque." }));
     box.appendChild(lbl);
-    box.appendChild(el("p", { class: "consent", html: 'Tratamos tu correo para guardar tu resultado y, si lo marcas, enviarte la newsletter. Detalles en <a href="/norsk/privacidad/">privacidad</a>.' }));
+    box.appendChild(el("p", { class: "consent", html: 'Tratamos tu correo para guardar tu resultado y, si lo marcas, enviarte la newsletter. Detalles en <a href="/pass/privacidad/">privacidad</a>.' }));
 
     var msg = el("p", { class: "ok", role: "status", "aria-live": "polite", text: "" });
     var btn = el("button", { class: "btn", text: "Guardar mi resultado" });
@@ -894,7 +894,7 @@
     s.appendChild(el("h1", { text: "Abrir el curso completo" }));
     s.appendChild(el("p", { class: "intro", text: "Las 12 lecciones del curso, más de 400 preguntas y simulacros ilimitados de los dos exámenes. Pagas una vez y caduca solo: sin suscripción." }));
 
-    s.appendChild(el("div", { class: "aviso", html: "¿Ya lo compraste? Entra con el enlace de tu correo o <a href=\"/norsk/acceso/\">pide que te lo reenviemos</a>." }));
+    s.appendChild(el("div", { class: "aviso", html: "¿Ya lo compraste? Entra con el enlace de tu correo o <a href=\"/pass/acceso/\">pide que te lo reenviemos</a>." }));
 
     var planes = el("div", { class: "planes" });
     [["p10", "Intensivo", "249", "10 días", false],
@@ -924,7 +924,7 @@
     });
     s.appendChild(planes);
     s.appendChild(el("p", { class: "toggle-nota", style: "margin-top:16px", text: "Garantía sin letra enana: si completas el curso, apruebas 5 simulacros y aun así suspendes, te devolvemos el dinero y sigues gratis hasta aprobar." }));
-    s.appendChild(el("p", { class: "toggle-nota", html: 'Pago único, sin suscripción. <a href="/norsk/condiciones/">Condiciones y garantía</a> · <a href="/norsk/privacidad/">Privacidad</a>' }));
+    s.appendChild(el("p", { class: "toggle-nota", html: 'Pago único, sin suscripción. <a href="/pass/condiciones/">Condiciones y garantía</a> · <a href="/pass/privacidad/">Privacidad</a>' }));
     $app.appendChild(s);
   }
 

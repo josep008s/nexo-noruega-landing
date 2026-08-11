@@ -1,4 +1,4 @@
-// Crea una Stripe Checkout Session para NEXO NORSK.
+// Crea una Stripe Checkout Session para NEXO PASS.
 // POST {plan: "p10"|"p30"|"p90"} -> {url}
 
 import { PLANES, siteUrl, stripe, readBody } from "./_norsk_lib.js";
@@ -20,11 +20,11 @@ export default async function handler(req, res) {
       metadata: { plan },
       // Consentimiento expreso (angrerettloven): checkbox obligatorio de condiciones
       // + texto de entrega inmediata. Requiere la URL de condiciones configurada en
-      // el Dashboard de Stripe (ver NORSK_SETUP.md).
+      // el Dashboard de Stripe (ver pass/PASS_SETUP.md).
       consent_collection: { terms_of_service: "required" },
       custom_text: {
         terms_of_service_acceptance: {
-          message: "Acepto que el acceso empiece de inmediato y que, al usar el contenido de pago, pierdo el derecho de desistimiento de 14 días. [Condiciones](https://www.nexonoruega.com/norsk/condiciones/)",
+          message: "Acepto que el acceso empiece de inmediato y que, al usar el contenido de pago, pierdo el derecho de desistimiento de 14 días. [Condiciones](https://www.nexonoruega.com/pass/condiciones/)",
         },
       },
       line_items: [{
@@ -33,13 +33,13 @@ export default async function handler(req, res) {
           currency: "nok",
           unit_amount: PLANES[plan].amount,
           product_data: {
-            name: `NEXO NORSK · ${PLANES[plan].nombre} (${PLANES[plan].dias} días)`,
+            name: `NEXO PASS · ${PLANES[plan].nombre} (${PLANES[plan].dias} días)`,
             description: "Curso y simulacros de la statsborgerprøven y la samfunnskunnskapsprøven, en español.",
           },
         },
       }],
-      success_url: `${siteUrl()}/norsk/gracias/?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${siteUrl()}/norsk/#precios`,
+      success_url: `${siteUrl()}/pass/gracias/?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${siteUrl()}/pass/#precios`,
     });
     res.status(200).json({ ok: true, url: session.url });
   } catch (e) {
