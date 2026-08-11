@@ -158,7 +158,7 @@
     state.sesion = null;
 
     var s = el("section", { class: "step" });
-    s.appendChild(el("p", { class: "kicker", text: "Nexo Norsk" }));
+    s.appendChild(el("p", { class: "kicker", text: "Nexo Pass" }));
     s.appendChild(el("h1", { text: "¿Qué practicamos hoy?" }));
     s.appendChild(el("p", { class: "intro", text: state.acceso
       ? "Todo el banco está abierto. Elige examen y modo."
