@@ -12,7 +12,7 @@ const LECCIONES = path.join(ROOT, "scripts", "_norsk_banco", "lecciones.json");
 const SALIDA = path.join(ROOT, "data", "norsk-demo.json");
 
 if (!fs.existsSync(BANCO)) {
-  console.error(`No existe ${BANCO}. Exporta el banco canónico del Drive (ver norsk/NORSK_SETUP.md).`);
+  console.error(`No existe ${BANCO}. Exporta el banco canónico del Drive (ver pass/PASS_SETUP.md).`);
   process.exit(1);
 }
 
@@ -56,7 +56,7 @@ if (errores.length) {
 
 const salida = {
   meta: {
-    producto: "NEXO NORSK",
+    producto: "NEXO PASS",
     actualizado: new Date().toISOString().slice(0, 10),
     fuente_temario: "Forskrift om læreplan i samfunnskunnskap for voksne innvandrere (FOR-2021-06-20-2054)",
     mecanica: {

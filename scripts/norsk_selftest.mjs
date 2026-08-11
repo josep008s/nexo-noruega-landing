@@ -1,4 +1,4 @@
-// Auto-test del backend de NEXO NORSK contra Supabase (sin Stripe).
+// Auto-test del backend de NEXO PASS contra Supabase (sin Stripe).
 // Verifica esquema, RPCs, muestreo de simulacros y contadores separados api/reenvio.
 // Uso:  SUPABASE_URL=... SUPABASE_SERVICE_KEY=... node scripts/norsk_selftest.mjs
 //
