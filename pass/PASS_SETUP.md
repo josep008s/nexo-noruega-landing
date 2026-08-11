@@ -1,18 +1,19 @@
-# NEXO NORSK — Setup y runbook
+# NEXO PASS — Setup y runbook
 
 Producto: preparación en español de la statsborgerprøven y la samfunnskunnskapsprøven.
-URL: https://www.nexonoruega.com/norsk/ · Rector: `Business/Nexo Noruega/norsk/PLAN_NORSK_v1.md` (Drive).
+URL: https://www.nexonoruega.com/pass/ · Rector: `Business/Nexo Noruega/norsk/PLAN_NORSK_v1.md` (Drive).
 
 ## Arquitectura
 
-- **Landing y guías**: estáticas e indexables (`/norsk/`, `/norsk/que-examen-necesitas/`…).
-- **App** (`/norsk/app/`): shell estático SIN contenido de pago. Sin cookie carga la demo pública
+- **Compatibilidad interna**: las API, tablas, variables y scripts conservan el prefijo `norsk_` para no romper Stripe, Supabase ni enlaces de acceso ya emitidos. Solo cambia la marca y la ruta pública.
+- **Landing y guías**: estáticas e indexables (`/pass/`, `/pass/que-examen-necesitas/`…).
+- **App** (`/pass/app/`): shell estático SIN contenido de pago. Sin cookie carga la demo pública
   (`/data/norsk-demo.json`); con cookie pide sesiones a la API.
 - **Banco completo**: SOLO en Supabase, servido por `api/norsk-preguntas.js` / `api/norsk-leccion.js`
   con cookie válida. Máximo 38 preguntas por llamada, rate limit 120 peticiones/día por compra.
   El repo es PÚBLICO: el banco jamás se commitea (`scripts/_norsk_banco/` está en .gitignore).
 - **Pago**: Stripe Checkout → webhook → alta idempotente en `norsk_compras` → email magic link (Resend)
-  → cookie HttpOnly → API. `/norsk/gracias/` da acceso inmediato sin esperar el email.
+  → cookie HttpOnly → API. `/pass/gracias/` da acceso inmediato sin esperar el email.
 
 ## Variables de entorno (Vercel → Settings → Environment Variables)
 
@@ -154,7 +155,7 @@ El canónico editorial vive en el Drive: `Business/Nexo Noruega/norsk/banco/BANC
 
 1. Exportar del Drive al repo (carpeta gitignored):
    ```bash
-   python3 "$HOME/Library/CloudStorage/GoogleDrive-josep.muttt@gmail.com/Mi unidad/Business/Nexo Noruega/norsk/banco/exportar_banco.py"
+   python3 "$HOME/Library/CloudStorage/GoogleDrive-josep.muttt@gmail.com/Mi unidad/Business/Nexo Noruega/pass/banco/exportar_banco.py"
    # escribe scripts/_norsk_banco/banco.json y lecciones.json en este repo
    ```
 2. Validar y subir:
@@ -188,23 +189,23 @@ Tarjeta de test: `4242 4242 4242 4242`, cualquier fecha futura y CVC.
 
 ## Legales (obligatorio antes de la primera venta)
 
-- Páginas publicadas: `/norsk/condiciones/` (compra, angrerett, garantía formal, reclamaciones)
-  y `/norsk/privacidad/` (RGPD, encargados, derechos). Enlazadas desde el footer de /norsk,
+- Páginas publicadas: `/pass/condiciones/` (compra, angrerett, garantía formal, reclamaciones)
+  y `/pass/privacidad/` (RGPD, encargados, derechos). Enlazadas desde el footer de /norsk,
   la pantalla de compra de la app y la FAQ.
 - **Rellenar el bloque [RAZÓN SOCIAL · org.nr./NIF · dirección]** en ambas páginas con la
   entidad que facture (LLC/ENK/autónomo). Sin esto NO se lanza.
 - **Stripe Dashboard** → Settings → Business → Public details: poner la URL de términos
-  `https://www.nexonoruega.com/norsk/condiciones/` y la de privacidad. El checkout usa
+  `https://www.nexonoruega.com/pass/condiciones/` y la de privacidad. El checkout usa
   `consent_collection.terms_of_service=required` (checkbox obligatorio) + texto de
   consentimiento de entrega inmediata (angrerett): si la URL no está configurada,
   la creación de la Checkout Session FALLA. Probar en test mode.
-- Crear el buzón **norsk@nexonoruega.com** (o alias) y que lo lea alguien: es el canal de
+- Crear el buzón **pass@nexonoruega.com** (o alias) y que lo lea alguien: es el canal de
   desistimiento, garantía y derechos RGPD.
 
 ## Checklist E2E antes de lanzar
 
 - [ ] `curl -X POST localhost:3000/api/norsk-checkout/ -d '{"plan":"p30"}' -H 'Content-Type: application/json'` → 200 con url; `{"plan":"px"}` → 400. (Usa la barra final; sin ella hay 308.)
-- [ ] Compra test completa → 1 fila en `norsk_compras` + 1 email de Resend (`email_enviado=true`) + `/norsk/gracias/?session_id=…` pone cookie y da acceso.
+- [ ] Compra test completa → 1 fila en `norsk_compras` + 1 email de Resend (`email_enviado=true`) + `/pass/gracias/?session_id=…` pone cookie y da acceso.
 - [ ] Replay del mismo evento (`stripe events resend …` o reenvío desde el Dashboard) → sigue habiendo 1 fila y 1 email (el flag `email_enviado` lo garantiza aunque /gracias insertara primero).
 - [ ] Un `checkout.session.completed` SIN `metadata.plan` (p. ej. creado a mano en el Dashboard) → el webhook responde `ignored: not-norsk` y NO crea acceso.
 - [ ] `stripe trigger charge.refunded` sobre la compra test → la fila pasa a `status=revocada` y la API devuelve 401.
@@ -212,10 +213,10 @@ Tarjeta de test: `4242 4242 4242 4242`, cualquier fecha futura y CVC.
 - [ ] `/api/norsk-preguntas/?modo=practica` sin cookie → 401; con cookie → 10 preguntas; `?modo=simulacro&examen=statsborger` → 36 con 4 `piloto:true`; `?examen=samfunns` → 38 con 4 piloto.
 - [ ] Petición 121 del día → 429.
 - [ ] Webhook con firma manipulada → 400.
-- [ ] Token caducado en `/api/norsk-activar` → redirect a `/norsk/acceso/?e=expirado`.
+- [ ] Token caducado en `/api/norsk-activar` → redirect a `/pass/acceso/?e=expirado`.
 - [ ] Compra con `expires_at` en el pasado (editar la fila) → API 401 y la app muestra renovación con el progreso local intacto.
 - [ ] Demo completa sin cookie y sin Supabase (solo `/data/norsk-demo.json`).
-- [ ] `/norsk` sin barra final → redirect a `/norsk/` (trailingSlash). Rutas absolutas verificadas navegando desde `/norsk/app/`.
+- [ ] `/norsk` sin barra final → redirect a `/pass/` (trailingSlash). Rutas absolutas verificadas navegando desde `/pass/app/`.
 - [ ] Lighthouse ≥95 en landing y guías; JSON-LD válido (Rich Results Test); navegación completa con teclado (1/2/3, Tab); `prefers-reduced-motion`.
 - [ ] En live: compra real de 249 kr verificada y reembolsada; sitemap enviado a Search Console.
 

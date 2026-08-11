@@ -45,7 +45,7 @@ export default async function handler(req, res) {
     styrk: (body.styrk || "").toString().slice(0, 8),
     confianza: typeof body.confianza === "number" ? body.confianza : null,
     // source distingue el embudo (p.ej. "sueldo", "norsk-demo"); newsletter = consentimiento explícito.
-    // Requiere en la tabla leads: source text, newsletter boolean default false (ver norsk/NORSK_SETUP.md).
+    // Requiere en la tabla leads: source text, newsletter boolean default false (ver pass/PASS_SETUP.md).
     source: (body.source || "").toString().slice(0, 40),
     newsletter: body.newsletter === true,
     utm_source: (body.utm_source || "").toString().slice(0, 60),
