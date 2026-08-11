@@ -9,7 +9,7 @@ import crypto from "node:crypto";
 
 // Única fuente de verdad de los planes. El cliente nunca envía importes.
 export const PLANES = {
-  p10: { amount: 24900, dias: 10, nombre: "Intensivo" },
+  p3: { amount: 9900, dias: 3, nombre: "Intensivo" },
   p30: { amount: 34900, dias: 30, nombre: "Con Calma" },
   p90: { amount: 44900, dias: 90, nombre: "Sin Prisa" },
 };
