@@ -218,7 +218,7 @@ Tarjeta de test: `4242 4242 4242 4242`, cualquier fecha futura y CVC.
 - [ ] Demo completa sin cookie y sin Supabase (solo `/data/norsk-demo.json`).
 - [ ] `/norsk` sin barra final → redirect a `/pass/` (trailingSlash). Rutas absolutas verificadas navegando desde `/pass/app/`.
 - [ ] Lighthouse ≥95 en landing y guías; JSON-LD válido (Rich Results Test); navegación completa con teclado (1/2/3, Tab); `prefers-reduced-motion`.
-- [ ] En live: compra real de 249 kr verificada y reembolsada; sitemap enviado a Search Console.
+- [ ] En live: compra real de 99 kr verificada y reembolsada; sitemap enviado a Search Console.
 
 ## Operación
 

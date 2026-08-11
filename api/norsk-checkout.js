@@ -1,5 +1,5 @@
 // Crea una Stripe Checkout Session para NEXO PASS.
-// POST {plan: "p10"|"p30"|"p90"} -> {url}
+// POST {plan: "p3"|"p30"|"p90"} -> {url}
 
 import { PLANES, siteUrl, stripe, readBody } from "./_norsk_lib.js";
 

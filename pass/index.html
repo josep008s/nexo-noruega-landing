@@ -33,7 +33,7 @@
     "inLanguage": ["es", "no"],
     "provider": { "@type": "Organization", "name": "Nexo Noruega", "url": "https://www.nexonoruega.com" },
     "offers": [
-      { "@type": "Offer", "name": "Intensivo (10 días)", "price": "249", "priceCurrency": "NOK", "url": "https://www.nexonoruega.com/pass/#precios" },
+      { "@type": "Offer", "name": "Intensivo (3 días)", "price": "99", "priceCurrency": "NOK", "url": "https://www.nexonoruega.com/pass/#precios" },
       { "@type": "Offer", "name": "Con Calma (30 días)", "price": "349", "priceCurrency": "NOK", "url": "https://www.nexonoruega.com/pass/#precios" },
       { "@type": "Offer", "name": "Sin Prisa (90 días)", "price": "449", "priceCurrency": "NOK", "url": "https://www.nexonoruega.com/pass/#precios" }
     ],
@@ -130,19 +130,15 @@
     .demo-card .op{font-family:var(--serif);font-size:1rem;color:var(--nieve);border:1px solid rgba(141,161,171,.4);border-radius:8px;padding:10px 14px;background:none;text-align:left;cursor:pointer;transition:border-color .2s,background .2s}
     .demo-card .op:hover{border-color:var(--aurora);background:rgba(63,203,148,.08)}
 
-    /* ===== Tabla comparativa ===== */
-    .tabla-scroll{overflow-x:auto;margin:8px 0 4px}
-    table{border-collapse:collapse;width:100%;min-width:560px;font-size:1rem}
-    th{font-family:var(--sg);font-weight:700;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;text-align:left;color:var(--fiordo);padding:10px 12px;border-bottom:2px solid var(--linea-clara)}
-    td{padding:10px 12px;border-bottom:1px solid var(--linea-clara);color:var(--noche);vertical-align:top}
-    td b{font-family:var(--sg)}
-    .rutas{display:grid;gap:12px;margin-top:24px}
-    @media (min-width:721px){.rutas{grid-template-columns:repeat(3,1fr)}}
-    .ruta-card{border:1px solid var(--linea-clara);border-radius:12px;padding:18px;background:#fff}
-    .ruta-card h3{font-family:var(--sg);font-size:1rem;line-height:1.25;margin-bottom:8px;color:var(--noche)}
-    .ruta-card p{font-size:.98rem;line-height:1.55;color:var(--fiordo)}
-    .ruta-card.destaca{background:rgba(63,203,148,.10);border-color:rgba(63,203,148,.55)}
-    .pasaporte{background:var(--noche);color:var(--nieve);border-radius:14px;padding:22px;margin-top:18px;max-width:70ch;box-shadow:0 14px 34px rgba(14,27,38,.12)}
+    /* ===== Comparativa de pruebas ===== */
+    .examenes{display:grid;gap:14px;margin-top:22px}
+    @media (min-width:721px){.examenes{grid-template-columns:repeat(2,1fr)}.examen .uso{min-height:4.7em}}
+    .examen{border:1px solid var(--linea-clara);border-radius:12px;padding:20px;background:#fff}
+    .examen h3{font-family:var(--sg);font-size:1.05rem;line-height:1.25;margin-bottom:10px;color:var(--noche);overflow-wrap:anywhere}
+    .examen .uso{font-size:.98rem;line-height:1.55;color:var(--fiordo)}
+    .examen .meta{font-family:var(--sg);font-size:.82rem;line-height:1.55;color:var(--fiordo);border-top:1px solid var(--linea-clara);padding-top:12px;margin-top:14px}
+    .examen .meta b{color:var(--noche)}
+    .pasaporte{background:var(--noche);color:var(--nieve);border-radius:14px;padding:22px;margin-top:24px;max-width:70ch;box-shadow:0 14px 34px rgba(14,27,38,.12)}
     .pasaporte .etiqueta{font-family:var(--sg);font-weight:700;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--aurora);margin-bottom:12px}
     .pasaporte h3{font-family:var(--sg);font-size:clamp(1.25rem,2.5vw,1.55rem);line-height:1.22;max-width:34ch;margin-bottom:10px}
     .pasaporte p{color:var(--niebla);font-size:1rem;margin-bottom:12px}
@@ -251,7 +247,7 @@
       <div class="wrap">
         <p class="kicker caesar reveal">Nexo Pass</p>
         <h1 class="reveal" style="--d:.08s">El examen que necesitas, explicado en español.</h1>
-        <p class="sub reveal" style="--d:.16s">Prepara la statsborgerprøven y la samfunnskunnskapsprøven con más de 400 preguntas bilingües y simulacros exactos. La primera se hace en noruego; la segunda, en 23 idiomas.</p>
+        <p class="sub reveal" style="--d:.16s">Prepara la statsborgerprøven y la samfunnskunnskapsprøven con más de 400 preguntas en noruego y español, explicaciones claras y simulacros con el formato oficial.</p>
         <div class="reveal" style="--d:.24s">
           <a class="cta" href="/pass/app/">Haz el simulacro gratis</a>
           <p class="microcopy">Sin registro ni tarjeta. 12 preguntas con explicación.</p>
@@ -259,12 +255,12 @@
 
         <div class="demo-card reveal" style="--d:.34s">
           <p class="etiqueta">Una pregunta, en los dos idiomas</p>
-          <p class="q-no" lang="nb">Når er Norges nasjonaldag?</p>
-          <p class="q-es">¿Cuándo es la fiesta nacional de Noruega?</p>
+          <p class="q-no" lang="nb">Når kan utenlandske statsborgere stemme ved kommunevalg?</p>
+          <p class="q-es">¿Cuándo pueden votar los extranjeros en las elecciones municipales?</p>
           <div class="ops" role="group" aria-label="Opciones de ejemplo">
-            <a class="op" href="/pass/app/">17. mai</a>
-            <a class="op" href="/pass/app/">6. juni</a>
-            <a class="op" href="/pass/app/">24. desember</a>
+            <a class="op" href="/pass/app/">Når de har vært folkeregistrert i Norge de tre siste årene</a>
+            <a class="op" href="/pass/app/">Når de har fått norsk statsborgerskap</a>
+            <a class="op" href="/pass/app/">Når de har bodd i Norge i ett år</a>
           </div>
         </div>
       </div>
@@ -273,47 +269,30 @@
     <!-- S2 · ELEGIR EXAMEN -->
     <section class="claro" id="que-examen">
       <div class="wrap">
-        <p class="kicker reveal">Elige bien</p>
-        <h2 class="reveal" style="--d:.08s">Primero: ¿residencia permanente o ciudadanía?</h2>
-        <p class="parrafo reveal" style="--d:.14s">Tu pasaporte y tu vía de residencia cambian la respuesta. Esta es la versión corta.</p>
+        <p class="kicker reveal">Las dos pruebas</p>
+        <h2 class="reveal" style="--d:.08s">El mismo temario. Dos formatos.</h2>
+        <p class="parrafo reveal" style="--d:.14s">NEXO PASS prepara ambas. Tú practicas cada una tal como aparece el día del examen.</p>
 
-        <div class="tabla-scroll reveal" style="--d:.2s">
-          <table>
-            <thead>
-              <tr><th scope="col">&nbsp;</th><th scope="col">Samfunnskunnskapsprøven</th><th scope="col">Statsborgerprøven</th></tr>
-            </thead>
-            <tbody>
-              <tr><td><b>Sirve para</b></td><td>Residencia permanente por la vía general. En noruego, también ciudadanía.</td><td>Ciudadanía</td></tr>
-              <tr><td><b>Idioma oficial</b></td><td>23 idiomas, incluidos español, inglés y noruego</td><td>Noruego: bokmål o nynorsk</td></tr>
-              <tr><td><b>Preguntas</b></td><td>38; puntúan 34</td><td>36; puntúan 32</td></tr>
-              <tr><td><b>Aprobado</b></td><td>26 correctas</td><td>24 correctas</td></tr>
-              <tr><td><b>Tiempo</b></td><td>60 minutos</td><td>60 minutos</td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div class="rutas">
-          <article class="ruta-card reveal" style="--d:.24s">
-            <h3>Pasaporte UE/EEE</h3>
-            <p>Para el derecho de residencia permanente, ninguna de las dos. Para ciudadanía, normalmente una prueba de conocimientos en noruego más el oral B1.</p>
+        <div class="examenes">
+          <article class="examen reveal" style="--d:.2s">
+            <h3>Samfunnskunnskapsprøven</h3>
+            <p class="uso">Residencia permanente por la vía general (disponible en 23 idiomas).</p>
+            <p class="meta"><b>38 preguntas</b> · puntúan 34 · apruebas con 26 · 60 minutos</p>
           </article>
-          <article class="ruta-card reveal" style="--d:.3s">
-            <h3>Vía general · residencia</h3>
-            <p>Samfunnskunnskapsprøven en un idioma que entiendas más noruego oral A2. Español e inglés no dependen de tu nacionalidad.</p>
-          </article>
-          <article class="ruta-card destaca reveal" style="--d:.36s">
-            <h3>Vía general · las dos puertas</h3>
-            <p><mark class="marcado">Si tu noruego llega, haz la samfunns en noruego:</mark> una sola prueba de conocimientos puede cubrir residencia y ciudadanía.</p>
+          <article class="examen reveal" style="--d:.24s">
+            <h3>Statsborgerprøven</h3>
+            <p class="uso">Ciudadanía noruega.</p>
+            <p class="meta"><b>36 preguntas</b> · puntúan 32 · apruebas con 24 · 60 minutos</p>
           </article>
         </div>
 
-        <div class="pasaporte reveal" style="--d:.42s">
-          <p class="etiqueta">Ciudadanía y pasaporte</p>
-          <h3>El examen es un requisito. No concede la ciudadanía ni el pasaporte por sí solo.</h3>
-          <p>Entre 18 y 67 años, normalmente necesitas además el oral B1 y cumplir las condiciones de residencia, identidad, situación legal y conducta de tu caso. Primero UDI concede la ciudadanía; después puedes solicitar el pasaporte a la Policía.</p>
+        <div class="pasaporte reveal" style="--d:.3s">
+          <p class="etiqueta">Si tu objetivo es la ciudadanía</p>
+          <h3>La prueba de conocimientos es solo uno de los requisitos.</h3>
+          <p>Entre 18 y 67 años, la regla general exige acreditar noruego oral B1 y aprobar la statsborgerprøven o la samfunnskunnskapsprøven en noruego. UDI recoge casos concretos en los que basta A2 y otras exenciones, y comprueba aparte el resto de requisitos de ciudadanía. Cuando te concedan la ciudadanía, podrás solicitar el pasaporte noruego.</p>
           <p class="ruta"><a href="/pass/requisitos-ciudadania-noruega/">Ver requisitos, plazos y excepciones</a></p>
         </div>
-        <p class="fuente reveal" style="--d:.46s"><a href="https://prove.hkdir.no/samfunnskunnskapsprove/les-om-proven-samfunnskunnskap">HK-dir</a>, <a href="https://www.udi.no/en/word-definitions/test-requirements-norwegian-citizenship/">UDI</a> y <a href="https://www.politiet.no/tjenester/pass-og-id-kort/huskeliste-dette-ma-du-ha-med-til-pass-og-id-kontoret/">Politiet</a> · Verificado en agosto de 2026</p>
+        <p class="fuente reveal" style="--d:.36s"><a href="https://prove.hkdir.no/samfunnskunnskapsprove/les-om-proven-samfunnskunnskap">HK-dir</a>, <a href="https://www.udi.no/en/word-definitions/test-requirements-norwegian-citizenship/">UDI</a> y <a href="https://www.politiet.no/tjenester/pass-og-id-kort/huskeliste-dette-ma-du-ha-med-til-pass-og-id-kontoret/">Politiet</a> · Verificado en agosto de 2026</p>
       </div>
     </section>
 
@@ -332,7 +311,7 @@
             <p>Cada pregunta en noruego y español, con explicación y fuente oficial.</p>
           </div>
           <div class="pieza reveal" style="--d:.3s">
-            <p class="titulo">Dos simulacros exactos</p>
+            <p class="titulo">Simulacros de las dos pruebas</p>
             <p>Mismas preguntas piloto, reloj y umbral que cada examen oficial.</p>
           </div>
         </div>
@@ -363,9 +342,9 @@
           <div class="plan reveal" style="--d:.18s">
             <p class="badge">&nbsp;</p>
             <p class="nombre">Intensivo</p>
-            <p class="precio">249 <small>kr</small></p>
-            <p class="dias">10 días de acceso</p>
-            <p class="lema">Tienes fecha y está cerca.</p>
+            <p class="precio">99 <small>kr</small></p>
+            <p class="dias">3 días de acceso</p>
+            <p class="lema">Tu examen es esta semana.</p>
             <p class="pronto">Abre muy pronto</p>
           </div>
           <div class="plan reco reveal" style="--d:.26s">
@@ -373,7 +352,7 @@
             <p class="nombre">Con Calma</p>
             <p class="precio">349 <small>kr</small></p>
             <p class="dias">30 días de acceso</p>
-            <p class="lema">La preparación normal.</p>
+            <p class="lema">Un mes para prepararlo.</p>
             <p class="pronto">Abre muy pronto</p>
           </div>
           <div class="plan reveal" style="--d:.34s">
