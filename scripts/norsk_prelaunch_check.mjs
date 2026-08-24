@@ -33,6 +33,7 @@ ok(`modo: ${VENTA ? "VENTA ABIERTA" : "pre-venta (lista de espera, sin checkout)
 
 // Páginas publicables (indexables o de venta). Excluye app/gracias/acceso.
 const PUBLICABLES = [
+  "norsk/index.html", "norsk/sprint-oral/index.html",
   "pass/index.html", "pass/leccion-0/index.html", "pass/preguntas-de-ejemplo/index.html",
   "pass/que-examen-necesitas/index.html", "pass/como-inscribirse/index.html",
   "pass/requisitos-ciudadania-noruega/index.html",

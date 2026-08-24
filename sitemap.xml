@@ -11,6 +11,16 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://www.nexonoruega.com/norsk/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.nexonoruega.com/norsk/sprint-oral/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://www.nexonoruega.com/pass/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
