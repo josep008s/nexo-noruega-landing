@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>El curso · NEXO NORSK</title>
+  <meta name="description" content="Curso de preparación del Norskprøven B1: los mecanismos que separan el A2 del B1, práctica y simulacros.">
+  <meta name="robots" content="noindex">
+  <link rel="canonical" href="https://www.nexonoruega.com/norsk/curso/">
+
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caesar+Dressing&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --noche:#0E1B26; --nieve:#F3F5F4; --aurora:#3FCB94; --fiordo:#2C5A72; --niebla:#8DA1AB;
+      --blanco:#FFFFFF;
+      --tinta-suave:rgba(14,27,38,.72);
+      --linea-clara:rgba(14,27,38,.14);
+      --sombra-clara:0 14px 34px rgba(14,27,38,.08);
+      --alerta:#8F5A0F;
+      --linea:rgba(14,27,38,.14);
+      --sg:"Space Grotesk",system-ui,sans-serif;
+      --serif:"Source Serif 4",Georgia,serif;
+      --caesar:"Caesar Dressing",var(--sg);
+      --ease:cubic-bezier(0.16,1,0.3,1);
+    }
+    *{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{font-family:var(--serif);background:var(--nieve);color:var(--noche);line-height:1.65;min-height:100svh;-webkit-font-smoothing:antialiased}
+    ::selection{background:var(--aurora);color:var(--noche)}
+    a{color:var(--fiordo)}
+    a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var(--fiordo);outline-offset:3px}
+
+    header{position:sticky;top:0;z-index:60;background:rgba(243,245,244,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--linea-clara)}
+    .head-inner{max-width:760px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .marca{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--noche)}
+    .marca svg{width:24px;height:24px;flex:none}
+    .marca span{font-family:var(--sg);font-weight:500;font-size:.88rem}
+    .marca b{font-weight:700}
+    .head-der{display:flex;align-items:center;gap:14px}
+    .head-der a{font-family:var(--sg);font-weight:500;font-size:.8rem;color:var(--fiordo);text-decoration:none}
+    .head-der a:hover{color:var(--noche)}
+    .estado{font-family:var(--sg);font-weight:700;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--noche);background:rgba(63,203,148,.28);border-radius:999px;padding:4px 11px}
+    .estado.demo{background:rgba(44,90,114,.12);color:var(--fiordo)}
+
+    main{max-width:760px;margin:0 auto;padding:26px 24px 100px}
+
+    .kicker{font-family:var(--sg);font-weight:700;font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--fiordo);margin-bottom:14px}
+    h1{font-family:var(--sg);font-weight:700;font-size:clamp(1.7rem,5vw,2.3rem);letter-spacing:-.02em;line-height:1.14;margin-bottom:10px}
+    h2{font-family:var(--sg);font-weight:700;font-size:1.2rem;margin-bottom:12px}
+    .intro{color:var(--tinta-suave);font-size:1.05rem;margin-bottom:24px;max-width:56ch}
+
+    .aviso{display:flex;gap:13px;align-items:flex-start;background:var(--blanco);border:1px solid var(--linea-clara);border-left:3px solid var(--alerta);border-radius:10px;padding:15px 17px;margin-bottom:24px}
+    .aviso .eti{font-family:var(--sg);font-weight:700;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--alerta);flex:none;padding-top:3px}
+    .aviso p{font-size:.95rem;color:var(--tinta-suave)}
+
+    .back{background:none;border:none;color:var(--fiordo);font-family:var(--sg);font-size:.82rem;cursor:pointer;padding:0;margin-bottom:16px}
+    .back:hover{color:var(--noche)}
+
+    .step{animation:enter .38s var(--ease)}
+    @keyframes enter{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:none}}
+
+    /* Progreso */
+    .progreso{background:var(--blanco);border:1px solid var(--linea-clara);border-radius:14px;padding:17px 19px;margin-bottom:24px;box-shadow:var(--sombra-clara)}
+    .progreso .lab{font-family:var(--sg);font-weight:700;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--fiordo);margin-bottom:8px}
+    .barra{position:relative;height:8px;border-radius:6px;background:rgba(14,27,38,.10);overflow:hidden;margin-bottom:9px}
+    .barra i{position:absolute;left:0;top:0;bottom:0;border-radius:6px;background:var(--aurora);transition:width .5s var(--ease)}
+    .progreso p{font-size:.94rem;color:var(--tinta-suave)}
+
+    /* Bloques del curso */
+    .bloque{margin-bottom:30px}
+    .bloque-tit{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:12px}
+    .bloque-tit h2{margin:0}
+    .bloque-tit .cuenta{font-family:var(--sg);font-size:.76rem;letter-spacing:.08em;text-transform:uppercase;color:var(--fiordo);flex:none}
+    .lista{display:grid;gap:9px}
+    .item{display:flex;align-items:center;gap:13px;background:var(--blanco);border:1px solid var(--linea-clara);border-radius:11px;padding:13px 15px;cursor:pointer;color:var(--noche);font-family:var(--serif);font-size:1rem;text-align:left;width:100%;transition:border-color .18s,transform .18s}
+    .item:hover{border-color:var(--aurora);transform:translateX(2px)}
+    .item .cod{font-family:var(--sg);font-weight:700;font-size:.78rem;color:var(--fiordo);flex:none;min-width:34px}
+    .item .txt{flex:1;line-height:1.4}
+    .item .txt small{display:block;color:var(--tinta-suave);font-size:.87rem;margin-top:2px}
+    .item .marca-est{font-family:var(--sg);font-weight:700;font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;flex:none;border-radius:999px;padding:3px 9px}
+    .item .marca-est.hecho{background:rgba(63,203,148,.28);color:var(--noche)}
+    .item .marca-est.bloq{background:rgba(44,90,114,.12);color:var(--fiordo)}
+    .item:disabled{cursor:default;opacity:.75}
+    .item:disabled:hover{border-color:var(--linea-clara);transform:none}
+
+    /* Lector */
+    .lector{max-width:68ch}
+    .lector h2{font-size:1.42rem;margin:26px 0 12px;letter-spacing:-.01em}
+    .lector h3{font-family:var(--sg);font-size:1.08rem;margin:20px 0 8px}
+    .lector p{margin-bottom:14px;font-size:1.07rem}
+    .lector ul,.lector ol{margin:0 0 14px 22px}
+    .lector li{margin-bottom:7px;font-size:1.05rem}
+    .lector table{border-collapse:collapse;width:100%;margin:16px 0;font-size:.97rem;display:block;overflow-x:auto}
+    .lector th,.lector td{border:1px solid var(--linea-clara);padding:9px 11px;text-align:left;vertical-align:top}
+    .lector th{font-family:var(--sg);font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;color:var(--fiordo);background:var(--blanco)}
+    .lector blockquote{background:rgba(63,203,148,.13);border-left:3px solid var(--aurora);border-radius:0 10px 10px 0;padding:15px 18px;margin:18px 0;color:var(--noche)}
+    .lector blockquote p:last-child{margin-bottom:0}
+    .lector code{font-family:var(--sg);font-size:.95em;background:var(--blanco);border:1px solid var(--linea-clara);border-radius:5px;padding:1px 6px}
+    .lector pre{background:var(--blanco);border:1px solid var(--linea-clara);border-radius:10px;padding:14px;overflow-x:auto;margin:16px 0;font-size:.9rem}
+    .lector hr{border:0;border-top:1px solid var(--linea-clara);margin:26px 0}
+    .lector strong{color:var(--noche)}
+
+    .meta-pieza{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 20px}
+    .meta-pieza span{font-family:var(--sg);font-size:.74rem;letter-spacing:.06em;color:var(--fiordo);border:1px solid var(--linea-clara);border-radius:999px;padding:4px 11px;background:var(--blanco)}
+
+    .nav-pieza{display:flex;gap:10px;margin-top:30px;padding-top:22px;border-top:1px solid var(--linea-clara)}
+    .nav-pieza button{flex:1}
+
+    .btn{display:inline-block;width:100%;font-family:var(--sg);font-weight:700;font-size:.98rem;color:var(--noche);background:var(--aurora);border:none;text-align:center;padding:14px 22px;border-radius:10px;cursor:pointer;margin-top:12px;text-decoration:none;transition:filter .18s}
+    .btn:hover{filter:brightness(1.05)}
+    .btn.ghost{background:none;border:1px solid var(--linea-clara);color:var(--noche)}
+    .btn.ghost:hover{border-color:var(--fiordo)}
+    .btn:disabled{opacity:.5;cursor:default}
+
+    .marcar{background:var(--blanco);border:1px solid var(--linea-clara);border-radius:12px;padding:16px 18px;margin-top:24px}
+    .marcar p{font-size:.96rem;color:var(--tinta-suave);margin-bottom:10px}
+
+    .candado{background:var(--blanco);border:1px solid var(--linea-clara);border-radius:14px;padding:24px;text-align:center;box-shadow:var(--sombra-clara)}
+    .candado h2{margin-bottom:8px}
+    .candado p{color:var(--tinta-suave);font-size:1rem;margin-bottom:6px;max-width:46ch;margin-left:auto;margin-right:auto}
+
+    @media (max-width:640px){
+      .head-der a{font-size:.75rem}
+      .marca span{font-size:.8rem}
+      .item{padding:12px 13px}
+      .nav-pieza{flex-direction:column}
+    }
+    @media (prefers-reduced-motion:reduce){.step{animation:none}.item:hover{transform:none}}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="head-inner">
+      <a class="marca" href="/norsk/" aria-label="NEXO NORSK">
+        <svg viewBox="0 0 800 800" aria-hidden="true">
+          <path d="M223 532 L223 298 L320 402 L320 265" fill="none" stroke="#2C5A72" stroke-opacity=".45" stroke-width="34" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M478 532 L478 264 L577 398 L577 532" fill="none" stroke="#2C5A72" stroke-width="34" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>NEXO <b>NORSK</b></span>
+      </a>
+      <div class="head-der">
+        <a href="/norsk/larsito/">Larsito</a>
+        <span class="estado demo" id="estado">Demo</span>
+      </div>
+    </div>
+  </header>
+
+  <main id="app" aria-live="polite">
+    <h1>El curso</h1>
+    <p class="intro">Cargando…</p>
+    <noscript><p>Esta página necesita JavaScript. Puedes volver a <a href="/norsk/">NEXO NORSK</a>.</p></noscript>
+  </main>
+
+  <script src="/norsk/curso/app.js"></script>
+</body>
+</html>
