@@ -4,6 +4,9 @@ node_modules/
 
 # NEXO PASS: el banco de preguntas es contenido de pago y el repo es público
 scripts/_norsk_banco/
+
+# Larsito: los guiones de listening son contenido de pago y el repo es público
+scripts/_norsk_larsito/
 .env.local
 .vercel
 .claude/
