@@ -142,6 +142,7 @@ if (exists("sitemap.xml")) {
     "pass/index.html", "pass/app/index.html", "pass/leccion-0/index.html",
     "pass/preguntas-de-ejemplo/index.html", "pass/que-examen-necesitas/index.html",
     "pass/como-inscribirse/index.html", "pass/requisitos-ciudadania-noruega/index.html",
+    "norsk/larsito/index.html",
   ];
   const TOKENS = ["#0E1B26", "#F3F5F4", "#3FCB94", "#2C5A72", "#8DA1AB"];
   const FUENTES = ["Space Grotesk", "Source Serif 4"];
@@ -180,6 +181,38 @@ if (exists("sitemap.xml")) {
   if (!/body\s*\{[^}]*background:\s*var\(--noche\)/.test(home)) {
     duro("index.html: la home ha perdido su fondo oscuro (no se rediseña)");
   } else ok("home: tema oscuro intacto");
+}
+
+// 5d) Larsito: el flag del cliente y la demo tienen que ser coherentes.
+// El agente de voz se despliega apagado hasta que existan claves; con el flag
+// encendido y sin backend, la página prometería algo que no puede cumplir.
+if (exists("norsk/larsito/app.js")) {
+  const js = read("norsk/larsito/app.js");
+  const m = /var LARSITO_ABIERTO = (true|false);/.exec(js);
+  if (!m) duro("norsk/larsito/app.js: falta el flag LARSITO_ABIERTO");
+  else {
+    const abierto = m[1] === "true";
+    ok(`Larsito: LARSITO_ABIERTO=${abierto}`);
+    if (abierto) aviso("Larsito abierto: comprueba LARSITO_ON, LARSITO_AGENT_ID y la clave de voz en Vercel");
+  }
+  if (!exists("data/larsito-demo.json")) duro("Falta data/larsito-demo.json (la demo de Larsito)");
+  else {
+    try {
+      const d = JSON.parse(read("data/larsito-demo.json"));
+      const escenarios = Array.isArray(d.escenarios) ? d.escenarios.length : 0;
+      const listening = Array.isArray(d.listening) ? d.listening.length : 0;
+      if (!escenarios) duro("demo de Larsito: sin escenarios de conversación");
+      else if (!listening) duro("demo de Larsito: sin ejercicios de escucha");
+      else {
+        const malas = (d.listening || []).filter((e) => !Array.isArray(e.preguntas) || e.preguntas.some((q) => !Array.isArray(q.opciones_no) || q.opciones_no.length !== 3 || ![0, 1, 2].includes(q.correcta)));
+        const sinTurnos = (d.escenarios || []).filter((e) => !Array.isArray(e.turnos) || !e.turnos.length);
+        if (malas.length) duro(`demo de Larsito: ${malas.length} ejercicios de escucha con estructura inválida`);
+        else if (sinTurnos.length) duro(`demo de Larsito: ${sinTurnos.length} escenarios sin turnos`);
+        else ok(`demo de Larsito: ${escenarios} conversaciones + ${listening} ejercicios de escucha`);
+      }
+      if (JSON.stringify(d).includes("\u2014")) duro("demo de Larsito: em dash en el contenido");
+    } catch (e) { duro("demo de Larsito: JSON inválido"); }
+  }
 }
 
 // 6) Contacto: hay que crear el buzón (no verificable aquí)

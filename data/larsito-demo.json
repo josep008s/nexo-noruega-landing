@@ -1,0 +1,715 @@
+{
+  "version": "0.1",
+  "aviso": "Esto es la demo pública de Larsito, con contenido fijo para que veas cómo se trabaja; la conversación de verdad, con voz y corrección en el momento, llega con el curso. El noruego de esta demo está pendiente de la revisión de un hablante nativo.",
+  "fuentes": [
+    {
+      "dato": "La prueba oral de Norskprøven dura entre 20 y 25 minutos, se hace con dos candidatos a la vez, la dirige un eksaminator y la evalúa un sensor. En el nivel A2-B1 hay tres tareas: contar algo sobre un tema cotidiano, intercambiar información con el otro candidato y expresar y justificar una opinión.",
+      "url": "https://hkdir.no/voksenopplaering/norsk-og-samfunnskunnskap/om-norskprovene/norskproven-a1-b2/prove-i-munnleg-kommunikasjon",
+      "consultado": "2026-08-29"
+    },
+    {
+      "dato": "La cita con el fastlege se pide por teléfono, en el propio centro o desde Helsenorge. Fuera del horario del centro se llama a la legevakt en el 116 117, abierta las 24 horas. Para una urgencia vital, el 113.",
+      "url": "https://www.helsenorge.no/en/help-services-in-the-municipalities/out-of-hours-medical-service/",
+      "consultado": "2026-08-29"
+    },
+    {
+      "dato": "La egenmelding, el aviso de baja sin médico, cubre por ley un máximo de tres días naturales seguidos y hasta cuatro veces en doce meses. Es el mínimo legal: hay empresas que amplían el derecho.",
+      "url": "https://www.nav.no/egenmelding",
+      "consultado": "2026-08-29"
+    },
+    {
+      "dato": "Quien cobra dagpenger, AAP o tiltakspenger tiene que enviar el meldekort cada catorce días. Si se envía tarde, el siguiente pago se reduce en proporción a los días de retraso.",
+      "url": "https://www.nav.no/send-meldekort",
+      "consultado": "2026-08-29"
+    },
+    {
+      "dato": "La barnehage cierra cinco planleggingsdager al año, días de trabajo interno del personal, y la foreldresamtale con la pedagogisk leder del grupo se hace normalmente dos veces al año.",
+      "url": "https://www.oslo.kommune.no/barnehage/feriestengt-barnehage/",
+      "consultado": "2026-08-29"
+    }
+  ],
+  "escenarios": [
+    {
+      "id": "esc-01",
+      "modo": "rollespill",
+      "titulo": "Pedir cita con tu médico",
+      "contexto_es": "Llamas al centro de salud donde tienes asignado a tu fastlege y te contesta la persona de recepción. Quieres una cita y tienes que explicar en dos frases qué te pasa.",
+      "nivel": "A2",
+      "turnos": [
+        {
+          "larsito_no": "Hei, du har kommet til Fjellheim legekontor. Hva kan jeg hjelpe deg med?",
+          "larsito_es": "Hola, has llamado al centro médico Fjellheim. ¿En qué puedo ayudarte?",
+          "pista_es": "Saluda y di que quieres pedir cita con tu médico de cabecera.",
+          "respuestas_modelo_no": [
+            "Hei, jeg vil gjerne bestille time hos fastlegen min.",
+            "Hei, jeg trenger en time hos legen så snart som mulig."
+          ],
+          "bloques_no": [
+            "Jeg vil gjerne bestille time",
+            "hos fastlegen min",
+            "så snart som mulig"
+          ]
+        },
+        {
+          "larsito_no": "Det ordner vi. Kan jeg få navnet ditt og fødselsdatoen din?",
+          "larsito_es": "Eso lo arreglamos. ¿Me dices tu nombre y tu fecha de nacimiento?",
+          "pista_es": "Di tu nombre y tu fecha de nacimiento, y ofrécete a deletrear el apellido.",
+          "respuestas_modelo_no": [
+            "Jeg heter Carmen López. Jeg er født tolvte mars nittenåttiåtte.",
+            "Navnet mitt er Diego Ramos. Skal jeg stave etternavnet?"
+          ],
+          "bloques_no": [
+            "Jeg heter ...",
+            "Jeg er født tolvte mars",
+            "Skal jeg stave etternavnet?"
+          ]
+        },
+        {
+          "larsito_no": "Takk. Og hva gjelder det? Du trenger ikke fortelle meg alt, bare kort hva som plager deg.",
+          "larsito_es": "Gracias. ¿Y de qué se trata? No tienes que contármelo todo, solo brevemente qué te molesta.",
+          "pista_es": "Describe el síntoma en una o dos frases y di desde cuándo lo tienes.",
+          "respuestas_modelo_no": [
+            "Jeg har vondt i magen, og det har vart i over en uke.",
+            "Jeg har hatt hodepine og feber siden mandag."
+          ],
+          "bloques_no": [
+            "Jeg har vondt i magen",
+            "Det begynte for en uke siden",
+            "Jeg har hatt feber i tre dager"
+          ]
+        },
+        {
+          "larsito_no": "Jeg forstår. Legen har en ledig time på torsdag klokka kvart over ni. Passer det for deg?",
+          "larsito_es": "Entiendo. El médico tiene un hueco el jueves a las nueve y cuarto. ¿Te viene bien?",
+          "pista_es": "Di que a esa hora estás trabajando y pide una cita más tarde.",
+          "respuestas_modelo_no": [
+            "Nei, det passer dessverre dårlig. Da er jeg på jobb. Har dere noe senere på dagen?",
+            "Torsdag passer fint, men ikke om morgenen. Kan jeg få en time etter klokka tre?"
+          ],
+          "bloques_no": [
+            "Det passer dessverre dårlig",
+            "Da er jeg på jobb",
+            "Har dere noe senere på dagen?"
+          ]
+        },
+        {
+          "larsito_no": "Da har jeg torsdag klokka halv fire i stedet. Du får en bekreftelse på SMS. Er det noe mer du lurer på?",
+          "larsito_es": "Pues entonces tengo el jueves a las tres y media. Recibirás una confirmación por SMS. ¿Quieres preguntar algo más?",
+          "pista_es": "Pregunta qué tienes que hacer si empeoras antes del jueves.",
+          "respuestas_modelo_no": [
+            "Ja, én ting til. Hva gjør jeg hvis det blir verre før torsdag?",
+            "Takk. Og hvis jeg blir dårligere i helga, hvem ringer jeg da?"
+          ],
+          "bloques_no": [
+            "Hva gjør jeg hvis ...",
+            "hvis det blir verre",
+            "Kan jeg ringe legevakten?"
+          ]
+        },
+        {
+          "larsito_no": "Blir det mye verre, ringer du legevakten på 116 117. Den er åpen hele døgnet. God bedring!",
+          "larsito_es": "Si empeora mucho, llamas a urgencias al 116 117. Está abierto las veinticuatro horas. ¡Que te mejores!",
+          "pista_es": "Despídete, da las gracias y confirma el día de la cita.",
+          "respuestas_modelo_no": [
+            "Tusen takk for hjelpen. Vi ses på torsdag.",
+            "Takk skal du ha. Ha en fin dag!"
+          ],
+          "bloques_no": [
+            "Tusen takk for hjelpen",
+            "Vi ses på torsdag",
+            "Ha en fin dag"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "esc-02",
+      "modo": "rollespill",
+      "titulo": "Reunión con la pedagoga de la guardería",
+      "contexto_es": "Estás en la foreldresamtale, la reunión que la pedagogisk leder del grupo tiene con las familias un par de veces al año. Quieres contar cómo ves a tu hijo en casa y salir de ahí con algo concreto acordado.",
+      "nivel": "B1",
+      "turnos": [
+        {
+          "larsito_no": "Hei, så hyggelig at du kunne komme. Bare sett deg. Hvordan synes du Mateo har hatt det i barnehagen i det siste?",
+          "larsito_es": "Hola, qué bien que hayas podido venir. Siéntate. ¿Cómo crees que le ha ido a Mateo en la guardería últimamente?",
+          "pista_es": "Di cómo le ves y apóyalo con un detalle concreto de casa.",
+          "respuestas_modelo_no": [
+            "Jeg synes han trives. Han snakker mye om Emma, og han vil gjerne gå hit om morgenen.",
+            "Han trives stort sett, men han er ofte veldig sliten når vi henter ham."
+          ],
+          "bloques_no": [
+            "Jeg synes han trives",
+            "Han snakker mye om ...",
+            "når vi henter ham"
+          ]
+        },
+        {
+          "larsito_no": "Det stemmer godt med det vi ser. Han leker mye med Emma. Vi har lagt merke til at han snakker lite norsk i samlingsstunden. Hvordan er det hjemme?",
+          "larsito_es": "Eso encaja con lo que vemos. Juega mucho con Emma. Hemos notado que habla poco noruego en la asamblea de la mañana. ¿Cómo va en casa?",
+          "pista_es": "Explica qué idiomas habláis en casa y qué hacéis con el noruego.",
+          "respuestas_modelo_no": [
+            "Hjemme snakker vi bare spansk, fordi vi vil at han skal beholde språket. Men vi leser norske bøker hver kveld.",
+            "Vi snakker spansk med hverandre, og han hører norsk her i barnehagen og på fotballtreningen."
+          ],
+          "bloques_no": [
+            "Hjemme snakker vi ...",
+            "fordi vi vil at han skal ...",
+            "Vi leser norske bøker sammen"
+          ]
+        },
+        {
+          "larsito_no": "Det er helt fint at dere holder på morsmålet hjemme. Barn klarer fint å lære to språk. Er det noe dere er bekymret for?",
+          "larsito_es": "Está muy bien que mantengáis la lengua materna en casa. Los niños aprenden dos idiomas sin problema. ¿Hay algo que os preocupe?",
+          "pista_es": "Cuenta una preocupación concreta y pregunta si ellos ven lo mismo.",
+          "respuestas_modelo_no": [
+            "Ja, litt. Han sier at han ikke har noen å leke med i utetiden. Ser dere det samme?",
+            "Vi lurer på om han forstår beskjedene deres. Merker dere at han blir usikker?"
+          ],
+          "bloques_no": [
+            "Vi lurer på om ...",
+            "Han sier at han ikke ...",
+            "Ser dere det samme?"
+          ]
+        },
+        {
+          "larsito_no": "Takk for at du sier fra. Vi skal følge med i utetiden og sette ham sammen med en fast lekevenn. Har du noen ønsker til oss?",
+          "larsito_es": "Gracias por decirlo. Vamos a estar atentos en el rato de patio y le pondremos con un compañero de juego fijo. ¿Tienes alguna petición para nosotros?",
+          "pista_es": "Pide algo concreto, por ejemplo que te avisen el mismo día si pasa algo.",
+          "respuestas_modelo_no": [
+            "Jeg ønsker at dere sier fra med en gang hvis noe skjer, også når det er noe lite.",
+            "Det hadde vært fint om dere skrev en kort melding i appen når han har en dårlig dag."
+          ],
+          "bloques_no": [
+            "Jeg ønsker at dere ...",
+            "Det hadde vært fint om ...",
+            "si fra med en gang"
+          ]
+        },
+        {
+          "larsito_no": "Det får du. Vi skriver i appen samme dag. Til slutt: neste uke har vi planleggingsdag på fredag, og da er barnehagen stengt.",
+          "larsito_es": "Lo tendrás. Escribimos en la aplicación el mismo día. Por último: la semana que viene tenemos día de planificación el viernes y la guardería está cerrada.",
+          "pista_es": "Confirma que lo has entendido y pregunta si tenéis que llevar algo.",
+          "respuestas_modelo_no": [
+            "Ok, da ordner vi noe annet på fredag. Er det noe han må ha med seg neste uke?",
+            "Det noterer jeg. Trenger han nye regnklær nå som det blir høst?"
+          ],
+          "bloques_no": [
+            "Da ordner vi noe annet",
+            "Er det noe han må ha med seg?",
+            "Det noterer jeg"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "esc-03",
+      "modo": "rollespill",
+      "titulo": "Pedir aclaración en una reunión de trabajo",
+      "contexto_es": "Tu jefe está explicando un cambio en una reunión de equipo y hay una palabra que no conoces. Se trata de preguntar en el momento y comprobar que lo has entendido, en vez de asentir y enterarte tarde.",
+      "nivel": "B1",
+      "turnos": [
+        {
+          "larsito_no": "Da tar vi punkt tre: vi legger om vaktlista fra neste måned, og alle må registrere timene i det nye systemet.",
+          "larsito_es": "Vamos con el punto tres: cambiamos el cuadrante a partir del mes que viene y todos tenéis que registrar las horas en el sistema nuevo.",
+          "pista_es": "Di que no has entendido una palabra y pide que lo repita.",
+          "respuestas_modelo_no": [
+            "Unnskyld, kan du gjenta det siste? Jeg fikk ikke med meg hva vaktlista er.",
+            "Beklager, jeg henger ikke helt med. Kan du si det en gang til, litt saktere?"
+          ],
+          "bloques_no": [
+            "Kan du gjenta det siste?",
+            "Jeg henger ikke helt med",
+            "litt saktere, takk"
+          ]
+        },
+        {
+          "larsito_no": "Selvfølgelig. Vaktlista er oversikten over hvem som jobber når. Fra første oktober lager vi den digitalt.",
+          "larsito_es": "Claro. El cuadrante es la lista de quién trabaja cuándo. A partir del uno de octubre la hacemos digital.",
+          "pista_es": "Repite con tus palabras lo que has entendido y pide confirmación.",
+          "respuestas_modelo_no": [
+            "Så hvis jeg forstår deg riktig, skal vi se vaktene på nettet i stedet for på papir?",
+            "Altså: fra oktober står vaktene i appen, og da må jeg sjekke der. Stemmer det?"
+          ],
+          "bloques_no": [
+            "Hvis jeg forstår deg riktig ...",
+            "i stedet for",
+            "Stemmer det?"
+          ]
+        },
+        {
+          "larsito_no": "Helt riktig. Og timene fører dere inn selv hver fredag, ellers får dere ikke betalt for overtid.",
+          "larsito_es": "Exacto. Y las horas las metéis vosotros mismos cada viernes, si no, no os pagan las horas extra.",
+          "pista_es": "Haz una pregunta concreta sobre qué pasa si un viernes se te olvida.",
+          "respuestas_modelo_no": [
+            "Hva skjer hvis jeg glemmer å føre timene en fredag? Kan jeg gjøre det på mandag?",
+            "Og hvis jeg er syk på fredag, hvem fører timene mine da?"
+          ],
+          "bloques_no": [
+            "Hva skjer hvis ...",
+            "Kan jeg gjøre det på mandag?",
+            "hvem gjør det da?"
+          ]
+        },
+        {
+          "larsito_no": "Da fører du dem senere, men si fra til meg. Har du noe å tilføye før vi går videre?",
+          "larsito_es": "Entonces las metes más tarde, pero avísame. ¿Quieres añadir algo antes de que sigamos?",
+          "pista_es": "Propón algo, por ejemplo una guía escrita para quien no tiene el noruego como lengua materna.",
+          "respuestas_modelo_no": [
+            "Ja, jeg har et forslag. Kan vi få en kort skriftlig veiledning? Det hjelper oss som ikke har norsk som morsmål.",
+            "Jeg vil gjerne foreslå at vi går gjennom systemet sammen den første uka."
+          ],
+          "bloques_no": [
+            "Jeg har et forslag",
+            "Kan vi få en kort skriftlig veiledning?",
+            "Det hjelper oss som ..."
+          ]
+        },
+        {
+          "larsito_no": "God idé. Jeg sender en veiledning på e-post i morgen. Er det greit for deg?",
+          "larsito_es": "Buena idea. Mando una guía por correo mañana. ¿Te parece bien?",
+          "pista_es": "Acepta y pide que se la manden también al resto del turno.",
+          "respuestas_modelo_no": [
+            "Ja, det er helt greit. Kan du sende den til hele kveldsvakta også?",
+            "Perfekt. Send den gjerne til alle på avdelingen, så slipper vi spørsmål senere."
+          ],
+          "bloques_no": [
+            "Det er helt greit",
+            "Send den gjerne til ...",
+            "så slipper vi spørsmål senere"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "esc-04",
+      "modo": "samtale",
+      "titulo": "Un vecino te invita al dugnad",
+      "contexto_es": "Te cruzas en el portal con un vecino que forma parte de la junta del edificio y te habla del dugnad, la jornada de trabajo comunitario del sábado. Quieres entender de qué va y aprovechar para conocer a alguien.",
+      "nivel": "A2",
+      "turnos": [
+        {
+          "larsito_no": "Hei! Jeg er Kjell, jeg bor i tredje etasje. Vi har dugnad på lørdag klokka elleve. Kommer du?",
+          "larsito_es": "¡Hola! Soy Kjell, vivo en el tercero. El sábado a las once tenemos dugnad. ¿Vienes?",
+          "pista_es": "Saluda, preséntate y pregunta qué es un dugnad.",
+          "respuestas_modelo_no": [
+            "Hei, Kjell. Jeg heter Ana. Jeg flyttet hit i mai. Hva er egentlig en dugnad?",
+            "Hei! Hyggelig å møte deg. Beklager, men jeg vet ikke hva dugnad betyr."
+          ],
+          "bloques_no": [
+            "Hyggelig å møte deg",
+            "Jeg flyttet hit i mai",
+            "Hva betyr det?"
+          ]
+        },
+        {
+          "larsito_no": "Det er når alle i borettslaget rydder ute sammen. Vi maler, raker løv og kaster søppel. Etterpå griller vi pølser.",
+          "larsito_es": "Es cuando todos los del bloque limpiamos el exterior juntos. Pintamos, rastrillamos hojas y tiramos basura. Después hacemos salchichas a la parrilla.",
+          "pista_es": "Di que te apuntas y pregunta si tienes que llevar algo.",
+          "respuestas_modelo_no": [
+            "Så hyggelig. Jeg blir med. Må jeg ta med noe selv?",
+            "Det høres fint ut. Jeg kommer gjerne. Trenger jeg hansker?"
+          ],
+          "bloques_no": [
+            "Jeg blir med",
+            "Må jeg ta med noe selv?",
+            "Det høres fint ut"
+          ]
+        },
+        {
+          "larsito_no": "Bare arbeidshansker, hvis du har. Resten har vi. Har du truffet de andre i oppgangen?",
+          "larsito_es": "Solo guantes de trabajo, si tienes. Lo demás lo tenemos nosotros. ¿Has conocido a los demás de la escalera?",
+          "pista_es": "Di a quién conoces y reconoce que todavía no has hablado con mucha gente.",
+          "respuestas_modelo_no": [
+            "Jeg kjenner bare naboen min i andre etasje. Ellers har jeg ikke snakket med så mange.",
+            "Ikke så mange, nei. Jeg jobber mye, så jeg er sjelden hjemme på dagtid."
+          ],
+          "bloques_no": [
+            "Jeg kjenner bare naboen min",
+            "Ellers har jeg ikke snakket med så mange",
+            "Jeg er sjelden hjemme"
+          ]
+        },
+        {
+          "larsito_no": "Da blir lørdag fin. Folk her er ikke uvennlige. De er bare litt trege i starten. Har du barn?",
+          "larsito_es": "Pues el sábado va a estar bien. Aquí la gente no es antipática. Solo son un poco lentos al principio. ¿Tienes hijos?",
+          "pista_es": "Habla de tu familia y propón algo, por ejemplo tomar un café.",
+          "respuestas_modelo_no": [
+            "Ja, jeg har en datter på fem år. Hun leker gjerne med de andre barna.",
+            "Jeg har to barn. Kanskje vi kan ta en kaffe sammen etter dugnaden?"
+          ],
+          "bloques_no": [
+            "Jeg har en datter på fem år",
+            "Kanskje vi kan ...",
+            "ta en kaffe sammen"
+          ]
+        },
+        {
+          "larsito_no": "Gjerne! Kona mi baker alltid altfor mye. Vi ses på lørdag, da.",
+          "larsito_es": "¡Con mucho gusto! Mi mujer siempre hornea demasiado. Nos vemos el sábado, entonces.",
+          "pista_es": "Despídete y confirma la hora.",
+          "respuestas_modelo_no": [
+            "Vi ses på lørdag klokka elleve. Ha en fin uke!",
+            "Takk, Kjell. Jeg kommer klokka elleve. Ha det bra!"
+          ],
+          "bloques_no": [
+            "Vi ses på lørdag",
+            "Ha en fin uke",
+            "Ha det bra"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "esc-05",
+      "modo": "eksamen",
+      "titulo": "Simulacro: hablar de ti mismo",
+      "contexto_es": "Larsito hace de eksaminator en la primera tarea de la prueba oral, esa en la que cuentas algo sobre un tema conocido durante dos o tres minutos. En el examen real estás con otro candidato y hay un sensor escuchando, así que aquí practicas tu parte.",
+      "nivel": "A2",
+      "turnos": [
+        {
+          "larsito_no": "Velkommen. Jeg er eksaminator i dag, og sensoren sitter her og lytter. Vi begynner med at du forteller litt om deg selv.",
+          "larsito_es": "Bienvenido. Hoy yo soy el examinador y el evaluador está aquí escuchando. Empezamos: cuéntanos un poco sobre ti.",
+          "pista_es": "Di tu nombre, de dónde eres y cuánto tiempo llevas en Noruega.",
+          "respuestas_modelo_no": [
+            "Jeg heter Ana Torres. Jeg kommer fra Sevilla, og jeg har bodd i Norge i fire år.",
+            "Jeg heter Diego. Jeg er fra Colombia, og jeg flyttet til Bergen i 2022."
+          ],
+          "bloques_no": [
+            "Jeg heter ...",
+            "Jeg kommer fra ...",
+            "Jeg har bodd i Norge i fire år"
+          ]
+        },
+        {
+          "larsito_no": "Takk. Kan du fortelle litt om hva du gjør til daglig?",
+          "larsito_es": "Gracias. ¿Puedes contar un poco a qué te dedicas cada día?",
+          "pista_es": "Habla de tu trabajo o de tus estudios y describe un día normal.",
+          "respuestas_modelo_no": [
+            "Jeg jobber på et sykehjem i Sandnes. Jeg begynner klokka sju og hjelper beboerne med frokost.",
+            "Jeg studerer på voksenopplæringen om formiddagen, og på ettermiddagen jobber jeg i en butikk."
+          ],
+          "bloques_no": [
+            "Jeg jobber som ...",
+            "Jeg begynner klokka sju",
+            "om formiddagen og på ettermiddagen"
+          ]
+        },
+        {
+          "larsito_no": "Hva liker du å gjøre når du har fri?",
+          "larsito_es": "¿Qué te gusta hacer cuando tienes tiempo libre?",
+          "pista_es": "Cuenta una afición y di por qué te gusta.",
+          "respuestas_modelo_no": [
+            "Jeg liker å gå tur i skogen. Det er stille der, og jeg blir rolig i hodet.",
+            "På fritiden spiller jeg fotball med noen kolleger. Vi trener hver onsdag."
+          ],
+          "bloques_no": [
+            "Jeg liker å gå tur",
+            "På fritiden ...",
+            "fordi jeg blir rolig"
+          ]
+        },
+        {
+          "larsito_no": "Kan du fortelle om noe du savner fra hjemlandet ditt?",
+          "larsito_es": "¿Puedes contar algo que eches de menos de tu país?",
+          "pista_es": "Di qué echas de menos y compáralo con Noruega sin quejarte.",
+          "respuestas_modelo_no": [
+            "Jeg savner familien min og maten. I Spania spiser vi seint, og vi sitter lenge ved bordet.",
+            "Jeg savner lyset om vinteren. Her blir det mørkt klokka tre, og det var uvant i begynnelsen."
+          ],
+          "bloques_no": [
+            "Jeg savner ...",
+            "I Spania ..., men her ...",
+            "Det var uvant i begynnelsen"
+          ]
+        },
+        {
+          "larsito_no": "Til slutt: hva har du lyst til å gjøre de neste årene?",
+          "larsito_es": "Por último: ¿qué te apetece hacer en los próximos años?",
+          "pista_es": "Habla de un plan de futuro usando skal o har lyst til.",
+          "respuestas_modelo_no": [
+            "Jeg skal ta fagbrev som helsefagarbeider. Derfor trenger jeg norsk på B1-nivå.",
+            "Jeg har lyst til å søke fast jobb, og senere vil jeg studere videre."
+          ],
+          "bloques_no": [
+            "Jeg skal ta fagbrev",
+            "Jeg har lyst til å ...",
+            "Derfor trenger jeg ..."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "esc-06",
+      "modo": "eksamen",
+      "titulo": "Simulacro: dar y defender una opinión",
+      "contexto_es": "Larsito hace de eksaminator en la última tarea de la prueba oral, la de expresar y justificar una opinión sobre un tema que te dan. Aquí no vale con decir qué piensas: hay que argumentarlo y aguantar una objeción.",
+      "nivel": "B1",
+      "turnos": [
+        {
+          "larsito_no": "Nå kommer den siste oppgaven. Du får et tema, og du skal si hva du mener og begrunne det. Temaet ditt er: bør alle barn lære å svømme på skolen?",
+          "larsito_es": "Ahora viene la última tarea. Te doy un tema y tienes que decir qué opinas y justificarlo. Tu tema es: ¿deberían todos los niños aprender a nadar en el colegio?",
+          "pista_es": "Da tu opinión en una frase clara y anuncia que vas a dar dos razones.",
+          "respuestas_modelo_no": [
+            "Jeg mener at alle barn bør lære å svømme på skolen. Jeg har to grunner til det.",
+            "Etter min mening er svømming like viktig som lesing. Jeg skal forklare hvorfor."
+          ],
+          "bloques_no": [
+            "Jeg mener at ...",
+            "Etter min mening ...",
+            "Jeg har to grunner til det"
+          ]
+        },
+        {
+          "larsito_no": "Gjerne. Fortell om den første grunnen din.",
+          "larsito_es": "Adelante. Cuéntame tu primera razón.",
+          "pista_es": "Da la primera razón y apóyala con un ejemplo o una experiencia tuya.",
+          "respuestas_modelo_no": [
+            "For det første er Norge fullt av vann. Vi bor nær sjøen, og barna er ved vannet hele sommeren.",
+            "Den viktigste grunnen er sikkerhet. Da jeg var liten, falt en venn i bassenget, og han kunne ikke svømme."
+          ],
+          "bloques_no": [
+            "For det første ...",
+            "Den viktigste grunnen er ...",
+            "Da jeg var liten, ..."
+          ]
+        },
+        {
+          "larsito_no": "Det var et tydelig eksempel. Men noen sier at skolen har nok å gjøre fra før. Hva svarer du dem?",
+          "larsito_es": "Ha sido un ejemplo claro. Pero hay quien dice que el colegio ya tiene bastante. ¿Qué les contestas?",
+          "pista_es": "Reconoce el argumento contrario y luego rebátelo.",
+          "respuestas_modelo_no": [
+            "Jeg skjønner innvendingen, men svømming tar bare noen timer i året. Til gjengjeld kan det redde liv.",
+            "Det er sant at lærerne har mye å gjøre. Likevel synes jeg at dette er viktigere enn mange andre fag."
+          ],
+          "bloques_no": [
+            "Jeg skjønner innvendingen, men ...",
+            "Det er sant at ..., likevel ...",
+            "Til gjengjeld ..."
+          ]
+        },
+        {
+          "larsito_no": "Hva mener du om at foreldrene skal betale for svømmekurs selv?",
+          "larsito_es": "¿Qué opinas de que los padres tengan que pagar ellos mismos las clases de natación?",
+          "pista_es": "Matiza: di en qué estás de acuerdo y en qué no.",
+          "respuestas_modelo_no": [
+            "Delvis er jeg enig, men da blir det urettferdig. Familier med dårlig råd har ikke samme mulighet.",
+            "Jeg er uenig i det. Hvis skolen betaler, får alle barna den samme sjansen."
+          ],
+          "bloques_no": [
+            "Delvis er jeg enig, men ...",
+            "Jeg er uenig i det",
+            "Familier med dårlig råd ..."
+          ]
+        },
+        {
+          "larsito_no": "Takk. Kan du oppsummere standpunktet ditt i én setning?",
+          "larsito_es": "Gracias. ¿Puedes resumir tu postura en una sola frase?",
+          "pista_es": "Resume tu postura en una frase, sin repetir todo el razonamiento.",
+          "respuestas_modelo_no": [
+            "Kort sagt: svømming bør være en del av skolen, fordi det handler om sikkerhet og om like muligheter.",
+            "Konklusjonen min er at alle barn må lære å svømme, og at skolen er det beste stedet å gjøre det."
+          ],
+          "bloques_no": [
+            "Kort sagt ...",
+            "Konklusjonen min er at ...",
+            "fordi det handler om ..."
+          ]
+        }
+      ]
+    }
+  ],
+  "listening": [
+    {
+      "codigo": "LARS-A2-01",
+      "nivel": "A2",
+      "tema": "barnehage",
+      "titulo": "Mensaje de voz de la guardería",
+      "transcript_no": "Hei, dette er Siri fra Maurtua barnehage. Jeg ringer om Mateo. Han har kastet opp to ganger i dag, og han er litt varm. Ellers er han i fint humør, men vi vil gjerne at dere henter ham. Kan du eller faren komme før klokka to? Ring meg gjerne tilbake på dette nummeret. Ha det bra.",
+      "transcript_es": "Hola, soy Siri, de la guardería Maurtua. Llamo por Mateo. Ha vomitado dos veces hoy y está un poco caliente. Por lo demás está de buen humor, pero preferimos que vengáis a recogerlo. ¿Puedes venir tú o el padre antes de las dos? Llámame a este número. Adiós.",
+      "preguntas": [
+        {
+          "q_no": "Hvorfor ringer barnehagen?",
+          "q_es": "¿Por qué llama la guardería?",
+          "opciones_no": [
+            "Mateo har glemt klærne sine i barnehagen",
+            "Mateo er syk og må hentes",
+            "Barnehagen er stengt i dag"
+          ],
+          "correcta": 1,
+          "explicacion_es": "Siri dice que el niño ha vomitado dos veces y que está algo caliente, y pide que alguien vaya a recogerlo. La ropa y el cierre no aparecen en el mensaje."
+        },
+        {
+          "q_no": "Når må noen hente Mateo?",
+          "q_es": "¿Cuándo tiene que ir alguien a recoger a Mateo?",
+          "opciones_no": [
+            "Før klokka to",
+            "Etter klokka fire",
+            "I morgen tidlig"
+          ],
+          "correcta": 0,
+          "explicacion_es": "La frase clave es kan du eller faren komme før klokka to. La preposición før marca el límite: antes de esa hora, no después."
+        }
+      ]
+    },
+    {
+      "codigo": "LARS-A2-02",
+      "nivel": "A2",
+      "tema": "transporte",
+      "titulo": "Aviso en la estación",
+      "transcript_no": "Kjære reisende. Toget til Oslo S er forsinket med omtrent tjue minutter. Årsaken er en feil på sporet. Neste tog går fra spor tre klokka ti over ni. Billetten din gjelder på det toget også. Vi beklager forsinkelsen. Husk å ta med deg alle tingene dine når du går av toget.",
+      "transcript_es": "Estimados viajeros. El tren a Oslo S lleva unos veinte minutos de retraso. La causa es una avería en la vía. El próximo tren sale del andén tres a las nueve y diez. Tu billete vale también para ese tren. Pedimos disculpas por el retraso. Acuérdate de llevarte todas tus cosas al bajar del tren.",
+      "preguntas": [
+        {
+          "q_no": "Hvor lenge er toget forsinket?",
+          "q_es": "¿Cuánto retraso lleva el tren?",
+          "opciones_no": [
+            "Omtrent ti minutter",
+            "Omtrent tjue minutter",
+            "Omtrent en time"
+          ],
+          "correcta": 1,
+          "explicacion_es": "El aviso dice forsinket med omtrent tjue minutter. El diez que se oye después pertenece a la hora de salida, klokka ti over ni, y es la trampa del ejercicio."
+        },
+        {
+          "q_no": "Hva må du gjøre med billetten din?",
+          "q_es": "¿Qué tienes que hacer con tu billete?",
+          "opciones_no": [
+            "Ingenting, den gjelder på det neste toget",
+            "Kjøpe en ny billett på spor tre",
+            "Bytte den i billettluka"
+          ],
+          "correcta": 0,
+          "explicacion_es": "Billetten din gjelder på det toget også significa que el billete sirve igual. El verbo gjelde, valer o estar vigente, aparece constantemente en avisos y cartas oficiales."
+        }
+      ]
+    },
+    {
+      "codigo": "LARS-A2-03",
+      "nivel": "A2",
+      "tema": "vecinos",
+      "titulo": "Mensaje de un vecino",
+      "transcript_no": "Hei, det er Kjell fra tredje etasje. Jeg pusser opp badet neste uke. Håndverkerne begynner mandag klokka åtte, og det blir mye støy. De er ferdige rundt klokka tre hver dag. Jeg beklager bråket på forhånd. Hvis det blir et problem for barnet ditt, si fra, så finner vi en løsning.",
+      "transcript_es": "Hola, soy Kjell, el del tercero. La semana que viene reformo el baño. Los operarios empiezan el lunes a las ocho y va a haber mucho ruido. Terminan sobre las tres cada día. Pido perdón por adelantado. Si le supone un problema a tu hijo, dímelo y buscamos una solución.",
+      "preguntas": [
+        {
+          "q_no": "Hva skal Kjell gjøre neste uke?",
+          "q_es": "¿Qué va a hacer Kjell la semana que viene?",
+          "opciones_no": [
+            "Han skal male oppgangen",
+            "Han skal pusse opp badet",
+            "Han skal flytte til en annen leilighet"
+          ],
+          "correcta": 1,
+          "explicacion_es": "Pusse opp es reformar, y aquí lo que reforma es el baño. Es un verbo que oirás en cualquier bloque de pisos noruego, casi siempre justo antes de una temporada de ruido."
+        },
+        {
+          "q_no": "Når slutter håndverkerne hver dag?",
+          "q_es": "¿A qué hora terminan los operarios cada día?",
+          "opciones_no": [
+            "Rundt klokka tre",
+            "Klokka åtte om morgenen",
+            "De jobber til langt på kveld"
+          ],
+          "correcta": 0,
+          "explicacion_es": "De er ferdige rundt klokka tre hver dag. Las ocho son la hora de empezar, no la de acabar, y ahí es donde se cae mucha gente al escuchar rápido."
+        }
+      ]
+    },
+    {
+      "codigo": "LARS-B1-01",
+      "nivel": "B1",
+      "tema": "trabajo",
+      "titulo": "Las normas de la baja por enfermedad",
+      "transcript_no": "Før vi avslutter møtet, minner jeg om reglene for egenmelding. Blir du syk, sender du en melding til meg før klokka ni samme morgen. Du kan bruke egenmelding i inntil tre kalenderdager om gangen, og maksimalt fire ganger i løpet av tolv måneder. Er du borte lenger enn det, trenger du sykmelding fra legen. Ta kontakt med meg hvis noe er uklart.",
+      "transcript_es": "Antes de terminar la reunión, os recuerdo las normas de la egenmelding. Si te pones enfermo, me mandas un mensaje antes de las nueve de esa misma mañana. Puedes usar la egenmelding hasta tres días naturales seguidos y como máximo cuatro veces en doce meses. Si faltas más tiempo, necesitas la baja del médico. Habla conmigo si algo no queda claro.",
+      "preguntas": [
+        {
+          "q_no": "Hvor mange dager kan du bruke egenmelding om gangen?",
+          "q_es": "¿Cuántos días seguidos puedes usar la egenmelding?",
+          "opciones_no": [
+            "Inntil tre kalenderdager",
+            "Inntil sju kalenderdager",
+            "Inntil tolv kalenderdager"
+          ],
+          "correcta": 0,
+          "explicacion_es": "Tres días naturales seguidos y cuatro veces en doce meses es el mínimo que fija la ley y el que aplica esta empresa. Hay empresas que amplían el derecho, así que conviene mirar tu convenio antes de darlo por hecho."
+        },
+        {
+          "q_no": "Hva må du gjøre hvis du er borte lenger enn egenmeldingen tillater?",
+          "q_es": "¿Qué tienes que hacer si faltas más tiempo del que cubre la egenmelding?",
+          "opciones_no": [
+            "Sende en ny melding til lederen hver morgen",
+            "Skaffe sykmelding fra legen",
+            "Vente til du er frisk og forklare det etterpå"
+          ],
+          "correcta": 1,
+          "explicacion_es": "A partir de ahí hace falta la sykmelding, la baja firmada por el médico. La egenmelding es solo el aviso que haces tú mismo, sin papel médico."
+        }
+      ]
+    },
+    {
+      "codigo": "LARS-B1-02",
+      "nivel": "B1",
+      "tema": "fastlege",
+      "titulo": "Resultados de los análisis",
+      "transcript_no": "Hei, dette er en beskjed fra Storgata legekontor. Legen din har sett på prøvesvarene dine, og de ser stort sett fine ut. Blodprosenten er litt lav, så hun anbefaler at du tar jerntabletter i tre måneder. Resepten finner du på Helsenorge. Hvis du fortsatt er trøtt om en måned, bestiller du en ny time hos oss. Utenom åpningstiden ringer du legevakten på 116 117.",
+      "transcript_es": "Hola, este es un mensaje del centro médico Storgata. Tu médica ha mirado los resultados de tus análisis y en general están bien. La hemoglobina está algo baja, así que te recomienda tomar hierro durante tres meses. La receta la tienes en Helsenorge. Si dentro de un mes sigues cansado, pides una cita nueva con nosotros. Fuera del horario del centro llamas a urgencias, al 116 117.",
+      "preguntas": [
+        {
+          "q_no": "Hva sier legen om prøvesvarene?",
+          "q_es": "¿Qué dice la médica de los resultados?",
+          "opciones_no": [
+            "De ser fine ut, men blodprosenten er litt lav",
+            "De er så dårlige at du må på sykehuset",
+            "De er ikke klare ennå"
+          ],
+          "correcta": 0,
+          "explicacion_es": "El mensaje junta las dos cosas: en conjunto están bien y hay un valor algo bajo. En noruego ese matiz suele llegar con stort sett, que significa en general o más o menos."
+        },
+        {
+          "q_no": "Hva skal du gjøre hvis du fortsatt er trøtt om en måned?",
+          "q_es": "¿Qué tienes que hacer si dentro de un mes sigues cansado?",
+          "opciones_no": [
+            "Ringe 116 117 med en gang",
+            "Ta dobbel dose med jerntabletter",
+            "Bestille en ny time hos legekontoret"
+          ],
+          "correcta": 2,
+          "explicacion_es": "Pides otra cita en tu centro. El 116 117 es la legevakt, el servicio de urgencias que atiende las veinticuatro horas cuando tu centro está cerrado, y no es el sitio al que llamar por un cansancio de un mes."
+        }
+      ]
+    },
+    {
+      "codigo": "LARS-B1-03",
+      "nivel": "B1",
+      "tema": "nav",
+      "titulo": "Aviso de NAV",
+      "transcript_no": "Dette er en automatisk beskjed fra NAV. Du har fått et nytt brev i innboksen din på nav.no. Husk at du må sende meldekort hver fjortende dag, også i de periodene du har jobbet noe. Sender du meldekortet for seint, blir utbetalingen redusert med de dagene du er forsinket. Logg inn med BankID for å lese hele brevet.",
+      "transcript_es": "Este es un aviso automático de NAV. Tienes una carta nueva en tu bandeja de entrada de nav.no. Recuerda que tienes que enviar el meldekort cada catorce días, también en los periodos en los que hayas trabajado algo. Si lo envías tarde, el pago se reduce en proporción a los días de retraso. Entra con BankID para leer la carta entera.",
+      "preguntas": [
+        {
+          "q_no": "Hvor ofte må du sende meldekort?",
+          "q_es": "¿Cada cuánto tienes que enviar el meldekort?",
+          "opciones_no": [
+            "Hver uke",
+            "Hver fjortende dag",
+            "Én gang i måneden"
+          ],
+          "correcta": 1,
+          "explicacion_es": "Cada catorce días, y también en los periodos en los que has trabajado algo, porque las horas trabajadas se declaran justamente ahí. El meldekort es el parte que NAV usa para calcular cuánto te toca cobrar."
+        },
+        {
+          "q_no": "Hva skjer hvis du sender meldekortet for seint?",
+          "q_es": "¿Qué pasa si envías el meldekort tarde?",
+          "opciones_no": [
+            "Utbetalingen blir redusert med de dagene du er forsinket",
+            "Du mister retten til dagpenger for godt",
+            "NAV ringer deg samme dag"
+          ],
+          "correcta": 0,
+          "explicacion_es": "El pago siguiente se recorta en proporción a los días de retraso. No se pierde el derecho, pero el dinero de esos días no vuelve, así que la fecha del meldekort es de las pocas que conviene apuntar en el calendario."
+        }
+      ]
+    }
+  ]
+}
