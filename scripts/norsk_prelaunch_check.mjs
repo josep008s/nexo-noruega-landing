@@ -132,6 +132,56 @@ if (exists("sitemap.xml")) {
   if (!faltan) ok(`sitemap: ${locs.length} URLs, todas existen`);
 }
 
+// 5b) Coherencia del tema claro (ver ESTILO.md)
+// El CSS vive inline en cada página, así que la única defensa contra la deriva
+// es comprobar que todas declaran los mismos tokens y que nadie usa como texto
+// un color que no llega al contraste AA sobre fondo claro.
+{
+  const TEMA_CLARO = [
+    "norsk/index.html", "norsk/sprint-oral/index.html",
+    "pass/index.html", "pass/app/index.html", "pass/leccion-0/index.html",
+    "pass/preguntas-de-ejemplo/index.html", "pass/que-examen-necesitas/index.html",
+    "pass/como-inscribirse/index.html", "pass/requisitos-ciudadania-noruega/index.html",
+  ];
+  const TOKENS = ["#0E1B26", "#F3F5F4", "#3FCB94", "#2C5A72", "#8DA1AB"];
+  const FUENTES = ["Space Grotesk", "Source Serif 4"];
+  let derivas = 0;
+
+  for (const f of TEMA_CLARO) {
+    if (!exists(f)) { duro(`tema claro: falta ${f}`); derivas++; continue; }
+    const h = read(f);
+    const root = (/:root\s*\{[\s\S]*?\}/.exec(h) || [""])[0];
+
+    const faltan = TOKENS.filter((t) => !root.includes(t));
+    if (faltan.length) { duro(`${f}: el :root no declara ${faltan.join(", ")} (ver ESTILO.md)`); derivas++; }
+
+    const sinFuente = FUENTES.filter((x) => !h.includes(x));
+    if (sinFuente.length) { duro(`${f}: no carga ${sinFuente.join(" ni ")}`); derivas++; }
+
+    if (/#0b6f63/i.test(h)) { duro(`${f}: usa #0b6f63, el verde retirado del sistema (ver ESTILO.md)`); derivas++; }
+
+    // Fondo de página claro: nadie del tema claro puede pintar el body de noche.
+    if (/body\s*\{[^}]*background:\s*var\(--noche\)/.test(h)) { duro(`${f}: el body sigue en tema oscuro`); derivas++; }
+
+    // aurora y niebla como color de texto sobre claro no llegan a AA.
+    for (const [tok, ratio] of [["--aurora", "1,7:1"], ["--niebla", "2,5:1"]]) {
+      const re = new RegExp(`\\.claro[^{]*\\{[^}]*color:\\s*var\\(${tok}\\)`, "i");
+      if (re.test(h)) { duro(`${f}: color:var(${tok}) sobre fondo claro (${ratio}, no llega a AA)`); derivas++; }
+    }
+  }
+  if (!derivas) ok(`tema claro: ${TEMA_CLARO.length} páginas con los mismos tokens y sin colores ilegibles`);
+
+  if (!exists("ESTILO.md")) duro("Falta ESTILO.md, que documenta el sistema visual");
+}
+
+// 5c) La home es intocable: su tema oscuro es decisión de marca.
+{
+  const home = read("index.html");
+  if (!/body\s*\{[^}]*background:\s*var\(--noche\)/.test(home)) {
+    duro("index.html: la home ha perdido su fondo oscuro (no se rediseña)");
+  } else ok("home: tema oscuro intacto");
+}
+
 // 6) Contacto: hay que crear el buzón (no verificable aquí)
 {
   const usaCorreo = LEGALES.some((f) => exists(f) && read(f).includes("pass@nexonoruega.com"));
