@@ -1,134 +1,487 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>NEXO NORSK · Noruego y pruebas en Noruega</title>
-  <meta name="description" content="Elige la preparación de NEXO NORSK que corresponde a tu situación: prueba oral de noruego o exámenes de ciudadanía.">
-  <meta name="robots" content="index,follow">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Norskprøven B1 · NEXO NORSK</title>
+  <meta name="description" content="Preparación de la Norskprøven B1 en español: las cuatro pruebas explicadas, los saltos de A2 a B1 y práctica oral de verdad. En construcción, con lista de espera abierta.">
   <link rel="canonical" href="https://www.nexonoruega.com/norsk/">
-  <link rel="icon" href="/favicon.ico" sizes="any">
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+  <meta property="og:title" content="Norskprøven B1, explicada en español">
+  <meta property="og:description" content="El nivel de noruego que pide la ciudadanía se demuestra hablando. Así lo preparamos: las cuatro pruebas, los saltos de A2 a B1 y práctica oral.">
+  <meta property="og:image" content="https://www.nexonoruega.com/og-image.png">
+  <meta property="og:url" content="https://www.nexonoruega.com/norsk/">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="es_ES">
-  <meta property="og:site_name" content="Nexo Noruega">
-  <meta property="og:title" content="NEXO NORSK · Elige por la situación que tienes delante">
-  <meta property="og:description" content="Preparación concreta para la prueba oral de noruego o los exámenes de ciudadanía.">
-  <meta property="og:url" content="https://www.nexonoruega.com/norsk/">
-  <meta property="og:image" content="https://www.nexonoruega.com/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 800'%3E%3Ccircle cx='400' cy='400' r='390' fill='%230E1B26'/%3E%3Cpath d='M223 532 L223 298 L320 402 L320 265' fill='none' stroke='%233FCB94' stroke-opacity='.45' stroke-width='26' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M478 532 L478 264 L577 398 L577 532' fill='none' stroke='%233FCB94' stroke-width='26' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Caesar+Dressing&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Course",
+    "name": "NEXO NORSK: preparación de la Norskprøven B1 en español",
+    "description": "Preparación en español de la Norskprøven, la prueba de noruego que Noruega pide para la ciudadanía: las cuatro partes del examen, los mecanismos que separan el A2 del B1 y práctica oral con feedback.",
+    "url": "https://www.nexonoruega.com/norsk/",
+    "inLanguage": ["es", "no"],
+    "provider": { "@type": "Organization", "name": "Nexo Noruega", "url": "https://www.nexonoruega.com" },
+    "hasCourseInstance": { "@type": "CourseInstance", "courseMode": "online" }
+  }
+  </script>
+
   <style>
-    :root {
-      --nieve: #f3f5f4;
-      --blanco: #fff;
-      --nieve-2: #edf1ef;
-      --tinta: #0e1b26;
-      --aurora: #0b6f63;
-      --aurora-viva: #3fcb94;
-      --linea: rgba(14, 27, 38, .14);
-      --sans: "Space Grotesk", system-ui, sans-serif;
-      --serif: "Source Serif 4", Georgia, serif;
+    :root{
+      --noche:#0E1B26; --nieve:#F3F5F4; --aurora:#3FCB94; --fiordo:#2C5A72; --niebla:#8DA1AB;
+      --blanco:#FFFFFF;
+      --tinta-suave:rgba(14,27,38,.72);
+      --linea-clara:rgba(14,27,38,.14);
+      --linea-oscura:rgba(243,245,244,.12);
+      --sombra-clara:0 14px 34px rgba(14,27,38,.08);
+      --alerta:#8F5A0F;
+      --sg:"Space Grotesk",system-ui,sans-serif;
+      --serif:"Source Serif 4",Georgia,serif;
+      --caesar:"Caesar Dressing",var(--sg);
+      --ease:cubic-bezier(0.16,1,0.3,1);
+      --ancho:860px;
     }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      color: var(--tinta);
-      background: radial-gradient(circle at 92% 3%, rgba(63, 203, 148, .12), transparent 22rem), var(--nieve);
-      font-family: var(--serif);
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
+    *{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{font-family:var(--serif);background:var(--nieve);color:var(--noche);line-height:1.7;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden}
+    ::selection{background:var(--aurora);color:var(--noche)}
+    a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var(--fiordo);outline-offset:3px}
+    img,svg{max-width:100%}
+
+    body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:80;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+      opacity:.028;mix-blend-mode:multiply}
+
+    .wrap{max-width:var(--ancho);margin:0 auto;padding:0 24px;position:relative;z-index:1}
+    section{padding:66px 0;position:relative}
+
+    .cielo{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+    .cielo::before{content:"";position:absolute;top:-12%;left:-10%;width:120%;height:80%;
+      background:radial-gradient(50% 60% at 28% 22%,rgba(63,203,148,.10),transparent 70%),
+                 radial-gradient(44% 50% at 78% 10%,rgba(44,90,114,.07),transparent 72%);
+      animation:deriva 46s ease-in-out infinite alternate}
+    @keyframes deriva{from{transform:translate3d(-2%,-1%,0) scale(1.03)}to{transform:translate3d(2%,1.5%,0) scale(1)}}
+
+    /* ===== Cabecera unificada ===== */
+    header{position:sticky;top:0;z-index:60;background:rgba(243,245,244,.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--linea-clara)}
+    .head-inner{max-width:var(--ancho);margin:0 auto;padding:16px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .marca{display:flex;align-items:center;gap:11px;text-decoration:none;color:var(--noche)}
+    .marca svg{width:26px;height:26px;flex:none}
+    .marca span{font-family:var(--sg);font-weight:500;font-size:.9rem;letter-spacing:.02em}
+    .marca b{font-weight:700}
+    .head-nav{display:flex;gap:20px}
+    .head-nav a{font-family:var(--sg);font-weight:500;font-size:.84rem;color:var(--fiordo);text-decoration:none;transition:color .2s}
+    .head-nav a:hover{color:var(--noche)}
+    .head-nav a[aria-current="page"]{color:var(--noche);font-weight:700}
+
+    .kicker{font-family:var(--sg);font-weight:700;font-size:.78rem;letter-spacing:.22em;text-transform:uppercase;margin-bottom:20px;color:var(--fiordo)}
+    .caesar{font-family:var(--caesar);font-weight:400;text-transform:uppercase;letter-spacing:.1em}
+
+    h1,h2{font-family:var(--sg);font-weight:700;letter-spacing:-.02em;line-height:1.12;color:var(--noche)}
+    h1{font-size:clamp(2.1rem,5.4vw,3.4rem);max-width:17ch;margin-bottom:20px}
+    h2{font-size:clamp(1.7rem,3.6vw,2.3rem);margin-bottom:24px;max-width:24ch}
+    .sub{font-size:1.16rem;color:var(--tinta-suave);max-width:56ch;margin-bottom:28px}
+    p{color:var(--tinta-suave)}
+    .parrafo{font-size:1.1rem;max-width:60ch;margin-bottom:18px}
+
+    mark.marcado{color:inherit;background-color:transparent;
+      background-image:linear-gradient(180deg,rgba(63,203,148,.42),rgba(63,203,148,.30));
+      background-repeat:no-repeat;background-size:100% 100%;
+      border-radius:.25em .4em .3em .35em / .4em .25em .35em .3em;
+      padding:.06em .16em;margin:0 -.06em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+    .js .reveal mark.marcado{background-size:0% 100%;transition:background-size .7s var(--ease);transition-delay:calc(var(--d,0s) + .55s)}
+    .js .reveal.visible mark.marcado{background-size:100% 100%}
+
+    .botones{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+    .cta{display:inline-block;font-family:var(--sg);font-weight:700;font-size:1rem;color:var(--noche);
+      background:var(--aurora);border:none;text-decoration:none;text-align:center;padding:16px 32px;border-radius:4px;cursor:pointer;
+      transition:transform .2s var(--ease),box-shadow .25s,filter .18s}
+    .cta:hover{transform:translateY(-2px);filter:brightness(1.05);box-shadow:0 8px 26px rgba(63,203,148,.4)}
+    .cta.ghost{background:none;border:1px solid var(--linea-clara);color:var(--noche)}
+    .cta.ghost:hover{box-shadow:none;border-color:var(--fiordo)}
+    .microcopy{font-family:var(--sg);font-weight:500;font-size:.8rem;letter-spacing:.05em;color:var(--fiordo);margin-top:14px}
+
+    .fuente{font-family:var(--sg);font-weight:500;font-size:.76rem;letter-spacing:.13em;text-transform:uppercase;color:var(--fiordo);
+      margin-top:30px;padding-top:16px;border-top:1px solid var(--linea-clara);display:inline-block}
+    .fuente a{color:inherit}
+
+    /* ===== Hero ===== */
+    .hero{padding-top:56px;padding-bottom:52px}
+    .aviso-obra{display:flex;gap:14px;align-items:flex-start;background:var(--blanco);border:1px solid var(--linea-clara);border-left:3px solid var(--alerta);border-radius:10px;padding:16px 18px;margin-top:32px;max-width:64ch}
+    .aviso-obra .eti{font-family:var(--sg);font-weight:700;font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--alerta);flex:none;padding-top:3px}
+    .aviso-obra p{font-size:.98rem}
+
+    /* ===== El examen ===== */
+    .pruebas{display:grid;gap:14px;margin-top:22px}
+    @media (min-width:721px){.pruebas{grid-template-columns:repeat(2,1fr)}}
+    .prueba{border:1px solid var(--linea-clara);border-radius:12px;padding:20px;background:var(--blanco);box-shadow:var(--sombra-clara);position:relative}
+    .prueba.clave{border-color:var(--aurora);box-shadow:0 0 0 1px rgba(63,203,148,.35),var(--sombra-clara)}
+    .prueba .no{font-family:var(--sg);font-weight:700;font-size:1.02rem;line-height:1.25;margin-bottom:2px;color:var(--noche);overflow-wrap:anywhere}
+    .prueba .es{font-family:var(--sg);font-weight:500;font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;color:var(--fiordo);margin-bottom:12px}
+    .prueba p{font-size:.98rem;line-height:1.6}
+    .prueba .marca-clave{font-family:var(--sg);font-weight:700;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--noche);background:rgba(63,203,148,.3);border-radius:999px;padding:3px 10px;display:inline-block;margin-top:12px}
+    .nota-ruta{background:var(--blanco);border:1px solid var(--linea-clara);border-left:3px solid var(--aurora);border-radius:10px;padding:18px 20px;margin-top:22px;max-width:70ch}
+    .nota-ruta p{font-size:1rem;margin-bottom:8px}
+    .nota-ruta a{font-family:var(--sg);font-weight:700;color:var(--fiordo);text-underline-offset:3px}
+
+    /* ===== Método ===== */
+    .pasos{display:grid;gap:26px;margin-top:10px}
+    @media (min-width:721px){.pasos{grid-template-columns:repeat(3,1fr)}}
+    .paso .num{font-family:var(--caesar);font-size:2.2rem;line-height:1;color:var(--fiordo);display:block;margin-bottom:8px}
+    .paso .titulo{font-family:var(--sg);font-weight:700;font-size:1.12rem;color:var(--noche);margin-bottom:8px}
+    .paso p{font-size:1rem}
+    .doble{display:grid;gap:14px;margin-top:30px}
+    @media (min-width:721px){.doble{grid-template-columns:repeat(2,1fr)}}
+    .mitad{border-top:3px solid var(--aurora);padding-top:16px}
+    .mitad h3{font-family:var(--sg);font-weight:700;font-size:1.08rem;color:var(--noche);margin-bottom:8px}
+    .mitad p{font-size:1rem}
+
+    /* ===== Larsito ===== */
+    .larsito-caja{background:var(--noche);color:var(--nieve);border-radius:18px;padding:28px;margin-top:8px;position:relative;overflow:hidden}
+    .larsito-caja .eti{font-family:var(--sg);font-weight:700;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--aurora);margin-bottom:12px}
+    .larsito-caja h3{font-family:var(--sg);font-weight:700;font-size:clamp(1.3rem,3vw,1.8rem);line-height:1.2;color:var(--nieve);max-width:24ch;margin-bottom:10px}
+    .larsito-caja .lede{color:var(--niebla);font-size:1.04rem;max-width:52ch;margin-bottom:22px}
+    .chat{display:grid;gap:10px;max-width:520px}
+    .burbuja{border-radius:14px;padding:13px 16px;max-width:88%}
+    .burbuja.lars{background:rgba(63,203,148,.14);border:1px solid rgba(63,203,148,.34);justify-self:start;border-bottom-left-radius:4px}
+    .burbuja.tu{background:rgba(243,245,244,.06);border:1px solid var(--linea-oscura);justify-self:end;border-bottom-right-radius:4px}
+    .burbuja .quien{font-family:var(--sg);font-weight:700;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--niebla);margin-bottom:5px}
+    .burbuja .no{font-family:var(--sg);font-weight:500;font-size:1.02rem;color:var(--nieve);line-height:1.45}
+    .burbuja .es{font-size:.9rem;color:var(--niebla);font-style:italic;margin-top:4px}
+    .correccion{border-top:1px solid var(--linea-oscura);margin-top:10px;padding-top:9px;font-size:.9rem;color:var(--niebla)}
+    .correccion b{color:var(--aurora);font-family:var(--sg);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;display:block;margin-bottom:3px}
+    .onda{display:flex;align-items:flex-end;gap:3px;height:22px;margin-top:10px}
+    .onda i{display:block;width:3px;border-radius:2px;background:var(--aurora);opacity:.75}
+    .larsito-pie{font-family:var(--sg);font-size:.82rem;color:var(--niebla);margin-top:22px}
+    .larsito-pie b{color:var(--aurora)}
+
+    /* ===== Sprint ===== */
+    .sprint{background:var(--blanco);border:1px solid var(--linea-clara);border-left:4px solid var(--aurora);border-radius:14px;padding:26px;box-shadow:var(--sombra-clara);margin-top:8px}
+    .sprint .eti{font-family:var(--sg);font-weight:700;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--fiordo);margin-bottom:12px}
+    .sprint h3{font-family:var(--sg);font-weight:700;font-size:clamp(1.25rem,2.6vw,1.6rem);line-height:1.22;color:var(--noche);max-width:28ch;margin-bottom:10px}
+    .sprint p{font-size:1.02rem;max-width:58ch;margin-bottom:14px}
+    .sprint-datos{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0 20px}
+    .sprint-datos span{font-family:var(--sg);font-weight:500;font-size:.8rem;color:var(--fiordo);border:1px solid var(--linea-clara);border-radius:999px;padding:6px 14px}
+
+    /* ===== Cruce a PASS ===== */
+    .cruce{background:var(--noche);color:var(--nieve);border-radius:16px;padding:26px;max-width:70ch}
+    .cruce .eti{font-family:var(--sg);font-weight:700;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--aurora);margin-bottom:12px}
+    .cruce h3{font-family:var(--sg);font-size:clamp(1.2rem,2.4vw,1.5rem);line-height:1.24;max-width:32ch;margin-bottom:10px;color:var(--nieve)}
+    .cruce p{color:var(--niebla);font-size:1rem;margin-bottom:14px}
+    .cruce a.enlace{font-family:var(--sg);font-weight:700;color:var(--aurora);text-underline-offset:3px}
+
+    /* ===== FAQ ===== */
+    .faq{margin-top:6px;max-width:70ch}
+    details{border-top:1px solid var(--linea-clara);padding:14px 0}
+    details:last-of-type{border-bottom:1px solid var(--linea-clara)}
+    summary{font-family:var(--sg);font-weight:700;font-size:1rem;cursor:pointer;color:var(--noche);list-style:none;display:flex;justify-content:space-between;gap:14px;align-items:baseline}
+    summary::-webkit-details-marker{display:none}
+    summary::after{content:"+";font-family:var(--sg);color:var(--fiordo);flex:none}
+    details[open] summary::after{content:"–"}
+    details p{margin-top:10px;font-size:1.02rem;max-width:62ch}
+    details a{color:var(--fiordo)}
+
+    .banda{border-top:1px solid var(--linea-clara)}
+    .cierre{padding:62px 0}
+    .cierre h2{max-width:26ch}
+
+    footer{border-top:1px solid var(--linea-clara);padding:32px 0;background:var(--nieve)}
+    .foot-inner{max-width:var(--ancho);margin:0 auto;padding:0 24px;display:flex;flex-wrap:wrap;gap:18px;align-items:center;justify-content:space-between}
+    .foot-inner p{font-family:var(--sg);font-size:.78rem;color:var(--fiordo)}
+    .footer-links{display:flex;flex-wrap:wrap;gap:20px}
+    .footer-links a{font-family:var(--sg);font-size:.82rem;color:var(--fiordo);text-decoration:none;background-image:linear-gradient(currentColor,currentColor);background-size:0% 1px;background-repeat:no-repeat;background-position:left bottom;transition:background-size .25s ease,color .2s ease}
+    .footer-links a:hover{background-size:100% 1px;color:var(--noche)}
+
+    .reveal{transition:opacity .8s var(--ease),transform .8s var(--ease);transition-delay:var(--d,0s)}
+    .js .reveal{opacity:0;transform:translateY(20px)}
+    .js .reveal.visible{opacity:1;transform:none}
+
+    @media (max-width:640px){
+      section{padding:52px 0}
+      .hero{padding-top:38px;padding-bottom:44px}
+      .head-nav{gap:14px}
+      .head-nav a{font-size:.78rem}
+      .marca span{font-size:.82rem}
+      .larsito-caja,.sprint,.cruce{padding:22px}
+      .burbuja{max-width:100%}
     }
-    .wrap { width: min(1080px, calc(100% - 40px)); margin: 0 auto; }
-    header { border-bottom: 1px solid var(--linea); }
-    header .wrap { display: flex; min-height: 72px; justify-content: space-between; align-items: center; gap: 24px; }
-    .brand, .back { font-family: var(--sans); font-weight: 700; text-decoration: none; }
-    .brand span, .back { color: var(--aurora); }
-    .back { font-size: .86rem; text-underline-offset: 4px; }
-    main { padding: clamp(72px, 10vw, 124px) 0; }
-    .eyebrow { margin: 0 0 22px; color: var(--aurora); font-family: var(--sans); font-size: .75rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; }
-    h1, h2 { margin-top: 0; font-family: var(--sans); }
-    h1 { max-width: 820px; margin-bottom: 28px; font-size: clamp(3.3rem, 7vw, 6.7rem); letter-spacing: -.07em; line-height: .92; }
-    h2 { margin-bottom: 12px; font-size: 1.65rem; letter-spacing: -.04em; line-height: 1.05; }
-    .lede { max-width: 680px; margin: 0; color: rgba(14, 27, 38, .7); font-size: clamp(1.18rem, 2.4vw, 1.48rem); }
-    .under { position: relative; z-index: 0; display: inline-block; }
-    .under::after {
-      position: absolute;
-      z-index: -1;
-      right: -.02em;
-      bottom: .01em;
-      left: -.02em;
-      height: .15em;
-      content: "";
-      background: var(--aurora-viva);
-      clip-path: polygon(0 35%, 9% 17%, 25% 30%, 44% 13%, 66% 27%, 83% 10%, 100% 28%, 99% 80%, 78% 72%, 58% 90%, 35% 75%, 14% 89%, 1% 72%);
+    @media (prefers-reduced-motion:reduce){
+      html{scroll-behavior:auto}
+      .cielo::before{animation:none}
+      .js .reveal{opacity:1;transform:none;transition:none}
+      .js .reveal mark.marcado{background-size:100% 100%;transition:none}
+      .cta:hover{transform:none}
     }
-    .choices { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 68px; }
-    .card { display: flex; min-height: 390px; padding: 36px; flex-direction: column; background: var(--blanco); border: 1px solid var(--linea); border-radius: 26px; }
-    .card.pass { background: var(--nieve-2); }
-    .tag { align-self: flex-start; padding: 6px 10px; color: var(--aurora); background: var(--nieve); border: 1px solid var(--linea); border-radius: 999px; font-family: var(--sans); font-size: .7rem; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; }
-    .card h2 { margin-top: 34px; }
-    .card p { color: rgba(14, 27, 38, .7); }
-    .facts { padding: 0; margin: 20px 0 30px; list-style: none; }
-    .facts li { padding: 9px 0; border-top: 1px solid var(--linea); }
-    .button { display: inline-flex; min-height: 50px; margin-top: auto; padding: 12px 18px; justify-content: center; align-items: center; color: var(--blanco); background: var(--tinta); border-radius: 999px; font-family: var(--sans); font-weight: 700; text-decoration: none; }
-    .button:hover, .button:focus-visible { color: var(--tinta); background: var(--aurora-viva); }
-    .future { max-width: 760px; margin: 56px auto 0; padding: 26px 30px; border-left: 6px solid var(--aurora-viva); background: rgba(255, 255, 255, .58); }
-    .future strong { font-family: var(--sans); }
-    .future p { margin: 6px 0 0; color: rgba(14, 27, 38, .68); }
-    footer { padding: 30px 0; border-top: 1px solid var(--linea); color: rgba(14, 27, 38, .6); font-size: .82rem; }
-    footer p { margin: 0; }
-    @media (max-width: 720px) {
-      .wrap { width: min(100% - 28px, 1080px); }
-      header .wrap { min-height: 64px; }
-      .choices { grid-template-columns: 1fr; margin-top: 50px; }
-      .card { min-height: 0; padding: 28px 24px; }
-      h1 { font-size: clamp(3rem, 15vw, 4.5rem); }
-    }
+    @media (max-width:640px){.head-nav a{padding:11px 0}.footer-links a{padding:9px 0}}
   </style>
 </head>
 <body>
   <header>
-    <div class="wrap">
-      <a class="brand" href="/norsk/">NEXO <span>NORSK</span></a>
-      <a class="back" href="/">Nexo Noruega</a>
+    <div class="head-inner">
+      <a class="marca" href="https://www.nexonoruega.com" aria-label="Nexo Noruega, inicio">
+        <svg viewBox="0 0 800 800" aria-hidden="true">
+          <path d="M223 532 L223 298 L320 402 L320 265" fill="none" stroke="#2C5A72" stroke-opacity=".45" stroke-width="34" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M478 532 L478 264 L577 398 L577 532" fill="none" stroke="#2C5A72" stroke-width="34" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>NEXO <b>NORSK</b></span>
+      </a>
+      <nav class="head-nav" aria-label="Secciones">
+        <a href="/norsk/" aria-current="page">Noruego</a>
+        <a href="/pass/">Exámenes</a>
+        <a href="https://www.nexonoruega.com">Nexo Noruega</a>
+      </nav>
     </div>
   </header>
+
   <main>
-    <div class="wrap">
-      <p class="eyebrow">Noruego para una situación concreta</p>
-      <h1>No necesitas otro curso. Necesitas elegir <span class="under">qué tienes delante.</span></h1>
-      <p class="lede">NEXO NORSK separa el idioma de los trámites. La prueba oral de noruego y los exámenes de ciudadanía no son el mismo problema.</p>
+    <!-- S1 · HERO -->
+    <section class="hero">
+      <div class="cielo" aria-hidden="true"></div>
+      <div class="wrap">
+        <p class="kicker caesar reveal">Nexo Norsk</p>
+        <h1 class="reveal" style="--d:.08s">Tu ciudadanía se juega en <mark class="marcado">veinte minutos hablando</mark>.</h1>
+        <p class="sub reveal" style="--d:.16s">La Norskprøven es la prueba de noruego que Noruega te pide para la ciudadanía, y el nivel que exige la regla general es el B1 oral. No se aprueba acumulando apuntes. Se aprueba abriendo la boca antes del día del examen.</p>
+        <div class="botones reveal" style="--d:.24s">
+          <a class="cta" href="https://nexonoruega.substack.com/subscribe">Avísame cuando abra</a>
+          <a class="cta ghost" href="#examen">Ver cómo es el examen</a>
+        </div>
 
-      <div class="choices">
-        <article class="card">
-          <span class="tag">Nuevo · piloto manual</span>
-          <h2>Tengo la prueba oral de noruego</h2>
-          <p>Ya posees aproximadamente el nivel, pero cuando te toca hablar te quedas corto, pierdes el hilo o te bloqueas.</p>
-          <ul class="facts">
-            <li>A1-A2 con objetivo A2</li>
-            <li>A2-B1 con objetivo B1</li>
-            <li>21 días · cinco plazas</li>
-          </ul>
-          <a class="button" href="/norsk/sprint-oral/">Ver el Sprint oral</a>
-        </article>
-        <article class="card pass">
-          <span class="tag">Ciudadanía</span>
-          <h2>Tengo la statsborgerprøven o la samfunnskunnskapsprøven</h2>
-          <p>Necesitas practicar el temario y el formato de los exámenes de conocimientos, no una prueba de conversación.</p>
-          <ul class="facts">
-            <li>Lección 0 gratuita</li>
-            <li>Preguntas bilingües de formato similar</li>
-            <li>Venta todavía cerrada</li>
-          </ul>
-          <a class="button" href="/pass/">Ir a NEXO PASS</a>
-        </article>
+        <div class="aviso-obra reveal" style="--d:.32s">
+          <span class="eti">En obras</span>
+          <p>El curso completo está en producción y no se vende todavía. Lo que sí existe hoy es el Sprint oral, un piloto con plazas contadas, y esta página, donde te cuento el examen entero sin pedirte nada a cambio.</p>
+        </div>
       </div>
+    </section>
 
-      <div class="future"><strong>¿Buscas un curso general de noruego?</strong><p>La ruta A1-B2 sigue en desarrollo. El Sprint oral no es una versión terminada de ese curso y no intenta sustituirlo.</p></div>
-    </div>
+    <!-- S2 · EL EXAMEN -->
+    <section class="banda" id="examen">
+      <div class="wrap">
+        <p class="kicker reveal">La Norskprøven por dentro</p>
+        <h2 class="reveal" style="--d:.08s">Una prueba, cuatro exámenes distintos.</h2>
+        <p class="parrafo reveal" style="--d:.14s">La Norskprøven no es un examen, son cuatro pruebas que se hacen por separado y se aprueban por separado. Puedes salir con B1 en lectura y A2 en habla. Y es la de habla la que decide tu ciudadanía.</p>
+
+        <div class="pruebas">
+          <article class="prueba reveal" style="--d:.2s">
+            <p class="no" lang="nb">Lytteforståelse</p>
+            <p class="es">Comprensión oral</p>
+            <p>Se hace por ordenador y se adapta a ti. Cuantas más aciertas, más difíciles vienen. Todos los candidatos se inscriben a la misma prueba, sin elegir nivel: el nivel sale al final.</p>
+          </article>
+          <article class="prueba reveal" style="--d:.24s">
+            <p class="no" lang="nb">Leseforståelse</p>
+            <p class="es">Comprensión lectora</p>
+            <p>Mismo mecanismo adaptativo que la de escucha, con textos. Suele ser la parte que mejor llevan los hispanohablantes, y por eso engaña: aprobar aquí no anticipa lo que pasa al hablar.</p>
+          </article>
+          <article class="prueba reveal" style="--d:.28s">
+            <p class="no" lang="nb">Skriftlig framstilling</p>
+            <p class="es">Expresión escrita</p>
+            <p>Aquí sí eliges nivel al inscribirte. Si vas a por el B1, te apuntas al tramo A2-B1. Elegir mal el tramo es uno de los errores caros del día de la inscripción, y nadie te avisa.</p>
+          </article>
+          <article class="prueba clave reveal" style="--d:.32s">
+            <p class="no" lang="nb">Muntlig kommunikasjon</p>
+            <p class="es">Expresión oral</p>
+            <p>Entre veinte y veinticinco minutos delante de un examinador, con un evaluador presente. Se habla, se conversa y se defiende una opinión.</p>
+            <span class="marca-clave">La que pide la ciudadanía</span>
+          </article>
+        </div>
+
+        <div class="nota-ruta reveal" style="--d:.38s">
+          <p>Para la ciudadanía, la regla general pide acreditar noruego oral B1 y además aprobar una prueba de conocimientos sobre Noruega. Son dos cosas distintas y se preparan aparte. UDI tasa las excepciones, y hay casos concretos en los que basta el A2.</p>
+          <p><a href="/pass/requisitos-ciudadania-noruega/">Ver requisitos, plazos y excepciones</a></p>
+        </div>
+        <p class="fuente reveal" style="--d:.42s"><a href="https://hkdir.no/voksenopplaering/norsk-og-samfunnskunnskap/om-norskprovene/norskproven-a1-b2">HK-dir</a> y <a href="https://www.udi.no/en/word-definitions/test-requirements-norwegian-citizenship/">UDI</a> · Verificado en agosto de 2026</p>
+      </div>
+    </section>
+
+    <!-- S3 · MÉTODO -->
+    <section class="banda">
+      <div class="wrap">
+        <p class="kicker reveal">Cómo lo preparamos</p>
+        <h2 class="reveal" style="--d:.08s">Aprobar sobrado y hablar de verdad son el mismo trabajo.</h2>
+        <p class="parrafo reveal" style="--d:.14s">Casi todo el material que existe elige un lado. O te entrena para el examen y luego no sabes pedir cita en el médico, o te enseña noruego bonito que no se parece a lo que te van a pedir esos veinte minutos. Aquí no separamos las dos cosas, porque en tu vida tampoco están separadas.</p>
+
+        <div class="pasos">
+          <div class="paso reveal" style="--d:.2s">
+            <span class="num">01</span>
+            <p class="titulo">Dónde estás de verdad</p>
+            <p>Un diagnóstico por destreza, no una etiqueta global. Saber que escuchas a B1 y hablas a A2 cambia por completo lo que tienes que hacer las próximas semanas.</p>
+          </div>
+          <div class="paso reveal" style="--d:.26s">
+            <span class="num">02</span>
+            <p class="titulo">Los saltos que separan A2 de B1</p>
+            <p>Dieciséis mecanismos concretos. No es gramática por gramática: cada uno resuelve algo que ahora te deja a medias, como contar lo que pasó, matizar sin sonar brusco o defender una opinión.</p>
+          </div>
+          <div class="paso reveal" style="--d:.32s">
+            <span class="num">03</span>
+            <p class="titulo">Hablar desde el primer día</p>
+            <p>Con ejercicios de respuesta cronometrada y conversación real. La fluidez no llega estudiando más, llega bajando el tiempo que tardas en arrancar la frase.</p>
+          </div>
+        </div>
+
+        <div class="doble">
+          <div class="mitad reveal" style="--d:.36s">
+            <h3>Para el examen</h3>
+            <p>Entrenamiento separado de las cuatro pruebas, con el formato de cada una, y simulacros completos cronometrados. Formato similar al oficial, nunca preguntas reales copiadas.</p>
+          </div>
+          <div class="mitad reveal" style="--d:.4s">
+            <h3>Para el lunes</h3>
+            <p>Las situaciones que de verdad te tocan: la reunión de trabajo, el fastlege, la barnehage, el vecino que te habla rápido. Mismo noruego, otro escenario.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- S4 · LARSITO -->
+    <section class="banda" id="larsito">
+      <div class="wrap">
+        <p class="kicker reveal">Práctica oral</p>
+        <h2 class="reveal" style="--d:.08s">Te presento a Larsito.</h2>
+        <p class="parrafo reveal" style="--d:.14s">El problema de la prueba oral es que para entrenarla necesitas a alguien enfrente, y a las once de la noche no hay nadie. Larsito es un compañero de conversación con el que puedes hablar noruego cuando te venga bien, que te corrige en español y que no se cansa de repetir.</p>
+
+        <div class="larsito-caja reveal" style="--d:.2s">
+          <p class="eti">Así funciona</p>
+          <h3>Le hablas en noruego. Te contesta en noruego. Te explica en español.</h3>
+          <p class="lede">Cuatro modos: conversación libre, simulacro del examen oral con su estructura real, situaciones del día a día y corrección a fondo.</p>
+
+          <div class="chat" aria-label="Ejemplo de conversación con Larsito">
+            <div class="burbuja lars">
+              <p class="quien">Larsito</p>
+              <p class="no" lang="nb">Fortell meg om en gang du måtte klage på noe. Hva skjedde?</p>
+              <p class="es">Cuéntame una vez que tuviste que reclamar algo. ¿Qué pasó?</p>
+              <div class="onda" aria-hidden="true">
+                <i style="height:40%"></i><i style="height:75%"></i><i style="height:55%"></i><i style="height:100%"></i><i style="height:65%"></i><i style="height:85%"></i><i style="height:35%"></i><i style="height:70%"></i><i style="height:50%"></i>
+              </div>
+            </div>
+            <div class="burbuja tu">
+              <p class="quien">Tú</p>
+              <p class="no" lang="nb">Jeg har klaget på strømregningen min i fjor fordi den var altfor høy.</p>
+            </div>
+            <div class="burbuja lars">
+              <p class="quien">Larsito</p>
+              <p class="no" lang="nb">Ja, det skjønner jeg godt. Hva svarte de deg?</p>
+              <p class="es">Sí, lo entiendo perfectamente. ¿Qué te contestaron?</p>
+              <div class="correccion">
+                <b>Una cosa</b>
+                Con <i lang="nb">i fjor</i> el hecho ya está cerrado en el pasado, así que va en pretérito: <i lang="nb">jeg klaget</i>, no <i lang="nb">jeg har klaget</i>. Ese salto es justo lo que el examinador escucha para separar A2 de B1.
+              </div>
+            </div>
+          </div>
+
+          <p class="larsito-pie"><b>En construcción.</b> Larsito llega con el curso. Si quieres probarlo antes que nadie, entra en la lista.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- S5 · SPRINT ORAL -->
+    <section class="banda" id="sprint">
+      <div class="wrap">
+        <p class="kicker reveal">Disponible ahora</p>
+        <h2 class="reveal" style="--d:.08s">Si tu examen es este invierno, no esperes al curso.</h2>
+
+        <div class="sprint reveal" style="--d:.16s">
+          <p class="eti">Sprint oral · Piloto manual</p>
+          <h3>Veintiún días trabajando solo la parte que te bloquea: hablar.</h3>
+          <p>Un piloto con acompañamiento humano, plazas contadas y dos rutas según dónde estés y adónde vas. Empieza con una entrevista para ver si te encaja, porque a mucha gente le llega demasiado pronto y eso también hay que decirlo.</p>
+          <div class="sprint-datos">
+            <span>21 días</span>
+            <span>Ruta A1-A2, objetivo A2</span>
+            <span>Ruta A2-B1, objetivo B1</span>
+            <span>Cinco plazas</span>
+          </div>
+          <a class="cta" href="/norsk/sprint-oral/">Ver el Sprint oral</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- S6 · FAQ + CRUCE -->
+    <section class="banda">
+      <div class="wrap">
+        <p class="kicker reveal">Preguntas rápidas</p>
+        <div class="faq reveal" style="--d:.1s">
+          <details>
+            <summary>¿Esto sustituye a la escuela de noruego?</summary>
+            <p>No. Si tienes derecho a clases gratuitas, ve a clase. Esto es la capa que casi ninguna escuela cubre: preparar el formato concreto de la Norskprøven y entrenar la parte oral hasta que deje de darte miedo.</p>
+          </details>
+          <details>
+            <summary>¿Qué nivel necesito para empezar?</summary>
+            <p>Está pensado para quien ya se defiende un poco, más o menos un A2, y se queda corto justo cuando tiene que hablar. Si empiezas de cero, el punto de partida es otro y te lo diremos claro en el diagnóstico.</p>
+          </details>
+          <details>
+            <summary>Mi objetivo es la residencia permanente, no la ciudadanía. ¿Me sirve?</summary>
+            <p>Sí, aunque el listón es distinto. Para la residencia permanente por la vía general se pide oral A2, no B1. El material es el mismo, cambia hasta dónde tienes que llegar. Los detalles de cada trámite están en <a href="/pass/requisitos-ciudadania-noruega/">la guía de requisitos</a>.</p>
+          </details>
+          <details>
+            <summary>¿Cuándo abre y cuánto va a costar?</summary>
+            <p>Todavía no hay fecha ni precio publicados, y no voy a inventarlos para que te suscribas. Cuando estén, lo sabrás por correo. Las fechas de convocatoria e inscripción del examen las publica HK-dir en su web.</p>
+          </details>
+        </div>
+
+        <div class="cruce reveal" style="--d:.2s">
+          <p class="eti">La otra mitad del requisito</p>
+          <h3>El idioma es solo uno de los dos exámenes.</h3>
+          <p>Para la ciudadanía también tienes que aprobar la statsborgerprøven o la samfunnskunnskapsprøven, la prueba de conocimientos sobre Noruega. Esa ya está construida y puedes hacer un simulacro gratis ahora mismo.</p>
+          <p><a class="enlace" href="/pass/">Ver NEXO PASS</a></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- S7 · CIERRE -->
+    <section class="cierre banda">
+      <div class="cielo" aria-hidden="true"></div>
+      <div class="wrap">
+        <h2 class="reveal">Entender noruego y hablarlo no son la misma habilidad. El examen lo sabe.</h2>
+        <p class="sub reveal" style="--d:.08s">Te aviso cuando el curso abra. Sin prisa artificial y sin cuenta atrás falsa.</p>
+        <div class="botones reveal" style="--d:.14s">
+          <a class="cta" href="https://nexonoruega.substack.com/subscribe">Avísame cuando abra</a>
+          <a class="cta ghost" href="/norsk/sprint-oral/">Ver el Sprint oral</a>
+        </div>
+      </div>
+    </section>
   </main>
-  <footer><div class="wrap"><p>NEXO NORSK es una línea independiente de preparación. No está afiliada, aprobada ni respaldada por HK-dir.</p></div></footer>
+
+  <footer>
+    <div class="foot-inner">
+      <p>Nexo Noruega no está afiliado a HK-dir, a UDI ni a ningún organismo oficial noruego.</p>
+      <nav class="footer-links" aria-label="Enlaces">
+        <a href="https://www.nexonoruega.com">Inicio</a>
+        <a href="/norsk/">Noruego</a>
+        <a href="/pass/">Exámenes</a>
+        <a href="/pass/condiciones/">Condiciones</a>
+        <a href="/pass/privacidad/">Privacidad</a>
+        <a href="https://nexonoruega.substack.com">Newsletter</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+  (function () {
+    "use strict";
+    document.documentElement.classList.add("js");
+
+    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    var observados = document.querySelectorAll(".reveal");
+    if ("IntersectionObserver" in window && !reduce) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add("visible"); io.unobserve(e.target); }
+        });
+      }, { threshold: 0.18 });
+      observados.forEach(function (el) { io.observe(el); });
+      setTimeout(function () { observados.forEach(function (el) { el.classList.add("visible"); }); }, 6000);
+    } else {
+      observados.forEach(function (el) { el.classList.add("visible"); });
+    }
+  })();
+  </script>
 </body>
 </html>
