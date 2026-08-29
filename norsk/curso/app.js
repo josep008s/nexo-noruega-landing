@@ -78,7 +78,7 @@
     if (!conAcceso) {
       var aviso = el("div", "aviso");
       aviso.appendChild(el("span", "eti", "Demo"));
-      aviso.appendChild(el("p", null, (demo && demo.aviso) || "El curso completo se abre al comprar. Aquí puedes ver cómo está hecho por dentro."));
+      aviso.appendChild(el("p", null, (demo && ((demo.meta && demo.meta.aviso) || demo.aviso)) || "El curso completo se abre al comprar. Aquí puedes ver cómo está hecho por dentro."));
       paso.appendChild(aviso);
     }
 
@@ -231,7 +231,13 @@
     if (chips.children.length) paso.appendChild(chips);
 
     var lector = el("div", "lector");
-    (pieza.secciones || []).forEach(function (s) {
+    // La primera seccion de un mecanismo es su cabecera de produccion, un
+    // bloque con codigos de canon y unidades destino. Es util para escribir
+    // el material y ruido para quien lo estudia, asi que no se muestra.
+    var secciones = (pieza.secciones || []).filter(function (s) {
+      return !/^\s*<pre><code>(MECANISMO|DOCUMENTO|PIEZA):/.test(s.html || "");
+    });
+    secciones.forEach(function (s) {
       if (s.titulo) {
         var h = el("h2", null, s.titulo);
         lector.appendChild(h);
@@ -298,15 +304,49 @@
 
   // ---------- Arranque ----------
 
+  // La demo la escribe el exportador del curso, que agrupa por su cuenta:
+  // trae el mecanismo de muestra y el trozo del diagnostico como campos
+  // propios, y el resto como indice sin cuerpo. Aqui se aplana todo a la
+  // misma lista de piezas que devuelve la API, para que el resto de la app
+  // no tenga que saber de donde viene el contenido.
   function desdeDemo(d) {
     demo = d;
-    var abiertas = (d.piezas || []).map(function (p) {
-      return { codigo: p.codigo, tipo: p.tipo, titulo: p.titulo, orden: p.orden || 0, resumen: p.resumen || "", abierta: true };
+    var piezas = [];
+
+    if (d.mecanismo) {
+      piezas.push(Object.assign({}, d.mecanismo, {
+        tipo: d.mecanismo.tipo || "mecanismo",
+        orden: d.mecanismo.orden || 10,
+        resumen: (d.mecanismo.meta && d.mecanismo.meta.grieta) || "",
+        abierta: true,
+      }));
+    }
+    if (d.diagnostico) {
+      piezas.push(Object.assign({}, d.diagnostico, {
+        tipo: d.diagnostico.tipo || "diagnostico",
+        orden: d.diagnostico.orden || 1,
+        resumen: d.diagnostico.nota || "",
+        abierta: true,
+      }));
+    }
+    (d.piezas || []).forEach(function (p) {
+      piezas.push(Object.assign({}, p, { abierta: true, resumen: p.resumen || "" }));
     });
-    var cerradas = (d.indice || []).map(function (p) {
-      return { codigo: p.codigo, tipo: p.tipo, titulo: p.titulo, orden: p.orden || 0, resumen: p.resumen || "", abierta: false };
+
+    var cerradas = (d.indice || []).map(function (p, i) {
+      return {
+        codigo: p.codigo,
+        tipo: p.tipo || "mecanismo",
+        titulo: p.titulo,
+        orden: p.orden || (20 + i),
+        resumen: p.grieta || p.resumen || "",
+        abierta: false,
+      };
     });
-    indice = abiertas.concat(cerradas).sort(function (a, b) { return (a.orden || 0) - (b.orden || 0); });
+
+    indice = piezas.concat(cerradas).sort(function (a, b) { return (a.orden || 0) - (b.orden || 0); });
+    piezas.forEach(function (p) { cache[p.codigo] = p; });
+
     conAcceso = false;
     chip.textContent = "Demo";
     chip.className = "estado demo";

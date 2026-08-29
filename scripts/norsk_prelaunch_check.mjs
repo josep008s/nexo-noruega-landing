@@ -142,7 +142,7 @@ if (exists("sitemap.xml")) {
     "pass/index.html", "pass/app/index.html", "pass/leccion-0/index.html",
     "pass/preguntas-de-ejemplo/index.html", "pass/que-examen-necesitas/index.html",
     "pass/como-inscribirse/index.html", "pass/requisitos-ciudadania-noruega/index.html",
-    "norsk/larsito/index.html",
+    "norsk/larsito/index.html", "norsk/curso/index.html",
   ];
   const TOKENS = ["#0E1B26", "#F3F5F4", "#3FCB94", "#2C5A72", "#8DA1AB"];
   const FUENTES = ["Space Grotesk", "Source Serif 4"];
@@ -212,6 +212,38 @@ if (exists("norsk/larsito/app.js")) {
       }
       if (JSON.stringify(d).includes("\u2014")) duro("demo de Larsito: em dash en el contenido");
     } catch (e) { duro("demo de Larsito: JSON inválido"); }
+  }
+}
+
+// 5e) El curso: la demo publica no puede llevar contenido de pago.
+// El exportador saca el material del Drive y deja aqui solo la muestra.
+// Este check es la ultima red antes de publicar en un repo publico.
+if (exists("norsk/curso/app.js")) {
+  if (!exists("data/norsk-curso-demo.json")) duro("Falta data/norsk-curso-demo.json (la demo del curso)");
+  else {
+    try {
+      const d = JSON.parse(read("data/norsk-curso-demo.json"));
+      const conCuerpo = [];
+      if (d.mecanismo && Array.isArray(d.mecanismo.secciones) && d.mecanismo.secciones.length) conCuerpo.push(d.mecanismo.codigo);
+      if (d.diagnostico && Array.isArray(d.diagnostico.secciones) && d.diagnostico.secciones.length) conCuerpo.push(d.diagnostico.codigo);
+      (d.piezas || []).forEach((p) => { if (Array.isArray(p.secciones) && p.secciones.length) conCuerpo.push(p.codigo); });
+
+      const filtradas = (d.indice || []).filter((p) => Array.isArray(p.secciones) && p.secciones.length);
+      if (filtradas.length) duro(`demo del curso: ${filtradas.length} piezas del indice traen cuerpo y no deberian`);
+      else if (conCuerpo.length > 3) duro(`demo del curso: ${conCuerpo.length} piezas completas, demasiadas para una muestra`);
+      else if (!conCuerpo.length) duro("demo del curso: no hay ninguna pieza de muestra");
+      else ok(`demo del curso: muestra de ${conCuerpo.join(", ")} + indice de ${(d.indice || []).length}`);
+
+      if (JSON.stringify(d).includes("Notas para la revisi")) duro("demo del curso: incluye notas internas de revision");
+      if (JSON.stringify(d).includes("\u2014")) duro("demo del curso: em dash en el contenido");
+    } catch (e) { duro("demo del curso: JSON invalido"); }
+  }
+
+  // El material completo jamas entra al repo.
+  if (exists("scripts/_norsk_curso/curso.json")) {
+    const ig = read(".gitignore");
+    if (!ig.includes("scripts/_norsk_curso/")) duro("scripts/_norsk_curso/ existe y NO esta en .gitignore (contenido de pago en repo publico)");
+    else ok("curso completo fuera del repo (gitignored)");
   }
 }
 
