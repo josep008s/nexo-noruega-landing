@@ -1,0 +1,197 @@
+{
+ "meta": {
+  "producto": "NEXO NORSK · Ruta Norskprøven B1",
+  "actualizado": "2026-08-29",
+  "aviso": "Material propio de NEXO NORSK, de formato similar al que HK-dir describe en su web. NEXO NORSK es un proyecto independiente y no tiene relación con HK-dir, con UDI ni con ningún centro de examen.",
+  "piezas_totales": 27,
+  "mecanismos_totales": 16
+ },
+ "mecanismo": {
+  "codigo": "M01",
+  "tipo": "mecanismo",
+  "titulo": "El verbo en segunda posición cuando la frase no empieza por el sujeto",
+  "orden": 2,
+  "meta": {
+   "piezas_canon": [
+    "B1-P01",
+    "B1-P02",
+    "B1-P03",
+    "B1-P04",
+    "B1-P05"
+   ],
+   "unidades_destino": [
+    "B1-U01",
+    "B1-U02",
+    "B1-U04"
+   ],
+   "delprover": {
+    "principal": "SKRIFTLIG",
+    "transferencia": "MUNTLIG",
+    "no_evaluado_en": [
+     "LES",
+     "LYTT"
+    ]
+   },
+   "lupa": "PASS_CON_AVISOS",
+   "revision_nativa": "PENDIENTE"
+  },
+  "secciones": [
+   {
+    "id": "intro",
+    "titulo": "Introducción",
+    "html": "<pre><code>MECANISMO: M01 · El verbo en segunda posición cuando la frase no empieza por el sujeto\nGRIETA: en cuanto la frase arranca por un tiempo, una causa o un conector, el verbo se descoloca.\nPIEZAS NUEVAS: B1-P01 (P), B1-P02 (P), B1-P03 (P), B1-P04 (P), B1-P05 (P)\nYA TRAES: canon A1 y A2 de orden sujeto + verbo en frase principal\nDELPRØVE PRINCIPAL: SKRIFTLIG\nDELPRØVE DE TRANSFERENCIA: MUNTLIG\nUNIDAD DESTINO: B1-U01, B1-U02, B1-U04\nEVIDENCIA: ocho frases propias, cada una con un arranque distinto del sujeto, escritas sin corrector automático\nRECUPERACIÓN: días 1, 3, 7 y 14</code></pre>\n<p>Los seis pasos del canon, y dónde vive cada uno en esta lección:</p>\n<table><thead><tr><th>Paso del canon</th><th>Sección de esta lección</th></tr></thead><tbody><tr><td>Escena</td><td>1. La escena</td></tr><tr><td>Grieta</td><td>2. La grieta</td></tr><tr><td>Mecanismo</td><td>3. El mecanismo</td></tr><tr><td>Contraste</td><td>4. El contraste con el castellano</td></tr><tr><td>Uso</td><td>8. Práctica, ficha T y ficha P</td></tr><tr><td>Transferencia</td><td>6. En tu vida y ficha E</td></tr></tbody></table>\n<p>Aviso de la casa: NEXO NORSK es un proyecto independiente. No tenemos relación con HK-dir, con UDI ni con ningún centro de examen. Lo que aparece aquí es material propio de formato similar al que HK-dir describe en su web, y no reproduce tareas reales de la prueba.</p>\n<hr>"
+   },
+   {
+    "id": "la-escena",
+    "titulo": "1. La escena",
+    "html": "<p>Un martes de octubre, a las cuatro y veinte, Marta recoge a su hija en la barnehage de Lørenskog. La pedagoga la para en la puerta con una frase corta: <code>Husk dugnaden på lørdag.</code> Marta la entiende entera. Sabe además lo que quiere contestar, porque el sábado le toca turno de tarde y no puede ir. Tiene las palabras: <code>lørdag</code>, <code>jobbe</code>, <code>kveldsvakt</code>.</p>\n<p>Empieza bien. Dice <code>På lørdag</code>, hace una pausa de medio segundo y ahí se le abre el hueco. Lo que sale es <code>På lørdag jeg jobber kveldsvakt</code>. La pedagoga asiente, apunta algo en una hoja y responde <code>Det er greit</code>. Nadie corrige nada, porque el mensaje ha llegado.</p>\n<p>Esa misma noche Marta escribe un correo a la barnehage para dejarlo por escrito. Teclea <code>I går jeg prøvde å ringe</code>, lo mira, nota que algo no encaja y lo borra. Vuelve a escribir <code>Jeg prøvde å ringe i går</code>, que sí le suena bien. Y sin darse cuenta acaba de tomar una decisión que va a repetir cien veces: cuando no está segura del arranque, quita el arranque.</p>"
+   },
+   {
+    "id": "la-grieta",
+    "titulo": "2. La grieta",
+    "html": "<p>Lo que Marta hace ahora funciona a medias. Construye todas las frases con el mismo molde, sujeto y después verbo, que es lo que le enseñaron en A2. Cuando quiere poner delante un tiempo o un conector, lo pega por fuera y deja el resto intacto. De ahí sale <code>På lørdag jeg jobber</code>.</p>\n<p>Se le entiende igual, y ese es justo el problema. Como nadie la corrige, el error se queda. Y la salida que encuentra sola, no arrancar nunca por otra cosa que no sea el sujeto, le cuesta el doble: pierde el orden y pierde además los conectores, porque casi todos van al principio de la frase.</p>\n<p>El nombre del problema es este. En noruego, en la frase principal, el verbo conjugado ocupa siempre la segunda posición. Si el primer lugar lo ocupa algo que no es el sujeto, el sujeto pasa detrás del verbo.</p>"
+   },
+   {
+    "id": "el-mecanismo",
+    "titulo": "3. El mecanismo",
+    "html": "<p>La frase principal noruega tiene un sitio fijo reservado al verbo conjugado, y ese sitio es el segundo. No es una preferencia de estilo. Es la estructura, y no se negocia.</p>\n<p>Delante del verbo cabe una pieza, solo una. Llamémosla el arranque. El sujeto es uno de los candidatos posibles a ocupar ese sitio, pero no el único. También puede ocuparlo un complemento de tiempo, una duración, un conector, una marca de postura o una subordinada entera. En cuanto lo ocupa cualquiera de ellos, el sujeto no desaparece: se coloca justo detrás del verbo.</p>\n<table><thead><tr><th>Arranque (posición 1)</th><th>Verbo (posición 2)</th><th>Sujeto</th><th>Resto</th><th>Pieza</th></tr></thead><tbody><tr><td>Jeg</td><td>begynte</td><td></td><td>på et nytt kurs i fjor.</td><td>base A2</td></tr><tr><td>I fjor</td><td>begynte</td><td>jeg</td><td>på et nytt kurs.</td><td>B1-P01</td></tr><tr><td>Derfor</td><td>tok</td><td>jeg</td><td>kontakt med utleieren.</td><td>B1-P02</td></tr><tr><td>Etter tre år i Norge</td><td>forstår</td><td>jeg</td><td>mer.</td><td>B1-P03</td></tr><tr><td>Da jeg kom hit,</td><td>snakket</td><td>jeg</td><td>ikke norsk.</td><td>B1-P04</td></tr><tr><td>Etter min mening</td><td>bør</td><td>skolen</td><td>informere tidligere.</td><td>B1-P05</td></tr></tbody></table>\n<p>Fíjate en tres cosas de esa tabla, porque son las que deciden si te sale bien mientras hablas.</p>\n<p>La primera es que el arranque es una sola pieza por larga que sea. <code>Etter tre år i Norge</code> son cinco palabras y ocupan un único sitio. <code>Da jeg kom hit</code> es una frase completa con su propio verbo, y también ocupa un único sitio. No cuentes palabras. Cuenta piezas.</p>\n<p>La segunda es que solo se mueve el verbo conjugado. En <code>Etter min mening bør skolen informere tidligere</code>, el que salta a la segunda posición es <code>bør</code>. El infinitivo <code>informere</code> se queda donde estaba, al final. Lo mismo pasa con <code>har</code>, <code>kan</code>, <code>må</code> y <code>skal</code>.</p>\n<p>La tercera es la trampa que más cuesta. <code>Og</code>, <code>men</code>, <code>eller</code> y <code>for</code> no ocupan el arranque. Son conjunciones que unen dos frases desde fuera, así que la frase que viene detrás empieza como si no hubiera nada delante: <code>Jeg ringte til kontoret, men ingen svarte</code>. Ahí <code>ingen</code> es el sujeto y va primero, no detrás del verbo. En cambio <code>derfor</code>, <code>dessverre</code>, <code>heldigvis</code>, <code>nå</code> y <code>etterpå</code> son adverbios, sí ocupan el arranque y sí desplazan al sujeto.</p>\n<p>Un aviso sobre <code>da</code>, porque en esta lección aparece con dos trabajos distintos. En <code>Da jeg kom hit, snakket jeg ikke norsk</code> es una conjunción que abre una subordinada, y esa subordinada entera es la que ocupa el arranque. En <code>Da bodde jeg i Oslo</code> es un adverbio que significa «entonces» y ocupa el arranque él solo. Para lo que estás practicando da igual cuál de los dos sea, porque los dos empujan el verbo a la segunda posición. La diferencia importa por otro motivo: la conjunción arrastra una frase con su propio verbo detrás, y el adverbio no.</p>\n<p><strong>Regla operativa, para aplicarla mientras hablas.</strong> Uno, elige el arranque y dilo entero sin frenar. Dos, verbo conjugado, sin pensarlo. Tres, sujeto detrás. Si notas que el verbo se te está retrasando, no arregles la frase por dentro: para, respira y empieza otra vez por el sujeto. Una frase sencilla y bien ordenada vale más que una frase ambiciosa a medio construir.</p>"
+   },
+   {
+    "id": "el-contraste-con-el-castellano",
+    "titulo": "4. El contraste con el castellano",
+    "html": "<p>Dos pares, y la diferencia se ve en el propio ejemplo.</p>\n<p><code>Jeg begynte på et nytt kurs i fjor.</code><br><code>I fjor begynte jeg på et nytt kurs.</code><br>Las dos son correctas y dicen lo mismo. Lo único que cambia es qué va delante, y en cuanto delante va el tiempo, el verbo se adelanta al sujeto. En castellano las dos versiones se traducen igual y el verbo no se mueve.</p>\n<p><code>Jeg fikk ikke svar, men jeg ringte igjen.</code><br><code>Jeg fikk ikke svar. Derfor ringte jeg igjen.</code><br>Aquí lo que cambia es la palabra de enlace, y esa palabra decide dónde va el sujeto. Con <code>men</code> el sujeto sigue delante del verbo. Con <code>derfor</code> pasa detrás. En castellano «pero volví a llamar» y «por eso volví a llamar» tienen la misma forma, así que esta elección no existe en tu idioma.</p>\n<p>El castellano no marca esta distinción, así que aquí no hay nada que transferir y hay que aprenderla de cero.</p>\n<p>En español el orden es libre y la posición del verbo no aporta información gramatical. «El año pasado empecé un curso», «Empecé un curso el año pasado» y «Yo, el año pasado, empecé un curso» son las tres correctas y significan lo mismo.</p>\n<p>Hay un segundo motivo, más escondido. En español el sujeto suele quedar sobreentendido, así que en «El año pasado empecé un curso» no hay ningún pronombre delante del verbo. Mover el sujeto detrás del verbo no se te plantea nunca, porque el sujeto no está escrito. Cuando llegas al noruego, donde el pronombre sí aparece siempre, te encuentras una pieza que en tu idioma no tenías que colocar en ningún sitio.</p>\n<p>Por eso esto no se resuelve recordando una regla mientras hablas, sino convirtiendo el arranque más verbo en un bloque automático.</p>"
+   },
+   {
+    "id": "en-el-examen",
+    "titulo": "5. En el examen",
+    "html": "<p>Empecemos por el dato de formato. La prueba escrita se corrige con criterios de resolución de cada tarea más cuatro criterios de lengua aplicados al conjunto: construcción del texto, ortografía y puntuación, vocabulario y gramática. Y para situarse en un nivel hay que estar en ese nivel en todos los criterios, sin media. Fuente: <a href=\"https://hkdir.no/voksenopplaering/norsk-og-samfunnskunnskap/om-norskprovene/norskproven-a1-b2/prove-i-skriftleg-framstilling\" target=\"_blank\" rel=\"noopener\">HK-dir, Prøve i skriftleg framstilling</a>, consultada el 29.08.2026.</p>\n<p>Sobre eso montamos nuestra rúbrica interna, que en la prueba escrita A2-B1 tiene siete puertas. Conviene decirlo claro antes de seguir: esa rúbrica es un instrumento nuestro de entrenamiento, los descriptores que citamos son una traducción de trabajo y no una traducción oficial, y nada de esto equivale al resultado que emite HK-dir.</p>\n<p>Este mecanismo toca dos de esas siete puertas. La de gramática, L4, porque el descriptor de B1 pide control bastante bueno de las estructuras básicas, y el orden de la frase principal es la estructura básica del noruego. Y la de construcción del texto, L1, porque el descriptor de B1 pide usar varios conectores distintos, y casi todos van al principio de la frase. Quien evita el arranque para no equivocarse pierde las dos puertas a la vez.</p>\n<p>En la prueba oral toca la puerta de gramática, O7, con el mismo descriptor.</p>\n<p>Y aquí está lo que conviene no olvidar: en las dos rúbricas manda la puerta más baja, sin media. Una sola puerta en A2 deja la actuación en A2 aunque las otras seis estén en B1.</p>\n<p>Estas cinco piezas no se evalúan en comprensión lectora ni en comprensión oral.</p>"
+   },
+   {
+    "id": "en-tu-vida",
+    "titulo": "6. En tu vida",
+    "html": "<p>El lunes por la mañana esto te cambia cuatro conversaciones.</p>\n<p>En el trabajo, cuando tienes que avisar de algo antes de que sea un problema: <code>I morgen kan jeg ikke ta kveldsvakta.</code> Arrancar por el tiempo pone la información importante donde la otra persona la necesita, al principio.</p>\n<p>En el fastlege, cuando la pregunta es desde cuándo: <code>For tre uker siden begynte smertene.</code> Si empiezas por el sujeto, el dato de tiempo llega al final y la consulta se alarga.</p>\n<p>En la barnehage, cuando escribes por la tarde para dejar constancia: <code>Neste uke begynner hun i den nye avdelingen.</code></p>\n<p>Y con los vecinos, en el borettslag, cuando hay que explicar por qué has hecho algo: <code>Derfor skrev jeg til styret.</code> Ese <code>derfor</code> al principio es la diferencia entre parecer que te quejas y parecer que informas.</p>"
+   },
+   {
+    "id": "bloques-para-llevarte",
+    "titulo": "7. Bloques para llevarte",
+    "html": "<p>No son palabras sueltas. Son bloques con el arranque y el verbo ya pegados, para que salgan juntos.</p>\n<table><thead><tr><th>Bloque en noruego</th><th>En castellano</th></tr></thead><tbody><tr><td><code>I fjor begynte jeg ...</code></td><td>El año pasado empecé...</td></tr><tr><td><code>For tre uker siden fikk jeg ...</code></td><td>Hace tres semanas recibí...</td></tr><tr><td><code>I morgen kan jeg ikke ...</code></td><td>Mañana no puedo...</td></tr><tr><td><code>Neste uke skal jeg ...</code></td><td>La semana que viene voy a...</td></tr><tr><td><code>Etter tre år i Norge forstår jeg ...</code></td><td>Después de tres años en Noruega entiendo...</td></tr><tr><td><code>Derfor tok jeg kontakt med ...</code></td><td>Por eso me puse en contacto con...</td></tr><tr><td><code>Derfor skriver jeg til ...</code></td><td>Por eso escribo a...</td></tr><tr><td><code>Dessverre kan jeg ikke ...</code></td><td>Lamentablemente no puedo...</td></tr><tr><td><code>Heldigvis fikk jeg svar.</code></td><td>Por suerte recibí respuesta.</td></tr><tr><td><code>Da jeg kom hit, snakket jeg ikke ...</code></td><td>Cuando llegué aquí, no hablaba...</td></tr><tr><td><code>Etter min mening bør ...</code></td><td>En mi opinión ... debería...</td></tr><tr><td><code>Til slutt ordnet det seg.</code></td><td>Al final se arregló.</td></tr></tbody></table>"
+   },
+   {
+    "id": "practica",
+    "titulo": "8. Práctica",
+    "html": "<h3>Ficha T · modelo</h3>\n<p>Lee los seis ítems resueltos y fíjate en el motivo, no en la frase. La frase es un ejemplo, el motivo es lo que se repite.</p>\n<p>Advertencia: estas frases son modelos para desmontar, no textos para memorizar y volcar. HK-dir considera fraude entregar un texto escrito por otra persona, aunque el candidato se lo haya aprendido de memoria. Fuente: <a href=\"https://prove.hkdir.no/norskprove-a1-b2/les-om-proven-norsk-A1-B2/om-skriveproven\" target=\"_blank\" rel=\"noopener\">HK-dir, Om skriveprøven</a>, consultada el 29.08.2026.</p>\n<p>Las cinco piezas del canon que aparecen aquí, de B1-P01 a B1-P05, están todas en estado P, es decir, que se te va a pedir producirlas y no solo reconocerlas.</p>\n<p><strong>T1.</strong> Base: <code>Jeg begynte på et nytt kurs i fjor.</code> Quiero arrancar por el tiempo.<br>Resuelto: <code>I fjor begynte jeg på et nytt kurs.</code> · B1-P01<br>Motivo: <code>I fjor</code> ocupa el arranque, así que <code>begynte</code> va inmediatamente después y <code>jeg</code> cae detrás del verbo. No vale <code>I fjor jeg begynte</code>, porque deja dos piezas delante del verbo.</p>\n<p><strong>T2.</strong> Base: <code>Jeg tok kontakt med utleieren.</code> Quiero unirlo a lo anterior con una consecuencia.<br>Resuelto: <code>Derfor tok jeg kontakt med utleieren.</code> · B1-P02<br>Motivo: <code>derfor</code> es un adverbio conector, no una conjunción, y ocupa el arranque. No vale <code>Derfor jeg tok</code>. Compáralo con <code>og</code>, que sí es conjunción y no desplaza nada.</p>\n<p><strong>T3.</strong> Base: <code>Jeg forstår mer.</code> Quiero arrancar por una duración.<br>Resuelto: <code>Etter tre år i Norge forstår jeg mer.</code> · B1-P03<br>Motivo: <code>Etter tre år i Norge</code> son cinco palabras y una sola pieza. No vale <code>Etter tre år i Norge jeg forstår mer</code>, aunque el arranque sea largo.</p>\n<p><strong>T4.</strong> Base: <code>Jeg snakket ikke norsk.</code> Quiero arrancar por una subordinada.<br>Resuelto: <code>Da jeg kom hit, snakket jeg ikke norsk.</code> · B1-P04<br>Motivo: la subordinada entera ocupa el arranque. El verbo <code>kom</code> se queda dentro de la subordinada, en su sitio. El que salta a la segunda posición es el de la frase principal, <code>snakket</code>.</p>\n<p><strong>T5.</strong> Base: <code>Skolen bør informere tidligere.</code> Quiero marcar mi postura al principio.<br>Resuelto: <code>Etter min mening bør skolen informere tidligere.</code> · B1-P05<br>Motivo: solo se mueve el verbo conjugado, <code>bør</code>. El infinitivo <code>informere</code> se queda al final. No vale <code>Etter min mening skolen bør informere</code>.</p>\n<p><strong>T6.</strong> Base: dos frases unidas. Quiero decir que llamé y no contestó nadie.<br>Resuelto: <code>Jeg ringte til kontoret, men ingen svarte.</code> · sin código de canon, es el contraejemplo del mecanismo<br>Motivo: <code>men</code> une las dos frases desde fuera y no ocupa el arranque, así que <code>ingen</code> va primero. No vale <code>men svarte ingen</code>. Esta es la trampa que más se cuela cuando ya has automatizado la inversión.</p>\n<h3>Ficha P · práctica con retirada de datos</h3>\n<p>Escribe la frase entera. El apoyo baja cada cuatro ítems y no se vuelve atrás a mirar.</p>\n<p><em>Vuelta 1, con el arranque y el verbo dados.</em></p>\n<p><strong>P1.</strong> Arranque <code>I går</code> · verbo <code>å ringe</code> · resto: yo, al fastlege.<br><strong>P2.</strong> Arranque <code>Derfor</code> · verbo <code>å sende</code> · resto: yo, el formulario otra vez.<br><strong>P3.</strong> Arranque <code>Etter to måneder i jobben</code> · verbo <code>å kjenne</code> · resto: yo, a todos en el departamento.<br><strong>P4.</strong> Arranque <code>Da jeg kom til Norge</code> · verbo <code>å forstå</code> · resto: yo, nada en la reunión de padres.</p>\n<p><em>Vuelta 2, con tres palabras clave y el tipo de arranque.</em></p>\n<p><strong>P5.</strong> Abre por un tiempo. Palabras: <code>neste uke</code> · <code>begynne</code> · <code>barnehagen</code>.<br><strong>P6.</strong> Abre por un conector consecutivo. Palabras: <code>derfor</code> · <code>skrive</code> · <code>borettslaget</code>.<br><strong>P7.</strong> Abre por una duración. Palabras: <code>etter tre uker</code> · <code>få</code> · <code>svar</code>.<br><strong>P8.</strong> Abre por una subordinada con <code>da</code>. Palabras: <code>flytte</code> · <code>snakke</code> · <code>engelsk</code>.</p>\n<p><em>Vuelta 3, sin apoyo.</em></p>\n<p><strong>P9.</strong> Estás en el fastlege. Di que los dolores empezaron hace tres semanas, arrancando por el tiempo.<br><strong>P10.</strong> Escribes a tu jefa. Di que, en tu opinión, la lista de turnos debería llegar antes.</p>\n<h3>Ficha E · evaluación</h3>\n<p>Datos nuevos y sin apoyo. Escribe en un editor sin corrección automática, como en la prueba.</p>\n<p><strong>E1.</strong> Correo a la barnehage. Arranca por el tiempo: mañana no puedes recoger a tu hija antes de las cuatro.<br><strong>E2.</strong> Hablas con tu jefa. Arranca por un conector consecutivo: por eso cambiaste el turno con Anna.<br><strong>E3.</strong> Correo al borettslag. Arranca por una duración: después de dos años aquí conoces a casi todos los vecinos.<br><strong>E4.</strong> Entrevista de trabajo. Arranca por una subordinada con <code>da</code>: cuando empezaste a trabajar en la barnehage no sabías nada de noruego.<br><strong>E5.</strong> Correo al ayuntamiento. Arranca marcando tu postura: en tu opinión el plazo para responder es demasiado corto.<br><strong>E6.</strong> En el fastlege. Arranca por el tiempo: esta mañana te dolía el hombro.<br><strong>E7.</strong> Cuenta que enviaste el formulario la semana pasada y que todavía no ha contestado nadie. Una sola frase con las dos partes unidas.<br><strong>E8.</strong> Correo a tu empresa. Arranca por el tiempo y usa un verbo modal: la semana que viene tienes que entregar el formulario a NAV.</p>"
+   },
+   {
+    "id": "soluciones",
+    "titulo": "9. Soluciones",
+    "html": "<h3>Ficha T</h3>\n<p>Las seis respuestas están resueltas en la propia ficha, con su motivo.</p>\n<h3>Ficha P</h3>\n<p><strong>P1.</strong> <code>I går ringte jeg til fastlegen.</code><br><strong>P2.</strong> <code>Derfor sendte jeg skjemaet på nytt.</code><br><strong>P3.</strong> <code>Etter to måneder i jobben kjente jeg alle på avdelingen.</code> El arranque tiene cinco palabras y sigue siendo una sola pieza.<br><strong>P4.</strong> <code>Da jeg kom til Norge, forsto jeg ingenting på foreldremøtet.</code> También se acepta <code>forstod</code>. La coma después de la subordinada es obligatoria.<br><strong>P5.</strong> <code>Neste uke begynner datteren min i barnehagen.</code> Se acepta cualquier sujeto que encaje, siempre que vaya detrás de <code>begynner</code>.<br><strong>P6.</strong> <code>Derfor skriver jeg til borettslaget.</code><br><strong>P7.</strong> <code>Etter tre uker fikk jeg svar.</code><br><strong>P8.</strong> <code>Da jeg flyttet hit, snakket jeg bare engelsk.</code> El verbo de la subordinada, <code>flyttet</code>, no se mueve. El que salta es <code>snakket</code>.<br><strong>P9.</strong> <code>For tre uker siden begynte smertene.</code> Aquí el sujeto es <code>smertene</code>, no <code>jeg</code>, y va detrás del verbo igual.<br><strong>P10.</strong> <code>Etter min mening bør vaktlista komme tidligere.</code> También vale <code>vaktlisten</code>. <code>Bør</code> es el verbo conjugado y <code>komme</code> se queda al final.</p>\n<h3>Ficha E</h3>\n<p><strong>E1.</strong> <code>I morgen kan jeg ikke hente datteren min før klokka fire.</code> El modal <code>kan</code> va en segunda posición y el infinitivo <code>hente</code> se queda detrás.<br><strong>E2.</strong> <code>Derfor byttet jeg vakt med Anna.</code><br><strong>E3.</strong> <code>Etter to år her kjenner jeg nesten alle naboene.</code><br><strong>E4.</strong> <code>Da jeg begynte å jobbe i barnehagen, kunne jeg ikke noe norsk.</code> El arranque es la subordinada entera, con <code>å jobbe</code> dentro. Sin <code>å jobbe</code>, <code>Da jeg begynte i barnehagen</code> se entiende como que empezaste tú de niña, que es lo que se dice de un crío que entra en la guardería.<br><strong>E5.</strong> <code>Etter min mening er fristen altfor kort.</code> Aquí no hay verbo modal: el que ocupa la segunda posición es <code>er</code>, y el sujeto <code>fristen</code> va detrás. Sirve para comprobar que el mecanismo no depende de que haya un <code>bør</code>. Se escribe <code>altfor</code> y no <code>for</code> a secas para que no se lea <code>fristen for</code> como si empezara un complemento.<br><strong>E6.</strong> <code>I morges hadde jeg vondt i skulderen.</code><br><strong>E7.</strong> <code>Jeg sendte skjemaet i forrige uke, men ingen har svart ennå.</code> La segunda frase no invierte, porque <code>men</code> es conjunción y no ocupa el arranque. Si has escrito <code>men har ingen svart</code>, vuelve al ítem T6.<br><strong>E8.</strong> <code>Neste uke må jeg levere skjemaet til NAV.</code></p>\n<p>Una respuesta distinta del modelo es válida si resuelve la tarea, conserva los datos y se entiende.</p>"
+   },
+   {
+    "id": "recuperacion",
+    "titulo": "10. Recuperación",
+    "html": "<p>La evidencia de esta lección son ocho frases propias, cada una con un arranque distinto del sujeto y escritas sin corrector automático. Esa evidencia no se construye de una sentada: se reparte en cuatro contactos, y en cada uno se retira algo.</p>\n<table><thead><tr><th style=\"text-align:right\">Día</th><th>Qué haces</th><th>Qué cambia</th></tr></thead><tbody><tr><td style=\"text-align:right\">1</td><td>Ficha T entera y P1 a P4</td><td>Nada. Tienes el arranque y el verbo dados</td></tr><tr><td style=\"text-align:right\">3</td><td>P5 a P8</td><td>Se retira el verbo. Quedan tres palabras clave y el tipo de arranque</td></tr><tr><td style=\"text-align:right\">7</td><td>P9, P10 y E1 a E4</td><td>Cambian el escenario y los datos, y ya no hay apoyo</td></tr><tr><td style=\"text-align:right\">14</td><td>E5 a E8, dichas en voz alta antes de escribirlas</td><td>Salto a la prueba oral, que es la delprøve de transferencia de este mecanismo</td></tr></tbody></table>"
+   },
+   {
+    "id": "como-saber-si-ya-lo-tienes",
+    "titulo": "11. Cómo saber si ya lo tienes",
+    "html": "<p>Tres señales que se pueden observar desde fuera.</p>\n<p><strong>Una.</strong> Escribes ocho frases seguidas sobre un tema nuevo, cada una con un arranque distinto del sujeto, y no tienes que releer ninguna para colocar el verbo. La comprobación es esa: sin releer.</p>\n<p><strong>Dos.</strong> Hablando, te oyes empezar por <code>Derfor</code>, <code>I fjor</code> o <code>Da jeg kom hit</code> sin haberlo decidido antes. Ha dejado de ser una regla que aplicas y ha pasado a ser un bloque que sale entero.</p>\n<p><strong>Tres.</strong> Distingues la trampa sobre la marcha. Después de <code>men</code> y de <code>og</code> dejas el sujeto delante, y después de <code>derfor</code> y de <code>dessverre</code> lo pasas detrás, sin pararte a pensar en la diferencia.</p>"
+   }
+  ],
+  "palabras": 3831
+ },
+ "indice": [
+  {
+   "codigo": "M02",
+   "titulo": "La subordinada por dentro: conjunción, sujeto, adverbio y verbo",
+   "grieta": "En A2 la negación va detrás del verbo y funciona. Dentro de una subordinada va delante, y el error no se ve hasta que empiezas a explicar motivos."
+  },
+  {
+   "codigo": "M03",
+   "titulo": "Relativas con som y descripción precisa",
+   "grieta": "Describes con frases sueltas puestas en fila, así que repites el sustantivo y no consigues señalar de cuál hablas."
+  },
+  {
+   "codigo": "M04",
+   "titulo": "Preteritum frente a presens perfektum",
+   "grieta": "en A2 basta con contar en pasado, y en B1 hay que separar el hecho cerrado con fecha de la experiencia que sigue contando hoy."
+  },
+  {
+   "codigo": "M05",
+   "titulo": "Conectores temporales y secuencia narrativa",
+   "grieta": "En A2 la secuencia se resuelve con først y så; en B1 hay que elegir entre da y når, y marcar simultaneidad y anterioridad."
+  },
+  {
+   "codigo": "M06",
+   "titulo": "Causa y consecuencia",
+   "grieta": "En A2 dices qué ha pasado. En B1 tienes que decir por qué ha pasado y qué se deriva de ello."
+  },
+  {
+   "codigo": "M07",
+   "titulo": "Condición e hipótesis",
+   "grieta": "En A2 se pide. En B1 se negocia. Sin condicional no hay reclamación creíble ni propuesta de solución."
+  },
+  {
+   "codigo": "M08",
+   "titulo": "Pasiva y el agente que desaparece",
+   "grieta": "cuando la frase esconde al que actúa, la persona entiende el tema del documento pero no la instrucción."
+  },
+  {
+   "codigo": "M09",
+   "titulo": "Estilo indirecto",
+   "grieta": "cuando hay que contar lo que dijo otra persona, o se repite la frase tal cual o se sueltan palabras sueltas, y en las dos salidas la frase se queda sin dueño."
+  },
+  {
+   "codigo": "M10",
+   "titulo": "Modalidad, atenuación y partículas de matiz",
+   "grieta": "sin grados, una frase correcta suena a sentencia y el interlocutor deja de negociar."
+  },
+  {
+   "codigo": "M11",
+   "titulo": "Acuerdo, desacuerdo y referencia a lo dicho por otra persona",
+   "grieta": "En A2 respondes a lo que te preguntan; en B1 tienes que enlazar con lo que acaba de decir la otra persona."
+  },
+  {
+   "codigo": "M12",
+   "titulo": "Cantidad, indefinidos y referencia negativa",
+   "grieta": "niegas la acción y das por hecho que se entiende la cantidad, así que tu queja escrita pierde precisión justo donde la necesita."
+  },
+  {
+   "codigo": "M13",
+   "titulo": "Posesión y referencia reflexiva",
+   "grieta": "Es la única distinción del canon que el castellano no marca. sin y hans se traducen igual y significan cosas distintas, y el error genera un malentendido de referencia."
+  },
+  {
+   "codigo": "M14",
+   "titulo": "Participio, condensación nominal y lenguaje de carta oficial",
+   "grieta": "la carta oficial mete una condición entera dentro de un sustantivo, y un sustantivo no parece una orden."
+  },
+  {
+   "codigo": "M15",
+   "titulo": "Cohesión: conectores de párrafo, progresión y construcciones con det",
+   "grieta": "las frases están bien una por una y el texto entero no lleva al lector a ninguna parte."
+  },
+  {
+   "codigo": "M16",
+   "titulo": "Producción conectada y reparación sin preparación",
+   "grieta": "cuando falta una palabra, el turno se acaba, y el silencio se lee como falta de fluidez aunque la gramática esté bien."
+  }
+ ],
+ "diagnostico": {
+  "codigo": "DIAGNOSTICO_B1",
+  "titulo": "Diagnóstico de entrada · Ruta Norskprøven B1 · NEXO NORSK, línea Idioma",
+  "parcial": true,
+  "nota": "Solo la introducción. Las cuatro pruebas, la rúbrica y las soluciones están en el curso.",
+  "secciones": [
+   {
+    "id": "intro",
+    "titulo": "Introducción",
+    "html": "<p>Esto no es un examen de HK-dir y no predice tu resultado. Es material propio de NEXO NORSK, de formato similar al que HK-dir describe en su web. El aviso completo está al final.</p>"
+   },
+   {
+    "id": "por-que-esto-no-te-va-a-dar-un-numero",
+    "titulo": "1. Por qué esto no te va a dar un número",
+    "html": "<p>La Norskprøven A1-B2 no da una nota. Da cuatro resultados independientes, uno por destreza, y puedes salir con B1 en lectura y A2 en escritura sin que eso sea un error. Fuente: <a href=\"https://hkdir.no/voksenopplaering/norsk-og-samfunnskunnskap/om-norskprovene/norskproven-a1-b2/om-norskproven-a1-b2\" target=\"_blank\" rel=\"noopener\">https://hkdir.no/voksenopplaering/norsk-og-samfunnskunnskap/om-norskprovene/norskproven-a1-b2/om-norskproven-a1-b2</a>, consultada el 29.08.2026.</p>\n<p>Hay una segunda razón, más práctica: las cuatro partes no funcionan igual.</p>\n<p>En <strong>escritura</strong> y en <strong>comunicación oral</strong> eliges el nivel al inscribirte. Te apuntas a A1-A2, a A2-B1 o a B1-B2, y ese nivel fija el techo de tu resultado. En la escritura eso es absoluto: puedes quedarte por debajo del techo, nunca subir por encima. En la oral hay una salvedad, porque si el sensor sospecha que estás por encima de B1 puede añadirte una tarea suelta de B2 de tres a seis minutos y valorarte en ese nivel. Fuente: <a href=\"https://hkdir.no/voksenopplaering/norsk-og-samfunnskunnskap/om-norskprovene/norskproven-a1-b2/prove-i-munnleg-kommunikasjon\" target=\"_blank\" rel=\"noopener\">https://hkdir.no/voksenopplaering/norsk-og-samfunnskunnskap/om-norskprovene/norskproven-a1-b2/prove-i-munnleg-kommunikasjon</a>, consultada el 29.08.2026.</p>\n<p>En <strong>lectura</strong> y en <strong>comprensión oral</strong> no eliges nada. Todos empiezan igual, con dos bloques cortos de siete u ocho tareas cada uno. El primero es idéntico para todo el mundo y casi todas sus tareas son de nivel A2. El segundo te llega en versión fácil, de A1 a A2, o difícil, de B1, según cómo te haya ido en el primero. La suma de los dos decide a qué bloque largo llegas, y ese bloque largo marca el techo del día: si acabas en el de A1-A2, ese día no puede salirte B1 por bien que respondas después. Fuente: <a href=\"https://hkdir.no/voksenopplaering/norsk-og-samfunnskunnskap/om-norskprovene/norskproven-a1-b2/den-adaptive-strukturen-i-lese-og-lytteproven\" target=\"_blank\" rel=\"noopener\">https://hkdir.no/voksenopplaering/norsk-og-samfunnskunnskap/om-norskprovene/norskproven-a1-b2/den-adaptive-strukturen-i-lese-og-lytteproven</a>, consultada el 29.08.2026.</p>\n<p>De ahí las dos cosas que este diagnóstico quiere hacerte ver. Un número global te escondería el dato que decide por dónde empezar. Y las tareas fáciles importan: fallar una hora por prisa te cierra el techo antes de llegar a lo que te mide.</p>"
+   }
+  ]
+ }
+}
