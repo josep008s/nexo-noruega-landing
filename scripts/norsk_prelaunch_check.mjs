@@ -213,6 +213,19 @@ if (exists("norsk/larsito/app.js")) {
       if (JSON.stringify(d).includes("\u2014")) duro("demo de Larsito: em dash en el contenido");
     } catch (e) { duro("demo de Larsito: JSON inválido"); }
   }
+
+  // TTS de servidor: si existe el endpoint, tiene que llevar el flag de apagado
+  // (LARSITO_TTS, comprobado antes de tocar OpenAI) y la lista blanca de frases
+  // de la demo, que es el control de coste para quien usa la página sin login.
+  if (exists("api/larsito-tts.js")) {
+    if (!exists("api/_larsito_frases.js")) {
+      duro("api/larsito-tts.js existe pero falta api/_larsito_frases.js (regenerar con node scripts/larsito_frases_hash.mjs)");
+    } else if (!read("api/larsito-tts.js").includes("LARSITO_TTS")) {
+      duro("api/larsito-tts.js: falta la comprobación del flag LARSITO_TTS antes de llamar a OpenAI");
+    } else {
+      ok("TTS de Larsito: apagado por defecto y con lista blanca");
+    }
+  }
 }
 
 // 5e) El curso: la demo publica no puede llevar contenido de pago.
