@@ -1,9 +1,12 @@
 // Larsito: práctica de conversación y comprensión oral de NEXO NORSK.
 //
-// Fase F0 (la actual): todo corre en el navegador. Los escenarios son guiados
-// (guion fijo) y la voz usa la Web Speech API, que es gratuita y no toca servidor.
-// La conversación libre con el agente real llega cuando LARSITO_ABIERTO pase a true
-// y el backend tenga claves. Mismo patrón que VENTA_ABIERTA en la app de PASS.
+// Fase F0 (la actual): los escenarios son guiados (guion fijo). La voz tiene dos
+// vías: el TTS de servidor (/api/larsito-tts/, apagado por defecto tras el flag
+// LARSITO_TTS) y, si no está, la voz noruega de la Web Speech API del navegador.
+// Si no hay ninguna de las dos, el audio se apaga y se avisa: nunca se lee bokmål
+// con una voz de otro idioma. La conversación libre con el agente real llega
+// cuando LARSITO_ABIERTO pase a true y el backend tenga claves. Mismo patrón que
+// VENTA_ABIERTA en la app de PASS.
 (function () {
   "use strict";
 
@@ -68,32 +71,107 @@
   // ---------- Voz del navegador ----------
   // El soporte de noruego varía mucho entre navegadores, así que todo lo que
   // dependa de la voz es opcional: si no está, se practica igual escribiendo.
+  // Regla de honestidad: aquí NUNCA se habla con una voz que no sea noruega.
+  // Leer bokmål con una voz española enseña una pronunciación falsa, y eso es
+  // peor que el silencio.
 
   var vozNo = null;
   function elegirVoz() {
     if (!("speechSynthesis" in window)) return null;
     var voces = window.speechSynthesis.getVoices() || [];
+    var mejor = null;
+    var mejorPuntos = -1;
     for (var i = 0; i < voces.length; i++) {
-      if (/^nb|^no/i.test(voces[i].lang || "")) return voces[i];
+      var v = voces[i];
+      if (!/^nb|^no/i.test(v.lang || "")) continue;
+      // Entre las voces noruegas hay preferencias: Nora es la voz buena que
+      // traen Apple y Google, y las voces de red (localService false) suelen
+      // sonar mejor que las locales del sistema.
+      var puntos = 0;
+      if (/nora/i.test(v.name || "")) puntos += 2;
+      if (v.localService === false) puntos += 1;
+      if (puntos > mejorPuntos) { mejor = v; mejorPuntos = puntos; }
     }
-    return null;
+    return mejor;
   }
   if ("speechSynthesis" in window) {
     vozNo = elegirVoz();
     window.speechSynthesis.onvoiceschanged = function () { vozNo = elegirVoz(); };
   }
 
-  function decir(texto, lento) {
-    if (!("speechSynthesis" in window)) return false;
+  function decir(texto, lento, alDone) {
+    // Sin voz noruega no se habla: nada de caer a la voz por defecto.
+    if (!vozNo) return false;
     try {
       window.speechSynthesis.cancel();
       var u = new SpeechSynthesisUtterance(texto);
       u.lang = "nb-NO";
       u.rate = lento ? 0.72 : 0.95;
-      if (vozNo) u.voice = vozNo;
+      u.voice = vozNo;
+      if (alDone) { u.onend = alDone; u.onerror = alDone; }
       window.speechSynthesis.speak(u);
       return true;
     } catch (err) { return false; }
+  }
+
+  // ---------- Voz de servidor ----------
+  // El endpoint /api/larsito-tts/ convierte las frases de la demo en mp3 con una
+  // voz de verdad. Está apagado por defecto (flag LARSITO_TTS en Vercel), así que
+  // se pregunta UNA vez por carga de página si está encendido y la respuesta se
+  // guarda en una variable, no en localStorage: puede cambiar entre despliegues.
+
+  var ttsServidor = null; // null = sin comprobar todavía, true/false = respuesta del ping
+
+  function comprobarTtsServidor() {
+    return fetch("/api/larsito-tts/?ping=1", { credentials: "same-origin" })
+      .then(function (r) { return r.json(); })
+      .then(function (d) { ttsServidor = !!(d && d.ok); })
+      .catch(function () { ttsServidor = false; });
+  }
+
+  function hayVoz() { return ttsServidor === true || !!vozNo; }
+
+  // Capa única de escucha: primero el servidor si está encendido, después la voz
+  // noruega del navegador, y si no hay ninguna de las dos devuelve false y quien
+  // llama apaga el botón. alDone (opcional) se dispara al terminar el audio.
+  function hablar(texto, lento, alDone) {
+    if (ttsServidor === true) {
+      var vel = lento ? "0.8" : "1";
+      fetch("/api/larsito-tts/?texto=" + encodeURIComponent(texto) + "&velocidad=" + vel, { credentials: "same-origin" })
+        .then(function (r) {
+          if (!r.ok || (r.headers.get("content-type") || "").indexOf("audio") === -1) throw new Error("sin audio");
+          return r.blob();
+        })
+        .then(function (b) {
+          var url = URL.createObjectURL(b);
+          var a = new Audio(url);
+          a.onended = function () { URL.revokeObjectURL(url); if (alDone) alDone(); };
+          a.onerror = function () { URL.revokeObjectURL(url); if (alDone) alDone(); };
+          return a.play();
+        })
+        .catch(function () {
+          // El servidor ha fallado con esta frase: se cae a la voz local noruega.
+          if (!decir(texto, lento, alDone) && alDone) alDone();
+        });
+      return true;
+    }
+    return decir(texto, lento, alDone);
+  }
+
+  // Aviso honesto cuando no hay ni servidor ni voz local noruega. La línea larga
+  // se muestra solo la primera vez; los botones se apagan siempre.
+  var avisoVozDado = false;
+  function avisarSinVoz(contenedor) {
+    if (avisoVozDado) return;
+    avisoVozDado = true;
+    contenedor.appendChild(el("p", "ayuda", "Tu navegador no tiene voz noruega instalada y el audio se apaga para no enseñarte una pronunciación falsa. La conversación por escrito funciona igual."));
+  }
+
+  function apagarEscucha(principal, secundario, contenedor) {
+    principal.disabled = true;
+    principal.textContent = "Sin voz noruega en este navegador";
+    if (secundario) { secundario.disabled = true; secundario.hidden = true; }
+    avisarSinVoz(contenedor);
   }
 
   function reconocedor() {
@@ -191,12 +269,15 @@
 
       var fila = el("div", "fila-audio");
       var bEsc = el("button", "mini", "Escuchar");
-      bEsc.addEventListener("click", function () {
-        if (!decir(turno.larsito_no)) bEsc.textContent = "Tu navegador no tiene voz noruega";
-        else { b.appendChild(onda()); setTimeout(function () { var o = b.querySelector(".onda"); if (o) o.remove(); }, 2600); }
-      });
       var bLento = el("button", "mini", "Más lento");
-      bLento.addEventListener("click", function () { decir(turno.larsito_no, true); });
+      var quitarOnda = function () { var o = b.querySelector(".onda"); if (o) o.remove(); };
+      bEsc.addEventListener("click", function () {
+        if (!hablar(turno.larsito_no, false, quitarOnda)) { apagarEscucha(bEsc, bLento, b); return; }
+        if (!b.querySelector(".onda")) b.appendChild(onda());
+      });
+      bLento.addEventListener("click", function () {
+        if (!hablar(turno.larsito_no, true)) apagarEscucha(bEsc, bLento, b);
+      });
       var bTrad = el("button", "mini", "Ver traducción");
       bTrad.addEventListener("click", function () {
         pes.hidden = !pes.hidden;
@@ -204,6 +285,7 @@
       });
       fila.appendChild(bEsc); fila.appendChild(bLento); fila.appendChild(bTrad);
       b.appendChild(fila);
+      if (!hayVoz()) apagarEscucha(bEsc, bLento, b);
       chat.appendChild(b);
       b.scrollIntoView({ block: "nearest" });
       return b;
@@ -332,9 +414,10 @@
       var oir = el("button", "btn ghost", "Escuchar el modelo");
       oir.addEventListener("click", function () {
         var m = (turno.respuestas_modelo_no || [])[0];
-        if (m) decir(m);
+        if (m && !hablar(m)) apagarEscucha(oir, null, caja);
       });
       caja.appendChild(oir);
+      if (!hayVoz()) apagarEscucha(oir, null, caja);
 
       var seguir = el("button", "btn", i + 1 >= esc.turnos.length ? "Terminar" : "Siguiente");
       seguir.addEventListener("click", function () { i++; mostrarTurno(); });
@@ -369,7 +452,7 @@
     paso.appendChild(botonVolver("Volver", renderInicio));
     paso.appendChild(el("p", "kicker", "Comprensión oral"));
     paso.appendChild(el("h1", null, "Escucha y responde"));
-    paso.appendChild(el("p", "intro", "En la demo el audio lo lee la voz de tu navegador. En el curso son grabaciones preparadas, con el ritmo del examen."));
+    paso.appendChild(el("p", "intro", "En la demo el audio lo lee una voz sintética noruega. En el curso son grabaciones preparadas, con el ritmo del examen."));
 
     (datos.listening || []).forEach(function (ej) {
       paso.appendChild(fichaListening(ej));
@@ -384,14 +467,16 @@
     caja.appendChild(el("p", "meta", ej.nivel + " · " + (ej.tema || "general")));
 
     var reproducir = el("button", "btn ghost", "Escuchar");
+    var lento = el("button", "btn ghost", "Escuchar más despacio");
     reproducir.addEventListener("click", function () {
-      if (!decir(ej.transcript_no)) reproducir.textContent = "Tu navegador no tiene voz noruega";
+      if (!hablar(ej.transcript_no)) apagarEscucha(reproducir, lento, caja);
+    });
+    lento.addEventListener("click", function () {
+      if (!hablar(ej.transcript_no, true)) apagarEscucha(reproducir, lento, caja);
     });
     caja.appendChild(reproducir);
-
-    var lento = el("button", "btn ghost", "Escuchar más despacio");
-    lento.addEventListener("click", function () { decir(ej.transcript_no, true); });
     caja.appendChild(lento);
+    if (!hayVoz()) apagarEscucha(reproducir, lento, caja);
 
     (ej.preguntas || []).forEach(function (q, qi) {
       var pn = el("p", "pregunta-no", q.q_no);
@@ -461,8 +546,12 @@
   function arrancar() {
     // Con el agente abierto, aquí se pediría la sesión a /api/larsito-sesion/.
     // Mientras está cerrado ni se llama: la demo se sirve entera desde el JSON.
-    fetch(DEMO, { credentials: "same-origin" })
-      .then(function (r) { if (!r.ok) throw new Error("http " + r.status); return r.json(); })
+    // El ping al TTS de servidor va en paralelo y se espera antes de pintar,
+    // para que los botones de escucha nazcan ya encendidos o apagados.
+    var demoLista = fetch(DEMO, { credentials: "same-origin" })
+      .then(function (r) { if (!r.ok) throw new Error("http " + r.status); return r.json(); });
+    comprobarTtsServidor()
+      .then(function () { return demoLista; })
       .then(function (d) {
         datos = d;
         if (!datos || !Array.isArray(datos.escenarios) || !datos.escenarios.length) throw new Error("vacío");
