@@ -1,5 +1,9 @@
 {
   "trailingSlash": true,
+  "regions": ["arn1"],
+  "functions": {
+    "api/larsito-*.js": { "maxDuration": 60 }
+  },
   "redirects": [
     { "source": "/norsk/app/app.js", "destination": "/pass/app/app.js", "permanent": true },
     { "source": "/norsk/app/", "destination": "/pass/app/", "permanent": true },

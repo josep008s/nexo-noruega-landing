@@ -4,6 +4,13 @@ node_modules/
 
 # NEXO PASS: el banco de preguntas es contenido de pago y el repo es público
 scripts/_norsk_banco/
+
+# Larsito: los guiones de listening son contenido de pago y el repo es público
+scripts/_norsk_larsito/
+
+# Curso Norskprøven B1: el material del curso es contenido de pago y el repo es
+# público. Lo único que sale de aquí al repo es data/norsk-curso-demo.json.
+scripts/_norsk_curso/
 .env.local
 .vercel
 .claude/
