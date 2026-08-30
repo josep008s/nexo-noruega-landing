@@ -48,8 +48,12 @@
   <style>
     :root{
       --noche:#0E1B26; --nieve:#F3F5F4; --aurora:#3FCB94; --fiordo:#2C5A72; --niebla:#8DA1AB;
-      --linea-oscura:rgba(243,245,244,.12);
+      --blanco:#FFFFFF;
+      --tinta-suave:rgba(14,27,38,.72);
       --linea-clara:rgba(14,27,38,.14);
+      --linea-oscura:rgba(243,245,244,.12);
+      --sombra-clara:0 14px 34px rgba(14,27,38,.08);
+      --alerta:#8F5A0F;
       --sg:"Space Grotesk",system-ui,sans-serif;
       --serif:"Source Serif 4",Georgia,serif;
       --caesar:"Caesar Dressing",var(--sg);
@@ -57,133 +61,123 @@
       --ancho:860px;
     }
     *{margin:0;padding:0;box-sizing:border-box}
-    html{scroll-behavior:smooth;scrollbar-color:rgba(141,161,171,.4) transparent}
-    body{font-family:var(--serif);background:var(--noche);color:var(--nieve);line-height:1.7;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden}
+    html{scroll-behavior:smooth}
+    body{font-family:var(--serif);background:var(--nieve);color:var(--noche);line-height:1.7;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden}
     ::selection{background:var(--aurora);color:var(--noche)}
-    a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var(--aurora);outline-offset:3px}
+    a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var(--fiordo);outline-offset:3px}
     img,svg{max-width:100%}
 
     body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:80;
       background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
-      opacity:.035;mix-blend-mode:overlay}
+      opacity:.028;mix-blend-mode:multiply}
 
-    .wrap{max-width:var(--ancho);margin:0 auto;padding:0 24px}
-    section{padding:72px 0}
-    .oscuro{background:var(--noche);color:var(--nieve);position:relative}
-    .claro{background:var(--nieve);color:var(--noche);position:relative}
-    .oscuro .wrap,.claro .wrap{position:relative;z-index:1}
+    .wrap{max-width:var(--ancho);margin:0 auto;padding:0 24px;position:relative;z-index:1}
+    section{padding:66px 0;position:relative}
 
     .cielo{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0}
-    .cielo::before{content:"";position:absolute;top:-12%;left:-10%;width:120%;height:70%;
-      background:radial-gradient(50% 60% at 28% 22%,rgba(63,203,148,.12),transparent 70%),
-                 radial-gradient(44% 50% at 78% 10%,rgba(50,124,124,.09),transparent 72%);
+    .cielo::before{content:"";position:absolute;top:-12%;left:-10%;width:120%;height:80%;
+      background:radial-gradient(50% 60% at 28% 22%,rgba(63,203,148,.10),transparent 70%),
+                 radial-gradient(44% 50% at 78% 10%,rgba(44,90,114,.07),transparent 72%);
       animation:deriva 46s ease-in-out infinite alternate}
     @keyframes deriva{from{transform:translate3d(-2%,-1%,0) scale(1.03)}to{transform:translate3d(2%,1.5%,0) scale(1)}}
 
-    header{position:relative;z-index:10;background:var(--noche)}
-    .head-inner{max-width:var(--ancho);margin:0 auto;padding:22px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px}
-    .marca{display:flex;align-items:center;gap:11px;text-decoration:none;color:var(--nieve)}
-    .marca svg{width:28px;height:28px;flex:none}
-    .marca span{font-family:var(--sg);font-weight:700;font-size:.92rem;letter-spacing:.02em}
-    .head-cta{font-family:var(--sg);font-weight:500;font-size:.82rem;letter-spacing:.04em;color:var(--aurora);text-decoration:none}
-    .head-cta:hover{color:var(--nieve)}
+    /* ===== Cabecera unificada ===== */
+    header{position:sticky;top:0;z-index:60;background:rgba(243,245,244,.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--linea-clara)}
+    .head-inner{max-width:var(--ancho);margin:0 auto;padding:16px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .marca{display:flex;align-items:center;gap:11px;text-decoration:none;color:var(--noche)}
+    .marca svg{width:26px;height:26px;flex:none}
+    .marca span{font-family:var(--sg);font-weight:500;font-size:.9rem;letter-spacing:.02em}
+    .marca b{font-weight:700}
+    .head-nav{display:flex;gap:20px}
+    .head-nav a{font-family:var(--sg);font-weight:500;font-size:.84rem;color:var(--fiordo);text-decoration:none;transition:color .2s}
+    .head-nav a:hover{color:var(--noche)}
+    .head-nav a[aria-current="page"]{color:var(--noche);font-weight:700}
 
-    .kicker{font-family:var(--sg);font-weight:700;font-size:.78rem;letter-spacing:.22em;text-transform:uppercase;margin-bottom:22px}
-    .oscuro .kicker{color:var(--aurora)}
-    .claro .kicker{color:var(--fiordo)}
+    .kicker{font-family:var(--sg);font-weight:700;font-size:.78rem;letter-spacing:.22em;text-transform:uppercase;margin-bottom:20px;color:var(--fiordo)}
     .caesar{font-family:var(--caesar);font-weight:400;text-transform:uppercase;letter-spacing:.1em}
 
-    h1,h2{font-family:var(--sg);font-weight:700;letter-spacing:-.02em;line-height:1.12}
-    h1{font-size:clamp(2.2rem,5.6vw,3.6rem);max-width:18ch;margin-bottom:22px}
-    h2{font-size:clamp(1.7rem,3.6vw,2.4rem);margin-bottom:28px;max-width:24ch}
-    .sub{font-size:1.18rem;color:var(--niebla);max-width:52ch;margin-bottom:34px}
-    .claro p{color:var(--fiordo)}
-    .claro .parrafo{font-size:1.13rem;max-width:60ch;margin-bottom:18px}
+    h1,h2{font-family:var(--sg);font-weight:700;letter-spacing:-.02em;line-height:1.12;color:var(--noche)}
+    h1{font-size:clamp(2.2rem,5.6vw,3.5rem);max-width:18ch;margin-bottom:20px}
+    h2{font-size:clamp(1.7rem,3.6vw,2.3rem);margin-bottom:24px;max-width:24ch}
+    .sub{font-size:1.16rem;color:var(--tinta-suave);max-width:54ch;margin-bottom:30px}
+    p{color:var(--tinta-suave)}
+    .parrafo{font-size:1.1rem;max-width:60ch;margin-bottom:18px}
 
     mark.marcado{color:inherit;background-color:transparent;
-      background-image:linear-gradient(180deg,rgba(63,203,148,.30),rgba(63,203,148,.22));
+      background-image:linear-gradient(180deg,rgba(63,203,148,.42),rgba(63,203,148,.30));
       background-repeat:no-repeat;background-size:100% 100%;
       border-radius:.25em .4em .3em .35em / .4em .25em .35em .3em;
       padding:.06em .16em;margin:0 -.06em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
     .js .reveal mark.marcado{background-size:0% 100%;transition:background-size .7s var(--ease);transition-delay:calc(var(--d,0s) + .55s)}
     .js .reveal.visible mark.marcado{background-size:100% 100%}
 
-    .cta{display:inline-block;font-family:var(--sg);font-weight:700;font-size:1rem;letter-spacing:.01em;color:var(--noche);
+    .cta{display:inline-block;font-family:var(--sg);font-weight:700;font-size:1rem;color:var(--noche);
       background:var(--aurora);border:none;text-decoration:none;text-align:center;padding:16px 34px;border-radius:4px;cursor:pointer;
       transition:transform .2s var(--ease),box-shadow .25s,filter .18s}
-    .cta:hover{transform:translateY(-2px);filter:brightness(1.06);box-shadow:0 8px 32px rgba(63,203,148,.35)}
-    .cta.ghost{background:none;border:1px solid rgba(141,161,171,.55);color:inherit}
-    .cta.ghost:hover{box-shadow:none;border-color:var(--aurora)}
-    .microcopy{font-family:var(--sg);font-weight:500;font-size:.8rem;letter-spacing:.06em;color:var(--niebla);margin-top:14px}
+    .cta:hover{transform:translateY(-2px);filter:brightness(1.05);box-shadow:0 8px 26px rgba(63,203,148,.4)}
+    .cta.ghost{background:none;border:1px solid var(--linea-clara);color:var(--noche)}
+    .cta.ghost:hover{box-shadow:none;border-color:var(--fiordo)}
+    .microcopy{font-family:var(--sg);font-weight:500;font-size:.8rem;letter-spacing:.05em;color:var(--fiordo);margin-top:14px}
 
-    .fuente{font-family:var(--sg);font-weight:500;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--niebla);
-      margin-top:34px;padding-top:18px;border-top:1px solid var(--linea-oscura);display:inline-block}
-    .claro .fuente{border-top-color:var(--linea-clara);color:var(--fiordo)}
+    .fuente{font-family:var(--sg);font-weight:500;font-size:.76rem;letter-spacing:.13em;text-transform:uppercase;color:var(--fiordo);
+      margin-top:30px;padding-top:16px;border-top:1px solid var(--linea-clara);display:inline-block}
+    .fuente a{color:inherit}
 
-    /* ===== Hero: mini-demo ===== */
-    .hero{padding-top:52px;padding-bottom:72px}
-    .demo-card{margin-top:32px;max-width:560px;background:rgba(243,245,244,.03);border:1px solid var(--linea-oscura);border-radius:14px;padding:20px}
-    .demo-card .etiqueta{font-family:var(--sg);font-weight:700;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--aurora);margin-bottom:14px}
-    .demo-card .q-no{font-family:var(--sg);font-weight:700;font-size:1.15rem;margin-bottom:4px}
-    .demo-card .q-es{color:var(--niebla);font-size:.98rem;font-style:italic;margin-bottom:16px}
-    .demo-card .ops{display:grid;gap:8px}
-    .demo-card .op{font-family:var(--serif);font-size:1rem;color:var(--nieve);border:1px solid rgba(141,161,171,.4);border-radius:8px;padding:10px 14px;background:none;text-align:left;cursor:pointer;transition:border-color .2s,background .2s}
-    .demo-card .op:hover{border-color:var(--aurora);background:rgba(63,203,148,.08)}
+    /* ===== Hero ===== */
+    .hero{padding-top:56px;padding-bottom:56px}
+    .dato-hero{display:flex;align-items:baseline;gap:16px;border-top:1px solid var(--linea-clara);border-bottom:1px solid var(--linea-clara);padding:18px 0;margin-top:34px;max-width:62ch}
+    .dato-hero strong{font-family:var(--caesar);font-size:2.7rem;line-height:1;color:var(--fiordo);font-weight:400;white-space:nowrap}
+    .dato-hero p{font-size:.98rem}
+    .dato-hero .marca-fuente{font-family:var(--sg);font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--fiordo)}
 
-    /* ===== Comparativa de pruebas ===== */
+    /* ===== Las dos pruebas ===== */
     .examenes{display:grid;gap:14px;margin-top:22px}
     @media (min-width:721px){.examenes{grid-template-columns:repeat(2,1fr)}.examen .uso{min-height:4.7em}}
-    .examen{border:1px solid var(--linea-clara);border-radius:12px;padding:20px;background:#fff}
+    .examen{border:1px solid var(--linea-clara);border-radius:12px;padding:20px;background:var(--blanco);box-shadow:var(--sombra-clara)}
     .examen h3{font-family:var(--sg);font-size:1.05rem;line-height:1.25;margin-bottom:10px;color:var(--noche);overflow-wrap:anywhere}
-    .examen .uso{font-size:.98rem;line-height:1.55;color:var(--fiordo)}
+    .examen .uso{font-size:.98rem;line-height:1.55}
     .examen .meta{font-family:var(--sg);font-size:.82rem;line-height:1.55;color:var(--fiordo);border-top:1px solid var(--linea-clara);padding-top:12px;margin-top:14px}
     .examen .meta b{color:var(--noche)}
-    .pasaporte{background:var(--noche);color:var(--nieve);border-radius:14px;padding:22px;margin-top:24px;max-width:70ch;box-shadow:0 14px 34px rgba(14,27,38,.12)}
-    .pasaporte .etiqueta{font-family:var(--sg);font-weight:700;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--aurora);margin-bottom:12px}
-    .pasaporte h3{font-family:var(--sg);font-size:clamp(1.25rem,2.5vw,1.55rem);line-height:1.22;max-width:34ch;margin-bottom:10px}
-    .pasaporte p{color:var(--niebla);font-size:1rem;margin-bottom:12px}
-    .pasaporte .ruta{color:var(--nieve)}
-    .pasaporte a{font-family:var(--sg);font-weight:700;color:var(--aurora);text-underline-offset:3px}
+    .nota-ruta{background:var(--blanco);border:1px solid var(--linea-clara);border-left:3px solid var(--aurora);border-radius:10px;padding:18px 20px;margin-top:22px;max-width:70ch}
+    .nota-ruta p{font-size:1rem;margin-bottom:8px}
+    .nota-ruta a{font-family:var(--sg);font-weight:700;color:var(--fiordo);text-underline-offset:3px}
 
-    /* ===== Qué incluye ===== */
+    /* ===== Qué recibes ===== */
     .piezas{display:grid;gap:22px;margin-top:8px}
     @media (min-width:721px){.piezas{grid-template-columns:repeat(3,1fr)}}
-    .pieza .titulo{font-family:var(--sg);font-weight:700;font-size:1.15rem;position:relative;padding-top:14px;margin-bottom:10px}
+    .pieza .titulo{font-family:var(--sg);font-weight:700;font-size:1.14rem;color:var(--noche);position:relative;padding-top:14px;margin-bottom:10px}
     .pieza .titulo::before{content:"";position:absolute;top:0;left:0;width:22px;height:3px;background:var(--aurora);transform-origin:left;transition:transform .5s var(--ease)}
     .js .pieza:not(.visible) .titulo::before{transform:scaleX(0)}
     .pieza:hover .titulo::before{transform:scaleX(1.55)}
     .pieza p{font-size:1rem}
-    .dato-compacto{display:flex;align-items:baseline;gap:14px;border-top:1px solid var(--linea-clara);border-bottom:1px solid var(--linea-clara);padding:18px 0;margin-top:26px}
-    .dato-compacto strong{font-family:var(--caesar);font-size:2.7rem;line-height:1;color:var(--fiordo);font-weight:400;white-space:nowrap}
-    .dato-compacto p{font-size:.98rem;color:var(--fiordo)}
-    .leccion-cero{display:flex;align-items:center;justify-content:space-between;gap:22px;background:rgba(63,203,148,.10);border:1px solid rgba(63,203,148,.42);border-radius:14px;padding:20px;margin-top:24px}
+    .leccion-cero{display:flex;align-items:center;justify-content:space-between;gap:22px;background:rgba(63,203,148,.12);border:1px solid rgba(63,203,148,.45);border-radius:14px;padding:20px;margin-top:26px}
     .leccion-cero h3{font-family:var(--sg);font-size:1.05rem;margin-bottom:4px;color:var(--noche)}
-    .leccion-cero p{font-size:.98rem;color:var(--fiordo)}
+    .leccion-cero p{font-size:.98rem}
     .leccion-cero .cta{flex:none;padding:13px 22px}
 
-    .banda{padding:60px 0;border-top:1px solid var(--linea-clara)}
+    .banda{border-top:1px solid var(--linea-clara)}
 
     /* ===== Precios ===== */
     .nota-planes{font-size:1.05rem;max-width:62ch;margin-bottom:22px}
     .planes{display:grid;gap:14px;margin-bottom:20px}
     @media (min-width:721px){.planes{grid-template-columns:repeat(3,1fr)}}
-    .plan{border:1px solid var(--linea-clara);border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:4px;background:#fff}
-    .plan.reco{border-color:var(--aurora);box-shadow:0 0 0 1px rgba(63,203,148,.35),0 12px 32px rgba(14,27,38,.08)}
+    .plan{border:1px solid var(--linea-clara);border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:4px;background:var(--blanco)}
+    .plan.reco{border-color:var(--aurora);box-shadow:0 0 0 1px rgba(63,203,148,.35),var(--sombra-clara)}
     .plan .badge{font-family:var(--sg);font-weight:700;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--fiordo);min-height:1em}
-    .plan.reco .badge{color:var(--aurora)}
-    .plan .nombre{font-family:var(--sg);font-weight:700;font-size:1.2rem}
-    .plan .precio{font-family:var(--sg);font-weight:700;font-size:2.2rem;letter-spacing:-.02em}
+    .plan .nombre{font-family:var(--sg);font-weight:700;font-size:1.2rem;color:var(--noche)}
+    .plan .precio{font-family:var(--sg);font-weight:700;font-size:2.2rem;letter-spacing:-.02em;color:var(--noche)}
     .plan .precio small{font-size:1rem;font-weight:500;color:var(--fiordo)}
     .plan .dias{color:var(--fiordo);font-size:.98rem}
-    .plan .lema{color:var(--fiordo);font-size:.92rem;font-style:italic;min-height:2.8em}
+    .plan .lema{color:var(--tinta-suave);font-size:.92rem;font-style:italic;min-height:2.8em}
     .plan button{margin-top:10px}
     .plan .pronto{font-family:var(--sg);font-weight:700;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--fiordo);border:1px dashed rgba(44,90,114,.5);border-radius:6px;text-align:center;padding:12px;margin-top:10px}
-    .espera{background:rgba(63,203,148,.10);border:1px solid rgba(63,203,148,.45);border-radius:14px;padding:20px;margin:4px 0 20px;max-width:70ch}
+    .espera{background:rgba(63,203,148,.12);border:1px solid rgba(63,203,148,.45);border-radius:14px;padding:20px;margin:4px 0 20px;max-width:70ch}
     .espera p{font-size:1rem;color:var(--noche);margin-bottom:12px}
     .ancla{font-size:.98rem;max-width:62ch}
-    .garantia{background:rgba(44,90,114,.06);border:1px solid var(--linea-clara);border-radius:14px;padding:20px;margin-top:20px;max-width:70ch}
+    .garantia{background:var(--blanco);border:1px solid var(--linea-clara);border-radius:14px;padding:20px;margin-top:20px;max-width:70ch}
     .garantia h3{font-family:var(--sg);font-weight:700;font-size:1.05rem;margin-bottom:10px;color:var(--noche)}
     .garantia .letra{font-size:.95rem}
+    .garantia a{color:var(--fiordo)}
 
     .faq{margin-top:28px;max-width:70ch}
     .faq h3{font-family:var(--sg);font-weight:700;font-size:1.05rem;margin-bottom:14px;color:var(--noche)}
@@ -195,27 +189,36 @@
     details[open] summary::after{content:"–"}
     details p{margin-top:10px;font-size:1.02rem;max-width:62ch}
 
-    /* ===== Cierre ===== */
-    .cierre h2{max-width:26ch}
-    .cierre{padding:68px 0}
-    .cierre .sub{margin-bottom:26px}
+    /* ===== Cruce a NORSK ===== */
+    .cruce{background:var(--noche);color:var(--nieve);border-radius:16px;padding:26px;margin-top:30px;max-width:70ch}
+    .cruce .etiqueta{font-family:var(--sg);font-weight:700;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--aurora);margin-bottom:12px}
+    .cruce h3{font-family:var(--sg);font-size:clamp(1.2rem,2.4vw,1.5rem);line-height:1.24;max-width:32ch;margin-bottom:10px;color:var(--nieve)}
+    .cruce p{color:var(--niebla);font-size:1rem;margin-bottom:14px}
+    .cruce a.enlace{font-family:var(--sg);font-weight:700;color:var(--aurora);text-underline-offset:3px}
 
-    footer{background:var(--noche);border-top:1px solid var(--linea-oscura);padding:34px 0}
+    /* ===== Cierre ===== */
+    .cierre{padding:62px 0}
+    .cierre h2{max-width:26ch}
+
+    footer{border-top:1px solid var(--linea-clara);padding:32px 0;background:var(--nieve)}
     .foot-inner{max-width:var(--ancho);margin:0 auto;padding:0 24px;display:flex;flex-wrap:wrap;gap:18px;align-items:center;justify-content:space-between}
-    .foot-inner p{font-family:var(--sg);font-size:.78rem;color:var(--niebla)}
-    .footer-links{display:flex;gap:22px}
-    .footer-links a{font-family:var(--sg);font-size:.82rem;color:var(--niebla);text-decoration:none;background-image:linear-gradient(currentColor,currentColor);background-size:0% 1px;background-repeat:no-repeat;background-position:left bottom;transition:background-size .25s ease,color .2s ease}
-    .footer-links a:hover{background-size:100% 1px;color:var(--nieve)}
+    .foot-inner p{font-family:var(--sg);font-size:.78rem;color:var(--fiordo)}
+    .footer-links{display:flex;flex-wrap:wrap;gap:20px}
+    .footer-links a{font-family:var(--sg);font-size:.82rem;color:var(--fiordo);text-decoration:none;background-image:linear-gradient(currentColor,currentColor);background-size:0% 1px;background-repeat:no-repeat;background-position:left bottom;transition:background-size .25s ease,color .2s ease}
+    .footer-links a:hover{background-size:100% 1px;color:var(--noche)}
 
     .reveal{transition:opacity .8s var(--ease),transform .8s var(--ease);transition-delay:var(--d,0s)}
     .js .reveal{opacity:0;transform:translateY(20px)}
     .js .reveal.visible{opacity:1;transform:none}
 
     @media (max-width:640px){
-      section{padding:58px 0}
-      .hero{padding-top:42px;padding-bottom:58px}
+      section{padding:52px 0}
+      .hero{padding-top:38px;padding-bottom:48px}
+      .head-nav{gap:14px}
+      .head-nav a{font-size:.78rem}
+      .marca span{font-size:.82rem}
       .leccion-cero{align-items:flex-start;flex-direction:column}
-      .dato-compacto{align-items:flex-start;flex-direction:column;gap:6px}
+      .dato-hero{align-items:flex-start;flex-direction:column;gap:6px}
     }
     @media (prefers-reduced-motion:reduce){
       html{scroll-behavior:auto}
@@ -224,6 +227,7 @@
       .js .reveal mark.marcado{background-size:100% 100%;transition:none}
       .cta:hover{transform:none}
     }
+    @media (max-width:640px){.head-nav a{padding:11px 0}.footer-links a{padding:9px 0}}
   </style>
 </head>
 <body>
@@ -231,18 +235,22 @@
     <div class="head-inner">
       <a class="marca" href="https://www.nexonoruega.com" aria-label="Nexo Noruega, inicio">
         <svg viewBox="0 0 800 800" aria-hidden="true">
-          <path d="M223 532 L223 298 L320 402 L320 265" fill="none" stroke="#3FCB94" stroke-opacity=".45" stroke-width="34" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M478 532 L478 264 L577 398 L577 532" fill="none" stroke="#3FCB94" stroke-width="34" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M223 532 L223 298 L320 402 L320 265" fill="none" stroke="#2C5A72" stroke-opacity=".45" stroke-width="34" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M478 532 L478 264 L577 398 L577 532" fill="none" stroke="#2C5A72" stroke-width="34" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
-        <span>Nexo Noruega</span>
+        <span>NEXO <b>PASS</b></span>
       </a>
-      <a class="head-cta" href="/pass/app/">Entrar</a>
+      <nav class="head-nav" aria-label="Secciones">
+        <a href="/norsk/">Noruego</a>
+        <a href="/pass/" aria-current="page">Exámenes</a>
+        <a href="/pass/app/">Entrar</a>
+      </nav>
     </div>
   </header>
 
   <main>
     <!-- S1 · HERO -->
-    <section class="oscuro hero">
+    <section class="hero">
       <div class="cielo" aria-hidden="true"></div>
       <div class="wrap">
         <p class="kicker caesar reveal">Nexo Pass</p>
@@ -253,21 +261,15 @@
           <p class="microcopy">Sin registro ni tarjeta. 12 preguntas con explicación.</p>
         </div>
 
-        <div class="demo-card reveal" style="--d:.34s">
-          <p class="etiqueta">Una pregunta, en los dos idiomas</p>
-          <p class="q-no" lang="nb">Når kan utenlandske statsborgere stemme ved kommunevalg?</p>
-          <p class="q-es">¿Cuándo pueden votar los extranjeros en las elecciones municipales?</p>
-          <div class="ops" role="group" aria-label="Opciones de ejemplo">
-            <a class="op" href="/pass/app/">Når de har vært folkeregistrert i Norge de tre siste årene</a>
-            <a class="op" href="/pass/app/">Når de har fått norsk statsborgerskap</a>
-            <a class="op" href="/pass/app/">Når de har bodd i Norge i ett år</a>
-          </div>
+        <div class="dato-hero reveal" style="--d:.32s">
+          <strong>92,4%</strong>
+          <p>aprobó la statsborgerprøven en 2025. Prepararte cuesta menos que repetir una tasa municipal. <span class="marca-fuente">HK-dir / NTB</span></p>
         </div>
       </div>
     </section>
 
     <!-- S2 · ELEGIR EXAMEN -->
-    <section class="claro" id="que-examen">
+    <section class="banda" id="que-examen">
       <div class="wrap">
         <p class="kicker reveal">Las dos pruebas</p>
         <h2 class="reveal" style="--d:.08s">El mismo temario. Dos formatos.</h2>
@@ -276,28 +278,26 @@
         <div class="examenes">
           <article class="examen reveal" style="--d:.2s">
             <h3>Samfunnskunnskapsprøven</h3>
-            <p class="uso">Residencia permanente por la vía general (disponible en 23 idiomas).</p>
+            <p class="uso">Residencia permanente por la vía general. Disponible en 23 idiomas.</p>
             <p class="meta"><b>38 preguntas</b> · puntúan 34 · apruebas con 26 · 60 minutos</p>
           </article>
           <article class="examen reveal" style="--d:.24s">
             <h3>Statsborgerprøven</h3>
-            <p class="uso">Ciudadanía noruega.</p>
+            <p class="uso">Ciudadanía noruega. Solo en noruego.</p>
             <p class="meta"><b>36 preguntas</b> · puntúan 32 · apruebas con 24 · 60 minutos</p>
           </article>
         </div>
 
-        <div class="pasaporte reveal" style="--d:.3s">
-          <p class="etiqueta">Si tu objetivo es la ciudadanía</p>
-          <h3>La prueba de conocimientos es solo uno de los requisitos.</h3>
-          <p>Entre 18 y 67 años, la regla general exige acreditar noruego oral B1 y aprobar la statsborgerprøven o la samfunnskunnskapsprøven en noruego. UDI recoge casos concretos en los que basta A2 y otras exenciones, y comprueba aparte el resto de requisitos de ciudadanía. Cuando te concedan la ciudadanía, podrás solicitar el pasaporte noruego.</p>
-          <p class="ruta"><a href="/pass/requisitos-ciudadania-noruega/">Ver requisitos, plazos y excepciones</a></p>
+        <div class="nota-ruta reveal" style="--d:.3s">
+          <p>Si vas a por la ciudadanía, esta prueba es solo uno de los requisitos. La regla general pide además acreditar noruego oral B1, y UDI tasa las excepciones.</p>
+          <p><a href="/pass/requisitos-ciudadania-noruega/">Ver requisitos, plazos y excepciones</a></p>
         </div>
         <p class="fuente reveal" style="--d:.36s"><a href="https://prove.hkdir.no/samfunnskunnskapsprove/les-om-proven-samfunnskunnskap">HK-dir</a>, <a href="https://www.udi.no/en/word-definitions/test-requirements-norwegian-citizenship/">UDI</a> y <a href="https://www.politiet.no/tjenester/pass-og-id-kort/huskeliste-dette-ma-du-ha-med-til-pass-og-id-kontoret/">Politiet</a> · Verificado en agosto de 2026</p>
       </div>
     </section>
 
     <!-- S3 · PRODUCTO -->
-    <section class="claro banda">
+    <section class="banda">
       <div class="wrap">
         <p class="kicker reveal">Qué recibes</p>
         <h2 class="reveal" style="--d:.08s">Curso, preguntas y simulacros. Nada más.</h2>
@@ -316,11 +316,6 @@
           </div>
         </div>
 
-        <div class="dato-compacto reveal" style="--d:.34s">
-          <strong>92,4%</strong>
-          <p>aprobó la statsborgerprøven en 2025. Prepararte cuesta menos que repetir una tasa municipal. <span class="fuente" style="margin:0 0 0 8px;padding:0;border:0">HK-dir / NTB</span></p>
-        </div>
-
         <div class="leccion-cero reveal" style="--d:.38s">
           <div>
             <h3>Lección 0 · Gratis</h3>
@@ -332,7 +327,7 @@
     </section>
 
     <!-- S4 · PRECIOS -->
-    <section class="claro banda" id="precios">
+    <section class="banda" id="precios">
       <div class="wrap">
         <p class="kicker reveal">Precios</p>
         <h2 class="reveal" style="--d:.08s">El mismo curso. Tú eliges los días.</h2>
@@ -392,11 +387,18 @@
             <p>Solo los días de acceso: 3, 30 o 90. El contenido y los simulacros son los mismos.</p>
           </details>
         </div>
+
+        <div class="cruce reveal" style="--d:.5s">
+          <p class="etiqueta">La otra mitad del requisito</p>
+          <h3>Esta prueba no mide tu noruego.</h3>
+          <p>Para la ciudadanía también tienes que acreditar noruego oral. Esa es la Norskprøven, y se prepara aparte.</p>
+          <p><a class="enlace" href="/norsk/">Ver NEXO NORSK</a></p>
+        </div>
       </div>
     </section>
 
     <!-- S5 · CIERRE -->
-    <section class="oscuro cierre">
+    <section class="cierre banda">
       <div class="cielo" aria-hidden="true"></div>
       <div class="wrap">
         <h2 class="reveal">Primero elige el examen. Después, llega habiéndolo hecho antes.</h2>
@@ -410,9 +412,10 @@
 
   <footer>
     <div class="foot-inner">
-      <p>NEXO PASS es un producto de Nexo Noruega. No estamos afiliados a HK-dir ni a UDI.</p>
+      <p>Nexo Noruega no está afiliado a HK-dir, a UDI ni a ningún organismo oficial noruego.</p>
       <nav class="footer-links" aria-label="Enlaces">
         <a href="https://www.nexonoruega.com">Inicio</a>
+        <a href="/norsk/">Noruego</a>
         <a href="/pass/que-examen-necesitas/">Guías</a>
         <a href="/pass/condiciones/">Condiciones</a>
         <a href="/pass/privacidad/">Privacidad</a>
