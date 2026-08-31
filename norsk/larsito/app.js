@@ -28,10 +28,11 @@
       var e = raw ? JSON.parse(raw) : null;
       if (!e || typeof e !== "object") throw new Error("vacío");
       if (!e.hechos) e.hechos = {};
+      if (!e.sinPistas) e.sinPistas = {};
       if (!e.aciertos) e.aciertos = {};
       return e;
     } catch (err) {
-      return { hechos: {}, aciertos: {} };
+      return { hechos: {}, sinPistas: {}, aciertos: {} };
     }
   }
 
@@ -108,7 +109,12 @@
       u.lang = "nb-NO";
       u.rate = lento ? 0.72 : 0.95;
       u.voice = vozNo;
-      if (alDone) { u.onend = alDone; u.onerror = alDone; }
+      var cerrar = function () {
+        if (sonando && sonando.u === u) sonando = null;
+        if (alDone) alDone();
+      };
+      u.onend = cerrar; u.onerror = cerrar;
+      sonando = { texto: texto, lento: !!lento, alDone: alDone, u: u, audio: null };
       window.speechSynthesis.speak(u);
       return true;
     } catch (err) { return false; }
@@ -131,26 +137,81 @@
 
   function hayVoz() { return ttsServidor === true || !!vozNo; }
 
+  // ---------- Un solo audio a la vez ----------
+  // Aquí vivía el eco: cada pulsación creaba un Audio nuevo sin parar el
+  // anterior. Ahora hay un único hueco de reproducción: antes de sonar nada se
+  // para lo que hubiera, y pulsar lo que ya suena lo detiene en vez de doblarlo.
+
+  var sonando = null; // { texto, lento, alDone, audio | u }
+
+  function pararAudio() {
+    var s = sonando;
+    sonando = null;
+    try { window.speechSynthesis.cancel(); } catch (err) {}
+    if (s && s.audio) {
+      try { s.audio.onended = null; s.audio.onerror = null; s.audio.pause(); } catch (err) {}
+    }
+    if (s && s.alDone) s.alDone();
+  }
+
+  // Cache de audios ya pedidos al servidor: la misma frase no se descarga dos
+  // veces en una sesión, y la precarga deja listo el turno antes del clic.
+  var cacheAudio = {};
+  var cacheOrden = [];
+  function claveAudio(texto, lento) { return (lento ? "L|" : "N|") + texto; }
+  function urlTts(texto, lento) {
+    // v=2 salta la caché de la CDN anterior al cambio de voz.
+    return "/api/larsito-tts/?texto=" + encodeURIComponent(texto) + "&velocidad=" + (lento ? "0.8" : "1") + "&v=2";
+  }
+  function pedirAudio(texto, lento) {
+    var clave = claveAudio(texto, lento);
+    if (cacheAudio[clave]) return cacheAudio[clave];
+    var promesa = fetch(urlTts(texto, lento), { credentials: "same-origin" })
+      .then(function (r) {
+        if (!r.ok || (r.headers.get("content-type") || "").indexOf("audio") === -1) throw new Error("sin audio");
+        return r.blob();
+      })
+      .then(function (b) { return URL.createObjectURL(b); })
+      .catch(function (err) { delete cacheAudio[clave]; throw err; });
+    cacheAudio[clave] = promesa;
+    cacheOrden.push(clave);
+    if (cacheOrden.length > 24) {
+      var fuera = cacheOrden.shift();
+      var vieja = cacheAudio[fuera];
+      delete cacheAudio[fuera];
+      if (vieja) vieja.then(function (u) { URL.revokeObjectURL(u); }).catch(function () {});
+    }
+    return promesa;
+  }
+  function precargar(texto) {
+    if (ttsServidor === true && texto) pedirAudio(texto, false).catch(function () {});
+  }
+
   // Capa única de escucha: primero el servidor si está encendido, después la voz
-  // noruega del navegador, y si no hay ninguna de las dos devuelve false y quien
-  // llama apaga el botón. alDone (opcional) se dispara al terminar el audio.
+  // noruega del navegador. Devuelve false sin voz alguna (quien llama apaga el
+  // botón) y "parado" cuando la pulsación detiene lo que ya sonaba (toggle).
   function hablar(texto, lento, alDone) {
+    if (sonando && sonando.texto === texto && sonando.lento === !!lento) {
+      pararAudio();
+      return "parado";
+    }
+    pararAudio();
     if (ttsServidor === true) {
-      var vel = lento ? "0.8" : "1";
-      fetch("/api/larsito-tts/?texto=" + encodeURIComponent(texto) + "&velocidad=" + vel, { credentials: "same-origin" })
-        .then(function (r) {
-          if (!r.ok || (r.headers.get("content-type") || "").indexOf("audio") === -1) throw new Error("sin audio");
-          return r.blob();
-        })
-        .then(function (b) {
-          var url = URL.createObjectURL(b);
+      var mio = { texto: texto, lento: !!lento, alDone: alDone, audio: null };
+      sonando = mio;
+      pedirAudio(texto, lento)
+        .then(function (url) {
+          if (sonando !== mio) return; // se paró o sonó otra cosa mientras cargaba
           var a = new Audio(url);
-          a.onended = function () { URL.revokeObjectURL(url); if (alDone) alDone(); };
-          a.onerror = function () { URL.revokeObjectURL(url); if (alDone) alDone(); };
+          mio.audio = a;
+          a.onended = function () { if (sonando === mio) { sonando = null; if (alDone) alDone(); } };
+          a.onerror = a.onended;
           return a.play();
         })
         .catch(function () {
           // El servidor ha fallado con esta frase: se cae a la voz local noruega.
+          if (sonando !== mio) return;
+          sonando = null;
           if (!decir(texto, lento, alDone) && alDone) alDone();
         });
       return true;
@@ -212,7 +273,9 @@
         esc.modo === "eksamen" ? "Simulacro del examen · " + esc.nivel : "Situación real · " + esc.nivel);
       b.appendChild(tag);
       if (estado.hechos[esc.id]) {
-        var hecho = el("span", "m", "Ya lo has hecho. Puedes repetirlo.");
+        var hecho = el("span", "m", estado.sinPistas && estado.sinPistas[esc.id]
+          ? "Hecho, incluso sin pistas. Repetir nunca sobra."
+          : "Ya lo has hecho. El siguiente paso es repetirlo sin pistas.");
         hecho.style.marginTop = "8px";
         b.appendChild(hecho);
       }
@@ -240,7 +303,7 @@
 
   // ---------- Pantalla: conversación guiada ----------
 
-  function renderConversacion(esc) {
+  function renderConversacion(esc, sinPistas) {
     limpiar();
     var paso = el("div", "step");
     paso.appendChild(botonVolver("Volver", renderInicio));
@@ -270,13 +333,20 @@
       var fila = el("div", "fila-audio");
       var bEsc = el("button", "mini", "Escuchar");
       var bLento = el("button", "mini", "Más lento");
-      var quitarOnda = function () { var o = b.querySelector(".onda"); if (o) o.remove(); };
+      var quitarOnda = function () {
+        var o = b.querySelector(".onda"); if (o) o.remove();
+        bEsc.textContent = "Escuchar";
+      };
+      precargar(turno.larsito_no);
       bEsc.addEventListener("click", function () {
-        if (!hablar(turno.larsito_no, false, quitarOnda)) { apagarEscucha(bEsc, bLento, b); return; }
+        var r = hablar(turno.larsito_no, false, quitarOnda);
+        if (!r) { apagarEscucha(bEsc, bLento, b); return; }
+        if (r === "parado") return; // quitarOnda ya ha restaurado el botón
+        bEsc.textContent = "Parar";
         if (!b.querySelector(".onda")) b.appendChild(onda());
       });
       bLento.addEventListener("click", function () {
-        if (!hablar(turno.larsito_no, true)) apagarEscucha(bEsc, bLento, b);
+        if (!hablar(turno.larsito_no, true, quitarOnda)) apagarEscucha(bEsc, bLento, b);
       });
       var bTrad = el("button", "mini", "Ver traducción");
       bTrad.addEventListener("click", function () {
@@ -311,10 +381,12 @@
       var caja = el("div", "responder");
       var pista = el("div", "pista");
       pista.appendChild(el("b", null, "Te toca"));
-      pista.appendChild(document.createTextNode(turno.pista_es));
+      pista.appendChild(document.createTextNode(sinPistas
+        ? "Sin pistas esta vez. En el examen tampoco las hay."
+        : turno.pista_es));
       caja.appendChild(pista);
 
-      if (turno.bloques_no && turno.bloques_no.length) {
+      if (!sinPistas && turno.bloques_no && turno.bloques_no.length) {
         var bl = el("div", "bloques");
         turno.bloques_no.forEach(function (x) {
           var chip = el("button", "bloque", x);
@@ -325,6 +397,13 @@
             campo.focus();
           });
           bl.appendChild(chip);
+          if (hayVoz()) {
+            var oirChip = el("button", "bloque-oir", "♪");
+            oirChip.setAttribute("aria-label", "Escuchar: " + x);
+            oirChip.title = "Escuchar cómo suena";
+            oirChip.addEventListener("click", function () { hablar(x); });
+            bl.appendChild(oirChip);
+          }
         });
         caja.appendChild(bl);
       }
@@ -412,6 +491,7 @@
       caja.appendChild(t);
 
       var oir = el("button", "btn ghost", "Escuchar el modelo");
+      precargar((turno.respuestas_modelo_no || [])[0]);
       oir.addEventListener("click", function () {
         var m = (turno.respuestas_modelo_no || [])[0];
         if (m && !hablar(m)) apagarEscucha(oir, null, caja);
@@ -428,14 +508,22 @@
 
     function terminar() {
       estado.hechos[esc.id] = true;
+      if (sinPistas) estado.sinPistas[esc.id] = true;
       guardar();
       zona.innerHTML = "";
       var caja = el("div", "responder");
-      caja.appendChild(el("h2", null, "Hecho."));
-      caja.appendChild(el("p", "pista", esc.modo === "eksamen"
-        ? "En el examen real esto dura entre veinte y veinticinco minutos y no hay pistas en español. Por eso conviene repetirlo hasta que salga sin pensar."
-        : "Repite la misma escena mañana sin mirar las pistas. Ahí es donde se gana la fluidez."));
-      var otra = el("button", "btn", "Volver a las situaciones");
+      caja.appendChild(el("h2", null, sinPistas ? "Sin pistas y entero. Eso ya es otra cosa." : "Hecho."));
+      caja.appendChild(el("p", "pista", sinPistas
+        ? "Acabas de hacer la escena como será el día del examen: sin apoyos. Si te has trabado en algún turno, repítelo mañana y compara."
+        : (esc.modo === "eksamen"
+          ? "En el examen real esto dura entre veinte y veinticinco minutos y no hay pistas en español. Por eso conviene repetirlo hasta que salga sin pensar."
+          : "Repite la misma escena mañana sin mirar las pistas. Ahí es donde se gana la fluidez.")));
+      if (!sinPistas) {
+        var sinP = el("button", "btn", "Repítelo sin pistas");
+        sinP.addEventListener("click", function () { renderConversacion(esc, true); });
+        caja.appendChild(sinP);
+      }
+      var otra = el("button", "btn" + (sinPistas ? "" : " ghost"), "Volver a las situaciones");
       otra.addEventListener("click", renderInicio);
       caja.appendChild(otra);
       zona.appendChild(caja);
