@@ -82,7 +82,9 @@ export default async function handler(req, res) {
       },
       body: JSON.stringify({
         model: "gpt-4o-mini-tts",
-        voice: "alloy",
+        // Larsito es un hombre de Trondheim: voz masculina por defecto,
+        // cambiable sin desplegar con la variable LARSITO_TTS_VOZ.
+        voice: process.env.LARSITO_TTS_VOZ || "ash",
         input: texto,
         response_format: "mp3",
         speed: velocidad,
