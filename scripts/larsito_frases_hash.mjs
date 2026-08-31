@@ -1,6 +1,6 @@
 // Regenera api/_larsito_frases.js: la lista blanca de frases de la demo de Larsito
 // que /api/larsito-tts/ sirve sin cookie. Lee data/larsito-demo.json, junta todas
-// las frases noruegas que la demo puede reproducir (larsito_no y respuestas modelo
+// las frases noruegas que la demo puede reproducir (larsito_no, respuestas modelo y bloques sugeridos
 // de cada turno, y el transcript_no de cada ejercicio de escucha), las normaliza
 // igual que el endpoint (trim + espacios colapsados) y escribe el SHA-256 de cada
 // una. Ejecutar cada vez que cambie el JSON de la demo:
@@ -23,6 +23,8 @@ for (const esc of demo.escenarios || []) {
   for (const turno of esc.turnos || []) {
     if (turno.larsito_no) frases.push(turno.larsito_no);
     for (const m of turno.respuestas_modelo_no || []) frases.push(m);
+    // Los bloques sugeridos tambien se pueden escuchar desde su chip.
+    for (const b of turno.bloques_no || []) frases.push(b);
   }
 }
 for (const ej of demo.listening || []) {
