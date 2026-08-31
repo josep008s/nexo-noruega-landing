@@ -1,10 +1,10 @@
 {
  "meta": {
   "producto": "NEXO NORSK · Ruta Norskprøven B1",
-  "actualizado": "2026-08-29",
+  "actualizado": "2026-08-31",
   "aviso": "Material propio de NEXO NORSK, de formato similar al que HK-dir describe en su web. NEXO NORSK es un proyecto independiente y no tiene relación con HK-dir, con UDI ni con ningún centro de examen.",
-  "piezas_totales": 27,
-  "mecanismos_totales": 16
+  "piezas_totales": 28,
+  "mecanismos_totales": 17
  },
  "mecanismo": {
   "codigo": "M01",
@@ -33,7 +33,7 @@
     ]
    },
    "lupa": "PASS_CON_AVISOS",
-   "revision_nativa": "PENDIENTE"
+   "revision_nativa": "RESUELTA_POR_SISTEMA_2026-08-31 (ver RESOLUCION_REVISION_BOKMAL_v1.md)"
   },
   "secciones": [
    {
@@ -69,12 +69,12 @@
    {
     "id": "en-tu-vida",
     "titulo": "6. En tu vida",
-    "html": "<p>El lunes por la mañana esto te cambia cuatro conversaciones.</p>\n<p>En el trabajo, cuando tienes que avisar de algo antes de que sea un problema: <code>I morgen kan jeg ikke ta kveldsvakta.</code> Arrancar por el tiempo pone la información importante donde la otra persona la necesita, al principio.</p>\n<p>En el fastlege, cuando la pregunta es desde cuándo: <code>For tre uker siden begynte smertene.</code> Si empiezas por el sujeto, el dato de tiempo llega al final y la consulta se alarga.</p>\n<p>En la barnehage, cuando escribes por la tarde para dejar constancia: <code>Neste uke begynner hun i den nye avdelingen.</code></p>\n<p>Y con los vecinos, en el borettslag, cuando hay que explicar por qué has hecho algo: <code>Derfor skrev jeg til styret.</code> Ese <code>derfor</code> al principio es la diferencia entre parecer que te quejas y parecer que informas.</p>"
+    "html": "<p>El lunes por la mañana esto te cambia cuatro conversaciones.</p>\n<p>En el trabajo, cuando tienes que avisar de algo antes de que sea un problema: <code>I morgen kan jeg ikke jobbe kveldsvakt.</code> Arrancar por el tiempo pone la información importante donde la otra persona la necesita, al principio.</p>\n<p>En el fastlege, cuando la pregunta es desde cuándo: <code>For tre uker siden begynte smertene.</code> Si empiezas por el sujeto, el dato de tiempo llega al final y la consulta se alarga.</p>\n<p>En la barnehage, cuando escribes por la tarde para dejar constancia: <code>Neste uke begynner hun på den nye avdelingen.</code></p>\n<p>Y con los vecinos, en el borettslag, cuando hay que explicar por qué has hecho algo: <code>Derfor skrev jeg til styret.</code> Ese <code>derfor</code> al principio es la diferencia entre parecer que te quejas y parecer que informas.</p>"
    },
    {
     "id": "bloques-para-llevarte",
     "titulo": "7. Bloques para llevarte",
-    "html": "<p>No son palabras sueltas. Son bloques con el arranque y el verbo ya pegados, para que salgan juntos.</p>\n<table><thead><tr><th>Bloque en noruego</th><th>En castellano</th></tr></thead><tbody><tr><td><code>I fjor begynte jeg ...</code></td><td>El año pasado empecé...</td></tr><tr><td><code>For tre uker siden fikk jeg ...</code></td><td>Hace tres semanas recibí...</td></tr><tr><td><code>I morgen kan jeg ikke ...</code></td><td>Mañana no puedo...</td></tr><tr><td><code>Neste uke skal jeg ...</code></td><td>La semana que viene voy a...</td></tr><tr><td><code>Etter tre år i Norge forstår jeg ...</code></td><td>Después de tres años en Noruega entiendo...</td></tr><tr><td><code>Derfor tok jeg kontakt med ...</code></td><td>Por eso me puse en contacto con...</td></tr><tr><td><code>Derfor skriver jeg til ...</code></td><td>Por eso escribo a...</td></tr><tr><td><code>Dessverre kan jeg ikke ...</code></td><td>Lamentablemente no puedo...</td></tr><tr><td><code>Heldigvis fikk jeg svar.</code></td><td>Por suerte recibí respuesta.</td></tr><tr><td><code>Da jeg kom hit, snakket jeg ikke ...</code></td><td>Cuando llegué aquí, no hablaba...</td></tr><tr><td><code>Etter min mening bør ...</code></td><td>En mi opinión ... debería...</td></tr><tr><td><code>Til slutt ordnet det seg.</code></td><td>Al final se arregló.</td></tr></tbody></table>"
+    "html": "<p>No son palabras sueltas. Son bloques con el arranque y el verbo ya pegados, para que salgan juntos.</p>\n<table><thead><tr><th>Bloque en noruego</th><th>En castellano</th></tr></thead><tbody><tr><td><code>I fjor begynte jeg ...</code></td><td>El año pasado empecé...</td></tr><tr><td><code>For tre uker siden fikk jeg ...</code></td><td>Hace tres semanas recibí...</td></tr><tr><td><code>I morgen kan jeg ikke ...</code></td><td>Mañana no puedo...</td></tr><tr><td><code>Neste uke skal jeg ...</code></td><td>La semana que viene voy a...</td></tr><tr><td><code>Etter tre år i Norge forstår jeg ...</code></td><td>Después de tres años en Noruega entiendo...</td></tr><tr><td><code>Derfor tok jeg kontakt med ...</code></td><td>Por eso me puse en contacto con...</td></tr><tr><td><code>Derfor skriver jeg til ...</code></td><td>Por eso escribo a...</td></tr><tr><td><code>Dessverre kan jeg ikke ...</code></td><td>Lamentablemente no puedo...</td></tr><tr><td><code>Heldigvis fikk jeg svar.</code></td><td>Por suerte recibí respuesta.</td></tr><tr><td><code>Da jeg kom hit, snakket jeg ikke ...</code></td><td>Cuando llegué aquí, no hablaba...</td></tr><tr><td><code>Etter min mening bør ...</code></td><td>En mi opinión ... debería...</td></tr><tr><td><code>Til slutt løste jeg problemet.</code></td><td>Al final resolví el problema.</td></tr></tbody></table>"
    },
    {
     "id": "practica",
@@ -97,7 +97,7 @@
     "html": "<p>Tres señales que se pueden observar desde fuera.</p>\n<p><strong>Una.</strong> Escribes ocho frases seguidas sobre un tema nuevo, cada una con un arranque distinto del sujeto, y no tienes que releer ninguna para colocar el verbo. La comprobación es esa: sin releer.</p>\n<p><strong>Dos.</strong> Hablando, te oyes empezar por <code>Derfor</code>, <code>I fjor</code> o <code>Da jeg kom hit</code> sin haberlo decidido antes. Ha dejado de ser una regla que aplicas y ha pasado a ser un bloque que sale entero.</p>\n<p><strong>Tres.</strong> Distingues la trampa sobre la marcha. Después de <code>men</code> y de <code>og</code> dejas el sujeto delante, y después de <code>derfor</code> y de <code>dessverre</code> lo pasas detrás, sin pararte a pensar en la diferencia.</p>"
    }
   ],
-  "palabras": 3831
+  "palabras": 3832
  },
  "indice": [
   {
@@ -174,6 +174,11 @@
    "codigo": "M16",
    "titulo": "Producción conectada y reparación sin preparación",
    "grieta": "cuando falta una palabra, el turno se acaba, y el silencio se lee como falta de fluidez aunque la gramática esté bien."
+  },
+  {
+   "codigo": "ANEXO-UTTRYKK",
+   "titulo": "Expresiones del banco UTTRYKK por mecanismo",
+   "grieta": null
   }
  ],
  "diagnostico": {
