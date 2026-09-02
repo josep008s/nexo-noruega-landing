@@ -261,8 +261,8 @@ if (exists("sitemap.xml")) {
       derivas++;
     }
     const activa = f.startsWith("norsk/")
-      ? '<a href="/norsk/" aria-current="page">Noruego</a>'
-      : '<a href="/pass/" aria-current="page">Exámenes</a>';
+      ? '<a href="/norsk/" aria-current="page">Norsk</a>'
+      : '<a href="/pass/" aria-current="page">Ciudadanía</a>';
     if (!header.includes(activa)) {
       duro(`${f}: aria-current no identifica la sección activa correcta`);
       derivas++;
@@ -272,7 +272,7 @@ if (exists("sitemap.xml")) {
       derivas++;
     }
   }
-  if (!derivas) ok("entradas Noruego/Exámenes: hero, marcado y navegación activos unificados");
+  if (!derivas) ok("entradas Norsk/Ciudadanía: hero, marcado y navegación activos unificados");
 }
 
 // 5e) Vercel Hobby: cada .js directo de api/ salvo los modulos _*.js cuenta
