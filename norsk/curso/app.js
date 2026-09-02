@@ -29,8 +29,10 @@
     try {
       var e = JSON.parse(localStorage.getItem(CLAVE) || "{}");
       if (!e.hechas) e.hechas = {};
+      if (!e.actuaciones) e.actuaciones = {};
+      if (!e.ultimaSeccion) e.ultimaSeccion = {};
       return e;
-    } catch (err) { return { hechas: {} }; }
+    } catch (err) { return { hechas: {}, actuaciones: {}, ultimaSeccion: {} }; }
   }
   function guardar() {
     try { localStorage.setItem(CLAVE, JSON.stringify(estado)); } catch (err) { /* modo privado */ }
@@ -54,6 +56,7 @@
   var TIPOS = {
     diagnostico: { titulo: "Empieza por aquí", nota: "Mide dónde estás de verdad, destreza por destreza." },
     mecanismo: { titulo: "Los mecanismos", nota: "Los dieciséis saltos que separan el A2 del B1." },
+    anexo: { titulo: "Anexo de apoyo", nota: "Expresiones útiles para activar los mecanismos en situaciones reales." },
     lytt: { titulo: "Comprensión oral", nota: "Escucha con el formato de la prueba." },
     les: { titulo: "Comprensión lectora", nota: "Textos y preguntas como los del examen." },
     skriv: { titulo: "Expresión escrita", nota: "Tareas modelo y cómo se corrige tu texto." },
@@ -61,7 +64,7 @@
     simulacro: { titulo: "Simulacros", nota: "El examen entero, cronometrado." },
     larsito: { titulo: "Larsito", nota: "Conversación y escucha con el compañero de voz." },
   };
-  var ORDEN_TIPOS = ["diagnostico", "mecanismo", "muntlig", "lytt", "les", "skriv", "simulacro"];
+  var ORDEN_TIPOS = ["diagnostico", "mecanismo", "anexo", "muntlig", "lytt", "les", "skriv", "simulacro"];
 
   // ---------- Pantalla: índice del curso ----------
 
@@ -222,11 +225,13 @@
       var u = [].concat(meta.unidades_destino).join(", ");
       if (u) chips.appendChild(el("span", null, "Unidad " + u));
     }
-    if (meta.revision_nativa && String(meta.revision_nativa).toUpperCase() === "PENDIENTE") {
-      var pend = el("span", null, "Pendiente de revisión nativa");
-      pend.style.borderColor = "rgba(143,90,15,.4)";
-      pend.style.color = "var(--alerta)";
-      chips.appendChild(pend);
+    if (meta.qa_lengua || meta.revision_nativa) {
+      var revision = String(meta.qa_lengua || meta.revision_nativa).toUpperCase();
+      if (revision === "SISTEMICA_TECNICA_ACEPTADA" || revision === "PENDIENTE" || revision.indexOf("RESUELTA_POR_SISTEMA") === 0) {
+        var qa = el("span", null, "QA sistémica y técnica aceptada");
+        qa.title = "No equivale a una firma humana o nativa";
+        chips.appendChild(qa);
+      }
     }
     if (chips.children.length) paso.appendChild(chips);
 
@@ -237,7 +242,7 @@
     var secciones = (pieza.secciones || []).filter(function (s) {
       return !/^\s*<pre><code>(MECANISMO|DOCUMENTO|PIEZA):/.test(s.html || "");
     });
-    secciones.forEach(function (s) {
+    function renderSeccion(s) {
       if (s.titulo) {
         var h = el("h2", null, s.titulo);
         lector.appendChild(h);
@@ -247,7 +252,85 @@
       // no lo escribe nadie desde fuera.
       caja.innerHTML = s.html || "";
       lector.appendChild(caja);
-    });
+    }
+
+    var jornadas = secciones.filter(function (s) { return /^jornada-\d+\b/.test(s.id || ""); });
+    if (pieza.codigo === "KIT_ORAL_21_JORNADAS" && jornadas.length === 21) {
+      var noJornadas = secciones.filter(function (s) { return jornadas.indexOf(s) === -1; });
+      var validas = jornadas.map(function (s) { return s.id; });
+      validas.push("__guia__");
+      var actual = estado.ultimaSeccion[pieza.codigo];
+      if (validas.indexOf(actual) === -1) actual = jornadas[0].id;
+
+      var ruta = el("div", "ruta21");
+      ruta.appendChild(el("p", "lab", "Ruta oral · 21 actuaciones"));
+      var hechas21 = jornadas.filter(function (s) { return estado.actuaciones[s.id]; }).length;
+      ruta.appendChild(el("p", "ruta21-progreso", hechas21 + " de 21 actuaciones marcadas"));
+      var selector = document.createElement("select");
+      selector.setAttribute("aria-label", "Elegir actuación o guía de la ruta oral");
+      jornadas.forEach(function (s, i) {
+        var op = document.createElement("option");
+        op.value = s.id;
+        op.textContent = (estado.actuaciones[s.id] ? "✓ " : "") + "Actuación " + (i + 1) + " · " + s.titulo.replace(/^Jornada\s+\d+\s*·?\s*/i, "");
+        selector.appendChild(op);
+      });
+      var guia = document.createElement("option");
+      guia.value = "__guia__";
+      guia.textContent = "Guía, criterios y tablas";
+      selector.appendChild(guia);
+      selector.value = actual;
+      selector.addEventListener("change", function () {
+        estado.ultimaSeccion[pieza.codigo] = selector.value;
+        guardar();
+        renderPieza(pieza);
+      });
+      ruta.appendChild(selector);
+      lector.appendChild(ruta);
+
+      if (actual === "__guia__") {
+        noJornadas.forEach(renderSeccion);
+      } else {
+        var pos = validas.indexOf(actual);
+        var jornada = jornadas[pos];
+        renderSeccion(jornada);
+
+        var control = el("div", "marcar actuacion-control");
+        var hecha = !!estado.actuaciones[jornada.id];
+        control.appendChild(el("p", null, hecha
+          ? "Esta actuación está marcada. El contenido de tu respuesta no se guarda."
+          : "Márcala al terminar los dos intentos y anotar la recuperación."));
+        var completar = el("button", "btn" + (hecha ? " ghost" : ""), hecha ? "Quitar la marca" : "Marcar actuación hecha");
+        completar.addEventListener("click", function () {
+          if (estado.actuaciones[jornada.id]) delete estado.actuaciones[jornada.id];
+          else estado.actuaciones[jornada.id] = true;
+          guardar();
+          renderPieza(pieza);
+        });
+        control.appendChild(completar);
+        lector.appendChild(control);
+
+        var navAct = el("div", "nav-pieza nav-actuacion");
+        var anterior = el("button", "btn ghost", "Actuación anterior");
+        anterior.disabled = pos === 0;
+        anterior.addEventListener("click", function () {
+          estado.ultimaSeccion[pieza.codigo] = jornadas[pos - 1].id;
+          guardar();
+          renderPieza(pieza);
+        });
+        var siguiente = el("button", "btn ghost", pos === jornadas.length - 1 ? "Fin de la ruta" : "Siguiente actuación");
+        siguiente.disabled = pos === jornadas.length - 1;
+        siguiente.addEventListener("click", function () {
+          estado.ultimaSeccion[pieza.codigo] = jornadas[pos + 1].id;
+          guardar();
+          renderPieza(pieza);
+        });
+        navAct.appendChild(anterior);
+        navAct.appendChild(siguiente);
+        lector.appendChild(navAct);
+      }
+    } else {
+      secciones.forEach(renderSeccion);
+    }
     paso.appendChild(lector);
 
     // marcar como leída

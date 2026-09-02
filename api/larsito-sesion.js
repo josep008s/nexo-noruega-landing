@@ -1,49 +1,107 @@
-// Autoriza una sesión de conversación de voz con Larsito (NEXO NORSK).
-// POST  -> { ok:true, agente_id, firma, turnos_restantes }
+// Autoriza y abre una sesión del producto completo de Larsito.
+// POST -> {ok:true, signed_url, turnos_restantes}
 //
-// Contrato:
-//   1. Mientras LARSITO_ON no valga exactamente "true", el endpoint está cerrado y
-//      responde 200 con {ok:false, error:"cerrado"}. Esa comprobación va la primera,
-//      antes que ninguna otra, para que se pueda desplegar sin claves y sin gasto.
-//   2. Con el flag activo exige el mismo muro que el resto de NEXO PASS: cookie de
-//      sesión firmada y compra activa comprobada en servidor, no solo en la cookie.
-//   3. Dos topes distintos. Uno por compra (60 sesiones al día, tabla norsk_uso con
-//      tipo "larsito", separado del tipo "api" para que practicar preguntas no queme
-//      la cuota de conversación ni al revés) y uno global del día para todo el
-//      producto (tabla norsk_uso_global), que es el que protege del gasto agregado
-//      en la API de voz si un día hay una avalancha.
-//   4. La respuesta lleva una firma JWT corta (15 minutos, uso "larsito") que el
-//      cliente presenta para abrir la sesión de voz. La clave de ElevenLabs no sale
-//      de este servidor en ningún caso: aquí solo viaja el identificador del agente.
+// El flag permanece cerrado por defecto. Con el producto abierto, la cookie y la
+// compra se verifican antes de reservar en una sola transaccion la cuota de la
+// compra, la global y el limite de intentos fallidos o pendientes. La firma interna
+// lleva reserva_id y jti: este mismo puente la canjea una sola vez antes de devolver
+// el signed URL de ElevenLabs. La API key nunca sale de este servidor.
 
-import { readSessionCookie, compraActiva, tickUso, sbRpc, jwtSign } from "./_norsk_lib.js";
+import { readSessionCookie, compraActiva, sbRpc, jwtSign } from "./_norsk_lib.js";
+import {
+  consumirFirmaLarsito,
+  registrarFalloFirmaLarsito,
+} from "./_larsito_reservas.js";
 
-// Sesiones de conversación por compra y día. Una sesión larga cuesta más que una
-// pregunta de test, así que el tope es bastante más bajo que el de norsk-preguntas.
 const TOPE_DIARIO = 60;
-
-// Vida de la firma que abre la sesión de voz. Corta a propósito: es un permiso de
-// entrada, no una sesión. Si el usuario tarda, pide otra.
+const TOPE_GLOBAL_DEFECTO = 2000;
+const TOPE_FALLOS_DEFECTO = 6;
 const FIRMA_MINUTOS = 15;
+const PROVEEDOR_TIMEOUT_MS = 10000;
 
-// Reintento con espera corta, igual que en norsk-preguntas: un hipo transitorio de
-// una RPC no debe echar a un comprador legítimo. Devuelve null si las tres tentativas
-// fallan, y quien llama decide (aquí siempre: fail-open, se sirve igualmente).
-async function contarConReintento(etiqueta, fn) {
-  for (let intento = 0; intento < 3; intento++) {
-    try { return await fn(); }
-    catch (e) {
-      if (intento === 2) { console.error(`larsito-sesion ${etiqueta} (fail-open)`, e); return null; }
-      await new Promise((r) => setTimeout(r, 200));
+// Este endpoint es el consumidor real: verifica y canjea la firma antes de
+// entregar al navegador el permiso temporal que emite ElevenLabs.
+const CONSUMIDOR_INTEGRADO = true;
+
+function enteroPositivo(raw, defecto, maximo) {
+  const n = Number.parseInt(raw || "", 10);
+  if (!Number.isSafeInteger(n) || n < 1 || n > maximo) return defecto;
+  return n;
+}
+
+function primeraFila(valor) {
+  if (Array.isArray(valor)) return valor[0] || null;
+  return valor && typeof valor === "object" ? valor : null;
+}
+
+export function crearFirmaLarsito(compraId, reserva, secreto, ahora) {
+  const emitida = Number.isSafeInteger(ahora)
+    ? ahora
+    : Math.floor(Date.now() / 1000);
+  const exp = emitida + FIRMA_MINUTOS * 60;
+  return {
+    exp,
+    firma: jwtSign({
+      sub: compraId,
+      iat: emitida,
+      exp,
+      aud: "larsito-consumer",
+      uso: "larsito",
+      reserva_id: reserva.reserva_id,
+      jti: reserva.jti,
+    }, secreto),
+  };
+}
+
+async function obtenerSignedUrl(agenteId, apiKey) {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), PROVEEDOR_TIMEOUT_MS);
+  try {
+    // La firma ligada a una conversacion no se puede reutilizar para abrir
+    // conversaciones paralelas durante sus quince minutos de validez.
+    const query = new URLSearchParams({
+      agent_id: agenteId,
+      include_conversation_id: "true",
+    });
+    const r = await fetch(
+      `https://api.elevenlabs.io/v1/convai/conversation/get-signed-url?${query}`,
+      {
+        method: "GET",
+        headers: { "xi-api-key": apiKey, Accept: "application/json" },
+        signal: controller.signal,
+      },
+    );
+    if (!r.ok) {
+      if (r.body && r.body.cancel) await r.body.cancel().catch(() => {});
+      throw new Error(`proveedor ${r.status}`);
     }
+    const body = await r.json();
+    if (!body || typeof body.signed_url !== "string" || !/^wss:\/\//i.test(body.signed_url)) {
+      throw new Error("proveedor sin signed_url");
+    }
+    return body.signed_url;
+  } finally {
+    clearTimeout(timeout);
   }
-  return null;
+}
+
+async function registrarFalloSeguro(firma, secreto) {
+  try {
+    return (await registrarFalloFirmaLarsito(firma, secreto)).ok === true;
+  } catch (err) {
+    console.error("larsito-sesion fallo no disponible");
+    return false;
+  }
 }
 
 export default async function handler(req, res) {
-  // Interruptor general. Va antes de todo: sin claves de voz este endpoint no hace
-  // nada y tiene que ser inofensivo, no dar un 500 ni filtrar si hay compra o no.
-  if (process.env.LARSITO_ON !== "true") {
+  res.setHeader("Cache-Control", "private, no-store");
+  res.setHeader("X-Content-Type-Options", "nosniff");
+
+  if (!CONSUMIDOR_INTEGRADO
+      || process.env.LARSITO_ON !== "true"
+      || process.env.LARSITO_CONSUMER_READY !== "true"
+      || process.env.LARSITO_AGENT_PRIVACY_READY !== "true") {
     res.status(200).json({
       ok: false,
       error: "cerrado",
@@ -52,63 +110,131 @@ export default async function handler(req, res) {
     return;
   }
 
-  if (req.method !== "POST") { res.status(405).json({ ok: false, error: "metodo" }); return; }
-
-  const sesion = readSessionCookie(req);
-  if (!sesion) { res.status(401).json({ ok: false, error: "acceso" }); return; }
-
-  let compra;
-  try { compra = await compraActiva(sesion.sub); } catch (e) {
-    console.error("larsito-sesion compra", e);
-    res.status(500).json({ ok: false, error: "interno" });
-    return;
-  }
-  if (!compra) { res.status(401).json({ ok: false, error: "caducado" }); return; }
-
-  // Tope por compra. Si la RPC no responde ni al tercer intento se sirve igualmente
-  // (fail-open) porque el usuario ya pagó: bloquearlo es peor que un rato sin tope.
-  // El tope real se restablece en cuanto Supabase vuelve a responder.
-  const usos = await contarConReintento("uso", () => tickUso(compra.id, "larsito"));
-  if (usos !== null && usos > TOPE_DIARIO) {
-    res.status(429).json({
-      ok: false,
-      error: "limite",
-      mensaje: `Has hecho ${TOPE_DIARIO} conversaciones hoy. Mañana vuelves a tener todas. Descansar entre sesiones también es estudiar.`,
-    });
-    return;
-  }
-
-  // Tope global del día para todo el producto. Es la red que protege la factura de
-  // la API de voz. Mismo criterio fail-open: si Supabase no contesta, no se bloquea
-  // a quien ha pagado, se registra el fallo y se sirve.
-  const topeGlobal = parseInt(process.env.LARSITO_TOPE_GLOBAL || "2000", 10);
-  const global = await contarConReintento("global", () => sbRpc("norsk_incr_global", { p_tipo: "larsito" }));
-  if (global !== null && Number(global) > topeGlobal) {
-    res.status(429).json({
-      ok: false,
-      error: "saturado",
-      mensaje: "Larsito está a tope de conversaciones por hoy. Prueba mañana, que vuelve entero.",
-    });
+  if (req.method !== "POST") {
+    res.setHeader("Allow", "POST");
+    res.status(405).json({ ok: false, error: "metodo" });
     return;
   }
 
   const secreto = process.env.NORSK_JWT_SECRET;
-  if (!secreto) {
-    console.error("larsito-sesion falta NORSK_JWT_SECRET");
-    res.status(500).json({ ok: false, error: "interno" });
+  const agenteId = process.env.LARSITO_AGENT_ID;
+  const apiKey = process.env.ELEVENLABS_API_KEY;
+  if (!secreto || !agenteId || !apiKey) {
+    console.error("larsito-sesion configuracion incompleta");
+    res.status(503).json({ ok: false, error: "no_disponible" });
     return;
   }
 
-  const exp = Math.floor(Date.now() / 1000) + FIRMA_MINUTOS * 60;
-  const firma = jwtSign({ sub: compra.id, exp, uso: "larsito" }, secreto);
+  const sesion = readSessionCookie(req);
+  if (!sesion) {
+    res.status(401).json({ ok: false, error: "acceso" });
+    return;
+  }
 
+  let compra;
+  try { compra = await compraActiva(sesion.sub); }
+  catch (err) {
+    console.error("larsito-sesion compra no disponible");
+    res.status(503).json({ ok: false, error: "no_disponible" });
+    return;
+  }
+  if (!compra) {
+    res.status(401).json({ ok: false, error: "caducado" });
+    return;
+  }
+
+  const topeGlobal = enteroPositivo(
+    process.env.LARSITO_TOPE_GLOBAL,
+    TOPE_GLOBAL_DEFECTO,
+    1000000,
+  );
+  const topeFallos = enteroPositivo(
+    process.env.LARSITO_TOPE_FALLOS,
+    TOPE_FALLOS_DEFECTO,
+    100,
+  );
+
+  let reserva;
+  try {
+    reserva = primeraFila(await sbRpc("norsk_reservar_larsito", {
+      p_compra: compra.id,
+      p_tipo: "larsito",
+      p_tope_compra: TOPE_DIARIO,
+      p_tope_global: topeGlobal,
+      p_tope_fallos: topeFallos,
+      p_vida_segundos: FIRMA_MINUTOS * 60,
+      p_coste: 1,
+    }));
+  } catch (err) {
+    console.error("larsito-sesion reserva no disponible");
+    res.status(503).json({ ok: false, error: "no_disponible" });
+    return;
+  }
+
+  if (!reserva || reserva.ok !== true || !reserva.reserva_id || !reserva.jti) {
+    const motivo = reserva && reserva.error;
+    if (motivo === "limite") {
+      res.status(429).json({
+        ok: false,
+        error: "limite",
+        mensaje: `Has hecho ${TOPE_DIARIO} conversaciones hoy. Puedes volver mañana.`,
+      });
+      return;
+    }
+    if (motivo === "saturado") {
+      res.status(429).json({
+        ok: false,
+        error: "saturado",
+        mensaje: "Larsito ha alcanzado el límite global de hoy.",
+      });
+      return;
+    }
+    if (motivo === "fallos") {
+      res.status(429).json({
+        ok: false,
+        error: "fallos",
+        mensaje: "Hay demasiados intentos fallidos o pendientes hoy. Inténtalo mañana.",
+      });
+      return;
+    }
+    if (motivo === "acceso") {
+      res.status(401).json({ ok: false, error: "caducado" });
+      return;
+    }
+    console.error("larsito-sesion reserva invalida");
+    res.status(503).json({ ok: false, error: "no_disponible" });
+    return;
+  }
+
+  const { firma } = crearFirmaLarsito(compra.id, reserva, secreto);
+
+  let signedUrl;
+  try {
+    signedUrl = await obtenerSignedUrl(agenteId, apiKey);
+  } catch (err) {
+    await registrarFalloSeguro(firma, secreto);
+    console.error("larsito-sesion proveedor no disponible");
+    res.status(502).json({ ok: false, error: "proveedor" });
+    return;
+  }
+
+  // La firma propia se consume justo antes de abrir la conexión del navegador.
+  // Si falla, nunca se entrega el signed URL aunque ElevenLabs ya haya respondido.
+  let consumida;
+  try { consumida = await consumirFirmaLarsito(firma, secreto); }
+  catch (err) { consumida = { ok: false, error: "no_disponible" }; }
+  if (!consumida || consumida.ok !== true) {
+    await registrarFalloSeguro(firma, secreto);
+    console.error("larsito-sesion consumo no disponible");
+    res.status(503).json({ ok: false, error: "no_disponible" });
+    return;
+  }
+
+  const usados = Number(reserva.usos_compra);
   res.status(200).json({
     ok: true,
-    agente_id: process.env.LARSITO_AGENT_ID || null,
-    firma,
-    // null cuando la cuenta no se pudo leer (fail-open): el cliente lo trata como
-    // "no lo sé", no como cero.
-    turnos_restantes: usos === null ? null : Math.max(0, TOPE_DIARIO - usos),
-    expira_en: exp,
+    signed_url: signedUrl,
+    turnos_restantes: Number.isFinite(usados) ? Math.max(0, TOPE_DIARIO - usados) : 0,
+    expira_en: FIRMA_MINUTOS * 60,
   });
 }

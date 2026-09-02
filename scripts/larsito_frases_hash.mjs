@@ -1,9 +1,7 @@
-// Regenera api/_larsito_frases.js: la lista blanca de frases de la demo de Larsito
-// que /api/larsito-tts/ sirve sin cookie. Lee data/larsito-demo.json, junta todas
-// las frases noruegas que la demo puede reproducir (larsito_no, respuestas modelo y bloques sugeridos
-// de cada turno, y el transcript_no de cada ejercicio de escucha), las normaliza
-// igual que el endpoint (trim + espacios colapsados) y escribe el SHA-256 de cada
-// una. Ejecutar cada vez que cambie el JSON de la demo:
+// Herramienta historica del TTS remoto retirado de la demo. Regenera el inventario
+// de hashes que se conserva en api/_larsito_frases.js solo como trazabilidad. Ni la
+// demo actual ni /api/larsito-tts.js importan esa lista: el endpoint del producto
+// completo exige siempre cookie y compra. No forma parte del build ni del guard.
 //
 //   node scripts/larsito_frases_hash.mjs
 
@@ -15,7 +13,7 @@ import { fileURLToPath } from "node:url";
 const ROOT = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const demo = JSON.parse(fs.readFileSync(path.join(ROOT, "data", "larsito-demo.json"), "utf8"));
 
-// MISMA normalización que api/larsito-tts.js. Si cambia allí, cambia aquí.
+// Normalizacion del inventario historico.
 const normalizar = (t) => String(t || "").trim().replace(/\s+/g, " ");
 
 const frases = [];
@@ -40,11 +38,10 @@ const hashes = [...new Set(frases.map((f) =>
   crypto.createHash("sha256").update(normalizar(f), "utf8").digest("hex")))];
 
 const salida = [
-  "// GENERADO por scripts/larsito_frases_hash.mjs a partir de data/larsito-demo.json.",
-  "// No editar a mano: si cambia la demo, regenerar con `node scripts/larsito_frases_hash.mjs`.",
-  "// Son hashes SHA-256 de frases ya públicas (la demo se sirve sin login), así que",
-  "// pueden vivir en el repo sin problema. /api/larsito-tts/ sirve estas frases sin",
-  "// cookie; cualquier otro texto exige compra activa.",
+  "// ARTEFACTO HISTORICO del TTS remoto que usaba la demo.",
+  "// La demo actual no importa esta lista ni llama a /api/larsito-tts/. El endpoint",
+  "// del producto completo exige siempre cookie y compra; el guard de pre-lanzamiento",
+  "// falla si FRASES_DEMO vuelve a entrar en esa ruta. Se conserva solo como trazabilidad.",
   "",
   "export const FRASES_DEMO = new Set([",
   ...hashes.map((h) => `  "${h}",`),

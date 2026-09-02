@@ -1,12 +1,11 @@
 // Larsito: práctica de conversación y comprensión oral de NEXO NORSK.
 //
-// Fase F0 (la actual): los escenarios son guiados (guion fijo). La voz tiene dos
-// vías: el TTS de servidor (/api/larsito-tts/, apagado por defecto tras el flag
-// LARSITO_TTS) y, si no está, la voz noruega de la Web Speech API del navegador.
-// Si no hay ninguna de las dos, el audio se apaga y se avisa: nunca se lee bokmål
-// con una voz de otro idioma. La conversación libre con el agente real llega
-// cuando LARSITO_ABIERTO pase a true y el backend tenga claves. Mismo patrón que
-// VENTA_ABIERTA en la app de PASS.
+// Fase F0 (la actual): los escenarios son guiados y usan datos ficticios. La demo
+// solo habla con una voz noruega que el navegador confirme como local. Si no la
+// hay, el audio se apaga. La voz del alumno solo se admite cuando SpeechRecognition
+// expone y acepta processLocally=true; en cualquier otro caso queda la escritura.
+// El agente completo usa el SDK local de ElevenLabs y solo se inicia tras pulsar
+// el botón, cuando LARSITO_ABIERTO pase a true y cierre sus gates.
 (function () {
   "use strict";
 
@@ -14,11 +13,15 @@
 
   var DEMO = "/data/larsito-demo.json";
   var CLAVE = "nexo_larsito_v1";
+  var aprendizaje = window.NexoLarsitoLearning || null;
 
   var app = document.getElementById("app");
   var datos = null;
-  var sesion = null;
   var estado = cargarEstado();
+  var conversacion = null;
+  var agenteCargando = false;
+  var sdkAgentePromesa = null;
+  var agenteVersion = 0;
 
   // ---------- Estado local ----------
 
@@ -30,14 +33,41 @@
       if (!e.hechos) e.hechos = {};
       if (!e.sinPistas) e.sinPistas = {};
       if (!e.aciertos) e.aciertos = {};
+      e.recuperaciones = aprendizaje
+        ? aprendizaje.normalizarCola(e.recuperaciones)
+        : [];
       return e;
     } catch (err) {
-      return { hechos: {}, sinPistas: {}, aciertos: {} };
+      return { hechos: {}, sinPistas: {}, aciertos: {}, recuperaciones: [] };
     }
   }
 
   function guardar() {
     try { localStorage.setItem(CLAVE, JSON.stringify(estado)); } catch (err) { /* modo privado */ }
+  }
+
+  function exportarProgreso() {
+    var payload = {
+      esquema: "nexo_larsito_progreso_v1",
+      exportado_en: new Date().toISOString(),
+      progreso: estado,
+    };
+    var blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement("a");
+    a.href = url;
+    a.download = "nexo-larsito-progreso.json";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(function () { URL.revokeObjectURL(url); }, 0);
+  }
+
+  function borrarProgreso() {
+    if (!window.confirm("¿Borrar el progreso guardado en este navegador?")) return;
+    estado = { hechos: {}, sinPistas: {}, aciertos: {}, recuperaciones: [] };
+    try { localStorage.removeItem(CLAVE); } catch (err) { /* modo privado */ }
+    renderInicio();
   }
 
   // ---------- Utilidades ----------
@@ -49,7 +79,20 @@
     return n;
   }
 
-  function limpiar() { app.innerHTML = ""; }
+  function cerrarConversacionActual() {
+    agenteVersion += 1;
+    agenteCargando = false;
+    var actual = conversacion;
+    conversacion = null;
+    if (actual && typeof actual.endSession === "function") {
+      Promise.resolve(actual.endSession()).catch(function () { /* ya desconectado */ });
+    }
+  }
+
+  function limpiar() {
+    cerrarConversacionActual();
+    app.innerHTML = "";
+  }
 
   function botonVolver(texto, alPulsar) {
     var b = el("button", "back", "← " + texto);
@@ -69,6 +112,52 @@
     return d;
   }
 
+  function programarRecuperacion(focoId, fuenteId) {
+    if (!aprendizaje) return false;
+    try {
+      estado.recuperaciones = aprendizaje.programar(
+        estado.recuperaciones,
+        focoId,
+        fuenteId,
+        new Date().toISOString(),
+      );
+      guardar();
+      return true;
+    } catch (err) { return false; }
+  }
+
+  function renderRecuperacionPendiente(paso) {
+    if (!aprendizaje) return;
+    var pendiente;
+    try {
+      pendiente = aprendizaje.primeraVencida(
+        estado.recuperaciones,
+        new Date().toISOString(),
+      );
+    } catch (err) { return; }
+    if (!pendiente) return;
+
+    var caja = el("div", "aviso recuperacion-pendiente");
+    caja.appendChild(el("span", "eti", "Recuperación pendiente"));
+    caja.appendChild(el("p", null,
+      "Haz primero el contacto " + pendiente.contacto
+      + ". Es el pendiente vencido más antiguo de tu cola local."));
+    var completar = el("button", "btn ghost", "Marcar recuperación hecha");
+    completar.addEventListener("click", function () {
+      try {
+        estado.recuperaciones = aprendizaje.completarVencida(
+          estado.recuperaciones,
+          pendiente.recovery_id,
+          new Date().toISOString(),
+        );
+        guardar();
+        renderInicio();
+      } catch (err) { /* la cola cambio; se recalcula al volver */ }
+    });
+    caja.appendChild(completar);
+    paso.appendChild(caja);
+  }
+
   // ---------- Voz del navegador ----------
   // El soporte de noruego varía mucho entre navegadores, así que todo lo que
   // dependa de la voz es opcional: si no está, se practica igual escribiendo.
@@ -84,20 +173,23 @@
     var mejorPuntos = -1;
     for (var i = 0; i < voces.length; i++) {
       var v = voces[i];
-      if (!/^nb|^no/i.test(v.lang || "")) continue;
-      // Entre las voces noruegas hay preferencias: Nora es la voz buena que
-      // traen Apple y Google, y las voces de red (localService false) suelen
-      // sonar mejor que las locales del sistema.
+      if (!/^(nb|no)(-|$)/i.test(v.lang || "")) continue;
+      // La demo no manda texto a un proveedor de voz. Una voz solo es apta si
+      // el navegador confirma a la vez idioma noruego y servicio local.
+      if (v.localService !== true) continue;
       var puntos = 0;
       if (/nora/i.test(v.name || "")) puntos += 2;
-      if (v.localService === false) puntos += 1;
       if (puntos > mejorPuntos) { mejor = v; mejorPuntos = puntos; }
     }
     return mejor;
   }
   if ("speechSynthesis" in window) {
     vozNo = elegirVoz();
-    window.speechSynthesis.onvoiceschanged = function () { vozNo = elegirVoz(); };
+    window.speechSynthesis.onvoiceschanged = function () {
+      var teniaVoz = !!vozNo;
+      vozNo = elegirVoz();
+      if (!teniaVoz && vozNo) restaurarEscuchaLocal();
+    };
   }
 
   function decir(texto, lento, alDone) {
@@ -114,125 +206,81 @@
         if (alDone) alDone();
       };
       u.onend = cerrar; u.onerror = cerrar;
-      sonando = { texto: texto, lento: !!lento, alDone: alDone, u: u, audio: null };
+      sonando = { texto: texto, lento: !!lento, alDone: alDone, u: u };
       window.speechSynthesis.speak(u);
       return true;
     } catch (err) { return false; }
   }
 
-  // ---------- Voz de servidor ----------
-  // El endpoint /api/larsito-tts/ convierte las frases de la demo en mp3 con una
-  // voz de verdad. Está apagado por defecto (flag LARSITO_TTS en Vercel), así que
-  // se pregunta UNA vez por carga de página si está encendido y la respuesta se
-  // guarda en una variable, no en localStorage: puede cambiar entre despliegues.
-
-  var ttsServidor = null; // null = sin comprobar todavía, true/false = respuesta del ping
-
-  function comprobarTtsServidor() {
-    return fetch("/api/larsito-tts/?ping=1", { credentials: "same-origin" })
-      .then(function (r) { return r.json(); })
-      .then(function (d) { ttsServidor = !!(d && d.ok); })
-      .catch(function () { ttsServidor = false; });
-  }
-
-  function hayVoz() { return ttsServidor === true || !!vozNo; }
+  function hayVoz() { return !!vozNo; }
 
   // ---------- Un solo audio a la vez ----------
-  // Aquí vivía el eco: cada pulsación creaba un Audio nuevo sin parar el
-  // anterior. Ahora hay un único hueco de reproducción: antes de sonar nada se
-  // para lo que hubiera, y pulsar lo que ya suena lo detiene en vez de doblarlo.
+  // Antes de sonar nada se para lo anterior; pulsar lo que ya suena lo detiene.
 
-  var sonando = null; // { texto, lento, alDone, audio | u }
+  var sonando = null; // { texto, lento, alDone, u }
 
   function pararAudio() {
     var s = sonando;
     sonando = null;
     try { window.speechSynthesis.cancel(); } catch (err) {}
-    if (s && s.audio) {
-      try { s.audio.onended = null; s.audio.onerror = null; s.audio.pause(); } catch (err) {}
-    }
     if (s && s.alDone) s.alDone();
   }
 
-  // Cache de audios ya pedidos al servidor: la misma frase no se descarga dos
-  // veces en una sesión, y la precarga deja listo el turno antes del clic.
-  var cacheAudio = {};
-  var cacheOrden = [];
-  function claveAudio(texto, lento) { return (lento ? "L|" : "N|") + texto; }
-  function urlTts(texto, lento) {
-    // v=2 salta la caché de la CDN anterior al cambio de voz.
-    return "/api/larsito-tts/?texto=" + encodeURIComponent(texto) + "&velocidad=" + (lento ? "0.8" : "1") + "&v=2";
-  }
-  function pedirAudio(texto, lento) {
-    var clave = claveAudio(texto, lento);
-    if (cacheAudio[clave]) return cacheAudio[clave];
-    var promesa = fetch(urlTts(texto, lento), { credentials: "same-origin" })
-      .then(function (r) {
-        if (!r.ok || (r.headers.get("content-type") || "").indexOf("audio") === -1) throw new Error("sin audio");
-        return r.blob();
-      })
-      .then(function (b) { return URL.createObjectURL(b); })
-      .catch(function (err) { delete cacheAudio[clave]; throw err; });
-    cacheAudio[clave] = promesa;
-    cacheOrden.push(clave);
-    if (cacheOrden.length > 24) {
-      var fuera = cacheOrden.shift();
-      var vieja = cacheAudio[fuera];
-      delete cacheAudio[fuera];
-      if (vieja) vieja.then(function (u) { URL.revokeObjectURL(u); }).catch(function () {});
-    }
-    return promesa;
-  }
-  function precargar(texto) {
-    if (ttsServidor === true && texto) pedirAudio(texto, false).catch(function () {});
-  }
-
-  // Capa única de escucha: primero el servidor si está encendido, después la voz
-  // noruega del navegador. Devuelve false sin voz alguna (quien llama apaga el
-  // botón) y "parado" cuando la pulsación detiene lo que ya sonaba (toggle).
+  // Capa única de escucha local. Devuelve false sin voz apta y "parado" cuando
+  // la pulsación detiene lo que ya sonaba.
   function hablar(texto, lento, alDone) {
     if (sonando && sonando.texto === texto && sonando.lento === !!lento) {
       pararAudio();
       return "parado";
     }
     pararAudio();
-    if (ttsServidor === true) {
-      var mio = { texto: texto, lento: !!lento, alDone: alDone, audio: null };
-      sonando = mio;
-      pedirAudio(texto, lento)
-        .then(function (url) {
-          if (sonando !== mio) return; // se paró o sonó otra cosa mientras cargaba
-          var a = new Audio(url);
-          mio.audio = a;
-          a.onended = function () { if (sonando === mio) { sonando = null; if (alDone) alDone(); } };
-          a.onerror = a.onended;
-          return a.play();
-        })
-        .catch(function () {
-          // El servidor ha fallado con esta frase: se cae a la voz local noruega.
-          if (sonando !== mio) return;
-          sonando = null;
-          if (!decir(texto, lento, alDone) && alDone) alDone();
-        });
-      return true;
-    }
     return decir(texto, lento, alDone);
   }
 
-  // Aviso honesto cuando no hay ni servidor ni voz local noruega. La línea larga
-  // se muestra solo la primera vez; los botones se apagan siempre.
+  // Aviso honesto cuando no hay voz local noruega. La línea larga se muestra
+  // solo la primera vez; los botones se apagan siempre.
   var avisoVozDado = false;
   function avisarSinVoz(contenedor) {
     if (avisoVozDado) return;
     avisoVozDado = true;
-    contenedor.appendChild(el("p", "ayuda", "Tu navegador no tiene voz noruega instalada y el audio se apaga para no enseñarte una pronunciación falsa. La conversación por escrito funciona igual."));
+    var aviso = el("p", "ayuda", "Tu navegador no tiene voz noruega instalada y el audio se apaga para no enseñarte una pronunciación falsa. La conversación por escrito funciona igual.");
+    aviso.setAttribute("data-aviso-voz-local", "true");
+    contenedor.appendChild(aviso);
   }
 
   function apagarEscucha(principal, secundario, contenedor) {
+    if (!principal.hasAttribute("data-voz-bloqueada")) {
+      principal.setAttribute("data-voz-bloqueada", "true");
+      principal.setAttribute("data-voz-texto", principal.textContent);
+    }
     principal.disabled = true;
     principal.textContent = "Sin voz noruega en este navegador";
-    if (secundario) { secundario.disabled = true; secundario.hidden = true; }
+    if (secundario) {
+      secundario.setAttribute("data-voz-secundaria", "true");
+      secundario.disabled = true;
+      secundario.hidden = true;
+    }
     avisarSinVoz(contenedor);
+  }
+
+  function restaurarEscuchaLocal() {
+    var principales = app.querySelectorAll('[data-voz-bloqueada="true"]');
+    for (var i = 0; i < principales.length; i++) {
+      var principal = principales[i];
+      principal.disabled = false;
+      principal.textContent = principal.getAttribute("data-voz-texto") || "Escuchar";
+      principal.removeAttribute("data-voz-bloqueada");
+      principal.removeAttribute("data-voz-texto");
+    }
+    var secundarios = app.querySelectorAll('[data-voz-secundaria="true"]');
+    for (var j = 0; j < secundarios.length; j++) {
+      secundarios[j].disabled = false;
+      secundarios[j].hidden = false;
+      secundarios[j].removeAttribute("data-voz-secundaria");
+    }
+    var avisos = app.querySelectorAll('[data-aviso-voz-local="true"]');
+    for (var k = 0; k < avisos.length; k++) avisos[k].remove();
+    avisoVozDado = false;
   }
 
   function reconocedor() {
@@ -240,6 +288,9 @@
     if (!R) return null;
     try {
       var r = new R();
+      if (!("processLocally" in r)) return null;
+      r.processLocally = true;
+      if (r.processLocally !== true) return null;
       r.lang = "nb-NO";
       r.interimResults = false;
       r.maxAlternatives = 1;
@@ -255,13 +306,17 @@
 
     paso.appendChild(el("p", "kicker", "Práctica oral"));
     paso.appendChild(el("h1", null, "Larsito"));
-    paso.appendChild(el("p", "intro", "Habla noruego cuando te venga bien. Larsito te da el contexto, tú respondes, y después ves cómo lo diría un noruego."));
+    paso.appendChild(el("p", "intro", "Practica noruego con situaciones guiadas. Larsito te da el contexto, tú respondes y después comparas tu frase con un modelo."));
 
     var aviso = el("div", "aviso");
     aviso.appendChild(el("span", "eti", "Demo"));
     var pA = el("p", null, datos && datos.aviso ? datos.aviso : "Esta es la versión de demostración: seis situaciones guiadas y seis ejercicios de escucha. La conversación libre llega con el curso.");
     aviso.appendChild(pA);
     paso.appendChild(aviso);
+
+    renderRecuperacionPendiente(paso);
+
+    if (LARSITO_ABIERTO) renderAgente(paso);
 
     paso.appendChild(el("h2", null, "Conversación"));
     var cards = el("div", "cards");
@@ -270,16 +325,19 @@
       b.appendChild(el("span", "t", esc.titulo));
       b.appendChild(el("span", "m", esc.contexto_es));
       var tag = el("span", "tag" + (esc.modo === "eksamen" ? " ex" : ""),
-        esc.modo === "eksamen" ? "Simulacro del examen · " + esc.nivel : "Situación real · " + esc.nivel);
+        esc.modo === "eksamen" ? "Simulacro sin evaluación · " + esc.nivel : "Role-play ficticio · " + esc.nivel);
       b.appendChild(tag);
       if (estado.hechos[esc.id]) {
         var hecho = el("span", "m", estado.sinPistas && estado.sinPistas[esc.id]
-          ? "Hecho, incluso sin pistas. Repetir nunca sobra."
-          : "Ya lo has hecho. El siguiente paso es repetirlo sin pistas.");
+          ? "Dos vueltas hechas; la segunda, sin bloques ni pistas de respuesta."
+          : "Ya lo has hecho. El siguiente paso es repetirlo con menos apoyo.");
         hecho.style.marginTop = "8px";
         b.appendChild(hecho);
       }
-      b.addEventListener("click", function () { renderConversacion(esc); });
+      b.addEventListener("click", function () {
+        if (agenteCargando) return;
+        renderConversacion(esc);
+      });
       cards.appendChild(b);
     });
     paso.appendChild(cards);
@@ -288,17 +346,262 @@
     h2b.style.marginTop = "30px";
     paso.appendChild(h2b);
     var btnL = el("button", "btn ghost", "Ver los ejercicios de escucha");
-    btnL.addEventListener("click", renderListening);
+    btnL.addEventListener("click", function () {
+      if (agenteCargando) return;
+      renderListening();
+    });
     paso.appendChild(btnL);
 
     var cierre = el("div", "cierre-panel");
-    cierre.appendChild(el("p", null, "Cuando el curso abra, Larsito responde a lo que tú digas, no a un guion, y corrige lo que necesites en cada turno."));
+    cierre.appendChild(el("p", null, "Cuando el curso abra, Larsito responderá a lo que digas, no a un guion. El feedback llegará después de la actuación completa."));
     var a = el("a", "btn", "Avísame cuando abra");
     a.href = "https://nexonoruega.substack.com/subscribe";
     cierre.appendChild(a);
     paso.appendChild(cierre);
 
+    var datosLocales = el("div", "cierre-panel datos-locales");
+    datosLocales.appendChild(el("h2", null, "Tu progreso local"));
+    datosLocales.appendChild(el("p", null, "Este navegador guarda solo qué prácticas has completado y tus aciertos. No guarda tus respuestas escritas ni transcripciones."));
+    var exportar = el("button", "btn ghost", "Exportar progreso");
+    exportar.addEventListener("click", exportarProgreso);
+    datosLocales.appendChild(exportar);
+    var borrar = el("button", "btn ghost", "Borrar progreso");
+    borrar.addEventListener("click", borrarProgreso);
+    datosLocales.appendChild(borrar);
+    paso.appendChild(datosLocales);
+
     app.appendChild(paso);
+  }
+
+  // ---------- Agente completo ----------
+  // El SDK llega en un bundle local (ElevenLabsClient). La clave de ElevenLabs
+  // y la JWT interna nunca llegan al navegador: el endpoint devuelve solo el
+  // signed URL temporal del proveedor.
+
+  function cargarSdkAgente() {
+    if (window.ElevenLabsClient && window.ElevenLabsClient.Conversation) {
+      return Promise.resolve(window.ElevenLabsClient);
+    }
+    if (sdkAgentePromesa) return sdkAgentePromesa;
+    sdkAgentePromesa = new Promise(function (resolve, reject) {
+      var s = document.createElement("script");
+      s.src = "/norsk/larsito/vendor/elevenlabs-client-1.23.0.iife.js";
+      s.async = true;
+      s.onload = function () {
+        if (window.ElevenLabsClient && window.ElevenLabsClient.Conversation) resolve(window.ElevenLabsClient);
+        else reject(new Error("sdk"));
+      };
+      s.onerror = function () { reject(new Error("sdk")); };
+      document.head.appendChild(s);
+    }).catch(function (err) {
+      sdkAgentePromesa = null;
+      throw err;
+    });
+    return sdkAgentePromesa;
+  }
+
+  function renderAgente(paso) {
+    var caja = el("div", "cierre-panel agente-panel");
+    caja.appendChild(el("h2", null, "Práctica con Larsito"));
+    caja.appendChild(el("p", null, "Elige conversación libre o simulacro. La conversación se transmite al proveedor de voz para que Larsito pueda responderte; no se guarda en el progreso local."));
+
+    var etiquetaModo = el("label", "ayuda", "Tipo de práctica");
+    var selectorModo = document.createElement("select");
+    selectorModo.setAttribute("aria-label", "Tipo de práctica con Larsito");
+    var opcionLibre = document.createElement("option");
+    opcionLibre.value = "FREE_CONVERSATION";
+    opcionLibre.textContent = "Conversación libre";
+    var opcionExamen = document.createElement("option");
+    opcionExamen.value = "EXAM_SIMULATION";
+    opcionExamen.textContent = "Simulacro de formato similar";
+    selectorModo.appendChild(opcionLibre);
+    selectorModo.appendChild(opcionExamen);
+    etiquetaModo.appendChild(selectorModo);
+    caja.appendChild(etiquetaModo);
+
+    var estadoAgente = el("p", "ayuda", "Listo para empezar.");
+    estadoAgente.setAttribute("role", "status");
+    caja.appendChild(estadoAgente);
+
+    var transcripcion = el("div", "chat agente-chat");
+    transcripcion.setAttribute("aria-live", "polite");
+    caja.appendChild(transcripcion);
+
+    var iniciar = el("button", "btn", "Iniciar conversación");
+    var parar = el("button", "btn ghost", "Terminar conversación");
+    parar.hidden = true;
+    caja.appendChild(iniciar);
+    caja.appendChild(parar);
+    paso.appendChild(caja);
+
+    var intentoExamen = null;
+
+    function uuidNuevo() {
+      if (!window.crypto || typeof window.crypto.randomUUID !== "function") {
+        throw new Error("navegador");
+      }
+      return window.crypto.randomUUID();
+    }
+
+    function obtenerIntentoExamen() {
+      if (!intentoExamen) {
+        intentoExamen = {
+          attempt_id: uuidNuevo(),
+          requests: { A: uuidNuevo(), B: uuidNuevo(), C: uuidNuevo() },
+          estimulos: {},
+        };
+      }
+      return intentoExamen;
+    }
+
+    async function pedirEstimuloEx(tarea) {
+      var intento = obtenerIntentoExamen();
+      if (intento.estimulos[tarea]) return intento.estimulos[tarea];
+      var respuesta = await fetch("/api/larsito-estimulo/", {
+        method: "POST",
+        credentials: "same-origin",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ruta: "norskproven-b1-v1",
+          tarea: tarea,
+          attempt_id: intento.attempt_id,
+          request_id: intento.requests[tarea],
+        }),
+      });
+      var body = await respuesta.json();
+      if (!respuesta.ok || !body || body.ok !== true
+          || body.ruta !== "norskproven-b1-v1"
+          || body.tarea !== tarea
+          || typeof body.stimulus_id !== "string") {
+        throw new Error((body && body.error) || "estimulo");
+      }
+      intento.estimulos[tarea] = body.stimulus_id;
+      return body.stimulus_id;
+    }
+
+    async function variablesDinamicas() {
+      if (selectorModo.value !== "EXAM_SIMULATION") {
+        return { modo: "FREE_CONVERSATION" };
+      }
+      setEstado("Reservando estímulos inéditos…");
+      // El orden A-B-C permite al servidor impedir combinaciones incompatibles.
+      var a = await pedirEstimuloEx("A");
+      var b = await pedirEstimuloEx("B");
+      var c = await pedirEstimuloEx("C");
+      return {
+        modo: "EXAM_SIMULATION",
+        ruta: "norskproven-b1-v1",
+        tarea: "ABC",
+        stimulus_id: [a, b, c].join(","),
+        stimulus_a: a,
+        stimulus_b: b,
+        stimulus_c: c,
+      };
+    }
+
+    function setEstado(texto) { estadoAgente.textContent = texto; }
+    function mensaje(m) {
+      if (!m || typeof m.message !== "string" || !m.message.trim()) return;
+      var quien = m.role === "user" || m.source === "user" ? "Tú" : "Larsito";
+      var b = el("div", "burbuja " + (quien === "Tú" ? "tu" : "lars"));
+      b.appendChild(el("p", "quien", quien));
+      var p = el("p", "no", m.message);
+      p.lang = "nb";
+      b.appendChild(p);
+      transcripcion.appendChild(b);
+      b.scrollIntoView({ block: "nearest" });
+    }
+    function restaurarBotones() {
+      iniciar.disabled = false;
+      iniciar.hidden = false;
+      parar.hidden = true;
+      selectorModo.disabled = false;
+      agenteCargando = false;
+    }
+
+    async function terminarAgente() {
+      var actual = conversacion;
+      conversacion = null;
+      if (actual) {
+        try { await actual.endSession(); } catch (err) { /* ya desconectado */ }
+      }
+      setEstado("Conversación terminada.");
+      restaurarBotones();
+    }
+
+    async function iniciarAgente() {
+      if (agenteCargando || conversacion) return;
+      var version = agenteVersion;
+      agenteCargando = true;
+      iniciar.disabled = true;
+      selectorModo.disabled = true;
+      try {
+        await cargarSdkAgente();
+        if (version !== agenteVersion) return;
+        if (!window.ElevenLabsClient || !window.ElevenLabsClient.Conversation) {
+          throw new Error("sdk");
+        }
+        const dinamicas = await variablesDinamicas();
+        if (version !== agenteVersion) return;
+        setEstado("Pidiendo una conexión segura…");
+        const respuesta = await fetch("/api/larsito-sesion/", {
+          method: "POST",
+          credentials: "same-origin",
+        });
+        const sesion = await respuesta.json();
+        if (version !== agenteVersion) return;
+        if (!respuesta.ok || !sesion || sesion.ok !== true || typeof sesion.signed_url !== "string") {
+          throw new Error((sesion && sesion.error) || "sesion");
+        }
+        setEstado("Conectando…");
+        const nuevaConversacion = await window.ElevenLabsClient.Conversation.startSession({
+          signedUrl: sesion.signed_url,
+          dynamicVariables: dinamicas,
+          clientTools: {
+            programar_recuperacion: function (parametros) {
+              var foco = parametros && parametros.focus_id;
+              var fuente = parametros && parametros.source_id;
+              return programarRecuperacion(foco, fuente)
+                ? "SCHEDULED_1_3_7_14"
+                : "REJECTED_INVALID_IDS";
+            },
+          },
+          onConnect: function () {
+            setEstado("Conectado. Te escucha Larsito.");
+            iniciar.hidden = true;
+            parar.hidden = false;
+            if (dinamicas.modo === "EXAM_SIMULATION") intentoExamen = null;
+            agenteCargando = false;
+          },
+          onDisconnect: function () {
+            conversacion = null;
+            setEstado("Conexión terminada.");
+            restaurarBotones();
+          },
+          onError: function () { setEstado("La conexión de voz ha fallado. Puedes intentarlo de nuevo."); },
+          onModeChange: function (modo) {
+            if (modo && modo.mode === "speaking") setEstado("Larsito está hablando…");
+            else if (modo && modo.mode === "listening") setEstado("Te escucha Larsito.");
+          },
+          onMessage: mensaje,
+        });
+        if (version !== agenteVersion) {
+          try { await nuevaConversacion.endSession(); } catch (err) { /* ya desconectado */ }
+          return;
+        }
+        conversacion = nuevaConversacion;
+      } catch (err) {
+        if (version !== agenteVersion) return;
+        conversacion = null;
+        setEstado(err && err.message === "acceso"
+          ? "Necesitas un acceso activo al curso para usar la conversación completa."
+          : "No se ha podido iniciar la conversación. La demo sigue disponible.");
+        restaurarBotones();
+      }
+    }
+
+    iniciar.addEventListener("click", iniciarAgente);
+    parar.addEventListener("click", terminarAgente);
   }
 
   // ---------- Pantalla: conversación guiada ----------
@@ -307,9 +610,15 @@
     limpiar();
     var paso = el("div", "step");
     paso.appendChild(botonVolver("Volver", renderInicio));
-    paso.appendChild(el("p", "kicker", esc.modo === "eksamen" ? "Simulacro de la prueba oral" : "Situación real"));
+    paso.appendChild(el("p", "kicker", esc.modo === "eksamen" ? "Simulacro sin evaluación" : "Role-play ficticio"));
     paso.appendChild(el("h1", null, esc.titulo));
     paso.appendChild(el("p", "intro", esc.contexto_es));
+    if (esc.datos_ficticios_es) {
+      var fichaFicticia = el("div", "aviso datos-ficticios");
+      fichaFicticia.appendChild(el("span", "eti", "Ficha ficticia"));
+      fichaFicticia.appendChild(el("p", null, esc.datos_ficticios_es));
+      paso.appendChild(fichaFicticia);
+    }
 
     var chat = el("div", "chat");
     paso.appendChild(chat);
@@ -337,7 +646,6 @@
         var o = b.querySelector(".onda"); if (o) o.remove();
         bEsc.textContent = "Escuchar";
       };
-      precargar(turno.larsito_no);
       bEsc.addEventListener("click", function () {
         var r = hablar(turno.larsito_no, false, quitarOnda);
         if (!r) { apagarEscucha(bEsc, bLento, b); return; }
@@ -382,7 +690,7 @@
       var pista = el("div", "pista");
       pista.appendChild(el("b", null, "Te toca"));
       pista.appendChild(document.createTextNode(sinPistas
-        ? "Sin pistas esta vez. En el examen tampoco las hay."
+        ? "Sin bloques ni pistas de respuesta. Usa solo la ficha ficticia que encabeza la escena."
         : turno.pista_es));
       caja.appendChild(pista);
 
@@ -409,11 +717,13 @@
       }
 
       var rec = reconocedor();
-      var mic = el("button", "mic");
-      mic.appendChild(el("span", "punto"));
-      mic.appendChild(document.createTextNode(rec ? "Mantén pulsado y habla" : "Tu navegador no reconoce voz"));
-      if (!rec) mic.disabled = true;
-      caja.appendChild(mic);
+      var mic = null;
+      if (rec) {
+        mic = el("button", "mic");
+        mic.appendChild(el("span", "punto"));
+        mic.appendChild(document.createTextNode("Mantén pulsado y habla"));
+        caja.appendChild(mic);
+      }
 
       var campo = el("input", "campo");
       campo.type = "text";
@@ -423,8 +733,8 @@
       caja.appendChild(campo);
 
       caja.appendChild(el("p", "ayuda", rec
-        ? "Lo que digas aparece en el cuadro para que puedas corregirlo antes de enviarlo."
-        : "El reconocimiento de voz no funciona en este navegador. Prueba en Chrome, o escribe la respuesta: se practica igual."));
+        ? "El navegador ha confirmado el procesamiento local. La transcripción solo aparece en el cuadro: no se sube ni se guarda en el progreso."
+        : "Este navegador no garantiza reconocimiento local, así que el micrófono no se muestra. Escribe una respuesta ficticia: se practica igual."));
 
       var enviar = el("button", "btn", "Responder");
       caja.appendChild(enviar);
@@ -478,20 +788,19 @@
       t.style.borderTop = "0";
       t.style.marginTop = "0";
       t.style.paddingTop = "0";
-      t.appendChild(el("b", null, "Cómo lo diría un noruego"));
+      t.appendChild(el("b", null, "Modelo para comparar"));
       (turno.respuestas_modelo_no || []).forEach(function (m) {
         var p = el("p", "bien", m);
         p.lang = "nb";
         p.style.marginBottom = "6px";
         t.appendChild(p);
       });
-      var nota = el("p", null, "Compara con lo que has dicho. Fíjate en el orden de las palabras y en dónde cae el verbo, que es lo que más delata el nivel.");
+      var nota = el("p", null, "Compara con lo que has dicho. Fíjate en el orden de las palabras y en dónde cae el verbo: esos cambios pueden hacer la frase más clara.");
       nota.style.marginTop = "8px";
       t.appendChild(nota);
       caja.appendChild(t);
 
       var oir = el("button", "btn ghost", "Escuchar el modelo");
-      precargar((turno.respuestas_modelo_no || [])[0]);
       oir.addEventListener("click", function () {
         var m = (turno.respuestas_modelo_no || [])[0];
         if (m && !hablar(m)) apagarEscucha(oir, null, caja);
@@ -508,18 +817,21 @@
 
     function terminar() {
       estado.hechos[esc.id] = true;
-      if (sinPistas) estado.sinPistas[esc.id] = true;
+      if (sinPistas) {
+        estado.sinPistas[esc.id] = true;
+        programarRecuperacion("DEMO:" + esc.id, esc.id);
+      }
       guardar();
       zona.innerHTML = "";
       var caja = el("div", "responder");
-      caja.appendChild(el("h2", null, sinPistas ? "Sin pistas y entero. Eso ya es otra cosa." : "Hecho."));
+      caja.appendChild(el("h2", null, sinPistas ? "Segunda vuelta completada." : "Hecho."));
       caja.appendChild(el("p", "pista", sinPistas
-        ? "Acabas de hacer la escena como será el día del examen: sin apoyos. Si te has trabado en algún turno, repítelo mañana y compara."
+        ? "Has retirado los bloques y las pistas de respuesta, pero conservas la ficha y el tema. Esto no demuestra transferencia ni reproduce o evalúa la prueba real. El siguiente paso sería practicar la misma función con datos ficticios nuevos."
         : (esc.modo === "eksamen"
-          ? "En el examen real esto dura entre veinte y veinticinco minutos y no hay pistas en español. Por eso conviene repetirlo hasta que salga sin pensar."
-          : "Repite la misma escena mañana sin mirar las pistas. Ahí es donde se gana la fluidez.")));
+          ? "Esto ha sido una práctica guiada, no una reproducción ni una evaluación de la prueba real. Repite la función con otra ficha ficticia y menos apoyo."
+          : "Repite la función otro día con datos ficticios nuevos y menos apoyo.")));
       if (!sinPistas) {
-        var sinP = el("button", "btn", "Repítelo sin pistas");
+        var sinP = el("button", "btn", "Repítelo con menos apoyo");
         sinP.addEventListener("click", function () { renderConversacion(esc, true); });
         caja.appendChild(sinP);
       }
@@ -540,31 +852,135 @@
     paso.appendChild(botonVolver("Volver", renderInicio));
     paso.appendChild(el("p", "kicker", "Comprensión oral"));
     paso.appendChild(el("h1", null, "Escucha y responde"));
-    paso.appendChild(el("p", "intro", "En la demo el audio lo lee una voz sintética noruega. En el curso son grabaciones preparadas, con el ritmo del examen."));
-
-    (datos.listening || []).forEach(function (ej) {
-      paso.appendChild(fichaListening(ej));
-    });
-
+    paso.appendChild(el("p", "intro", LARSITO_ABIERTO
+      ? "Escucha las grabaciones preparadas del curso y responde a sus preguntas."
+      : "Si tu dispositivo tiene una voz noruega local, puede leer el texto sintéticamente. Las grabaciones del curso están preparadas para sus tareas concretas."));
     app.appendChild(paso);
+
+    if (!LARSITO_ABIERTO) {
+      (datos.listening || []).forEach(function (ej) { paso.appendChild(fichaListening(ej, false)); });
+      return;
+    }
+
+    var cargando = el("p", "ayuda", "Cargando las grabaciones…");
+    var tandas = el("div");
+    var siguiente = el("button", "btn ghost", "Siguiente tanda");
+    var fin = el("p", "ayuda", "Has llegado al final de las grabaciones B1 disponibles.");
+    siguiente.hidden = true;
+    fin.hidden = true;
+    paso.appendChild(cargando);
+    paso.appendChild(tandas);
+    paso.appendChild(siguiente);
+    paso.appendChild(fin);
+
+    var cursorSiguiente = null;
+    var cargandoTanda = false;
+    var vistos = new Set();
+    var numeroTanda = 0;
+
+    function cargarTanda(cursor) {
+      if (cargandoTanda) return;
+      cargandoTanda = true;
+      siguiente.disabled = true;
+      siguiente.hidden = true;
+      fin.hidden = true;
+      cargando.hidden = false;
+      cargando.textContent = numeroTanda
+        ? "Cargando la siguiente tanda…"
+        : "Cargando las grabaciones…";
+
+      var url = "/api/larsito-listening/?nivel=B1";
+      if (cursor) url += "&cursor=" + encodeURIComponent(cursor);
+
+      fetch(url, { credentials: "same-origin" })
+        .then(function (r) { return r.json().then(function (d) { return { respuesta: r, datos: d }; }); })
+        .then(function (resultado) {
+          var r = resultado.respuesta;
+          var d = resultado.datos;
+          if (!r.ok || !d || d.ok !== true || !Array.isArray(d.ejercicios)) {
+            throw new Error((d && d.error) || "listening");
+          }
+          if (!d.ejercicios.length || d.ejercicios.length > 10 || typeof d.has_more !== "boolean") {
+            throw new Error("pagina");
+          }
+          if (d.has_more
+              && (typeof d.next_cursor !== "string"
+                || !/^[A-Z0-9_-]{3,40}$/.test(d.next_cursor)
+                || d.next_cursor === cursor)) {
+            throw new Error("cursor");
+          }
+
+          var codigos = new Set();
+          d.ejercicios.forEach(function (ej) {
+            if (!ej || typeof ej.codigo !== "string"
+                || !/^[A-Z0-9_-]{3,40}$/.test(ej.codigo)
+                || vistos.has(ej.codigo) || codigos.has(ej.codigo)) {
+              throw new Error("pagina_repetida");
+            }
+            codigos.add(ej.codigo);
+          });
+
+          numeroTanda += 1;
+          d.ejercicios.forEach(function (ej) {
+            vistos.add(ej.codigo);
+            tandas.appendChild(fichaListening(ej, true));
+          });
+          cursorSiguiente = d.has_more ? d.next_cursor : null;
+          cargandoTanda = false;
+          cargando.hidden = true;
+          siguiente.disabled = false;
+          siguiente.hidden = !cursorSiguiente;
+          fin.hidden = !!cursorSiguiente;
+        })
+        .catch(function () {
+          cargandoTanda = false;
+          cargando.hidden = false;
+          cargando.textContent = "No se han podido cargar las grabaciones. Vuelve a intentarlo en un momento.";
+          // Si fallo una pagina posterior, conserva el mismo cursor para que el
+          // boton reintente esa tanda y no salte ni repita la anterior.
+          if (cursor) {
+            cursorSiguiente = cursor;
+            siguiente.disabled = false;
+            siguiente.hidden = false;
+          }
+        });
+    }
+
+    siguiente.addEventListener("click", function () {
+      if (cursorSiguiente) cargarTanda(cursorSiguiente);
+    });
+    cargarTanda(null);
   }
 
-  function fichaListening(ej) {
+  function fichaListening(ej, remoto) {
     var caja = el("div", "ejercicio");
     caja.appendChild(el("h3", null, ej.titulo));
     caja.appendChild(el("p", "meta", ej.nivel + " · " + (ej.tema || "general")));
 
-    var reproducir = el("button", "btn ghost", "Escuchar");
-    var lento = el("button", "btn ghost", "Escuchar más despacio");
-    reproducir.addEventListener("click", function () {
-      if (!hablar(ej.transcript_no)) apagarEscucha(reproducir, lento, caja);
-    });
-    lento.addEventListener("click", function () {
-      if (!hablar(ej.transcript_no, true)) apagarEscucha(reproducir, lento, caja);
-    });
-    caja.appendChild(reproducir);
-    caja.appendChild(lento);
-    if (!hayVoz()) apagarEscucha(reproducir, lento, caja);
+    if (remoto) {
+      if (typeof ej.audio_url === "string" && ej.audio_url) {
+        var audio = document.createElement("audio");
+        audio.controls = true;
+        audio.preload = "none";
+        audio.src = ej.audio_url;
+        audio.setAttribute("aria-label", "Grabación de " + ej.titulo);
+        caja.appendChild(audio);
+      } else {
+        caja.appendChild(el("p", "ayuda", "Esta grabación no está disponible ahora mismo."));
+      }
+    } else {
+      var reproducir = el("button", "btn ghost", "Escuchar");
+      var lento = el("button", "btn ghost", "Escuchar más despacio");
+      reproducir.addEventListener("click", function () {
+        if (!hablar(ej.transcript_no)) apagarEscucha(reproducir, lento, caja);
+      });
+      lento.addEventListener("click", function () {
+        if (!hablar(ej.transcript_no, true)) apagarEscucha(reproducir, lento, caja);
+      });
+      caja.appendChild(reproducir);
+      caja.appendChild(lento);
+      if (!hayVoz()) apagarEscucha(reproducir, lento, caja);
+    }
 
     (ej.preguntas || []).forEach(function (q, qi) {
       var pn = el("p", "pregunta-no", q.q_no);
@@ -632,14 +1048,11 @@
   }
 
   function arrancar() {
-    // Con el agente abierto, aquí se pediría la sesión a /api/larsito-sesion/.
-    // Mientras está cerrado ni se llama: la demo se sirve entera desde el JSON.
-    // El ping al TTS de servidor va en paralelo y se espera antes de pintar,
-    // para que los botones de escucha nazcan ya encendidos o apagados.
-    var demoLista = fetch(DEMO, { credentials: "same-origin" })
-      .then(function (r) { if (!r.ok) throw new Error("http " + r.status); return r.json(); });
-    comprobarTtsServidor()
-      .then(function () { return demoLista; })
+    // La demo se sirve entera desde el JSON. La sesión del agente se pide solo
+    // al pulsar "Iniciar conversación", para no reservar una conversación sin
+    // que la persona haya decidido empezar.
+    fetch(DEMO, { credentials: "same-origin" })
+      .then(function (r) { if (!r.ok) throw new Error("http " + r.status); return r.json(); })
       .then(function (d) {
         datos = d;
         if (!datos || !Array.isArray(datos.escenarios) || !datos.escenarios.length) throw new Error("vacío");
@@ -650,15 +1063,5 @@
       });
   }
 
-  // Con el agente abierto, primero se pide sesión al backend (que aplica el muro
-  // de pago y la cuota). Si dice que no, la página cae a la demo en vez de romperse.
-  if (LARSITO_ABIERTO) {
-    fetch("/api/larsito-sesion/", { method: "POST", credentials: "same-origin" })
-      .then(function (r) { return r.json(); })
-      .then(function (s) { if (s && s.ok) sesion = s; })
-      .catch(function () { /* sin sesión, queda la demo */ })
-      .then(arrancar);
-  } else {
-    arrancar();
-  }
+  arrancar();
 })();

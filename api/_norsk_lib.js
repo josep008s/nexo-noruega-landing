@@ -268,6 +268,80 @@ export function readBody(req) {
   });
 }
 
+// JSON acotado para endpoints sensibles. Vercel puede entregar req.body ya
+// parseado o como stream; en ambos casos se aplica el mismo limite en bytes.
+export async function readJsonBodyLimited(req, maxBytes) {
+  const limite = Number.isInteger(maxBytes) && maxBytes > 0 ? maxBytes : 2048;
+  const declarado = Number(req.headers && req.headers["content-length"]);
+  if (Number.isFinite(declarado) && declarado > limite) {
+    const e = new Error("cuerpo demasiado grande");
+    e.status = 413;
+    e.code = "cuerpo";
+    throw e;
+  }
+
+  if (req.body !== undefined && req.body !== null) {
+    let raw;
+    if (Buffer.isBuffer(req.body)) raw = req.body.toString("utf8");
+    else if (typeof req.body === "string") raw = req.body;
+    else {
+      try { raw = JSON.stringify(req.body); }
+      catch (err) {
+        const e = new Error("json invalido");
+        e.status = 400;
+        e.code = "json";
+        throw e;
+      }
+    }
+    if (Buffer.byteLength(raw, "utf8") > limite) {
+      const e = new Error("cuerpo demasiado grande");
+      e.status = 413;
+      e.code = "cuerpo";
+      throw e;
+    }
+    try { return raw ? JSON.parse(raw) : {}; }
+    catch (err) {
+      const e = new Error("json invalido");
+      e.status = 400;
+      e.code = "json";
+      throw e;
+    }
+  }
+
+  return new Promise((resolve, reject) => {
+    const chunks = [];
+    let bytes = 0;
+    let excedido = false;
+    req.on("data", (chunk) => {
+      if (excedido) return;
+      const b = Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk);
+      bytes += b.length;
+      if (bytes > limite) {
+        excedido = true;
+        return;
+      }
+      chunks.push(b);
+    });
+    req.on("end", () => {
+      if (excedido) {
+        const e = new Error("cuerpo demasiado grande");
+        e.status = 413;
+        e.code = "cuerpo";
+        reject(e);
+        return;
+      }
+      try { resolve(JSON.parse(Buffer.concat(chunks).toString("utf8") || "{}")); }
+      catch (err) {
+        const e = new Error("json invalido");
+        e.status = 400;
+        e.code = "json";
+        reject(e);
+      }
+    });
+    req.on("error", reject);
+  });
+}
+
 export function readRawBody(req) {
   return new Promise((resolve, reject) => {
     const chunks = [];

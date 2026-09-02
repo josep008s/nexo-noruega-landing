@@ -1,0 +1,2 @@
+# El bundle de terceros se conserva byte por byte salvo el sourceMappingURL retirado.
+norsk/larsito/vendor/*.js -whitespace

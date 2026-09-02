@@ -9,19 +9,109 @@
 
 import fs from "node:fs";
 import path from "node:path";
+import { createHash } from "node:crypto";
 import { fileURLToPath } from "node:url";
 
 const ROOT = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const CURSO = path.join(ROOT, "scripts", "_norsk_curso", "curso.json");
+const MANIFIESTO = path.join(ROOT, "scripts", "_norsk_curso", "manifiesto.json");
 const DRY = process.argv.includes("--dry");
+const FINGERPRINT_VERSION = "sha256-ruta-contenido-v1";
 
 const CODIGO_VALIDO = /^[A-Z0-9_-]{3,40}$/;
-const TIPOS = ["diagnostico", "mecanismo", "lytt", "les", "skriv", "muntlig", "simulacro"];
+const TIPOS = ["diagnostico", "mecanismo", "anexo", "lytt", "les", "skriv", "muntlig", "simulacro"];
 const PROHIBIDAS = /increíble|brutal|paraíso|trucos|hola chicos/i;
 const NO_PENINSULAR = /\b(celular|manejar|acá|computadora|plata|carro)\b/i;
+const SECCION_INTERNA = /^(?:notas-para-la-revision-nativa|puertas-abiertas-de-esta-leccion|puertas-abiertas-de-este-documento|registro-de-dudas-para-contraste-humano-opcional|registro-historico-de-dudas-de-lengua|registro-de-revision-de-lengua|registro-de-produccion|estado-y-controles-separados-de-esta-leccion|estado-reconciliado-de-esta-leccion|estado-reconciliado-y-mejoras-opcionales|estado-y-trabajo-abierto|controles-y-pendientes-separados|lo-que-este-banco-todavia-no-tiene|hoja-interna-de-observacion-siete-puertas-y-alcance|control-de-calidad-de-este-bloque|comprobaciones-pasadas-sobre-este-archivo|comprobaciones-internas-de-este-lote|siguiente-paso)$/;
+const CONTENIDO_EDITORIAL_INTERNO = /contraste humano|revisi[oó]n nativa|registro (?:hist[oó]rico )?de dudas|puerta editorial|firma (?:humana|nativa)|revisi[oó]n sist[eé]mica|revisi[oó]n de bokm[aå]l|qa (?:sist[eé]mic[oa]|t[eé]cnic[oa]|de audio)|material interno|material publicable|no es copy|estado (?:de producci[oó]n|y trabajo abierto)|puertas abiertas de este documento|hoja interna|\bcohorte\b|\breclutamiento\b|circuito (?:con personas|de alumnos)|(?:no hay|no se incluye)[^.!?]{0,120}\bconsentimiento\b|\bla lupa\b|pass_con_avisos|orden (?:expresa )?de publicaci[oó]n|publicaci[oó]n (?:sigue|se registra|conserva|es una puerta)|puertas? (?:t[eé]cnicas? y )?de publicaci[oó]n|autorizar (?:la )?publicaci[oó]n|autorizar su uso p[uú]blico/i;
 
 function fallo(errores, id, msg) {
   errores.push(`${id}: ${msg}`);
+}
+
+function sha256(datos) {
+  return createHash("sha256").update(datos).digest("hex");
+}
+
+function fingerprintFuentes(entradas) {
+  const ordenadas = entradas.slice().sort((a, b) => (a.ruta < b.ruta ? -1 : a.ruta > b.ruta ? 1 : 0));
+  const hash = createHash("sha256");
+  hash.update(`${FINGERPRINT_VERSION}\0`, "utf8");
+  ordenadas.forEach(({ ruta, sha256: huella }) => {
+    hash.update(ruta, "utf8");
+    hash.update("\0", "utf8");
+    hash.update(huella, "ascii");
+    hash.update("\n", "utf8");
+  });
+  return hash.digest("hex");
+}
+
+function validarManifiesto(cursoTexto, piezas, errores) {
+  if (!fs.existsSync(MANIFIESTO)) {
+    fallo(errores, "manifiesto", "falta manifiesto.json; vuelve a exportar desde las fuentes");
+    return null;
+  }
+
+  let manifiesto;
+  try {
+    manifiesto = JSON.parse(fs.readFileSync(MANIFIESTO, "utf8"));
+  } catch (e) {
+    fallo(errores, "manifiesto", "JSON inválido");
+    return null;
+  }
+
+  if (manifiesto.fingerprint_version !== FINGERPRINT_VERSION) {
+    fallo(errores, "manifiesto", "versión de fingerprint ausente o desconocida");
+  }
+  if (manifiesto.curso_sha256 !== sha256(Buffer.from(cursoTexto, "utf8"))) {
+    fallo(errores, "manifiesto", "curso.json no coincide con su SHA-256; vuelve a exportar");
+  }
+  if (!Array.isArray(manifiesto.fuentes) || !manifiesto.fuentes.length) {
+    fallo(errores, "manifiesto", "lista de fuentes vacía");
+    return manifiesto;
+  }
+  if (manifiesto.fuentes.length !== piezas.length) {
+    fallo(errores, "manifiesto", `registra ${manifiesto.fuentes.length} fuentes para ${piezas.length} piezas`);
+  }
+
+  const rutas = new Set();
+  const base = typeof manifiesto.material === "string" ? path.resolve(manifiesto.material) : "";
+  manifiesto.fuentes.forEach((entrada, i) => {
+    const id = `manifiesto.fuentes[${i}]`;
+    const ruta = entrada && entrada.ruta;
+    const huella = entrada && entrada.sha256;
+    if (!ruta || typeof ruta !== "string" || path.isAbsolute(ruta) || ruta.includes("\\") || !ruta.endsWith(".md")) {
+      fallo(errores, id, "ruta relativa inválida");
+      return;
+    }
+    if (rutas.has(ruta)) fallo(errores, id, `ruta duplicada: ${ruta}`);
+    rutas.add(ruta);
+    if (!/^[a-f0-9]{64}$/.test(huella || "")) {
+      fallo(errores, id, "SHA-256 inválido");
+      return;
+    }
+    if (!base) {
+      fallo(errores, id, "directorio material inválido");
+      return;
+    }
+    const absoluta = path.resolve(base, ruta);
+    if (!absoluta.startsWith(`${base}${path.sep}`)) {
+      fallo(errores, id, "ruta sale del directorio material");
+      return;
+    }
+    if (!fs.existsSync(absoluta)) {
+      fallo(errores, id, `fuente ausente: ${ruta}`);
+      return;
+    }
+    if (sha256(fs.readFileSync(absoluta)) !== huella) {
+      fallo(errores, id, `fuente modificada desde el export: ${ruta}`);
+    }
+  });
+
+  if (manifiesto.fuentes_sha256 !== fingerprintFuentes(manifiesto.fuentes)) {
+    fallo(errores, "manifiesto", "fingerprint agregado de fuentes no coincide");
+  }
+  return manifiesto;
 }
 
 function validarPieza(p, errores, avisos, vistos) {
@@ -41,6 +131,10 @@ function validarPieza(p, errores, avisos, vistos) {
     if (!s || !s.titulo) fallo(errores, id, `seccion[${i}]: sin titulo`);
     if (!s || !s.html || s.html.length < 20) fallo(errores, id, `seccion[${i}]: html vacío`);
     if (s && idsVistos.has(s.id)) fallo(errores, id, `seccion[${i}]: id ${s.id} repetido`);
+    if (s && SECCION_INTERNA.test(s.id || "")) fallo(errores, id, `seccion[${i}]: nota editorial interna en artefacto de alumno`);
+    if (s && CONTENIDO_EDITORIAL_INTERNO.test(`${s.titulo || ""} ${s.html || ""}`)) {
+      fallo(errores, id, `seccion[${i}]: contenido editorial interno en artefacto de alumno`);
+    }
     if (s && s.id) idsVistos.add(s.id);
   });
 
@@ -52,8 +146,12 @@ function validarPieza(p, errores, avisos, vistos) {
   const meta = p.meta || {};
   if (String(meta.lupa || "").toUpperCase() === "FAIL") fallo(errores, id, "lupa en FAIL, no se sube");
   if (!meta.lupa) avisos.push(`${id}: sin marca de La Lupa`);
-  if (String(meta.revision_nativa || "").toUpperCase() === "PENDIENTE") {
-    avisos.push(`${id}: revisión nativa pendiente`);
+  if (meta.qa_lengua !== "SISTEMICA_TECNICA_ACEPTADA"
+      || meta.qa_lengua_alcance !== "NO_FIRMA_HUMANA_NATIVA") {
+    fallo(errores, id, "QA de lengua sin alcance sistémico/técnico canónico");
+  }
+  if (Object.prototype.hasOwnProperty.call(meta, "revision_nativa")) {
+    fallo(errores, id, "metadato legacy revision_nativa no permitido en artefacto de alumno");
   }
   if (!(p.palabras > 0)) avisos.push(`${id}: sin recuento de palabras`);
 }
@@ -89,12 +187,14 @@ if (!fs.existsSync(CURSO)) {
   process.exit(1);
 }
 
-const bruto = JSON.parse(fs.readFileSync(CURSO, "utf8"));
+const cursoTexto = fs.readFileSync(CURSO, "utf8");
+const bruto = JSON.parse(cursoTexto);
 const piezas = Array.isArray(bruto) ? bruto : bruto.piezas || [];
 
 const errores = [];
 const avisos = [];
 const vistos = new Set();
+const manifiesto = validarManifiesto(cursoTexto, piezas, errores);
 piezas.forEach((p) => validarPieza(p, errores, avisos, vistos));
 
 const porTipo = {};
@@ -104,6 +204,9 @@ const secciones = piezas.reduce((n, p) => n + ((p.secciones || []).length), 0);
 
 console.log(`Curso: ${piezas.length} piezas (${Object.entries(porTipo).map(([t, n]) => `${t} ${n}`).join(" · ") || "ninguna"})`);
 console.log(`Secciones: ${secciones} · Palabras: ${palabras.toLocaleString("es-ES")}`);
+if (manifiesto && manifiesto.fuentes_sha256) {
+  console.log(`Fuentes SHA-256: ${manifiesto.fuentes_sha256} · Curso SHA-256: ${manifiesto.curso_sha256}`);
+}
 if (avisos.length) console.log(`\nAVISOS (${avisos.length}):\n- ${avisos.join("\n- ")}`);
 if (errores.length) {
   console.error(`\nERRORES (${errores.length}), no se sube nada:\n- ${errores.join("\n- ")}`);
