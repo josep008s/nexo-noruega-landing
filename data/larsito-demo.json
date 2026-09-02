@@ -1,6 +1,6 @@
 {
   "version": "0.1",
-  "aviso": "Esto es la demo pública de Larsito, con contenido fijo para que veas cómo se trabaja; la conversación de verdad, con voz y corrección en el momento, llega con el curso. El noruego de esta demo está pendiente de la revisión de un hablante nativo.",
+  "aviso": "Esta demo usa contenido fijo y personajes ficticios. No escribas datos personales, familiares ni de salud reales. El noruego y el audio tienen la QA sistémica y técnica aceptada para esta v1; no se presenta como firma de un revisor nativo humano. La demo no evalúa pronunciación ni nivel.",
   "fuentes": [
     {
       "dato": "La prueba oral de Norskprøven dura entre 20 y 25 minutos, se hace con dos candidatos a la vez, la dirige un eksaminator y la evalúa un sensor. En el nivel A2-B1 hay tres tareas: contar algo sobre un tema cotidiano, intercambiar información con el otro candidato y expresar y justificar una opinión.",
@@ -33,7 +33,8 @@
       "id": "esc-01",
       "modo": "rollespill",
       "titulo": "Pedir cita con tu médico",
-      "contexto_es": "Llamas al centro de salud donde tienes asignado a tu fastlege y te contesta la persona de recepción. Quieres una cita y tienes que explicar en dos frases qué te pasa.",
+      "contexto_es": "Role-play ficticio: representas a Carmen y llamas a recepción para practicar cómo pedir una cita. Usa solo la ficha inventada, nunca tus datos ni síntomas reales.",
+      "datos_ficticios_es": "Carmen López · nacida el 12 de marzo de 1988 · dolor de espalda ficticio desde el martes · trabaja por la mañana y puede ir después de las 15:00.",
       "nivel": "A2",
       "turnos": [
         {
@@ -51,12 +52,12 @@
           ]
         },
         {
-          "larsito_no": "Det ordner vi. Kan jeg få navnet ditt og fødselsdatoen din?",
-          "larsito_es": "Eso lo arreglamos. ¿Me dices tu nombre y tu fecha de nacimiento?",
-          "pista_es": "Di tu nombre y tu fecha de nacimiento, y ofrécete a deletrear el apellido.",
+          "larsito_no": "Det ordner vi. Kan du lese opp navnet og fødselsdatoen som står på øvingskortet?",
+          "larsito_es": "Eso lo arreglamos. ¿Puedes leer el nombre y la fecha de nacimiento de la ficha de práctica?",
+          "pista_es": "Lee los datos ficticios de Carmen y ofrécete a deletrear el apellido. No uses los tuyos.",
           "respuestas_modelo_no": [
             "Jeg heter Carmen López. Jeg er født tolvte mars nittenåttiåtte.",
-            "Navnet mitt er Diego Ramos. Skal jeg stave etternavnet?"
+            "Navnet mitt er Carmen López. Skal jeg stave etternavnet?"
           ],
           "bloques_no": [
             "Jeg heter ...",
@@ -65,17 +66,17 @@
           ]
         },
         {
-          "larsito_no": "Takk. Og hva gjelder det? Du trenger ikke fortelle meg alt, bare kort hva som plager deg.",
-          "larsito_es": "Gracias. ¿Y de qué se trata? No tienes que contármelo todo, solo brevemente qué te molesta.",
-          "pista_es": "Describe el síntoma en una o dos frases y di desde cuándo lo tienes.",
+          "larsito_no": "Takk. Hva står det på øvingskortet om grunnen til timen?",
+          "larsito_es": "Gracias. ¿Qué pone en la ficha de práctica sobre el motivo de la cita?",
+          "pista_es": "Resume el motivo ficticio y desde cuándo aparece. No cuentes nada de tu salud.",
           "respuestas_modelo_no": [
-            "Jeg har vondt i magen, og det har vart i over en uke.",
-            "Jeg har hatt hodepine og feber siden mandag."
+            "Jeg har vondt i ryggen, og det begynte på tirsdag.",
+            "På øvingskortet står det at jeg har hatt vondt i ryggen siden tirsdag."
           ],
           "bloques_no": [
-            "Jeg har vondt i magen",
-            "Det begynte for en uke siden",
-            "Jeg har hatt feber i tre dager"
+            "Jeg har vondt i ryggen",
+            "Det begynte på tirsdag",
+            "På øvingskortet står det at ..."
           ]
         },
         {
@@ -95,20 +96,20 @@
         {
           "larsito_no": "Da har jeg torsdag klokka halv fire i stedet. Du får en bekreftelse på SMS. Er det noe mer du lurer på?",
           "larsito_es": "Pues entonces tengo el jueves a las tres y media. Recibirás una confirmación por SMS. ¿Quieres preguntar algo más?",
-          "pista_es": "Pregunta qué tienes que hacer si empeoras antes del jueves.",
+          "pista_es": "Pregunta cómo debe avisar el personaje si necesita cambiar la cita.",
           "respuestas_modelo_no": [
-            "Ja, én ting til. Hva gjør jeg hvis det blir verre før torsdag?",
-            "Takk. Og hvis jeg blir dårligere i helga, hvem ringer jeg da?"
+            "Ja, én ting til. Hvordan gir jeg beskjed hvis jeg må endre timen?",
+            "Takk. Hvem ringer jeg hvis jeg ikke kan komme på torsdag?"
           ],
           "bloques_no": [
-            "Hva gjør jeg hvis ...",
-            "hvis det blir verre",
-            "Kan jeg ringe legevakten?"
+            "Hvordan gir jeg beskjed hvis ...",
+            "hvis jeg må endre timen",
+            "Hvem ringer jeg da?"
           ]
         },
         {
-          "larsito_no": "Blir det mye verre, ringer du legevakten på 116 117. Den er åpen hele døgnet. God bedring!",
-          "larsito_es": "Si empeora mucho, llamas a urgencias al 116 117. Está abierto las veinticuatro horas. ¡Que te mejores!",
+          "larsito_no": "Hvis du må endre timen, ringer du legekontoret i åpningstiden. Ha en fin dag!",
+          "larsito_es": "Si tienes que cambiar la cita, llamas al centro durante su horario de atención. ¡Que tengas buen día!",
           "pista_es": "Despídete, da las gracias y confirma el día de la cita.",
           "respuestas_modelo_no": [
             "Tusen takk for hjelpen. Vi ses på torsdag.",
@@ -126,16 +127,17 @@
       "id": "esc-02",
       "modo": "rollespill",
       "titulo": "Reunión con la pedagoga de la guardería",
-      "contexto_es": "Estás en la foreldresamtale, la reunión que la pedagogisk leder del grupo tiene con las familias un par de veces al año. Quieres contar cómo ves a tu hijo en casa y salir de ahí con algo concreto acordado.",
+      "contexto_es": "Role-play ficticio: representas a una persona adulta en una reunión de guardería sobre Mateo, un niño inventado. Responde solo con la ficha.",
+      "datos_ficticios_es": "Mateo es un personaje ficticio de cinco años. Le gusta ir a la guardería y habla de Emma. En casa usa español y escucha cuentos en noruego. Le preocupa quedarse solo en el patio. La familia ficticia pide aviso en la aplicación el mismo día.",
       "nivel": "B1",
       "turnos": [
         {
           "larsito_no": "Hei, så hyggelig at du kunne komme. Bare sett deg. Hvordan synes du Mateo har hatt det i barnehagen i det siste?",
           "larsito_es": "Hola, qué bien que hayas podido venir. Siéntate. ¿Cómo crees que le ha ido a Mateo en la guardería últimamente?",
-          "pista_es": "Di cómo le ves y apóyalo con un detalle concreto de casa.",
+          "pista_es": "Explica cómo está Mateo según la ficha y añade ese detalle ficticio de casa.",
           "respuestas_modelo_no": [
             "Jeg synes han trives. Han snakker mye om Emma, og han vil gjerne gå hit om morgenen.",
-            "Han trives stort sett, men han er ofte veldig sliten når vi henter ham."
+            "Han virker glad i barnehagen, og hjemme snakker han ofte om Emma."
           ],
           "bloques_no": [
             "Jeg synes han trives",
@@ -146,10 +148,10 @@
         {
           "larsito_no": "Det stemmer godt med det vi ser. Han leker mye med Emma. Vi har lagt merke til at han snakker lite norsk i samlingsstunden. Hvordan er det hjemme?",
           "larsito_es": "Eso encaja con lo que vemos. Juega mucho con Emma. Hemos notado que habla poco noruego en la asamblea de la mañana. ¿Cómo va en casa?",
-          "pista_es": "Explica qué idiomas habláis en casa y qué hacéis con el noruego.",
+          "pista_es": "Explica los idiomas de la familia ficticia y qué hace con el noruego.",
           "respuestas_modelo_no": [
             "Hjemme snakker vi bare spansk, fordi vi vil at han skal beholde språket. Men vi leser norske bøker hver kveld.",
-            "Vi snakker spansk med hverandre, og han hører norsk her i barnehagen og på fotballtreningen."
+            "Vi snakker spansk med hverandre, og vi leser norske bøker sammen."
           ],
           "bloques_no": [
             "Hjemme snakker vi ...",
@@ -160,10 +162,10 @@
         {
           "larsito_no": "Det er helt fint at dere holder på morsmålet hjemme. Barn klarer fint å lære to språk. Er det noe dere er bekymret for?",
           "larsito_es": "Está muy bien que mantengáis la lengua materna en casa. Los niños aprenden dos idiomas sin problema. ¿Hay algo que os preocupe?",
-          "pista_es": "Cuenta una preocupación concreta y pregunta si ellos ven lo mismo.",
+          "pista_es": "Cuenta la preocupación de la ficha y pregunta si allí ven lo mismo.",
           "respuestas_modelo_no": [
             "Ja, litt. Han sier at han ikke har noen å leke med i utetiden. Ser dere det samme?",
-            "Vi lurer på om han forstår beskjedene deres. Merker dere at han blir usikker?"
+            "Vi er litt bekymret fordi han føler seg alene ute. Ser dere det samme?"
           ],
           "bloques_no": [
             "Vi lurer på om ...",
@@ -205,7 +207,8 @@
       "id": "esc-03",
       "modo": "rollespill",
       "titulo": "Pedir aclaración en una reunión de trabajo",
-      "contexto_es": "Tu jefe está explicando un cambio en una reunión de equipo y hay una palabra que no conoces. Se trata de preguntar en el momento y comprobar que lo has entendido, en vez de asentir y enterarte tarde.",
+      "contexto_es": "Role-play ficticio: representas a una persona del turno mientras su responsable explica un cambio. Practicas cómo pedir una aclaración sin contar nada de tu empleo real.",
+      "datos_ficticios_es": "La empresa ficticia cambia el cuadrante a formato digital el 1 de octubre. Cada persona registra sus horas el viernes. El personaje pide una guía escrita para todo el turno.",
       "nivel": "B1",
       "turnos": [
         {
@@ -239,10 +242,10 @@
         {
           "larsito_no": "Helt riktig. Og timene fører dere inn selv hver fredag, ellers får dere ikke betalt for overtid.",
           "larsito_es": "Exacto. Y las horas las metéis vosotros mismos cada viernes, si no, no os pagan las horas extra.",
-          "pista_es": "Haz una pregunta concreta sobre qué pasa si un viernes se te olvida.",
+          "pista_es": "Pregunta qué debe hacer el personaje si olvida registrar las horas un viernes.",
           "respuestas_modelo_no": [
             "Hva skjer hvis jeg glemmer å føre timene en fredag? Kan jeg gjøre det på mandag?",
-            "Og hvis jeg er syk på fredag, hvem fører timene mine da?"
+            "Hvis jeg glemmer å registrere timene på fredag, kan jeg gjøre det senere?"
           ],
           "bloques_no": [
             "Hva skjer hvis ...",
@@ -284,13 +287,14 @@
       "id": "esc-04",
       "modo": "samtale",
       "titulo": "Un vecino te invita al dugnad",
-      "contexto_es": "Te cruzas en el portal con un vecino que forma parte de la junta del edificio y te habla del dugnad, la jornada de trabajo comunitario del sábado. Quieres entender de qué va y aprovechar para conocer a alguien.",
+      "contexto_es": "Role-play ficticio: representas a Ana, una vecina inventada, cuando Kjell la invita al dugnad del edificio.",
+      "datos_ficticios_es": "Ana acaba de mudarse al segundo piso, todavía conoce a poca gente, no tiene hijos y llevará guantes de trabajo al dugnad del sábado a las 11:00.",
       "nivel": "A2",
       "turnos": [
         {
           "larsito_no": "Hei! Jeg er Kjell, jeg bor i tredje etasje. Vi har dugnad på lørdag klokka elleve. Kommer du?",
           "larsito_es": "¡Hola! Soy Kjell, vivo en el tercero. El sábado a las once tenemos dugnad. ¿Vienes?",
-          "pista_es": "Saluda, preséntate y pregunta qué es un dugnad.",
+          "pista_es": "Preséntate como Ana, el personaje de la ficha, y pregunta qué es un dugnad.",
           "respuestas_modelo_no": [
             "Hei, Kjell. Jeg heter Ana. Jeg flyttet hit i mai. Hva er egentlig en dugnad?",
             "Hei! Hyggelig å møte deg. Beklager, men jeg vet ikke hva dugnad betyr."
@@ -318,10 +322,10 @@
         {
           "larsito_no": "Bare arbeidshansker, hvis du har. Resten har vi. Har du truffet de andre i oppgangen?",
           "larsito_es": "Solo guantes de trabajo, si tienes. Lo demás lo tenemos nosotros. ¿Has conocido a los demás de la escalera?",
-          "pista_es": "Di a quién conoces y reconoce que todavía no has hablado con mucha gente.",
+          "pista_es": "Di que Ana solo conoce a Kjell y que todavía no ha hablado con mucha gente.",
           "respuestas_modelo_no": [
-            "Jeg kjenner bare naboen min i andre etasje. Ellers har jeg ikke snakket med så mange.",
-            "Ikke så mange, nei. Jeg jobber mye, så jeg er sjelden hjemme på dagtid."
+            "Jeg kjenner bare deg, Kjell. Ellers har jeg ikke snakket med så mange.",
+            "Bare deg foreløpig. Jeg har ikke rukket å bli kjent med de andre ennå."
           ],
           "bloques_no": [
             "Jeg kjenner bare naboen min",
@@ -332,13 +336,13 @@
         {
           "larsito_no": "Da blir lørdag fin. Folk her er ikke uvennlige. De er bare litt trege i starten. Har du barn?",
           "larsito_es": "Pues el sábado va a estar bien. Aquí la gente no es antipática. Solo son un poco lentos al principio. ¿Tienes hijos?",
-          "pista_es": "Habla de tu familia y propón algo, por ejemplo tomar un café.",
+          "pista_es": "Di que el personaje no tiene hijos y propón tomar un café después del dugnad.",
           "respuestas_modelo_no": [
-            "Ja, jeg har en datter på fem år. Hun leker gjerne med de andre barna.",
-            "Jeg har to barn. Kanskje vi kan ta en kaffe sammen etter dugnaden?"
+            "Nei, jeg har ikke barn. Men jeg vil gjerne bli kjent med naboene.",
+            "Jeg har ikke barn. Kanskje vi kan ta en kaffe sammen etter dugnaden?"
           ],
           "bloques_no": [
-            "Jeg har en datter på fem år",
+            "Jeg har ikke barn",
             "Kanskje vi kan ...",
             "ta en kaffe sammen"
           ]
@@ -363,16 +367,17 @@
       "id": "esc-05",
       "modo": "eksamen",
       "titulo": "Simulacro: hablar de ti mismo",
-      "contexto_es": "Larsito hace de eksaminator en la primera tarea de la prueba oral, esa en la que cuentas algo sobre un tema conocido durante dos o tres minutos. En el examen real estás con otro candidato y hay un sensor escuchando, así que aquí practicas tu parte.",
+      "contexto_es": "Simulación sin evaluación: Larsito representa al eksaminator, pero no hay sensor ni persona escuchando. Usa el personaje ficticio de la ficha; esta demo no determina tu nivel.",
+      "datos_ficticios_es": "Ana Torres es de Sevilla, vive en Noruega desde hace cuatro años, trabaja en una residencia, sale a caminar por el bosque, echa de menos a su familia y la comida, y quiere obtener el fagbrev de helsefagarbeider.",
       "nivel": "A2",
       "turnos": [
         {
-          "larsito_no": "Velkommen. Jeg er eksaminator i dag, og sensoren sitter her og lytter. Vi begynner med at du forteller litt om deg selv.",
-          "larsito_es": "Bienvenido. Hoy yo soy el examinador y el evaluador está aquí escuchando. Empezamos: cuéntanos un poco sobre ti.",
-          "pista_es": "Di tu nombre, de dónde eres y cuánto tiempo llevas en Noruega.",
+          "larsito_no": "Velkommen. Jeg spiller eksaminator i denne øvingen. Ingen sensor lytter til deg her. Fortell om personen på øvingskortet.",
+          "larsito_es": "Bienvenido. Represento al examinador en esta práctica. Aquí no hay ningún sensor escuchándote. Habla del personaje de la ficha.",
+          "pista_es": "Presenta a Ana con los datos ficticios de la ficha, no con los tuyos.",
           "respuestas_modelo_no": [
             "Jeg heter Ana Torres. Jeg kommer fra Sevilla, og jeg har bodd i Norge i fire år.",
-            "Jeg heter Diego. Jeg er fra Colombia, og jeg flyttet til Bergen i 2022."
+            "Navnet mitt er Ana Torres. Jeg er fra Sevilla og har bodd her i fire år."
           ],
           "bloques_no": [
             "Jeg heter ...",
@@ -383,10 +388,10 @@
         {
           "larsito_no": "Takk. Kan du fortelle litt om hva du gjør til daglig?",
           "larsito_es": "Gracias. ¿Puedes contar un poco a qué te dedicas cada día?",
-          "pista_es": "Habla de tu trabajo o de tus estudios y describe un día normal.",
+          "pista_es": "Habla del trabajo ficticio de Ana y describe su día según la ficha.",
           "respuestas_modelo_no": [
             "Jeg jobber på et sykehjem i Sandnes. Jeg begynner klokka sju og hjelper beboerne med frokost.",
-            "Jeg studerer på voksenopplæringen om formiddagen, og på ettermiddagen jobber jeg i en butikk."
+            "Til daglig jobber jeg på et sykehjem og hjelper beboerne med frokost."
           ],
           "bloques_no": [
             "Jeg jobber som ...",
@@ -397,10 +402,10 @@
         {
           "larsito_no": "Hva liker du å gjøre når du har fri?",
           "larsito_es": "¿Qué te gusta hacer cuando tienes tiempo libre?",
-          "pista_es": "Cuenta una afición y di por qué te gusta.",
+          "pista_es": "Cuenta la afición ficticia de Ana y explica por qué podría gustarle.",
           "respuestas_modelo_no": [
             "Jeg liker å gå tur i skogen. Det er stille der, og jeg blir rolig i hodet.",
-            "På fritiden spiller jeg fotball med noen kolleger. Vi trener hver onsdag."
+            "På fritiden går jeg gjerne tur i skogen, fordi det er stille der."
           ],
           "bloques_no": [
             "Jeg liker å gå tur",
@@ -411,10 +416,10 @@
         {
           "larsito_no": "Kan du fortelle om noe du savner fra hjemlandet ditt?",
           "larsito_es": "¿Puedes contar algo que eches de menos de tu país?",
-          "pista_es": "Di qué echas de menos y compáralo con Noruega sin quejarte.",
+          "pista_es": "Cuenta qué echa de menos Ana y compáralo con Noruega.",
           "respuestas_modelo_no": [
             "Jeg savner familien min og maten. I Spania spiser vi seint, og vi sitter lenge ved bordet.",
-            "Jeg savner lyset om vinteren. Her blir det mørkt klokka tre, og det var uvant i begynnelsen."
+            "Jeg savner familien og maten fra Spania, men jeg trives også godt i Norge."
           ],
           "bloques_no": [
             "Jeg savner ...",
@@ -425,10 +430,10 @@
         {
           "larsito_no": "Til slutt: hva har du lyst til å gjøre de neste årene?",
           "larsito_es": "Por último: ¿qué te apetece hacer en los próximos años?",
-          "pista_es": "Habla de un plan de futuro usando skal o har lyst til.",
+          "pista_es": "Explica el plan de futuro ficticio de Ana usando skal o har lyst til.",
           "respuestas_modelo_no": [
             "Jeg skal ta fagbrev som helsefagarbeider. Derfor trenger jeg norsk på B1-nivå.",
-            "Jeg har lyst til å søke fast jobb, og senere vil jeg studere videre."
+            "Jeg har lyst til å ta fagbrev som helsefagarbeider de neste årene."
           ],
           "bloques_no": [
             "Jeg skal ta fagbrev",
@@ -442,13 +447,14 @@
       "id": "esc-06",
       "modo": "eksamen",
       "titulo": "Simulacro: dar y defender una opinión",
-      "contexto_es": "Larsito hace de eksaminator en la última tarea de la prueba oral, la de expresar y justificar una opinión sobre un tema que te dan. Aquí no vale con decir qué piensas: hay que argumentarlo y aguantar una objeción.",
+      "contexto_es": "Simulación sin evaluación: Larsito representa al eksaminator, pero no hay sensor ni persona escuchando. Defiende la postura ficticia de la ficha; la demo no determina tu nivel.",
+      "datos_ficticios_es": "Postura asignada: la escuela debe enseñar natación por seguridad y para ofrecer las mismas oportunidades. Ejemplo ficticio: un colegio cercano al mar dedica unas horas al año a esta práctica.",
       "nivel": "B1",
       "turnos": [
         {
           "larsito_no": "Nå kommer den siste oppgaven. Du får et tema, og du skal si hva du mener og begrunne det. Temaet ditt er: bør alle barn lære å svømme på skolen?",
           "larsito_es": "Ahora viene la última tarea. Te doy un tema y tienes que decir qué opinas y justificarlo. Tu tema es: ¿deberían todos los niños aprender a nadar en el colegio?",
-          "pista_es": "Da tu opinión en una frase clara y anuncia que vas a dar dos razones.",
+          "pista_es": "Expón la postura asignada en una frase clara y anuncia dos razones.",
           "respuestas_modelo_no": [
             "Jeg mener at alle barn bør lære å svømme på skolen. Jeg har to grunner til det.",
             "Etter min mening er svømming like viktig som lesing. Jeg skal forklare hvorfor."
@@ -462,15 +468,15 @@
         {
           "larsito_no": "Gjerne. Fortell om den første grunnen din.",
           "larsito_es": "Adelante. Cuéntame tu primera razón.",
-          "pista_es": "Da la primera razón y apóyala con un ejemplo o una experiencia tuya.",
+          "pista_es": "Da la primera razón y apóyala con el ejemplo ficticio de la ficha.",
           "respuestas_modelo_no": [
             "For det første er Norge fullt av vann. Vi bor nær sjøen, og barna er ved vannet hele sommeren.",
-            "Den viktigste grunnen er sikkerhet. Da jeg var liten, falt en venn i bassenget, og han kunne ikke svømme."
+            "Den viktigste grunnen er sikkerhet. Et eksempel er skoler nær sjøen, der barna ofte er ved vannet."
           ],
           "bloques_no": [
             "For det første ...",
             "Den viktigste grunnen er ...",
-            "Da jeg var liten, ..."
+            "Et eksempel er ..."
           ]
         },
         {

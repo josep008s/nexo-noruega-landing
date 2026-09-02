@@ -1,5 +1,5 @@
 -- NEXO NORSK · Curso Norskprøven B1 (línea Idioma).
--- Se aplica DESPUÉS de 0001_norsk_schema.sql, que crea el esquema base de NEXO PASS
+-- Se aplica DESPUÉS de 20260831192821_norsk_schema_0001.sql, que crea el esquema base de NEXO PASS
 -- (norsk_compras, norsk_uso y sus RPCs). Esta migración no lo repite: solo añade la
 -- tabla del curso. El contador de uso del tipo 'curso' sale de norsk_incr_uso, que
 -- ya existe desde la 0001, así que aquí no hay que crear ninguna función nueva.
@@ -10,12 +10,14 @@
 
 -- ---------- Contenido del curso ----------
 -- Una pieza es un documento del material: el diagnóstico de entrada, uno de los
--- dieciséis mecanismos, o un documento por destreza. El cuerpo viaja troceado en
+-- dieciséis mecanismos, el anexo de expresiones, o un documento por destreza. El cuerpo viaja troceado en
 -- secciones, cada una con su id, su título y su HTML ya convertido, porque la app
 -- pinta una sección por pantalla y así no tiene que interpretar Markdown en el
 -- cliente. En "meta" van los campos del front-matter que interesan a la app
--- (piezas del canon, unidades de destino, delprøver, estado de La Lupa y de la
--- revisión nativa). El Markdown original vive en el Drive, no aquí.
+-- (piezas del canon, unidades de destino, delprøver, estado de La Lupa y
+-- qa_lengua/qa_lengua_alcance para la QA sistémica y técnica aceptada; no se
+-- exporta un campo revision_nativa porque no existe firma humana/nativa).
+-- El Markdown original vive en el Drive, no aquí.
 create table if not exists norsk_curso (
   codigo     text primary key,
   tipo       text not null,
