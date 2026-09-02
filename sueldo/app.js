@@ -101,7 +101,7 @@
     "No es que cobres más. Es que dejas de pagar lo que allí pagas aparte.",
     "El bruto se cobra. El neto se vive. Mira la diferencia.",
     "Mismo oficio, otro país, otro final de mes.",
-    "Aquí el sueldo no es el truco. El truco es lo que ya no pagas."
+    "Aquí el sueldo no es la noticia. La noticia es lo que ya no pagas aparte."
   ];
 
   // ---------- navegación entre pantallas ----------
@@ -114,7 +114,11 @@
   var acItems = [], acIdx = -1;
   function renderAc(v) {
     if (norm(v).length < 2) { ac.innerHTML = ""; acItems = []; acIdx = -1; inp.setAttribute("aria-expanded", "false"); return; }
-    var top = rank(v).filter(function (x) { return x.s > 0.34; }).slice(0, 6);
+    // Si hay una coincidencia clara, no se enseñan parecidos lejanos (para "enfermera" no debe salir "herrero");
+    // el umbral bajo solo se mantiene cuando nada encaja bien, para tolerar erratas.
+    var ranked = rank(v);
+    var umbral = ranked.length && ranked[0].s >= 0.6 ? 0.45 : 0.34;
+    var top = ranked.filter(function (x) { return x.s > umbral; }).slice(0, 6);
     acItems = top; acIdx = -1;
     ac.innerHTML = top.map(function (x, i) {
       var cat = CATS[x.o.grupo] || "";
@@ -187,7 +191,7 @@
           '<p class="num hero" id="r-neto">0 kr</p>' +
           '<p class="eur"><span id="e-neto">' + eeur(eur(netoM)) + "</span> · después de impuestos</p>" +
           '<p class="cap">Es una aproximación. El neto exacto depende de tu kommune, tus deducciones y tu situación: con tantas variables, nadie puede clavarlo de antemano.</p></div>' +
-        '<p class="extra">Y no pagas aparte: guardería (tope ' + kr(serv.barnehage_makspris_mes) + "/mes), universidad gratis, sanidad (tope " + kr(serv.egenandelstak_anio) + "/año).</p>" +
+        '<p class="extra">Y no pagas aparte: guardería (tope ' + kr(serv.barnehage_makspris_mes) + "/mes), universidad pública sin matrícula si eres ciudadano de la UE o del EEE, sanidad (tope " + kr(serv.egenandelstak_anio) + "/año).</p>" +
         '<p class="remate">' + esc(remate) + "</p></div>" +
 
       '<div class="afinar hidden" id="afinar">' +
