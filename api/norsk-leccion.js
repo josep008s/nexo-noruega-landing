@@ -1,5 +1,6 @@
 // Sirve lecciones del curso. La lección pública (L0) se sirve sin cookie;
-// el resto exige compra activa.
+// el resto, y el índice completo, exigen compra activa. Sin cookie se
+// responde 401 en vez de tocar Supabase (la demo tiene su propio JSON).
 // GET ?slug=<slug>  |  GET (sin slug) -> índice de lecciones (título/resumen, sin cuerpo)
 
 import { readSessionCookie, compraActiva, sbSelect } from "./_norsk_lib.js";
@@ -10,6 +11,9 @@ export default async function handler(req, res) {
 
   try {
     if (!slug) {
+      const sesion = readSessionCookie(req);
+      const compra = sesion ? await compraActiva(sesion.sub) : null;
+      if (!compra) { res.status(401).json({ ok: false, error: "acceso" }); return; }
       const rows = await sbSelect("norsk_lecciones?select=slug,orden,modulo,titulo,resumen,publica&order=orden.asc");
       res.status(200).json({ ok: true, lecciones: rows });
       return;

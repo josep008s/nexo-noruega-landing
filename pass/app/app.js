@@ -125,9 +125,13 @@
   // ---------- arranque ----------
 
   function boot() {
-    var pingP = api("/api/norsk-preguntas/?modo=ping").catch(function () { return null; });
+    // Solo se pregunta a la API si el navegador lleva la marca de acceso que
+    // pone el servidor al activar la compra; si no, la demo va directa al JSON
+    // sin dejar errores 401 en la consola.
+    var hayAcceso = /(?:^|;\s*)nexo_norsk_ok=/.test(document.cookie);
+    var pingP = hayAcceso ? api("/api/norsk-preguntas/?modo=ping").catch(function () { return null; }) : Promise.resolve(null);
     var demoP = fetch("/data/norsk-demo.json").then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; });
-    var lecP = api("/api/norsk-leccion/").catch(function () { return null; });
+    var lecP = hayAcceso ? api("/api/norsk-leccion/").catch(function () { return null; }) : Promise.resolve(null);
 
     Promise.all([pingP, demoP, lecP]).then(function (rs) {
       state.acceso = rs[0] && rs[0].ok ? rs[0] : null;
