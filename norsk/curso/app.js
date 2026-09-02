@@ -235,7 +235,7 @@
           fila.appendChild(el("span", "cuaderno-num", String(t.n)));
           var txt = el("span", "cuaderno-txt");
           txt.appendChild(el("strong", null, t.titulo));
-          txt.appendChild(el("small", null, t.que + " · " + t.paginas + " páginas · " + t.mb + " MB"));
+          txt.appendChild(el("small", null, t.que + " · " + t.paginas + " páginas"));
           fila.appendChild(txt);
           if (conAcceso) {
             fila.href = CUADERNO_API + "?tomo=" + t.n;
