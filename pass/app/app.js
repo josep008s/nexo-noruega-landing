@@ -760,7 +760,7 @@
       var caja = el("div", { class: "captura" });
       caja.appendChild(el("h2", { text: "El curso completo abre muy pronto" }));
       caja.appendChild(el("p", { text: "Suscríbete a la newsletter y te avisamos el día que abra. Es también donde contamos cómo funciona de verdad la vida aquí." }));
-      caja.appendChild(el("a", { class: "btn", href: "https://nexonoruega.substack.com/subscribe", text: "Avísame cuando abra" }));
+      caja.appendChild(el("a", { class: "btn", href: "https://nexonoruega.substack.com/subscribe?utm_source=nexonoruega.com&utm_medium=web&utm_campaign=pass-app", text: "Avísame cuando abra" }));
       return caja;
     }
     var box = el("div", { class: "captura" });
@@ -889,7 +889,7 @@
       s.appendChild(el("h1", { text: "El curso abre muy pronto" }));
       s.appendChild(el("p", { class: "intro", text: "Está terminado y verificado: las 12 lecciones, más de 400 preguntas y los simulacros con el formato oficial exacto. Estamos cerrando los últimos trámites antes de abrir la venta." }));
       s.appendChild(el("p", { class: "intro", text: "Suscríbete a la newsletter y te avisamos el día que abra. Mientras tanto, la demo y la Lección 0 son gratis." }));
-      s.appendChild(el("a", { class: "btn", href: "https://nexonoruega.substack.com/subscribe", text: "Avísame cuando abra" }));
+      s.appendChild(el("a", { class: "btn", href: "https://nexonoruega.substack.com/subscribe?utm_source=nexonoruega.com&utm_medium=web&utm_campaign=pass-app", text: "Avísame cuando abra" }));
       s.appendChild(el("button", { class: "btn ghost", text: "Volver a practicar", onclick: renderInicio }));
       $app.appendChild(s);
       return;

@@ -355,7 +355,7 @@
     var cierre = el("div", "cierre-panel");
     cierre.appendChild(el("p", null, "Cuando el curso abra, Larsito responderá a lo que digas, no a un guion. El feedback llegará después de la actuación completa."));
     var a = el("a", "btn", "Avísame cuando abra");
-    a.href = "https://nexonoruega.substack.com/subscribe";
+    a.href = "https://nexonoruega.substack.com/subscribe?utm_source=nexonoruega.com&utm_medium=web&utm_campaign=norsk-larsito";
     cierre.appendChild(a);
     paso.appendChild(cierre);
 
