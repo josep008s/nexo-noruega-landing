@@ -282,7 +282,7 @@
     card.appendChild(el("p", { class: "med-num", text: (esDemo ? "Mejor demo: " : "Mejor simulacro: ") + mejor + "% · aprobado en el 76%" }));
     card.appendChild(el("p", { class: "med-msg", text: msg }));
     if (state.acceso && nAprob > 0) {
-      card.appendChild(el("p", { class: "med-gar", text: "Simulacros aprobados: " + nAprob + " de 5 (garantía)" }));
+      card.appendChild(el("p", { class: "med-gar", text: "Simulacros superados: " + nAprob }));
     }
     return card;
   }
@@ -927,8 +927,8 @@
       planes.appendChild(plan);
     });
     s.appendChild(planes);
-    s.appendChild(el("p", { class: "toggle-nota", style: "margin-top:16px", text: "Garantía sin letra enana: si completas el curso, apruebas 5 simulacros y aun así suspendes, te devolvemos el dinero y sigues gratis hasta aprobar." }));
-    s.appendChild(el("p", { class: "toggle-nota", html: 'Pago único, sin suscripción. <a href="/pass/condiciones/">Condiciones y garantía</a> · <a href="/pass/privacidad/">Privacidad</a>' }));
+    s.appendChild(el("p", { class: "toggle-nota", style: "margin-top:16px", text: "NEXO PASS es una preparación independiente y no garantiza el aprobado." }));
+    s.appendChild(el("p", { class: "toggle-nota", html: 'Pago único, sin suscripción. <a href="/pass/condiciones/">Condiciones</a> · <a href="/pass/privacidad/">Privacidad</a>' }));
     $app.appendChild(s);
   }
 
