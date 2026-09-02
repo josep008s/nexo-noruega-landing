@@ -89,17 +89,17 @@
     .marca span{font-family:var(--sg);font-weight:500;font-size:.9rem;letter-spacing:.02em}
     .marca b{font-weight:700}
     .head-nav{display:flex;gap:20px}
-    .head-nav a{font-family:var(--sg);font-weight:500;font-size:.84rem;color:var(--fiordo);text-decoration:none;transition:color .2s}
+    .head-nav a{font-family:var(--sg);font-weight:500;font-size:.84rem;color:var(--fiordo);text-decoration:none;padding:4px 0 3px;border-bottom:3px solid transparent;transition:color .2s,border-color .2s}
     .head-nav a:hover{color:var(--noche)}
-    .head-nav a[aria-current="page"]{color:var(--noche);font-weight:700}
+    .head-nav a[aria-current="page"]{color:var(--noche);font-weight:700;border-bottom-color:var(--aurora)}
 
     .kicker{font-family:var(--sg);font-weight:700;font-size:.78rem;letter-spacing:.22em;text-transform:uppercase;margin-bottom:20px;color:var(--fiordo)}
     .caesar{font-family:var(--caesar);font-weight:400;text-transform:uppercase;letter-spacing:.1em}
 
     h1,h2{font-family:var(--sg);font-weight:700;letter-spacing:-.02em;line-height:1.12;color:var(--noche)}
-    h1{font-size:clamp(2.2rem,5.6vw,3.5rem);max-width:18ch;margin-bottom:20px}
+    h1{font-size:clamp(2.1rem,5.4vw,3.4rem);max-width:17ch;margin-bottom:20px}
     h2{font-size:clamp(1.7rem,3.6vw,2.3rem);margin-bottom:24px;max-width:24ch}
-    .sub{font-size:1.16rem;color:var(--tinta-suave);max-width:54ch;margin-bottom:30px}
+    .sub{font-size:1.16rem;color:var(--tinta-suave);max-width:56ch;margin-bottom:28px}
     p{color:var(--tinta-suave)}
     .parrafo{font-size:1.1rem;max-width:60ch;margin-bottom:18px}
 
@@ -112,7 +112,7 @@
     .js .reveal.visible mark.marcado{background-size:100% 100%}
 
     .cta{display:inline-block;font-family:var(--sg);font-weight:700;font-size:1rem;color:var(--noche);
-      background:var(--aurora);border:none;text-decoration:none;text-align:center;padding:16px 34px;border-radius:4px;cursor:pointer;
+      background:var(--aurora);border:none;text-decoration:none;text-align:center;padding:16px 32px;border-radius:4px;cursor:pointer;
       transition:transform .2s var(--ease),box-shadow .25s,filter .18s}
     .cta:hover{transform:translateY(-2px);filter:brightness(1.05);box-shadow:0 8px 26px rgba(63,203,148,.4)}
     .cta.ghost{background:none;border:1px solid var(--linea-clara);color:var(--noche)}
@@ -124,7 +124,7 @@
     .fuente a{color:inherit}
 
     /* ===== Hero ===== */
-    .hero{padding-top:56px;padding-bottom:56px}
+    .hero{padding-top:56px;padding-bottom:52px}
     .dato-hero .marca-fuente{font-family:var(--sg);font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--fiordo)}
 
     /* ===== Las dos pruebas ===== */
@@ -210,7 +210,7 @@
 
     @media (max-width:640px){
       section{padding:52px 0}
-      .hero{padding-top:38px;padding-bottom:48px}
+      .hero{padding-top:38px;padding-bottom:44px}
       .head-nav{gap:14px}
       .head-nav a{font-size:.78rem}
       .marca span{font-size:.82rem}
@@ -239,7 +239,7 @@
       <nav class="head-nav" aria-label="Secciones">
         <a href="/norsk/">Noruego</a>
         <a href="/pass/" aria-current="page">Exámenes</a>
-        <a href="/pass/app/">Entrar</a>
+        <a href="https://www.nexonoruega.com">Nexo Noruega</a>
       </nav>
     </div>
   </header>
@@ -250,7 +250,7 @@
       <div class="cielo" aria-hidden="true"></div>
       <div class="wrap">
         <p class="kicker caesar reveal">Nexo Pass</p>
-        <h1 class="reveal" style="--d:.08s">El examen que necesitas, explicado en español.</h1>
+        <h1 class="reveal" style="--d:.08s">El examen que necesitas, <mark class="marcado">explicado en español</mark>.</h1>
         <p class="sub reveal" style="--d:.16s">Prepara la statsborgerprøven y la samfunnskunnskapsprøven con cientos y cientos de preguntas en noruego y español, explicaciones claras y simulacros con el formato oficial.</p>
         <div class="reveal" style="--d:.24s">
           <a class="cta" href="/pass/app/">Haz el simulacro gratis</a>
