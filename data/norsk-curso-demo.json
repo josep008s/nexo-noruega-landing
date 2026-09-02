@@ -1,10 +1,10 @@
 {
  "meta": {
   "producto": "NEXO NORSK · Ruta Norskprøven B1",
-  "actualizado": "2026-08-31",
+  "actualizado": "2026-09-02",
   "aviso": "Material propio de NEXO NORSK, de formato similar al que HK-dir describe en su web. NEXO NORSK es un proyecto independiente y no tiene relación con HK-dir, con UDI ni con ningún centro de examen.",
   "piezas_totales": 28,
-  "mecanismos_totales": 17
+  "mecanismos_totales": 16
  },
  "mecanismo": {
   "codigo": "M01",
@@ -33,7 +33,8 @@
     ]
    },
    "lupa": "PASS_CON_AVISOS",
-   "revision_nativa": "RESUELTA_POR_SISTEMA_2026-08-31 (ver RESOLUCION_REVISION_BOKMAL_v1.md)"
+   "qa_lengua": "SISTEMICA_TECNICA_ACEPTADA",
+   "qa_lengua_alcance": "NO_FIRMA_HUMANA_NATIVA"
   },
   "secciones": [
    {
@@ -64,7 +65,7 @@
    {
     "id": "en-el-examen",
     "titulo": "5. En el examen",
-    "html": "<p>Empecemos por el dato de formato. La prueba escrita se corrige con criterios de resolución de cada tarea más cuatro criterios de lengua aplicados al conjunto: construcción del texto, ortografía y puntuación, vocabulario y gramática. Y para situarse en un nivel hay que estar en ese nivel en todos los criterios, sin media. Fuente: <a href=\"https://hkdir.no/voksenopplaering/norsk-og-samfunnskunnskap/om-norskprovene/norskproven-a1-b2/prove-i-skriftleg-framstilling\" target=\"_blank\" rel=\"noopener\">HK-dir, Prøve i skriftleg framstilling</a>, consultada el 29.08.2026.</p>\n<p>Sobre eso montamos nuestra rúbrica interna, que en la prueba escrita A2-B1 tiene siete puertas. Conviene decirlo claro antes de seguir: esa rúbrica es un instrumento nuestro de entrenamiento, los descriptores que citamos son una traducción de trabajo y no una traducción oficial, y nada de esto equivale al resultado que emite HK-dir.</p>\n<p>Este mecanismo toca dos de esas siete puertas. La de gramática, L4, porque el descriptor de B1 pide control bastante bueno de las estructuras básicas, y el orden de la frase principal es la estructura básica del noruego. Y la de construcción del texto, L1, porque el descriptor de B1 pide usar varios conectores distintos, y casi todos van al principio de la frase. Quien evita el arranque para no equivocarse pierde las dos puertas a la vez.</p>\n<p>En la prueba oral toca la puerta de gramática, O7, con el mismo descriptor.</p>\n<p>Y aquí está lo que conviene no olvidar: en las dos rúbricas manda la puerta más baja, sin media. Una sola puerta en A2 deja la actuación en A2 aunque las otras seis estén en B1.</p>\n<p>Estas cinco piezas no se evalúan en comprensión lectora ni en comprensión oral.</p>"
+    "html": "<p>Empecemos por el dato de formato. La prueba escrita se corrige con criterios de resolución de cada tarea más cuatro criterios de lengua aplicados al conjunto: construcción del texto, ortografía y puntuación, vocabulario y gramática. Y para situarse en un nivel hay que estar en ese nivel en todos los criterios, sin media. Fuente: <a href=\"https://hkdir.no/voksenopplaering/norsk-og-samfunnskunnskap/om-norskprovene/norskproven-a1-b2/prove-i-skriftleg-framstilling\" target=\"_blank\" rel=\"noopener\">HK-dir, Prøve i skriftleg framstilling</a>, consultada el 29.08.2026.</p>\n<p>Sobre eso montamos nuestra rúbrica interna, que en la prueba escrita A2-B1 tiene siete puertas. Conviene decirlo claro antes de seguir: esa rúbrica es un instrumento nuestro de entrenamiento, los descriptores que citamos son una traducción de trabajo y no una traducción oficial, y nada de esto equivale al resultado que emite HK-dir.</p>\n<p>Este mecanismo toca dos de esas siete puertas. La de gramática, L4, porque el descriptor de B1 pide control bastante bueno de las estructuras básicas, y el orden de la frase principal es la estructura básica del noruego. Y la de construcción del texto, L1, porque el descriptor de B1 pide usar varios conectores distintos, y casi todos van al principio de la frase. Quien evita el arranque para no equivocarse pierde las dos puertas a la vez.</p>\n<p>En la prueba oral toca la puerta de gramática, O7, con el mismo descriptor.</p>\n<p>Y aquí está lo que conviene no olvidar: la valoración oficial no compensa criterios mediante una media. En la observación interna de NEXO, la puerta observable más baja fija el siguiente foco; no convierte la actuación en una etiqueta A2/B1.</p>\n<p>Estas cinco piezas no se evalúan en comprensión lectora ni en comprensión oral.</p>"
    },
    {
     "id": "en-tu-vida",
@@ -97,7 +98,7 @@
     "html": "<p>Tres señales que se pueden observar desde fuera.</p>\n<p><strong>Una.</strong> Escribes ocho frases seguidas sobre un tema nuevo, cada una con un arranque distinto del sujeto, y no tienes que releer ninguna para colocar el verbo. La comprobación es esa: sin releer.</p>\n<p><strong>Dos.</strong> Hablando, te oyes empezar por <code>Derfor</code>, <code>I fjor</code> o <code>Da jeg kom hit</code> sin haberlo decidido antes. Ha dejado de ser una regla que aplicas y ha pasado a ser un bloque que sale entero.</p>\n<p><strong>Tres.</strong> Distingues la trampa sobre la marcha. Después de <code>men</code> y de <code>og</code> dejas el sujeto delante, y después de <code>derfor</code> y de <code>dessverre</code> lo pasas detrás, sin pararte a pensar en la diferencia.</p>"
    }
   ],
-  "palabras": 3832
+  "palabras": 3313
  },
  "indice": [
   {
@@ -174,23 +175,18 @@
    "codigo": "M16",
    "titulo": "Producción conectada y reparación sin preparación",
    "grieta": "cuando falta una palabra, el turno se acaba, y el silencio se lee como falta de fluidez aunque la gramática esté bien."
-  },
-  {
-   "codigo": "ANEXO-UTTRYKK",
-   "titulo": "Expresiones del banco UTTRYKK por mecanismo",
-   "grieta": null
   }
  ],
  "diagnostico": {
   "codigo": "DIAGNOSTICO_B1",
-  "titulo": "Diagnóstico de entrada · Ruta Norskprøven B1 · NEXO NORSK, línea Idioma",
+  "titulo": "Perfil diagnóstico opcional · Ruta Norskprøven B1 · NEXO NORSK, línea Idioma",
   "parcial": true,
   "nota": "Solo la introducción. Las cuatro pruebas, la rúbrica y las soluciones están en el curso.",
   "secciones": [
    {
     "id": "intro",
     "titulo": "Introducción",
-    "html": "<p>Esto no es un examen de HK-dir y no predice tu resultado. Es material propio de NEXO NORSK, de formato similar al que HK-dir describe en su web. El aviso completo está al final.</p>"
+    "html": "<p>Esto no es un examen de HK-dir y no predice tu resultado. Es material propio de NEXO NORSK, de formato similar al que HK-dir describe en su web. El aviso completo está al final.</p>\n<blockquote><p><strong>Uso vigente.</strong> No necesitas completar las cuatro partes para entrar en la ruta. La entrada exige A2 funcional en comprensión oral y producción oral, y empieza con una línea base hablada. Este perfil sirve para decidir si activar además las ramas de lectura o escritura; una banda baja en ellas no bloquea ni cambia el inicio del núcleo oral.</p></blockquote>"
    },
    {
     "id": "por-que-esto-no-te-va-a-dar-un-numero",

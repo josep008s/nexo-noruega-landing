@@ -11,6 +11,8 @@ scripts/_norsk_larsito/
 # Curso Norskprøven B1: el material del curso es contenido de pago y el repo es
 # público. Lo único que sale de aquí al repo es data/norsk-curso-demo.json.
 scripts/_norsk_curso/
-.env.local
+.env*
+!.env.example
 .vercel
 .claude/
+supabase/.temp/
