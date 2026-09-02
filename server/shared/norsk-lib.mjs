@@ -1,4 +1,5 @@
-// Helpers compartidos de NEXO PASS (los archivos api/_* no se exponen como endpoint).
+// Helpers compartidos de NEXO PASS, fuera de api/ para no consumir una funcion
+// serverless propia en Vercel.
 // Sin dependencias: node:crypto + fetch global (Node 18+).
 //
 // Variables de entorno (ver pass/PASS_SETUP.md):

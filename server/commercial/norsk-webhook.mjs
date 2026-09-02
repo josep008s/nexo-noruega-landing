@@ -9,7 +9,7 @@
 
 import {
   PLANES, sbUpsert, sbPatch, sendMagicLink, stripeVerifySignature, readRawBody,
-} from "./_norsk_lib.js";
+} from "../shared/norsk-lib.mjs";
 
 export const config = { api: { bodyParser: false } };
 
@@ -48,7 +48,7 @@ export default async function handler(req, res) {
   if (session.payment_status !== "paid") { res.status(200).json({ ok: true, unpaid: true }); return; }
 
   // Solo NORSK: la cuenta de Stripe puede tener otros productos. Sin metadata.plan
-  // válido (creado por api/norsk-checkout.js), este webhook no da acceso a nada.
+  // válido (creado por /api/norsk-checkout/), este webhook no da acceso a nada.
   const plan = session.metadata && session.metadata.plan;
   if (!Object.prototype.hasOwnProperty.call(PLANES, plan)) {
     res.status(200).json({ ok: true, ignored: "not-norsk" });

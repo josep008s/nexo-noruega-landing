@@ -1,7 +1,7 @@
 // Crea una Stripe Checkout Session para NEXO PASS.
 // POST {plan: "p3"|"p30"|"p90"} -> {url}
 
-import { PLANES, siteUrl, stripe, readBody } from "./_norsk_lib.js";
+import { PLANES, siteUrl, stripe, readBody } from "../shared/norsk-lib.mjs";
 
 export default async function handler(req, res) {
   if (req.method === "OPTIONS") { res.status(204).end(); return; }

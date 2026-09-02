@@ -7,11 +7,11 @@
 // lleva reserva_id y jti: este mismo puente la canjea una sola vez antes de devolver
 // el signed URL de ElevenLabs. La API key nunca sale de este servidor.
 
-import { readSessionCookie, compraActiva, sbRpc, jwtSign } from "./_norsk_lib.js";
+import { readSessionCookie, compraActiva, sbRpc, jwtSign } from "../server/shared/norsk-lib.mjs";
 import {
   consumirFirmaLarsito,
   registrarFalloFirmaLarsito,
-} from "./_larsito_reservas.js";
+} from "../server/shared/larsito-reservas.mjs";
 
 const TOPE_DIARIO = 60;
 const TOPE_GLOBAL_DEFECTO = 2000;
