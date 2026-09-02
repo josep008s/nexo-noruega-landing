@@ -1,5 +1,4 @@
-// ARTEFACTO HISTORICO del TTS remoto que usaba la demo, fuera de api/ para que
-// Vercel no lo trate como una funcion serverless.
+// ARTEFACTO HISTORICO del TTS remoto que usaba la demo.
 // La demo actual no importa esta lista ni llama a /api/larsito-tts/. El endpoint
 // del producto completo exige siempre cookie y compra; el guard de pre-lanzamiento
 // falla si FRASES_DEMO vuelve a entrar en esa ruta. Se conserva solo como trazabilidad.

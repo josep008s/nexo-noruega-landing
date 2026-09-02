@@ -8,7 +8,7 @@ import {
   readSessionCookie,
   jwtVerify,
   sbRpc,
-} from "../server/shared/norsk-lib.mjs";
+} from "./_norsk_lib.js";
 
 const MAX_BODY_BYTES = 2 * 1024;
 
