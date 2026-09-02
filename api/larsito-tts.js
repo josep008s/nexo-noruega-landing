@@ -11,7 +11,7 @@ import {
   compraActiva,
   sbRpc,
   jwtSign,
-} from "./_norsk_lib.js";
+} from "../server/shared/norsk-lib.mjs";
 
 const MAX_BODY_BYTES = 2 * 1024;
 const MAX_CARACTERES = 300;
