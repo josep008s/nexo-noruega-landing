@@ -22,12 +22,16 @@
     ::selection{background:var(--aurora);color:var(--noche)}
     a{color:var(--fiordo)}
     a:focus-visible{outline:2px solid var(--aurora);outline-offset:3px}
-    header{background:var(--noche)}
+    header{position:sticky;top:0;z-index:60;background:rgba(243,245,244,.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--linea-clara)}
     .head-inner{max-width:760px;margin:0 auto;padding:20px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px}
-    .marca{display:flex;align-items:center;gap:11px;text-decoration:none;color:var(--nieve)}
+    .marca{display:flex;align-items:center;gap:11px;text-decoration:none;color:var(--noche)}
     .marca svg{width:26px;height:26px;flex:none}
-    .marca span{font-family:var(--sg);font-weight:700;font-size:.9rem}
-    .head-cta{font-family:var(--sg);font-weight:500;font-size:.82rem;color:var(--aurora);text-decoration:none}
+    .marca span{font-family:var(--sg);font-weight:500;font-size:.9rem;letter-spacing:.02em}
+    .marca b{font-weight:700}
+    .head-nav{display:flex;gap:20px}
+    .head-nav a{font-family:var(--sg);font-weight:500;font-size:.84rem;color:var(--fiordo);text-decoration:none;padding:4px 0 3px;border-bottom:3px solid transparent}
+    .head-nav a:hover{color:var(--noche)}
+    @media(max-width:640px){.marca span{display:none}.head-nav{gap:14px}.head-nav a{font-size:.8rem}}
     main{max-width:760px;margin:0 auto;padding:56px 24px 80px}
     article{max-width:68ch}
     .kicker{font-family:var(--sg);font-weight:700;font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;color:var(--fiordo);margin-bottom:16px}
@@ -42,11 +46,12 @@
     .pendiente{background:rgba(224,164,88,.14);border-left:3px solid #E0A458;border-radius:0 10px 10px 0;padding:14px 16px;margin:18px 0}
     .pendiente p{margin:0;font-size:.95rem}
     .fecha{font-family:var(--sg);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--fiordo);margin-top:36px;padding-top:14px;border-top:1px solid var(--linea-clara)}
-    footer{background:var(--noche);padding:28px 0}
+    footer{border-top:1px solid var(--linea-clara);padding:32px 0;background:var(--nieve)}
     .foot-inner{max-width:760px;margin:0 auto;padding:0 24px;display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between}
-    .foot-inner p{font-family:var(--sg);font-size:.76rem;color:var(--niebla);margin:0}
-    .foot-inner a{font-family:var(--sg);font-size:.8rem;color:var(--niebla);text-decoration:none}
-    .foot-inner a:hover{color:var(--nieve)}
+    .foot-inner p{font-family:var(--sg);font-size:.78rem;color:var(--fiordo);margin:0}
+    .footer-links{display:flex;flex-wrap:wrap;gap:20px}
+    .footer-links a{font-family:var(--sg);font-size:.82rem;color:var(--fiordo);text-decoration:none}
+    .footer-links a:hover{color:var(--noche)}
   </style>
 </head>
 <body>
@@ -54,12 +59,16 @@
     <div class="head-inner">
       <a class="marca" href="/pass/" aria-label="NEXO PASS">
         <svg viewBox="0 0 800 800" aria-hidden="true">
-          <path d="M223 532 L223 298 L320 402 L320 265" fill="none" stroke="#3FCB94" stroke-opacity=".45" stroke-width="34" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M478 532 L478 264 L577 398 L577 532" fill="none" stroke="#3FCB94" stroke-width="34" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M223 532 L223 298 L320 402 L320 265" fill="none" stroke="#2C5A72" stroke-opacity=".45" stroke-width="34" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M478 532 L478 264 L577 398 L577 532" fill="none" stroke="#2C5A72" stroke-width="34" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
-        <span>NEXO PASS</span>
+        <span>NEXO <b>PASS</b></span>
       </a>
-      <a class="head-cta" href="/pass/">El curso</a>
+      <nav class="head-nav" aria-label="Secciones">
+        <a href="/norsk/">Noruego</a>
+        <a href="/pass/">Exámenes</a>
+        <a href="https://www.nexonoruega.com">Nexo Noruega</a>
+      </nav>
     </div>
   </header>
 
@@ -114,8 +123,15 @@
 
   <footer>
     <div class="foot-inner">
-      <p>NEXO PASS es un producto de Nexo Noruega.</p>
-      <nav aria-label="Enlaces"><a href="/pass/">El curso</a> · <a href="/pass/privacidad/">Privacidad</a> · <a href="https://www.nexonoruega.com">Nexo Noruega</a></nav>
+      <p>NEXO PASS es un producto de Nexo Noruega. No está afiliado a HK-dir, a UDI ni a ningún organismo oficial noruego.</p>
+      <nav class="footer-links" aria-label="Enlaces">
+        <a href="https://www.nexonoruega.com">Inicio</a>
+        <a href="/norsk/">Noruego</a>
+        <a href="/pass/">Exámenes</a>
+        <a href="/pass/condiciones/">Condiciones</a>
+        <a href="/pass/privacidad/">Privacidad</a>
+        <a href="https://nexonoruega.substack.com">Newsletter</a>
+      </nav>
     </div>
   </footer>
 </body>
