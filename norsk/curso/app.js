@@ -1,12 +1,10 @@
 // App del curso Norskprøven B1 de NEXO NORSK.
 //
-// Dos modos, como en la app de PASS:
-//   - Demo: sirve /data/norsk-curso-demo.json, que trae un mecanismo entero
-//     y el índice del resto. No toca servidor y funciona sin cuenta.
-//   - Con acceso: pide el índice y cada pieza a /api/norsk-curso/, que aplica
-//     el muro de pago. Una pieza por llamada, nunca el curso entero.
+// Dos modos:
+//   - Demo pública: muestra el diagnóstico, M01 y el mapa del curso.
+//   - Con acceso: pide el índice y cada pieza al servidor protegido.
 //
-// El progreso se guarda solo en este navegador. No se envía a ningún sitio.
+// El progreso se guarda solo en este navegador.
 (function () {
   "use strict";
 
@@ -16,9 +14,10 @@
 
   var app = document.getElementById("app");
   var chip = document.getElementById("estado");
+  var readingProgress = document.getElementById("readingProgress");
 
-  var indice = [];      // [{codigo, tipo, titulo, orden, resumen, abierta}]
-  var cache = {};       // codigo -> pieza completa
+  var indice = [];
+  var cache = {};
   var conAcceso = false;
   var demo = null;
   var estado = cargarEstado();
@@ -31,9 +30,13 @@
       if (!e.hechas) e.hechas = {};
       if (!e.actuaciones) e.actuaciones = {};
       if (!e.ultimaSeccion) e.ultimaSeccion = {};
+      if (!e.ultimaPieza) e.ultimaPieza = null;
       return e;
-    } catch (err) { return { hechas: {}, actuaciones: {}, ultimaSeccion: {} }; }
+    } catch (err) {
+      return { hechas: {}, actuaciones: {}, ultimaSeccion: {}, ultimaPieza: null };
+    }
   }
+
   function guardar() {
     try { localStorage.setItem(CLAVE, JSON.stringify(estado)); } catch (err) { /* modo privado */ }
   }
@@ -46,126 +49,235 @@
     if (texto !== undefined && texto !== null) n.textContent = texto;
     return n;
   }
+
   function limpiar() { app.innerHTML = ""; }
+
+  function enfocarTitulo() {
+    var h1 = app.querySelector("h1");
+    if (!h1) return;
+    h1.setAttribute("tabindex", "-1");
+    h1.focus({ preventScroll: true });
+  }
+
   function volver(texto, fn) {
     var b = el("button", "back", "← " + texto);
     b.addEventListener("click", fn);
     return b;
   }
 
-  var TIPOS = {
-    diagnostico: { titulo: "Empieza por aquí", nota: "Mide dónde estás de verdad, destreza por destreza." },
-    mecanismo: { titulo: "Los mecanismos", nota: "Los dieciséis saltos que separan el A2 del B1." },
-    anexo: { titulo: "Anexo de apoyo", nota: "Expresiones útiles para activar los mecanismos en situaciones reales." },
-    lytt: { titulo: "Comprensión oral", nota: "Escucha con el formato de la prueba." },
-    les: { titulo: "Comprensión lectora", nota: "Textos y preguntas como los del examen." },
-    skriv: { titulo: "Expresión escrita", nota: "Tareas modelo y cómo se corrige tu texto." },
-    muntlig: { titulo: "Expresión oral", nota: "El entrenamiento diario y el banco de consignas." },
-    simulacro: { titulo: "Simulacros", nota: "El examen entero, cronometrado." },
-    larsito: { titulo: "Larsito", nota: "Conversación y escucha con el compañero de voz." },
+  function dosCifras(n) { return String(n).padStart(2, "0"); }
+
+  function piezaEnIndice(codigo) {
+    return indice.filter(function (p) { return p.codigo === codigo; })[0] || null;
+  }
+
+  var ETIQUETAS_CODIGO = {
+    DIAGNOSTICO_B1: "Inicio",
+    "ANEXO-UTTRYKK": "Uttrykk",
+    BANCO_CONSIGNAS_ORAL: "Oral 01",
+    KIT_ORAL_21_JORNADAS: "Oral 02",
+    LYTT_CORTOS_A: "Escucha 01",
+    LYTT_CORTOS_B: "Escucha 02",
+    LYTT_LARGOS: "Escucha 03",
+    LES_BREVES: "Lectura 01",
+    LES_LARGOS: "Lectura 02",
+    SKRIV_B1: "Escritura",
+    SIMULACROS_LYTT_LES_SKRIV: "Simulacro 01",
+    SIMULACROS_ORAL: "Simulacro 02",
   };
-  var ORDEN_TIPOS = ["diagnostico", "mecanismo", "anexo", "muntlig", "lytt", "les", "skriv", "simulacro"];
+
+  function etiquetaCodigo(pieza) {
+    return ETIQUETAS_CODIGO[pieza.codigo] || pieza.codigo.replace(/_v.*/, "").slice(0, 12);
+  }
+
+  var TIPOS = {
+    diagnostico: { titulo: "Punto de partida", nota: "Localiza qué destreza necesita trabajo antes de abrir más material." },
+    muntlig: { titulo: "Núcleo oral", nota: "Consignas y 21 actuaciones para sostener el turno, reparar y volver a intentarlo." },
+    mecanismo: { titulo: "Los 16 mecanismos", nota: "El salto de A2 a B1, explicado desde situaciones que sí ocurren." },
+    lytt: { titulo: "Comprensión oral", nota: "Escucha, decide y comprueba qué información cambia la respuesta." },
+    les: { titulo: "Comprensión lectora", nota: "Textos breves y largos para leer condiciones, intención y detalle." },
+    skriv: { titulo: "Expresión escrita", nota: "Tareas, modelos y criterios para escribir con dirección." },
+    anexo: { titulo: "Banco de expresiones", nota: "Expresiones de UTTRYKK colocadas donde activan cada mecanismo." },
+    simulacro: { titulo: "Simulacros", nota: "La prueba completa cuando ya toca medir el recorrido entero." },
+    larsito: { titulo: "Larsito", nota: "Conversación, segundo intento y feedback dentro de la ruta oral." },
+  };
+
+  var ORDEN_TIPOS = ["diagnostico", "muntlig", "mecanismo", "lytt", "les", "skriv", "anexo", "simulacro"];
+
+  var NOMBRES_DESTREZA = {
+    MUNTLIG: "expresión oral",
+    SKRIFTLIG: "expresión escrita",
+    LES: "lectura",
+    LYTT: "escucha",
+  };
+
+  function normalizarDestrezas(meta) {
+    var bruto = meta && meta.delprover;
+    if (!bruto) return [];
+    var valores = [];
+    function anadir(valor) {
+      if (Array.isArray(valor)) return valor.forEach(anadir);
+      if (valor !== null && valor !== undefined && valor !== "") valores.push(valor);
+    }
+    if (Array.isArray(bruto)) anadir(bruto);
+    else if (typeof bruto === "string") anadir(bruto);
+    else if (typeof bruto === "object") {
+      anadir(bruto.principal);
+      anadir(bruto.transferencia);
+    }
+    return valores
+      .map(function (x) { return NOMBRES_DESTREZA[String(x).toUpperCase()] || String(x).toLowerCase(); })
+      .filter(function (x, i, a) { return x && a.indexOf(x) === i; });
+  }
+
+  function modoLector(activo) {
+    document.body.classList.toggle("modo-lector", !!activo);
+    if (!activo && readingProgress) readingProgress.style.width = "0";
+    if (activo) requestAnimationFrame(actualizarProgresoLectura);
+  }
+
+  function actualizarProgresoLectura() {
+    if (!readingProgress || !document.body.classList.contains("modo-lector")) return;
+    var lector = document.querySelector(".lector");
+    if (!lector) { readingProgress.style.width = "0"; return; }
+    var inicio = lector.getBoundingClientRect().top + window.scrollY - 120;
+    var total = Math.max(1, lector.offsetHeight - window.innerHeight * .55);
+    var avance = Math.max(0, Math.min(1, (window.scrollY - inicio) / total));
+    readingProgress.style.width = Math.round(avance * 100) + "%";
+  }
+
+  window.addEventListener("scroll", actualizarProgresoLectura, { passive: true });
+  window.addEventListener("resize", actualizarProgresoLectura);
 
   // ---------- Pantalla: índice del curso ----------
 
-  function renderIndice() {
-    limpiar();
-    var paso = el("div", "step");
+  function renderDato(numero, texto) {
+    var d = el("div", "curso-dato");
+    d.appendChild(el("strong", null, numero));
+    d.appendChild(el("span", null, texto));
+    return d;
+  }
 
-    paso.appendChild(el("p", "kicker", "Norskprøven B1"));
-    paso.appendChild(el("h1", null, "El curso"));
-    paso.appendChild(el("p", "intro", conAcceso
-      ? "Todo el material, ordenado. Puedes ir en orden o entrar directo a lo que te falla."
-      : "Estás en la versión de demostración. Puedes leer entero el primer mecanismo y ver el mapa del resto."));
+  function renderLarsito() {
+    var franja = el("aside", "larsito-franja");
+    var copia = el("div");
+    copia.appendChild(el("p", "eti", "Dentro del núcleo oral"));
+    copia.appendChild(el("h3", null, "Habla, repara y vuelve a intentarlo."));
+    copia.appendChild(el("p", null, "Larsito convierte cada actuación en conversación y feedback, sin guardar el contenido de tu respuesta."));
+    franja.appendChild(copia);
+    var a = el("a", null, "Practicar con Larsito →");
+    a.href = "/norsk/larsito/";
+    franja.appendChild(a);
+    return franja;
+  }
+
+  function renderIndice() {
+    modoLector(false);
+    limpiar();
+
+    var paso = el("div", "step step-indice");
+    var hero = el("section", "curso-hero");
+    hero.appendChild(el("p", "kicker caesar", "Ruta Norskprøven B1"));
+
+    var h1 = el("h1");
+    h1.appendChild(document.createTextNode("De entender noruego a "));
+    h1.appendChild(el("mark", "marcado", "sostenerlo hablando"));
+    h1.appendChild(document.createTextNode("."));
+    hero.appendChild(h1);
+
+    hero.appendChild(el("p", "intro", conAcceso
+      ? "Empieza por el diagnóstico o entra directamente en lo que hoy te frena. La ruta oral es el núcleo; lectura, escucha y escritura se abren cuando las necesitas."
+      : "Abre el diagnóstico y el primer mecanismo. El resto del mapa te enseña cómo está construido el curso antes de que abra."));
 
     if (!conAcceso) {
-      var aviso = el("div", "aviso");
-      aviso.appendChild(el("span", "eti", "Demo"));
-      aviso.appendChild(el("p", null, (demo && ((demo.meta && demo.meta.aviso) || demo.aviso)) || "El curso completo se abre al comprar. Aquí puedes ver cómo está hecho por dentro."));
-      paso.appendChild(aviso);
+      hero.appendChild(el("p", "nota-demo", "Vista de muestra. Lo abierto se lee entero; lo demás queda señalado sin enseñar el contenido de pago."));
     }
 
-    // progreso
+    var ultima = conAcceso && estado.ultimaPieza ? piezaEnIndice(estado.ultimaPieza) : null;
+    if (ultima && ultima.abierta) {
+      var continuar = el("button", "continuar");
+      continuar.appendChild(document.createTextNode("Continuar "));
+      continuar.appendChild(el("span", null, "· " + ultima.titulo));
+      continuar.addEventListener("click", function () { abrirPieza(ultima.codigo); });
+      hero.appendChild(continuar);
+    }
+
+    var datos = el("div", "curso-datos");
+    datos.appendChild(renderDato("21", "actuaciones orales"));
+    datos.appendChild(renderDato("16", "mecanismos B1"));
+    datos.appendChild(renderDato("4", "destrezas conectadas"));
+    hero.appendChild(datos);
+
     var abiertas = indice.filter(function (p) { return p.abierta; });
     var hechas = abiertas.filter(function (p) { return estado.hechas[p.codigo]; }).length;
     if (abiertas.length) {
       var pr = el("div", "progreso");
-      pr.appendChild(el("p", "lab", "Tu avance"));
+      var cab = el("div", "progreso-cab");
+      cab.appendChild(el("p", "lab", "Tu recorrido"));
+      cab.appendChild(el("p", "valor", hechas + " de " + abiertas.length));
+      pr.appendChild(cab);
       var barra = el("div", "barra");
       var relleno = el("i");
       relleno.style.width = Math.round((hechas / abiertas.length) * 100) + "%";
       barra.appendChild(relleno);
       pr.appendChild(barra);
-      pr.appendChild(el("p", null, hechas === 0
-        ? "Todavía no has marcado ninguna pieza. Se marcan solas cuando las lees hasta el final."
-        : "Llevas " + hechas + " de " + abiertas.length + (hechas === abiertas.length ? ". Has pasado por todo." : ".")));
-      paso.appendChild(pr);
+      pr.appendChild(el("p", "nota", hechas === 0
+        ? "Marca una pieza cuando la hayas trabajado. El progreso queda solo en este navegador."
+        : (hechas === abiertas.length ? "Has pasado por todo lo que tienes abierto." : "Continúa desde la última pieza o cambia de destreza.")));
+      hero.appendChild(pr);
     }
+    paso.appendChild(hero);
 
-    // bloques por tipo
+    var recorrido = el("div", "recorrido");
+    var numeroBloque = 0;
     ORDEN_TIPOS.forEach(function (tipo) {
       var piezas = indice.filter(function (p) { return p.tipo === tipo; });
       if (!piezas.length) return;
+      numeroBloque++;
       var info = TIPOS[tipo] || { titulo: tipo, nota: "" };
 
-      var bloque = el("div", "bloque");
-      var cab = el("div", "bloque-tit");
-      cab.appendChild(el("h2", null, info.titulo));
+      var bloque = el("section", "bloque bloque-" + tipo);
+      var cab = el("div", "bloque-cab");
+      cab.appendChild(el("span", "bloque-num", dosCifras(numeroBloque)));
+      var tit = el("div", "bloque-tit");
+      tit.appendChild(el("h2", null, info.titulo));
+      if (info.nota) tit.appendChild(el("p", null, info.nota));
+      cab.appendChild(tit);
       cab.appendChild(el("span", "cuenta", piezas.length === 1 ? "1 pieza" : piezas.length + " piezas"));
       bloque.appendChild(cab);
-      if (info.nota) {
-        var nota = el("p", null, info.nota);
-        nota.style.cssText = "color:var(--tinta-suave);font-size:.96rem;margin-bottom:12px";
-        bloque.appendChild(nota);
-      }
 
       var lista = el("div", "lista");
       piezas.forEach(function (p) {
         var b = el("button", "item");
-        b.appendChild(el("span", "cod", p.codigo.replace(/_v.*/, "").slice(0, 8)));
+        b.appendChild(el("span", "cod", etiquetaCodigo(p)));
         var txt = el("span", "txt");
         txt.appendChild(document.createTextNode(p.titulo));
-        if (p.resumen) {
-          var s = el("small", null, p.resumen);
-          txt.appendChild(s);
-        }
+        if (p.resumen) txt.appendChild(el("small", null, p.resumen));
         b.appendChild(txt);
 
         if (!p.abierta) {
-          b.appendChild(el("span", "marca-est bloq", "Con el curso"));
+          b.appendChild(el("span", "marca-est bloq", "Curso completo"));
           b.disabled = true;
-          b.title = "Esta pieza se abre al comprar el curso";
+          b.title = "Esta pieza se abre con el curso completo";
         } else if (estado.hechas[p.codigo]) {
-          b.appendChild(el("span", "marca-est hecho", "Leída"));
+          b.appendChild(el("span", "marca-est hecho", "Hecha"));
+        } else {
+          b.appendChild(el("span", "flecha", "→"));
         }
 
-        if (p.abierta) {
-          b.addEventListener("click", function () { abrirPieza(p.codigo); });
-        }
+        if (p.abierta) b.addEventListener("click", function () { abrirPieza(p.codigo); });
         lista.appendChild(b);
       });
       bloque.appendChild(lista);
-      paso.appendChild(bloque);
+      if (tipo === "muntlig") bloque.appendChild(renderLarsito());
+      recorrido.appendChild(bloque);
     });
-
-    // Larsito siempre disponible
-    var extra = el("div", "bloque");
-    var cabL = el("div", "bloque-tit");
-    cabL.appendChild(el("h2", null, TIPOS.larsito.titulo));
-    extra.appendChild(cabL);
-    var notaL = el("p", null, TIPOS.larsito.nota);
-    notaL.style.cssText = "color:var(--tinta-suave);font-size:.96rem;margin-bottom:12px";
-    extra.appendChild(notaL);
-    var aL = el("a", "btn ghost", "Practicar con Larsito");
-    aL.href = "/norsk/larsito/";
-    extra.appendChild(aL);
-    paso.appendChild(extra);
+    paso.appendChild(recorrido);
 
     if (!conAcceso) {
-      var cierre = el("div", "candado");
-      cierre.style.marginTop = "26px";
+      var cierre = el("section", "cierre-demo");
       cierre.appendChild(el("h2", null, "El curso completo todavía no está a la venta."));
-      cierre.appendChild(el("p", null, "Cuando abra, se avisa por correo. Sin cuenta atrás y sin prisa fabricada."));
+      cierre.appendChild(el("p", null, "Cuando abra, se avisará por correo. Sin cuenta atrás y sin urgencia fabricada."));
       var aS = el("a", "btn", "Avísame cuando abra");
       aS.href = "https://nexonoruega.substack.com/subscribe";
       cierre.appendChild(aS);
@@ -174,22 +286,26 @@
 
     app.appendChild(paso);
     window.scrollTo({ top: 0, behavior: "auto" });
+    enfocarTitulo();
   }
 
   // ---------- Pantalla: lector de una pieza ----------
 
   function abrirPieza(codigo) {
+    estado.ultimaPieza = codigo;
+    guardar();
     if (cache[codigo]) return renderPieza(cache[codigo]);
 
+    modoLector(false);
     limpiar();
-    var cargando = el("div", "step");
+    var cargando = el("div", "error");
     cargando.appendChild(el("p", "intro", "Abriendo…"));
     app.appendChild(cargando);
 
     if (!conAcceso) {
       var enDemo = (demo.piezas || []).filter(function (p) { return p.codigo === codigo; })[0];
       if (enDemo) { cache[codigo] = enDemo; return renderPieza(enDemo); }
-      return error("Esta pieza es del curso completo.");
+      return error("Esta pieza pertenece al curso completo.");
     }
 
     fetch(API + "?modo=pieza&codigo=" + encodeURIComponent(codigo), { credentials: "same-origin" })
@@ -206,55 +322,96 @@
       });
   }
 
-  function renderPieza(pieza) {
-    limpiar();
-    var paso = el("div", "step");
-    paso.appendChild(volver("Volver al curso", renderIndice));
+  function textoPlano(html) {
+    var contenedor = document.createElement("div");
+    contenedor.innerHTML = String(html || "");
+    return (contenedor.textContent || "").replace(/\s+/g, " ").trim();
+  }
 
-    paso.appendChild(el("p", "kicker", (TIPOS[pieza.tipo] || {}).titulo || pieza.tipo));
-    paso.appendChild(el("h1", null, pieza.titulo));
+  function esAvisoLegalAlumno(bloque) {
+    var plano = textoPlano(bloque);
+    return /NEXO NORSK/i.test(plano)
+      && /(?:proyecto independiente|material propio)/i.test(plano)
+      && /(?:HK-dir|UDI|centro de examen)/i.test(plano)
+      && /(?:no es la prueba|no promete|no reproduce|no estamos vinculados|no tenemos relaci[oó]n)/i.test(plano);
+  }
+
+  function limpiarHtmlAlumno(html, seccionId) {
+    var limpio = String(html || "");
+    limpio = limpio.replace(/<pre><code>\s*(?:MECANISMO|DOCUMENTO|PIEZA):[\s\S]*?<\/code><\/pre>/gi, "");
+    if (seccionId === "intro" || seccionId === "nota-de-limites") {
+      limpio = limpio.replace(/<blockquote>[\s\S]*?<\/blockquote>/gi, function (bloque) { return esAvisoLegalAlumno(bloque) ? "" : bloque; });
+      limpio = limpio.replace(/<p>[\s\S]*?<\/p>/gi, function (bloque) { return esAvisoLegalAlumno(bloque) ? "" : bloque; });
+      if (seccionId === "intro") limpio = limpio.replace(/<p>(?:Los seis pasos del (?:canon|método)|Cómo se corresponde esta lección con los seis pasos|Recorrido de la lección|Esta lección recorre|La lección sigue)[\s\S]*?<\/p>/gi, "");
+    }
+    return limpio.replace(/^\s+|\s+$/g, "");
+  }
+
+  function tituloSeccionAlumno(pieza, seccion) {
+    var clave = pieza.codigo + ":" + seccion.id;
+    var propios = {
+      "DIAGNOSTICO_B1:como-hacer-este-perfil-opcional": "Cómo hacer el diagnóstico",
+      "KIT_ORAL_21_JORNADAS:intro": "Cómo funciona la ruta",
+      "SIMULACROS_LYTT_LES_SKRIV:convenciones-de-este-documento": "Cómo usar estos simulacros",
+    };
+    if (propios[clave]) return propios[clave];
+    if (seccion.id === "nota-de-limites") return "Antes de empezar";
+    if (seccion.id === "limites-de-este-documento") return "Qué practica esta ruta";
+    if (seccion.id === "convenciones-de-este-documento") return "Cómo usar este material";
+    return seccion.titulo;
+  }
+
+  function prepararSecciones(pieza) {
+    return (pieza.secciones || []).map(function (s) {
+      var html = limpiarHtmlAlumno(s.html || "", s.id);
+      return Object.assign({}, s, { html: html, titulo: tituloSeccionAlumno(pieza, s) });
+    }).filter(function (s) {
+      return !!s.html;
+    });
+  }
+
+  function renderPieza(pieza) {
+    modoLector(true);
+    limpiar();
+
+    var fichaIndice = piezaEnIndice(pieza.codigo) || pieza;
+    var abiertas = indice.filter(function (p) { return p.abierta; });
+    var posicion = abiertas.map(function (p) { return p.codigo; }).indexOf(pieza.codigo);
+
+    var paso = el("article", "step lesson");
+    var barraLeccion = el("div", "lesson-bar");
+    barraLeccion.appendChild(volver("Volver al curso", renderIndice));
+    if (posicion >= 0) barraLeccion.appendChild(el("span", "lesson-position", "Pieza " + (posicion + 1) + " de " + abiertas.length));
+    paso.appendChild(barraLeccion);
+
+    var hero = el("header", "lesson-hero");
+    hero.appendChild(el("p", "kicker", (TIPOS[pieza.tipo] || {}).titulo || pieza.tipo));
+    hero.appendChild(el("h1", null, pieza.titulo));
+    if (fichaIndice.resumen) hero.appendChild(el("p", "lesson-lede", fichaIndice.resumen));
 
     var meta = pieza.meta || {};
     var chips = el("div", "meta-pieza");
-    if (meta.delprover) {
-      var dp = meta.delprover;
-      var texto = typeof dp === "string" ? dp : (dp.principal ? "Se evalúa en " + String(dp.principal).toLowerCase() : null);
-      if (texto) chips.appendChild(el("span", null, texto));
-    }
-    if (meta.unidades_destino) {
-      var u = [].concat(meta.unidades_destino).join(", ");
-      if (u) chips.appendChild(el("span", null, "Unidad " + u));
-    }
-    if (meta.qa_lengua || meta.revision_nativa) {
-      var revision = String(meta.qa_lengua || meta.revision_nativa).toUpperCase();
-      if (revision === "SISTEMICA_TECNICA_ACEPTADA" || revision === "PENDIENTE" || revision.indexOf("RESUELTA_POR_SISTEMA") === 0) {
-        var qa = el("span", null, "QA sistémica y técnica aceptada");
-        qa.title = "No equivale a una firma humana o nativa";
-        chips.appendChild(qa);
-      }
-    }
-    if (chips.children.length) paso.appendChild(chips);
+    chips.appendChild(el("span", null, etiquetaCodigo(pieza)));
+    var destrezas = normalizarDestrezas(meta);
+    if (destrezas.length) chips.appendChild(el("span", null, "Trabajas: " + destrezas.join(" · ")));
+    hero.appendChild(chips);
+    paso.appendChild(hero);
 
+    var secciones = prepararSecciones(pieza);
     var lector = el("div", "lector");
-    // La primera seccion de un mecanismo es su cabecera de produccion, un
-    // bloque con codigos de canon y unidades destino. Es util para escribir
-    // el material y ruido para quien lo estudia, asi que no se muestra.
-    var secciones = (pieza.secciones || []).filter(function (s) {
-      return !/^\s*<pre><code>(MECANISMO|DOCUMENTO|PIEZA):/.test(s.html || "");
-    });
+
     function renderSeccion(s) {
-      if (s.titulo) {
-        var h = el("h2", null, s.titulo);
-        lector.appendChild(h);
-      }
-      var caja = el("div");
-      // El HTML lo genera nuestro exportador a partir del Markdown del curso,
-      // no lo escribe nadie desde fuera.
-      caja.innerHTML = s.html || "";
-      lector.appendChild(caja);
+      var bloque = el("section", "lector-seccion");
+      bloque.id = "apartado-" + s.id;
+      if (s.titulo) bloque.appendChild(el("h2", null, s.titulo));
+      var cuerpo = el("div", "seccion-cuerpo");
+      cuerpo.innerHTML = s.html || "";
+      bloque.appendChild(cuerpo);
+      lector.appendChild(bloque);
     }
 
     var jornadas = secciones.filter(function (s) { return /^jornada-\d+\b/.test(s.id || ""); });
+    var lectorInsertado = false;
     if (pieza.codigo === "KIT_ORAL_21_JORNADAS" && jornadas.length === 21) {
       var noJornadas = secciones.filter(function (s) { return jornadas.indexOf(s) === -1; });
       var validas = jornadas.map(function (s) { return s.id; });
@@ -285,14 +442,18 @@
         renderPieza(pieza);
       });
       ruta.appendChild(selector);
-      lector.appendChild(ruta);
+      paso.appendChild(ruta);
 
       if (actual === "__guia__") {
         noJornadas.forEach(renderSeccion);
+        paso.appendChild(lector);
+        lectorInsertado = true;
       } else {
         var pos = validas.indexOf(actual);
         var jornada = jornadas[pos];
         renderSeccion(jornada);
+        paso.appendChild(lector);
+        lectorInsertado = true;
 
         var control = el("div", "marcar actuacion-control");
         var hecha = !!estado.actuaciones[jornada.id];
@@ -307,7 +468,7 @@
           renderPieza(pieza);
         });
         control.appendChild(completar);
-        lector.appendChild(control);
+        paso.appendChild(control);
 
         var navAct = el("div", "nav-pieza nav-actuacion");
         var anterior = el("button", "btn ghost", "Actuación anterior");
@@ -326,20 +487,19 @@
         });
         navAct.appendChild(anterior);
         navAct.appendChild(siguiente);
-        lector.appendChild(navAct);
+        paso.appendChild(navAct);
       }
     } else {
       secciones.forEach(renderSeccion);
     }
-    paso.appendChild(lector);
+    if (!lectorInsertado) paso.appendChild(lector);
 
-    // marcar como leída
     var marcar = el("div", "marcar");
     var yaEsta = !!estado.hechas[pieza.codigo];
     marcar.appendChild(el("p", null, yaEsta
-      ? "La tienes marcada como leída. Volver a ella no borra nada."
-      : "Cuando la hayas trabajado de verdad, márcala. Lo que cuenta es haber hecho la práctica, no haber pasado la pantalla."));
-    var bm = el("button", "btn" + (yaEsta ? " ghost" : ""), yaEsta ? "Quitar la marca" : "Marcar como leída");
+      ? "Esta pieza está marcada como hecha. Puedes volver sin perder nada."
+      : "Márcala cuando hayas hecho la práctica, no solo cuando hayas llegado al final."));
+    var bm = el("button", "btn" + (yaEsta ? " ghost" : ""), yaEsta ? "Quitar la marca" : "Marcar como hecha");
     bm.addEventListener("click", function () {
       if (estado.hechas[pieza.codigo]) delete estado.hechas[pieza.codigo];
       else estado.hechas[pieza.codigo] = true;
@@ -349,17 +509,22 @@
     marcar.appendChild(bm);
     paso.appendChild(marcar);
 
-    // anterior y siguiente dentro del material abierto
-    var abiertas = indice.filter(function (p) { return p.abierta; });
-    var i = abiertas.map(function (p) { return p.codigo; }).indexOf(pieza.codigo);
-    if (i >= 0 && abiertas.length > 1) {
-      var nav = el("div", "nav-pieza");
-      var ant = el("button", "btn ghost", "Anterior");
-      ant.disabled = i === 0;
-      ant.addEventListener("click", function () { abrirPieza(abiertas[i - 1].codigo); });
-      var sig = el("button", "btn ghost", "Siguiente");
-      sig.disabled = i === abiertas.length - 1;
-      sig.addEventListener("click", function () { abrirPieza(abiertas[i + 1].codigo); });
+    if (posicion >= 0 && abiertas.length > 1) {
+      var nav = el("nav", "nav-pieza");
+      nav.setAttribute("aria-label", "Navegación entre piezas");
+
+      var ant = el("button", "nav-card anterior");
+      ant.disabled = posicion === 0;
+      ant.appendChild(el("small", null, "← Anterior"));
+      ant.appendChild(el("strong", null, posicion === 0 ? "Inicio del curso" : abiertas[posicion - 1].titulo));
+      if (posicion > 0) ant.addEventListener("click", function () { abrirPieza(abiertas[posicion - 1].codigo); });
+
+      var sig = el("button", "nav-card siguiente");
+      sig.disabled = posicion === abiertas.length - 1;
+      sig.appendChild(el("small", null, "Siguiente →"));
+      sig.appendChild(el("strong", null, posicion === abiertas.length - 1 ? "Final del curso" : abiertas[posicion + 1].titulo));
+      if (posicion < abiertas.length - 1) sig.addEventListener("click", function () { abrirPieza(abiertas[posicion + 1].codigo); });
+
       nav.appendChild(ant);
       nav.appendChild(sig);
       paso.appendChild(nav);
@@ -367,31 +532,27 @@
 
     app.appendChild(paso);
     window.scrollTo({ top: 0, behavior: "auto" });
+    enfocarTitulo();
+    requestAnimationFrame(actualizarProgresoLectura);
   }
 
   // ---------- Errores ----------
 
   function error(msg) {
+    modoLector(false);
     limpiar();
-    var d = el("div", "step");
+    var d = el("div", "error");
     d.appendChild(el("h1", null, "Vaya."));
     d.appendChild(el("p", "intro", msg));
     var b = el("button", "btn ghost", "Volver al curso");
     b.addEventListener("click", renderIndice);
     d.appendChild(b);
-    var a = el("a", "btn", "Ir a NEXO NORSK");
-    a.href = "/norsk/";
-    d.appendChild(a);
     app.appendChild(d);
+    enfocarTitulo();
   }
 
   // ---------- Arranque ----------
 
-  // La demo la escribe el exportador del curso, que agrupa por su cuenta:
-  // trae el mecanismo de muestra y el trozo del diagnostico como campos
-  // propios, y el resto como indice sin cuerpo. Aqui se aplana todo a la
-  // misma lista de piezas que devuelve la API, para que el resto de la app
-  // no tenga que saber de donde viene el contenido.
   function desdeDemo(d) {
     demo = d;
     var piezas = [];
@@ -430,9 +591,10 @@
     indice = piezas.concat(cerradas).sort(function (a, b) { return (a.orden || 0) - (b.orden || 0); });
     piezas.forEach(function (p) { cache[p.codigo] = p; });
 
-    conAcceso = false;
-    chip.textContent = "Demo";
-    chip.className = "estado demo";
+    var vistaCompletaLocal = !!(d.meta && (d.meta.vista_completa_local || d.meta.modo === "revision_local_privada"));
+    conAcceso = vistaCompletaLocal;
+    chip.textContent = vistaCompletaLocal ? "Curso Pro" : "Demo";
+    chip.className = vistaCompletaLocal ? "estado" : "estado demo";
     renderIndice();
   }
 
@@ -448,7 +610,7 @@
           indice = d.piezas.map(function (p) { return Object.assign({}, p, { abierta: true }); })
             .sort(function (a, b) { return (a.orden || 0) - (b.orden || 0); });
           conAcceso = true;
-          chip.textContent = "Curso completo";
+          chip.textContent = "Curso Pro";
           chip.className = "estado";
           renderIndice();
           return null;
