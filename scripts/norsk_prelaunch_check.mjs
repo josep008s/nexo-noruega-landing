@@ -746,6 +746,37 @@ if (exists("sitemap.xml")) {
   }
 }
 
+// 5h) Cuaderno en PDF: descarga solo con compra, PDF de pago fuera del repo, muestra publica pequena.
+{
+  const API = "api/norsk-cuaderno.js";
+  if (!exists(API)) duro("Falta api/norsk-cuaderno.js (descarga del cuaderno)");
+  else {
+    const h = read(API);
+    if (!h.includes("readSessionCookie") || !h.includes("compraActiva")) duro("norsk-cuaderno: no comprueba sesion y compra antes de firmar");
+    if (!/expiresIn/.test(h) || !/norsk-cuaderno/.test(h)) duro("norsk-cuaderno: no firma contra el bucket privado norsk-cuaderno");
+    if (!/statusCode = 302/.test(h)) duro("norsk-cuaderno: no redirige a la URL firmada");
+    if (/SUPABASE_SERVICE_KEY\s*=\s*["']/.test(h)) duro("norsk-cuaderno: clave escrita en el codigo");
+  }
+  const META = "data/norsk-cuaderno.json";
+  if (!exists(META)) duro("Falta data/norsk-cuaderno.json (metadatos publicos del cuaderno)");
+  else {
+    try {
+      const d = JSON.parse(read(META));
+      if (!Array.isArray(d.tomos) || d.tomos.length !== 6) duro("norsk-cuaderno.json: deben ser 6 tomos");
+      if (JSON.stringify(d).includes(".pdf")) duro("norsk-cuaderno.json: expone nombres de archivo del bucket");
+    } catch (e) { duro("norsk-cuaderno.json no es JSON valido"); }
+  }
+  if (!read(".gitignore").includes("scripts/_norsk_cuaderno/")) duro("scripts/_norsk_cuaderno/ no esta en .gitignore (PDF de pago en repo publico)");
+  const MUESTRA = "norsk/curso/muestra/NEXO-NORSK_Cuaderno-B1_Muestra.pdf";
+  if (!exists(MUESTRA)) duro("Falta la muestra gratuita del cuaderno en norsk/curso/muestra/");
+  else if (fs.statSync(rel(MUESTRA)).size > 3 * 1024 * 1024) duro("La muestra del cuaderno pesa mas de 3 MB: revisar que solo lleve la guia y M01");
+  const app = read("norsk/curso/app.js");
+  if (!app.includes("/api/norsk-cuaderno/") || !app.includes("norsk-cuaderno.json")) duro("curso/app.js: no muestra el bloque del cuaderno");
+  const test = spawnSync(process.execPath, [rel("scripts/norsk_cuaderno_selftest.mjs")], { encoding: "utf8", env: { ...process.env, NODE_NO_WARNINGS: "1" } });
+  if (test.status !== 0 || !/casos sin red OK/.test(test.stdout || "")) duro("selftest del cuaderno falla: " + String(test.stdout || test.stderr || "").slice(-200));
+  else ok("cuaderno en PDF: descarga solo con compra, PDF fuera del repo, muestra publica y selftest sin red");
+}
+
 // 5g) El curso: la demo publica no puede llevar contenido de pago.
 // El exportador saca el material del Drive y deja aqui solo la muestra.
 // Este check es la ultima red antes de publicar en un repo publico.

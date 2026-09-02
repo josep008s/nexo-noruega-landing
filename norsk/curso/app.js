@@ -201,6 +201,56 @@
     return franja;
   }
 
+  // ---------- Cuaderno en PDF (seis tomos) ----------
+  // Los metadatos públicos (título, páginas, peso) vienen de /data/norsk-cuaderno.json.
+  // Con acceso, cada tomo enlaza a /api/norsk-cuaderno/?tomo=N, que comprueba la
+  // compra y redirige a una URL firmada de quince minutos. En la demo no se llama
+  // a nada: se enseña lo que hay y se ofrece la muestra gratuita.
+  var CUADERNO_META = "/data/norsk-cuaderno.json";
+  var CUADERNO_API = "/api/norsk-cuaderno/";
+  var CUADERNO_MUESTRA = "/norsk/curso/muestra/NEXO-NORSK_Cuaderno-B1_Muestra.pdf";
+
+  function renderCuaderno() {
+    var sec = el("section", "cuaderno");
+    var cab = el("div", "cuaderno-cab");
+    cab.appendChild(el("p", "eti", "Material de apoyo"));
+    cab.appendChild(el("h2", null, "Tu cuaderno en PDF"));
+    cab.appendChild(el("p", "cuaderno-intro", conAcceso
+      ? "El curso entero en seis tomos para imprimir o leer sin conexión: la teoría con sus esquemas, la práctica con renglones y las claves aparte. Cada descarga es personal y caduca a los quince minutos; vuelve a pulsar si se te pasa."
+      : "El curso entero en seis tomos para imprimir o leer sin conexión: la teoría con sus esquemas, la práctica con renglones y las claves aparte. Viene con el curso completo. Hoy puedes bajarte la muestra gratuita: la guía de uso y el primer mecanismo entero."));
+    sec.appendChild(cab);
+    var lista = el("div", "cuaderno-lista");
+    sec.appendChild(lista);
+    if (!conAcceso) {
+      var m = el("a", "btn cuaderno-muestra", "Descargar la muestra gratis (PDF)");
+      m.href = CUADERNO_MUESTRA; m.setAttribute("download", "");
+      sec.appendChild(m);
+    }
+    fetch(CUADERNO_META, { credentials: "same-origin" })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (d) {
+        if (!d || !Array.isArray(d.tomos)) return;
+        d.tomos.forEach(function (t) {
+          var fila = el(conAcceso ? "a" : "div", "cuaderno-tomo");
+          fila.appendChild(el("span", "cuaderno-num", String(t.n)));
+          var txt = el("span", "cuaderno-txt");
+          txt.appendChild(el("strong", null, t.titulo));
+          txt.appendChild(el("small", null, t.que + " · " + t.paginas + " páginas · " + t.mb + " MB"));
+          fila.appendChild(txt);
+          if (conAcceso) {
+            fila.href = CUADERNO_API + "?tomo=" + t.n;
+            fila.setAttribute("rel", "nofollow");
+            fila.appendChild(el("span", "cuaderno-accion", "Descargar"));
+          } else {
+            fila.appendChild(el("span", "marca-est bloq", "Con el curso"));
+          }
+          lista.appendChild(fila);
+        });
+      })
+      .catch(function () { /* sin metadatos no se pinta la lista; el bloque sigue teniendo sentido */ });
+    return sec;
+  }
+
   function renderIndice() {
     modoLector(false);
     limpiar();
@@ -303,6 +353,7 @@
       recorrido.appendChild(bloque);
     });
     paso.appendChild(recorrido);
+    paso.appendChild(renderCuaderno());
 
     if (!conAcceso) {
       var cierre = el("section", "cierre-demo");

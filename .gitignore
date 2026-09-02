@@ -16,3 +16,6 @@ scripts/_norsk_curso/
 .vercel
 .claude/
 supabase/.temp/
+
+# Cuaderno en PDF: los seis tomos son contenido de pago y el repo es público
+scripts/_norsk_cuaderno/
