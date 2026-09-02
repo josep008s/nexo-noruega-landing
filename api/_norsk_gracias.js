@@ -4,7 +4,7 @@
 
 import {
   PLANES, stripe, sbUpsert, sbSelect, setSessionCookie,
-} from "../../api/_norsk_lib.js";
+} from "./_norsk_lib.js";
 
 export default async function handler(req, res) {
   const sessionId = (req.query && req.query.session_id) || "";

@@ -266,13 +266,13 @@ if (exists("sitemap.xml")) {
   const SELFTEST_COMERCIAL = "scripts/norsk_comercial_router_selftest.mjs";
   const rutas = ["activar", "checkout", "gracias", "reenviar", "webhook"];
   const antiguos = rutas.map((ruta) => `api/norsk-${ruta}.js`);
-  const delegados = rutas.map((ruta) => `server/commercial/norsk-${ruta}.mjs`);
+  const delegados = rutas.map((ruta) => `api/_norsk_${ruta}.js`);
   const compartidos = ["api/_norsk_lib.js", "api/_larsito_reservas.js", "api/_larsito_frases.js"];
 
   if (!exists(ROUTER)) duro(`Falta ${ROUTER}`);
   else {
     const js = read(ROUTER);
-    const faltan = rutas.filter((ruta) => !js.includes(`norsk-${ruta}.mjs`));
+    const faltan = rutas.filter((ruta) => !js.includes(`_norsk_${ruta}.js`));
     if (faltan.length || !js.includes("bodyParser: false")
         || !js.includes("RUTAS_PUBLICAS") || js.includes("req.query.route")) {
       duro(`${ROUTER}: delegados, body RAW o selector por ruta publica incompletos`);
@@ -281,6 +281,21 @@ if (exists("sitemap.xml")) {
   if (antiguos.some(exists)) duro("Vercel Hobby: quedan handlers comerciales directos dentro de api/");
   for (const f of [...delegados, ...compartidos]) {
     if (!exists(f)) duro(`Vercel Hobby: falta el modulo interno ${f}`);
+  }
+  if (exists("server/commercial")
+      && fs.readdirSync(rel("server/commercial"), { withFileTypes: true }).some((e) => e.isFile())) {
+    duro("Vercel: server/commercial existe y podria publicar handlers como archivos estaticos");
+  }
+
+  for (const f of ["api/_norsk_checkout.js", "api/_norsk_reenviar.js"]) {
+    if (exists(f)) {
+      const js = read(f);
+      if (!js.includes("readJsonBodyLimited(req, MAX_BODY_BYTES)")
+          || !/MAX_BODY_BYTES\s*=\s*2\s*\*\s*1024/.test(js)
+          || !js.includes("e && e.status === 413 ? 413 : 400")) {
+        duro(`${f}: JSON sin limite de 2 KiB o errores 400/413 sin controlar`);
+      }
+    }
   }
 
   try {
@@ -299,9 +314,9 @@ if (exists("sitemap.xml")) {
       encoding: "utf8",
       env: { ...process.env, NODE_NO_WARNINGS: "1" },
     });
-    if (test.status !== 0 || !/PASS norsk_comercial_router_selftest: 7 rutas sin red/.test(test.stdout || "")) {
+    if (test.status !== 0 || !/PASS norsk_comercial_router_selftest: 12 casos sin red/.test(test.stdout || "")) {
       duro(`${SELFTEST_COMERCIAL}: el router no conserva despacho, metodos o respuestas`);
-    } else ok("router comercial: siete casos verificados sin red, incluida colision de selector");
+    } else ok("router comercial: doce casos sin red, con colision y limites 400/413");
   }
 }
 

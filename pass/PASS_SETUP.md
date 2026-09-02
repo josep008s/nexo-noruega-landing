@@ -270,4 +270,4 @@ Tarjeta de test: `4242 4242 4242 4242`, cualquier fecha futura y CVC.
 - MVA: sin registro por debajo de 50.000 NOK/12 meses (~143 ventas del plan medio). Al 80% del umbral,
   decidir registro o exención de enseñanza (mval. § 3-5, exigiría tutoría real).
 - Vipps: en private preview en Stripe (Checkout + NOK ya soportados). Al pasar a GA se activa en
-  `server/commercial/norsk-checkout.mjs` sin tocar nada más.
+  `api/_norsk_checkout.js` sin tocar nada más.

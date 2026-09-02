@@ -1,14 +1,23 @@
 // Reenvío del magic link. Respuesta SIEMPRE constante (anti-enumeración).
 // POST {email} -> {ok:true}
 
-import { sbSelect, sbRpc, sendMagicLink, readBody } from "../../api/_norsk_lib.js";
+import { sbSelect, sbRpc, sendMagicLink, readJsonBodyLimited } from "./_norsk_lib.js";
+
+const MAX_BODY_BYTES = 2 * 1024;
 
 const RESPUESTA = { ok: true, mensaje: "Si ese correo tiene un acceso activo, el enlace está de camino." };
 
 export default async function handler(req, res) {
   if (req.method !== "POST") { res.status(405).json({ ok: false }); return; }
 
-  const body = await readBody(req);
+  let body;
+  try {
+    body = await readJsonBodyLimited(req, MAX_BODY_BYTES);
+  } catch (e) {
+    const status = e && e.status === 413 ? 413 : 400;
+    res.status(status).json({ ok: false, error: status === 413 ? "cuerpo" : "json" });
+    return;
+  }
   const email = (body.email || "").toString().trim().toLowerCase();
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { res.status(200).json(RESPUESTA); return; }
 
