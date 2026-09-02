@@ -1,40 +1,138 @@
 {
   "trailingSlash": true,
-  "regions": ["arn1"],
+  "regions": [
+    "arn1"
+  ],
   "functions": {
-    "api/larsito-*.js": { "maxDuration": 60 }
+    "api/larsito-*.js": {
+      "maxDuration": 60
+    }
   },
   "headers": [
     {
       "source": "/(.*)",
       "headers": [
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
-        { "key": "X-Frame-Options", "value": "DENY" },
-        { "key": "Content-Security-Policy", "value": "frame-ancestors 'none'" },
-        { "key": "Permissions-Policy", "value": "camera=(), geolocation=(), microphone=(self)" }
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "Content-Security-Policy",
+          "value": "frame-ancestors 'none'"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), geolocation=(), microphone=(self)"
+        }
       ]
     }
   ],
   "rewrites": [
-    { "source": "/api/norsk-activar/", "destination": "/api/norsk-comercial" },
-    { "source": "/api/norsk-checkout/", "destination": "/api/norsk-comercial" },
-    { "source": "/api/norsk-gracias/", "destination": "/api/norsk-comercial" },
-    { "source": "/api/norsk-reenviar/", "destination": "/api/norsk-comercial" },
-    { "source": "/api/norsk-webhook/", "destination": "/api/norsk-comercial" }
+    {
+      "source": "/api/norsk-activar/",
+      "destination": "/api/norsk-comercial"
+    },
+    {
+      "source": "/api/norsk-checkout/",
+      "destination": "/api/norsk-comercial"
+    },
+    {
+      "source": "/api/norsk-gracias/",
+      "destination": "/api/norsk-comercial"
+    },
+    {
+      "source": "/api/norsk-reenviar/",
+      "destination": "/api/norsk-comercial"
+    },
+    {
+      "source": "/api/norsk-webhook/",
+      "destination": "/api/norsk-comercial"
+    }
   ],
   "redirects": [
-    { "source": "/(.*)", "has": [{ "type": "host", "value": "nexonoruega.com" }], "destination": "https://www.nexonoruega.com/$1", "permanent": true },
-    { "source": "/norsk/app/app.js", "destination": "/pass/app/app.js", "permanent": true },
-    { "source": "/norsk/app/", "destination": "/pass/app/", "permanent": true },
-    { "source": "/norsk/acceso/", "destination": "/pass/acceso/", "permanent": true },
-    { "source": "/norsk/gracias/", "destination": "/pass/gracias/", "permanent": true },
-    { "source": "/norsk/leccion-0/", "destination": "/pass/leccion-0/", "permanent": true },
-    { "source": "/norsk/preguntas-de-ejemplo/", "destination": "/pass/preguntas-de-ejemplo/", "permanent": true },
-    { "source": "/norsk/que-examen-necesitas/", "destination": "/pass/que-examen-necesitas/", "permanent": true },
-    { "source": "/norsk/como-inscribirse/", "destination": "/pass/como-inscribirse/", "permanent": true },
-    { "source": "/norsk/requisitos-ciudadania-noruega/", "destination": "/pass/requisitos-ciudadania-noruega/", "permanent": true },
-    { "source": "/norsk/condiciones/", "destination": "/pass/condiciones/", "permanent": true },
-    { "source": "/norsk/privacidad/", "destination": "/pass/privacidad/", "permanent": true }
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "nexonoruega.com"
+        }
+      ],
+      "destination": "https://www.nexonoruega.com/$1",
+      "permanent": true
+    },
+    {
+      "source": "/norsk/sprint-oral",
+      "destination": "/norsk/entrenamiento-oral/",
+      "permanent": true
+    },
+    {
+      "source": "/norsk/sprint-oral/",
+      "destination": "/norsk/entrenamiento-oral/",
+      "permanent": true
+    },
+    {
+      "source": "/norsk/app/app.js",
+      "destination": "/pass/app/app.js",
+      "permanent": true
+    },
+    {
+      "source": "/norsk/app/",
+      "destination": "/pass/app/",
+      "permanent": true
+    },
+    {
+      "source": "/norsk/acceso/",
+      "destination": "/pass/acceso/",
+      "permanent": true
+    },
+    {
+      "source": "/norsk/gracias/",
+      "destination": "/pass/gracias/",
+      "permanent": true
+    },
+    {
+      "source": "/norsk/leccion-0/",
+      "destination": "/pass/leccion-0/",
+      "permanent": true
+    },
+    {
+      "source": "/norsk/preguntas-de-ejemplo/",
+      "destination": "/pass/preguntas-de-ejemplo/",
+      "permanent": true
+    },
+    {
+      "source": "/norsk/que-examen-necesitas/",
+      "destination": "/pass/que-examen-necesitas/",
+      "permanent": true
+    },
+    {
+      "source": "/norsk/como-inscribirse/",
+      "destination": "/pass/como-inscribirse/",
+      "permanent": true
+    },
+    {
+      "source": "/norsk/requisitos-ciudadania-noruega/",
+      "destination": "/pass/requisitos-ciudadania-noruega/",
+      "permanent": true
+    },
+    {
+      "source": "/norsk/condiciones/",
+      "destination": "/pass/condiciones/",
+      "permanent": true
+    },
+    {
+      "source": "/norsk/privacidad/",
+      "destination": "/pass/privacidad/",
+      "permanent": true
+    }
   ]
 }

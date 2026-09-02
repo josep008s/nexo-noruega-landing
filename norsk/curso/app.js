@@ -122,14 +122,14 @@
 
   var TIPOS = {
     diagnostico: { titulo: "Punto de partida", nota: "Localiza qué destreza necesita trabajo antes de abrir más material." },
-    muntlig: { titulo: "Núcleo oral", nota: "Consignas y 21 actuaciones para sostener el turno, reparar y volver a intentarlo." },
+    muntlig: { titulo: "Hablar", nota: "El entrenamiento oral: consignas y 21 actuaciones para sostener el turno, reparar y volver a intentarlo." },
     mecanismo: { titulo: "Los 16 mecanismos", nota: "El salto de A2 a B1, explicado desde situaciones que sí ocurren." },
-    lytt: { titulo: "Comprensión oral", nota: "Escucha, decide y comprueba qué información cambia la respuesta." },
-    les: { titulo: "Comprensión lectora", nota: "Textos breves y largos para leer condiciones, intención y detalle." },
-    skriv: { titulo: "Expresión escrita", nota: "Tareas, modelos y criterios para escribir con dirección." },
+    lytt: { titulo: "Escuchar", nota: "Escucha, decide y comprueba qué información cambia la respuesta." },
+    les: { titulo: "Leer", nota: "Textos breves y largos para leer condiciones, intención y detalle." },
+    skriv: { titulo: "Escribir", nota: "Tareas, modelos y criterios para escribir con dirección." },
     anexo: { titulo: "Banco de expresiones", nota: "Expresiones de UTTRYKK colocadas donde activan cada mecanismo." },
     simulacro: { titulo: "Simulacros", nota: "La prueba completa cuando ya toca medir el recorrido entero." },
-    larsito: { titulo: "Larsito", nota: "Conversación, segundo intento y feedback dentro de la ruta oral." },
+    larsito: { titulo: "Practicar con Larsito", nota: "El compañero de conversación del entrenamiento oral: conversación, segundo intento e informe." },
   };
 
   var ORDEN_TIPOS = ["diagnostico", "muntlig", "mecanismo", "lytt", "les", "skriv", "anexo", "simulacro"];
@@ -257,7 +257,7 @@
 
     var paso = el("div", "step step-indice");
     var hero = el("section", "curso-hero");
-    hero.appendChild(el("p", "kicker caesar", "Ruta Norskprøven B1"));
+    hero.appendChild(el("p", "kicker caesar", "Norskprøven B1"));
 
     var h1 = el("h1");
     h1.appendChild(document.createTextNode("De entender noruego a "));
@@ -526,7 +526,7 @@
       if (validas.indexOf(actual) === -1) actual = jornadas[0].id;
 
       var ruta = el("div", "ruta21");
-      ruta.appendChild(el("p", "lab", "Ruta oral · 21 actuaciones"));
+      ruta.appendChild(el("p", "lab", "Entrenamiento oral · 21 actuaciones"));
       var hechas21 = jornadas.filter(function (s) { return estado.actuaciones[s.id]; }).length;
       ruta.appendChild(el("p", "ruta21-progreso", hechas21 + " de 21 actuaciones marcadas"));
       var selector = document.createElement("select");
