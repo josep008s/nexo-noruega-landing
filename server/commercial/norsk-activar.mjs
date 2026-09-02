@@ -1,7 +1,7 @@
 // Magic link de NEXO PASS: valida el JWT del email y pone la cookie de sesión.
 // GET ?token=... -> 302 /pass/app/  (o /pass/acceso/?e=expirado)
 
-import { jwtVerify, compraActiva, setSessionCookie } from "../shared/norsk-lib.mjs";
+import { jwtVerify, compraActiva, setSessionCookie } from "../../api/_norsk_lib.js";
 
 export default async function handler(req, res) {
   const token = (req.query && req.query.token) || "";

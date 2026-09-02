@@ -19,7 +19,7 @@ import {
   compraActiva,
   sbSelect,
   sbRpc,
-} from "../server/shared/norsk-lib.mjs";
+} from "./_norsk_lib.js";
 
 // Tope duro por llamada. Aunque el cliente pida más, aquí se corta.
 const MAX_POR_LLAMADA = 10;

@@ -1,9 +1,9 @@
 // Contrato interno del consumidor de servidor de Larsito.
-// Este modulo vive fuera de api/ y no se publica como endpoint. No hay ruta de navegador
+// Los archivos api/_* no se publican como endpoints. No hay ruta de navegador
 // que marque una reserva como consumida: el puente de servidor importa
 // consumirFirmaLarsito y exigir ok=true antes de abrir el recurso externo.
 
-import { jwtVerify, sbRpc } from "./norsk-lib.mjs";
+import { jwtVerify, sbRpc } from "./_norsk_lib.js";
 
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 
