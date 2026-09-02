@@ -9,7 +9,7 @@
 
 import {
   PLANES, sbUpsert, sbPatch, sendMagicLink, stripeVerifySignature, readRawBody,
-} from "../../api/_norsk_lib.js";
+} from "./_norsk_lib.js";
 
 export const config = { api: { bodyParser: false } };
 
