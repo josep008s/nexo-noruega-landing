@@ -74,8 +74,6 @@
     .head-nav{display:flex;gap:20px;align-items:center;font:500 .84rem var(--sg)}
     .head-nav a{color:var(--fiordo);text-decoration:none;transition:color .2s}
     .head-nav a:hover{color:var(--noche)}
-    .nav-cta{padding:9px 15px;background:var(--noche);color:var(--nieve)!important;border-radius:999px;font-weight:700}
-    .nav-cta:hover{background:var(--fiordo)}
 
     h1,h2,h3{font-family:var(--sg);margin-top:0;color:var(--noche)}
     h1{max-width:16ch;margin:0 0 24px;font-size:clamp(2.6rem,6.4vw,4.6rem);font-weight:700;letter-spacing:-.045em;line-height:1.02}
@@ -185,7 +183,6 @@
     }
     @media(max-width:620px){
       .wrap,.narrow{width:min(100% - 28px,1120px)}
-      .head-nav a:not(.nav-cta){display:none}
       h1{font-size:clamp(2.4rem,10vw,3.4rem)}
       .fit-grid,.include-grid{grid-template-columns:1fr}
       .fact{border-left:0!important;border-top:1px solid var(--linea-clara)}
@@ -209,10 +206,10 @@
       </svg>
       <span>NEXO <b>NORSK</b></span>
     </a>
-    <nav class="head-nav" aria-label="Navegación principal">
+    <nav class="head-nav" aria-label="Secciones">
       <a href="/norsk/">Noruego</a>
       <a href="/pass/">Exámenes</a>
-      <a class="nav-cta" href="/norsk/larsito/">Probar a Larsito</a>
+      <a href="https://www.nexonoruega.com">Nexo Noruega</a>
     </nav>
   </div>
 </header>
@@ -434,9 +431,10 @@
     <nav class="footer-links" aria-label="Enlaces">
       <a href="https://www.nexonoruega.com">Inicio</a>
       <a href="/norsk/">Noruego</a>
-      <a href="/norsk/larsito/">Larsito</a>
       <a href="/pass/">Exámenes</a>
+      <a href="/pass/condiciones/">Condiciones</a>
       <a href="/pass/privacidad/">Privacidad</a>
+      <a href="https://nexonoruega.substack.com">Newsletter</a>
     </nav>
   </div>
 </footer>

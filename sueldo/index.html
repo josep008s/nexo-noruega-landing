@@ -54,8 +54,17 @@
     .marca{display:flex;align-items:center;gap:11px;text-decoration:none;color:var(--nieve)}
     .marca svg{width:28px;height:28px;flex:none}
     .marca span{font-family:var(--sg);font-weight:700;font-size:.92rem;letter-spacing:.02em}
-    .head-cta{font-family:var(--sg);font-weight:500;font-size:.82rem;letter-spacing:.04em;color:var(--aurora);text-decoration:none}
-    .head-cta:hover{color:var(--nieve)}
+    .head-nav{display:flex;gap:18px}
+    .head-nav a{font-family:var(--sg);font-weight:500;font-size:.82rem;letter-spacing:.04em;color:var(--aurora);text-decoration:none}
+    .head-nav a:hover{color:var(--nieve)}
+
+    footer{position:relative;z-index:1;border-top:1px solid rgba(141,161,171,.22);padding:26px 0}
+    .foot-inner{max-width:680px;margin:0 auto;padding:0 24px;display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between}
+    .foot-inner p{font-family:var(--sg);font-size:.74rem;color:var(--niebla);margin:0}
+    .footer-links{display:flex;flex-wrap:wrap;gap:16px}
+    .footer-links a{font-family:var(--sg);font-size:.78rem;letter-spacing:.04em;color:var(--niebla);text-decoration:none}
+    .footer-links a:hover{color:var(--nieve)}
+    @media(max-width:640px){.marca span{display:none}.head-nav{gap:12px}.head-nav a{font-size:.76rem;letter-spacing:.02em}}
 
     main{position:relative;z-index:1;max-width:680px;margin:0 auto;padding:18px 24px 80px;min-height:72svh;display:flex;flex-direction:column;justify-content:center}
 
@@ -159,7 +168,11 @@
         </svg>
         <span>Nexo Noruega</span>
       </a>
-      <a class="head-cta" href="https://nexonoruega.substack.com/subscribe">Suscríbete</a>
+      <nav class="head-nav" aria-label="Secciones">
+        <a href="/norsk/">Noruego</a>
+        <a href="/pass/">Exámenes</a>
+        <a href="https://www.nexonoruega.com">Nexo Noruega</a>
+      </nav>
     </div>
   </header>
 
@@ -182,6 +195,20 @@
     <!-- PANTALLA 2: resultado -->
     <section id="s-result" class="step hidden" aria-live="polite"></section>
   </main>
+
+  <footer>
+    <div class="foot-inner">
+      <p>Datos de SSB y Skatteetaten. Nexo Noruega no está afiliado a ningún organismo oficial noruego.</p>
+      <nav class="footer-links" aria-label="Enlaces">
+        <a href="https://www.nexonoruega.com">Inicio</a>
+        <a href="/norsk/">Noruego</a>
+        <a href="/pass/">Exámenes</a>
+        <a href="/pass/condiciones/">Condiciones</a>
+        <a href="/pass/privacidad/">Privacidad</a>
+        <a href="https://nexonoruega.substack.com">Newsletter</a>
+      </nav>
+    </div>
+  </footer>
 
   <script src="/sueldo/app.js"></script>
 </body>
