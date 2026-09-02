@@ -248,7 +248,66 @@ if (exists("sitemap.xml")) {
   if (!derivas) ok("entradas Noruego/Exámenes: hero, marcado y navegación activos unificados");
 }
 
-// 5e) Larsito: privacidad local de la demo y contrato cerrado del producto.
+// 5e) Vercel Hobby: cada .js directo de api/ cuenta como funcion. Los cinco
+// endpoints comerciales comparten un router, pero conservan sus URLs publicas.
+{
+  const MAX_FUNCIONES = 12;
+  const funciones = fs.readdirSync(rel("api"), { withFileTypes: true })
+    .filter((e) => e.isFile() && e.name.endsWith(".js"))
+    .map((e) => e.name)
+    .sort();
+
+  if (funciones.length > MAX_FUNCIONES) {
+    duro(`Vercel Hobby: ${funciones.length} funciones en api/; el maximo es ${MAX_FUNCIONES}`);
+  } else ok(`Vercel Hobby: ${funciones.length}/${MAX_FUNCIONES} funciones serverless`);
+
+  const ROUTER = "api/norsk-comercial.js";
+  const SELFTEST_COMERCIAL = "scripts/norsk_comercial_router_selftest.mjs";
+  const rutas = ["activar", "checkout", "gracias", "reenviar", "webhook"];
+  const antiguos = rutas.map((ruta) => `api/norsk-${ruta}.js`);
+  const delegados = rutas.map((ruta) => `server/commercial/norsk-${ruta}.mjs`);
+  const compartidos = [
+    "server/shared/norsk-lib.mjs",
+    "server/shared/larsito-reservas.mjs",
+    "server/archive/larsito-frases.mjs",
+  ];
+
+  if (!exists(ROUTER)) duro(`Falta ${ROUTER}`);
+  else {
+    const js = read(ROUTER);
+    const faltan = rutas.filter((ruta) => !js.includes(`norsk-${ruta}.mjs`));
+    if (faltan.length || !js.includes("bodyParser: false")) {
+      duro(`${ROUTER}: delegados incompletos o body RAW de Stripe desactivado`);
+    }
+  }
+  if (antiguos.some(exists)) duro("Vercel Hobby: quedan handlers comerciales directos dentro de api/");
+  for (const f of [...delegados, ...compartidos]) {
+    if (!exists(f)) duro(`Vercel Hobby: falta el modulo interno ${f}`);
+  }
+
+  try {
+    const cfg = JSON.parse(read("vercel.json"));
+    const rewrites = Array.isArray(cfg.rewrites) ? cfg.rewrites : [];
+    const incompletas = rutas.filter((ruta) => !rewrites.some((r) =>
+      r.source === `/api/norsk-${ruta}/`
+      && r.destination === `/api/norsk-comercial?route=${ruta}`));
+    if (incompletas.length) duro(`vercel.json: faltan rewrites comerciales para ${incompletas.join(", ")}`);
+    else ok("rutas comerciales: cinco URLs publicas conservadas por rewrites internos");
+  } catch (e) { duro("vercel.json: JSON invalido"); }
+
+  if (!exists(SELFTEST_COMERCIAL)) duro(`Falta ${SELFTEST_COMERCIAL}`);
+  else {
+    const test = spawnSync(process.execPath, [rel(SELFTEST_COMERCIAL)], {
+      encoding: "utf8",
+      env: { ...process.env, NODE_NO_WARNINGS: "1" },
+    });
+    if (test.status !== 0 || !/PASS norsk_comercial_router_selftest: 6 rutas sin red/.test(test.stdout || "")) {
+      duro(`${SELFTEST_COMERCIAL}: el router no conserva despacho, metodos o respuestas`);
+    } else ok("router comercial: seis rutas verificadas sin red");
+  }
+}
+
+// 5f) Larsito: privacidad local de la demo y contrato cerrado del producto.
 // Estas comprobaciones son deliberadamente explicitas: una refactorizacion que
 // quite una barrera debe actualizar este guard y pasar revision, no quedar verde.
 {
@@ -259,7 +318,7 @@ if (exists("sitemap.xml")) {
   const TTS = "api/larsito-tts.js";
   const SESION = "api/larsito-sesion.js";
   const LISTENING = "api/larsito-listening.js";
-  const RESERVAS = "api/_larsito_reservas.js";
+  const RESERVAS = "server/shared/larsito-reservas.mjs";
   const COMPENSAR = "api/larsito-compensar.js";
   const LARSITO_VENDOR = "norsk/larsito/vendor/elevenlabs-client-1.23.0.iife.js";
   const MIGRACION = "supabase/migrations/20260902075618_larsito_reservas_0004.sql";
@@ -647,7 +706,7 @@ if (exists("sitemap.xml")) {
   }
 }
 
-// 5e) El curso: la demo publica no puede llevar contenido de pago.
+// 5g) El curso: la demo publica no puede llevar contenido de pago.
 // El exportador saca el material del Drive y deja aqui solo la muestra.
 // Este check es la ultima red antes de publicar en un repo publico.
 if (exists("norsk/curso/app.js")) {

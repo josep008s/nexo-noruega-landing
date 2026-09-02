@@ -4,7 +4,7 @@
 
 import {
   PLANES, stripe, sbUpsert, sbSelect, setSessionCookie,
-} from "./_norsk_lib.js";
+} from "../shared/norsk-lib.mjs";
 
 export default async function handler(req, res) {
   const sessionId = (req.query && req.query.session_id) || "";
@@ -14,7 +14,7 @@ export default async function handler(req, res) {
     const session = await stripe(`checkout/sessions/${encodeURIComponent(sessionId)}`);
     if (session.payment_status !== "paid") { res.status(402).json({ ok: false, error: "impago" }); return; }
 
-    // Solo sesiones NORSK (metadata.plan la pone api/norsk-checkout.js).
+    // Solo sesiones NORSK (metadata.plan la pone el endpoint /api/norsk-checkout/).
     const plan = session.metadata && session.metadata.plan;
     if (!Object.prototype.hasOwnProperty.call(PLANES, plan)) {
       res.status(400).json({ ok: false, error: "producto" });

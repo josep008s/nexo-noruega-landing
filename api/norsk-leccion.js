@@ -2,7 +2,7 @@
 // el resto exige compra activa.
 // GET ?slug=<slug>  |  GET (sin slug) -> índice de lecciones (título/resumen, sin cuerpo)
 
-import { readSessionCookie, compraActiva, sbSelect } from "./_norsk_lib.js";
+import { readSessionCookie, compraActiva, sbSelect } from "../server/shared/norsk-lib.mjs";
 
 export default async function handler(req, res) {
   const q = req.query || {};

@@ -2,7 +2,7 @@
 // No sustituye una prueba de concurrencia real sobre PostgreSQL/Supabase.
 
 import assert from "node:assert/strict";
-import { COOKIE, jwtSign, jwtVerify } from "../api/_norsk_lib.js";
+import { COOKIE, jwtSign, jwtVerify } from "../server/shared/norsk-lib.mjs";
 import sesionHandler, { crearFirmaLarsito } from "../api/larsito-sesion.js";
 import ttsHandler from "../api/larsito-tts.js";
 import listeningHandler from "../api/larsito-listening.js";
@@ -12,7 +12,7 @@ import "../norsk/larsito/learning-core.js";
 import {
   consumirFirmaLarsito,
   registrarFalloFirmaLarsito,
-} from "../api/_larsito_reservas.js";
+} from "../server/shared/larsito-reservas.mjs";
 
 const SECRET = "test-secret-".padEnd(64, "x");
 const COMPRA = "11111111-1111-4111-8111-111111111111";

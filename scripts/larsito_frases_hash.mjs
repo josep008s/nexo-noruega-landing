@@ -1,5 +1,5 @@
 // Herramienta historica del TTS remoto retirado de la demo. Regenera el inventario
-// de hashes que se conserva en api/_larsito_frases.js solo como trazabilidad. Ni la
+// de hashes que se conserva en server/archive/larsito-frases.mjs solo como trazabilidad. Ni la
 // demo actual ni /api/larsito-tts.js importan esa lista: el endpoint del producto
 // completo exige siempre cookie y compra. No forma parte del build ni del guard.
 //
@@ -49,5 +49,5 @@ const salida = [
   "",
 ].join("\n");
 
-fs.writeFileSync(path.join(ROOT, "api", "_larsito_frases.js"), salida);
-console.log(`${frases.length} frases de la demo, ${hashes.length} hashes únicos -> api/_larsito_frases.js`);
+fs.writeFileSync(path.join(ROOT, "server", "archive", "larsito-frases.mjs"), salida);
+console.log(`${frases.length} frases de la demo, ${hashes.length} hashes únicos -> server/archive/larsito-frases.mjs`);
