@@ -201,6 +201,27 @@ if (exists("sitemap.xml")) {
   if (!exists("ESTILO.md")) duro("Falta ESTILO.md, que documenta el sistema visual");
 }
 
+// 5b bis) Fuentes autoalojadas: el navegador no debe pedir nada a Google.
+{
+  const pages = [];
+  const walk = (d) => fs.readdirSync(rel(d), { withFileTypes: true }).forEach((e) => {
+    const p = path.join(d, e.name);
+    if (e.isDirectory()) walk(p);
+    else if (e.name === "index.html") pages.push(p);
+  });
+  walk("pass"); walk("norsk"); walk("sueldo"); pages.push("index.html");
+  let malas = 0;
+  for (const f of pages) {
+    const h = read(f);
+    if (/fonts\.googleapis\.com|fonts\.gstatic\.com/.test(h)) { duro(`${f}: carga fuentes de Google (van autoalojadas en /fonts/)`); malas++; }
+    if (!h.includes('href="/fonts/fonts.css"')) { duro(`${f}: no enlaza /fonts/fonts.css`); malas++; }
+  }
+  for (const w of ["fonts/fonts.css", "fonts/LICENSES.txt", "fonts/caesar-dressing-normal-400-latin.woff2", "fonts/source-serif-4-italic-400-latin.woff2", "fonts/source-serif-4-normal-400-latin.woff2", "fonts/space-grotesk-normal-500-latin.woff2"]) {
+    if (!exists(w)) { duro(`Falta ${w} (fuentes autoalojadas)`); malas++; }
+  }
+  if (!malas) ok(`fuentes: autoalojadas en /fonts/ en ${pages.length} páginas, sin terceros`);
+}
+
 // 5c) La home es intocable: su tema oscuro es decisión de marca.
 {
   const home = read("index.html");

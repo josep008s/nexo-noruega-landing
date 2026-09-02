@@ -58,16 +58,16 @@ Sobre fondo claro, el texto tiene que superar el 4,5:1 de la norma AA. Tres regl
 
 ## Tipografía
 
-Tres familias, cargadas de Google Fonts en cada página:
+Tres familias, autoalojadas en `/fonts/` como ficheros `woff2` (subconjunto latino, licencia SIL OFL, ver `fonts/LICENSES.txt`) y declaradas una sola vez en `/fonts/fonts.css`. Esa hoja es la única excepción al "sin CSS compartido": solo contiene `@font-face`, ningún token. Ningún navegador vuelve a pedir nada a Google, que era el único tercero de la web.
 
 - **Space Grotesk** (500, 700): titulares, kickers, interfaz, botones, metadatos.
 - **Source Serif 4** (400, 600, cursiva): cuerpo de texto. Es la fuente por defecto del `body`.
 - **Caesar Dressing**: solo la firma de marca y las cifras grandes de dato. Sobre claro, en `--fiordo`.
 
-Enlace canónico:
+Enlace canónico, el mismo en las 17 páginas (sin `preconnect` a Google):
 
 ```html
-<link href="https://fonts.googleapis.com/css2?family=Caesar+Dressing&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/fonts/fonts.css">
 ```
 
 ## Firmas visuales que se conservan
