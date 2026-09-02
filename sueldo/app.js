@@ -178,7 +178,7 @@
 
       '<div class="gate-card" id="gate-card">' +
         '<p class="gate-copy">Si te interesa cómo funciona la vida <mark class="hi">donde las cosas funcionan</mark>, suscríbete. Te llega a tu correo información sobre Noruega que no cuelgo en redes, de alguien que ya ha pasado por todas las fases.</p>' +
-        '<iframe class="sub-embed" src="https://nexonoruega.substack.com/embed" title="Suscríbete a Nexo Noruega" loading="lazy"></iframe>' +
+        '<iframe class="sub-embed" src="https://nexonoruega.substack.com/embed?utm_source=nexonoruega.com&utm_medium=web&utm_campaign=sueldo&utm_content=' + encodeURIComponent(norm(o.nombre_es).replace(/\s+/g, "-").slice(0, 60)) + '" title="Suscríbete a Nexo Noruega" loading="lazy"></iframe>' +
         '<button class="reveal-link" id="reveal">Ver el cálculo</button>' +
         '<p class="tillit-note">Aunque no te suscribas, puedes verlo. Eso es <span class="tw">tillit</span>, la confianza noruega: el sistema da primero y confía en que devuelvas.</p>' +
       '</div>' +
