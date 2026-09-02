@@ -21,11 +21,11 @@ const BUCKET = "norsk-cuaderno";
 const DRY = process.argv.includes("--dry");
 
 const TOMOS = [
-  { n: 1, archivo: "NEXO-NORSK_Cuaderno-B1_Tomo-1_Los-cimientos-de-la-frase.pdf", titulo: "Los cimientos de la frase", que: "Perfil diagnóstico y mecanismos M01 a M08" },
-  { n: 2, archivo: "NEXO-NORSK_Cuaderno-B1_Tomo-2_Matiz-texto-y-conversacion.pdf", titulo: "Matiz, texto y conversación", que: "Mecanismos M09 a M16" },
-  { n: 3, archivo: "NEXO-NORSK_Cuaderno-B1_Tomo-3_Hablar.pdf", titulo: "Hablar", que: "Kit oral de 21 actuaciones y banco de consignas" },
-  { n: 4, archivo: "NEXO-NORSK_Cuaderno-B1_Tomo-4_Entender.pdf", titulo: "Entender", que: "Escucha y lectura, con las claves aparte" },
-  { n: 5, archivo: "NEXO-NORSK_Cuaderno-B1_Tomo-5_Escribir.pdf", titulo: "Escribir", que: "Expresión escrita y expresiones por mecanismo" },
+  { n: 1, archivo: "NEXO-NORSK_Cuaderno-B1_Tomo-1_Los-16-mecanismos-primera-parte.pdf", titulo: "Los 16 mecanismos, primera parte", que: "Punto de partida y mecanismos M01 a M08" },
+  { n: 2, archivo: "NEXO-NORSK_Cuaderno-B1_Tomo-2_Los-16-mecanismos-segunda-parte.pdf", titulo: "Los 16 mecanismos, segunda parte", que: "Mecanismos M09 a M16" },
+  { n: 3, archivo: "NEXO-NORSK_Cuaderno-B1_Tomo-3_Hablar.pdf", titulo: "Hablar", que: "Entrenamiento oral: 21 actuaciones y banco de consignas" },
+  { n: 4, archivo: "NEXO-NORSK_Cuaderno-B1_Tomo-4_Escuchar-y-leer.pdf", titulo: "Escuchar y leer", que: "Escucha y lectura, con las claves aparte" },
+  { n: 5, archivo: "NEXO-NORSK_Cuaderno-B1_Tomo-5_Escribir.pdf", titulo: "Escribir", que: "Expresión escrita y banco de expresiones" },
   { n: 6, archivo: "NEXO-NORSK_Cuaderno-B1_Tomo-6_Simulacros.pdf", titulo: "Simulacros", que: "Por ordenador y oral, con soluciones" },
 ];
 
