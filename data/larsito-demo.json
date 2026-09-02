@@ -1,6 +1,6 @@
 {
-  "version": "0.1",
-  "aviso": "Esta demo usa contenido fijo y personajes ficticios. No escribas datos personales, familiares ni de salud reales. El noruego y el audio tienen la QA sistémica y técnica aceptada para esta v1; no se presenta como firma de un revisor nativo humano. La demo no evalúa pronunciación ni nivel.",
+  "version": "0.2",
+  "aviso": "Esta demo usa contenido fijo y personajes ficticios. No escribas datos personales, familiares ni de salud reales. Las voces son grabaciones fijas servidas desde nexonoruega.com, sin llamadas a ningún proveedor en vivo; si grabas tu voz para compararte con el modelo, la grabación se queda en tu navegador y desaparece al salir. El noruego y el audio tienen la QA sistémica y técnica aceptada para esta v1; no se presenta como firma de un revisor nativo humano. La demo no evalúa pronunciación ni nivel.",
   "fuentes": [
     {
       "dato": "La prueba oral de Norskprøven dura entre 20 y 25 minutos, se hace con dos candidatos a la vez, la dirige un eksaminator y la evalúa un sensor. En el nivel A2-B1 hay tres tareas: contar algo sobre un tema cotidiano, intercambiar información con el otro candidato y expresar y justificar una opinión.",
@@ -49,7 +49,9 @@
             "Jeg vil gjerne bestille time",
             "hos fastlegen min",
             "så snart som mulig"
-          ]
+          ],
+          "audio_no": "/norsk/larsito/audio/demo/esc-01-t1-larsito.mp3",
+          "audio_modelo": "/norsk/larsito/audio/demo/esc-01-t1-modelo.mp3"
         },
         {
           "larsito_no": "Det ordner vi. Kan du lese opp navnet og fødselsdatoen som står på øvingskortet?",
@@ -63,7 +65,9 @@
             "Jeg heter ...",
             "Jeg er født tolvte mars",
             "Skal jeg stave etternavnet?"
-          ]
+          ],
+          "audio_no": "/norsk/larsito/audio/demo/esc-01-t2-larsito.mp3",
+          "audio_modelo": "/norsk/larsito/audio/demo/esc-01-t2-modelo.mp3"
         },
         {
           "larsito_no": "Takk. Hva står det på øvingskortet om grunnen til timen?",
@@ -77,7 +81,9 @@
             "Jeg har vondt i ryggen",
             "Det begynte på tirsdag",
             "På øvingskortet står det at ..."
-          ]
+          ],
+          "audio_no": "/norsk/larsito/audio/demo/esc-01-t3-larsito.mp3",
+          "audio_modelo": "/norsk/larsito/audio/demo/esc-01-t3-modelo.mp3"
         },
         {
           "larsito_no": "Jeg forstår. Legen har en ledig time på torsdag klokka kvart over ni. Passer det for deg?",
@@ -91,7 +97,9 @@
             "Det passer dessverre dårlig",
             "Da er jeg på jobb",
             "Har dere noe senere på dagen?"
-          ]
+          ],
+          "audio_no": "/norsk/larsito/audio/demo/esc-01-t4-larsito.mp3",
+          "audio_modelo": "/norsk/larsito/audio/demo/esc-01-t4-modelo.mp3"
         },
         {
           "larsito_no": "Da har jeg torsdag klokka halv fire i stedet. Du får en bekreftelse på SMS. Er det noe mer du lurer på?",
@@ -105,7 +113,9 @@
             "Hvordan gir jeg beskjed hvis ...",
             "hvis jeg må endre timen",
             "Hvem ringer jeg da?"
-          ]
+          ],
+          "audio_no": "/norsk/larsito/audio/demo/esc-01-t5-larsito.mp3",
+          "audio_modelo": "/norsk/larsito/audio/demo/esc-01-t5-modelo.mp3"
         },
         {
           "larsito_no": "Hvis du må endre timen, ringer du legekontoret i åpningstiden. Ha en fin dag!",
@@ -119,7 +129,9 @@
             "Tusen takk for hjelpen",
             "Vi ses på torsdag",
             "Ha en fin dag"
-          ]
+          ],
+          "audio_no": "/norsk/larsito/audio/demo/esc-01-t6-larsito.mp3",
+          "audio_modelo": "/norsk/larsito/audio/demo/esc-01-t6-modelo.mp3"
         }
       ]
     },
@@ -143,7 +155,9 @@
             "Jeg synes han trives",
             "Han snakker mye om ...",
             "når vi henter ham"
-          ]
+          ],
+          "audio_no": "/norsk/larsito/audio/demo/esc-02-t1-larsito.mp3",
+          "audio_modelo": "/norsk/larsito/audio/demo/esc-02-t1-modelo.mp3"
         },
         {
           "larsito_no": "Det stemmer godt med det vi ser. Han leker mye med Emma. Vi har lagt merke til at han snakker lite norsk i samlingsstunden. Hvordan er det hjemme?",
@@ -157,7 +171,9 @@
             "Hjemme snakker vi ...",
             "fordi vi vil at han skal ...",
             "Vi leser norske bøker sammen"
-          ]
+          ],
+          "audio_no": "/norsk/larsito/audio/demo/esc-02-t2-larsito.mp3",
+          "audio_modelo": "/norsk/larsito/audio/demo/esc-02-t2-modelo.mp3"
         },
         {
           "larsito_no": "Det er helt fint at dere holder på morsmålet hjemme. Barn klarer fint å lære to språk. Er det noe dere er bekymret for?",
@@ -171,7 +187,9 @@
             "Vi lurer på om ...",
             "Han sier at han ikke ...",
             "Ser dere det samme?"
-          ]
+          ],
+          "audio_no": "/norsk/larsito/audio/demo/esc-02-t3-larsito.mp3",
+          "audio_modelo": "/norsk/larsito/audio/demo/esc-02-t3-modelo.mp3"
         },
         {
           "larsito_no": "Takk for at du sier fra. Vi skal følge med i utetiden og sette ham sammen med en fast lekevenn. Har du noen ønsker til oss?",
@@ -185,7 +203,9 @@
             "Jeg ønsker at dere ...",
             "Det hadde vært fint om ...",
             "si fra med en gang"
-          ]
+          ],
+          "audio_no": "/norsk/larsito/audio/demo/esc-02-t4-larsito.mp3",
+          "audio_modelo": "/norsk/larsito/audio/demo/esc-02-t4-modelo.mp3"
         },
         {
           "larsito_no": "Det får du. Vi skriver i appen samme dag. Til slutt: neste uke har vi planleggingsdag på fredag, og da er barnehagen stengt.",
@@ -199,7 +219,9 @@
             "Da ordner vi noe annet",
             "Er det noe han må ha med seg?",
             "Det noterer jeg"
-          ]
+          ],
+          "audio_no": "/norsk/larsito/audio/demo/esc-02-t5-larsito.mp3",
+          "audio_modelo": "/norsk/larsito/audio/demo/esc-02-t5-modelo.mp3"
         }
       ]
     },
@@ -223,7 +245,9 @@
             "Kan du gjenta det siste?",
             "Jeg henger ikke helt med",
             "litt saktere, takk"
-          ]
+          ],
+          "audio_no": "/norsk/larsito/audio/demo/esc-03-t1-larsito.mp3",
+          "audio_modelo": "/norsk/larsito/audio/demo/esc-03-t1-modelo.mp3"
         },
         {
           "larsito_no": "Selvfølgelig. Vaktlista er oversikten over hvem som jobber når. Fra første oktober lager vi den digitalt.",
@@ -237,7 +261,9 @@
             "Hvis jeg forstår deg riktig ...",
             "i stedet for",
             "Stemmer det?"
-          ]
+          ],
+          "audio_no": "/norsk/larsito/audio/demo/esc-03-t2-larsito.mp3",
+          "audio_modelo": "/norsk/larsito/audio/demo/esc-03-t2-modelo.mp3"
         },
         {
           "larsito_no": "Helt riktig. Og timene fører dere inn selv hver fredag, ellers får dere ikke betalt for overtid.",
@@ -251,7 +277,9 @@
             "Hva skjer hvis ...",
             "Kan jeg gjøre det på mandag?",
             "hvem gjør det da?"
-          ]
+          ],
+          "audio_no": "/norsk/larsito/audio/demo/esc-03-t3-larsito.mp3",
+          "audio_modelo": "/norsk/larsito/audio/demo/esc-03-t3-modelo.mp3"
         },
         {
           "larsito_no": "Da fører du dem senere, men si fra til meg. Har du noe å tilføye før vi går videre?",
@@ -265,7 +293,9 @@
             "Jeg har et forslag",
             "Kan vi få en kort skriftlig veiledning?",
             "Det hjelper oss som ..."
-          ]
+          ],
+          "audio_no": "/norsk/larsito/audio/demo/esc-03-t4-larsito.mp3",
+          "audio_modelo": "/norsk/larsito/audio/demo/esc-03-t4-modelo.mp3"
         },
         {
           "larsito_no": "God idé. Jeg sender en veiledning på e-post i morgen. Er det greit for deg?",
@@ -279,7 +309,9 @@
             "Det er helt greit",
             "Send den gjerne til ...",
             "så slipper vi spørsmål senere"
-          ]
+          ],
+          "audio_no": "/norsk/larsito/audio/demo/esc-03-t5-larsito.mp3",
+          "audio_modelo": "/norsk/larsito/audio/demo/esc-03-t5-modelo.mp3"
         }
       ]
     },
@@ -303,7 +335,9 @@
             "Hyggelig å møte deg",
             "Jeg flyttet hit i mai",
             "Hva betyr det?"
-          ]
+          ],
+          "audio_no": "/norsk/larsito/audio/demo/esc-04-t1-larsito.mp3",
+          "audio_modelo": "/norsk/larsito/audio/demo/esc-04-t1-modelo.mp3"
         },
         {
           "larsito_no": "Det er når alle i borettslaget rydder ute sammen. Vi maler, raker løv og kaster søppel. Etterpå griller vi pølser.",
@@ -317,7 +351,9 @@
             "Jeg blir med",
             "Må jeg ta med noe selv?",
             "Det høres fint ut"
-          ]
+          ],
+          "audio_no": "/norsk/larsito/audio/demo/esc-04-t2-larsito.mp3",
+          "audio_modelo": "/norsk/larsito/audio/demo/esc-04-t2-modelo.mp3"
         },
         {
           "larsito_no": "Bare arbeidshansker, hvis du har. Resten har vi. Har du truffet de andre i oppgangen?",
@@ -331,7 +367,9 @@
             "Jeg kjenner bare naboen min",
             "Ellers har jeg ikke snakket med så mange",
             "Jeg er sjelden hjemme"
-          ]
+          ],
+          "audio_no": "/norsk/larsito/audio/demo/esc-04-t3-larsito.mp3",
+          "audio_modelo": "/norsk/larsito/audio/demo/esc-04-t3-modelo.mp3"
         },
         {
           "larsito_no": "Da blir lørdag fin. Folk her er ikke uvennlige. De er bare litt trege i starten. Har du barn?",
@@ -345,7 +383,9 @@
             "Jeg har ikke barn",
             "Kanskje vi kan ...",
             "ta en kaffe sammen"
-          ]
+          ],
+          "audio_no": "/norsk/larsito/audio/demo/esc-04-t4-larsito.mp3",
+          "audio_modelo": "/norsk/larsito/audio/demo/esc-04-t4-modelo.mp3"
         },
         {
           "larsito_no": "Gjerne! Kona mi baker alltid altfor mye. Vi ses på lørdag, da.",
@@ -359,7 +399,9 @@
             "Vi ses på lørdag",
             "Ha en fin uke",
             "Ha det bra"
-          ]
+          ],
+          "audio_no": "/norsk/larsito/audio/demo/esc-04-t5-larsito.mp3",
+          "audio_modelo": "/norsk/larsito/audio/demo/esc-04-t5-modelo.mp3"
         }
       ]
     },
@@ -383,7 +425,9 @@
             "Jeg heter ...",
             "Jeg kommer fra ...",
             "Jeg har bodd i Norge i fire år"
-          ]
+          ],
+          "audio_no": "/norsk/larsito/audio/demo/esc-05-t1-larsito.mp3",
+          "audio_modelo": "/norsk/larsito/audio/demo/esc-05-t1-modelo.mp3"
         },
         {
           "larsito_no": "Takk. Kan du fortelle litt om hva du gjør til daglig?",
@@ -397,7 +441,9 @@
             "Jeg jobber som ...",
             "Jeg begynner klokka sju",
             "om formiddagen og på ettermiddagen"
-          ]
+          ],
+          "audio_no": "/norsk/larsito/audio/demo/esc-05-t2-larsito.mp3",
+          "audio_modelo": "/norsk/larsito/audio/demo/esc-05-t2-modelo.mp3"
         },
         {
           "larsito_no": "Hva liker du å gjøre når du har fri?",
@@ -411,7 +457,9 @@
             "Jeg liker å gå tur",
             "På fritiden ...",
             "fordi jeg blir rolig"
-          ]
+          ],
+          "audio_no": "/norsk/larsito/audio/demo/esc-05-t3-larsito.mp3",
+          "audio_modelo": "/norsk/larsito/audio/demo/esc-05-t3-modelo.mp3"
         },
         {
           "larsito_no": "Kan du fortelle om noe du savner fra hjemlandet ditt?",
@@ -425,7 +473,9 @@
             "Jeg savner ...",
             "I Spania ..., men her ...",
             "Det var uvant i begynnelsen"
-          ]
+          ],
+          "audio_no": "/norsk/larsito/audio/demo/esc-05-t4-larsito.mp3",
+          "audio_modelo": "/norsk/larsito/audio/demo/esc-05-t4-modelo.mp3"
         },
         {
           "larsito_no": "Til slutt: hva har du lyst til å gjøre de neste årene?",
@@ -439,7 +489,9 @@
             "Jeg skal ta fagbrev",
             "Jeg har lyst til å ...",
             "Derfor trenger jeg ..."
-          ]
+          ],
+          "audio_no": "/norsk/larsito/audio/demo/esc-05-t5-larsito.mp3",
+          "audio_modelo": "/norsk/larsito/audio/demo/esc-05-t5-modelo.mp3"
         }
       ]
     },
@@ -463,7 +515,9 @@
             "Jeg mener at ...",
             "Etter min mening ...",
             "Jeg har to grunner til det"
-          ]
+          ],
+          "audio_no": "/norsk/larsito/audio/demo/esc-06-t1-larsito.mp3",
+          "audio_modelo": "/norsk/larsito/audio/demo/esc-06-t1-modelo.mp3"
         },
         {
           "larsito_no": "Gjerne. Fortell om den første grunnen din.",
@@ -477,7 +531,9 @@
             "For det første ...",
             "Den viktigste grunnen er ...",
             "Et eksempel er ..."
-          ]
+          ],
+          "audio_no": "/norsk/larsito/audio/demo/esc-06-t2-larsito.mp3",
+          "audio_modelo": "/norsk/larsito/audio/demo/esc-06-t2-modelo.mp3"
         },
         {
           "larsito_no": "Det var et tydelig eksempel. Men noen sier at skolen har nok å gjøre fra før. Hva svarer du dem?",
@@ -491,7 +547,9 @@
             "Jeg skjønner innvendingen, men ...",
             "Det er sant at ..., likevel ...",
             "Til gjengjeld ..."
-          ]
+          ],
+          "audio_no": "/norsk/larsito/audio/demo/esc-06-t3-larsito.mp3",
+          "audio_modelo": "/norsk/larsito/audio/demo/esc-06-t3-modelo.mp3"
         },
         {
           "larsito_no": "Hva mener du om at foreldrene skal betale for svømmekurs selv?",
@@ -505,7 +563,9 @@
             "Delvis er jeg enig, men ...",
             "Jeg er uenig i det",
             "Familier med dårlig råd ..."
-          ]
+          ],
+          "audio_no": "/norsk/larsito/audio/demo/esc-06-t4-larsito.mp3",
+          "audio_modelo": "/norsk/larsito/audio/demo/esc-06-t4-modelo.mp3"
         },
         {
           "larsito_no": "Takk. Kan du oppsummere standpunktet ditt i én setning?",
@@ -519,7 +579,9 @@
             "Kort sagt ...",
             "Konklusjonen min er at ...",
             "fordi det handler om ..."
-          ]
+          ],
+          "audio_no": "/norsk/larsito/audio/demo/esc-06-t5-larsito.mp3",
+          "audio_modelo": "/norsk/larsito/audio/demo/esc-06-t5-modelo.mp3"
         }
       ]
     }
@@ -555,7 +617,8 @@
           "correcta": 0,
           "explicacion_es": "La frase clave es kan du eller faren komme før klokka to. La preposición før marca el límite: antes de esa hora, no después."
         }
-      ]
+      ],
+      "audio": "/norsk/larsito/audio/demo/LARS-A2-01.mp3"
     },
     {
       "codigo": "LARS-A2-02",
@@ -587,7 +650,8 @@
           "correcta": 0,
           "explicacion_es": "Billetten din gjelder på det toget også significa que el billete sirve igual. El verbo gjelde, valer o estar vigente, aparece constantemente en avisos y cartas oficiales."
         }
-      ]
+      ],
+      "audio": "/norsk/larsito/audio/demo/LARS-A2-02.mp3"
     },
     {
       "codigo": "LARS-A2-03",
@@ -619,7 +683,8 @@
           "correcta": 0,
           "explicacion_es": "De er ferdige rundt klokka tre hver dag. Las ocho son la hora de empezar, no la de acabar, y ahí es donde se cae mucha gente al escuchar rápido."
         }
-      ]
+      ],
+      "audio": "/norsk/larsito/audio/demo/LARS-A2-03.mp3"
     },
     {
       "codigo": "LARS-B1-01",
@@ -651,7 +716,8 @@
           "correcta": 1,
           "explicacion_es": "A partir de ahí hace falta la sykmelding, la baja firmada por el médico. La egenmelding es solo el aviso que haces tú mismo, sin papel médico."
         }
-      ]
+      ],
+      "audio": "/norsk/larsito/audio/demo/LARS-B1-01.mp3"
     },
     {
       "codigo": "LARS-B1-02",
@@ -683,7 +749,8 @@
           "correcta": 2,
           "explicacion_es": "Pides otra cita en tu centro. El 116 117 es la legevakt, el servicio de urgencias que atiende las veinticuatro horas cuando tu centro está cerrado, y no es el sitio al que llamar por un cansancio de un mes."
         }
-      ]
+      ],
+      "audio": "/norsk/larsito/audio/demo/LARS-B1-02.mp3"
     },
     {
       "codigo": "LARS-B1-03",
@@ -715,7 +782,9 @@
           "correcta": 0,
           "explicacion_es": "El pago siguiente se recorta en proporción a los días de retraso. No se pierde el derecho, pero el dinero de esos días no vuelve, así que la fecha del meldekort es de las pocas que conviene apuntar en el calendario."
         }
-      ]
+      ],
+      "audio": "/norsk/larsito/audio/demo/LARS-B1-03.mp3"
     }
-  ]
+  ],
+  "audio_estatico": true
 }
