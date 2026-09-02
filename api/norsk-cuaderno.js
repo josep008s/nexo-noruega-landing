@@ -9,10 +9,10 @@ import { readSessionCookie, compraActiva } from "./_norsk_lib.js";
 
 export const BUCKET = "norsk-cuaderno";
 export const TOMOS = {
-  1: "NEXO-NORSK_Cuaderno-B1_Tomo-1_Los-cimientos-de-la-frase.pdf",
-  2: "NEXO-NORSK_Cuaderno-B1_Tomo-2_Matiz-texto-y-conversacion.pdf",
+  1: "NEXO-NORSK_Cuaderno-B1_Tomo-1_Los-16-mecanismos-primera-parte.pdf",
+  2: "NEXO-NORSK_Cuaderno-B1_Tomo-2_Los-16-mecanismos-segunda-parte.pdf",
   3: "NEXO-NORSK_Cuaderno-B1_Tomo-3_Hablar.pdf",
-  4: "NEXO-NORSK_Cuaderno-B1_Tomo-4_Entender.pdf",
+  4: "NEXO-NORSK_Cuaderno-B1_Tomo-4_Escuchar-y-leer.pdf",
   5: "NEXO-NORSK_Cuaderno-B1_Tomo-5_Escribir.pdf",
   6: "NEXO-NORSK_Cuaderno-B1_Tomo-6_Simulacros.pdf",
 };

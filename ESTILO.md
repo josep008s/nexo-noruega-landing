@@ -92,6 +92,17 @@ La sección activa se distingue con peso 700 y una línea Aurora de 3 px. El pat
 
 Etiquetas vigentes desde el 02.09.2026: `Norsk` (antes `Noruego`, porque es el nombre del producto, coincide con la URL y es la palabra que el lector usa a diario) y `Ciudadanía` (antes `Exámenes`, que era ambiguo: la Ruta B1 también prepara un examen). No se usa "pasaporte" en la navegación: los exámenes no lo garantizan y la regla del producto es preparación, no promesa.
 
+
+## Nombres
+
+- Tres casas y un nombre por casa: `Nexo Noruega` (home, calculadora y newsletter), `NEXO NORSK` (todo `/norsk`) y `NEXO PASS` (todo `/pass`). En la web, NORSK y PASS son dos productos hermanos bajo Nexo Noruega; "línea Idioma" y "línea Ciudadanía" son vocabulario interno de los documentos de trabajo.
+- Los nombres de producto van siempre en mayúsculas, como el logotipo, también en rótulos pequeños y en prosa: `NEXO NORSK`, `NEXO PASS`. La marca editorial va en alta y baja: `Nexo Noruega`.
+- El logotipo de cada casa enlaza al inicio de esa casa (`/norsk/`, `/pass/` o `/`). El enlace a la home de Nexo Noruega ya está en la navegación, así que el logotipo no lo repite.
+- Títulos de pestaña: `Qué es · CASA`, siempre con punto medio, nunca con barra vertical.
+- El entrenamiento oral tiene un solo nombre público, `Entrenamiento oral`, en `/norsk/entrenamiento-oral/`. Larsito es el personaje con el que se practica, no un producto aparte. La URL antigua `/norsk/sprint-oral/` redirige de forma permanente.
+- Las partes del curso se nombran con verbos: `Hablar`, `Escuchar`, `Leer`, `Escribir` y `Simulacros`, más `Punto de partida`, `Los 16 mecanismos`, `Banco de expresiones` y `Practicar con Larsito`. Los tomos del cuaderno en PDF usan los mismos nombres.
+- En público se dice `curso`. `Ruta` es vocabulario interno y no aparece en la web.
+
 ## Hero de las dos entradas de producto
 
 `/norsk/` y `/pass/` comparten exactamente la geometría de entrada: H1 a `clamp(2.1rem,5.4vw,3.4rem)` y `17ch`, entradilla a `56ch`, CTA con `16px 32px` y hero con `56px 0 52px` en escritorio y `38px 0 44px` en móvil.
@@ -137,6 +148,6 @@ El pie lleva siempre el aviso de no afiliación y los enlaces legales:
 
 ## Páginas que siguen el tema claro
 
-`norsk/index.html`, `norsk/sprint-oral/index.html`, `norsk/curso/index.html`, `norsk/larsito/index.html`, `pass/index.html`, `pass/app/index.html`, `pass/leccion-0/index.html`, `pass/que-examen-necesitas/index.html`, `pass/como-inscribirse/index.html`, `pass/preguntas-de-ejemplo/index.html`, `pass/requisitos-ciudadania-noruega/index.html`, `pass/condiciones/index.html`, `pass/privacidad/index.html`, `pass/acceso/index.html` y `pass/gracias/index.html`. El guard (`scripts/norsk_prelaunch_check.mjs`, lista `TEMA_CLARO`) vigila exactamente esta lista.
+`norsk/index.html`, `norsk/entrenamiento-oral/index.html`, `norsk/curso/index.html`, `norsk/larsito/index.html`, `pass/index.html`, `pass/app/index.html`, `pass/leccion-0/index.html`, `pass/que-examen-necesitas/index.html`, `pass/como-inscribirse/index.html`, `pass/preguntas-de-ejemplo/index.html`, `pass/requisitos-ciudadania-noruega/index.html`, `pass/condiciones/index.html`, `pass/privacidad/index.html`, `pass/acceso/index.html` y `pass/gracias/index.html`. El guard (`scripts/norsk_prelaunch_check.mjs`, lista `TEMA_CLARO`) vigila exactamente esta lista.
 
 Solo dos superficies son oscuras, y las dos a propósito: `index.html` (la home, la cara editorial de la marca) y `sueldo/index.html` (la calculadora, que es una herramienta editorial de Nexo Noruega y no una página de producto). Las dos llevan la misma navegación de tres enlaces y el mismo pie que el resto, con los colores del tema oscuro.
