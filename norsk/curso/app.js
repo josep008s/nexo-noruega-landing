@@ -86,6 +86,36 @@
     SIMULACROS_ORAL: "Simulacro 02",
   };
 
+  // Títulos tal y como los ve el alumno. Los archivos de producción llevan
+  // coletillas del tipo "· Ruta Norskprøven B1 · NEXO NORSK, línea Idioma" que
+  // aquí sobran, y algunos nombres se acortan para que el índice se lea de un
+  // vistazo. El contenido no cambia; solo el rótulo.
+  var TITULOS_ALUMNO = {
+    DIAGNOSTICO_B1: "Perfil diagnóstico por destrezas",
+    "ANEXO-UTTRYKK": "Expresiones por mecanismo",
+    LYTT_CORTOS_A: "Guiones cortos de escucha, bloque A",
+    LYTT_CORTOS_B: "Guiones cortos de escucha, bloque B",
+    LYTT_LARGOS: "Guiones largos de escucha",
+    LES_BREVES: "Textos breves de lectura",
+    LES_LARGOS: "Textos largos de lectura",
+    SKRIV_B1: "Expresión escrita: tareas, modelos y criterios",
+    BANCO_CONSIGNAS_ORAL: "Banco de consignas del oral",
+    KIT_ORAL_21_JORNADAS: "Kit oral: 21 actuaciones a tu ritmo",
+    SIMULACROS_LYTT_LES_SKRIV: "Simulacros de escucha, lectura y escritura",
+    SIMULACROS_ORAL: "Simulacros del oral",
+  };
+  var COLETILLAS_TITULO = /\s*·\s*Ruta Norskpr[øo]ven [A-Z0-9-]+(?:\s*·\s*NEXO NORSK(?:, l[ií]nea Idioma)?)?\s*$/i;
+
+  function tituloAlumno(pieza) {
+    if (!pieza) return "";
+    if (TITULOS_ALUMNO[pieza.codigo]) return TITULOS_ALUMNO[pieza.codigo];
+    return String(pieza.titulo || "").replace(COLETILLAS_TITULO, "").trim();
+  }
+
+  function conTituloAlumno(pieza) {
+    return Object.assign({}, pieza, { titulo: tituloAlumno(pieza) });
+  }
+
   function etiquetaCodigo(pieza) {
     return ETIQUETAS_CODIGO[pieza.codigo] || pieza.codigo.replace(/_v.*/, "").slice(0, 12);
   }
@@ -304,7 +334,7 @@
 
     if (!conAcceso) {
       var enDemo = (demo.piezas || []).filter(function (p) { return p.codigo === codigo; })[0];
-      if (enDemo) { cache[codigo] = enDemo; return renderPieza(enDemo); }
+      if (enDemo) { cache[codigo] = conTituloAlumno(enDemo); return renderPieza(cache[codigo]); }
       return error("Esta pieza pertenece al curso completo.");
     }
 
@@ -312,8 +342,8 @@
       .then(function (r) { return r.json(); })
       .then(function (d) {
         if (!d || !d.ok || !d.pieza) throw new Error(d && d.error ? d.error : "pieza");
-        cache[codigo] = d.pieza;
-        renderPieza(d.pieza);
+        cache[codigo] = conTituloAlumno(d.pieza);
+        renderPieza(cache[codigo]);
       })
       .catch(function (e) {
         error(String(e.message) === "limite"
@@ -344,7 +374,30 @@
       limpio = limpio.replace(/<p>[\s\S]*?<\/p>/gi, function (bloque) { return esAvisoLegalAlumno(bloque) ? "" : bloque; });
       if (seccionId === "intro") limpio = limpio.replace(/<p>(?:Los seis pasos del (?:canon|método)|Cómo se corresponde esta lección con los seis pasos|Recorrido de la lección|Esta lección recorre|La lección sigue)[\s\S]*?<\/p>/gi, "");
     }
+    // Ruido de producción que no aporta nada al alumno: la tabla que cruza los
+    // "pasos del canon" con las secciones, los párrafos que hablan del canon y
+    // sus códigos internos (B1-P01), y la columna "Pieza" de las tablas.
+    limpio = limpio.replace(/<table>(?:(?!<\/table>)[\s\S])*?Paso del canon(?:(?!<\/table>)[\s\S])*?<\/table>/gi, "");
+    limpio = limpio.replace(/<p>(?:(?!<\/p>)[\s\S])*?(?:del canon|piezas? del canon|estado P\b)(?:(?!<\/p>)[\s\S])*?<\/p>/gi, "");
+    limpio = limpio.replace(/\s*·\s*B1-P\d{2}(?:\s*\([A-Z]\))?/g, "");
+    limpio = limpio.replace(/<table>(?:(?!<\/table>)[\s\S])*?<\/table>/gi, function (tabla) { return quitarColumnaPieza(tabla); });
+    if (seccionId === "intro") limpio = limpio.replace(/<hr\s*\/?>/gi, "");
     return limpio.replace(/^\s+|\s+$/g, "");
+  }
+
+  function quitarColumnaPieza(tabla) {
+    var cab = tabla.match(/<thead>[\s\S]*?<\/thead>/i);
+    if (!cab) return tabla;
+    var ths = cab[0].match(/<th[^>]*>[\s\S]*?<\/th>/gi) || [];
+    var idx = -1;
+    ths.forEach(function (th, i) { if (/^<th[^>]*>\s*Pieza\s*<\/th>$/i.test(th)) idx = i; });
+    if (idx < 0) return tabla;
+    return tabla.replace(/<tr[^>]*>[\s\S]*?<\/tr>/gi, function (fila) {
+      var celdas = fila.match(/<t[hd][^>]*>[\s\S]*?<\/t[hd]>/gi) || [];
+      if (celdas.length <= idx) return fila;
+      celdas.splice(idx, 1);
+      return fila.replace(/<t[hd][^>]*>[\s\S]*?<\/t[hd]>/gi, function () { return ""; }).replace(/(<tr[^>]*>)/i, "$1" + celdas.join(""));
+    });
   }
 
   function tituloSeccionAlumno(pieza, seccion) {
@@ -358,7 +411,9 @@
     if (seccion.id === "nota-de-limites") return "Antes de empezar";
     if (seccion.id === "limites-de-este-documento") return "Qué practica esta ruta";
     if (seccion.id === "convenciones-de-este-documento") return "Cómo usar este material";
-    return seccion.titulo;
+    // Cada archivo numeraba sus apartados a su manera ("1. La escena" en unos, "La escena" en otros).
+    // Se quita la numeración de un nivel; la de dos niveles (1.1, 2.3) se conserva porque distingue simulacros.
+    return String(seccion.titulo || "").replace(/^\d+\.\s+(?=\D)/, "");
   }
 
   function prepararSecciones(pieza) {
@@ -558,7 +613,7 @@
     var piezas = [];
 
     if (d.mecanismo) {
-      piezas.push(Object.assign({}, d.mecanismo, {
+      piezas.push(Object.assign({}, conTituloAlumno(d.mecanismo), {
         tipo: d.mecanismo.tipo || "mecanismo",
         orden: d.mecanismo.orden || 10,
         resumen: (d.mecanismo.meta && d.mecanismo.meta.grieta) || "",
@@ -566,7 +621,7 @@
       }));
     }
     if (d.diagnostico) {
-      piezas.push(Object.assign({}, d.diagnostico, {
+      piezas.push(Object.assign({}, conTituloAlumno(d.diagnostico), {
         tipo: d.diagnostico.tipo || "diagnostico",
         orden: d.diagnostico.orden || 1,
         resumen: d.diagnostico.nota || "",
@@ -574,14 +629,14 @@
       }));
     }
     (d.piezas || []).forEach(function (p) {
-      piezas.push(Object.assign({}, p, { abierta: true, resumen: p.resumen || "" }));
+      piezas.push(Object.assign({}, conTituloAlumno(p), { abierta: true, resumen: p.resumen || "" }));
     });
 
     var cerradas = (d.indice || []).map(function (p, i) {
       return {
         codigo: p.codigo,
         tipo: p.tipo || "mecanismo",
-        titulo: p.titulo,
+        titulo: tituloAlumno(p),
         orden: p.orden || (20 + i),
         resumen: p.grieta || p.resumen || "",
         abierta: false,
@@ -607,7 +662,7 @@
       .then(function (r) { return r.ok ? r.json() : null; })
       .then(function (d) {
         if (d && d.ok && Array.isArray(d.piezas) && d.piezas.length) {
-          indice = d.piezas.map(function (p) { return Object.assign({}, p, { abierta: true }); })
+          indice = d.piezas.map(function (p) { return Object.assign({}, conTituloAlumno(p), { abierta: true }); })
             .sort(function (a, b) { return (a.orden || 0) - (b.orden || 0); });
           conAcceso = true;
           chip.textContent = "Curso Pro";
