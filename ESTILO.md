@@ -86,15 +86,17 @@ Enlace canónico, el mismo en las 17 páginas (sin `preconnect` a Google):
 
 ## Cabecera y pie unificados
 
-Las páginas de producto comparten cabecera y pie para que /norsk y /pass se lean como una sola casa. La cabecera es clara, con blur, y su navegación es siempre la misma: `Noruego` a `/norsk/`, `Exámenes` a `/pass/`, `Nexo Noruega` a la home.
+Las páginas de producto comparten cabecera y pie para que /norsk y /pass se lean como una sola casa. La cabecera es clara, con blur, y su navegación es siempre la misma: `Norsk` a `/norsk/`, `Ciudadanía` a `/pass/`, `Nexo Noruega` a la home.
 
-La sección activa se distingue con peso 700 y una línea Aurora de 3 px. El patrón es idéntico en `Noruego` y `Exámenes`; no se sustituye el tercer enlace por una acción del producto.
+La sección activa se distingue con peso 700 y una línea Aurora de 3 px. El patrón es idéntico en `Norsk` y `Ciudadanía`; no se sustituye el tercer enlace por una acción del producto.
+
+Etiquetas vigentes desde el 02.09.2026: `Norsk` (antes `Noruego`, porque es el nombre del producto, coincide con la URL y es la palabra que el lector usa a diario) y `Ciudadanía` (antes `Exámenes`, que era ambiguo: la Ruta B1 también prepara un examen). No se usa "pasaporte" en la navegación: los exámenes no lo garantizan y la regla del producto es preparación, no promesa.
 
 ## Hero de las dos entradas de producto
 
 `/norsk/` y `/pass/` comparten exactamente la geometría de entrada: H1 a `clamp(2.1rem,5.4vw,3.4rem)` y `17ch`, entradilla a `56ch`, CTA con `16px 32px` y hero con `56px 0 52px` en escritorio y `38px 0 44px` en móvil.
 
-Cada titular señala una única promesa con `<mark class="marcado">`: `veinte minutos hablando` en Noruego y `explicado en español` en Exámenes. El resaltado Aurora es semántico, no una selección de texto simulada ni un adorno repartido por el hero.
+Cada titular señala una única promesa con `<mark class="marcado">`: `veinte minutos hablando` en Norsk y `explicado en español` en Ciudadanía. El resaltado Aurora es semántico, no una selección de texto simulada ni un adorno repartido por el hero.
 
 ```html
 <header>
@@ -107,8 +109,8 @@ Cada titular señala una única promesa con `<mark class="marcado">`: `veinte mi
       <span>NEXO <b>NORSK</b></span>
     </a>
     <nav class="head-nav" aria-label="Secciones">
-      <a href="/norsk/">Noruego</a>
-      <a href="/pass/">Exámenes</a>
+      <a href="/norsk/">Norsk</a>
+      <a href="/pass/">Ciudadanía</a>
       <a href="https://www.nexonoruega.com">Nexo Noruega</a>
     </nav>
   </div>
@@ -123,8 +125,8 @@ El pie lleva siempre el aviso de no afiliación y los enlaces legales:
     <p>Nexo Noruega no está afiliado a HK-dir, a UDI ni a ningún organismo oficial noruego.</p>
     <nav class="footer-links" aria-label="Enlaces">
       <a href="https://www.nexonoruega.com">Inicio</a>
-      <a href="/norsk/">Noruego</a>
-      <a href="/pass/">Exámenes</a>
+      <a href="/norsk/">Norsk</a>
+      <a href="/pass/">Ciudadanía</a>
       <a href="/pass/condiciones/">Condiciones</a>
       <a href="/pass/privacidad/">Privacidad</a>
       <a href="https://nexonoruega.substack.com">Newsletter</a>
