@@ -64,6 +64,9 @@ const IDS_SECCIONES_EDITORIALES = new Set([
   "siguiente-paso",
 ]);
 const CONTENIDO_EDITORIAL_INTERNO = /contraste humano|revisi[oó]n nativa|registro (?:hist[oó]rico )?de dudas|puerta editorial|firma (?:humana|nativa)|revisi[oó]n sist[eé]mica|revisi[oó]n de bokm[aå]l|qa (?:sist[eé]mic[oa]|t[eé]cnic[oa]|de audio)|material interno|material publicable|no es copy|estado (?:de producci[oó]n|y trabajo abierto)|puertas abiertas de este documento|hoja interna|\bcohorte\b|\breclutamiento\b|circuito (?:con personas|de alumnos)|(?:no hay|no se incluye)[^.!?]{0,120}\bconsentimiento\b|\bla lupa\b|pass_con_avisos|orden (?:expresa )?de publicaci[oó]n|publicaci[oó]n (?:sigue|se registra|conserva|es una puerta)|puertas? (?:t[eé]cnicas? y )?de publicaci[oó]n|autorizar (?:la )?publicaci[oó]n|autorizar su uso p[uú]blico/i;
+const CABECERA_PRODUCCION_HTML = /<pre><code>\s*(?:MECANISMO|DOCUMENTO|PIEZA):/i;
+const RUTA_INTERNA_CURSO = /(?:\/Users\/|(?:\.\.\/)+|(?:norsk\/)?idioma\/rutas\/|(?:_fuentes|produccion|scripts|supabase|api|data|rutas)\/)[^\s<>"']+\.(?:md|xlsx|json|sql|mjs|js|py)\b/i;
+const RUIDO_PRODUCCION_ALUMNO = /MP3 m[aá]ster|fuente editable|experiencia maestra|Gobierno vigente|para producci[oó]n interna|Nota de grabaci[oó]n|petici[oó]n original|QA editorial interna|\bversionado\b|puerta abierta en la cabecera/i;
 
 // 1) Placeholders legales (duro con venta abierta; aviso en pre-venta, donde las
 // condiciones declaran que entran en vigor con la primera venta)
@@ -758,9 +761,24 @@ if (exists("norsk/curso/app.js")) {
 
       const filtradas = (d.indice || []).filter((p) => Array.isArray(p.secciones) && p.secciones.length);
       if (filtradas.length) duro(`demo del curso: ${filtradas.length} piezas del indice traen cuerpo y no deberian`);
-      else if (conCuerpo.length > 3) duro(`demo del curso: ${conCuerpo.length} piezas completas, demasiadas para una muestra`);
-      else if (!conCuerpo.length) duro("demo del curso: no hay ninguna pieza de muestra");
-      else ok(`demo del curso: muestra de ${conCuerpo.join(", ")} + indice de ${(d.indice || []).length}`);
+      const cuerposEsperados = ["M01", "DIAGNOSTICO_B1"];
+      const cuerposReales = conCuerpo.slice().sort();
+      if (JSON.stringify(cuerposReales) !== JSON.stringify(cuerposEsperados.slice().sort())) {
+        duro(`demo del curso: cuerpos ${cuerposReales.join(", ") || "ninguno"}; solo se permiten M01 y DIAGNOSTICO_B1`);
+      }
+      if (Array.isArray(d.piezas) && d.piezas.length) duro("demo del curso: d.piezas debe estar vacio");
+      if (!d.mecanismo || d.mecanismo.codigo !== "M01") duro("demo del curso: la muestra completa debe ser M01");
+      if (!d.diagnostico || d.diagnostico.codigo !== "DIAGNOSTICO_B1"
+          || d.diagnostico.parcial !== true || d.diagnostico.secciones.length !== 2) {
+        duro("demo del curso: el diagnostico debe ser parcial y llevar exactamente dos secciones");
+      }
+      const indiceEsperado = Array.from({ length: 15 }, (_, i) => `M${String(i + 2).padStart(2, "0")}`);
+      const indiceReal = (d.indice || []).map((p) => p.codigo);
+      if (JSON.stringify(indiceReal) !== JSON.stringify(indiceEsperado)) {
+        duro("demo del curso: el indice debe contener exactamente M02-M16, en orden y sin cuerpo");
+      } else if (!filtradas.length && JSON.stringify(cuerposReales) === JSON.stringify(cuerposEsperados.slice().sort())) {
+        ok("demo del curso: M01 + introduccion parcial del diagnostico + indice M02-M16");
+      }
 
       if (!d.mecanismo || !d.mecanismo.meta
           || d.mecanismo.meta.qa_lengua !== "SISTEMICA_TECNICA_ACEPTADA"
@@ -778,6 +796,9 @@ if (exists("norsk/curso/app.js")) {
       if (CONTENIDO_EDITORIAL_INTERNO.test(textoAlumno)) {
         duro("demo del curso: expone notas, dudas o puertas editoriales internas");
       }
+      if (CABECERA_PRODUCCION_HTML.test(textoAlumno)) duro("demo del curso: expone una cabecera de produccion");
+      if (RUTA_INTERNA_CURSO.test(textoAlumno)) duro("demo del curso: expone una ruta interna");
+      if (RUIDO_PRODUCCION_ALUMNO.test(textoAlumno)) duro("demo del curso: expone lenguaje de produccion");
       if (JSON.stringify(d).includes("\u2014")) duro("demo del curso: em dash en el contenido");
     } catch (e) { duro("demo del curso: JSON invalido"); }
   }
@@ -787,6 +808,16 @@ if (exists("norsk/curso/app.js")) {
     const ig = read(".gitignore");
     if (!ig.includes("scripts/_norsk_curso/")) duro("scripts/_norsk_curso/ existe y NO esta en .gitignore (contenido de pago en repo publico)");
     else ok("curso completo fuera del repo (gitignored)");
+    if (!exists("scripts/_norsk_curso/manifiesto.json")) duro("curso completo: falta el manifiesto del export");
+    else {
+      try {
+        const manifiesto = JSON.parse(read("scripts/_norsk_curso/manifiesto.json"));
+        const exportadorActual = createHash("sha256").update(read("scripts/norsk_curso_export.mjs"), "utf8").digest("hex");
+        if (!manifiesto.exportador_sha256 || manifiesto.exportador_sha256 !== exportadorActual) {
+          duro("curso completo: artefactos no regenerados despues de cambiar el exportador");
+        } else ok("curso completo: artefactos generados con el exportador vigente");
+      } catch (e) { duro("curso completo: manifiesto de export invalido"); }
+    }
     const buildCurso = spawnSync(process.execPath, [rel("scripts/norsk_curso_build.mjs"), "--dry"], {
       encoding: "utf8",
       env: { ...process.env, NODE_NO_WARNINGS: "1" },
@@ -807,6 +838,14 @@ if (exists("norsk/curso/app.js")) {
       if (textoEditorial.length) {
         duro(`curso completo: ${textoEditorial.length} seccion(es) exponen QA, trazabilidad o trabajo editorial interno`);
       } else if (!idsFiltrados.length) ok("curso completo: trazabilidad editorial separada de la superficie de alumno");
+      const cabecerasProduccion = seccionesPrivadas.filter((s) => CABECERA_PRODUCCION_HTML.test(s.html || ""));
+      if (cabecerasProduccion.length) {
+        duro(`curso completo: ${cabecerasProduccion.length} cabecera(s) de produccion en la superficie de alumno`);
+      }
+      const rutasInternas = seccionesPrivadas.filter((s) => RUTA_INTERNA_CURSO.test(`${s.titulo || ""} ${s.html || ""}`));
+      if (rutasInternas.length) duro(`curso completo: ${rutasInternas.length} ruta(s) internas en la superficie de alumno`);
+      const ruidoProduccion = seccionesPrivadas.filter((s) => RUIDO_PRODUCCION_ALUMNO.test(`${s.titulo || ""} ${s.html || ""}`));
+      if (ruidoProduccion.length) duro(`curso completo: ${ruidoProduccion.length} seccion(es) con lenguaje de produccion`);
       const kit = privado.find((p) => p.codigo === "KIT_ORAL_21_JORNADAS");
       const jornadas = kit && Array.isArray(kit.secciones)
         ? kit.secciones.filter((s) => /^jornada-\d+\b/.test(s.id || ""))
