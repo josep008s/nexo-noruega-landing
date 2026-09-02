@@ -70,14 +70,14 @@
       <p class="kicker">Privacidad</p>
       <h1>Sin cookies de rastreo. Sin analítica. Solo lo imprescindible.</h1>
 
-      <p>Esta página explica qué datos tratamos en www.nexonoruega.com/pass, para qué y con qué base, conforme al RGPD y a la personopplysningsloven noruega. La versión corta: tratamos tu correo para darte el acceso que compraste, y nada más se mueve de tu dispositivo.</p>
+      <p>Esta página explica qué datos tratamos en www.nexonoruega.com/pass, para qué y con qué base, conforme al RGPD y a la personopplysningsloven noruega. La versión corta: tratamos tu correo para darte el acceso que compraste. El progreso permanece en tu dispositivo. La demo actual de Larsito no transmite tu audio. Si activamos la conversación completa, el audio y las transcripciones de esa conversación se transmiten a ElevenLabs para que el agente pueda escucharte y responderte. Si pides escuchar un texto con el TTS remoto, ese texto se envía a OpenAI para generar la voz.</p>
 
       <div class="pendiente">
         <p><b>La venta todavía no está abierta</b> y en esta fase no recogemos datos nosotros: la única alta posible es la newsletter, gestionada por Substack con su propia política. <b>Responsable del tratamiento (desde la primera venta):</b> [RAZÓN SOCIAL · org.nr./NIF · dirección] · Contacto: pass@nexonoruega.com; se completa antes de abrir la venta.</p>
       </div>
 
       <h2>Qué tratamos y para qué</h2>
-      <div class="tabla-scroll">
+      <div class="tabla-scroll" tabindex="0" role="region" aria-label="Tratamientos de datos y conservación">
         <table>
           <thead><tr><th>Dato</th><th>Para qué</th><th>Base legal</th><th>Cuánto tiempo</th></tr></thead>
           <tbody>
@@ -85,15 +85,17 @@
             <tr><td><b>Correo de la demo</b> (opcional) con tu resultado y, si marcas la casilla, tu alta en la futura newsletter</td><td>Enviarte tu resultado y un plan de estudio; newsletter solo con tu consentimiento expreso</td><td>Consentimiento (revocable)</td><td>Hasta que te des de baja o lo pidas</td></tr>
             <tr><td><b>Cookie técnica de acceso</b> (nexo_norsk)</td><td>Mantenerte dentro del curso que compraste. Es una cookie estrictamente necesaria: no rastrea ni perfila</td><td>Interés legítimo / contrato</td><td>Caduca con tu ventana de acceso</td></tr>
             <tr><td><b>Progreso de práctica</b> (aciertos, simulacros)</td><td>Mostrarte tu preparación. Se guarda en el almacenamiento local de TU navegador; no lo recibimos nosotros</td><td>No sale de tu dispositivo</td><td>Hasta que borres los datos del navegador</td></tr>
+            <tr><td><b>Audio y transcripciones de la conversación</b> (solo si se activa el agente completo)</td><td>Transmitirlos a ElevenLabs para que Larsito pueda entenderte y responderte</td><td>Ejecución del contrato y acción solicitada por ti</td><td>La función seguirá cerrada hasta confirmar la conservación configurada en el agente, el guardado de audio y la región aplicable, y publicarlo aquí</td></tr>
+            <tr><td><b>Texto que eliges escuchar</b> (solo si se activa la síntesis remota; nunca el audio del alumno)</td><td>Enviarlo a OpenAI para generar el audio que solicitas</td><td>Ejecución del contrato y acción solicitada por ti</td><td>NEXO no conserva ese texto; la función seguirá cerrada hasta publicar aquí la conservación aplicable del proveedor</td></tr>
             <tr><td><b>Registros técnicos</b> (logs de servidor)</td><td>Seguridad y funcionamiento del servicio</td><td>Interés legítimo</td><td>Plazos cortos estándar del proveedor</td></tr>
           </tbody>
         </table>
       </div>
-      <p>No usamos cookies de publicidad, píxeles de terceros ni herramientas de analítica. El pago lo procesa Stripe: tu tarjeta nunca pasa por nuestros sistemas.</p>
+      <p>No usamos cookies de publicidad, píxeles de terceros ni herramientas de analítica. El pago lo procesa Stripe: tu tarjeta nunca pasa por nuestros sistemas. En la demo de Larsito no se llama a OpenAI ni a ElevenLabs: la voz opcional solo se activa si el navegador confirma que es noruega y local.</p>
 
       <h2>Quién nos ayuda a prestarlo (encargados)</h2>
       <ul>
-        <li><b>Stripe</b> (pagos), <b>Vercel</b> (alojamiento web), <b>Supabase</b> (base de datos de accesos y contenido) y <b>Resend</b> (envío de correos transaccionales).</li>
+        <li><b>Stripe</b> (pagos), <b>Vercel</b> (alojamiento web), <b>Supabase</b> (base de datos de accesos y contenido), <b>Resend</b> (envío de correos transaccionales), <b>ElevenLabs</b> (solo si se activa el agente conversacional, recibe audio y transcripciones para prestar la conversación) y <b>OpenAI</b> (solo si se activa el TTS remoto, recibe el texto elegido para generar voz).</li>
         <li>Algunos de estos proveedores procesan datos fuera del EEE; en ese caso lo hacen bajo cláusulas contractuales tipo u otros mecanismos válidos del RGPD.</li>
       </ul>
 

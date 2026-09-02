@@ -26,21 +26,53 @@ URL: https://www.nexonoruega.com/pass/ · Rector: `Business/Nexo Noruega/norsk/P
 | `NORSK_JWT_SECRET` | todos | 32+ bytes aleatorios (`openssl rand -hex 32`), distinto test/live |
 | `RESEND_API_KEY` | Prod/Preview | dominio nexonoruega.com verificado (SPF/DKIM) |
 | `NORSK_SITE_URL` | opcional | por defecto https://www.nexonoruega.com |
+| `LARSITO_ON` | todos | cerrado salvo valor exacto `true`; no activar antes de los gates finales de privacidad, proveedor y apertura comercial |
+| `LARSITO_CONSUMER_READY` | todos | segundo cierre de runtime; el endpoint también exige el puente real a ElevenLabs integrado en `api/larsito-sesion.js` |
+| `LARSITO_AGENT_ID` | todos | identificador privado del agente del producto completo |
+| `ELEVENLABS_API_KEY` | servidor | clave privada para pedir signed URLs de Conversational AI; nunca en el cliente |
+| `LARSITO_AGENT_PRIVACY_READY` | todos | segundo cierre del agente de voz; `true` solo tras fijar y publicar la conservación de audio/transcripciones de ElevenLabs |
+| `LARSITO_TOPE_GLOBAL` | opcional | sesiones diarias globales; por defecto 2000 |
+| `LARSITO_TOPE_FALLOS` | opcional | sesiones fallidas o pendientes por compra y día; por defecto 6 |
+| `LARSITO_LISTENING` | todos | cerrado salvo valor exacto `on`; sirve audio preparado solo tras reserva y consumo atómicos |
+| `LARSITO_TTS` | todos | cerrado salvo valor exacto `on`; la demo nunca lo usa y no se abre antes del gate de privacidad |
+| `LARSITO_PRIVACY_READY` | todos | segundo cierre del TTS; `true` solo tras confirmar y publicar la conservación del proveedor |
+| `OPENAI_API_KEY` | servidor | necesaria solo para el TTS del producto completo |
+| `LARSITO_TTS_VOZ` | opcional | por defecto `ash` |
+| `LARSITO_TTS_TOPE_COMPRA` | opcional | síntesis diarias por compra; por defecto 300 |
+| `LARSITO_TTS_TOPE_GLOBAL` | opcional | síntesis diarias globales; por defecto 10000 |
+| `LARSITO_TTS_TOPE_FALLOS` | opcional | síntesis fallidas o pendientes por compra y día; por defecto 6 |
 
-## Aplicar el esquema (una vez)
+## Aplicar el esquema y las migraciones
 
-El esquema completo y al día está en `supabase/migrations/0001_norsk_schema.sql`. Dos vías:
-- **Studio**: Supabase → SQL Editor → pegar el archivo → Run.
+La fuente está en `supabase/migrations/`. Los nombres llevan las versiones exactas registradas en el historial remoto de Supabase y se aplican en orden cronológico; no basta con `20260831192821_norsk_schema_0001.sql`. Dos vías:
+- **Studio**: Supabase → SQL Editor → ejecutar cada migración pendiente en orden → Run.
 - **CLI**: `supabase link --project-ref <ref>` (con `SUPABASE_ACCESS_TOKEN`) y `supabase db push`.
+
+### Decisión de esquema para Larsito
+
+`20260902075618_larsito_reservas_0004.sql` añade un libro de reservas, un contador de riesgo y tres RPC cerradas a `service_role`:
+
+- `norsk_reservar_larsito` bloquea y comprueba en una sola transacción el contador de la compra, el global y el límite de fallos o pendientes. Si Supabase, la compra o cualquiera de los topes falla, el endpoint no llama al proveedor.
+- `norsk_consumir_reserva_larsito` canjea una reserva una sola vez y libera su plaza pendiente justo antes de entregar el resultado.
+- `norsk_registrar_fallo_larsito` devuelve una sola vez el crédito de la compra cuando no llega el resultado. Conserva el contador global y la plaza de riesgo porque el intento pudo generar coste externo. La transición bloqueada hace idempotente el reintento, incluso después de medianoche.
+
+`20260902094330_norsk_aprendizaje_0006.sql` añade la exposición de estímulos `EX-*`. `norsk_mostrar_estimulo_ex` vuelve a comprobar que la compra sigue activa, serializa por compra/ruta/tarea, registra el estímulo antes de devolverlo y rechaza reutilizaciones. Un `request_id` repetido con el mismo intento y tarea devuelve la misma asignación; si cambia tarea o intento, falla cerrado. La tabla y la RPC quedan reservadas a `service_role`. El navegador nunca elige ni envía un código `EX-*`: pide A, B y C con UUID estables y pasa solo la respuesta del servidor a `dynamicVariables` del agente. La combinación `EX-B-02 + EX-C-02` queda bloqueada por la RPC.
+
+Los endpoints dependen de estas migraciones y fallan cerrados si las RPC no existen. Aplicarlas y probarlas en un proyecto de desarrollo antes de cambiar `LARSITO_ON`, `LARSITO_LISTENING` o `LARSITO_TTS`; aplicar el SQL no abre ninguna función comercial. La sesión del agente exige `LARSITO_CONSUMER_READY=true`, `LARSITO_AGENT_PRIVACY_READY=true` y la clave privada de ElevenLabs. `api/larsito-sesion.js` pide el signed URL con `include_conversation_id=true`, canjea la reserva con `consumirFirmaLarsito` y solo entonces devuelve el URL al navegador. Así, la firma de conversación tampoco puede reutilizarse; la JWT interna y la API key nunca salen del servidor. El agente usa autenticación por signed URL, no una allowlist simultánea.
+
+El TTS remoto envía a OpenAI únicamente el texto que el usuario elige escuchar, nunca audio del alumno. Requiere a la vez `LARSITO_TTS=on` y `LARSITO_PRIVACY_READY=true`. El agente conversacional transmite audio y transcripciones a ElevenLabs y requiere además `LARSITO_AGENT_PRIVACY_READY=true`. Ambos gates siguen cerrados hasta confirmar y publicar la conservación aplicable de cada proveedor en `/pass/privacidad/` y probar el flujo en desarrollo. La QA lingüística y de audio aceptada para v1 es sistémica/técnica; no se presenta como firma humana o nativa.
 
 Después, verificar el backend SIN Stripe:
 ```bash
 SUPABASE_URL=… SUPABASE_SERVICE_KEY=… node scripts/norsk_selftest.mjs
+node scripts/larsito_reservas_selftest.mjs
 ```
-Comprueba el esquema, las RPCs, el muestreo 36/38 por módulo, los contadores separados
-api/reenvio y la revocación. Luego subir el contenido con `norsk_build_banco.mjs`.
+El primer comando comprueba el esquema, las RPCs, el muestreo 36/38 por módulo,
+los contadores separados api/reenvio y la revocación. El segundo prueba sin red
+trece flujos: privacidad, configuración cerrada, reserva, TTS, fallo, replay, consumidor, paginación de listening, compensación segura, cola local 1-3-7-14 y asignación concurrente e idempotente de estímulos `EX-*`; no sustituye la concurrencia
+real en PostgreSQL. Luego subir el contenido con `norsk_build_banco.mjs`.
 
-## SQL (referencia; la fuente es supabase/migrations/0001_norsk_schema.sql)
+## SQL (referencia; la fuente es supabase/migrations/20260831192821_norsk_schema_0001.sql)
 
 ```sql
 create table if not exists norsk_preguntas (
@@ -216,6 +248,16 @@ Tarjeta de test: `4242 4242 4242 4242`, cualquier fecha futura y CVC.
 - [ ] Token caducado en `/api/norsk-activar` → redirect a `/pass/acceso/?e=expirado`.
 - [ ] Compra con `expires_at` en el pasado (editar la fila) → API 401 y la app muestra renovación con el progreso local intacto.
 - [ ] Demo completa sin cookie y sin Supabase (solo `/data/norsk-demo.json`).
+- [ ] Demo de Larsito sin llamadas a `/api/larsito-tts/`; micrófono ausente si el navegador no confirma `processLocally=true`; voz ausente si no confirma noruego y `localService=true`.
+- [x] `20260902075618_larsito_reservas_0004.sql` aplicada y verificada en desarrollo: concurrencia contra el último crédito concede una sola reserva; la misma firma solo se consume una vez; un fallo devuelve una sola vez la cuota de compra pero conserva global y riesgo; al 7.º fallo con el tope por defecto se bloquea antes del proveedor; RPC ausente devuelve 503 sin llamar al proveedor.
+- [x] `20260902094330_norsk_aprendizaje_0006.sql` aplicada y verificada en desarrollo: cuatro llamadas concurrentes A recibieron `EX-A-01` a `EX-A-04` sin repetición; la quinta devolvió `agotados`; un retry devolvió el mismo código; reutilizar el request con otro intento y una tarea nula devolvieron `solicitud`; la compra caducada devolvió `acceso`; B02+C02 se evitó asignando C03. Fixture borrada (0 filas QA) y anon/auth sin `SELECT` ni `EXECUTE`.
+- [x] Recuperación local: cada foco registrado crea exactamente 1/3/7/14 en fechas base, +2, +6 y +13; solo persisten IDs, fechas y estado; la interfaz presenta primero el vencido más antiguo y el selftest impide completar fuera de orden. El SDK expone `clientTools.programar_recuperacion` con IDs saneados; que el agente real la invoque después de cada foco forma parte del gate final del proveedor.
+- [x] Consumidor EX técnico: `EXAM_SIMULATION` pide A, B y C a `/api/larsito-estimulo/` con `attempt_id` y `request_id` estables, no contiene códigos EX en cliente y pasa las respuestas server-issued a `dynamicVariables`. Los placeholders y el prompt reales del agente siguen en el gate de proveedor.
+- [x] Puente y coste: obtiene el signed URL ligado a una conversación, consume la reserva antes de devolverlo, registra fallo seguro y pasa replay/configuración cerrada sin red. La prueba viva del proveedor queda en el gate siguiente.
+- [ ] Conversación completa: con una compra de desarrollo activa, el botón llama a `/api/larsito-sesion/`, el SDK local `@elevenlabs/client` inicia `startSession({ signedUrl, dynamicVariables })`, los mensajes se muestran sin persistir audio/transcripciones y terminar la sesión llama a `endSession()`.
+- [x] Listening técnico: 86 audios verificados, tandas paginadas de diez sin repetir, reserva fallida sin URL y cero degradación a fail-open. El flag comercial sigue cerrado.
+- [x] TTS técnico: solo POST JSON, 2 KiB de cuerpo, 300 caracteres, velocidad 0.8 o 1, `Cache-Control: private, no-store`, timeout, rechazo de audio mayor de 4 MiB y consumo único antes de entregar audio. El proveedor vivo sigue cerrado.
+- [ ] Privacidad del TTS: se ha confirmado la conservación del proveedor, se ha publicado en `/pass/privacidad/` y se ha verificado que nunca sale audio del alumno; solo entonces pueden ponerse `LARSITO_PRIVACY_READY=true` y `LARSITO_TTS=on`.
 - [ ] `/norsk` sin barra final → redirect a `/pass/` (trailingSlash). Rutas absolutas verificadas navegando desde `/pass/app/`.
 - [ ] Lighthouse ≥95 en landing y guías; JSON-LD válido (Rich Results Test); navegación completa con teclado (1/2/3, Tab); `prefers-reduced-motion`.
 - [ ] En live: compra real de 99 kr verificada y reembolsada; sitemap enviado a Search Console.

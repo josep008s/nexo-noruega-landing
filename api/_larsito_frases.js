@@ -1,8 +1,7 @@
-// GENERADO por scripts/larsito_frases_hash.mjs a partir de data/larsito-demo.json.
-// No editar a mano: si cambia la demo, regenerar con `node scripts/larsito_frases_hash.mjs`.
-// Son hashes SHA-256 de frases ya públicas (la demo se sirve sin login), así que
-// pueden vivir en el repo sin problema. /api/larsito-tts/ sirve estas frases sin
-// cookie; cualquier otro texto exige compra activa.
+// ARTEFACTO HISTORICO del TTS remoto que usaba la demo.
+// La demo actual no importa esta lista ni llama a /api/larsito-tts/. El endpoint
+// del producto completo exige siempre cookie y compra; el guard de pre-lanzamiento
+// falla si FRASES_DEMO vuelve a entrar en esa ruta. Se conserva solo como trazabilidad.
 
 export const FRASES_DEMO = new Set([
   "90bdb43a1a8ba855e143b001ccff23b9efb77b670d4771bfabc12b17ba6bc9ed",

@@ -18,6 +18,7 @@
 
 import fs from "node:fs";
 import path from "node:path";
+import { createHash } from "node:crypto";
 import { fileURLToPath } from "node:url";
 
 const ROOT = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
@@ -49,10 +50,54 @@ const FUENTES = [
 // endpoint, así que se acota aquí y se vuelve a acotar allí.
 const CODIGO_VALIDO = /^[A-Z0-9_-]{3,40}$/;
 
-// Secciones que no entran en la demo pública. Son notas de trabajo dirigidas a
-// quien revisa el noruego, no material del alumno, y la demo se copia a un repo
-// público. En el curso de pago siguen estando.
-const SECCIONES_FUERA_DE_LA_DEMO = ["notas-para-la-revision-nativa", "puertas-abiertas-de-esta-leccion"];
+// Secciones editoriales internas. No son material del alumno y por tanto no
+// entran ni en el curso de pago ni en la demo pública. La fuente Markdown las
+// conserva como trazabilidad; el exportador las separa de la superficie final.
+const SECCIONES_INTERNAS = new Set([
+  "notas-para-la-revision-nativa",
+  "puertas-abiertas-de-esta-leccion",
+  "puertas-abiertas-de-este-documento",
+  "registro-de-dudas-para-contraste-humano-opcional",
+  "registro-historico-de-dudas-de-lengua",
+  "registro-de-revision-de-lengua",
+  "registro-de-produccion",
+  "estado-y-controles-separados-de-esta-leccion",
+  "estado-reconciliado-de-esta-leccion",
+  "estado-reconciliado-y-mejoras-opcionales",
+  "estado-y-trabajo-abierto",
+  "controles-y-pendientes-separados",
+  "lo-que-este-banco-todavia-no-tiene",
+  "hoja-interna-de-observacion-siete-puertas-y-alcance",
+  "control-de-calidad-de-este-bloque",
+  "comprobaciones-pasadas-sobre-este-archivo",
+  "comprobaciones-internas-de-este-lote",
+  "siguiente-paso",
+]);
+
+// Defensa de contenido, independiente de los títulos. Estos marcadores describen
+// QA, trazabilidad o trabajo editorial y no deben aparecer en el artefacto que ve
+// el alumno. Se acotan a fórmulas de producción: no se prohíben expresiones
+// pedagógicas legítimas como "otra persona", el piloto de un aparato o el
+// consentimiento dentro de un ejemplo de vocabulario.
+const CONTENIDO_EDITORIAL_INTERNO = /contraste humano|revisi[oó]n nativa|registro (?:hist[oó]rico )?de dudas|puerta editorial|firma (?:humana|nativa)|revisi[oó]n sist[eé]mica|revisi[oó]n de bokm[aå]l|qa (?:sist[eé]mic[oa]|t[eé]cnic[oa]|de audio)|material interno|material publicable|no es copy|estado (?:de producci[oó]n|y trabajo abierto)|puertas abiertas de este documento|hoja interna|\bcohorte\b|\breclutamiento\b|circuito (?:con personas|de alumnos)|(?:no hay|no se incluye)[^.!?]{0,120}\bconsentimiento\b|\bla lupa\b|pass_con_avisos|orden (?:expresa )?de publicaci[oó]n|publicaci[oó]n (?:sigue|se registra|conserva|es una puerta)|puertas? (?:t[eé]cnicas? y )?de publicaci[oó]n|autorizar (?:la )?publicaci[oó]n|autorizar su uso p[uú]blico/i;
+
+const FINGERPRINT_VERSION = "sha256-ruta-contenido-v1";
+
+function ordenarFuentes(entradas) {
+  return entradas.slice().sort((a, b) => (a.ruta < b.ruta ? -1 : a.ruta > b.ruta ? 1 : 0));
+}
+
+function fingerprintFuentes(entradas) {
+  const hash = createHash("sha256");
+  hash.update(`${FINGERPRINT_VERSION}\0`, "utf8");
+  ordenarFuentes(entradas).forEach(({ ruta, sha256 }) => {
+    hash.update(ruta, "utf8");
+    hash.update("\0", "utf8");
+    hash.update(sha256, "ascii");
+    hash.update("\n", "utf8");
+  });
+  return hash.digest("hex");
+}
 
 // ---------- YAML: el subconjunto que usa el front-matter del curso ----------
 // Cubre escalares, listas en bloque y en línea, mapas anidados y bloques plegados
@@ -322,16 +367,27 @@ function idDeSeccion(titulo) {
 
 // Parte el cuerpo por los encabezados de segundo nivel. Lo que va antes del primero
 // (el H1, la ficha del mecanismo, el aviso de la casa) forma la sección de entrada.
-function trocearSecciones(cuerpo) {
+function trocearSecciones(cuerpo, separarJornadas = false) {
   const lineas = cuerpo.split("\n");
   const bloques = [];
   let actual = { titulo: null, lineas: [] };
   let enCodigo = false;
+  let h1PrincipalVisto = false;
   for (const l of lineas) {
     if (/^```/.test(l.trim())) enCodigo = !enCodigo;
-    if (!enCodigo && /^##\s+(?!#)/.test(l)) {
+    const esH1 = !enCodigo && /^#\s+(?!#)/.test(l);
+    const esH2 = !enCodigo && /^##\s+(?!#)/.test(l);
+    const esJornada = !enCodigo && separarJornadas && /^###\s+Jornada\s+\d+\b/i.test(l);
+    // El primer H1 es el título de la pieza y ya viaja en otro campo. Los H1
+    // posteriores sí delimitan bloques: algunos simulacros los usan para separar
+    // material del alumno de hojas editoriales internas antes de volver al curso.
+    if (esH1 && !h1PrincipalVisto) {
+      h1PrincipalVisto = true;
+      continue;
+    }
+    if (esH1 || esH2 || esJornada) {
       bloques.push(actual);
-      actual = { titulo: l.replace(/^##\s+/, "").trim(), lineas: [] };
+      actual = { titulo: l.replace(/^#{1,3}\s+/, "").trim(), lineas: [] };
       continue;
     }
     actual.lineas.push(l);
@@ -354,12 +410,69 @@ function trocearSecciones(cuerpo) {
   return secciones;
 }
 
+function textoPlanoHtml(html) {
+  return String(html)
+    .replace(/<[^>]+>/g, " ")
+    .replace(/&nbsp;|&#160;/gi, " ")
+    .replace(/&[a-z0-9#]+;/gi, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+// La fuente Markdown conserva toda la trazabilidad. Esta función solo limpia la
+// copia de alumno y opera de forma determinista sobre bloques completos. Las dos
+// sustituciones en línea conservan ejercicios legítimos que antes llevaban una
+// coletilla editorial dentro del mismo párrafo.
+function sanearHtmlParaAlumno(codigo, seccion) {
+  let html = seccion.html;
+
+  if ((codigo === "M02" || codigo === "M13") && seccion.id === "practica") {
+    html = html.replace(
+      /Guion original nuestro, con revisi[oó]n sist[eé]mica cerrada el 31\.08\.2026; no equivale a firma humana y esta ficha no tiene una pista propia asociada\./g,
+      "Guion original nuestro."
+    );
+  }
+
+  if (codigo === "SIMULACROS_LYTT_LES_SKRIV" && seccion.id === "convenciones-de-este-documento") {
+    html = html.replace(
+      / El QA de audio y bokm[aå]l aceptado es t[eé]cnico\/sist[eé]mico, no firma humana o nativa; el uso de los archivos conserva sus puertas t[eé]cnicas y de publicaci[oó]n separadas\./g,
+      ""
+    );
+  }
+
+  if (codigo === "SIMULACROS_ORAL" && seccion.id === "el-caso-que-mas-duele") {
+    html = html.replace(/La hoja interna puede mostrar/g, "Tu registro de progreso puede mostrar");
+  }
+
+  const filtrarBloque = (bloque) => {
+    const plano = textoPlanoHtml(bloque);
+    if (CONTENIDO_EDITORIAL_INTERNO.test(plano)) return "";
+    if (/verificaci[oó]n de lengua ya hecha en esta versi[oó]n/i.test(plano)) return "";
+    if (/relaci[oó]n con el bloque a/i.test(plano)) return "";
+    if (/revalidaci[oó]n de la ficha de formato[^.!?]{0,160}(?:apertura|actualizaci[oó]n)/i.test(plano)) return "";
+    return bloque;
+  };
+  html = html.replace(/<p>[\s\S]*?<\/p>/g, filtrarBloque);
+  html = html.replace(/<li>[\s\S]*?<\/li>/g, filtrarBloque);
+  html = html.replace(/<(ol|ul)>\s*<\/\1>/g, "");
+  html = html.replace(/\n{2,}/g, "\n").trim();
+
+  return html;
+}
+
 function contarPalabras(cuerpo) {
   return String(cuerpo)
     .replace(/`{1,3}/g, " ")
     .replace(/[#*_|>]/g, " ")
     .split(/\s+/)
     .filter((p) => /[\wÀ-ÿ]/.test(p)).length;
+}
+
+function contarPalabrasSecciones(secciones) {
+  const texto = secciones.map((s) => `${s.titulo || ""} ${String(s.html || "")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/&[a-z0-9#]+;/gi, " ")}`).join("\n");
+  return contarPalabras(texto);
 }
 
 // ---------- Lectura del material ----------
@@ -397,6 +510,8 @@ const errores = [];
 const avisos = [];
 const piezas = [];
 const codigosVistos = new Set();
+const seccionesInternasOmitidas = [];
+const fuentesLeidas = [];
 
 for (const fuente of FUENTES) {
   const dir = path.join(MATERIAL, fuente.dir);
@@ -414,7 +529,13 @@ for (const fuente of FUENTES) {
     const codigo = codigoDeArchivo(archivo);
     if (SOLO && codigo !== SOLO) continue;
 
-    const bruto = fs.readFileSync(path.join(dir, archivo), "utf8");
+    const rutaFuente = path.join(dir, archivo);
+    const bytesFuente = fs.readFileSync(rutaFuente);
+    const bruto = bytesFuente.toString("utf8");
+    fuentesLeidas.push({
+      ruta: path.posix.join(fuente.dir, archivo),
+      sha256: createHash("sha256").update(bytesFuente).digest("hex"),
+    });
     const partido = partirFrontMatter(bruto);
     if (!partido) { errores.push(`${archivo}: sin front-matter YAML al principio`); continue; }
 
@@ -428,18 +549,27 @@ for (const fuente of FUENTES) {
     if (String(meta.lupa || "").toUpperCase() === "FAIL") errores.push(`${codigoFinal}: lupa en FAIL, la pieza no sale`);
     if (cuerpo.includes("—")) errores.push(`${codigoFinal}: em dash (—) en el cuerpo`);
 
-    const secciones = trocearSecciones(cuerpo);
-    const palabras = contarPalabras(cuerpo);
+    const seccionesLeidas = trocearSecciones(cuerpo, codigoFinal === "KIT_ORAL_21_JORNADAS");
+    const secciones = seccionesLeidas
+      .filter((s) => !SECCIONES_INTERNAS.has(s.id))
+      .map((s) => ({ ...s, html: sanearHtmlParaAlumno(codigoFinal, s) }))
+      .filter((s) => s.html);
+    seccionesLeidas.filter((s) => SECCIONES_INTERNAS.has(s.id)).forEach((s) => {
+      seccionesInternasOmitidas.push(`${codigoFinal}:${s.id}`);
+    });
+    secciones.forEach((s) => {
+      if (CONTENIDO_EDITORIAL_INTERNO.test(`${s.titulo || ""} ${textoPlanoHtml(s.html)}`)) {
+        errores.push(`${codigoFinal}:${s.id}: contenido editorial interno en artefacto de alumno`);
+      }
+    });
+    const palabras = contarPalabrasSecciones(secciones);
     if (!secciones.length || palabras < 50) { errores.push(`${codigoFinal}: contenido vacío o demasiado corto (${palabras} palabras)`); continue; }
 
     if (!meta.lupa) avisos.push(`${codigoFinal}: sin campo lupa en el front-matter`);
-    if (String(meta.revision_nativa || "").toUpperCase() === "PENDIENTE") {
-      avisos.push(`${codigoFinal}: revisión nativa pendiente`);
-    }
-
+    const tipoFinal = codigoFinal === "ANEXO-UTTRYKK" ? "anexo" : fuente.tipo;
     piezas.push({
       codigo: codigoFinal,
-      tipo: fuente.tipo,
+      tipo: tipoFinal,
       titulo: tituloDe(meta, cuerpo, codigoFinal),
       orden: piezas.length + 1,
       meta: {
@@ -447,7 +577,11 @@ for (const fuente of FUENTES) {
         unidades_destino: meta.unidades_destino || null,
         delprover: meta.delprover || null,
         lupa: meta.lupa || null,
-        revision_nativa: meta.revision_nativa || null,
+        // Política única de producto: la QA existente de esta v1 se acepta como
+        // sistémica/técnica. No se exporta bajo el nombre revision_nativa porque
+        // no existe una firma humana o nativa.
+        qa_lengua: "SISTEMICA_TECNICA_ACEPTADA",
+        qa_lengua_alcance: "NO_FIRMA_HUMANA_NATIVA",
       },
       secciones,
       palabras,
@@ -462,10 +596,14 @@ const porTipo = {};
 piezas.forEach((p) => { porTipo[p.tipo] = (porTipo[p.tipo] || 0) + 1; });
 const palabrasTotales = piezas.reduce((n, p) => n + p.palabras, 0);
 const seccionesTotales = piezas.reduce((n, p) => n + p.secciones.length, 0);
+const fuentesManifest = ordenarFuentes(fuentesLeidas);
+const fuentesSha256 = fingerprintFuentes(fuentesManifest);
 
 console.log(`Material leído en: ${MATERIAL}`);
 console.log(`Piezas: ${piezas.length} (${Object.entries(porTipo).map(([t, n]) => `${t} ${n}`).join(" · ") || "ninguna"})`);
 console.log(`Secciones: ${seccionesTotales} · Palabras: ${palabrasTotales.toLocaleString("es-ES")}`);
+console.log(`Secciones editoriales omitidas de las superficies: ${seccionesInternasOmitidas.length}`);
+console.log(`Fingerprint de ${fuentesManifest.length} fuentes: ${fuentesSha256}`);
 
 if (avisos.length) console.log(`\nAVISOS (${avisos.length}):\n- ${avisos.join("\n- ")}`);
 if (errores.length) {
@@ -491,17 +629,12 @@ function construirDemo() {
   const m01 = piezas.find((p) => p.codigo === "M01");
   if (!m01) { avisos.push("no hay M01: la demo se queda sin mecanismo de muestra"); return null; }
 
-  // La lección va entera menos las secciones de trabajo interno. Son notas de la
-  // casa para quien revisa el noruego, no material del alumno, y la demo acaba en
-  // un repo público: publicar ahí las dudas abiertas del equipo no ayuda a nadie.
-  // En el curso de pago sí van, porque forman parte de la pieza.
+  // La lectura principal ya separó las secciones editoriales internas del curso
+  // completo. Este filtro repetido es una defensa adicional para el artefacto
+  // público si en el futuro cambia la construcción de piezas.
   const mecanismoDemo = Object.assign({}, m01, {
-    secciones: m01.secciones.filter((s) => !SECCIONES_FUERA_DE_LA_DEMO.includes(s.id)),
+    secciones: m01.secciones.filter((s) => !SECCIONES_INTERNAS.has(s.id)),
   });
-  const quitadas = m01.secciones
-    .filter((s) => SECCIONES_FUERA_DE_LA_DEMO.includes(s.id))
-    .map((s) => s.titulo);
-  if (quitadas.length) console.log(`\nFuera de la demo pública, por ser trabajo interno: ${quitadas.join(" · ")}`);
 
   const indice = piezas
     .filter((p) => p.tipo === "mecanismo" && p.codigo !== "M01")
@@ -541,6 +674,11 @@ function construirDemo() {
 function revisarDemo(demo) {
   const fallos = [];
   const texto = JSON.stringify(demo);
+  const seccionesAlumno = [
+    ...((demo.mecanismo && demo.mecanismo.secciones) || []),
+    ...((demo.diagnostico && demo.diagnostico.secciones) || []),
+  ];
+  const textoAlumno = seccionesAlumno.map((s) => `${s.titulo || ""} ${s.html || ""}`).join(" ");
   if (texto.includes("—")) fallos.push("em dash en la demo");
   if (/increíble|brutal|paraíso|trucos|hola chicos/i.test(texto)) fallos.push("palabra prohibida de marca en la demo");
   if (/\b(celular|manejar|acá|computadora|plata|carro)\b/i.test(texto)) fallos.push("marcador no peninsular en la demo");
@@ -549,6 +687,11 @@ function revisarDemo(demo) {
   demo.indice.forEach((m) => {
     if (m.secciones || m.html) fallos.push(`${m.codigo}: el índice de la demo lleva cuerpo`);
   });
+  const internas = seccionesAlumno.filter((s) => SECCIONES_INTERNAS.has(s.id));
+  if (internas.length) fallos.push(`la demo lleva ${internas.length} sección(es) editorial(es) interna(s)`);
+  if (CONTENIDO_EDITORIAL_INTERNO.test(textoAlumno)) {
+    fallos.push("la demo expone notas, dudas o puertas editoriales internas");
+  }
   return fallos;
 }
 
@@ -572,7 +715,9 @@ if (SOLO) {
   process.exit(0);
 }
 
-fs.writeFileSync(path.join(SALIDA, "curso.json"), JSON.stringify(curso, null, 1));
+const cursoJson = JSON.stringify(curso, null, 1);
+const cursoSha256 = createHash("sha256").update(cursoJson, "utf8").digest("hex");
+fs.writeFileSync(path.join(SALIDA, "curso.json"), cursoJson);
 console.log(`\nEscrito ${path.join(SALIDA, "curso.json")}: ${curso.length} piezas.`);
 
 const demo = construirDemo();
@@ -603,6 +748,10 @@ const manifiesto = {
   secciones: seccionesTotales,
   palabras: palabrasTotales,
   codigos: piezas.map((p) => p.codigo),
+  fingerprint_version: FINGERPRINT_VERSION,
+  fuentes_sha256: fuentesSha256,
+  fuentes: fuentesManifest,
+  curso_sha256: cursoSha256,
 };
 fs.writeFileSync(path.join(SALIDA, "manifiesto.json"), JSON.stringify(manifiesto, null, 1));
 console.log(`Escrito ${path.join(SALIDA, "manifiesto.json")}.`);

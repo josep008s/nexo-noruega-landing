@@ -1,28 +1,78 @@
 // Sirve ejercicios de comprensión oral de Larsito a compradores con acceso activo.
-// GET ?nivel=A2|B1&tema=<slug opcional>  -> hasta 10 ejercicios con audio firmado
+// GET ?nivel=A2|B1&tema=<slug opcional>&cursor=<codigo opcional>
+//   -> hasta 10 ejercicios con audio firmado y cursor para la tanda siguiente
 //
 // Contrato:
-//   1. Mismo interruptor que larsito-sesion: mientras LARSITO_ON no valga "true"
-//      responde 200 con {ok:false, error:"cerrado"} y no toca nada más.
+//   1. Dos interruptores cerrados por defecto: LARSITO_ON=true y
+//      LARSITO_LISTENING=on. Sin ambos no toca autenticacion, Supabase ni audio.
 //   2. Con el flag activo, mismo muro que el resto de NEXO PASS: cookie de sesión
-//      firmada, compra activa comprobada en servidor y cuota diaria (tipo "larsito").
+//      firmada, compra activa comprobada en servidor y reserva atomica de cuota,
+//      coste global y riesgo (tipo "larsito"). Si el control falla, no sirve.
 //   3. Nunca existe una llamada que devuelva el banco entero: máximo 10 ejercicios
 //      por petición, igual que en norsk-preguntas. El contenido es de pago y se sirve
 //      a cuentagotas, no en bloque.
 //   4. El audio no se sirve por URL pública. Cada mp3 vive en un bucket privado de
-//      Supabase Storage y se entrega con una URL firmada de una hora, que caduca sola.
+//      Supabase Storage y se entrega con una URL firmada de quince minutos.
 
-import { readSessionCookie, compraActiva, tickUso, sbSelect } from "./_norsk_lib.js";
+import {
+  readSessionCookie,
+  compraActiva,
+  sbSelect,
+  sbRpc,
+} from "./_norsk_lib.js";
 
 // Tope duro por llamada. Aunque el cliente pida más, aquí se corta.
 const MAX_POR_LLAMADA = 10;
+const MAX_POR_CONSULTA = MAX_POR_LLAMADA + 1;
+const TOPE_DIARIO = 60;
+const TOPE_GLOBAL_DEFECTO = 2000;
+const TOPE_FALLOS_DEFECTO = 6;
+const RESERVA_VIDA_SEGUNDOS = 120;
 
-// Vida de la URL firmada del audio, en segundos. Una hora sobra para escuchar un
-// ejercicio varias veces y es lo bastante corta como para que compartir el enlace
-// no sirva de mucho.
-const TTL_AUDIO = 3600;
+// Vida de la URL firmada del audio, en segundos. Quince minutos permiten repetir
+// el ejercicio y acotan la ventana residual si la compra se revoca después.
+const TTL_AUDIO = 15 * 60;
 
 const CAMPOS = "codigo,nivel,tema,titulo,duracion_s,audio_path,preguntas,transcript_no,transcript_es";
+
+function enteroPositivo(raw, defecto, maximo) {
+  const n = Number.parseInt(raw || "", 10);
+  if (!Number.isSafeInteger(n) || n < 1 || n > maximo) return defecto;
+  return n;
+}
+
+function primeraFila(valor) {
+  if (Array.isArray(valor)) return valor[0] || null;
+  return valor && typeof valor === "object" ? valor : null;
+}
+
+async function consumir(reserva, compraId) {
+  try {
+    return await sbRpc("norsk_consumir_reserva_larsito", {
+      p_reserva: reserva.reserva_id,
+      p_compra: compraId,
+      p_tipo: "larsito",
+      p_jti: reserva.jti,
+    }) === true;
+  } catch (err) {
+    console.error("larsito-listening consumo no disponible");
+    return false;
+  }
+}
+
+async function registrarFallo(reserva, compraId) {
+  try {
+    return await sbRpc("norsk_registrar_fallo_larsito", {
+      p_reserva: reserva.reserva_id,
+      p_compra: compraId,
+      p_tipo: "larsito",
+      p_jti: reserva.jti,
+    }) === true;
+  } catch (err) {
+    console.error("larsito-listening registro de fallo no disponible");
+    return false;
+  }
+}
 
 // Firma una URL temporal contra el bucket privado norsk-audio. Devuelve la URL
 // absoluta lista para el <audio> del cliente.
@@ -48,8 +98,12 @@ async function urlFirmada(path, segundos) {
 }
 
 export default async function handler(req, res) {
-  // Interruptor general, antes que ninguna otra comprobación.
-  if (process.env.LARSITO_ON !== "true") {
+  res.setHeader("Cache-Control", "private, no-store");
+  res.setHeader("X-Content-Type-Options", "nosniff");
+
+  // Interruptores antes que cualquier autenticacion, consulta o firma de audio.
+  if (process.env.LARSITO_ON !== "true"
+      || process.env.LARSITO_LISTENING !== "on") {
     res.status(200).json({
       ok: false,
       error: "cerrado",
@@ -58,34 +112,28 @@ export default async function handler(req, res) {
     return;
   }
 
+  if (req.method !== "GET") {
+    res.setHeader("Allow", "GET");
+    res.status(405).json({ ok: false, error: "metodo" });
+    return;
+  }
+
+  if (!process.env.NORSK_JWT_SECRET) {
+    console.error("larsito-listening configuracion incompleta");
+    res.status(503).json({ ok: false, error: "no_disponible" });
+    return;
+  }
+
   const sesion = readSessionCookie(req);
   if (!sesion) { res.status(401).json({ ok: false, error: "acceso" }); return; }
 
   let compra;
   try { compra = await compraActiva(sesion.sub); } catch (e) {
-    console.error("larsito-listening compra", e);
-    res.status(500).json({ ok: false, error: "interno" });
+    console.error("larsito-listening compra no disponible");
+    res.status(503).json({ ok: false, error: "no_disponible" });
     return;
   }
   if (!compra) { res.status(401).json({ ok: false, error: "caducado" }); return; }
-
-  // Rate limit con reintento: un hipo transitorio de la RPC no debe echar a un
-  // comprador legítimo. Se reintenta 2 veces; si aún falla (Supabase caído), se
-  // sirve igualmente (fail-open) porque el usuario ya pagó. Comparte el contador
-  // "larsito" con las sesiones de conversación: es el mismo producto.
-  try {
-    let usos = null;
-    for (let intento = 0; intento < 3 && usos === null; intento++) {
-      try { usos = await tickUso(compra.id, "larsito"); }
-      catch (e) {
-        if (intento === 2) { console.error("larsito-listening uso (fail-open)", e); break; }
-        await new Promise((r) => setTimeout(r, 200));
-      }
-    }
-    if (usos !== null && usos > 60) { res.status(429).json({ ok: false, error: "limite" }); return; }
-  } catch (e) {
-    console.error("larsito-listening uso", e);
-  }
 
   const q = req.query || {};
 
@@ -95,17 +143,81 @@ export default async function handler(req, res) {
   const tema = q.tema ? String(q.tema).trim() : null;
   if (tema && !/^[a-z0-9-]{2,40}$/.test(tema)) { res.status(400).json({ ok: false, error: "tema" }); return; }
 
+  // Cursor estable sobre la clave unica codigo. Solo aceptamos el mismo alfabeto
+  // que usa el banco; no se interpola texto arbitrario en la consulta PostgREST.
+  const cursor = q.cursor ? String(q.cursor).trim().toUpperCase() : null;
+  if (cursor && !/^[A-Z0-9_-]{3,40}$/.test(cursor)) {
+    res.status(400).json({ ok: false, error: "cursor" });
+    return;
+  }
+
+  const topeGlobal = enteroPositivo(
+    process.env.LARSITO_TOPE_GLOBAL,
+    TOPE_GLOBAL_DEFECTO,
+    1000000,
+  );
+  const topeFallos = enteroPositivo(
+    process.env.LARSITO_TOPE_FALLOS,
+    TOPE_FALLOS_DEFECTO,
+    100,
+  );
+
+  let reserva;
+  try {
+    reserva = primeraFila(await sbRpc("norsk_reservar_larsito", {
+      p_compra: compra.id,
+      p_tipo: "larsito",
+      p_tope_compra: TOPE_DIARIO,
+      p_tope_global: topeGlobal,
+      p_tope_fallos: topeFallos,
+      p_vida_segundos: RESERVA_VIDA_SEGUNDOS,
+      p_coste: 1,
+    }));
+  } catch (e) {
+    console.error("larsito-listening reserva no disponible");
+    res.status(503).json({ ok: false, error: "no_disponible" });
+    return;
+  }
+
+  if (!reserva || reserva.ok !== true || !reserva.reserva_id || !reserva.jti) {
+    const motivo = reserva && reserva.error;
+    if (motivo === "limite" || motivo === "saturado" || motivo === "fallos") {
+      res.status(429).json({ ok: false, error: motivo });
+      return;
+    }
+    if (motivo === "acceso") {
+      res.status(401).json({ ok: false, error: "caducado" });
+      return;
+    }
+    res.status(503).json({ ok: false, error: "no_disponible" });
+    return;
+  }
+
   try {
     const filtros = ["activa=is.true"];
     if (nivel) filtros.push(`nivel=eq.${nivel}`);
     if (tema) filtros.push(`tema=eq.${encodeURIComponent(tema)}`);
+    if (cursor) filtros.push(`codigo=gt.${encodeURIComponent(cursor)}`);
     const rows = await sbSelect(
-      `norsk_listening?${filtros.join("&")}&select=${CAMPOS}&order=codigo.asc&limit=${MAX_POR_LLAMADA}`);
+      `norsk_listening?${filtros.join("&")}&select=${CAMPOS}&order=codigo.asc&limit=${MAX_POR_CONSULTA}`);
+
+    // Se pide una fila extra solo para saber si hay otra tanda. Nunca se firma ni
+    // se devuelve mas de MAX_POR_LLAMADA, y el cursor avanza sobre la ultima fila
+    // de esta pagina para que la siguiente consulta no pueda repetirla.
+    const candidatas = Array.isArray(rows) ? rows : [];
+    const pagina = candidatas.slice(0, MAX_POR_LLAMADA);
+    const hasMore = candidatas.length > MAX_POR_LLAMADA;
+    const nextCursor = hasMore && pagina.length
+      ? String(pagina[pagina.length - 1].codigo || "").toUpperCase()
+      : null;
+    if (nextCursor && !/^[A-Z0-9_-]{3,40}$/.test(nextCursor)) {
+      throw new Error("cursor de contenido invalido");
+    }
 
     // Se firma el audio de cada ejercicio en paralelo. Si la firma de uno falla, se
     // omite ese ejercicio y los demás siguen: un mp3 que falta no puede tumbar la
     // pantalla entera de comprensión oral.
-    const firmados = await Promise.all((rows || []).map(async (ej) => {
+    const firmados = await Promise.all(pagina.map(async (ej) => {
       if (!ej.audio_path) {
         console.error(`larsito-listening ${ej.codigo}: sin audio_path`);
         return null;
@@ -121,9 +233,32 @@ export default async function handler(req, res) {
     }));
 
     const ejercicios = firmados.filter(Boolean);
-    res.status(200).json({ ok: true, nivel, tema, audio_ttl: TTL_AUDIO, ejercicios });
+    // Una petición sin ningún recurso reproducible no ha entregado listening:
+    // no debe consumir la reserva ni aparentar éxito vacío. La compensación es
+    // idempotente y conserva el coste global/riesgo del intento externo.
+    if (!ejercicios.length) {
+      await registrarFallo(reserva, compra.id);
+      res.status(503).json({ ok: false, error: "no_disponible" });
+      return;
+    }
+    const consumida = await consumir(reserva, compra.id);
+    if (!consumida) {
+      await registrarFallo(reserva, compra.id);
+      res.status(503).json({ ok: false, error: "no_disponible" });
+      return;
+    }
+    res.status(200).json({
+      ok: true,
+      nivel,
+      tema,
+      audio_ttl: TTL_AUDIO,
+      ejercicios,
+      has_more: hasMore,
+      next_cursor: nextCursor,
+    });
   } catch (e) {
-    console.error("larsito-listening", e);
-    res.status(500).json({ ok: false, error: "interno" });
+    await registrarFallo(reserva, compra.id);
+    console.error("larsito-listening no disponible");
+    res.status(503).json({ ok: false, error: "no_disponible" });
   }
 }

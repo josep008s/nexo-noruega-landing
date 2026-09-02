@@ -1,5 +1,5 @@
 -- NEXO NORSK · Larsito (agente de conversación de voz y comprensión oral).
--- Se aplica DESPUÉS de 0001_norsk_schema.sql, que crea el esquema base de NEXO PASS
+-- Se aplica DESPUÉS de 20260831192821_norsk_schema_0001.sql, que crea el esquema base de NEXO PASS
 -- (norsk_compras, norsk_uso y sus RPCs). Esta migración no lo repite: solo añade lo
 -- que Larsito necesita.
 -- Dos formas de aplicarla:
