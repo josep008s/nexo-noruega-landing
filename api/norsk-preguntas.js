@@ -8,7 +8,7 @@
 // Nunca existe un endpoint que devuelva el banco entero: máximo 38 por llamada,
 // rate limit persistente de 120 peticiones/día por compra (tabla norsk_uso).
 
-import { readSessionCookie, compraActiva, tickUso, sbRpc, sbSelect } from "../server/shared/norsk-lib.mjs";
+import { readSessionCookie, compraActiva, tickUso, sbRpc, sbSelect } from "./_norsk_lib.js";
 
 // Reparto por módulo (proporcional al peso del banco 26/37/37).
 const SIMULACROS = {

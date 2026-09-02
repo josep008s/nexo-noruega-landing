@@ -9,7 +9,7 @@
 // La demo pública del curso no pasa por aquí: vive en data/norsk-curso-demo.json y
 // la sirve el estático, porque es lo único que puede leerse sin haber pagado.
 
-import { readSessionCookie, compraActiva, tickUso, sbSelect } from "../server/shared/norsk-lib.mjs";
+import { readSessionCookie, compraActiva, tickUso, sbSelect } from "./_norsk_lib.js";
 
 // Tope diario por compra para el tipo "curso". Contador propio, separado del de
 // práctica ("api") y del de Larsito: leer una lección no debe quemar la cuota de
