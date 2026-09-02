@@ -392,10 +392,34 @@ if (exists("sitemap.xml")) {
 
     const ttsRemotoDemo = [
       "/api/larsito-tts", "ttsServidor", "comprobarTtsServidor",
-      "pedirAudio", "new Audio(", "FRASES_DEMO",
+      "pedirAudio", "FRASES_DEMO",
     ].filter((x) => js.includes(x));
     if (ttsRemotoDemo.length) duro(`${APP}: la demo conserva TTS remoto (${ttsRemotoDemo.join(", ")})`);
     else ok("Larsito demo: cero TTS remoto");
+
+    // Audio fijo de la demo: new Audio() solo con la grabacion propia (url del JSON,
+    // servida desde /norsk/larsito/audio/demo/) o con la grabacion local efimera (blob).
+    const audiosNuevos = (js.match(/new Audio\(([^)]*)\)/g) || []).map((x) => x.replace(/^new Audio\(|\)$/g, "").trim());
+    const audiosRaros = audiosNuevos.filter((x) => x !== "url" && x !== "urlMio");
+    if (audiosRaros.length) duro(`${APP}: new Audio() con origen no previsto (${audiosRaros.join(", ")})`);
+    if (!/function reproducirFijo\(url, texto, lento, alDone\)/.test(js) || /https?:\/\//.test((js.match(/function reproducirFijo[\s\S]*?\n  \}/) || [""])[0])) {
+      duro(`${APP}: la reproduccion fija debe usar solo rutas propias`);
+    }
+    try {
+      const demo = JSON.parse(read(DEMO_LARSITO));
+      const rutas = [];
+      for (const e of demo.escenarios || []) for (const t of e.turnos || []) { if (t.audio_no) rutas.push(t.audio_no); if (t.audio_modelo) rutas.push(t.audio_modelo); }
+      for (const l of demo.listening || []) if (l.audio) rutas.push(l.audio);
+      const fuera = rutas.filter((r) => !/^\/norsk\/larsito\/audio\/demo\/[A-Za-z0-9._-]+\.mp3$/.test(r));
+      const ausentes = rutas.filter((r) => !exists(r.slice(1)));
+      if (fuera.length) duro(`demo de Larsito: ${fuera.length} audio(s) fuera de /norsk/larsito/audio/demo/`);
+      else if (ausentes.length) duro(`demo de Larsito: ${ausentes.length} audio(s) declarados que no existen`);
+      else if (demo.audio_estatico === true && !rutas.length) duro("demo de Larsito: audio_estatico sin rutas");
+      else ok(`Larsito demo: ${rutas.length} grabaciones fijas propias, sin proveedor en vivo`);
+    } catch (e) { duro("demo de Larsito: JSON ilegible al comprobar el audio fijo"); }
+    const grabacionLocal = js.includes("MediaRecorder") ? (js.includes("URL.revokeObjectURL(urlMio)") && !/FormData|upload|subir\(/.test(js)) : true;
+    if (!grabacionLocal) duro(`${APP}: la grabacion local de 'repite tu' debe quedarse en memoria y liberarse`);
+    else if (js.includes("MediaRecorder")) ok("Larsito demo: 'repite tu' graba solo en memoria local y libera el blob");
 
     const progreso = js.includes("function exportarProgreso()")
       && js.includes("function borrarProgreso()")
@@ -743,6 +767,36 @@ if (exists("sitemap.xml")) {
         || !/PASS larsito_reservas_selftest: 13 flujos sin red/.test(test.stdout || "")) {
       duro(`${SELFTEST}: falla el contrato dinamico de reserva, consumo, fallo o replay`);
     } else ok("selftest Larsito: 13 flujos sin red, incluida cola 1-3-7-14 y estimulos EX concurrentes");
+  }
+}
+
+// 5i) Memoria de Larsito: informes y cola de recuperacion solo con compra, sin audio ni transcripciones.
+{
+  const API = "api/larsito-aprendizaje.js";
+  const MIGRACION = "supabase/migrations/20260902230000_larsito_aprendizaje_0007.sql";
+  const SELFTEST = "scripts/larsito_aprendizaje_selftest.mjs";
+  if (!exists(API)) duro("Falta api/larsito-aprendizaje.js (memoria de Larsito)");
+  else {
+    const h = read(API);
+    if (!h.includes("readSessionCookie") || !h.includes("compraActiva")) duro("larsito-aprendizaje: no comprueba sesion y compra");
+    if (!/LARSITO_ON !== "true"/.test(h)) duro("larsito-aprendizaje: falta el interruptor LARSITO_ON");
+    if (!/const MAX_TEXTO = 300;/.test(h)) duro("larsito-aprendizaje: el foco de feedback debe caber en 300 caracteres");
+    if (!/CLAVES_PROHIBIDAS = \/\^\(audio\|grabacion/.test(h)) duro("larsito-aprendizaje: debe rechazar audio y transcripciones");
+    if (!/readJsonBodyLimited\(req, MAX_BODY_BYTES\)/.test(h)) duro("larsito-aprendizaje: cuerpo sin acotar");
+    if (!exists(MIGRACION)) duro(`Falta ${MIGRACION}`);
+    else {
+      const sql = read(MIGRACION);
+      for (const t of ["norsk_larsito_informes", "norsk_larsito_recuperaciones"]) {
+        if (!new RegExp(`enable row level security`).test(sql) || !new RegExp(`revoke all on table public\\.${t} from public, anon, authenticated`).test(sql)) duro(`migracion 0007: ${t} sin RLS o sin revoke`);
+      }
+      if (!/char_length\(ahora\) between 1 and 300/.test(sql)) duro("migracion 0007: el foco Ahora no esta acotado a 300");
+    }
+    if (!exists(SELFTEST)) duro(`Falta ${SELFTEST}`);
+    else {
+      const test = spawnSync(process.execPath, [SELFTEST], { encoding: "utf8" });
+      if (test.status !== 0 || !/PASS larsito_aprendizaje_selftest: \d+ casos sin red/.test(test.stdout || "")) duro(`${SELFTEST}: falla el contrato de la memoria de Larsito`);
+      else ok("memoria de Larsito: informes y recuperaciones solo con compra, sin audio ni transcripciones, selftest sin red");
+    }
   }
 }
 
