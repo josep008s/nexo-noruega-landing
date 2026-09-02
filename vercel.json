@@ -5,11 +5,11 @@
     "api/larsito-*.js": { "maxDuration": 60 }
   },
   "rewrites": [
-    { "source": "/api/norsk-activar/", "destination": "/api/norsk-comercial?route=activar" },
-    { "source": "/api/norsk-checkout/", "destination": "/api/norsk-comercial?route=checkout" },
-    { "source": "/api/norsk-gracias/", "destination": "/api/norsk-comercial?route=gracias" },
-    { "source": "/api/norsk-reenviar/", "destination": "/api/norsk-comercial?route=reenviar" },
-    { "source": "/api/norsk-webhook/", "destination": "/api/norsk-comercial?route=webhook" }
+    { "source": "/api/norsk-activar/", "destination": "/api/norsk-comercial" },
+    { "source": "/api/norsk-checkout/", "destination": "/api/norsk-comercial" },
+    { "source": "/api/norsk-gracias/", "destination": "/api/norsk-comercial" },
+    { "source": "/api/norsk-reenviar/", "destination": "/api/norsk-comercial" },
+    { "source": "/api/norsk-webhook/", "destination": "/api/norsk-comercial" }
   ],
   "redirects": [
     { "source": "/norsk/app/app.js", "destination": "/pass/app/app.js", "permanent": true },

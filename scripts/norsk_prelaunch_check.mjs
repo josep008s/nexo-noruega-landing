@@ -248,12 +248,13 @@ if (exists("sitemap.xml")) {
   if (!derivas) ok("entradas Noruego/Exámenes: hero, marcado y navegación activos unificados");
 }
 
-// 5e) Vercel Hobby: cada .js directo de api/ cuenta como funcion. Los cinco
+// 5e) Vercel Hobby: cada .js directo de api/ salvo los modulos _*.js cuenta
+// como funcion. Los cinco
 // endpoints comerciales comparten un router, pero conservan sus URLs publicas.
 {
   const MAX_FUNCIONES = 12;
   const funciones = fs.readdirSync(rel("api"), { withFileTypes: true })
-    .filter((e) => e.isFile() && e.name.endsWith(".js"))
+    .filter((e) => e.isFile() && e.name.endsWith(".js") && !e.name.startsWith("_"))
     .map((e) => e.name)
     .sort();
 
@@ -266,18 +267,15 @@ if (exists("sitemap.xml")) {
   const rutas = ["activar", "checkout", "gracias", "reenviar", "webhook"];
   const antiguos = rutas.map((ruta) => `api/norsk-${ruta}.js`);
   const delegados = rutas.map((ruta) => `server/commercial/norsk-${ruta}.mjs`);
-  const compartidos = [
-    "server/shared/norsk-lib.mjs",
-    "server/shared/larsito-reservas.mjs",
-    "server/archive/larsito-frases.mjs",
-  ];
+  const compartidos = ["api/_norsk_lib.js", "api/_larsito_reservas.js", "api/_larsito_frases.js"];
 
   if (!exists(ROUTER)) duro(`Falta ${ROUTER}`);
   else {
     const js = read(ROUTER);
     const faltan = rutas.filter((ruta) => !js.includes(`norsk-${ruta}.mjs`));
-    if (faltan.length || !js.includes("bodyParser: false")) {
-      duro(`${ROUTER}: delegados incompletos o body RAW de Stripe desactivado`);
+    if (faltan.length || !js.includes("bodyParser: false")
+        || !js.includes("RUTAS_PUBLICAS") || js.includes("req.query.route")) {
+      duro(`${ROUTER}: delegados, body RAW o selector por ruta publica incompletos`);
     }
   }
   if (antiguos.some(exists)) duro("Vercel Hobby: quedan handlers comerciales directos dentro de api/");
@@ -290,7 +288,7 @@ if (exists("sitemap.xml")) {
     const rewrites = Array.isArray(cfg.rewrites) ? cfg.rewrites : [];
     const incompletas = rutas.filter((ruta) => !rewrites.some((r) =>
       r.source === `/api/norsk-${ruta}/`
-      && r.destination === `/api/norsk-comercial?route=${ruta}`));
+      && r.destination === "/api/norsk-comercial"));
     if (incompletas.length) duro(`vercel.json: faltan rewrites comerciales para ${incompletas.join(", ")}`);
     else ok("rutas comerciales: cinco URLs publicas conservadas por rewrites internos");
   } catch (e) { duro("vercel.json: JSON invalido"); }
@@ -301,9 +299,9 @@ if (exists("sitemap.xml")) {
       encoding: "utf8",
       env: { ...process.env, NODE_NO_WARNINGS: "1" },
     });
-    if (test.status !== 0 || !/PASS norsk_comercial_router_selftest: 6 rutas sin red/.test(test.stdout || "")) {
+    if (test.status !== 0 || !/PASS norsk_comercial_router_selftest: 7 rutas sin red/.test(test.stdout || "")) {
       duro(`${SELFTEST_COMERCIAL}: el router no conserva despacho, metodos o respuestas`);
-    } else ok("router comercial: seis rutas verificadas sin red");
+    } else ok("router comercial: siete casos verificados sin red, incluida colision de selector");
   }
 }
 
@@ -318,7 +316,7 @@ if (exists("sitemap.xml")) {
   const TTS = "api/larsito-tts.js";
   const SESION = "api/larsito-sesion.js";
   const LISTENING = "api/larsito-listening.js";
-  const RESERVAS = "server/shared/larsito-reservas.mjs";
+  const RESERVAS = "api/_larsito_reservas.js";
   const COMPENSAR = "api/larsito-compensar.js";
   const LARSITO_VENDOR = "norsk/larsito/vendor/elevenlabs-client-1.23.0.iife.js";
   const MIGRACION = "supabase/migrations/20260902075618_larsito_reservas_0004.sql";

@@ -13,18 +13,19 @@ function respuesta() {
   };
 }
 
-async function probar(route, method, query, esperado) {
-  const req = { method, query: { route, ...(query || {}) }, headers: {} };
+async function probar(ruta, method, query, esperado) {
+  const req = { method, url: ruta, query: query || {}, headers: {} };
   const res = respuesta();
   await handler(req, res);
-  assert.equal(res.statusCode, esperado, `${route || "desconocida"}: status`);
+  assert.equal(res.statusCode, esperado, `${ruta || "desconocida"}: status`);
 }
 
-await probar("activar", "GET", {}, 302);
-await probar("checkout", "GET", {}, 405);
-await probar("gracias", "GET", {}, 400);
-await probar("reenviar", "GET", {}, 405);
-await probar("webhook", "GET", {}, 405);
-await probar("desconocida", "GET", {}, 404);
+await probar("/api/norsk-activar/", "GET", {}, 302);
+await probar("/api/norsk-checkout/", "GET", {}, 405);
+await probar("/api/norsk-gracias/", "GET", {}, 400);
+await probar("/api/norsk-reenviar/", "GET", {}, 405);
+await probar("/api/norsk-webhook/", "GET", {}, 405);
+await probar("/api/norsk-comercial/", "GET", {}, 404);
+await probar("/api/norsk-checkout/?route=activar", "GET", { route: "activar" }, 405);
 
-console.log("PASS norsk_comercial_router_selftest: 6 rutas sin red");
+console.log("PASS norsk_comercial_router_selftest: 7 rutas sin red");

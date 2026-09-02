@@ -1,5 +1,5 @@
 // Unica funcion serverless para las cinco rutas comerciales de NEXO PASS.
-// vercel.json conserva las URLs publicas y anade el selector interno `route`.
+// vercel.json conserva las URLs publicas y las dirige a este unico bundle.
 
 import activar from "../server/commercial/norsk-activar.mjs";
 import checkout from "../server/commercial/norsk-checkout.mjs";
@@ -11,12 +11,24 @@ import webhook from "../server/commercial/norsk-webhook.mjs";
 // otros dos endpoints con JSON ya leen el stream con readBody().
 export const config = { api: { bodyParser: false } };
 
-const RUTAS = Object.freeze({ activar, checkout, gracias, reenviar, webhook });
+const RUTAS_PUBLICAS = Object.freeze({
+  "/api/norsk-activar": activar,
+  "/api/norsk-checkout": checkout,
+  "/api/norsk-gracias": gracias,
+  "/api/norsk-reenviar": reenviar,
+  "/api/norsk-webhook": webhook,
+});
 
 export default async function handler(req, res) {
-  const valor = req.query && req.query.route;
-  const ruta = Array.isArray(valor) ? valor[0] : valor;
-  const delegado = Object.prototype.hasOwnProperty.call(RUTAS, ruta) ? RUTAS[ruta] : null;
+  let ruta = "";
+  try {
+    ruta = new URL(req.url || "/", "http://nexo.internal").pathname.replace(/\/+$/, "");
+  } catch (e) { /* URL invalida: 404 cerrado */ }
+  // req.url conserva la ruta publica tras el rewrite. La query se ignora como
+  // selector para que el cliente no pueda cambiar el handler de una URL.
+  const delegado = Object.prototype.hasOwnProperty.call(RUTAS_PUBLICAS, ruta)
+    ? RUTAS_PUBLICAS[ruta]
+    : null;
 
   if (!delegado) {
     res.status(404).json({ ok: false, error: "ruta" });
