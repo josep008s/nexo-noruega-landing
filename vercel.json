@@ -4,6 +4,18 @@
   "functions": {
     "api/larsito-*.js": { "maxDuration": 60 }
   },
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+        { "key": "X-Frame-Options", "value": "DENY" },
+        { "key": "Content-Security-Policy", "value": "frame-ancestors 'none'" },
+        { "key": "Permissions-Policy", "value": "camera=(), geolocation=(), microphone=(self)" }
+      ]
+    }
+  ],
   "rewrites": [
     { "source": "/api/norsk-activar/", "destination": "/api/norsk-comercial" },
     { "source": "/api/norsk-checkout/", "destination": "/api/norsk-comercial" },
@@ -12,6 +24,7 @@
     { "source": "/api/norsk-webhook/", "destination": "/api/norsk-comercial" }
   ],
   "redirects": [
+    { "source": "/:path*", "has": [{ "type": "host", "value": "nexonoruega.com" }], "destination": "https://www.nexonoruega.com/:path*", "permanent": true },
     { "source": "/norsk/app/app.js", "destination": "/pass/app/app.js", "permanent": true },
     { "source": "/norsk/app/", "destination": "/pass/app/", "permanent": true },
     { "source": "/norsk/acceso/", "destination": "/pass/acceso/", "permanent": true },
