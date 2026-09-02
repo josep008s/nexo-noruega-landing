@@ -206,7 +206,49 @@ if (exists("sitemap.xml")) {
   } else ok("home: tema oscuro intacto");
 }
 
-// 5d) Larsito: privacidad local de la demo y contrato cerrado del producto.
+// 5d) Las dos entradas de producto comparten shell visual. El contenido cambia,
+// pero hero, resaltado y navegación activa no pueden volver a divergir.
+{
+  const ENTRADAS = ["norsk/index.html", "pass/index.html"];
+  const CONTRATO = [
+    'h1{font-size:clamp(2.1rem,5.4vw,3.4rem);max-width:17ch;margin-bottom:20px}',
+    '.sub{font-size:1.16rem;color:var(--tinta-suave);max-width:56ch;margin-bottom:28px}',
+    'background:var(--aurora);border:none;text-decoration:none;text-align:center;padding:16px 32px',
+    '.hero{padding-top:56px;padding-bottom:52px}',
+    '.hero{padding-top:38px;padding-bottom:44px}',
+    'border-bottom:3px solid transparent',
+    'border-bottom-color:var(--aurora)',
+  ];
+  let derivas = 0;
+
+  for (const f of ENTRADAS) {
+    const h = read(f);
+    const header = (/<header>[\s\S]*?<\/header>/.exec(h) || [""])[0];
+    const ausentes = CONTRATO.filter((fragmento) => !h.includes(fragmento));
+    if (ausentes.length) {
+      duro(`${f}: la entrada de producto se desvía del hero o la navegación compartidos (ver ESTILO.md)`);
+      derivas++;
+    }
+    if (!/<h1[^>]*>[\s\S]*?<mark class="marcado">[^<]+<\/mark>[\s\S]*?<\/h1>/.test(h)) {
+      duro(`${f}: el hero no señala una única promesa con mark.marcado`);
+      derivas++;
+    }
+    const activa = f.startsWith("norsk/")
+      ? '<a href="/norsk/" aria-current="page">Noruego</a>'
+      : '<a href="/pass/" aria-current="page">Exámenes</a>';
+    if (!header.includes(activa)) {
+      duro(`${f}: aria-current no identifica la sección activa correcta`);
+      derivas++;
+    }
+    if (!header.includes('<a href="https://www.nexonoruega.com">Nexo Noruega</a>')) {
+      duro(`${f}: la navegación compartida no termina en Nexo Noruega`);
+      derivas++;
+    }
+  }
+  if (!derivas) ok("entradas Noruego/Exámenes: hero, marcado y navegación activos unificados");
+}
+
+// 5e) Larsito: privacidad local de la demo y contrato cerrado del producto.
 // Estas comprobaciones son deliberadamente explicitas: una refactorizacion que
 // quite una barrera debe actualizar este guard y pasar revision, no quedar verde.
 {
