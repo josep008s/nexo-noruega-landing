@@ -101,6 +101,7 @@ for (const f of LEGALES) {
   });
   walk("pass");
   walk("norsk");
+  walk("sueldo");
   pages.push("index.html");
   let rotos = 0;
   for (const pg of pages) {
@@ -166,6 +167,8 @@ if (exists("sitemap.xml")) {
     "pass/preguntas-de-ejemplo/index.html", "pass/que-examen-necesitas/index.html",
     "pass/como-inscribirse/index.html", "pass/requisitos-ciudadania-noruega/index.html",
     "norsk/larsito/index.html", "norsk/curso/index.html",
+    "pass/condiciones/index.html", "pass/privacidad/index.html",
+    "pass/acceso/index.html", "pass/gracias/index.html",
   ];
   const TOKENS = ["#0E1B26", "#F3F5F4", "#3FCB94", "#2C5A72", "#8DA1AB"];
   const FUENTES = ["Space Grotesk", "Source Serif 4"];
