@@ -1,0 +1,7 @@
+# Ficheros internos que no deben servirse en público (auditoría web sep 2026)
+*.md
+pass/MODO.json
+scripts/
+supabase/
+.claude/
+node_modules/

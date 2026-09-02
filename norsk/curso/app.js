@@ -437,9 +437,11 @@
   }
 
   function arrancar() {
-    // Primero se pregunta al servidor si hay acceso. Si dice que no, o si no
-    // hay backend todavía, se cae a la demo sin dar error al usuario.
-    fetch(API + "?modo=indice", { credentials: "same-origin" })
+    // Solo se pregunta al servidor si el navegador lleva la marca de acceso
+    // (cookie nexo_norsk_ok, que pone el servidor al activar la compra). Si no
+    // la hay, o el servidor dice que no, se cae a la demo sin error en consola.
+    var hayAcceso = /(?:^|;\s*)nexo_norsk_ok=/.test(document.cookie);
+    (hayAcceso ? fetch(API + "?modo=indice", { credentials: "same-origin" }) : Promise.reject(new Error("sin acceso")))
       .then(function (r) { return r.ok ? r.json() : null; })
       .then(function (d) {
         if (d && d.ok && Array.isArray(d.piezas) && d.piezas.length) {

@@ -57,8 +57,13 @@ export function setSessionCookie(res, compraId, expiresAtMs) {
   const exp = Math.floor(expiresAtMs / 1000);
   const token = jwtSign({ sub: compraId, exp, uso: "sesion" }, secret);
   const maxAge = Math.max(0, Math.floor((expiresAtMs - Date.now()) / 1000));
-  res.setHeader("Set-Cookie",
-    `${COOKIE}=${token}; HttpOnly; Secure; SameSite=Lax; Path=/; Max-Age=${maxAge}`);
+  // Dos cookies: la de sesión (HttpOnly, con el JWT) y una marca sin valor
+  // sensible que el navegador sí puede leer, para que la app sepa si tiene
+  // sentido llamar a la API o debe ir directa a la demo.
+  res.setHeader("Set-Cookie", [
+    `${COOKIE}=${token}; HttpOnly; Secure; SameSite=Lax; Path=/; Max-Age=${maxAge}`,
+    `${COOKIE}_ok=1; Secure; SameSite=Lax; Path=/; Max-Age=${maxAge}`,
+  ]);
 }
 
 export function readSessionCookie(req) {
