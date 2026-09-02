@@ -88,6 +88,14 @@ Enlace canónico:
 
 Las páginas de producto comparten cabecera y pie para que /norsk y /pass se lean como una sola casa. La cabecera es clara, con blur, y su navegación es siempre la misma: `Noruego` a `/norsk/`, `Exámenes` a `/pass/`, `Nexo Noruega` a la home.
 
+La sección activa se distingue con peso 700 y una línea Aurora de 3 px. El patrón es idéntico en `Noruego` y `Exámenes`; no se sustituye el tercer enlace por una acción del producto.
+
+## Hero de las dos entradas de producto
+
+`/norsk/` y `/pass/` comparten exactamente la geometría de entrada: H1 a `clamp(2.1rem,5.4vw,3.4rem)` y `17ch`, entradilla a `56ch`, CTA con `16px 32px` y hero con `56px 0 52px` en escritorio y `38px 0 44px` en móvil.
+
+Cada titular señala una única promesa con `<mark class="marcado">`: `veinte minutos hablando` en Noruego y `explicado en español` en Exámenes. El resaltado Aurora es semántico, no una selección de texto simulada ni un adorno repartido por el hero.
+
 ```html
 <header>
   <div class="head-inner">
