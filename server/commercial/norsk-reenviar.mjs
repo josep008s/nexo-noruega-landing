@@ -1,7 +1,7 @@
 // Reenvío del magic link. Respuesta SIEMPRE constante (anti-enumeración).
 // POST {email} -> {ok:true}
 
-import { sbSelect, sbRpc, sendMagicLink, readBody } from "./_norsk_lib.js";
+import { sbSelect, sbRpc, sendMagicLink, readBody } from "../shared/norsk-lib.mjs";
 
 const RESPUESTA = { ok: true, mensaje: "Si ese correo tiene un acceso activo, el enlace está de camino." };
 
