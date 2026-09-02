@@ -135,6 +135,6 @@ El pie lleva siempre el aviso de no afiliación y los enlaces legales:
 
 ## Páginas que siguen el tema claro
 
-`norsk/index.html`, `norsk/sprint-oral/index.html`, `pass/index.html`, `pass/app/index.html`, `pass/leccion-0/index.html`, `pass/que-examen-necesitas/index.html`, `pass/como-inscribirse/index.html`, `pass/preguntas-de-ejemplo/index.html`, `pass/requisitos-ciudadania-noruega/index.html`.
+`norsk/index.html`, `norsk/sprint-oral/index.html`, `norsk/curso/index.html`, `norsk/larsito/index.html`, `pass/index.html`, `pass/app/index.html`, `pass/leccion-0/index.html`, `pass/que-examen-necesitas/index.html`, `pass/como-inscribirse/index.html`, `pass/preguntas-de-ejemplo/index.html`, `pass/requisitos-ciudadania-noruega/index.html`, `pass/condiciones/index.html`, `pass/privacidad/index.html`, `pass/acceso/index.html` y `pass/gracias/index.html`. El guard (`scripts/norsk_prelaunch_check.mjs`, lista `TEMA_CLARO`) vigila exactamente esta lista.
 
-`index.html` (la home) queda fuera: es oscura por decisión de marca.
+Solo dos superficies son oscuras, y las dos a propósito: `index.html` (la home, la cara editorial de la marca) y `sueldo/index.html` (la calculadora, que es una herramienta editorial de Nexo Noruega y no una página de producto). Las dos llevan la misma navegación de tres enlaces y el mismo pie que el resto, con los colores del tema oscuro.

@@ -24,7 +24,7 @@
     { "source": "/api/norsk-webhook/", "destination": "/api/norsk-comercial" }
   ],
   "redirects": [
-    { "source": "/:path*", "has": [{ "type": "host", "value": "nexonoruega.com" }], "destination": "https://www.nexonoruega.com/:path*", "permanent": true },
+    { "source": "/(.*)", "has": [{ "type": "host", "value": "nexonoruega.com" }], "destination": "https://www.nexonoruega.com/$1", "permanent": true },
     { "source": "/norsk/app/app.js", "destination": "/pass/app/app.js", "permanent": true },
     { "source": "/norsk/app/", "destination": "/pass/app/", "permanent": true },
     { "source": "/norsk/acceso/", "destination": "/pass/acceso/", "permanent": true },
