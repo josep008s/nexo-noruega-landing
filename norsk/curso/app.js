@@ -279,7 +279,7 @@
       cierre.appendChild(el("h2", null, "El curso completo todavía no está a la venta."));
       cierre.appendChild(el("p", null, "Cuando abra, se avisará por correo. Sin cuenta atrás y sin urgencia fabricada."));
       var aS = el("a", "btn", "Avísame cuando abra");
-      aS.href = "https://nexonoruega.substack.com/subscribe";
+      aS.href = "https://nexonoruega.substack.com/subscribe?utm_source=nexonoruega.com&utm_medium=web&utm_campaign=norsk-curso";
       cierre.appendChild(aS);
       paso.appendChild(cierre);
     }
