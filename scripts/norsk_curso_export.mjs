@@ -21,7 +21,8 @@ import path from "node:path";
 import { createHash } from "node:crypto";
 import { fileURLToPath } from "node:url";
 
-const ROOT = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
+const EXPORTADOR_ARCHIVO = fileURLToPath(import.meta.url);
+const ROOT = path.dirname(path.dirname(EXPORTADOR_ARCHIVO));
 
 // Carpeta canónica del material en el Drive. El curso se escribe y se revisa ahí:
 // este script solo lee, nunca escribe en el Drive.
@@ -80,6 +81,9 @@ const SECCIONES_INTERNAS = new Set([
 // pedagógicas legítimas como "otra persona", el piloto de un aparato o el
 // consentimiento dentro de un ejemplo de vocabulario.
 const CONTENIDO_EDITORIAL_INTERNO = /contraste humano|revisi[oó]n nativa|registro (?:hist[oó]rico )?de dudas|puerta editorial|firma (?:humana|nativa)|revisi[oó]n sist[eé]mica|revisi[oó]n de bokm[aå]l|qa (?:sist[eé]mic[oa]|t[eé]cnic[oa]|de audio)|material interno|material publicable|no es copy|estado (?:de producci[oó]n|y trabajo abierto)|puertas abiertas de este documento|hoja interna|\bcohorte\b|\breclutamiento\b|circuito (?:con personas|de alumnos)|(?:no hay|no se incluye)[^.!?]{0,120}\bconsentimiento\b|\bla lupa\b|pass_con_avisos|orden (?:expresa )?de publicaci[oó]n|publicaci[oó]n (?:sigue|se registra|conserva|es una puerta)|puertas? (?:t[eé]cnicas? y )?de publicaci[oó]n|autorizar (?:la )?publicaci[oó]n|autorizar su uso p[uú]blico/i;
+const CABECERA_PRODUCCION_HTML = /<pre><code>\s*(?:MECANISMO|DOCUMENTO|PIEZA):/i;
+const RUTA_INTERNA_CURSO = /(?:\/Users\/|(?:\.\.\/)+|(?:norsk\/)?idioma\/rutas\/|(?:_fuentes|produccion|scripts|supabase|api|data|rutas)\/)[^\s<>"']+\.(?:md|xlsx|json|sql|mjs|js|py)\b/i;
+const RUIDO_PRODUCCION_ALUMNO = /MP3 m[aá]ster|fuente editable|experiencia maestra|Gobierno vigente|para producci[oó]n interna|Nota de grabaci[oó]n|petici[oó]n original|QA editorial interna|\bversionado\b|puerta abierta en la cabecera/i;
 
 const FINGERPRINT_VERSION = "sha256-ruta-contenido-v1";
 
@@ -419,12 +423,190 @@ function textoPlanoHtml(html) {
     .trim();
 }
 
+function esFichaInternaMecanismo(bloque, codigo) {
+  if (!/^M\d{2}$/.test(codigo)) return false;
+  const plano = textoPlanoHtml(bloque);
+  if (!new RegExp(`^MECANISMO:\\s*${codigo}\\b`, "i").test(plano)) return false;
+  return [
+    /\bGRIETA:/i,
+    /\bPIEZAS NUEVAS:/i,
+    /\bYA TRAES:/i,
+    /\bDELPRØVE PRINCIPAL:/i,
+    /\bUNIDAD DESTINO:/i,
+    /\bEVIDENCIA:/i,
+    /\bRECUPERACI[ÓO]N:/i,
+  ].every((patron) => patron.test(plano));
+}
+
+function esAvisoLegalRepetido(bloque) {
+  const plano = textoPlanoHtml(bloque);
+  return /NEXO NORSK/i.test(plano)
+    && /(?:proyecto independiente|material propio)/i.test(plano)
+    && /(?:HK-dir|UDI|centro de examen)/i.test(plano)
+    && /(?:no es la prueba|no promete|no reproduce|no estamos vinculados|no tenemos relaci[oó]n)/i.test(plano);
+}
+
+function esMapaInternoDeLeccion(bloque) {
+  const plano = textoPlanoHtml(bloque);
+  return /(?:los seis pasos (?:del canon|del m[eé]todo)|c[oó]mo se corresponde esta lecci[oó]n con los seis pasos|recorrido de la lecci[oó]n)/i.test(plano)
+    && /(?:escena|grieta)/i.test(plano)
+    && /(?:ficha P|transferencia)/i.test(plano);
+}
+
+function sustituirBloqueAlumno(html, etiqueta, patrones, reemplazo) {
+  const re = new RegExp(`<${etiqueta}(?:\\s[^>]*)?>[\\s\\S]*?<\\/${etiqueta}>`, "gi");
+  return html.replace(re, (bloque) => {
+    const plano = textoPlanoHtml(bloque);
+    return patrones.every((patron) => patron.test(plano)) ? reemplazo : bloque;
+  });
+}
+
+function limpiarRuidoEspecifico(codigo, seccion, html) {
+  if (codigo === "DIAGNOSTICO_B1" && seccion.id === "como-hacer-este-perfil-opcional") {
+    html = sustituirBloqueAlumno(html, "p", [/86 MP3 m[aá]ster/i],
+      "<p><strong>Para la escucha.</strong> Escucha cada pieza dos veces a velocidad normal: pide que te la lean o usa el lector de voz en noruego del móvil. No leas el texto; si lo haces, anótalo porque entonces estás midiendo lectura.</p>");
+  }
+
+  if (codigo === "LES_LARGOS" && seccion.id === "nota-de-limites") {
+    html = sustituirBloqueAlumno(html, "li", [/215 a 280 palabras/i, /_fuentes\/FICHA_FORMATO_LES/i],
+      "<li><strong>La longitud de 215 a 280 palabras es una decisión de NEXO.</strong> HK-dir no publica cifras de palabras por nivel; solo indica que los textos de A1 y A2 son más cortos y sencillos que los de B1 y B2.</li>");
+    html = sustituirBloqueAlumno(html, "li", [/Tres opciones por pregunta/i, /cuando montemos el simulacro/i],
+      "<li><strong>Aquí hay tres opciones por pregunta.</strong> La prueba publica cuatro para este tipo de tarea, así que esta práctica no reproduce exactamente esa parte del formato.</li>");
+  }
+
+  if (codigo === "BANCO_CONSIGNAS_ORAL" && seccion.id === "nota-de-limites") {
+    html = sustituirBloqueAlumno(html, "p", [/_fuentes\/FICHA_FORMATO_MUNTLIG/i, /Son cuatro/i],
+      `<p><strong>Cómo es la prueba oral.</strong> Estos datos se comprobaron el 01.09.2026 con la información pública de HK-dir. Normalmente participan dos candidatos, un examinador y un sensor externo. La presentación inicial no se evalúa. Después hay tres tareas: una intervención individual de 2 a 3 minutos, una conversación en pareja de 5 a 7 y otra intervención individual de opinión justificada de 2 a 3. La valoración corresponde al sensor de HK-dir. Fuentes: ${enlace("https://prove.hkdir.no/norskprove-a1-b2/les-om-proven-norsk-A1-B2/om-muntlig-prove", "información para candidatos")} y ${enlace("https://hkdir.no/voksenopplaering/norsk-og-samfunnskunnskap/om-norskprovene/norskproven-a1-b2/prove-i-munnleg-kommunikasjon", "criterios de comunicación oral")}.</p>`);
+  }
+
+  if (codigo === "KIT_ORAL_21_JORNADAS" && seccion.id === "intro") {
+    html = sustituirBloqueAlumno(html, "blockquote", [/Gobierno vigente/i, /experiencia maestra/i],
+      "<blockquote><p>Son 21 actuaciones flexibles, pensadas para cuatro a seis semanas. No tienen que hacerse en días consecutivos. Veinte minutos es una referencia, no un límite.</p></blockquote>");
+  }
+
+  if (codigo === "KIT_ORAL_21_JORNADAS" && seccion.id === "limites-de-este-documento") {
+    html = sustituirBloqueAlumno(html, "p", [/_fuentes\/FICHA_FORMATO_MUNTLIG/i, /revalidarse/i],
+      "<p>Los datos sobre la prueba oral se comprobaron el 01.09.2026 con las fuentes oficiales de HK-dir y el reglamento vigente.</p>");
+  }
+
+  if (codigo === "SIMULACROS_LYTT_LES_SKRIV" && seccion.id === "convenciones-de-este-documento") {
+    html = sustituirBloqueAlumno(html, "p", [/34 MP3 m[aá]ster/i, /fuente editable/i], "");
+    html = sustituirBloqueAlumno(html, "p", [/Cuando una soluci[oó]n dice M04 o M02/i, /01_mecanismos\//i],
+      "<p><strong>Mecanismos.</strong> Cuando una solución menciona M04 o M02, se refiere a uno de los dieciséis mecanismos de la ruta. Puedes abrirlo desde el índice del curso.</p>");
+  }
+
+  if (codigo === "SIMULACROS_ORAL" && seccion.id === "nota-de-limites") {
+    html = sustituirBloqueAlumno(html, "p", [/_fuentes\/FICHA_FORMATO_MUNTLIG/i, /cada seis meses/i],
+      `<p>Los datos de formato se comprobaron el 01.09.2026 con la ${enlace("https://prove.hkdir.no/norskprove-a1-b2/les-om-proven-norsk-A1-B2/om-muntlig-prove", "información pública para candidatos")}, los ${enlace("https://hkdir.no/voksenopplaering/norsk-og-samfunnskunnskap/om-norskprovene/norskproven-a1-b2/prove-i-munnleg-kommunikasjon", "criterios de comunicación oral")} y el ${enlace("https://cdn.sanity.io/files/dc7vqrwe/production/0d54a91003ef099600915a4503f4d3b24da2c9ee.pdf?dl=", "formulario público de valoración")} de HK-dir.</p>`);
+    html = sustituirBloqueAlumno(html, "p", [/O2 lleva alcance/i, /O5/i],
+      "<p><strong>Para practicar.</strong> Cada simulacro está escrito para tres personas: tú, quien hace de examinador y quien hace de segundo candidato. Larsito puede ocupar esos dos papeles cuando practiques por tu cuenta.</p>");
+  }
+
+  if (codigo === "LYTT_CORTOS_B" && seccion.id === "bloque-a2-ocho-guiones") {
+    html = sustituirBloqueAlumno(html, "p", [/^Nota de grabaci[oó]n$/i], "");
+    html = sustituirBloqueAlumno(html, "p", [/alternativas nombran el sexo/i, /VOZ 2/i], "");
+  }
+
+  if (codigo === "LYTT_LARGOS" && seccion.id === "que-son-estas-doce-piezas") {
+    html = sustituirBloqueAlumno(html, "p", [/petici[oó]n original/i, /QA editorial interna/i, /versionado/i], "");
+  }
+
+  if (codigo === "SIMULACROS_LYTT_LES_SKRIV" && seccion.id === "reglas-comunes-de-los-dos-simulacros-escritos") {
+    html = sustituirBloqueAlumno(html, "p", [/ficha de la l[aá]mina/i, /nuestro equipo produzca/i],
+      "<p><strong>Sobre la tarea de describir una imagen.</strong> En esta versión la tarea usa una escena descrita en lugar de una imagen. Es más fácil, así que no la cuentes como simulacro completo hasta repetirla con una imagen delante.</p>");
+  }
+
+  if (codigo === "SIMULACROS_LYTT_LES_SKRIV" && /^simulacro-skriv-[12]-3-tareas-90-minutos$/.test(seccion.id)) {
+    html = sustituirBloqueAlumno(html, "p", [/Ficha de la l[aá]mina/i, /producci[oó]n interna/i], "");
+  }
+
+  if (codigo === "LYTT_CORTOS_A" && seccion.id === "nota-de-limites") {
+    html = sustituirBloqueAlumno(html, "p", [/etiquetas de trabajo del equipo/i, /Estas etiquetas solo ordenan la producci[oó]n/i],
+      "<p>Las etiquetas A2, B1 y B1 alto son orientativas: ordenan la práctica, pero no califican tu nivel ni proceden de HK-dir.</p>");
+    html = sustituirBloqueAlumno(html, "p", [/Voces de la grabaci[oó]n/i, /el reparto de voces no es libre/i], "");
+    html = sustituirBloqueAlumno(html, "p", [/Fechas\./i, /revisi[oó]n interna/i],
+      "<p><strong>Fechas.</strong> En los guiones no se combinan días de la semana con fechas cerradas, para que las escenas no dependan de un calendario concreto.</p>");
+    html = sustituirBloqueAlumno(html, "p", [/Plantas y traducci[oó]n/i, /cuando el material llegue a la app/i],
+      "<p><strong>Plantas.</strong> En Noruega la planta a pie de calle es <code>første etasje</code>. Por eso <code>andre etasje</code> corresponde a la primera planta en la cuenta española y <code>tredje etasje</code>, a la segunda.</p>");
+    html = sustituirBloqueAlumno(html, "p", [/Escenas sanitarias/i, /kit de fichas/i],
+      "<p><strong>Escenas sanitarias.</strong> Solo practican situaciones administrativas y lengua. No incluyen diagnóstico, tratamiento ni consejo clínico.</p>");
+  }
+
+  if (codigo === "LYTT_CORTOS_B" && seccion.id === "nota-de-limites") {
+    html = sustituirBloqueAlumno(html, "p", [/estimaci[oó]n interna del equipo/i, /umbral de puntos/i],
+      "<p>Las etiquetas A2, B1 y B1 alto son orientativas: ordenan la práctica, pero no califican tu nivel ni proceden de HK-dir.</p>");
+    html = sustituirBloqueAlumno(html, "p", [/Lo que no rellenamos/i, /papel para tomar notas/i],
+      "<p>Para el número exacto de tareas, el papel permitido y las condiciones del centro, consulta tu convocatoria y tu centro de examen.</p>");
+    html = sustituirBloqueAlumno(html, "p", [/C[oó]mo se usan/i, /especificaci[oó]n/i], "");
+    html = sustituirBloqueAlumno(html, "p", [/Qu[eé] significa aqu[ií] citar una pieza/i, /canon de 80 piezas/i], "");
+    html = sustituirBloqueAlumno(html, "table", [/Pieza que el canon eval[uú]a en LYTT/i, /Mecanismo/i], "");
+  }
+
+  if (codigo === "LYTT_LARGOS" && seccion.id === "nota-de-limites") {
+    html = sustituirBloqueAlumno(html, "p", [/ficha de formato del proyecto/i, /fecha de consulta/i],
+      "<p>Estas notas separan el formato publicado por HK-dir de las decisiones didácticas de NEXO.</p>");
+    html = sustituirBloqueAlumno(html, "p", [/dificultad de cada guion/i, /circuito descriptivo/i],
+      `<p><strong>1. La dificultad es orientativa.</strong> A2 alto, B1 y B1 alto ordenan la práctica; no califican al alumno ni proceden de HK-dir. Los umbrales oficiales no se publican. Fuente: ${enlace("https://hkdir.no/voksenopplaering/norsk-og-samfunnskunnskap/om-norskprovene/norskproven-a1-b2/den-adaptive-strukturen-i-lese-og-lytteproven", "HK-dir, estructura adaptativa")}, consultada el 29.08.2026.</p>`);
+    html = sustituirBloqueAlumno(html, "p", [/Tres preguntas por audio/i, /Cuando estas piezas se monten/i],
+      `<p><strong>2. Aquí hay tres preguntas por audio.</strong> Sirven para estudiar el mismo guion desde el dato, la intención y la conclusión. El formato B1 publicado incluye conversaciones largas con dos preguntas simultáneas, así que esta práctica no lo reproduce exactamente. Fuente: ${enlace("https://hkdir.no/voksenopplaering/norsk-og-samfunnskunnskap/om-norskprovene/norskproven-a1-b2/om-lytteproven", "HK-dir, prueba de escucha")}, consultada el 29.08.2026.</p>`);
+    html = sustituirBloqueAlumno(html, "p", [/Tres opciones por pregunta/i, /ficha de formato/i],
+      "<p><strong>6. Aquí hay tres opciones por pregunta.</strong> Es una decisión didáctica para poder leer el ítem entero antes de escuchar.</p>");
+    html = sustituirBloqueAlumno(html, "p", [/Piezas del canon marcadas R/i, /especificaci[oó]n curricular/i], "");
+    html = sustituirBloqueAlumno(html, "p", [/Cada opci[oó]n incorrecta lleva su motivo/i, /control de calidad de la ruta/i], "");
+  }
+
+  if (codigo === "LES_BREVES" && seccion.id === "nota-de-limites") {
+    html = sustituirBloqueAlumno(html, "p", [/Dos huecos que la ficha/i, /decisi[oó]n nuestra de producci[oó]n/i],
+      "<p><strong>Dos límites.</strong> HK-dir no publica una cifra de palabras por nivel ni la proporción exacta de cada tipo de ítem. Los textos de 20 a 70 palabras y el reparto de esta colección son decisiones didácticas de NEXO.</p>");
+    html = sustituirBloqueAlumno(html, "p", [/Un tercer aviso/i, /puerta abierta en la cabecera/i],
+      `<p><strong>Número de alternativas.</strong> La prueba usa cuatro. Aquí usamos tres para una práctica más breve, así que el azar ayuda más en este material. Fuente: ${enlace("https://hkdir.no/voksenopplaering/norsk-og-samfunnskunnskap/om-norskprovene/norskproven-a1-b2/om-leseproven", "HK-dir, prueba de lectura")}, consultada el 29.08.2026.</p>`);
+  }
+
+  if (codigo === "SKRIV_B1" && seccion.id === "como-se-corrige-tu-texto") {
+    html = html.replace(/<h3>1\.6 Lo que esta ficha deja sin cerrar<\/h3>/i, "<h3>1.6 Datos que cambian</h3>");
+    html = sustituirBloqueAlumno(html, "p", [/Lo que esta ficha deja sin cerrar/i, /plazo de reclamaci[oó]n/i],
+      "<p>No damos aquí plazos de reclamación, precios ni fechas de convocatoria porque pueden cambiar o las fuentes discrepan. Consulta HK-dir o tu centro de examen.</p>");
+  }
+
+  if (codigo === "SIMULACROS_ORAL" && seccion.id === "ficha-de-tiempos-2") {
+    html = html.replace(/La ficha de formato no dice que el examinador cambie las condiciones a mitad de la tarea/gi,
+      "La información pública de HK-dir no indica que el examinador cambie las condiciones a mitad de la tarea");
+  }
+
+  return html;
+}
+
 // La fuente Markdown conserva toda la trazabilidad. Esta función solo limpia la
 // copia de alumno y opera de forma determinista sobre bloques completos. Las dos
 // sustituciones en línea conservan ejercicios legítimos que antes llevaban una
 // coletilla editorial dentro del mismo párrafo.
 function sanearHtmlParaAlumno(codigo, seccion) {
   let html = seccion.html;
+
+  html = html.replace(/<pre><code>[\s\S]*?<\/code><\/pre>/g, (bloque) => {
+    if (!CABECERA_PRODUCCION_HTML.test(bloque)) return bloque;
+    if (/^M\d{2}$/.test(codigo) && !esFichaInternaMecanismo(bloque, codigo)) return bloque;
+    cabecerasInternasOmitidas++;
+    return "";
+  });
+
+  if (seccion.id === "intro" || seccion.id === "nota-de-limites") {
+    html = html.replace(/<blockquote>[\s\S]*?<\/blockquote>/g, (bloque) => (
+      esAvisoLegalRepetido(bloque) ? "" : bloque
+    ));
+    html = html.replace(/<p>[\s\S]*?<\/p>/g, (bloque) => (
+      esAvisoLegalRepetido(bloque) || (seccion.id === "intro" && /^M\d{2}$/.test(codigo) && esMapaInternoDeLeccion(bloque)) ? "" : bloque
+    ));
+  }
+
+  html = limpiarRuidoEspecifico(codigo, seccion, html);
+
+  // Última defensa: una ruta interna nunca se enseña. Las reescrituras de arriba
+  // conservan el dato útil; esta sustitución cubre una referencia nueva que se
+  // haya colado dentro de código sin borrar el párrafo entero.
+  html = html.replace(/<code>[^<]+<\/code>/gi, (bloque) => (
+    RUTA_INTERNA_CURSO.test(textoPlanoHtml(bloque)) ? "la documentación interna de la ruta" : bloque
+  ));
 
   if ((codigo === "M02" || codigo === "M13") && seccion.id === "practica") {
     html = html.replace(
@@ -512,6 +694,7 @@ const piezas = [];
 const codigosVistos = new Set();
 const seccionesInternasOmitidas = [];
 const fuentesLeidas = [];
+let cabecerasInternasOmitidas = 0;
 
 for (const fuente of FUENTES) {
   const dir = path.join(MATERIAL, fuente.dir);
@@ -553,13 +736,23 @@ for (const fuente of FUENTES) {
     const secciones = seccionesLeidas
       .filter((s) => !SECCIONES_INTERNAS.has(s.id))
       .map((s) => ({ ...s, html: sanearHtmlParaAlumno(codigoFinal, s) }))
-      .filter((s) => s.html);
+      .filter((s) => textoPlanoHtml(s.html));
     seccionesLeidas.filter((s) => SECCIONES_INTERNAS.has(s.id)).forEach((s) => {
       seccionesInternasOmitidas.push(`${codigoFinal}:${s.id}`);
     });
     secciones.forEach((s) => {
-      if (CONTENIDO_EDITORIAL_INTERNO.test(`${s.titulo || ""} ${textoPlanoHtml(s.html)}`)) {
+      const textoSeccion = `${s.titulo || ""} ${textoPlanoHtml(s.html)}`;
+      if (CABECERA_PRODUCCION_HTML.test(s.html || "")) {
+        errores.push(`${codigoFinal}:${s.id}: cabecera de producción interna en artefacto de alumno`);
+      }
+      if (CONTENIDO_EDITORIAL_INTERNO.test(textoSeccion)) {
         errores.push(`${codigoFinal}:${s.id}: contenido editorial interno en artefacto de alumno`);
+      }
+      if (RUTA_INTERNA_CURSO.test(`${s.titulo || ""} ${s.html || ""}`) || RUTA_INTERNA_CURSO.test(textoSeccion)) {
+        errores.push(`${codigoFinal}:${s.id}: ruta interna en artefacto de alumno`);
+      }
+      if (RUIDO_PRODUCCION_ALUMNO.test(textoSeccion)) {
+        errores.push(`${codigoFinal}:${s.id}: lenguaje de producción en artefacto de alumno`);
       }
     });
     const palabras = contarPalabrasSecciones(secciones);
@@ -598,12 +791,15 @@ const palabrasTotales = piezas.reduce((n, p) => n + p.palabras, 0);
 const seccionesTotales = piezas.reduce((n, p) => n + p.secciones.length, 0);
 const fuentesManifest = ordenarFuentes(fuentesLeidas);
 const fuentesSha256 = fingerprintFuentes(fuentesManifest);
+const exportadorSha256 = createHash("sha256").update(fs.readFileSync(EXPORTADOR_ARCHIVO)).digest("hex");
 
 console.log(`Material leído en: ${MATERIAL}`);
 console.log(`Piezas: ${piezas.length} (${Object.entries(porTipo).map(([t, n]) => `${t} ${n}`).join(" · ") || "ninguna"})`);
 console.log(`Secciones: ${seccionesTotales} · Palabras: ${palabrasTotales.toLocaleString("es-ES")}`);
 console.log(`Secciones editoriales omitidas de las superficies: ${seccionesInternasOmitidas.length}`);
+console.log(`Cabeceras internas de mecanismo omitidas: ${cabecerasInternasOmitidas}`);
 console.log(`Fingerprint de ${fuentesManifest.length} fuentes: ${fuentesSha256}`);
+console.log(`Exportador SHA-256: ${exportadorSha256}`);
 
 if (avisos.length) console.log(`\nAVISOS (${avisos.length}):\n- ${avisos.join("\n- ")}`);
 if (errores.length) {
@@ -677,6 +873,7 @@ function revisarDemo(demo) {
   const seccionesAlumno = [
     ...((demo.mecanismo && demo.mecanismo.secciones) || []),
     ...((demo.diagnostico && demo.diagnostico.secciones) || []),
+    ...((demo.piezas || []).flatMap((p) => p.secciones || [])),
   ];
   const textoAlumno = seccionesAlumno.map((s) => `${s.titulo || ""} ${s.html || ""}`).join(" ");
   if (texto.includes("—")) fallos.push("em dash en la demo");
@@ -692,6 +889,9 @@ function revisarDemo(demo) {
   if (CONTENIDO_EDITORIAL_INTERNO.test(textoAlumno)) {
     fallos.push("la demo expone notas, dudas o puertas editoriales internas");
   }
+  if (CABECERA_PRODUCCION_HTML.test(textoAlumno)) fallos.push("la demo expone una cabecera de producción");
+  if (RUTA_INTERNA_CURSO.test(textoAlumno)) fallos.push("la demo expone una ruta interna");
+  if (RUIDO_PRODUCCION_ALUMNO.test(textoPlanoHtml(textoAlumno))) fallos.push("la demo expone lenguaje de producción");
   return fallos;
 }
 
@@ -752,6 +952,7 @@ const manifiesto = {
   fuentes_sha256: fuentesSha256,
   fuentes: fuentesManifest,
   curso_sha256: cursoSha256,
+  exportador_sha256: exportadorSha256,
 };
 fs.writeFileSync(path.join(SALIDA, "manifiesto.json"), JSON.stringify(manifiesto, null, 1));
 console.log(`Escrito ${path.join(SALIDA, "manifiesto.json")}.`);
