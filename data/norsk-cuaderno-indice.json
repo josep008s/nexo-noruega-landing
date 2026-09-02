@@ -1,0 +1,202 @@
+{
+ "version": 1,
+ "actualizado": "2026-09-02",
+ "piezas": {
+  "DIAGNOSTICO_B1": {
+   "tomo": 1,
+   "tomo_titulo": "Los 16 mecanismos, primera parte",
+   "pagina": 5,
+   "titulo": "Perfil diagnóstico por destrezas",
+   "paginas_tomo": 167
+  },
+  "M01": {
+   "tomo": 1,
+   "tomo_titulo": "Los 16 mecanismos, primera parte",
+   "pagina": 24,
+   "titulo": "El verbo en segunda posición cuando la frase no empieza por el sujeto",
+   "paginas_tomo": 167
+  },
+  "M02": {
+   "tomo": 1,
+   "tomo_titulo": "Los 16 mecanismos, primera parte",
+   "pagina": 42,
+   "titulo": "La subordinada por dentro: conjunción, sujeto, adverbio y verbo",
+   "paginas_tomo": 167
+  },
+  "M03": {
+   "tomo": 1,
+   "tomo_titulo": "Los 16 mecanismos, primera parte",
+   "pagina": 61,
+   "titulo": "Relativas con som y descripción precisa",
+   "paginas_tomo": 167
+  },
+  "M04": {
+   "tomo": 1,
+   "tomo_titulo": "Los 16 mecanismos, primera parte",
+   "pagina": 80,
+   "titulo": "Preteritum frente a presens perfektum",
+   "paginas_tomo": 167
+  },
+  "M05": {
+   "tomo": 1,
+   "tomo_titulo": "Los 16 mecanismos, primera parte",
+   "pagina": 96,
+   "titulo": "Conectores temporales y secuencia narrativa",
+   "paginas_tomo": 167
+  },
+  "M06": {
+   "tomo": 1,
+   "tomo_titulo": "Los 16 mecanismos, primera parte",
+   "pagina": 112,
+   "titulo": "Causa y consecuencia",
+   "paginas_tomo": 167
+  },
+  "M07": {
+   "tomo": 1,
+   "tomo_titulo": "Los 16 mecanismos, primera parte",
+   "pagina": 129,
+   "titulo": "Condición e hipótesis",
+   "paginas_tomo": 167
+  },
+  "M08": {
+   "tomo": 1,
+   "tomo_titulo": "Los 16 mecanismos, primera parte",
+   "pagina": 150,
+   "titulo": "Pasiva y el agente que desaparece",
+   "paginas_tomo": 167
+  },
+  "M09": {
+   "tomo": 2,
+   "tomo_titulo": "Los 16 mecanismos, segunda parte",
+   "pagina": 5,
+   "titulo": "Estilo indirecto",
+   "paginas_tomo": 151
+  },
+  "M10": {
+   "tomo": 2,
+   "tomo_titulo": "Los 16 mecanismos, segunda parte",
+   "pagina": 21,
+   "titulo": "Modalidad, atenuación y partículas de matiz",
+   "paginas_tomo": 151
+  },
+  "M11": {
+   "tomo": 2,
+   "tomo_titulo": "Los 16 mecanismos, segunda parte",
+   "pagina": 41,
+   "titulo": "Acuerdo, desacuerdo y referencia a lo dicho por otra persona",
+   "paginas_tomo": 151
+  },
+  "M12": {
+   "tomo": 2,
+   "tomo_titulo": "Los 16 mecanismos, segunda parte",
+   "pagina": 58,
+   "titulo": "Cantidad, indefinidos y referencia negativa",
+   "paginas_tomo": 151
+  },
+  "M13": {
+   "tomo": 2,
+   "tomo_titulo": "Los 16 mecanismos, segunda parte",
+   "pagina": 77,
+   "titulo": "Posesión y referencia reflexiva",
+   "paginas_tomo": 151
+  },
+  "M14": {
+   "tomo": 2,
+   "tomo_titulo": "Los 16 mecanismos, segunda parte",
+   "pagina": 95,
+   "titulo": "Participio, condensación nominal y lenguaje de carta oficial",
+   "paginas_tomo": 151
+  },
+  "M15": {
+   "tomo": 2,
+   "tomo_titulo": "Los 16 mecanismos, segunda parte",
+   "pagina": 112,
+   "titulo": "Cohesión: conectores de párrafo, progresión y construcciones con det",
+   "paginas_tomo": 151
+  },
+  "M16": {
+   "tomo": 2,
+   "tomo_titulo": "Los 16 mecanismos, segunda parte",
+   "pagina": 130,
+   "titulo": "Producción conectada y reparación sin preparación",
+   "paginas_tomo": 151
+  },
+  "KIT_ORAL_21_JORNADAS": {
+   "tomo": 3,
+   "tomo_titulo": "Hablar",
+   "pagina": 4,
+   "titulo": "Kit oral: 21 actuaciones a tu ritmo",
+   "paginas_tomo": 63
+  },
+  "BANCO_CONSIGNAS_ORAL": {
+   "tomo": 3,
+   "tomo_titulo": "Hablar",
+   "pagina": 39,
+   "titulo": "Banco de consignas del oral",
+   "paginas_tomo": 63
+  },
+  "LYTT_CORTOS_A": {
+   "tomo": 4,
+   "tomo_titulo": "Escuchar y leer",
+   "pagina": 6,
+   "titulo": "Guiones cortos de escucha, bloque A",
+   "paginas_tomo": 187
+  },
+  "LYTT_CORTOS_B": {
+   "tomo": 4,
+   "tomo_titulo": "Escuchar y leer",
+   "pagina": 30,
+   "titulo": "Guiones cortos de escucha, bloque B",
+   "paginas_tomo": 187
+  },
+  "LYTT_LARGOS": {
+   "tomo": 4,
+   "tomo_titulo": "Escuchar y leer",
+   "pagina": 58,
+   "titulo": "Guiones largos de escucha",
+   "paginas_tomo": 187
+  },
+  "LES_BREVES": {
+   "tomo": 4,
+   "tomo_titulo": "Escuchar y leer",
+   "pagina": 103,
+   "titulo": "Textos breves de lectura",
+   "paginas_tomo": 187
+  },
+  "LES_LARGOS": {
+   "tomo": 4,
+   "tomo_titulo": "Escuchar y leer",
+   "pagina": 144,
+   "titulo": "Textos largos de lectura",
+   "paginas_tomo": 187
+  },
+  "SKRIV_B1": {
+   "tomo": 5,
+   "tomo_titulo": "Escribir",
+   "pagina": 4,
+   "titulo": "Expresión escrita: tareas, modelos y criterios",
+   "paginas_tomo": 93
+  },
+  "ANEXO-UTTRYKK": {
+   "tomo": 5,
+   "tomo_titulo": "Escribir",
+   "pagina": 52,
+   "titulo": "Expresiones por mecanismo",
+   "paginas_tomo": 93
+  },
+  "SIMULACROS_LYTT_LES_SKRIV": {
+   "tomo": 6,
+   "tomo_titulo": "Simulacros",
+   "pagina": 4,
+   "titulo": "Simulacros de escucha, lectura y escritura",
+   "paginas_tomo": 86
+  },
+  "SIMULACROS_ORAL": {
+   "tomo": 6,
+   "tomo_titulo": "Simulacros",
+   "pagina": 58,
+   "titulo": "Simulacros del oral",
+   "paginas_tomo": 86
+  }
+ }
+}

@@ -719,6 +719,7 @@
           chip.textContent = "Curso Pro";
           chip.className = "estado";
           renderIndice();
+          abrirDesdeHash();
           return null;
         }
         throw new Error("sin acceso");
@@ -727,9 +728,17 @@
         return fetch(DEMO, { credentials: "same-origin" })
           .then(function (r) { if (!r.ok) throw new Error("demo"); return r.json(); })
           .then(desdeDemo)
+          .then(abrirDesdeHash)
           .catch(function () { error("El curso no está disponible ahora mismo. Vuelve a intentarlo en un rato."); });
       });
   }
+
+  // Enlace directo a una pieza: /norsk/curso/#M09 (lo usan el informe de Larsito y el cuaderno).
+  function abrirDesdeHash() {
+    var m = /^#([A-Z0-9_-]{2,32})$/.exec(window.location.hash || "");
+    if (m) abrirPieza(m[1]);
+  }
+  window.addEventListener("hashchange", abrirDesdeHash);
 
   arrancar();
 })();
