@@ -568,6 +568,163 @@
     return { items: out, reinicio: reinicio, restantes: Math.max(0, candidatos.length - out.length) };
   }
 
+  // ---------- Diagnóstico del fallo ----------
+  // La corrección no es una frase fija: compara lo que has puesto con la solución,
+  // palabra a palabra, y añade la regla del mecanismo. Nunca inventa noruego.
+
+  var REGLAS = {
+    M01: "Cuando la frase no empieza por el sujeto, el verbo conjugado va en segunda posición y el sujeto justo detrás.",
+    M02: "Dentro de la subordinada el orden es conjunción, sujeto, adverbio (ikke, alltid, bare) y después el verbo. La subordinada no invierte nunca.",
+    M03: "La relativa va con «som» pegada al nombre que describe. Si «som» hace de sujeto de la relativa, no se puede quitar.",
+    M04: "Con una fecha o un momento cerrado va preteritum. Con una duración que sigue hoy o una experiencia sin fecha va presens perfektum: «har» más participio.",
+    M05: "«Da» es una vez en el pasado; «når» es cada vez o futuro. Si la subordinada temporal va delante, después de la coma viene el verbo de la principal.",
+    M06: "«Fordi» abre una subordinada, con el sujeto delante del verbo. «Derfor» y «så» abren una principal y empujan el verbo a la segunda posición.",
+    M07: "La condición con «hvis» delante: coma y después el verbo de la principal. En la hipótesis entran «ville» o «skulle» más infinitivo.",
+    M08: "En la pasiva el objeto pasa a ser sujeto: «bli» más participio, o la forma en -s. El agente, si aparece, va con «av».",
+    M09: "Afirmación: «at». Pregunta de sí o no: «om», nunca «hvis». Dentro de la subordinada no hay inversión, y el verbo retrocede al pasado si el verbo de decir está en pasado.",
+    M10: "Los modales matizan: «kan» y «kanskje» posibilidad, «må» obligación, «bør» consejo, «skulle» y «ville» hipótesis. Las partículas «jo», «vel» y «nok» van detrás del verbo.",
+    M11: "Para estar de acuerdo o discrepar se recoge primero lo dicho («som du sa», «jeg er enig i at») y después viene tu postura.",
+    M12: "«Noen» en preguntas y afirmaciones; «ingen» o «ikke noen» en negativas. «Mange» con lo que se cuenta y «mye» con lo que no se cuenta.",
+    M13: "«Sin», «si», «sitt» y «sine» solo cuando el poseedor es el sujeto de la frase. Si es otra persona, «hans», «hennes» o «deres».",
+    M14: "La carta oficial condensa: participio o sustantivo en lugar de la frase entera. Al deshacerlo, sujeto, verbo y complemento vuelven a su sitio.",
+    M15: "Los conectores de párrafo («likevel», «dessuten», «derfor») ocupan la primera posición y empujan el verbo a la segunda. «Det» de relleno abre frases sin sujeto real.",
+    M16: "Al reparar en directo se retoma la idea con un conector («altså», «jeg mener») y se termina la frase; no se vuelve a empezar desde cero.",
+  };
+
+  var PARES = [
+    [["at", "om"], "«at» introduce una afirmación o una opinión; «om» una pregunta de sí o no."],
+    [["om", "hvis"], "«hvis» pone una condición; «om» cuenta una pregunta de sí o no. El «si» del castellano tienta a usar «hvis», pero aquí no es condición."],
+    [["at", "hvis"], "«hvis» pone una condición; «at» introduce lo que alguien dice o piensa."],
+    [["da", "når"], "«da» es una vez concreta en el pasado; «når» es cada vez o algo que todavía no ha pasado."],
+    [["fordi", "derfor"], "«fordi» da la causa y abre una subordinada; «derfor» da la consecuencia y abre una principal."],
+    [["fordi", "så"], "«fordi» da la causa; «så» da la consecuencia."],
+    [["sin", "hans"], "«sin» apunta al sujeto de la frase; «hans» a otra persona."],
+    [["sin", "hennes"], "«sin» apunta al sujeto de la frase; «hennes» a otra persona."],
+    [["si", "hennes"], "«si» apunta al sujeto de la frase; «hennes» a otra persona."],
+    [["sitt", "hans"], "«sitt» apunta al sujeto de la frase; «hans» a otra persona."],
+    [["sine", "deres"], "«sine» apunta al sujeto de la frase; «deres» a otras personas."],
+    [["som", "at"], "«som» abre una relativa que describe un nombre; «at» introduce lo que alguien dice o piensa."],
+    [["noen", "ingen"], "«noen» en afirmaciones y preguntas; «ingen» en negativas."],
+    [["mange", "mye"], "«mange» con lo que se puede contar; «mye» con lo que no."],
+    [["har", "hadde"], "«har» más participio mira desde hoy; «hadde» más participio es anterior a otro momento del pasado."],
+    [["er", "var"], "«er» es presente; «var» es pasado. Si el verbo de decir está en pasado, lo de dentro retrocede."],
+    [["kan", "kunne"], "«kan» es presente; «kunne» es pasado o hipótesis. Si el verbo de decir está en pasado, lo de dentro retrocede."],
+    [["må", "måtte"], "«må» es presente; «måtte» es pasado. Si el verbo de decir está en pasado, lo de dentro retrocede."],
+    [["skal", "skulle"], "«skal» es presente; «skulle» es pasado o hipótesis."],
+    [["vil", "ville"], "«vil» es presente; «ville» es pasado o hipótesis."],
+  ];
+  var ADVERBIOS = { ikke: 1, alltid: 1, aldri: 1, bare: 1, ofte: 1, "også": 1, fortsatt: 1, allerede: 1, "ennå": 1, kanskje: 1, gjerne: 1, egentlig: 1 };
+  var SUBORDINANTES = { at: 1, om: 1, fordi: 1, hvis: 1, "når": 1, da: 1, som: 1, mens: 1, "før": 1, etter: 1, siden: 1, selv: 1, "dersom": 1 };
+
+  // Verbos conjugados frecuentes y terminaciones típicas; sirve solo para elegir la redacción del aviso.
+  var VERBOS = { er: 1, var: 1, har: 1, hadde: 1, kan: 1, kunne: 1, "må": 1, "måtte": 1, skal: 1, skulle: 1, vil: 1, ville: 1, "bør": 1, burde: 1, blir: 1, ble: 1, fikk: 1, gikk: 1, kom: 1, sa: 1, "så": 1, tok: 1, dro: 1, sto: 1, fant: 1, gjorde: 1, visste: 1, "må": 1, lot: 1, satt: 1, "lå": 1, ga: 1, spurte: 1, mente: 1, trengte: 1, ringte: 1, sendte: 1, skrev: 1, leste: 1, bodde: 1, jobbet: 1, begynte: 1, flyttet: 1, snakket: 1, forsto: 1, forstod: 1, kjente: 1, hentet: 1, byttet: 1 };
+  var NO_VERBOS = { etter: 1, over: 1, under: 1, for: 1, eller: 1, her: 1, der: 1, hver: 1, "vår": 1, deres: 1, mer: 1, "før": 1, siden: 1, "år": 1, uker: 1, timer: 1, dager: 1, ganger: 1, lærer: 1, mening: 1 };
+  function pareceVerbo(w) {
+    var l = limpiarToken(w);
+    if (!l || NO_VERBOS[l]) return false;
+    if (VERBOS[l]) return true;
+    return /[a-zæøå]{3,}(er|te|dde)$/.test(l) && !/(ing|else|het)er$/.test(l);
+  }
+
+  function listaComillas(ws) {
+    return ws.map(function (w) { return "«" + w + "»"; }).join(", ");
+  }
+
+  function explicacionPar(a, b) {
+    var la = String(a).toLowerCase(), lb = String(b).toLowerCase();
+    for (var i = 0; i < PARES.length; i++) {
+      var par = PARES[i][0];
+      if ((par[0] === la && par[1] === lb) || (par[0] === lb && par[1] === la)) return PARES[i][1];
+    }
+    return "";
+  }
+
+  // Alineación por subsecuencia común más larga: qué palabras faltan, sobran o están fuera de sitio.
+  function alinear(dado, solucion) {
+    var a = dado.map(normalizar), b = solucion.map(normalizar);
+    var n = a.length, m = b.length, i, j;
+    var t = [];
+    for (i = 0; i <= n; i++) { t[i] = []; for (j = 0; j <= m; j++) t[i][j] = 0; }
+    for (i = n - 1; i >= 0; i--) for (j = m - 1; j >= 0; j--) t[i][j] = a[i] === b[j] ? t[i + 1][j + 1] + 1 : Math.max(t[i + 1][j], t[i][j + 1]);
+    var sobran = [], faltan = [];
+    i = 0; j = 0;
+    while (i < n && j < m) {
+      if (a[i] === b[j]) { i++; j++; }
+      else if (t[i + 1][j] >= t[i][j + 1]) { sobran.push(dado[i]); i++; }
+      else { faltan.push(solucion[j]); j++; }
+    }
+    while (i < n) sobran.push(dado[i++]);
+    while (j < m) faltan.push(solucion[j++]);
+    return { sobran: sobran, faltan: faltan };
+  }
+
+  function diagnosticoOrden(dado, solucion, mecanismo) {
+    var partes = [];
+    var fuera = [];
+    for (var i = 0; i < solucion.length; i++) { if (normalizar(dado[i] || "") !== normalizar(solucion[i])) fuera.push(dado[i] || solucion[i]); }
+    if (!fuera.length) return "";
+    var intercambio = fuera.length === 2 && solucion.length > 2 && dado.some(function (w, k) { return normalizar(w) === normalizar(solucion[k + 1] || "") && normalizar(dado[k + 1] || "") === normalizar(solucion[k]); });
+    if (intercambio) partes.push("Solo has intercambiado " + listaComillas(fuera) + ".");
+    else partes.push("Tienes fuera de sitio " + listaComillas(fuera.slice(0, 4)) + (fuera.length > 4 ? " y alguna más" : "") + ".");
+    // El verbo conjugado de la solución: si el alumno lo ha retrasado, se dice dónde va.
+    var k = -1;
+    for (var v = 1; v < solucion.length; v++) { if (pareceVerbo(solucion[v])) { k = v; break; } }
+    var verboDicho = false;
+    if (k > 0) {
+      var posDado = dado.map(normalizar).indexOf(normalizar(solucion[k]));
+      if (posDado > k) {
+        partes.push("«" + solucion[k] + "» es el verbo y va justo después de «" + solucion.slice(0, k).join(" ").replace(/[,.]$/, "") + "», en segunda posición.");
+        verboDicho = true;
+      }
+    }
+    var seg = !verboDicho && solucion[1] && dado[1] && normalizar(dado[1]) !== normalizar(solucion[1]) && normalizar(dado[0]) === normalizar(solucion[0]);
+    if (seg) partes.push("En la frase correcta, «" + solucion[1] + "» va justo después de «" + solucion[0].replace(/[,.]$/, "") + "».");
+    var adv = fuera.filter(function (w) { return ADVERBIOS[limpiarToken(w)]; })[0];
+    if (adv) {
+      var idx = solucion.map(normalizar).indexOf(normalizar(adv));
+      var enSub = solucion.slice(0, idx).some(function (w) { return SUBORDINANTES[limpiarToken(w)]; });
+      partes.push(enSub ? "«" + adv + "» va delante del verbo porque está dentro de una subordinada." : "«" + adv + "» va detrás del verbo conjugado en la frase principal.");
+    }
+    if (mecanismo && REGLAS[mecanismo]) partes.push("Regla de la pieza: " + REGLAS[mecanismo]);
+    return partes.join(" ");
+  }
+
+  function diagnosticoEscrito(texto, respuesta, mecanismo) {
+    var dado = tokens(String(texto || "").replace(/[«»"“”]/g, ""));
+    var sol = tokens(respuesta);
+    if (!dado.length) return "";
+    var al = alinear(dado, sol);
+    var partes = [];
+    var mismoConjunto = al.sobran.length === al.faltan.length && al.sobran.length > 0
+      && al.sobran.map(normalizar).sort().join("|") === al.faltan.map(normalizar).sort().join("|");
+    if (mismoConjunto) {
+      partes.push("Las palabras están, pero no en su sitio: " + listaComillas(al.faltan) + ".");
+    } else {
+      var erratas = [];
+      var faltan = al.faltan.slice(), sobran = al.sobran.slice();
+      faltan.forEach(function (f) {
+        var cerca = sobran.filter(function (s) { return distancia(normalizar(s), normalizar(f)) <= Math.max(1, Math.floor(normalizar(f).length / 4)); })[0];
+        if (cerca) { erratas.push([cerca, f]); sobran.splice(sobran.indexOf(cerca), 1); }
+      });
+      faltan = faltan.filter(function (f) { return !erratas.some(function (e) { return e[1] === f; }); });
+      if (erratas.length) partes.push("Revisa " + erratas.map(function (e) { return "«" + e[0] + "» (en la solución, «" + e[1] + "»)"; }).join(", ") + ".");
+      if (faltan.length) partes.push("Te falta " + listaComillas(faltan) + ".");
+      if (sobran.length) partes.push("Sobra " + listaComillas(sobran) + ".");
+      erratas.forEach(function (e) { var ex = explicacionPar(e[0], e[1]); if (ex) partes.push(ex); });
+    }
+    if (mecanismo && REGLAS[mecanismo]) partes.push("Regla de la pieza: " + REGLAS[mecanismo]);
+    return partes.join(" ");
+  }
+
+  function diagnosticoHueco(elegida, correcta, mecanismo) {
+    if (!elegida) return "";
+    var partes = ["Has puesto «" + elegida + "»; aquí va «" + correcta + "»."];
+    var ex = explicacionPar(elegida, correcta);
+    if (ex) partes.push(ex);
+    else if (mecanismo && REGLAS[mecanismo]) partes.push("Regla de la pieza: " + REGLAS[mecanismo]);
+    return partes.join(" ");
+  }
+
   // ---------- Interfaz ----------
 
   function el(tag, clase, texto) {
@@ -784,6 +941,8 @@
         if (hechas === item.pares.length) alResolver(fallos === 0, fallos + " fallos");
       } else {
         fallos++;
+        if (!item.confusiones) item.confusiones = [];
+        if (item.confusiones.length < 2) item.confusiones.push({ no: fNo.textContent, es: tEs.textContent, correcto: par ? par.es : "" });
         fNo.classList.add("mal"); tEs.classList.add("mal");
         setTimeout(function () { fNo.classList.remove("mal"); tEs.classList.remove("mal"); }, 450);
       }
@@ -942,6 +1101,22 @@
     return "";
   }
 
+  function diagnosticar(item, dado, mecanismo) {
+    try {
+      if (item.tipo === "ordena" || item.tipo === "transforma") return diagnosticoOrden(tokens(dado), item.solucion, mecanismo);
+      if (item.tipo === "escribe") {
+        var ts = tokens(String(dado || "").replace(/[«»"“”]/g, ""));
+        var mismoConjunto = ts.length === item.solucion.length && ts.map(normalizar).sort().join("|") === item.solucion.map(normalizar).sort().join("|");
+        return mismoConjunto ? diagnosticoOrden(ts, item.solucion, mecanismo) : diagnosticoEscrito(dado, item.respuesta, mecanismo);
+      }
+      if (item.tipo === "completa") return diagnosticoHueco(dado, item.respuesta, mecanismo);
+      if (item.tipo === "empareja" && item.confusiones && item.confusiones.length) {
+        return item.confusiones.map(function (c) { return "Has unido «" + c.no + "» con «" + c.es + "»; en realidad significa «" + c.correcto + "»."; }).join(" ");
+      }
+    } catch (err) { return ""; }
+    return "";
+  }
+
   function numero(n) { return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, "."); }
 
   function registroDe(estado, codigo) {
@@ -1057,6 +1232,8 @@
         var fb = el("div", "feedback " + (acierto ? "bien" : "mal"));
         fb.setAttribute("role", "status");
         fb.appendChild(el("b", null, acierto ? "Bien." : (bien && conPista ? "Con ayuda, pero bien." : "No es esa.")));
+        var diag = acierto ? "" : diagnosticar(item, dado, pieza.codigo);
+        if (diag) fb.appendChild(el("p", "diagnostico", diag));
         var sol = fraseSolucion(item);
         if (sol && !acierto) { var ps = el("p", "solucion", sol); ps.lang = "nb"; fb.appendChild(ps); }
         var txt = textoFeedback(item, acierto);
@@ -1142,5 +1319,5 @@
     return caja;
   }
 
-  root.NexoPractica = Object.freeze({ extraer: extraer, banco: banco, tanda: tanda, filtrar: filtrar, montar: montar, llamada: llamada, seccionAnexo: seccionAnexo, TANDA: TANDA });
+  root.NexoPractica = Object.freeze({ extraer: extraer, banco: banco, tanda: tanda, filtrar: filtrar, montar: montar, llamada: llamada, seccionAnexo: seccionAnexo, diagnosticar: diagnosticar, REGLAS: REGLAS, TANDA: TANDA });
 })(typeof window !== "undefined" ? window : globalThis);

@@ -69,6 +69,24 @@ for (const pieza of piezas.sort((a, b) => a.codigo.localeCompare(b.codigo))) {
   if (b.items.length < (completo ? 75 : 60)) fallos.push(`${pieza.codigo}: solo ${b.items.length} ejercicios`);
   if (!b.fuentes.bloques) fallos.push(`${pieza.codigo}: sin bloques para llevarte`);
 }
+// Diagnóstico del fallo: casos fijos que no dependen del contenido.
+{
+  const d = P.diagnosticar;
+  const sol = ["neste", "uke", "begynner", "hun", "på", "den", "nye", "avdelingen."];
+  const v2 = d({ tipo: "ordena", solucion: sol }, "neste uke hun begynner på den nye avdelingen.", "M01");
+  if (!/intercambiado «hun», «begynner»/.test(v2) || !/«begynner» es el verbo y va justo después de «neste uke», en segunda posición/.test(v2) || !/Regla de la pieza/.test(v2)) fallos.push("diagnóstico: orden V2 no explica el intercambio (" + v2 + ")");
+  const hueco = d({ tipo: "completa", respuesta: "at" }, "om", "M09");
+  if (!/Has puesto «om»; aquí va «at»/.test(hueco) || !/afirmación/.test(hueco)) fallos.push("diagnóstico: hueco at/om sin explicación (" + hueco + ")");
+  const esc = d({ tipo: "escribe", respuesta: "Hun sa at hun ikke kunne komme.", solucion: ["hun", "sa", "at", "hun", "ikke", "kunne", "komme."] }, "Hun sa at hun kunne komme.", "M09");
+  if (!/Te falta «ikke»/.test(esc)) fallos.push("diagnóstico: escrito no detecta la palabra que falta (" + esc + ")");
+  const err = d({ tipo: "escribe", respuesta: "Jeg forsto ingenting.", solucion: ["jeg", "forsto", "ingenting."] }, "Jeg forstå ingenting.", "M04");
+  if (!/Revisa «forstå»/.test(err)) fallos.push("diagnóstico: escrito no detecta la errata (" + err + ")");
+  const sub = d({ tipo: "ordena", solucion: ["hun", "sa", "at", "hun", "ikke", "kunne", "komme."] }, "hun sa at hun kunne ikke komme.", "M02");
+  if (!/«ikke» va delante del verbo porque está dentro de una subordinada/.test(sub)) fallos.push("diagnóstico: adverbio en subordinada (" + sub + ")");
+  const noVerbo = d({ tipo: "ordena", solucion: ["etter", "min", "mening", "bør"] }, "etter mening min bør", "M01");
+  if (/es el verbo/.test(noVerbo) || !/«min» va justo después de «etter»/.test(noVerbo)) fallos.push("diagnóstico: llama verbo a lo que no lo es (" + noVerbo + ")");
+  if (!fallos.some((f) => f.startsWith("diagnóstico"))) console.log("  diagnóstico del fallo: intercambio, V2, hueco at/om, palabra que falta, errata y adverbio en subordinada OK");
+}
 console.log("  tipos en total:", JSON.stringify(tipos), "· total:", total);
 if (fallos.length) { console.log("\nFALLOS:\n  " + fallos.slice(0, 40).join("\n  ")); process.exit(1); }
 if (completo && process.argv.includes("--meta")) {
