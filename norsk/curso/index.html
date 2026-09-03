@@ -238,6 +238,91 @@
     .cuaderno .marca-est{font-family:var(--sg);font-weight:700;font-size:.62rem;letter-spacing:.11em;text-transform:uppercase;border-radius:999px;padding:5px 10px;white-space:nowrap;color:var(--fiordo);background:var(--nieve);border:1px solid var(--linea-clara)}
     .cuaderno-muestra{margin-top:24px}
     @media (max-width:640px){.cuaderno-tomo{grid-template-columns:34px minmax(0,1fr)}.cuaderno-tomo .cuaderno-accion,.cuaderno-tomo .marca-est{grid-column:2}}
+  
+    /* Práctica interactiva */
+    .practica-llamada{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:16px;align-items:center;margin-top:26px;padding:16px 18px;border-radius:16px;background:#fff;border:1px solid var(--linea-clara);text-decoration:none;color:inherit;box-shadow:var(--sombra-clara);transition:transform .25s var(--ease),box-shadow .25s}
+    .practica-llamada:hover{transform:translateY(-2px);box-shadow:0 18px 40px rgba(14,27,38,.12)}
+    .practica-llamada .eti{font-family:var(--sg);font-weight:700;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--noche);background:rgba(63,203,148,.28);border-radius:999px;padding:6px 10px}
+    .practica-llamada .txt strong{display:block;font-family:var(--sg);font-size:1.02rem}
+    .practica-llamada .txt small{display:block;color:var(--tinta-suave);font-size:.9rem;line-height:1.45;margin-top:3px}
+    .practica-llamada .flecha{font-family:var(--sg);font-size:1.4rem;color:var(--fiordo)}
+    .practica-pieza{max-width:68ch;margin:56px auto 0;padding-top:48px;border-top:1px solid var(--linea-clara)}
+    .practica-cab h2{font-size:clamp(1.55rem,4vw,2.15rem);margin:14px 0 14px}
+    .practica-intro{font-size:1.05rem;color:var(--tinta-suave);line-height:1.7}
+    .practica-mejor{font-family:var(--sg);font-size:.9rem;color:var(--fiordo);margin-top:8px}
+    .practica-barra{display:flex;gap:6px;margin:24px 0 18px}
+    .practica-barra i{flex:1;height:6px;border-radius:999px;background:rgba(14,27,38,.1);transition:background .3s}
+    .practica-barra i.actual{background:var(--fiordo)}
+    .practica-barra i.ok{background:var(--aurora)}
+    .practica-barra i.ko{background:var(--alerta)}
+    .ejercicio{background:#fff;border:1px solid var(--linea-clara);border-radius:20px;padding:22px 22px 24px;box-shadow:var(--sombra-clara);animation:aparecer .35s var(--ease)}
+    @keyframes aparecer{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+    .ejercicio-cab .eti{font-family:var(--sg);font-weight:700;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--fiordo)}
+    .ejercicio .consigna{margin:14px 0 8px;font-size:1.02rem;color:var(--tinta-suave)}
+    .ejercicio .pista-es{font-family:var(--serif);font-size:1.18rem;margin:0 0 18px}
+    .ejercicio .ayuda-item{font-size:.95rem;color:var(--tinta-suave);margin:10px 0 14px}
+    .linea-respuesta{display:flex;flex-wrap:wrap;gap:8px;min-height:64px;padding:12px;border-radius:14px;border:2px dashed rgba(44,90,114,.35);background:rgba(44,90,114,.04);transition:border-color .2s,background .2s}
+    .linea-respuesta.vacia::before{content:"Arrastra aquí las palabras, o tócalas en orden";color:var(--tinta-suave);font-size:.95rem;align-self:center;padding-left:4px}
+    .linea-respuesta.destino{border-color:var(--aurora);background:rgba(63,203,148,.1)}
+    .banco-fichas{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 18px;min-height:48px}
+    .ficha,.tarjeta{font-family:var(--sg);font-size:1.02rem;padding:10px 14px;border-radius:12px;border:1px solid rgba(14,27,38,.16);background:#fff;color:var(--noche);cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none;transition:transform .15s var(--ease),box-shadow .15s,background .15s;box-shadow:0 2px 0 rgba(14,27,38,.08)}
+    .ficha:hover,.tarjeta:hover{transform:translateY(-1px);box-shadow:0 4px 10px rgba(14,27,38,.12)}
+    .ficha:active{cursor:grabbing}
+    .ficha:disabled,.tarjeta:disabled{cursor:default;opacity:.85}
+    .ficha.usada{opacity:.35}
+    .ficha.ficha-origen{opacity:.3}
+    .ficha-flotante{position:fixed;z-index:200;pointer-events:none;margin:0;box-shadow:0 14px 30px rgba(14,27,38,.22);transform-origin:center;opacity:.96}
+    .ficha.bien,.tarjeta.bien,.hueco.bien{background:rgba(63,203,148,.28);border-color:var(--aurora)}
+    .ficha.mal,.tarjeta.mal,.hueco.mal{background:rgba(143,90,15,.12);border-color:var(--alerta)}
+    .tarjeta.seleccionada{outline:3px solid var(--aurora);outline-offset:2px}
+    .tarjeta.destino{outline:3px dashed var(--aurora);outline-offset:2px}
+    .frase-hueco{font-family:var(--sg);font-size:1.2rem;line-height:1.9;margin:12px 0 4px}
+    .hueco{display:inline-block;min-width:88px;text-align:center;padding:2px 12px;border-radius:10px;border:2px dashed rgba(44,90,114,.45);background:rgba(44,90,114,.05);cursor:pointer;transition:all .2s}
+    .hueco.destino{border-color:var(--aurora);background:rgba(63,203,148,.12)}
+    .hueco.vacio{color:var(--fiordo)}
+    .hueco.corregido{text-decoration:underline;text-decoration-color:var(--aurora);text-underline-offset:4px}
+    .parejas{display:grid;grid-template-columns:1fr 1fr;gap:10px 14px;margin:10px 0 6px}
+    .parejas .col{display:flex;flex-direction:column;gap:10px}
+    .tarjeta{text-align:left;padding:12px 14px;white-space:normal;line-height:1.35}
+    .tarjeta.es{font-family:var(--serif);font-size:1rem;cursor:pointer}
+    .contexto-mc{margin:12px 0 16px;padding:14px 16px;border-radius:14px;background:rgba(44,90,114,.06)}
+    .contexto-mc .eti{font-family:var(--sg);font-weight:700;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--fiordo);margin-bottom:6px}
+    .texto-ctx{white-space:pre-line;font-size:1.02rem;line-height:1.7;margin:0}
+    .pregunta-mc{font-family:var(--sg);font-size:1.12rem;font-weight:500;margin:12px 0 14px;line-height:1.5}
+    .opciones-mc{display:grid;gap:10px}
+    .opcion-mc{display:grid;grid-template-columns:32px minmax(0,1fr);gap:12px;align-items:start;text-align:left;padding:12px 14px;border-radius:14px;border:1px solid rgba(14,27,38,.16);background:#fff;font-size:1.02rem;line-height:1.5;cursor:pointer;transition:transform .15s var(--ease),border-color .15s,background .15s}
+    .opcion-mc:hover{transform:translateX(3px);border-color:var(--fiordo)}
+    .opcion-mc .letra{font-family:var(--sg);font-weight:700;font-size:.8rem;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:rgba(44,90,114,.1);color:var(--fiordo);text-transform:uppercase}
+    .opcion-mc.bien{background:rgba(63,203,148,.22);border-color:var(--aurora)}
+    .opcion-mc.bien .letra{background:var(--aurora);color:var(--noche)}
+    .opcion-mc.mal{background:rgba(143,90,15,.1);border-color:var(--alerta)}
+    .opcion-mc:disabled{cursor:default;transform:none}
+    .origen{padding:14px 16px;border-radius:14px;background:rgba(44,90,114,.06);margin:12px 0 6px}
+    .origen .eti{font-family:var(--sg);font-weight:700;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--fiordo)}
+    .origen .frase-origen{font-family:var(--sg);font-size:1.15rem;margin:6px 0 0}
+    .origen .instruccion{margin:6px 0 0;color:var(--tinta-suave);font-size:.98rem}
+    .enunciado-escribe{font-size:1.08rem;line-height:1.7;margin:12px 0 14px}
+    .campo-escribe{width:100%;font:inherit;font-family:var(--sg);font-size:1.08rem;padding:14px 16px;border-radius:14px;border:1px solid rgba(14,27,38,.2);background:#fff;color:var(--noche)}
+    .campo-escribe:focus{outline:3px solid rgba(63,203,148,.45);outline-offset:1px;border-color:var(--aurora)}
+    .campo-escribe.bien{border-color:var(--aurora);background:rgba(63,203,148,.12)}
+    .campo-escribe.mal{border-color:var(--alerta);background:rgba(143,90,15,.08)}
+    .fila-acciones{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+    .zona-ordena{margin-top:14px}
+    .feedback{margin-top:20px;padding:16px 18px;border-radius:14px;border-left:4px solid var(--aurora);background:rgba(63,203,148,.1);animation:aparecer .3s var(--ease)}
+    .feedback.mal{border-left-color:var(--alerta);background:rgba(143,90,15,.07)}
+    .feedback b{font-family:var(--sg);display:block;margin-bottom:6px}
+    .feedback .solucion{font-family:var(--sg);font-size:1.08rem;margin:0 0 8px}
+    .feedback p{margin:0 0 10px;font-size:1rem;line-height:1.6}
+    .feedback .btn{margin-top:6px}
+    .resumen-practica{text-align:center;padding:34px 22px;border-radius:20px;background:#fff;border:1px solid var(--linea-clara);box-shadow:var(--sombra-clara);animation:aparecer .4s var(--ease)}
+    .resumen-practica .eti{font-family:var(--sg);font-weight:700;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--fiordo)}
+    .resumen-practica .marcador{font-family:var(--sg);font-weight:700;font-size:clamp(2.4rem,8vw,3.6rem);margin:8px 0 6px;line-height:1}
+    .resumen-practica.pleno .marcador{color:#1f8f63}
+    .resumen-practica.flojo .marcador{color:var(--alerta)}
+    .resumen-practica .lectura{font-size:1.05rem;color:var(--tinta-suave);max-width:46ch;margin:0 auto 18px;line-height:1.6}
+    .resumen-practica .fila-acciones{justify-content:center}
+    .item .marca-est.practica{background:rgba(44,90,114,.12);color:var(--fiordo)}
+    @media (max-width:560px){.practica-llamada{grid-template-columns:auto minmax(0,1fr)}.practica-llamada .flecha{display:none}.parejas{grid-template-columns:1fr 1fr;gap:8px}.ejercicio{padding:18px 16px 20px;border-radius:16px}}
   </style>
 </head>
 <body>
@@ -285,6 +370,8 @@
     </div>
   </footer>
 
-  <script src="/norsk/curso/app.js?v=20260902b"></script>
+  <script src="/norsk/curso/practica.js?v=20260903"></script>
+
+  <script src="/norsk/curso/app.js?v=20260903"></script>
 </body>
 </html>
