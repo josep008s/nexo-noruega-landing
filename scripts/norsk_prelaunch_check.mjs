@@ -770,6 +770,26 @@ if (exists("sitemap.xml")) {
   }
 }
 
+// 5j) Practica interactiva del curso: ejercicios generados solo con el noruego ya revisado de cada pieza.
+{
+  const MOTOR = "norsk/curso/practica.js";
+  const SELFTEST = "scripts/norsk_practica_selftest.mjs";
+  if (!exists(MOTOR)) duro("Falta norsk/curso/practica.js (practica interactiva)");
+  else {
+    const js = read(MOTOR);
+    if (!/root\.NexoPractica = Object\.freeze/.test(js)) duro("practica.js: no expone NexoPractica");
+    if (!read("norsk/curso/index.html").includes("/norsk/curso/practica.js")) duro("norsk/curso/index.html: no carga practica.js");
+    if (!read("norsk/curso/app.js").includes("NexoPractica.montar")) duro("norsk/curso/app.js: no monta la practica interactiva");
+    if (/fetch\(|XMLHttpRequest|localStorage\.setItem\([^)]*respuesta/i.test(js)) duro("practica.js: la practica no debe llamar a la red ni guardar respuestas");
+    if (!exists(SELFTEST)) duro(`Falta ${SELFTEST}`);
+    else {
+      const test = spawnSync(process.execPath, [SELFTEST], { encoding: "utf8" });
+      if (test.status !== 0 || !/PASS norsk_practica_selftest/.test(test.stdout || "")) duro(`${SELFTEST}: el generador no produce una tanda completa con el contenido de la pieza`);
+      else ok("practica interactiva: generador sin red, sin inventar noruego, selftest en verde");
+    }
+  }
+}
+
 // 5i) Memoria de Larsito: informes y cola de recuperacion solo con compra, sin audio ni transcripciones.
 {
   const API = "api/larsito-aprendizaje.js";
