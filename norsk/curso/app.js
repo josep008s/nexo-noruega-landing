@@ -31,9 +31,10 @@
       if (!e.actuaciones) e.actuaciones = {};
       if (!e.ultimaSeccion) e.ultimaSeccion = {};
       if (!e.ultimaPieza) e.ultimaPieza = null;
+      if (!e.practica) e.practica = {};
       return e;
     } catch (err) {
-      return { hechas: {}, actuaciones: {}, ultimaSeccion: {}, ultimaPieza: null };
+      return { hechas: {}, actuaciones: {}, ultimaSeccion: {}, ultimaPieza: null, practica: {} };
     }
   }
 
@@ -341,6 +342,8 @@
           b.title = "Esta pieza se abre con el curso completo";
         } else if (estado.hechas[p.codigo]) {
           b.appendChild(el("span", "marca-est hecho", "Hecha"));
+        } else if (estado.practica && estado.practica[p.codigo] && estado.practica[p.codigo].mejor) {
+          b.appendChild(el("span", "marca-est practica", "Práctica " + estado.practica[p.codigo].mejor.aciertos + "/" + estado.practica[p.codigo].mejor.total));
         } else {
           b.appendChild(el("span", "flecha", "→"));
         }
@@ -501,6 +504,7 @@
     var destrezas = normalizarDestrezas(meta);
     if (destrezas.length) chips.appendChild(el("span", null, "Trabajas: " + destrezas.join(" · ")));
     hero.appendChild(chips);
+    if (pieza.tipo === "mecanismo" && window.NexoPractica) hero.appendChild(window.NexoPractica.llamada(pieza, estado));
     paso.appendChild(hero);
 
     var secciones = prepararSecciones(pieza);
@@ -599,6 +603,20 @@
       secciones.forEach(renderSeccion);
     }
     if (!lectorInsertado) paso.appendChild(lector);
+
+    if (pieza.tipo === "mecanismo" && window.NexoPractica) {
+      var practica = window.NexoPractica.montar(pieza, {
+        estado: estado,
+        guardar: guardar,
+        alTerminar: function (registro) {
+          if (registro.ultimo && registro.ultimo.aciertos === registro.ultimo.total && !estado.hechas[pieza.codigo]) {
+            estado.hechas[pieza.codigo] = true;
+            guardar();
+          }
+        },
+      });
+      if (practica) paso.appendChild(practica);
+    }
 
     var marcar = el("div", "marcar");
     var yaEsta = !!estado.hechas[pieza.codigo];
