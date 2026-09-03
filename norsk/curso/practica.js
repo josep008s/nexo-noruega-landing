@@ -1,16 +1,17 @@
 // Práctica interactiva del curso B1 de NEXO NORSK.
 //
-// Genera ejercicios a partir del contenido ya revisado de cada mecanismo (nunca
-// inventa noruego): los bloques para llevarte, la ficha T (modelo), la ficha P
-// (práctica con soluciones) y la ficha E (evaluación de opción múltiple).
-// Tipos: elegir la correcta, ordenar palabras arrastrando, completar el hueco,
-// emparejar noruego y castellano, transformar una frase y escribirla.
-// Todo ocurre en el navegador; el progreso se guarda en el estado local del curso
-// (aciertos y tandas), nunca las respuestas escritas.
+// Construye un banco grande de ejercicios por pieza a partir del contenido ya
+// revisado (nunca inventa noruego): los bloques para llevarte, la ficha T (modelo),
+// la ficha P y la ficha E con sus soluciones, las frases de ejemplo de la propia
+// pieza y, con el curso completo, las expresiones del anexo de ese mecanismo.
+// Tipos: elegir la respuesta o la correcta, ordenar palabras arrastrando, completar
+// el hueco, emparejar, transformar una frase y escribirla. Todo ocurre en el
+// navegador; el progreso guarda ids, aciertos y tandas, nunca las respuestas.
 (function (root) {
   "use strict";
 
   var TANDA = 8;
+  var MAX_VISTOS = 800;
 
   // ---------- Utilidades de texto ----------
 
@@ -25,7 +26,6 @@
   }
 
   function planoConCodigo(html) {
-    // Conserva las citas en noruego entre comillas para que el enunciado se entienda.
     return plano(String(html || "").replace(/<code>(.*?)<\/code>/g, "«$1»"));
   }
 
@@ -43,6 +43,8 @@
     return String(s || "").toLowerCase().replace(/[«»"“”]/g, "").replace(/\s+/g, " ").replace(/[.!?…,;:]+$/g, "").trim();
   }
 
+  function limpiarToken(t) { return String(t || "").toLowerCase().replace(/^[«"(]+/, "").replace(/[»".,!?;:)]+$/, ""); }
+
   function distancia(a, b) {
     var m = a.length, n = b.length, i, j, prev, tmp;
     if (!m) return n; if (!n) return m;
@@ -59,7 +61,6 @@
     return fila[n];
   }
 
-  // Generador determinista: la misma pieza da la misma tanda hasta que se pide otra.
   function prng(semilla) {
     var s = (semilla >>> 0) || 1;
     return function () { s = (s * 1664525 + 1013904223) >>> 0; return s / 4294967296; };
@@ -75,6 +76,7 @@
     return a;
   }
   function elegirN(arr, n, rnd) { return barajar(arr, rnd).slice(0, n); }
+  function idDe(tipo, clave) { return tipo + ":" + semillaDe(clave).toString(36); }
 
   // ---------- Extracción del contenido de la pieza ----------
 
@@ -84,7 +86,6 @@
   }
 
   function bloqueDeFicha(html, letra) {
-    // Trozo de la sección que va desde "Ficha X" (h3 o párrafo en negrita) hasta la ficha siguiente.
     var re = new RegExp("(?:<h3[^>]*>\\s*Ficha " + letra + "\\b|<p><strong>Ficha " + letra + "\\.?<\\/strong>)[\\s\\S]*?(?=<h3|<p><strong>Ficha [A-Z]\\b|$)", "i");
     var m = re.exec(html);
     return m ? m[0] : "";
@@ -101,10 +102,14 @@
     return out;
   }
 
-  function nombresPropios(pieza) {
+  function nombresPropios(pieza, anexoHtml) {
     var set = {};
-    (pieza.secciones || []).forEach(function (s) {
-      codigos(s.html).forEach(function (c) {
+    var fuentes = (pieza.secciones || []).map(function (s) { return s.html; });
+    if (anexoHtml) fuentes.push(anexoHtml);
+    fuentes.forEach(function (html) {
+      var textos = codigos(html);
+      String(html || "").replace(/(?:^|<br\s*\/?>)\s*NO:\s*([^<]+)/g, function (m, t) { textos.push(decodificar(t)); return m; });
+      textos.forEach(function (c) {
         c.split(/(?<=[.!?])\s+/).forEach(function (frase) {
           tokens(frase).forEach(function (t, i) {
             var limpio = t.replace(/^[«"(]+|[»".,!?;:)]+$/g, "");
@@ -120,12 +125,16 @@
     return String(t || "").replace(/\s*(?:\.\.\.|…)\s*$/, "").replace(/^\s*(?:\.\.\.|…)\s*/, "").trim();
   }
 
+  function fraseValida(frase, min, max) {
+    var n = tokens(frase).length;
+    return n >= (min || 3) && n <= (max || 14);
+  }
+
   function extraerBloques(pieza) {
     var html = seccion(pieza, "bloques-para-llevarte");
     var pares = [];
     filas(html).forEach(function (celdas) {
       if (celdas.length < 2) return;
-      // La celda con noruego es la primera que lleva <code>; el castellano, la siguiente sin <code>.
       var iNo = -1;
       for (var i = 0; i < celdas.length; i++) { if (/<code>/.test(celdas[i])) { iNo = i; break; } }
       if (iNo < 0 || iNo + 1 >= celdas.length) return;
@@ -134,21 +143,17 @@
       if (cs.length !== 1 || / y <code>/.test(celdas[iNo])) return;
       var parcial = /(?:\.\.\.|…)\s*$/.test(cs[0]);
       var no = sinPuntosSuspensivos(cs[0]);
-      var es = sinPuntosSuspensivos(plano(celdas[iNo + 1]));
       if (/<code>/.test(celdas[iNo + 1])) return;
-      var n = tokens(no).length;
-      if (n < 3 || n > 14 || !es || es.length > 140) return;
+      var es = sinPuntosSuspensivos(plano(celdas[iNo + 1]));
+      if (!fraseValida(no) || !es || es.length > 140) return;
       pares.push({ no: no, es: es, parcial: parcial });
     });
     return pares;
   }
 
   function extraerFichaT(pieza) {
-    var html = seccion(pieza, "practica");
-    var bloque = bloqueDeFicha(html, "T");
+    var bloque = bloqueDeFicha(seccion(pieza, "practica"), "T");
     var out = [];
-    function valida(frase) { var n = tokens(frase).length; return n >= 3 && n <= 14; }
-    // Forma de tabla: # | entrada | salida | motivo (o # | frase | motivo)
     var tabla = /<table>[\s\S]*?<\/table>/i.exec(bloque);
     if (tabla) {
       var fs = filas(tabla[0]);
@@ -156,33 +161,31 @@
       fs.slice(1).forEach(function (celdas) {
         if (cab.length >= 4 && celdas.length >= 4) {
           var ent = codigos(celdas[1]), sal = codigos(celdas[2]);
-          if (ent.length === 1 && sal.length === 1 && valida(sal[0])) out.push({ entrada: ent[0], salida: sal[0], motivo: planoConCodigo(celdas[3]), etqEntrada: cab[1], etqSalida: cab[2] });
+          if (ent.length === 1 && sal.length === 1 && fraseValida(sal[0])) out.push({ entrada: ent[0], salida: sal[0], motivo: planoConCodigo(celdas[3]), etqEntrada: cab[1], etqSalida: cab[2] });
         } else if (cab.length === 3 && celdas.length >= 3) {
           var cs = codigos(celdas[1]);
-          if (cs.length === 1 && valida(cs[0])) out.push({ salida: cs[0], motivo: planoConCodigo(celdas[2]) });
+          if (cs.length === 1 && fraseValida(cs[0])) out.push({ salida: cs[0], motivo: planoConCodigo(celdas[2]) });
         }
       });
       if (out.length) return out;
     }
-    // Forma de párrafo, en sus variantes.
     var re = /<p><strong>T\d+[^<]*<\/strong>([\s\S]*?)<\/p>/gi, m;
     while ((m = re.exec(bloque))) {
       var cuerpo = m[1];
       var base = /Base:\s*<code>([\s\S]*?)<\/code>([\s\S]*?)<br\s*\/?>\s*Resuelto:\s*<code>([\s\S]*?)<\/code>([\s\S]*?)(?:<br\s*\/?>\s*Motivo:\s*([\s\S]*))?$/i.exec(cuerpo);
       if (base) {
-        if (valida(base[3])) out.push({ entrada: decodificar(base[1]).trim(), instruccion: plano(base[2]), salida: decodificar(base[3]).trim(), motivo: planoConCodigo(base[5] || ""), etqEntrada: "Base", etqSalida: "Resuelto" });
+        if (fraseValida(base[3])) out.push({ entrada: decodificar(base[1]).trim(), instruccion: plano(base[2]), salida: decodificar(base[3]).trim(), motivo: planoConCodigo(base[5] || ""), etqEntrada: "Base", etqSalida: "Resuelto" });
         continue;
       }
       var corrige = /Lo que sale solo:\s*<code>([\s\S]*?)<\/code>[\s\S]*?Lo que resuelve:\s*<code>([\s\S]*?)<\/code>([\s\S]*)$/i.exec(cuerpo);
       if (corrige) {
         var quiere = /Quieres decir:\s*([\s\S]*?)<br/i.exec(cuerpo);
         var porque = /Por qué:\s*([\s\S]*?)(?:<br\s*\/?>\s*Por qué no la otra|$)/i.exec(corrige[3]);
-        if (valida(corrige[2])) out.push({ entrada: decodificar(corrige[1]).trim(), instruccion: quiere ? "Quieres decir: " + plano(quiere[1]) : "", salida: decodificar(corrige[2]).trim(), motivo: porque ? planoConCodigo(porque[1]) : planoConCodigo(corrige[3]), etqEntrada: "Lo que sale solo", etqSalida: "Lo que resuelve" });
+        if (fraseValida(corrige[2])) out.push({ entrada: decodificar(corrige[1]).trim(), entradaMal: true, instruccion: quiere ? "Quieres decir: " + plano(quiere[1]) : "", salida: decodificar(corrige[2]).trim(), motivo: porque ? planoConCodigo(porque[1]) : planoConCodigo(corrige[3]), etqEntrada: "Lo que sale solo", etqSalida: "Lo que resuelve" });
         continue;
       }
-      // Situación en castellano + frase resuelta (o frase resuelta + explicación).
       var primero = /<code>([\s\S]*?)<\/code>/.exec(cuerpo);
-      if (!primero || !valida(primero[1])) continue;
+      if (!primero || !fraseValida(primero[1])) continue;
       var antes = plano(cuerpo.slice(0, primero.index)).replace(/^[\s·.:-]+/, "");
       var despues = planoConCodigo(cuerpo.slice(primero.index + primero[0].length)).replace(/^\s*\(B1-P[^)]*\)\s*/, "").replace(/^[\s·.:-]+/, "");
       out.push({ salida: decodificar(primero[1]).trim(), pista: antes.length >= 12 && !/^Pieza|^Criterio/i.test(antes) ? antes : "", motivo: despues });
@@ -190,29 +193,22 @@
     return out;
   }
 
-  function itemsNumerados(bloque, prefijoLetra, exigeCodigo) {
-    // Devuelve [{n, html}] tanto si las respuestas van en <li> como en párrafos con <strong>P1.</strong>.
+  function itemsNumerados(bloque, letra, exigeCodigo) {
     var out = [], m;
-    var vistos = {};
     var reLi = /<li>([\s\S]*?)<\/li>/gi;
     while ((m = reLi.exec(bloque))) {
       var li = m[1];
-      var num = new RegExp("^\\s*<strong>" + prefijoLetra + "(\\d+)\\.<\\/strong>\\s*").exec(li);
-      var n = num ? Number(num[1]) : null;
+      var num = new RegExp("^\\s*<strong>" + letra + "(\\d+)\\.<\\/strong>\\s*").exec(li);
       var cuerpo = num ? li.slice(num[0].length) : li;
       if (exigeCodigo && !/^\s*<code>/.test(cuerpo)) continue;
-      out.push({ n: n, html: cuerpo });
-      if (n) vistos[n] = true;
+      out.push({ n: num ? Number(num[1]) : null, html: cuerpo });
     }
     if (out.length) {
-      // Numeración por orden si el <ol> no la lleva (respeta start="5").
       var contador = 0;
-      var arranques = [];
-      bloque.replace(/<ol(?:\s+start="(\d+)")?>/gi, function (mm, st) { arranques.push(st ? Number(st) : null); return mm; });
-      out.forEach(function (it, i) { if (!it.n) { it.n = ++contador; } });
+      out.forEach(function (it) { if (!it.n) it.n = ++contador; });
       return out;
     }
-    var reP = new RegExp("<strong>" + prefijoLetra + "(\\d+)\\.<\\/strong>\\s*([\\s\\S]*?)(?=<br\\s*\\/?>\\s*<strong>" + prefijoLetra + "\\d+\\.|<\\/p>)", "gi");
+    var reP = new RegExp("<strong>" + letra + "(\\d+)\\.?(?:\\s[^<]*)?<\\/strong>\\s*([\\s\\S]*?)(?=<br\\s*\\/?>\\s*<strong>" + letra + "\\d+|<\\/p>)", "gi");
     while ((m = reP.exec(bloque))) {
       if (exigeCodigo && !/^\s*<code>/.test(m[2])) continue;
       out.push({ n: Number(m[1]), html: m[2] });
@@ -220,25 +216,27 @@
     return out;
   }
 
-  function extraerFichaP(pieza) {
-    var pr = bloqueDeFicha(seccion(pieza, "practica"), "P");
-    var so = bloqueDeFicha(seccion(pieza, "soluciones"), "P");
+  // Ficha P (y ficha E de producción): enunciado en castellano + frase resuelta en la solución.
+  function extraerResueltos(pieza, letra) {
+    var pr = bloqueDeFicha(seccion(pieza, "practica"), letra);
+    var so = bloqueDeFicha(seccion(pieza, "soluciones"), letra);
     var out = [];
     if (!pr || !so) return out;
-    var enunciados = itemsNumerados(pr, "P", false);
-    var soluciones = itemsNumerados(so, "P", true);
+    var enunciados = itemsNumerados(pr, letra, false);
+    var soluciones = itemsNumerados(so, letra, true);
     if (!enunciados.length || !soluciones.length) return out;
     var porNumero = {};
     enunciados.forEach(function (e, i) { porNumero[e.n || (i + 1)] = e; });
     soluciones.forEach(function (sol, i) {
-      var en = porNumero[sol.n || (i + 1)] || enunciados[i];
+      var en = porNumero[sol.n || (i + 1)];
       if (!en) return;
       var mm = /^\s*<code>([\s\S]*?)<\/code>([\s\S]*)$/.exec(sol.html);
-      if (!mm || /respuesta libre/i.test(plano(sol.html))) return;
+      if (!mm || /respuesta libre|modelo posible|respuesta posible/i.test(plano(sol.html))) return;
       var resp = decodificar(mm[1]).trim();
-      var n = tokens(resp).length;
-      if (n < 3 || n > 16) return;
-      out.push({ n: sol.n || (i + 1), enunciado: planoConCodigo(en.html), respuesta: resp, explicacion: planoConCodigo(mm[2]) });
+      if (!fraseValida(resp, 3, 16) || /\.\.\.|…/.test(resp)) return;
+      var enunciado = planoConCodigo(en.html).replace(/^[\s·.:-]+/, "");
+      if (enunciado.length < 12 || enunciado.length > 260) return;
+      out.push({ n: sol.n || (i + 1), enunciado: enunciado, respuesta: resp, explicacion: planoConCodigo(mm[2]) });
     });
     return out;
   }
@@ -265,7 +263,6 @@
       var cuerpo = item[2];
       var pregunta, opciones = [], resto;
       if (/<br\s*\/?>\s*a\)/i.test(cuerpo)) {
-        // Opciones tras un salto de línea: en una sola línea separadas por comas o una por línea.
         var trozos = cuerpo.split(/<br\s*\/?>/i);
         pregunta = plano(trozos[0]);
         resto = trozos.slice(1).map(planoConCodigo).join(" ");
@@ -286,19 +283,79 @@
     return out;
   }
 
-  function extraer(pieza) {
+  // Frases de ejemplo de las secciones explicativas. Solo frases completas y sin
+  // marca de "esto no vale" delante: la escena y la grieta quedan fuera porque
+  // enseñan la forma que falla.
+  var NEGATIVO = /(no vale|y no\b|no es\b|en vez de|en lugar de|nunca|falla|\bmal\b|sale solo|calco|error|incorrect|tampoco|suena raro|no:)\s*(?:<[^>]+>|[^<]){0,25}$/i;
+  function extraerEjemplos(pieza, excluir) {
+    var out = [], vistos = {};
+    excluir.forEach(function (f) { vistos[normalizar(f)] = true; });
+    ["el-mecanismo", "en-el-examen", "en-tu-vida"].forEach(function (id) {
+      var html = seccion(pieza, id), m;
+      var re = /<code>([\s\S]*?)<\/code>/g;
+      while ((m = re.exec(html))) {
+        var f = decodificar(m[1]).trim();
+        if (!fraseValida(f, 4, 14) || !/^[A-ZÆØÅ]/.test(f) || !/[.!?]$/.test(f) || /\.\.\.|…/.test(f)) continue;
+        var antes = html.slice(Math.max(0, m.index - 70), m.index);
+        if (NEGATIVO.test(antes)) continue;
+        var k = normalizar(f);
+        if (vistos[k]) continue;
+        vistos[k] = true;
+        out.push({ no: f });
+      }
+    });
+    return out;
+  }
+
+  // Anexo de expresiones: <p><strong>expresión</strong> · tipo · nivel · significado<br>...<br>NO: frase<br>ES: traducción<br>MATIZ: nota</p>
+  function extraerExpresiones(anexoHtml) {
+    var out = [], m;
+    var re = /<p><strong>([^<]+)<\/strong>([\s\S]*?)<\/p>/g;
+    while ((m = re.exec(String(anexoHtml || "")))) {
+      var expresion = decodificar(m[1]).trim();
+      var cuerpo = m[2];
+      var cab = /^\s*·\s*[A-Z]{2}\s*·\s*[AB][12]\s*·\s*([^<]+)/.exec(cuerpo);
+      var no = /(?:^|<br\s*\/?>)\s*NO:\s*([^<]+)/.exec(cuerpo);
+      var es = /(?:^|<br\s*\/?>)\s*ES:\s*([^<]+)/.exec(cuerpo);
+      var matiz = /(?:^|<br\s*\/?>)\s*MATIZ:\s*([^<]+)/.exec(cuerpo);
+      if (!cab || !no || !es) continue;
+      var frase = decodificar(no[1]).trim();
+      if (!fraseValida(frase, 4, 16)) continue;
+      out.push({ expresion: expresion, significado: decodificar(cab[1]).trim().replace(/[.;]\s*$/, ""), no: frase, es: decodificar(es[1]).trim(), matiz: matiz ? decodificar(matiz[1]).trim() : "" });
+    }
+    return out;
+  }
+
+  function seccionAnexo(anexoPieza, codigoMecanismo) {
+    if (!anexoPieza || !codigoMecanismo) return null;
+    var pref = String(codigoMecanismo).toLowerCase() + "-";
+    var s = (anexoPieza.secciones || []).filter(function (x) { return String(x.id || "").indexOf(pref) === 0; })[0];
+    return s ? String(s.html || "") : null;
+  }
+
+  function extraer(pieza, anexoHtml) {
+    var bloques = extraerBloques(pieza);
+    var fichaT = extraerFichaT(pieza);
+    var fichaP = extraerResueltos(pieza, "P");
+    var fichaEprod = extraerResueltos(pieza, "E");
+    var conocidas = bloques.map(function (b) { return b.no; }).concat(fichaT.map(function (t) { return t.salida; }), fichaP.map(function (p) { return p.respuesta; }), fichaEprod.map(function (p) { return p.respuesta; }));
     return {
-      propios: nombresPropios(pieza),
-      bloques: extraerBloques(pieza),
-      fichaT: extraerFichaT(pieza),
-      fichaP: extraerFichaP(pieza),
+      propios: nombresPropios(pieza, anexoHtml),
+      bloques: bloques,
+      fichaT: fichaT,
+      fichaP: fichaP,
+      fichaEprod: fichaEprod,
       fichaE: extraerFichaE(pieza),
+      ejemplos: extraerEjemplos(pieza, conocidas),
+      expresiones: extraerExpresiones(anexoHtml),
     };
   }
 
-  // ---------- Construcción de ejercicios ----------
+  // ---------- Construcción del banco ----------
 
-  var FUNCIONALES = ["at", "om", "som", "fordi", "hvis", "når", "da", "derfor", "ikke", "men", "og", "eller", "for", "så", "at", "selv om", "mens", "etter", "før", "sin", "si", "sitt", "sine", "hans", "hennes", "deres", "det", "den", "de", "må", "kan", "skal", "vil", "bør", "kunne", "måtte", "skulle", "ville", "har", "hadde", "er", "var", "blir", "ble", "alltid", "bare", "ofte", "aldri", "også", "ennå", "nok", "vel", "jo", "kanskje", "ganske", "litt", "veldig", "mye", "mange", "noen", "ingen", "ingenting", "alle", "hver", "flere", "både", "enten", "verken"];
+  var FUNCIONALES = ["at", "om", "som", "fordi", "hvis", "når", "da", "derfor", "ikke", "men", "og", "eller", "for", "så", "mens", "etter", "før", "siden", "sin", "si", "sitt", "sine", "hans", "hennes", "deres", "det", "den", "de", "må", "kan", "skal", "vil", "bør", "kunne", "måtte", "skulle", "ville", "har", "hadde", "er", "var", "blir", "ble", "alltid", "bare", "ofte", "aldri", "også", "ennå", "nok", "vel", "jo", "kanskje", "ganske", "litt", "veldig", "mye", "mange", "noen", "ingen", "ingenting", "alle", "hver", "flere", "både", "enten", "verken", "likevel", "dessuten", "altså", "selv", "egentlig", "fortsatt", "til", "på", "i", "med", "av", "fra", "hos", "over", "under"];
+  var FUNC = {};
+  FUNCIONALES.forEach(function (f) { FUNC[f] = true; });
 
   function primerToken(t, propios) {
     var limpio = t.replace(/[.,!?;:]+$/, "");
@@ -307,102 +364,208 @@
   }
 
   function fichasOrdena(frase, propios) {
-    var ts = tokens(frase);
-    var sol = ts.map(function (t, i) { return i === 0 ? primerToken(t, propios) : t; });
-    return sol;
+    return tokens(frase).map(function (t, i) { return i === 0 ? primerToken(t, propios) : t; });
   }
 
-  function itemOrdena(par, propios, rnd, prefijo) {
-    var sol = fichasOrdena(par.no, propios);
-    var mezcla = barajar(sol, rnd);
-    var intentos = 0;
-    while (mezcla.join(" ") === sol.join(" ") && intentos++ < 5) mezcla = barajar(sol, rnd);
-    return { tipo: "ordena", id: prefijo + ":ordena:" + semillaDe(par.no), pista: par.es, parcial: !!par.parcial, motivo: par.motivo || "", fichas: mezcla, solucion: sol, frase: par.no };
+  function mezclaDistinta(sol, rnd) {
+    var mezcla = barajar(sol, rnd), intentos = 0;
+    while (mezcla.join(" ") === sol.join(" ") && intentos++ < 6) mezcla = barajar(sol, rnd);
+    return mezcla;
   }
 
-  function itemTransforma(t, propios, rnd, prefijo) {
+  function itemOrdena(frase, extra, propios, rnd, fuente) {
+    var sol = fichasOrdena(frase, propios);
+    if (sol.length < 3) return null;
+    return Object.assign({ tipo: "ordena", id: idDe("ordena", fuente + "|" + frase), fuente: fuente, fichas: mezclaDistinta(sol, rnd), solucion: sol, frase: frase, pista: "", motivo: "", parcial: false }, extra || {});
+  }
+
+  function itemTransforma(t, propios, rnd) {
     var sol = fichasOrdena(t.salida, propios);
-    var mezcla = barajar(sol, rnd);
-    var intentos = 0;
-    while (mezcla.join(" ") === sol.join(" ") && intentos++ < 5) mezcla = barajar(sol, rnd);
-    return { tipo: "transforma", id: prefijo + ":transforma:" + semillaDe(t.salida), entrada: t.entrada, instruccion: t.instruccion || "", etqEntrada: t.etqEntrada, etqSalida: t.etqSalida, fichas: mezcla, solucion: sol, frase: t.salida, motivo: t.motivo };
+    return { tipo: "transforma", id: idDe("transforma", t.salida), fuente: "fichas", entrada: t.entrada, entradaMal: !!t.entradaMal, instruccion: t.instruccion || "", etqEntrada: t.etqEntrada, etqSalida: t.etqSalida, fichas: mezclaDistinta(sol, rnd), solucion: sol, frase: t.salida, motivo: t.motivo || "" };
   }
 
-  function itemCompleta(par, todos, rnd, prefijo) {
-    var ts = tokens(par.no);
-    var candidatos = [];
+  // Huecos: primero palabras de función (lo que enseña el mecanismo), después contenido.
+  function posicionesHueco(ts, rnd, maximo, preferidas) {
+    var pref = [], fun = [], cont = [];
     ts.forEach(function (t, i) {
-      var limpio = t.toLowerCase().replace(/[.,!?;:]+$/, "");
-      if (i > 0 && FUNCIONALES.indexOf(limpio) >= 0) candidatos.push(i);
+      var l = limpiarToken(t);
+      if (!l || /\d/.test(l)) return;
+      if (preferidas && preferidas[l]) { pref.push(i); return; }
+      if (FUNC[l] && i > 0) fun.push(i);
+      else if (l.length >= 4 && i > 0 && i < ts.length - 1) cont.push(i);
     });
-    if (!candidatos.length) candidatos = ts.map(function (_, i) { return i; }).filter(function (i) { return i > 0 && i < ts.length - 1; });
-    if (!candidatos.length) return null;
-    var idx = candidatos[Math.floor(rnd() * candidatos.length)];
+    // Las palabras de la expresión van primero; después las de función y, al final, el contenido.
+    var orden = barajar(pref, rnd).concat(barajar(fun, rnd), barajar(cont, rnd));
+    var out = [], usados = {};
+    orden.forEach(function (i) { var l = limpiarToken(ts[i]); if (!usados[l] && out.length < maximo) { usados[l] = true; out.push(i); } });
+    return out;
+  }
+
+  function itemCompleta(frase, idx, es, poolContenido, rnd, fuente, extra) {
+    var ts = tokens(frase);
     var respuesta = ts[idx].replace(/[.,!?;:]+$/, "");
     var puntuacion = ts[idx].slice(respuesta.length);
-    // Distractores de la misma familia: palabras de función si el hueco es de función,
-    // y si no, palabras de contenido de otras frases de la misma pieza.
-    var esFuncional = FUNCIONALES.indexOf(respuesta.toLowerCase()) >= 0;
+    var l = respuesta.toLowerCase();
     var pool = {};
-    if (esFuncional) {
-      FUNCIONALES.forEach(function (f) { if (f.indexOf(" ") < 0) pool[f] = true; });
-    } else {
-      todos.forEach(function (p) {
-        if (p.no === par.no) return;
-        tokens(p.no).forEach(function (t) {
-          var l = t.toLowerCase().replace(/[.,!?;:«»]+$/, "").replace(/^[«"]+/, "");
-          if (l.length >= 3 && FUNCIONALES.indexOf(l) < 0 && !/\d/.test(l) && !/^[A-ZÆØÅ]/.test(t)) pool[l] = true;
-        });
-      });
-      if (Object.keys(pool).length < 3) FUNCIONALES.forEach(function (f) { if (f.indexOf(" ") < 0) pool[f] = true; });
+    if (FUNC[l]) FUNCIONALES.forEach(function (f) { if (f.indexOf(" ") < 0 && f.length > 1) pool[f] = true; });
+    else {
+      (poolContenido || []).forEach(function (w) { if (w !== l && w.length >= 3) pool[w] = true; });
+      if (Object.keys(pool).length < 3) FUNCIONALES.forEach(function (f) { pool[f] = true; });
     }
-    delete pool[respuesta.toLowerCase()];
+    delete pool[l];
     var distractores = elegirN(Object.keys(pool), 3, rnd);
     if (distractores.length < 2) return null;
-    var opciones = barajar([respuesta].concat(distractores), rnd);
-    return { tipo: "completa", id: prefijo + ":completa:" + semillaDe(par.no) + ":" + idx, antes: ts.slice(0, idx), despues: ts.slice(idx + 1), puntuacion: puntuacion, respuesta: respuesta, opciones: opciones, es: par.es, frase: par.no };
+    return Object.assign({ tipo: "completa", id: idDe("completa", fuente + "|" + frase + "|" + idx), fuente: fuente, antes: ts.slice(0, idx), despues: ts.slice(idx + 1), puntuacion: puntuacion, respuesta: respuesta, opciones: barajar([respuesta].concat(distractores), rnd), es: es || "", frase: frase, motivo: "" }, extra || {});
   }
 
-  function itemEmpareja(pares, rnd, prefijo) {
-    var sel = elegirN(pares, 4, rnd);
-    if (sel.length < 3) return null;
-    return { tipo: "empareja", id: prefijo + ":empareja:" + sel.map(function (p) { return semillaDe(p.no); }).join("-"), pares: sel, derecha: barajar(sel.map(function (p) { return p.es; }), rnd) };
-  }
-
-  function itemEscribe(p, propios, rnd, prefijo) {
-    return { tipo: "escribe", id: prefijo + ":escribe:" + p.n, enunciado: p.enunciado, respuesta: p.respuesta, explicacion: p.explicacion, fichas: barajar(fichasOrdena(p.respuesta, propios), rnd), solucion: fichasOrdena(p.respuesta, propios) };
-  }
-
-  function itemMc(e, prefijo) {
-    return { tipo: "mc", id: prefijo + ":mc:" + e.n, pregunta: e.pregunta, opciones: e.opciones, correcta: e.correcta, explicacion: e.explicacion, contexto: e.contexto };
-  }
-
-  function generar(pieza, semilla) {
-    var datos = extraer(pieza);
-    var rnd = prng(semillaDe(pieza.codigo + ":" + (semilla || 0)));
-    var prefijo = pieza.codigo;
-    var items = [];
-    var mc = elegirN(datos.fichaE, 2, rnd).map(function (e) { return itemMc(e, prefijo); });
-    var conEntrada = datos.fichaT.filter(function (t) { return t.entrada; });
-    var sinEntrada = datos.fichaT.filter(function (t) { return !t.entrada; });
-    var tr = elegirN(conEntrada, 2, rnd).map(function (t) { return itemTransforma(t, datos.propios, rnd, prefijo); })
-      .concat(elegirN(sinEntrada, 2 - Math.min(2, conEntrada.length), rnd).map(function (t) { return itemOrdena({ no: t.salida, es: t.pista || "", motivo: t.motivo }, datos.propios, rnd, prefijo + ":T"); }));
-    var bl = barajar(datos.bloques, rnd);
-    var emp = bl.length >= 3 ? [itemEmpareja(bl, rnd, prefijo)].filter(Boolean) : [];
-    var ord = bl.slice(0, 2).map(function (p) { return itemOrdena(p, datos.propios, rnd, prefijo); });
-    var com = bl.slice(2, 4).map(function (p) { return itemCompleta(p, datos.bloques, rnd, prefijo); }).filter(Boolean);
-    var esc = elegirN(datos.fichaP, 1, rnd).map(function (p) { return itemEscribe(p, datos.propios, rnd, prefijo); });
-    // Orden pedagógico: reconocer, después construir, después producir.
-    items = items.concat(mc.slice(0, 1), emp, ord.slice(0, 1), com.slice(0, 1), tr.slice(0, 1), mc.slice(1), ord.slice(1), com.slice(1), tr.slice(1), esc);
-    // Relleno si la pieza tiene pocas fuentes.
-    var extra = bl.slice(4);
-    var k = 0;
-    while (items.length < TANDA && k < extra.length) {
-      var it = k % 2 === 0 ? itemOrdena(extra[k], datos.propios, rnd, prefijo) : itemCompleta(extra[k], datos.bloques, rnd, prefijo);
-      if (it) items.push(it);
-      k++;
+  function itemsEmpareja(pares, rnd, fuente, clave) {
+    var out = [];
+    var mezclados = barajar(pares, rnd);
+    for (var i = 0; i + 3 <= mezclados.length; i += 4) {
+      var sel = mezclados.slice(i, i + 4);
+      if (sel.length < 3) break;
+      out.push({ tipo: "empareja", id: idDe("empareja", clave + "|" + sel.map(function (p) { return p.no; }).join("|")), fuente: fuente, pares: sel, derecha: barajar(sel.map(function (p) { return p.es; }), rnd) });
     }
-    return { items: items.slice(0, TANDA), fuentes: { bloques: datos.bloques.length, fichaT: datos.fichaT.length, fichaP: datos.fichaP.length, fichaE: datos.fichaE.length } };
+    return out;
+  }
+
+  function itemEscribe(p, propios, rnd, fuente) {
+    var sol = fichasOrdena(p.respuesta, propios);
+    return { tipo: "escribe", id: idDe("escribe", p.respuesta), fuente: fuente, enunciado: p.enunciado, respuesta: p.respuesta, explicacion: p.explicacion || "", fichas: mezclaDistinta(sol, rnd), solucion: sol };
+  }
+
+  function itemMc(e) {
+    return { tipo: "mc", id: idDe("mc", e.pregunta + "|" + e.opciones.join("|")), fuente: "fichas", pregunta: e.pregunta, opciones: e.opciones, correcta: e.correcta, explicacion: e.explicacion, contexto: e.contexto, opcionesNb: e.opciones.some(function (o) { return /^«/.test(o); }) };
+  }
+
+  // Elegir la correcta: pregunta con cuatro opciones del mismo conjunto.
+  function itemElige(pregunta, correcta, otras, explicacion, rnd, fuente, opcionesNb, clave) {
+    var distintas = [];
+    otras.forEach(function (o) { if (o && o !== correcta && distintas.indexOf(o) < 0) distintas.push(o); });
+    var distractores = elegirN(distintas, 3, rnd);
+    if (distractores.length < 2) return null;
+    var opciones = barajar([correcta].concat(distractores), rnd);
+    return { tipo: "elige", id: idDe("elige", clave), fuente: fuente, pregunta: pregunta, opciones: opciones, correcta: opciones.indexOf(correcta), explicacion: explicacion || "", opcionesNb: !!opcionesNb };
+  }
+
+  function palabrasClaveExpresion(expr) {
+    return tokens(expr).map(limpiarToken).filter(function (w) { return w && w !== "å" && w !== "seg" && w.length >= 2; });
+  }
+
+  var bancos = {};
+
+  function banco(pieza, anexoHtml) {
+    var clave = pieza.codigo + (anexoHtml ? "+anexo" : "");
+    if (bancos[clave]) return bancos[clave];
+    var d = extraer(pieza, anexoHtml);
+    var rnd = prng(semillaDe("banco:" + pieza.codigo));
+    var items = [];
+    var contenido = [];
+    d.bloques.concat(d.ejemplos).forEach(function (p) { tokens(p.no).forEach(function (t) { var l = limpiarToken(t); if (l.length >= 3 && !FUNC[l] && !/\d/.test(l) && !/^[A-ZÆØÅ]/.test(t)) contenido.push(l); }); });
+
+    // Bloques para llevarte
+    d.bloques.forEach(function (p) {
+      items.push(itemOrdena(p.no, { pista: p.es, parcial: p.parcial }, d.propios, rnd, "bloques"));
+      posicionesHueco(tokens(p.no), rnd, 2).forEach(function (idx) { items.push(itemCompleta(p.no, idx, p.es, contenido, rnd, "bloques")); });
+      items.push(itemElige("¿Qué significa «" + p.no + (p.parcial ? "…" : "") + "»?", p.es, d.bloques.map(function (x) { return x.es; }), "«" + p.no + "» significa: " + p.es + ".", rnd, "bloques", false, "sig|" + p.no));
+      items.push(itemElige("¿Cómo se dice «" + p.es + (p.parcial ? "…" : "") + "»?", p.no, d.bloques.map(function (x) { return x.no; }), "«" + p.no + "» significa: " + p.es + ".", rnd, "bloques", true, "fra|" + p.no));
+    });
+    items = items.concat(itemsEmpareja(d.bloques, rnd, "bloques", "bloques"));
+
+    // Ficha T
+    d.fichaT.forEach(function (t) {
+      if (t.entrada) items.push(itemTransforma(t, d.propios, rnd));
+      else items.push(itemOrdena(t.salida, { pista: t.pista || "", motivo: t.motivo || "" }, d.propios, rnd, "fichas"));
+      posicionesHueco(tokens(t.salida), rnd, 1).forEach(function (idx) { items.push(itemCompleta(t.salida, idx, t.pista || t.instruccion || "", contenido, rnd, "fichas", { motivo: t.motivo || "" })); });
+    });
+
+    // Ficha P y ficha E de producción
+    d.fichaP.concat(d.fichaEprod).forEach(function (p) {
+      items.push(itemEscribe(p, d.propios, rnd, "fichas"));
+      items.push(itemOrdena(p.respuesta, { pista: p.enunciado, motivo: p.explicacion || "" }, d.propios, rnd, "fichas"));
+      posicionesHueco(tokens(p.respuesta), rnd, 1).forEach(function (idx) { items.push(itemCompleta(p.respuesta, idx, p.enunciado, contenido, rnd, "fichas", { motivo: p.explicacion || "" })); });
+    });
+
+    // Ficha E de opción múltiple
+    d.fichaE.forEach(function (e) { items.push(itemMc(e)); });
+
+    // Frases de ejemplo de la pieza
+    d.ejemplos.forEach(function (p) {
+      items.push(itemOrdena(p.no, {}, d.propios, rnd, "pieza"));
+      posicionesHueco(tokens(p.no), rnd, 1).forEach(function (idx) { items.push(itemCompleta(p.no, idx, "", contenido, rnd, "pieza")); });
+    });
+
+    // Anexo de expresiones del mecanismo
+    if (d.expresiones.length) {
+      var clavesExpr = {};
+      d.expresiones.forEach(function (x) { palabrasClaveExpresion(x.expresion).forEach(function (w) { clavesExpr[w] = true; }); });
+      var poolExpr = Object.keys(clavesExpr);
+      d.expresiones.forEach(function (x) {
+        var expl = "«" + x.expresion + "»: " + x.significado + "." + (x.matiz ? " " + x.matiz : "");
+        items.push(itemElige("¿Qué significa «" + x.expresion + "»?", x.significado, d.expresiones.map(function (y) { return y.significado; }), expl, rnd, "anexo", false, "exsig|" + x.expresion));
+        items.push(itemElige("¿Qué expresión significa «" + x.significado + "»?", x.expresion, d.expresiones.map(function (y) { return y.expresion; }), expl, rnd, "anexo", true, "exfra|" + x.expresion));
+        items.push(itemOrdena(x.no, { pista: x.es, motivo: x.matiz ? "«" + x.expresion + "»: " + x.matiz : "" }, d.propios, rnd, "anexo"));
+        var ts = tokens(x.no);
+        var pref = {};
+        palabrasClaveExpresion(x.expresion).forEach(function (w) { pref[w] = true; });
+        var pos = posicionesHueco(ts, rnd, 1, pref);
+        if (pos.length) {
+          var l = limpiarToken(ts[pos[0]]);
+          var pool = pref[l] ? poolExpr.filter(function (w) { return w !== l; }) : contenido;
+          items.push(itemCompleta(x.no, pos[0], x.es, pool, rnd, "anexo", { motivo: x.matiz ? "«" + x.expresion + "»: " + x.matiz : "" }));
+        }
+      });
+      items = items.concat(itemsEmpareja(d.expresiones.map(function (x) { return { no: x.expresion, es: x.significado }; }), rnd, "anexo", "anexo"));
+    }
+
+    items = items.filter(Boolean);
+    var vistos = {}, unicos = [];
+    items.forEach(function (it) { if (!vistos[it.id]) { vistos[it.id] = true; unicos.push(it); } });
+
+    var porTipo = {}, porFuente = {};
+    unicos.forEach(function (it) { porTipo[it.tipo] = (porTipo[it.tipo] || 0) + 1; porFuente[it.fuente] = (porFuente[it.fuente] || 0) + 1; });
+    var resultado = {
+      items: unicos,
+      porTipo: porTipo,
+      porFuente: porFuente,
+      fuentes: { bloques: d.bloques.length, fichaT: d.fichaT.length, fichaP: d.fichaP.length, fichaEprod: d.fichaEprod.length, fichaE: d.fichaE.length, ejemplos: d.ejemplos.length, expresiones: d.expresiones.length },
+    };
+    bancos[clave] = resultado;
+    return resultado;
+  }
+
+  var ORDEN_TIPOS = ["mc", "elige", "empareja", "ordena", "completa", "transforma", "escribe"];
+
+  function filtrar(items, filtro) {
+    if (!filtro || filtro === "todos") return items;
+    if (filtro === "anexo") return items.filter(function (it) { return it.fuente === "anexo"; });
+    return items.filter(function (it) { return it.tipo === filtro; });
+  }
+
+  // Una tanda: ejercicios no vistos, variados por tipo, con el filtro elegido.
+  function tanda(items, opciones) {
+    var n = opciones.n || TANDA;
+    var vistos = opciones.vistos || {};
+    var rnd = prng(semillaDe("tanda:" + (opciones.semilla || 0)));
+    var candidatos = items.filter(function (it) { return !vistos[it.id]; });
+    var reinicio = false;
+    if (candidatos.length < Math.min(n, items.length)) { candidatos = items.slice(); reinicio = true; }
+    var porTipo = {};
+    barajar(candidatos, rnd).forEach(function (it) { (porTipo[it.tipo] = porTipo[it.tipo] || []).push(it); });
+    var out = [];
+    var tipos = ORDEN_TIPOS.filter(function (t) { return porTipo[t] && porTipo[t].length; });
+    var ronda = 0;
+    while (out.length < n && tipos.some(function (t) { return porTipo[t].length; })) {
+      tipos.forEach(function (t) {
+        if (out.length >= n || !porTipo[t].length) return;
+        var ya = out.filter(function (x) { return x.tipo === t; }).length;
+        if ((t === "mc" || t === "elige") && ya >= 2 && ronda < 3) return;
+        if (t === "empareja" && ya >= 1 && ronda < 3) return;
+        out.push(porTipo[t].shift());
+      });
+      ronda++;
+    }
+    return { items: out, reinicio: reinicio, restantes: Math.max(0, candidatos.length - out.length) };
   }
 
   // ---------- Interfaz ----------
@@ -414,9 +577,14 @@
     return e;
   }
 
-  function vibrar(ms) { try { if (navigator.vibrate) navigator.vibrate(ms); } catch (err) { /* nada */ } }
+  function vibrar(ms) {
+    try {
+      if (!navigator.vibrate) return;
+      if (navigator.userActivation && !navigator.userActivation.hasBeenActive) return;
+      navigator.vibrate(ms);
+    } catch (err) { /* nada */ }
+  }
 
-  // Arrastre con Pointer Events y alternativa por toque/teclado (tocar una ficha la coloca).
   function hacerArrastrable(ficha, opciones) {
     var arrastrando = false, clon = null, inicioX = 0, inicioY = 0, moved = false;
     ficha.setAttribute("draggable", "false");
@@ -439,7 +607,6 @@
         clon.style.top = r.top + "px";
         document.body.appendChild(clon);
         ficha.classList.add("ficha-origen");
-        if (opciones.alEmpezar) opciones.alEmpezar(ficha);
       }
       e.preventDefault();
       clon.style.transform = "translate(" + dx + "px," + dy + "px)";
@@ -455,7 +622,6 @@
         var destino = document.elementFromPoint(e.clientX, e.clientY);
         opciones.alSoltar(ficha, destino, e.clientX, e.clientY);
       } else if (e.type === "pointerup") {
-        // Toque sin arrastre: alternativa accesible.
         opciones.alTocar(ficha);
       }
     }
@@ -473,22 +639,13 @@
     return b;
   }
 
-  function comparadorDeOrden(objetivo) {
-    return function (a, b) { return objetivo.indexOf(a) - objetivo.indexOf(b); };
-  }
-
-  // Ordenar palabras (también sirve para transformar y para la pista de escribir).
   function montarOrdena(item, caja, alResolver) {
     var solucion = item.solucion;
     var linea = el("div", "linea-respuesta");
     linea.setAttribute("aria-label", "Tu frase. Toca una palabra para quitarla.");
     var banco = el("div", "banco-fichas");
     banco.setAttribute("aria-label", "Palabras disponibles. Toca una para añadirla a la frase.");
-    var fichas = item.fichas.map(function (t) {
-      var f = botonFicha(t);
-      banco.appendChild(f);
-      return f;
-    });
+    var fichas = item.fichas.map(function (t) { var f = botonFicha(t); banco.appendChild(f); return f; });
 
     function indiceDeInsercion(x, y) {
       var hijos = Array.prototype.slice.call(linea.children);
@@ -503,8 +660,7 @@
       if (destino === linea || (destino && linea.contains(destino))) {
         var idx = indiceDeInsercion(x, y);
         var ref = linea.children[idx] || null;
-        if (ref === f) return;
-        linea.insertBefore(f, ref);
+        if (ref !== f) linea.insertBefore(f, ref);
       } else if (destino === banco || (destino && banco.contains(destino))) {
         banco.appendChild(f);
       }
@@ -516,7 +672,7 @@
     }
     fichas.forEach(function (f) {
       hacerArrastrable(f, {
-        alSoltar: function (ficha, destino, x, y) { mover(ficha, destino, x, y); },
+        alSoltar: mover,
         alTocar: tocar,
         alMover: function (ficha, x, y) {
           var sobre = document.elementFromPoint(x, y);
@@ -550,7 +706,6 @@
     caja.appendChild(linea);
     caja.appendChild(banco);
     caja.appendChild(comprobar);
-    return { deshabilitar: function () { fichas.forEach(function (f) { f.disabled = true; }); comprobar.disabled = true; } };
   }
 
   function montarCompleta(item, caja, alResolver) {
@@ -565,6 +720,9 @@
     var banco = el("div", "banco-fichas");
     var fichas = item.opciones.map(function (t) { var f = botonFicha(t); banco.appendChild(f); return f; });
     var colocada = null;
+    var comprobar = el("button", "btn", "Comprobar");
+    comprobar.type = "button";
+    comprobar.disabled = true;
 
     function colocar(f) {
       if (colocada) { colocada.disabled = false; colocada.classList.remove("usada"); }
@@ -577,7 +735,7 @@
     fichas.forEach(function (f) {
       hacerArrastrable(f, {
         alSoltar: function (ficha, destino) { if (destino === hueco || (destino && hueco.contains(destino))) colocar(ficha); },
-        alTocar: function (ficha) { colocar(ficha); },
+        alTocar: colocar,
         alMover: function (ficha, x, y) { var s = document.elementFromPoint(x, y); hueco.classList.toggle("destino", s === hueco); },
       });
     });
@@ -589,10 +747,6 @@
       hueco.classList.add("vacio");
       comprobar.disabled = true;
     });
-
-    var comprobar = el("button", "btn", "Comprobar");
-    comprobar.type = "button";
-    comprobar.disabled = true;
     comprobar.addEventListener("click", function () {
       var bien = colocada && normalizar(colocada.textContent) === normalizar(item.respuesta);
       hueco.classList.add(bien ? "bien" : "mal");
@@ -602,7 +756,7 @@
       alResolver(!!bien, colocada ? colocada.textContent : "");
     });
     caja.appendChild(frase);
-    caja.appendChild(el("p", "ayuda-item", item.es));
+    if (item.es) caja.appendChild(el("p", "ayuda-item", item.es));
     caja.appendChild(banco);
     caja.appendChild(comprobar);
   }
@@ -611,11 +765,9 @@
     var cols = el("div", "parejas");
     var izq = el("div", "col izq"), der = el("div", "col der");
     var seleccion = null, hechas = 0, fallos = 0;
-    var tarjetasDer = {};
     item.derecha.forEach(function (es) {
       var t = el("button", "tarjeta es", es);
       t.type = "button";
-      tarjetasDer[es] = t;
       t.addEventListener("click", function () { if (seleccion) intentar(seleccion, t); });
       der.appendChild(t);
     });
@@ -657,7 +809,9 @@
       izq.appendChild(f);
     });
     cols.appendChild(izq); cols.appendChild(der);
-    caja.appendChild(el("p", "ayuda-item", "Arrastra cada frase noruega hasta su significado, o toca una y después la otra."));
+    caja.appendChild(el("p", "ayuda-item", item.fuente === "anexo"
+      ? "Arrastra cada expresión hasta su significado, o toca una y después la otra."
+      : "Arrastra cada frase noruega hasta su significado, o toca una y después la otra."));
     caja.appendChild(cols);
   }
 
@@ -678,7 +832,7 @@
       b.type = "button";
       b.appendChild(el("span", "letra", "abcd".charAt(i)));
       var t = el("span", "texto", op);
-      if (/[æøå]/i.test(op) || /^«/.test(op)) t.lang = "nb";
+      if (item.opcionesNb || /[æøå]/i.test(op)) t.lang = "nb";
       b.appendChild(t);
       b.addEventListener("click", function () {
         if (resuelto) return;
@@ -719,9 +873,7 @@
       if (zonaOrdena) return;
       zonaOrdena = el("div", "zona-ordena");
       caja.insertBefore(zonaOrdena, fila);
-      campo.disabled = true;
-      comprobar.disabled = true;
-      pista.disabled = true;
+      campo.disabled = true; comprobar.disabled = true; pista.disabled = true;
       montarOrdena(item, zonaOrdena, function (bien, dado) { alResolver(bien, dado, true); });
     });
     function evaluar() {
@@ -736,43 +888,37 @@
     campo.addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); evaluar(); } });
   }
 
-  var TITULOS = {
-    mc: "Elige la respuesta",
-    ordena: "Ordena la frase",
-    transforma: "Transforma la frase",
-    completa: "Completa el hueco",
-    empareja: "Empareja",
-    escribe: "Escríbela tú",
-  };
+  var TITULOS = { mc: "Elige la respuesta", elige: "Elige la correcta", ordena: "Ordena la frase", transforma: "Transforma la frase", completa: "Completa el hueco", empareja: "Empareja", escribe: "Escríbela tú" };
+  var NOMBRES_FILTRO = { todos: "Todo", mc: "Preguntas", elige: "Elegir", ordena: "Ordenar", completa: "Huecos", empareja: "Emparejar", transforma: "Transformar", escribe: "Escribir", anexo: "Expresiones" };
 
   function montarItem(item, indice, total, alResolver) {
     var tarjeta = el("section", "ejercicio tipo-" + item.tipo);
     var cab = el("div", "ejercicio-cab");
-    cab.appendChild(el("span", "eti", (indice + 1) + " de " + total + " · " + TITULOS[item.tipo]));
+    cab.appendChild(el("span", "eti", (indice + 1) + " de " + total + " · " + TITULOS[item.tipo] + (item.fuente === "anexo" ? " · expresiones" : "")));
     tarjeta.appendChild(cab);
     var caja = el("div", "ejercicio-cuerpo");
     if (item.tipo === "ordena") {
       if (item.pista) {
-        caja.appendChild(el("p", "consigna", item.parcial ? "Construye el arranque noruego que significa:" : "Construye la frase noruega que significa:"));
+        caja.appendChild(el("p", "consigna", item.parcial ? "Construye el arranque noruego que significa:" : (item.fuente === "fichas" && item.pista.length > 60 ? "Construye la frase que resuelve esto:" : "Construye la frase noruega que significa:")));
         caja.appendChild(el("p", "pista-es", item.pista + (item.parcial ? "…" : "")));
       } else {
         caja.appendChild(el("p", "consigna", "Ordena las palabras hasta que la frase esté bien construida."));
       }
       montarOrdena(item, caja, alResolver);
     } else if (item.tipo === "transforma") {
-      var origen = el("div", "origen");
+      var origen = el("div", "origen" + (item.entradaMal ? " mal" : ""));
       origen.appendChild(el("span", "eti", item.etqEntrada || "Frase"));
       var pe = el("p", "frase-origen", item.entrada); pe.lang = "nb"; origen.appendChild(pe);
       if (item.instruccion) origen.appendChild(el("p", "instruccion", item.instruccion));
       caja.appendChild(origen);
-      caja.appendChild(el("p", "consigna", (item.etqSalida || "Resuelto") + ". Ordena las palabras:"));
+      caja.appendChild(el("p", "consigna", (item.entradaMal ? "Corrígela. " : "") + (item.etqSalida || "Resuelto") + ". Ordena las palabras:"));
       montarOrdena(item, caja, alResolver);
     } else if (item.tipo === "completa") {
       caja.appendChild(el("p", "consigna", "Arrastra la palabra que falta al hueco, o tócala."));
       montarCompleta(item, caja, alResolver);
     } else if (item.tipo === "empareja") {
       montarEmpareja(item, caja, alResolver);
-    } else if (item.tipo === "mc") {
+    } else if (item.tipo === "mc" || item.tipo === "elige") {
       montarMc(item, caja, alResolver);
     } else if (item.tipo === "escribe") {
       montarEscribe(item, caja, alResolver);
@@ -782,10 +928,10 @@
   }
 
   function textoFeedback(item, bien) {
-    if (item.tipo === "mc") return item.explicacion || "";
+    if (item.tipo === "mc" || item.tipo === "elige") return item.explicacion || "";
     if (item.tipo === "transforma") return item.motivo || "";
     if (item.tipo === "escribe") return item.explicacion || "";
-    if (item.tipo === "completa") return bien ? "" : "La palabra era «" + item.respuesta + "». " + item.es;
+    if (item.tipo === "completa") return item.motivo || (bien ? "" : (item.es ? "La palabra era «" + item.respuesta + "». " + item.es : "La palabra era «" + item.respuesta + "»."));
     if (item.tipo === "ordena") return item.motivo || (bien ? "" : item.pista);
     return "";
   }
@@ -796,38 +942,106 @@
     return "";
   }
 
-  // Monta la práctica completa de una pieza dentro de un contenedor.
-  // opciones: { estado, guardar, alTerminar }
+  function numero(n) { return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, "."); }
+
+  function registroDe(estado, codigo) {
+    if (!estado.practica) estado.practica = {};
+    var r = estado.practica[codigo] || {};
+    r.tandas = r.tandas || 0;
+    r.mejor = r.mejor || null;
+    r.ultimo = r.ultimo || null;
+    r.falladas = Array.isArray(r.falladas) ? r.falladas : [];
+    r.vistos = Array.isArray(r.vistos) ? r.vistos : [];
+    r.hechos = r.hechos || 0;
+    r.aciertos = r.aciertos || 0;
+    r.filtro = r.filtro || "todos";
+    estado.practica[codigo] = r;
+    return r;
+  }
+
+  // Monta la práctica completa de una pieza.
+  // opciones: { estado, guardar, anexoHtml, alTerminar, soloFalladas, filtro }
   function montar(pieza, opciones) {
     var estado = opciones.estado;
-    if (!estado.practica) estado.practica = {};
-    var registro = estado.practica[pieza.codigo] || { tandas: 0, mejor: null, ultimo: null, falladas: [] };
-    var semilla = registro.tandas || 0;
-    var generado = generar(pieza, semilla);
-    if (!generado.items.length) return null;
+    var registro = registroDe(estado, pieza.codigo);
+    var b = banco(pieza, opciones.anexoHtml || null);
+    if (!b.items.length) return null;
+    if (opciones.filtro) { registro.filtro = opciones.filtro; opciones.guardar(); }
+    var filtro = registro.filtro || "todos";
+    if (!filtrar(b.items, filtro).length) filtro = "todos";
 
     var raiz = el("section", "practica-pieza");
     raiz.id = "practica";
+
     var cab = el("div", "practica-cab");
     cab.appendChild(el("p", "kicker", "Ponlo a prueba"));
     cab.appendChild(el("h2", null, "Practica " + pieza.codigo + " sin salir de aquí"));
-    cab.appendChild(el("p", "practica-intro", "Ocho ejercicios cortos hechos con las frases de esta pieza: elegir, ordenar arrastrando, completar, emparejar y escribir. Cada uno te dice al momento cómo ha ido y por qué."));
-    if (registro.mejor) cab.appendChild(el("p", "practica-mejor", "Tu mejor tanda: " + registro.mejor.aciertos + " de " + registro.mejor.total + "."));
+    cab.appendChild(el("p", "practica-intro", "Esta pieza tiene " + numero(b.items.length) + " ejercicios hechos con sus propias frases: elegir, ordenar arrastrando, completar, emparejar, transformar y escribir. Van de ocho en ocho, sin repetir hasta que los hayas visto todos, y cada uno te dice al momento cómo ha ido y por qué."));
+    var stats = el("p", "practica-stats");
+    function pintarStats() {
+      stats.textContent = "Hechos " + numero(registro.hechos) + " de " + numero(b.items.length)
+        + (registro.hechos ? " · aciertos " + Math.round(100 * registro.aciertos / Math.max(1, registro.hechos)) + " %" : "")
+        + (registro.mejor ? " · mejor tanda " + registro.mejor.aciertos + " de " + registro.mejor.total : "");
+    }
+    pintarStats();
+    cab.appendChild(stats);
+
+    var filtros = el("div", "practica-filtros");
+    filtros.setAttribute("role", "group");
+    filtros.setAttribute("aria-label", "Tipo de ejercicio");
+    var claves = ["todos"].concat(ORDEN_TIPOS.filter(function (t) { return b.porTipo[t]; }));
+    if (b.porFuente.anexo) claves.push("anexo");
+    claves.forEach(function (k) {
+      var n = k === "todos" ? b.items.length : (k === "anexo" ? b.porFuente.anexo : b.porTipo[k]);
+      var chipF = el("button", "chip-filtro" + (k === filtro ? " activo" : ""), NOMBRES_FILTRO[k] + " · " + n);
+      chipF.type = "button";
+      chipF.setAttribute("aria-pressed", k === filtro ? "true" : "false");
+      chipF.addEventListener("click", function () {
+        if (k === filtro) return;
+        var nuevo = montar(pieza, Object.assign({}, opciones, { soloFalladas: null, filtro: k }));
+        raiz.replaceWith(nuevo);
+        nuevo.scrollIntoView({ block: "start", behavior: "smooth" });
+      });
+      filtros.appendChild(chipF);
+    });
+    cab.appendChild(filtros);
     raiz.appendChild(cab);
 
+    var vistosMapa = {};
+    registro.vistos.forEach(function (id) { vistosMapa[id] = true; });
+    var seleccion;
+    if (opciones.soloFalladas && opciones.soloFalladas.length) {
+      seleccion = { items: b.items.filter(function (it) { return opciones.soloFalladas.indexOf(it.id) >= 0; }), reinicio: false, restantes: 0 };
+    }
+    if (!seleccion || !seleccion.items.length) {
+      seleccion = tanda(filtrar(b.items, filtro), { vistos: vistosMapa, semilla: pieza.codigo + ":" + filtro + ":" + registro.tandas });
+    }
+    var items = seleccion.items;
+    if (seleccion.reinicio && registro.vistos.length) {
+      raiz.appendChild(el("p", "practica-aviso", "Ya has pasado por todos los ejercicios de este tipo. Vuelven mezclados, así que es una vuelta más de repaso."));
+      var delFiltro = {};
+      filtrar(b.items, filtro).forEach(function (it) { delFiltro[it.id] = true; });
+      registro.vistos = registro.vistos.filter(function (id) { return !delFiltro[id]; });
+      opciones.guardar();
+    }
+
     var barra = el("div", "practica-barra");
-    var puntos = [];
-    generado.items.forEach(function () { var p = el("i"); puntos.push(p); barra.appendChild(p); });
+    var puntos = items.map(function () { var p = el("i"); barra.appendChild(p); return p; });
     raiz.appendChild(barra);
 
     var escenario = el("div", "practica-escenario");
     raiz.appendChild(escenario);
 
     var indice = 0, aciertos = 0, resultados = [];
-    var soloFalladas = opciones.soloFalladas || null;
-    var items = soloFalladas ? generado.items.filter(function (it) { return soloFalladas.indexOf(it.id) >= 0; }) : generado.items;
-    if (!items.length) items = generado.items;
-    puntos.forEach(function (p, i) { p.hidden = i >= items.length; });
+
+    function anotar(item, acierto) {
+      if (registro.vistos.indexOf(item.id) < 0) registro.vistos.push(item.id);
+      if (registro.vistos.length > MAX_VISTOS) registro.vistos = registro.vistos.slice(-MAX_VISTOS);
+      registro.hechos++;
+      if (acierto) registro.aciertos++;
+      opciones.guardar();
+      pintarStats();
+    }
 
     function mostrar() {
       escenario.innerHTML = "";
@@ -838,11 +1052,11 @@
         var acierto = bien && !conPista;
         resultados[indice] = acierto;
         if (acierto) aciertos++;
+        anotar(item, acierto);
         vibrar(acierto ? 10 : [30, 40, 30]);
         var fb = el("div", "feedback " + (acierto ? "bien" : "mal"));
         fb.setAttribute("role", "status");
-        var titulo = acierto ? "Bien." : (bien && conPista ? "Con ayuda, pero bien." : "No es esa.");
-        fb.appendChild(el("b", null, titulo));
+        fb.appendChild(el("b", null, acierto ? "Bien." : (bien && conPista ? "Con ayuda, pero bien." : "No es esa.")));
         var sol = fraseSolucion(item);
         if (sol && !acierto) { var ps = el("p", "solucion", sol); ps.lang = "nb"; fb.appendChild(ps); }
         var txt = textoFeedback(item, acierto);
@@ -862,41 +1076,41 @@
     function resumen() {
       var total = items.length;
       var falladas = items.filter(function (it, i) { return !resultados[i]; }).map(function (it) { return it.id; });
-      registro.tandas = (registro.tandas || 0) + 1;
+      registro.tandas++;
       registro.ultimo = { aciertos: aciertos, total: total, fecha: new Date().toISOString() };
       if (!registro.mejor || aciertos / total > registro.mejor.aciertos / registro.mejor.total) registro.mejor = { aciertos: aciertos, total: total };
       registro.falladas = falladas;
-      estado.practica[pieza.codigo] = registro;
       opciones.guardar();
+      pintarStats();
 
+      var quedan = filtrar(b.items, filtro).filter(function (it) { return registro.vistos.indexOf(it.id) < 0; }).length;
       var caja = el("section", "resumen-practica " + (aciertos === total ? "pleno" : aciertos >= total * 0.6 ? "bien" : "flojo"));
-      caja.appendChild(el("p", "eti", "Resultado"));
+      caja.appendChild(el("p", "eti", "Resultado de la tanda"));
       caja.appendChild(el("p", "marcador", aciertos + " de " + total));
-      var frase = aciertos === total
-        ? "Todo bien. La próxima tanda trae otras frases de la misma pieza."
+      caja.appendChild(el("p", "lectura", aciertos === total
+        ? "Todo bien. " + (quedan ? "Te quedan " + numero(quedan) + " ejercicios distintos en esta pieza." : "Has visto todos los de esta pieza: a partir de aquí es repaso.")
         : aciertos >= total * 0.6
-          ? "Va saliendo. Repite las que han fallado antes de pasar a otra pieza."
-          : "Todavía no está asentado. Vuelve al mecanismo, lee el contraste y repite las falladas.";
-      caja.appendChild(el("p", "lectura", frase));
+          ? "Va saliendo. Repite las que han fallado y sigue: " + (quedan ? "quedan " + numero(quedan) + " sin ver." : "ya has visto todos los de esta pieza.")
+          : "Todavía no está asentado. Vuelve al mecanismo, lee el contraste y repite las falladas."));
       var acciones = el("div", "fila-acciones");
       if (falladas.length) {
         var rep = el("button", "btn", "Repetir las falladas (" + falladas.length + ")");
         rep.type = "button";
         rep.addEventListener("click", function () {
-          var nuevo = montar(pieza, Object.assign({}, opciones, { soloFalladas: falladas, semillaFija: semilla }));
+          var nuevo = montar(pieza, Object.assign({}, opciones, { soloFalladas: falladas }));
           raiz.replaceWith(nuevo);
           nuevo.scrollIntoView({ block: "start", behavior: "smooth" });
         });
         acciones.appendChild(rep);
       }
-      var otra = el("button", "btn" + (falladas.length ? " ghost" : ""), "Otra tanda con frases nuevas");
-      otra.type = "button";
-      otra.addEventListener("click", function () {
+      var seguir = el("button", "btn" + (falladas.length ? " ghost" : ""), quedan ? "Seguir · " + numero(quedan) + " por ver" : "Otra vuelta de repaso");
+      seguir.type = "button";
+      seguir.addEventListener("click", function () {
         var nuevo = montar(pieza, Object.assign({}, opciones, { soloFalladas: null }));
         raiz.replaceWith(nuevo);
         nuevo.scrollIntoView({ block: "start", behavior: "smooth" });
       });
-      acciones.appendChild(otra);
+      acciones.appendChild(seguir);
       caja.appendChild(acciones);
       if (opciones.alTerminar) opciones.alTerminar(registro);
       escenario.appendChild(caja);
@@ -904,22 +1118,21 @@
       caja.scrollIntoView({ block: "start", behavior: "smooth" });
     }
 
-    if (opciones.semillaFija !== undefined) { /* la repetición de falladas conserva la tanda */ }
     mostrar();
     return raiz;
   }
 
-  // Tarjeta de llamada para la cabecera de la pieza.
-  function llamada(pieza, estado) {
+  function llamada(pieza, estado, total) {
     var registro = estado.practica && estado.practica[pieza.codigo];
     var caja = el("a", "practica-llamada");
     caja.href = "#practica";
     caja.appendChild(el("span", "eti", "Ponlo a prueba"));
     var txt = el("span", "txt");
-    txt.appendChild(el("strong", null, registro && registro.mejor ? "Practicar otra vez" : "Ocho ejercicios interactivos"));
-    txt.appendChild(el("small", null, registro && registro.mejor
-      ? "Tu mejor tanda: " + registro.mejor.aciertos + " de " + registro.mejor.total + ". Arrastra, elige, completa y escribe."
-      : "Al final de la pieza: arrastra, elige, completa y escribe con las frases de este mecanismo."));
+    var hechos = registro ? registro.hechos || 0 : 0;
+    txt.appendChild(el("strong", null, hechos ? "Seguir practicando" : (total ? numero(total) + " ejercicios interactivos" : "Ejercicios interactivos")));
+    txt.appendChild(el("small", null, hechos
+      ? "Llevas " + numero(hechos) + (total ? " de " + numero(total) : "") + ". Arrastra, elige, completa y escribe con las frases de este mecanismo."
+      : "Al final de la pieza: arrastra, elige, completa, empareja y escribe con las frases de este mecanismo, de ocho en ocho."));
     caja.appendChild(txt);
     caja.appendChild(el("span", "flecha", "↓"));
     caja.addEventListener("click", function (e) {
@@ -929,5 +1142,5 @@
     return caja;
   }
 
-  root.NexoPractica = Object.freeze({ extraer: extraer, generar: generar, montar: montar, llamada: llamada, TANDA: TANDA });
+  root.NexoPractica = Object.freeze({ extraer: extraer, banco: banco, tanda: tanda, filtrar: filtrar, montar: montar, llamada: llamada, seccionAnexo: seccionAnexo, TANDA: TANDA });
 })(typeof window !== "undefined" ? window : globalThis);

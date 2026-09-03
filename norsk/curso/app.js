@@ -10,6 +10,8 @@
 
   var DEMO = "/data/norsk-curso-demo.json";
   var API = "/api/norsk-curso/";
+  var PRACTICA_META = "/data/norsk-practica-meta.json";
+  var practicaMeta = null;
   var CLAVE = "nexo_curso_v1";
 
   var app = document.getElementById("app");
@@ -288,6 +290,7 @@
     datos.appendChild(renderDato("16", "mecanismos B1"));
     datos.appendChild(renderDato("4", "destrezas conectadas"));
     hero.appendChild(datos);
+    requestAnimationFrame(pintarDatoPractica);
 
     var abiertas = indice.filter(function (p) { return p.abierta; });
     var hechas = abiertas.filter(function (p) { return estado.hechas[p.codigo]; }).length;
@@ -342,8 +345,10 @@
           b.title = "Esta pieza se abre con el curso completo";
         } else if (estado.hechas[p.codigo]) {
           b.appendChild(el("span", "marca-est hecho", "Hecha"));
-        } else if (estado.practica && estado.practica[p.codigo] && estado.practica[p.codigo].mejor) {
-          b.appendChild(el("span", "marca-est practica", "Práctica " + estado.practica[p.codigo].mejor.aciertos + "/" + estado.practica[p.codigo].mejor.total));
+        } else if (estado.practica && estado.practica[p.codigo] && (estado.practica[p.codigo].hechos || estado.practica[p.codigo].mejor)) {
+          var reg = estado.practica[p.codigo];
+          var totalP = totalPracticaDe(p.codigo);
+          b.appendChild(el("span", "marca-est practica", "Práctica " + formatoNumero(reg.hechos || 0) + (totalP ? " de " + formatoNumero(totalP) : "")));
         } else {
           b.appendChild(el("span", "flecha", "→"));
         }
@@ -404,6 +409,36 @@
           ? "Has abierto muchas piezas hoy. Mañana vuelves a tener el cupo entero."
           : "No se ha podido abrir esta pieza. Vuelve a intentarlo en un momento.");
       });
+  }
+
+  // Devuelve una pieza con sus secciones sin pintarla: caché, JSON de demo o revisión, o API con acceso.
+  function cargarPieza(codigo) {
+    if (cache[codigo]) return Promise.resolve(cache[codigo]);
+    var enDemo = ((demo && demo.piezas) || []).filter(function (p) { return p.codigo === codigo; })[0];
+    if (enDemo) { cache[codigo] = conTituloAlumno(enDemo); return Promise.resolve(cache[codigo]); }
+    if (!conAcceso) return Promise.resolve(null);
+    return fetch(API + "?modo=pieza&codigo=" + encodeURIComponent(codigo), { credentials: "same-origin" })
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        if (!d || !d.ok || !d.pieza) return null;
+        cache[codigo] = conTituloAlumno(d.pieza);
+        return cache[codigo];
+      })
+      .catch(function () { return null; });
+  }
+
+  function formatoNumero(n) { return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, "."); }
+
+  function totalPracticaDe(codigo) {
+    return practicaMeta && practicaMeta.por_pieza && practicaMeta.por_pieza[codigo] ? practicaMeta.por_pieza[codigo] : 0;
+  }
+
+  function pintarDatoPractica() {
+    var datos = document.querySelector(".curso-datos");
+    if (!datos || datos.querySelector(".dato-practica") || !practicaMeta || !practicaMeta.ejercicios_totales) return;
+    var d = renderDato(formatoNumero(practicaMeta.ejercicios_totales), "ejercicios interactivos");
+    d.classList.add("dato-practica");
+    datos.appendChild(d);
   }
 
   function textoPlano(html) {
@@ -504,7 +539,11 @@
     var destrezas = normalizarDestrezas(meta);
     if (destrezas.length) chips.appendChild(el("span", null, "Trabajas: " + destrezas.join(" · ")));
     hero.appendChild(chips);
-    if (pieza.tipo === "mecanismo" && window.NexoPractica) hero.appendChild(window.NexoPractica.llamada(pieza, estado));
+    if (pieza.tipo === "mecanismo" && window.NexoPractica) {
+      // Con el curso completo el total incluye el anexo de expresiones; en la demo, solo lo que hay en la pieza.
+      var totalCta = conAcceso ? totalPracticaDe(pieza.codigo) : window.NexoPractica.banco(pieza, null).items.length;
+      hero.appendChild(window.NexoPractica.llamada(pieza, estado, totalCta));
+    }
     paso.appendChild(hero);
 
     var secciones = prepararSecciones(pieza);
@@ -605,17 +644,27 @@
     if (!lectorInsertado) paso.appendChild(lector);
 
     if (pieza.tipo === "mecanismo" && window.NexoPractica) {
-      var practica = window.NexoPractica.montar(pieza, {
-        estado: estado,
-        guardar: guardar,
-        alTerminar: function (registro) {
-          if (registro.ultimo && registro.ultimo.aciertos === registro.ultimo.total && !estado.hechas[pieza.codigo]) {
-            estado.hechas[pieza.codigo] = true;
-            guardar();
-          }
-        },
+      // El banco se monta cuando llega el anexo de expresiones de este mecanismo
+      // (con el curso completo); en la demo no hay anexo y se monta al momento.
+      var huecoPractica = el("div", "practica-hueco");
+      huecoPractica.appendChild(el("p", "ayuda", "Preparando los ejercicios…"));
+      paso.appendChild(huecoPractica);
+      var codigoAbierto = pieza.codigo;
+      cargarPieza("ANEXO-UTTRYKK").then(function (anexo) {
+        if (!huecoPractica.isConnected || estado.ultimaPieza !== codigoAbierto) return;
+        var practica = window.NexoPractica.montar(pieza, {
+          estado: estado,
+          guardar: guardar,
+          anexoHtml: window.NexoPractica.seccionAnexo(anexo, pieza.codigo),
+          alTerminar: function (registro) {
+            if (registro.ultimo && registro.ultimo.aciertos === registro.ultimo.total && !estado.hechas[pieza.codigo]) {
+              estado.hechas[pieza.codigo] = true;
+              guardar();
+            }
+          },
+        });
+        if (practica) huecoPractica.replaceWith(practica); else huecoPractica.remove();
       });
-      if (practica) paso.appendChild(practica);
     }
 
     var marcar = el("div", "marcar");
@@ -723,6 +772,10 @@
   }
 
   function arrancar() {
+    fetch(PRACTICA_META, { credentials: "same-origin" })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (j) { practicaMeta = j; pintarDatoPractica(); })
+      .catch(function () { practicaMeta = null; });
     // Solo se pregunta al servidor si el navegador lleva la marca de acceso
     // (cookie nexo_norsk_ok, que pone el servidor al activar la compra). Si no
     // la hay, o el servidor dice que no, se cae a la demo sin error en consola.
