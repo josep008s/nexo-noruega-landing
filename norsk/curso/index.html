@@ -334,6 +334,16 @@
     .practica-aviso{margin:14px 0 0;padding:12px 16px;border-radius:12px;background:rgba(44,90,114,.08);font-size:.95rem;color:var(--tinta-suave)}
     .origen.mal{background:rgba(143,90,15,.08)}
     .origen.mal .frase-origen{text-decoration:underline;text-decoration-style:wavy;text-decoration-color:var(--alerta);text-underline-offset:5px}
+  
+    /* Repaso entre piezas */
+    .repaso-tarjeta{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:16px;align-items:center;margin-top:28px;padding:18px 20px;border-radius:16px;background:#fff;border:1px solid var(--linea-clara);box-shadow:var(--sombra-clara);max-width:760px}
+    .repaso-tarjeta.vence{border-left:4px solid var(--aurora)}
+    .repaso-tarjeta .eti{font-family:var(--sg);font-weight:700;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--noche);background:rgba(63,203,148,.28);border-radius:999px;padding:6px 10px}
+    .repaso-tarjeta .txt strong{display:block;font-family:var(--sg);font-size:1.05rem}
+    .repaso-tarjeta .txt small{display:block;color:var(--tinta-suave);font-size:.92rem;line-height:1.45;margin-top:3px}
+    .step-repaso .practica-pieza{margin-top:24px;padding-top:12px;border-top:0}
+    .eti-pieza{font-family:var(--sg);font-weight:700;font-size:.66rem;letter-spacing:.12em;color:var(--fiordo);margin-left:10px;padding:3px 8px;border-radius:999px;background:rgba(44,90,114,.1)}
+    @media (max-width:560px){.repaso-tarjeta{grid-template-columns:auto minmax(0,1fr)}.repaso-tarjeta .btn{grid-column:1 / -1}}
   </style>
 </head>
 <body>
@@ -381,8 +391,8 @@
     </div>
   </footer>
 
-  <script src="/norsk/curso/practica.js?v=20260903c"></script>
+  <script src="/norsk/curso/practica.js?v=20260903d"></script>
 
-  <script src="/norsk/curso/app.js?v=20260903c"></script>
+  <script src="/norsk/curso/app.js?v=20260903d"></script>
 </body>
 </html>
