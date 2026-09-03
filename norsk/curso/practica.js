@@ -520,7 +520,7 @@
 
     items = items.filter(Boolean);
     var vistos = {}, unicos = [];
-    items.forEach(function (it) { if (!vistos[it.id]) { vistos[it.id] = true; unicos.push(it); } });
+    items.forEach(function (it) { if (!vistos[it.id]) { vistos[it.id] = true; it.mecanismo = pieza.codigo; unicos.push(it); } });
 
     var porTipo = {}, porFuente = {};
     unicos.forEach(function (it) { porTipo[it.tipo] = (porTipo[it.tipo] || 0) + 1; porFuente[it.fuente] = (porFuente[it.fuente] || 0) + 1; });
@@ -1134,6 +1134,106 @@
     return r;
   }
 
+  // ---------- Repaso espaciado entre piezas ----------
+  // Lo que fallas en cualquier mecanismo vuelve a salir al día siguiente y, si lo
+  // aciertas, a los 3, 7 y 14 días. Después se da por asentado. Solo guarda ids.
+
+  var CONTACTOS_REPASO = [1, 3, 7, 14];
+
+  function repasoDe(estado) {
+    if (!estado.repaso || typeof estado.repaso !== "object") estado.repaso = { items: {} };
+    if (!estado.repaso.items) estado.repaso.items = {};
+    return estado.repaso;
+  }
+
+  function sumarDias(fecha, dias) {
+    var d = new Date(fecha);
+    d.setDate(d.getDate() + dias);
+    d.setHours(5, 0, 0, 0);
+    return d.toISOString();
+  }
+
+  function programarRepaso(estado, codigoPieza, item, acierto, ahora) {
+    var r = repasoDe(estado);
+    var clave = codigoPieza + "|" + item.id;
+    var actual = r.items[clave];
+    var hoy = ahora || new Date();
+    if (!acierto) {
+      r.items[clave] = { pieza: codigoPieza, id: item.id, tipo: item.tipo, contacto: 0, vence: sumarDias(hoy, CONTACTOS_REPASO[0]), fallos: (actual ? actual.fallos || 0 : 0) + 1, ultimo: hoy.toISOString() };
+      return r.items[clave];
+    }
+    if (!actual) return null;
+    var siguiente = (actual.contacto || 0) + 1;
+    if (siguiente >= CONTACTOS_REPASO.length) { delete r.items[clave]; return null; }
+    actual.contacto = siguiente;
+    actual.vence = sumarDias(hoy, CONTACTOS_REPASO[siguiente]);
+    actual.ultimo = hoy.toISOString();
+    return actual;
+  }
+
+  function repasoPendiente(estado, ahora) {
+    var r = repasoDe(estado);
+    var limite = (ahora || new Date()).getTime();
+    var todos = Object.keys(r.items).map(function (k) { return r.items[k]; });
+    var vencidos = todos.filter(function (x) { return Date.parse(x.vence) <= limite; }).sort(function (a, b) { return Date.parse(a.vence) - Date.parse(b.vence); });
+    var futuros = todos.filter(function (x) { return Date.parse(x.vence) > limite; }).sort(function (a, b) { return Date.parse(a.vence) - Date.parse(b.vence); });
+    var piezas = {};
+    vencidos.forEach(function (x) { piezas[x.pieza] = true; });
+    return { vencidos: vencidos, futuros: futuros, total: todos.length, piezas: Object.keys(piezas), proximo: futuros.length ? futuros[0].vence : null };
+  }
+
+  // ---------- Tanda ----------
+  // Pinta una serie de ejercicios con barra, corrección y resumen. La usan la
+  // práctica de una pieza y el repaso entre piezas.
+  // ctx: { registroDe(item) -> registro, alResolver(item, acierto), resumen(resultados, items) -> nodo }
+  function montarTandaEnRaiz(raiz, items, ctx) {
+    var barra = el("div", "practica-barra");
+    var puntos = items.map(function () { var p = el("i"); barra.appendChild(p); return p; });
+    raiz.appendChild(barra);
+    var escenario = el("div", "practica-escenario");
+    raiz.appendChild(escenario);
+    var indice = 0, resultados = [];
+
+    function mostrar() {
+      escenario.innerHTML = "";
+      if (indice >= items.length) {
+        puntos.forEach(function (p, i) { p.className = resultados[i] ? "ok" : "ko"; });
+        var caja = ctx.resumen(resultados, items);
+        escenario.appendChild(caja);
+        caja.scrollIntoView({ block: "start", behavior: "smooth" });
+        return;
+      }
+      var item = items[indice];
+      puntos.forEach(function (p, i) { p.className = i < indice ? (resultados[i] ? "ok" : "ko") : (i === indice ? "actual" : ""); });
+      var tarjeta = montarItem(item, indice, items.length, function (bien, dado, conPista) {
+        var acierto = bien && !conPista;
+        resultados[indice] = acierto;
+        ctx.alResolver(item, acierto);
+        vibrar(acierto ? 10 : [30, 40, 30]);
+        var fb = el("div", "feedback " + (acierto ? "bien" : "mal"));
+        fb.setAttribute("role", "status");
+        fb.appendChild(el("b", null, acierto ? "Bien." : (bien && conPista ? "Con ayuda, pero bien." : "No es esa.")));
+        var diag = acierto ? "" : diagnosticar(item, dado, item.mecanismo);
+        if (diag) fb.appendChild(el("p", "diagnostico", diag));
+        var sol = fraseSolucion(item);
+        if (sol && !acierto) { var ps = el("p", "solucion", sol); ps.lang = "nb"; fb.appendChild(ps); }
+        var txt = textoFeedback(item, acierto);
+        if (txt) fb.appendChild(el("p", null, txt));
+        var sig = el("button", "btn", indice === items.length - 1 ? "Ver el resultado" : "Siguiente");
+        sig.type = "button";
+        sig.addEventListener("click", function () { indice++; mostrar(); });
+        fb.appendChild(sig);
+        tarjeta.appendChild(fb);
+        fb.scrollIntoView({ block: "nearest", behavior: "smooth" });
+        setTimeout(function () { sig.focus(); }, 50);
+      });
+      if (ctx.etiquetaPieza && item.mecanismo) tarjeta.querySelector(".ejercicio-cab").appendChild(el("span", "eti-pieza", item.mecanismo));
+      escenario.appendChild(tarjeta);
+      if (indice > 0) tarjeta.scrollIntoView({ block: "start", behavior: "smooth" });
+    }
+    mostrar();
+  }
+
   // Monta la práctica completa de una pieza.
   // opciones: { estado, guardar, anexoHtml, alTerminar, soloFalladas, filtro }
   function montar(pieza, opciones) {
@@ -1151,7 +1251,7 @@
     var cab = el("div", "practica-cab");
     cab.appendChild(el("p", "kicker", "Ponlo a prueba"));
     cab.appendChild(el("h2", null, "Practica " + pieza.codigo + " sin salir de aquí"));
-    cab.appendChild(el("p", "practica-intro", "Esta pieza tiene " + numero(b.items.length) + " ejercicios hechos con sus propias frases: elegir, ordenar arrastrando, completar, emparejar, transformar y escribir. Van de ocho en ocho, sin repetir hasta que los hayas visto todos, y cada uno te dice al momento cómo ha ido y por qué."));
+    cab.appendChild(el("p", "practica-intro", "Esta pieza tiene " + numero(b.items.length) + " ejercicios hechos con sus propias frases: elegir, ordenar arrastrando, completar, emparejar, transformar y escribir. Van de ocho en ocho, sin repetir hasta que los hayas visto todos, y cada uno te dice al momento cómo ha ido y por qué. Lo que falles vuelve a salir en el repaso del índice."));
     var stats = el("p", "practica-stats");
     function pintarStats() {
       stats.textContent = "Hechos " + numero(registro.hechos) + " de " + numero(b.items.length)
@@ -1200,102 +1300,112 @@
       opciones.guardar();
     }
 
-    var barra = el("div", "practica-barra");
-    var puntos = items.map(function () { var p = el("i"); barra.appendChild(p); return p; });
-    raiz.appendChild(barra);
-
-    var escenario = el("div", "practica-escenario");
-    raiz.appendChild(escenario);
-
-    var indice = 0, aciertos = 0, resultados = [];
-
-    function anotar(item, acierto) {
-      if (registro.vistos.indexOf(item.id) < 0) registro.vistos.push(item.id);
-      if (registro.vistos.length > MAX_VISTOS) registro.vistos = registro.vistos.slice(-MAX_VISTOS);
-      registro.hechos++;
-      if (acierto) registro.aciertos++;
-      opciones.guardar();
-      pintarStats();
-    }
-
-    function mostrar() {
-      escenario.innerHTML = "";
-      if (indice >= items.length) return resumen();
-      var item = items[indice];
-      puntos.forEach(function (p, i) { p.className = i < indice ? (resultados[i] ? "ok" : "ko") : (i === indice ? "actual" : ""); });
-      var tarjeta = montarItem(item, indice, items.length, function (bien, dado, conPista) {
-        var acierto = bien && !conPista;
-        resultados[indice] = acierto;
+    var aciertos = 0;
+    montarTandaEnRaiz(raiz, items, {
+      alResolver: function (item, acierto) {
         if (acierto) aciertos++;
-        anotar(item, acierto);
-        vibrar(acierto ? 10 : [30, 40, 30]);
-        var fb = el("div", "feedback " + (acierto ? "bien" : "mal"));
-        fb.setAttribute("role", "status");
-        fb.appendChild(el("b", null, acierto ? "Bien." : (bien && conPista ? "Con ayuda, pero bien." : "No es esa.")));
-        var diag = acierto ? "" : diagnosticar(item, dado, pieza.codigo);
-        if (diag) fb.appendChild(el("p", "diagnostico", diag));
-        var sol = fraseSolucion(item);
-        if (sol && !acierto) { var ps = el("p", "solucion", sol); ps.lang = "nb"; fb.appendChild(ps); }
-        var txt = textoFeedback(item, acierto);
-        if (txt) fb.appendChild(el("p", null, txt));
-        var sig = el("button", "btn", indice === items.length - 1 ? "Ver el resultado" : "Siguiente");
-        sig.type = "button";
-        sig.addEventListener("click", function () { indice++; mostrar(); });
-        fb.appendChild(sig);
-        tarjeta.appendChild(fb);
-        fb.scrollIntoView({ block: "nearest", behavior: "smooth" });
-        setTimeout(function () { sig.focus(); }, 50);
-      });
-      escenario.appendChild(tarjeta);
-      if (indice > 0) tarjeta.scrollIntoView({ block: "start", behavior: "smooth" });
-    }
+        if (registro.vistos.indexOf(item.id) < 0) registro.vistos.push(item.id);
+        if (registro.vistos.length > MAX_VISTOS) registro.vistos = registro.vistos.slice(-MAX_VISTOS);
+        registro.hechos++;
+        if (acierto) registro.aciertos++;
+        programarRepaso(estado, pieza.codigo, item, acierto);
+        opciones.guardar();
+        pintarStats();
+      },
+      resumen: function (resultados, items) {
+        var total = items.length;
+        var falladas = items.filter(function (it, i) { return !resultados[i]; }).map(function (it) { return it.id; });
+        registro.tandas++;
+        registro.ultimo = { aciertos: aciertos, total: total, fecha: new Date().toISOString() };
+        if (!registro.mejor || aciertos / total > registro.mejor.aciertos / registro.mejor.total) registro.mejor = { aciertos: aciertos, total: total };
+        registro.falladas = falladas;
+        opciones.guardar();
+        pintarStats();
 
-    function resumen() {
-      var total = items.length;
-      var falladas = items.filter(function (it, i) { return !resultados[i]; }).map(function (it) { return it.id; });
-      registro.tandas++;
-      registro.ultimo = { aciertos: aciertos, total: total, fecha: new Date().toISOString() };
-      if (!registro.mejor || aciertos / total > registro.mejor.aciertos / registro.mejor.total) registro.mejor = { aciertos: aciertos, total: total };
-      registro.falladas = falladas;
-      opciones.guardar();
-      pintarStats();
-
-      var quedan = filtrar(b.items, filtro).filter(function (it) { return registro.vistos.indexOf(it.id) < 0; }).length;
-      var caja = el("section", "resumen-practica " + (aciertos === total ? "pleno" : aciertos >= total * 0.6 ? "bien" : "flojo"));
-      caja.appendChild(el("p", "eti", "Resultado de la tanda"));
-      caja.appendChild(el("p", "marcador", aciertos + " de " + total));
-      caja.appendChild(el("p", "lectura", aciertos === total
-        ? "Todo bien. " + (quedan ? "Te quedan " + numero(quedan) + " ejercicios distintos en esta pieza." : "Has visto todos los de esta pieza: a partir de aquí es repaso.")
-        : aciertos >= total * 0.6
-          ? "Va saliendo. Repite las que han fallado y sigue: " + (quedan ? "quedan " + numero(quedan) + " sin ver." : "ya has visto todos los de esta pieza.")
-          : "Todavía no está asentado. Vuelve al mecanismo, lee el contraste y repite las falladas."));
-      var acciones = el("div", "fila-acciones");
-      if (falladas.length) {
-        var rep = el("button", "btn", "Repetir las falladas (" + falladas.length + ")");
-        rep.type = "button";
-        rep.addEventListener("click", function () {
-          var nuevo = montar(pieza, Object.assign({}, opciones, { soloFalladas: falladas }));
+        var quedan = filtrar(b.items, filtro).filter(function (it) { return registro.vistos.indexOf(it.id) < 0; }).length;
+        var caja = el("section", "resumen-practica " + (aciertos === total ? "pleno" : aciertos >= total * 0.6 ? "bien" : "flojo"));
+        caja.appendChild(el("p", "eti", "Resultado de la tanda"));
+        caja.appendChild(el("p", "marcador", aciertos + " de " + total));
+        caja.appendChild(el("p", "lectura", aciertos === total
+          ? "Todo bien. " + (quedan ? "Te quedan " + numero(quedan) + " ejercicios distintos en esta pieza." : "Has visto todos los de esta pieza: a partir de aquí es repaso.")
+          : aciertos >= total * 0.6
+            ? "Va saliendo. Las " + falladas.length + " que han fallado vuelven mañana en el repaso del índice. " + (quedan ? "Quedan " + numero(quedan) + " sin ver." : "Ya has visto todos los de esta pieza.")
+            : "Todavía no está asentado. Vuelve al mecanismo, lee el contraste y repite las falladas; mañana te esperan en el repaso del índice."));
+        var acciones = el("div", "fila-acciones");
+        if (falladas.length) {
+          var rep = el("button", "btn", "Repetir las falladas (" + falladas.length + ")");
+          rep.type = "button";
+          rep.addEventListener("click", function () {
+            var nuevo = montar(pieza, Object.assign({}, opciones, { soloFalladas: falladas }));
+            raiz.replaceWith(nuevo);
+            nuevo.scrollIntoView({ block: "start", behavior: "smooth" });
+          });
+          acciones.appendChild(rep);
+        }
+        var seguir = el("button", "btn" + (falladas.length ? " ghost" : ""), quedan ? "Seguir · " + numero(quedan) + " por ver" : "Otra vuelta de repaso");
+        seguir.type = "button";
+        seguir.addEventListener("click", function () {
+          var nuevo = montar(pieza, Object.assign({}, opciones, { soloFalladas: null }));
           raiz.replaceWith(nuevo);
           nuevo.scrollIntoView({ block: "start", behavior: "smooth" });
         });
-        acciones.appendChild(rep);
-      }
-      var seguir = el("button", "btn" + (falladas.length ? " ghost" : ""), quedan ? "Seguir · " + numero(quedan) + " por ver" : "Otra vuelta de repaso");
-      seguir.type = "button";
-      seguir.addEventListener("click", function () {
-        var nuevo = montar(pieza, Object.assign({}, opciones, { soloFalladas: null }));
-        raiz.replaceWith(nuevo);
-        nuevo.scrollIntoView({ block: "start", behavior: "smooth" });
-      });
-      acciones.appendChild(seguir);
-      caja.appendChild(acciones);
-      if (opciones.alTerminar) opciones.alTerminar(registro);
-      escenario.appendChild(caja);
-      puntos.forEach(function (p, i) { p.className = resultados[i] ? "ok" : "ko"; });
-      caja.scrollIntoView({ block: "start", behavior: "smooth" });
-    }
+        acciones.appendChild(seguir);
+        caja.appendChild(acciones);
+        if (opciones.alTerminar) opciones.alTerminar(registro);
+        return caja;
+      },
+    });
+    return raiz;
+  }
 
-    mostrar();
+  // Repaso del día: ejercicios vencidos de varias piezas.
+  // entradas: [{ pieza, item }] ya resueltos por la app; opciones: { estado, guardar, alVolver }
+  function montarRepaso(entradas, opciones) {
+    var estado = opciones.estado;
+    var items = entradas.map(function (e) { return e.item; });
+    var raiz = el("section", "practica-pieza repaso-pieza");
+    raiz.id = "repaso";
+    var cab = el("div", "practica-cab");
+    cab.appendChild(el("p", "kicker", "Repaso"));
+    cab.appendChild(el("h2", null, "Lo que fallaste vuelve hoy"));
+    var piezas = [];
+    entradas.forEach(function (e) { if (piezas.indexOf(e.pieza) < 0) piezas.push(e.pieza); });
+    cab.appendChild(el("p", "practica-intro", items.length + (items.length === 1 ? " ejercicio" : " ejercicios") + " de " + (piezas.length === 1 ? "la pieza " : "las piezas ") + piezas.join(", ") + ". Si lo aciertas hoy, vuelve a los 3 días, después a los 7 y a los 14. Si vuelves a fallar, mañana otra vez."));
+    raiz.appendChild(cab);
+    var aciertos = 0;
+    montarTandaEnRaiz(raiz, items, {
+      etiquetaPieza: true,
+      alResolver: function (item, acierto) {
+        if (acierto) aciertos++;
+        var registro = registroDe(estado, item.mecanismo);
+        registro.hechos++;
+        if (acierto) registro.aciertos++;
+        programarRepaso(estado, item.mecanismo, item, acierto);
+        opciones.guardar();
+      },
+      resumen: function (resultados, items) {
+        var total = items.length;
+        var pendiente = repasoPendiente(estado);
+        var caja = el("section", "resumen-practica " + (aciertos === total ? "pleno" : aciertos >= total * 0.6 ? "bien" : "flojo"));
+        caja.appendChild(el("p", "eti", "Repaso hecho"));
+        caja.appendChild(el("p", "marcador", aciertos + " de " + total));
+        caja.appendChild(el("p", "lectura", (aciertos === total ? "Todo asentado por hoy. " : "Lo que ha fallado vuelve mañana. ")
+          + (pendiente.vencidos.length ? "Te quedan " + pendiente.vencidos.length + " ejercicios más vencidos." : (pendiente.proximo ? "El próximo repaso te espera el " + new Date(pendiente.proximo).toLocaleDateString("es-ES", { day: "numeric", month: "long" }) + "." : "No queda nada programado: lo que falles a partir de ahora volverá aquí."))));
+        var acciones = el("div", "fila-acciones");
+        if (pendiente.vencidos.length) {
+          var seguir = el("button", "btn", "Seguir repasando");
+          seguir.type = "button";
+          seguir.addEventListener("click", function () { if (opciones.alSeguir) opciones.alSeguir(); });
+          acciones.appendChild(seguir);
+        }
+        var volver = el("button", "btn" + (pendiente.vencidos.length ? " ghost" : ""), "Volver al curso");
+        volver.type = "button";
+        volver.addEventListener("click", function () { if (opciones.alVolver) opciones.alVolver(); });
+        acciones.appendChild(volver);
+        caja.appendChild(acciones);
+        return caja;
+      },
+    });
     return raiz;
   }
 
@@ -1319,5 +1429,5 @@
     return caja;
   }
 
-  root.NexoPractica = Object.freeze({ extraer: extraer, banco: banco, tanda: tanda, filtrar: filtrar, montar: montar, llamada: llamada, seccionAnexo: seccionAnexo, diagnosticar: diagnosticar, REGLAS: REGLAS, TANDA: TANDA });
+  root.NexoPractica = Object.freeze({ extraer: extraer, banco: banco, tanda: tanda, filtrar: filtrar, montar: montar, montarRepaso: montarRepaso, programarRepaso: programarRepaso, repasoPendiente: repasoPendiente, llamada: llamada, seccionAnexo: seccionAnexo, diagnosticar: diagnosticar, REGLAS: REGLAS, TANDA: TANDA });
 })(typeof window !== "undefined" ? window : globalThis);

@@ -34,9 +34,10 @@
       if (!e.ultimaSeccion) e.ultimaSeccion = {};
       if (!e.ultimaPieza) e.ultimaPieza = null;
       if (!e.practica) e.practica = {};
+      if (!e.repaso) e.repaso = { items: {} };
       return e;
     } catch (err) {
-      return { hechas: {}, actuaciones: {}, ultimaSeccion: {}, ultimaPieza: null, practica: {} };
+      return { hechas: {}, actuaciones: {}, ultimaSeccion: {}, ultimaPieza: null, practica: {}, repaso: { items: {} } };
     }
   }
 
@@ -182,6 +183,78 @@
   window.addEventListener("scroll", actualizarProgresoLectura, { passive: true });
   window.addEventListener("resize", actualizarProgresoLectura);
 
+  // ---------- Repaso entre piezas ----------
+
+  function fechaCorta(iso) {
+    try { return new Date(iso).toLocaleDateString("es-ES", { day: "numeric", month: "long" }); } catch (err) { return ""; }
+  }
+
+  function renderTarjetaRepaso() {
+    var pendiente = window.NexoPractica.repasoPendiente(estado);
+    if (!pendiente.total) return null;
+    var caja = el("section", "repaso-tarjeta" + (pendiente.vencidos.length ? " vence" : ""));
+    caja.appendChild(el("span", "eti", "Repaso"));
+    var txt = el("div", "txt");
+    if (pendiente.vencidos.length) {
+      txt.appendChild(el("strong", null, pendiente.vencidos.length + (pendiente.vencidos.length === 1 ? " ejercicio para hoy" : " ejercicios para hoy")));
+      txt.appendChild(el("small", null, "Lo que fallaste en " + (pendiente.piezas.length === 1 ? "la pieza " : "las piezas ") + pendiente.piezas.join(", ") + ". Cinco minutos y se asienta."));
+    } else {
+      txt.appendChild(el("strong", null, "Nada vence hoy"));
+      txt.appendChild(el("small", null, pendiente.total + (pendiente.total === 1 ? " ejercicio programado" : " ejercicios programados") + ". El próximo repaso, el " + fechaCorta(pendiente.proximo) + "."));
+    }
+    caja.appendChild(txt);
+    var b = el("button", "btn" + (pendiente.vencidos.length ? "" : " ghost"), pendiente.vencidos.length ? "Repasar ahora" : "Adelantar el repaso");
+    b.addEventListener("click", function () { renderRepaso(!pendiente.vencidos.length); });
+    caja.appendChild(b);
+    return caja;
+  }
+
+  function renderRepaso(adelantar) {
+    modoLector(false);
+    limpiar();
+    var paso = el("div", "step step-repaso");
+    paso.appendChild(volver("Volver al curso", renderIndice));
+    var cargando = el("p", "intro", "Preparando el repaso…");
+    paso.appendChild(cargando);
+    app.appendChild(paso);
+
+    var pendiente = window.NexoPractica.repasoPendiente(estado);
+    var lista = pendiente.vencidos.length ? pendiente.vencidos : (adelantar ? pendiente.futuros : []);
+    // Solo piezas abiertas para esta persona; las demás se quedan programadas.
+    lista = lista.filter(function (x) { var p = piezaEnIndice(x.pieza); return p && p.abierta; }).slice(0, window.NexoPractica.TANDA);
+    if (!lista.length) { cargando.textContent = "No hay nada que repasar ahora mismo."; return; }
+
+    var codigos = [];
+    lista.forEach(function (x) { if (codigos.indexOf(x.pieza) < 0) codigos.push(x.pieza); });
+    var cargas = codigos.map(function (c) { return cargarPieza(c); });
+    cargas.push(conAcceso ? cargarPieza("ANEXO-UTTRYKK") : Promise.resolve(null));
+    Promise.all(cargas).then(function (piezas) {
+      var anexo = piezas.pop();
+      var porCodigo = {};
+      piezas.forEach(function (p, i) { if (p) porCodigo[codigos[i]] = p; });
+      var entradas = [];
+      lista.forEach(function (x) {
+        var pieza = porCodigo[x.pieza];
+        if (!pieza) return;
+        var b = window.NexoPractica.banco(pieza, window.NexoPractica.seccionAnexo(anexo, pieza.codigo));
+        var item = b.items.filter(function (it) { return it.id === x.id; })[0];
+        if (item) entradas.push({ pieza: x.pieza, item: item });
+        else { delete estado.repaso.items[x.pieza + "|" + x.id]; guardar(); }
+      });
+      cargando.remove();
+      if (!entradas.length) { paso.appendChild(el("p", "intro", "Estos ejercicios ya no están en el banco de su pieza. Se han quitado del repaso.")); return; }
+      paso.appendChild(window.NexoPractica.montarRepaso(entradas, {
+        estado: estado,
+        guardar: guardar,
+        alVolver: renderIndice,
+        alSeguir: function () { renderRepaso(false); },
+      }));
+      window.scrollTo({ top: 0, behavior: "auto" });
+    }).catch(function () {
+      cargando.textContent = "No se ha podido preparar el repaso. Vuelve a intentarlo en un momento.";
+    });
+  }
+
   // ---------- Pantalla: índice del curso ----------
 
   function renderDato(numero, texto) {
@@ -291,6 +364,11 @@
     datos.appendChild(renderDato("4", "destrezas conectadas"));
     hero.appendChild(datos);
     requestAnimationFrame(pintarDatoPractica);
+
+    if (window.NexoPractica) {
+      var tarjetaRepaso = renderTarjetaRepaso();
+      if (tarjetaRepaso) paso.appendChild(tarjetaRepaso);
+    }
 
     var abiertas = indice.filter(function (p) { return p.abierta; });
     var hechas = abiertas.filter(function (p) { return estado.hechas[p.codigo]; }).length;

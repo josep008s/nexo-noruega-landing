@@ -87,6 +87,30 @@ for (const pieza of piezas.sort((a, b) => a.codigo.localeCompare(b.codigo))) {
   if (/es el verbo/.test(noVerbo) || !/«min» va justo después de «etter»/.test(noVerbo)) fallos.push("diagnóstico: llama verbo a lo que no lo es (" + noVerbo + ")");
   if (!fallos.some((f) => f.startsWith("diagnóstico"))) console.log("  diagnóstico del fallo: intercambio, V2, hueco at/om, palabra que falta, errata y adverbio en subordinada OK");
 }
+// Repaso espaciado: fallo -> mañana; acierto -> 3, 7, 14 días; después desaparece.
+{
+  const estado = { repaso: { items: {} } };
+  const it = { id: "ordena:abc", tipo: "ordena" };
+  const dia = (n) => new Date(Date.UTC(2026, 8, 3 + n, 12));
+  P.programarRepaso(estado, "M01", it, false, dia(0));
+  let pend = P.repasoPendiente(estado, dia(0));
+  if (pend.vencidos.length !== 0 || pend.total !== 1) fallos.push("repaso: el fallo no debe vencer el mismo día");
+  pend = P.repasoPendiente(estado, dia(1));
+  if (pend.vencidos.length !== 1 || pend.piezas[0] !== "M01") fallos.push("repaso: el fallo debe vencer al día siguiente");
+  P.programarRepaso(estado, "M01", it, true, dia(1));
+  if (P.repasoPendiente(estado, dia(3)).vencidos.length !== 0 || P.repasoPendiente(estado, dia(4)).vencidos.length !== 1) fallos.push("repaso: tras acertar debe volver a los 3 días");
+  P.programarRepaso(estado, "M01", it, true, dia(4));
+  if (P.repasoPendiente(estado, dia(11)).vencidos.length !== 1) fallos.push("repaso: tras el segundo acierto debe volver a los 7 días");
+  P.programarRepaso(estado, "M01", it, true, dia(11));
+  if (P.repasoPendiente(estado, dia(25)).vencidos.length !== 1) fallos.push("repaso: tras el tercer acierto debe volver a los 14 días");
+  P.programarRepaso(estado, "M01", it, true, dia(25));
+  if (P.repasoPendiente(estado, dia(60)).total !== 0) fallos.push("repaso: tras el cuarto acierto debe darse por asentado");
+  P.programarRepaso(estado, "M02", { id: "completa:x", tipo: "completa" }, false, dia(0));
+  P.programarRepaso(estado, "M02", { id: "completa:x", tipo: "completa" }, false, dia(2));
+  const r = estado.repaso.items["M02|completa:x"];
+  if (!r || r.fallos !== 2 || r.contacto !== 0) fallos.push("repaso: un segundo fallo debe volver al primer contacto y contar los fallos");
+  if (!fallos.some((f) => f.startsWith("repaso"))) console.log("  repaso espaciado: 1, 3, 7 y 14 días, y reinicio al fallar OK");
+}
 console.log("  tipos en total:", JSON.stringify(tipos), "· total:", total);
 if (fallos.length) { console.log("\nFALLOS:\n  " + fallos.slice(0, 40).join("\n  ")); process.exit(1); }
 if (completo && process.argv.includes("--meta")) {
