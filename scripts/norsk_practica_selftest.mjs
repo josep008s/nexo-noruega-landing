@@ -1,11 +1,11 @@
 #!/usr/bin/env node
-// Autotest sin navegador de norsk/curso/practica.js: el generador de ejercicios
-// interactivos tiene que producir una tanda completa para cada mecanismo con el
-// noruego ya revisado de la pieza (bloques, ficha T, ficha P, ficha E), sin
-// inventar frases y sin romperse con las variantes de formato de cada archivo.
-// Usa el curso completo si está en el disco (api/_curso_privado.js, fuera del
-// repo) y, si no, la pieza abierta de la demo pública.
-import { readFileSync, existsSync } from "node:fs";
+// Autotest sin navegador de norsk/curso/practica.js: el banco de ejercicios de cada
+// mecanismo tiene que ser grande, estar hecho solo con el noruego ya revisado de la
+// pieza (más el anexo de expresiones cuando existe) y no romperse con las variantes
+// de formato de cada archivo. Con el curso completo en disco (api/_curso_privado.js,
+// fuera del repo) recorre los 16 mecanismos; si no, la pieza abierta de la demo.
+// Con --meta escribe data/norsk-practica-meta.json (totales por pieza para la web).
+import { readFileSync, existsSync, writeFileSync } from "node:fs";
 import vm from "node:vm";
 
 const ENT = { amp: "&", lt: "<", gt: ">", quot: '"', apos: "'", nbsp: " ", laquo: "«", raquo: "»", hellip: "…" };
@@ -15,11 +15,9 @@ function decode(s) {
     return Object.prototype.hasOwnProperty.call(ENT, e) ? ENT[e] : m;
   });
 }
-// DOM mínimo: solo lo que usa la extracción (textarea.innerHTML → value).
 const fakeDocument = {
   createElement() {
-    const n = { _html: "", set innerHTML(v) { this._html = String(v); }, get innerHTML() { return this._html; }, get value() { return decode(this._html); }, get textContent() { return decode(this._html.replace(/<[^>]+>/g, "")); } };
-    return n;
+    return { _html: "", set innerHTML(v) { this._html = String(v); }, get innerHTML() { return this._html; }, get value() { return decode(this._html); }, get textContent() { return decode(this._html.replace(/<[^>]+>/g, "")); } };
   },
 };
 const sandbox = { window: undefined, document: fakeDocument, navigator: {}, console };
@@ -28,11 +26,14 @@ vm.createContext(sandbox);
 vm.runInContext(readFileSync(new URL("../norsk/curso/practica.js", import.meta.url), "utf8"), sandbox);
 const P = sandbox.NexoPractica;
 
-let piezas;
+let piezas, anexo = null, completo = false;
 const privado = new URL("../api/_curso_privado.js", import.meta.url);
 if (existsSync(privado)) {
   const raw = readFileSync(privado, "utf8");
-  piezas = JSON.parse(raw.slice(raw.indexOf("{"), raw.lastIndexOf("}") + 1)).piezas.filter((p) => p.tipo === "mecanismo");
+  const todas = JSON.parse(raw.slice(raw.indexOf("{"), raw.lastIndexOf("}") + 1)).piezas;
+  piezas = todas.filter((p) => p.tipo === "mecanismo");
+  anexo = todas.find((p) => p.codigo === "ANEXO-UTTRYKK") || null;
+  completo = true;
 } else {
   const demo = JSON.parse(readFileSync(new URL("../data/norsk-curso-demo.json", import.meta.url), "utf8"));
   piezas = [demo.mecanismo];
@@ -40,25 +41,43 @@ if (existsSync(privado)) {
 
 const fallos = [];
 const tipos = {};
+const porPieza = {};
+let total = 0;
 for (const pieza of piezas.sort((a, b) => a.codigo.localeCompare(b.codigo))) {
-  let g;
-  try { g = P.generar(pieza, 0); } catch (e) { fallos.push(`${pieza.codigo}: excepción ${e.message}`); continue; }
-  const cuenta = {};
-  for (const it of g.items) {
-    cuenta[it.tipo] = (cuenta[it.tipo] || 0) + 1;
+  let b;
+  const anexoHtml = P.seccionAnexo(anexo, pieza.codigo);
+  try { b = P.banco(pieza, anexoHtml); } catch (e) { fallos.push(`${pieza.codigo}: excepción ${e.message}`); continue; }
+  for (const it of b.items) {
     tipos[it.tipo] = (tipos[it.tipo] || 0) + 1;
     if ((it.tipo === "ordena" || it.tipo === "transforma" || it.tipo === "escribe") && it.solucion.join(" ").toLowerCase() !== String(it.frase || it.respuesta || "").toLowerCase()) fallos.push(`${pieza.codigo}: ${it.tipo} no reconstruye la frase original (${it.solucion.join(" ")})`);
-    if (it.tipo === "mc" && (it.opciones.length < 3 || it.correcta >= it.opciones.length)) fallos.push(`${pieza.codigo}: mc con opciones inválidas (E${it.id})`);
+    if ((it.tipo === "mc" || it.tipo === "elige") && (it.opciones.length < 3 || it.correcta < 0 || it.correcta >= it.opciones.length)) fallos.push(`${pieza.codigo}: ${it.tipo} con opciones inválidas (${it.pregunta.slice(0, 40)})`);
+    if ((it.tipo === "mc" || it.tipo === "elige") && new Set(it.opciones).size !== it.opciones.length) fallos.push(`${pieza.codigo}: ${it.tipo} con opciones repetidas (${it.pregunta.slice(0, 40)})`);
     if (it.tipo === "completa" && it.opciones.indexOf(it.respuesta) < 0) fallos.push(`${pieza.codigo}: completa sin la respuesta entre las opciones`);
     if (it.tipo === "empareja" && it.pares.length < 3) fallos.push(`${pieza.codigo}: empareja con menos de 3 pares`);
   }
-  const g2 = P.generar(pieza, 1);
-  const distintas = g2.items.filter((it) => !g.items.some((x) => x.id === it.id)).length;
-  console.log(`  ${pieza.codigo}: ${g.items.length} ítems ${JSON.stringify(cuenta)} · fuentes ${JSON.stringify(g.fuentes)} · tanda 2 cambia ${distintas}`);
-  if (g.items.length < 6) fallos.push(`${pieza.codigo}: solo ${g.items.length} ejercicios`);
-  if (!g.fuentes.bloques) fallos.push(`${pieza.codigo}: sin bloques para llevarte`);
-  if (piezas.length > 1 && !g.fuentes.fichaE && !g.fuentes.fichaP && !g.fuentes.fichaT) fallos.push(`${pieza.codigo}: sin ninguna ficha reconocida`);
+  // Tres tandas seguidas no deben repetir ejercicio mientras queden sin ver.
+  const vistos = {};
+  const ids = new Set();
+  for (let k = 0; k < 3; k++) {
+    const t = P.tanda(b.items, { vistos, semilla: `${pieza.codigo}:todos:${k}` });
+    if (t.items.length !== 8) fallos.push(`${pieza.codigo}: tanda ${k} con ${t.items.length} ejercicios`);
+    for (const it of t.items) { if (ids.has(it.id)) fallos.push(`${pieza.codigo}: repite ${it.id} antes de agotar el banco`); ids.add(it.id); vistos[it.id] = true; }
+  }
+  porPieza[pieza.codigo] = b.items.length;
+  total += b.items.length;
+  console.log(`  ${pieza.codigo}: ${b.items.length} ejercicios ${JSON.stringify(b.porTipo)} · fuentes ${JSON.stringify(b.fuentes)}`);
+  if (b.items.length < (completo ? 75 : 60)) fallos.push(`${pieza.codigo}: solo ${b.items.length} ejercicios`);
+  if (!b.fuentes.bloques) fallos.push(`${pieza.codigo}: sin bloques para llevarte`);
 }
-console.log("  tipos en total:", JSON.stringify(tipos));
-if (fallos.length) { console.log("\nFALLOS:\n  " + fallos.join("\n  ")); process.exit(1); }
-console.log(`\nPASS norsk_practica_selftest: ${piezas.length} pieza(s) con tanda completa sin inventar noruego`);
+console.log("  tipos en total:", JSON.stringify(tipos), "· total:", total);
+if (fallos.length) { console.log("\nFALLOS:\n  " + fallos.slice(0, 40).join("\n  ")); process.exit(1); }
+if (completo && process.argv.includes("--meta")) {
+  const meta = { version: 1, actualizado: new Date().toISOString().slice(0, 10), ejercicios_totales: total, por_pieza: porPieza };
+  writeFileSync(new URL("../data/norsk-practica-meta.json", import.meta.url), JSON.stringify(meta, null, 2) + "\n");
+  console.log("  data/norsk-practica-meta.json escrito");
+}
+if (completo && existsSync(new URL("../data/norsk-practica-meta.json", import.meta.url))) {
+  const meta = JSON.parse(readFileSync(new URL("../data/norsk-practica-meta.json", import.meta.url), "utf8"));
+  if (Math.abs(meta.ejercicios_totales - total) > total * 0.15) { console.log(`\nFALLO: data/norsk-practica-meta.json dice ${meta.ejercicios_totales} y el banco real es ${total}; regenera con --meta`); process.exit(1); }
+}
+console.log(`\nPASS norsk_practica_selftest: ${piezas.length} pieza(s), ${total} ejercicios sin inventar noruego`);
