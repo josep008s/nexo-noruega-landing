@@ -4,8 +4,8 @@
   "ruta": "norsk-desde-cero-a2",
   "actualizado": "2026-09-04",
   "aviso": "Material propio de NEXO NORSK. NEXO NORSK es un proyecto independiente y no tiene relación con HK-dir, con UDI ni con ningún centro de examen. Este recorrido no promete un nivel, un aprobado ni un trámite.",
-  "piezas_totales": 14,
-  "lecciones_totales": 14
+  "piezas_totales": 16,
+  "lecciones_totales": 16
  },
  "piezas": [
   {
@@ -2237,6 +2237,24 @@
    "zona": "A1",
    "unidad": "A1-U03",
    "resumen": "Un compañero no encuentra un paquete: dile dónde está con zona, soporte y referencia, sin repetir el nombre del objeto."
+  },
+  {
+   "codigo": "A1-U04-L01",
+   "tipo": "leccion",
+   "titulo": "Busco esto",
+   "orden": 15,
+   "zona": "A1",
+   "unidad": "A1-U04",
+   "resumen": "En una tienda después del trabajo, encontrar dos productos que no ves preguntando a un empleado, y pedir la cantidad exacta de cada cosa de tu lista."
+  },
+  {
+   "codigo": "A1-U04-L02",
+   "tipo": "leccion",
+   "titulo": "Puedo pedirlo",
+   "orden": 16,
+   "zona": "A1",
+   "unidad": "A1-U04",
+   "resumen": "En una cafetería cerca del trabajo, pedir dos cosas, reaccionar cuando no tienen lo que pides, preguntar el precio, confirmarlo y pagar."
   }
  ]
 }

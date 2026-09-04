@@ -448,6 +448,164 @@
    }
   },
   {
+   "id": "LARS-A1-U04",
+   "modo": "rollespill",
+   "modo_contrato": "REAL_LIFE",
+   "nivel": "A1",
+   "titulo": "La tienda y la cafetería",
+   "leccion": [
+    "A1-U04-L01",
+    "A1-U04-L02"
+   ],
+   "contexto_es": "Role-play ficticio en dos partes. Primero, en una tienda, Larsito hace de empleado: tú buscas leche de avena, dices lo que necesitas con la cantidad, preguntas si tienen bolsitas de café y dónde están los huevos. Después, en una cafetería, pides un café pequeño y un panecillo con queso, no lo tienen, aceptas la alternativa, respondes a «aquí o para llevar», preguntas el precio, lo confirmas y pagas con tarjeta. Usa la tarjeta ficticia.",
+   "datos_ficticios_es": "Tu lista: leche de avena · un pan y seis manzanas · bolsitas de café · huevos. En la cafetería: un café pequeño y un panecillo con queso · para llevar · el precio es 95 coronas.",
+   "turnos": [
+    {
+     "larsito_no": "Hei, kan jeg hjelpe deg?",
+     "larsito_es": "Hola, ¿te puedo ayudar?",
+     "pista_es": "Di que buscas leche de avena: «Jeg leter etter …».",
+     "respuestas_modelo_no": [
+      "Ja, takk. Jeg leter etter havremelk.",
+      "Jeg leter etter havremelk."
+     ],
+     "bloques_no": [
+      "Jeg leter etter …"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Den står i kjøleskapet, ved siden av vanlig melk.",
+     "larsito_es": "Está en la nevera, al lado de la leche normal.",
+     "pista_es": "Da las gracias y di que necesitas un pan y seis manzanas: «Jeg trenger …».",
+     "respuestas_modelo_no": [
+      "Takk. Jeg trenger også et brød og seks epler.",
+      "Takk. Jeg trenger et brød og seks epler."
+     ],
+     "bloques_no": [
+      "Jeg trenger …"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Brødet er der borte. Eplene er i fruktavdelingen.",
+     "larsito_es": "El pan está allí. Las manzanas están en la sección de fruta.",
+     "pista_es": "Pregunta si tienen bolsitas de café: «Har dere …?».",
+     "respuestas_modelo_no": [
+      "Har dere små poser med kaffe?"
+     ],
+     "bloques_no": [
+      "Har dere …?"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Ja, de står på den øverste hyllen.",
+     "larsito_es": "Sí, están en la balda de arriba.",
+     "pista_es": "Pregunta dónde están los huevos.",
+     "respuestas_modelo_no": [
+      "Hvor er eggene?",
+      "Og hvor er eggene?"
+     ],
+     "bloques_no": [
+      "Hvor er …?"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "De er ved siden av osten.",
+     "larsito_es": "Están al lado del queso.",
+     "pista_es": "Da las gracias: «Tusen takk».",
+     "respuestas_modelo_no": [
+      "Tusen takk."
+     ],
+     "bloques_no": [
+      "Tusen takk."
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Hei. Hva kan jeg hjelpe deg med?",
+     "larsito_es": "Hola. ¿En qué te puedo ayudar?",
+     "pista_es": "Pide un café pequeño y un panecillo con queso: «Kan jeg få …?».",
+     "respuestas_modelo_no": [
+      "Kan jeg få en liten kaffe og et rundstykke med ost?"
+     ],
+     "bloques_no": [
+      "Kan jeg få …?"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Vi har ikke rundstykke med ost i dag. Vi har et med egg.",
+     "larsito_es": "Hoy no tenemos panecillo con queso. Tenemos uno con huevo.",
+     "pista_es": "Acepta la alternativa: «Da tar jeg det».",
+     "respuestas_modelo_no": [
+      "Da tar jeg det."
+     ],
+     "bloques_no": [
+      "Da tar jeg det."
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Skal du spise her eller ta med?",
+     "larsito_es": "¿Vas a comer aquí o para llevar?",
+     "pista_es": "Para llevar, y pregunta el precio.",
+     "respuestas_modelo_no": [
+      "Ta med, takk. Hva koster det?",
+      "Ta med. Hva koster det?"
+     ],
+     "bloques_no": [
+      "Ta med, takk.",
+      "Hva koster det?"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Det blir nittifem kroner.",
+     "larsito_es": "Son noventa y cinco coronas.",
+     "pista_es": "Confirma la cifra.",
+     "respuestas_modelo_no": [
+      "Nittifem?",
+      "Sa du nittifem?"
+     ],
+     "bloques_no": [
+      "Nittifem?"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Ja. Noe mer?",
+     "larsito_es": "Sí. ¿Algo más?",
+     "pista_es": "Nada más, y pagas con tarjeta.",
+     "respuestas_modelo_no": [
+      "Nei takk, det var alt. Jeg betaler med kort.",
+      "Nei takk, det var alt."
+     ],
+     "bloques_no": [
+      "Nei takk, det var alt.",
+      "Jeg betaler med kort."
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    }
+   ],
+   "cierre": {
+    "conserva": "Si has dicho cada cantidad delante de la cosa, has preguntado con «Har dere …?» y «Hvor er …?», y en la cafetería has pedido con «Kan jeg få …?», has aceptado la alternativa con «Da tar jeg det» y has confirmado el precio, esta escena está hecha.",
+    "ahora": "Si has metido «de» entre la medida y el producto, o una «å» después de «kan», vuelve a la tabla de la cantidad de Busco esto y a la del modal de Puedo pedirlo.",
+    "repite": "Vuelve a hacer las dos escenas con la misma tarjeta, sin mirar la pista ni los bloques."
+   }
+  },
+  {
    "id": "LARS-PREA1-U01",
    "modo": "rollespill",
    "modo_contrato": "REAL_LIFE",
