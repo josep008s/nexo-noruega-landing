@@ -12,7 +12,20 @@
 
   var LARSITO_ABIERTO = false;
 
-  var DEMO = "/data/larsito-demo.json";
+  // Rutas de la familia NEXO NORSK. Cada una trae sus propios escenarios; el
+  // progreso local es uno solo porque los identificadores no se repiten.
+  var RUTAS_DEMO = {
+    "norskproven-b1": "/data/larsito-demo.json",
+    "norsk-desde-cero-a2": "/data/larsito-desde-cero-demo.json"
+  };
+  var PARAMS = (function () { try { return new URLSearchParams(window.location.search); } catch (e) { return null; } })();
+  var RUTA = PARAMS && RUTAS_DEMO[PARAMS.get("ruta")] ? PARAMS.get("ruta") : "norskproven-b1";
+  var ES_CERO = RUTA === "norsk-desde-cero-a2";
+  var QUERY_RUTA = ES_CERO ? "?ruta=" + RUTA : "";
+  var DEMO = RUTAS_DEMO[RUTA];
+  // La lección del curso puede abrir un escenario directamente y volver a ella.
+  var ESCENARIO_INICIAL = PARAMS && /^[A-Z0-9-]{3,32}$/.test(PARAMS.get("escenario") || "") ? PARAMS.get("escenario") : null;
+  var LECCION_ORIGEN = PARAMS && /^[A-Z0-9-]{3,32}$/.test(PARAMS.get("leccion") || "") ? PARAMS.get("leccion") : null;
   var INDICE_CUADERNO = "/data/norsk-cuaderno-indice.json";
   var APRENDIZAJE = "/api/larsito-aprendizaje/";
   var CLAVE = "nexo_larsito_v1";
@@ -350,9 +363,16 @@
     limpiar();
     var paso = el("div", "step");
 
-    paso.appendChild(el("p", "kicker", "Práctica oral"));
+    paso.appendChild(el("p", "kicker", ES_CERO ? "Práctica oral · Noruego desde cero hasta A2" : "Práctica oral"));
     paso.appendChild(el("h1", null, "Larsito"));
-    paso.appendChild(el("p", "intro", "Practica noruego con situaciones guiadas. Larsito te da el contexto, tú respondes y después comparas tu frase con un modelo."));
+    paso.appendChild(el("p", "intro", ES_CERO
+      ? "Practica en voz alta lo que acabas de aprender en cada lección. Larsito te da una frase corta, tú respondes con los bloques de la tarjeta y después comparas tu frase con el modelo."
+      : "Practica noruego con situaciones guiadas. Larsito te da el contexto, tú respondes y después comparas tu frase con un modelo."));
+    if (ES_CERO) {
+      var volverCurso = el("a", "btn ghost", "Volver al curso");
+      volverCurso.href = "/norsk/curso/" + QUERY_RUTA;
+      paso.appendChild(volverCurso);
+    }
 
     var aviso = el("div", "aviso");
     aviso.appendChild(el("span", "eti", "Demo"));
@@ -372,7 +392,7 @@
       b.appendChild(el("span", "t", esc.titulo));
       b.appendChild(el("span", "m", esc.contexto_es));
       var tag = el("span", "tag" + (esc.modo === "eksamen" ? " ex" : ""),
-        esc.modo === "eksamen" ? "Simulacro sin evaluación · " + esc.nivel : "Role-play ficticio · " + esc.nivel);
+        esc.modo === "eksamen" ? "Simulacro sin evaluación · " + nombreNivel(esc.nivel) : "Role-play ficticio · " + nombreNivel(esc.nivel));
       b.appendChild(tag);
       if (estado.hechos[esc.id]) {
         var hecho = el("span", "m", estado.sinPistas && estado.sinPistas[esc.id]
@@ -389,15 +409,17 @@
     });
     paso.appendChild(cards);
 
-    var h2b = el("h2", null, "Comprensión oral");
-    h2b.style.marginTop = "30px";
-    paso.appendChild(h2b);
-    var btnL = el("button", "btn ghost", "Ver los ejercicios de escucha");
-    btnL.addEventListener("click", function () {
-      if (agenteCargando) return;
-      renderListening();
-    });
-    paso.appendChild(btnL);
+    if ((datos.listening || []).length) {
+      var h2b = el("h2", null, "Comprensión oral");
+      h2b.style.marginTop = "30px";
+      paso.appendChild(h2b);
+      var btnL = el("button", "btn ghost", "Ver los ejercicios de escucha");
+      btnL.addEventListener("click", function () {
+        if (agenteCargando) return;
+        renderListening();
+      });
+      paso.appendChild(btnL);
+    }
 
     var cierre = el("div", "cierre-panel");
     cierre.appendChild(el("p", null, "Cuando el curso abra, Larsito responderá a lo que digas, no a un guion. El feedback llegará después de la actuación completa."));
@@ -685,7 +707,12 @@
     limpiar();
     var paso = el("div", "step");
     paso.appendChild(botonVolver("Volver", renderInicio));
-    paso.appendChild(el("p", "kicker", esc.modo === "eksamen" ? "Simulacro sin evaluación" : "Role-play ficticio"));
+    if (LECCION_ORIGEN && esc.id === ESCENARIO_INICIAL) {
+      var volverLeccion = el("a", "btn ghost", "Volver a la lección");
+      volverLeccion.href = "/norsk/curso/" + QUERY_RUTA + "#" + LECCION_ORIGEN;
+      paso.appendChild(volverLeccion);
+    }
+    paso.appendChild(el("p", "kicker", (esc.modo === "eksamen" ? "Simulacro sin evaluación" : "Role-play ficticio") + " · " + nombreNivel(esc.nivel)));
     paso.appendChild(el("h1", null, esc.titulo));
     paso.appendChild(el("p", "intro", esc.contexto_es));
     if (esc.datos_ficticios_es) {
@@ -905,7 +932,19 @@
       zona.innerHTML = "";
       var caja = el("div", "responder");
       caja.appendChild(el("h2", null, sinPistas ? "Segunda vuelta completada." : "Hecho."));
-      caja.appendChild(el("p", "pista", sinPistas
+      // Cierre propio del escenario (rutas por niveles): qué conservar, qué hacer
+      // ahora y con qué tarjeta repetir. Sin él, queda el texto genérico.
+      var cierrePropio = esc.cierre && typeof esc.cierre === "object" && !sinPistas;
+      if (cierrePropio) {
+        [["Conserva", esc.cierre.conserva], ["Ahora", esc.cierre.ahora], ["Repite", esc.cierre.repite]].forEach(function (par) {
+          if (!par[1]) return;
+          var linea = el("p", "pista");
+          linea.appendChild(el("b", null, par[0] + ". "));
+          linea.appendChild(document.createTextNode(par[1]));
+          caja.appendChild(linea);
+        });
+      }
+      if (!cierrePropio) caja.appendChild(el("p", "pista", sinPistas
         ? "Has retirado los bloques y las pistas de respuesta, pero conservas la ficha y el tema. Esto no demuestra transferencia ni reproduce o evalúa la prueba real. El siguiente paso sería practicar la misma función con datos ficticios nuevos."
         : (esc.modo === "eksamen"
           ? "Esto ha sido una práctica guiada, no una reproducción ni una evaluación de la prueba real. Repite la función con otra ficha ficticia y menos apoyo."
@@ -1311,6 +1350,11 @@
     paso.appendChild(caja);
   }
 
+  // En público el primer tramo se llama «desde cero»; «Pre-A1» es la etiqueta curricular.
+  function nombreNivel(n) {
+    return n === "Pre-A1" ? "Primer contacto" : (n || "");
+  }
+
   function nombreModo(m) {
     return { FREE_CONVERSATION: "conversación libre", EXAM_SIMULATION: "simulacro", REAL_LIFE: "situación real", DEEP_CORRECTION: "corrección a fondo" }[m] || "sesión";
   }
@@ -1503,8 +1547,10 @@
         datos = d;
         if (!datos || !Array.isArray(datos.escenarios) || !datos.escenarios.length) throw new Error("vacío");
         construirAudioFijo(datos);
-        cargarIndiceCuaderno();
-        renderInicio();
+        if (!ES_CERO) cargarIndiceCuaderno();
+        var inicial = ESCENARIO_INICIAL ? escenarioPorId(ESCENARIO_INICIAL) : null;
+        if (inicial) renderConversacion(inicial);
+        else renderInicio();
       })
       .catch(function () {
         error("La práctica no está disponible ahora mismo. Vuelve a intentarlo en un rato.");

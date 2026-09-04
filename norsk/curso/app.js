@@ -900,7 +900,7 @@
     var larsito = seccionHtml("con-larsito");
     if (larsito && pieza.meta && pieza.meta.larsito) {
       var aL = el("a", "btn", "Abrir el escenario con Larsito");
-      aL.href = "/norsk/larsito/" + QUERY_RUTA + "&escenario=" + encodeURIComponent(pieza.meta.larsito);
+      aL.href = "/norsk/larsito/" + QUERY_RUTA + "&escenario=" + encodeURIComponent(pieza.meta.larsito) + "&leccion=" + encodeURIComponent(pieza.codigo);
       larsito.appendChild(aL);
     }
     seccionHtml("cierre");

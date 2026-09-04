@@ -1031,6 +1031,27 @@ if (exists("norsk/curso/app.js")) {
       if (!duros.some((x) => x.startsWith("demo desde cero"))) ok(`demo desde cero: ${d.piezas.length} lección(es) abierta(s) + índice de ${(d.indice || []).length}`);
     } catch (e) { duro("demo desde cero: JSON inválido"); }
   }
+  // Larsito desde cero: escenarios guiados, sin audio remoto ni estado editorial.
+  const DEMO_LARSITO_CERO = "data/larsito-desde-cero-demo.json";
+  if (!exists(DEMO_LARSITO_CERO)) duro(`Falta ${DEMO_LARSITO_CERO}`);
+  else {
+    try {
+      const raw = read(DEMO_LARSITO_CERO);
+      const d = JSON.parse(raw);
+      const esc = Array.isArray(d.escenarios) ? d.escenarios : [];
+      if (d.ruta !== "norsk-desde-cero-a2") duro("Larsito desde cero: ruta incorrecta");
+      if (!esc.length) duro("Larsito desde cero: sin escenarios");
+      if (d.audio_estatico !== false) duro("Larsito desde cero: audio_estatico debe ser false (sin grabaciones ni proveedor)");
+      if (raw.includes("\u2014")) duro("Larsito desde cero: em dash");
+      if (/PENDIENTE|revisi[oó]n nativa|firma nativa/i.test(raw)) duro("Larsito desde cero: expone estado editorial interno");
+      if (PROHIBIDAS.test(raw)) duro("Larsito desde cero: palabra prohibida de marca");
+      const turnosMal = esc.flatMap((e) => (e.turnos || []).filter((t) => !t.larsito_no || !t.larsito_es || !t.pista_es || !(t.respuestas_modelo_no || []).length));
+      if (turnosMal.length) duro(`Larsito desde cero: ${turnosMal.length} turno(s) incompletos`);
+      const conAudio = esc.flatMap((e) => (e.turnos || []).filter((t) => t.audio_no || t.audio_modelo));
+      if (conAudio.length) duro("Larsito desde cero: audio declarado en turnos sin manifiesto");
+      if (!duros.some((x) => x.startsWith("Larsito desde cero"))) ok(`Larsito desde cero: ${esc.length} escenario(s) guiado(s), ${esc.reduce((n, e) => n + (e.turnos || []).length, 0)} turnos, sin audio remoto`);
+    } catch (e) { duro("Larsito desde cero: JSON inválido"); }
+  }
   const SELFTEST_CERO = "scripts/norsk_desde_cero_selftest.mjs";
   if (!exists(SELFTEST_CERO)) duro(`Falta ${SELFTEST_CERO}`);
   else {

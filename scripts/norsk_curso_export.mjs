@@ -61,6 +61,11 @@ const RUTAS = {
     audio: path.join("03_audio", "manifiesto.json"),
     // La demo pública abre estas piezas enteras; el resto solo enseña su nombre.
     demoAbiertas: ["PREA1-U02-L01", "PREA1-U02-L02"],
+    // Escenarios de Larsito por nivel (escenarios_<nivel>.json), que viajan
+    // enteros a la demo pública de Larsito de esta ruta: son práctica guiada
+    // con datos ficticios y no llevan material de pago.
+    larsito: "04_larsito",
+    demoLarsito: path.join(ROOT, "data", "larsito-desde-cero-demo.json"),
   },
 };
 const RUTA = (process.argv.find((a) => a.startsWith("--ruta=")) || "").slice(7).trim() || "norskproven-b1";
@@ -1092,6 +1097,65 @@ if (fallos.length) {
       (demo.diagnostico ? ` + introducción del diagnóstico (${demo.diagnostico.secciones.length} secciones)` : " sin diagnóstico"));
   } else {
     console.log(`  ${demo.piezas.map((p) => `${p.codigo} (${p.secciones.length} secciones, ${p.palabras} palabras)`).join(" + ")} + índice de ${demo.indice.length} piezas`);
+  }
+}
+
+// Demo pública de Larsito para la ruta: une los escenarios por nivel del Drive.
+// Cada turno tiene que llevar la frase de Larsito en noruego y castellano, la
+// pista y al menos una respuesta modelo; ningún audio remoto (audio_estatico=false).
+function construirDemoLarsito() {
+  if (!CFG.larsito) return null;
+  const dir = path.join(MATERIAL, CFG.larsito);
+  if (!fs.existsSync(dir)) { avisos.push(`no existe ${CFG.larsito}: Larsito se queda sin escenarios`); return null; }
+  const archivos = fs.readdirSync(dir).filter((f) => /^escenarios_[a-z0-9]+\.json$/.test(f)).sort();
+  const escenarios = [];
+  const reglas = {};
+  const fallosL = [];
+  let aviso = null;
+  for (const f of archivos) {
+    let d;
+    try { d = JSON.parse(fs.readFileSync(path.join(dir, f), "utf8")); } catch (e) { fallosL.push(`${f}: JSON inválido`); continue; }
+    if (!aviso && d.aviso) aviso = d.aviso;
+    if (d.nivel && d.reglas_nivel) reglas[d.nivel] = d.reglas_nivel;
+    for (const e of d.escenarios || []) {
+      for (const campo of ["id", "modo", "nivel", "titulo", "contexto_es"]) if (!e[campo]) fallosL.push(`${f} ${e.id || "?"}: falta ${campo}`);
+      if (!Array.isArray(e.turnos) || !e.turnos.length) fallosL.push(`${f} ${e.id}: sin turnos`);
+      (e.turnos || []).forEach((t, i) => {
+        for (const campo of ["larsito_no", "larsito_es", "pista_es"]) if (!t[campo]) fallosL.push(`${e.id} turno ${i + 1}: falta ${campo}`);
+        if (!Array.isArray(t.respuestas_modelo_no) || !t.respuestas_modelo_no.length) fallosL.push(`${e.id} turno ${i + 1}: sin respuesta modelo`);
+        if (t.audio_no || t.audio_modelo) fallosL.push(`${e.id} turno ${i + 1}: audio declarado sin manifiesto de Larsito`);
+      });
+      if (escenarios.some((x) => x.id === e.id)) fallosL.push(`${e.id}: identificador repetido`);
+      const { qa, notas_internas, ...limpio } = e;
+      escenarios.push(limpio);
+    }
+  }
+  if (!escenarios.length) { avisos.push("Larsito: ningún escenario en el Drive"); return null; }
+  const texto = JSON.stringify(escenarios);
+  if (texto.includes("—")) fallosL.push("em dash en los escenarios de Larsito");
+  if (/increíble|brutal|paraíso|trucos|hola chicos/i.test(texto)) fallosL.push("palabra prohibida de marca en los escenarios de Larsito");
+  if (/PENDIENTE|revisi[oó]n nativa|firma nativa/i.test(texto)) fallosL.push("los escenarios de Larsito exponen estado editorial interno");
+  if (fallosL.length) {
+    console.error(`\nERRORES en los escenarios de Larsito (no se escribe la demo):\n- ${fallosL.join("\n- ")}`);
+    process.exit(1);
+  }
+  return {
+    version: 1,
+    ruta: RUTA,
+    generado: new Date().toISOString().slice(0, 10),
+    aviso: aviso || "Escenarios ficticios para practicar. Larsito reconoce únicamente las respuestas preparadas de cada turno y no guarda lo que dices.",
+    reglas_nivel: reglas,
+    escenarios,
+    listening: [],
+    audio_estatico: false,
+  };
+}
+
+if (CFG.demoLarsito) {
+  const demoL = construirDemoLarsito();
+  if (demoL) {
+    fs.writeFileSync(CFG.demoLarsito, JSON.stringify(demoL, null, 1));
+    console.log(`Escrito ${CFG.demoLarsito}: ${demoL.escenarios.length} escenario(s) de Larsito (${Object.keys(demoL.reglas_nivel).join(", ") || "sin reglas de nivel"}).`);
   }
 }
 

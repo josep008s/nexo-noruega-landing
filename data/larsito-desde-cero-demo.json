@@ -1,0 +1,156 @@
+{
+ "version": 1,
+ "ruta": "norsk-desde-cero-a2",
+ "generado": "2026-09-04",
+ "aviso": "Escenarios ficticios para practicar. Larsito reconoce únicamente las respuestas preparadas de cada turno; no analiza pronunciación, no inventa correcciones y no guarda el contenido de lo que dices. Usa solo los datos de la tarjeta, nunca los tuyos.",
+ "reglas_nivel": {
+  "Pre-A1": {
+   "turnos_larsito": "una frase, muy despacio",
+   "apoyo": "pista en castellano y bloque visible",
+   "modos": [
+    "REAL_LIFE"
+   ],
+   "correccion": "una sola prioridad al final: si el bloque completo estaba",
+   "pronunciacion": "NOT_OBSERVED",
+   "escalera": [
+    "repetir la frase más despacio",
+    "dar la pista en castellano",
+    "mostrar el bloque con el dato de la tarjeta",
+    "pedir que lo digas tú"
+   ]
+  }
+ },
+ "escenarios": [
+  {
+   "id": "LARS-PREA1-U02",
+   "modo": "rollespill",
+   "nivel": "Pre-A1",
+   "titulo": "Primer día: la sala de descanso y la recepción",
+   "leccion": [
+    "PREA1-U02-L01",
+    "PREA1-U02-L02"
+   ],
+   "contexto_es": "Role-play ficticio en dos partes. Primero, un compañero nuevo te hace tres preguntas en la sala de descanso. Después, recepción te pide deletrear el apellido y confirmar un código. Usa la tarjeta ficticia.",
+   "datos_ficticios_es": "Lucía Santos · viene de Spania · vive en Oslo · código de acceso D-420.",
+   "turnos": [
+    {
+     "larsito_no": "Hei. Jeg heter Amir. Hva heter du?",
+     "larsito_es": "Hola. Me llamo Amir. ¿Cómo te llamas?",
+     "pista_es": "Di tu nombre de la tarjeta con «Jeg heter…».",
+     "respuestas_modelo_no": [
+      "Jeg heter Lucía.",
+      "Hei. Jeg heter Lucía."
+     ],
+     "bloques_no": [
+      "Jeg heter …"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Hvor kommer du fra?",
+     "larsito_es": "¿De dónde vienes?",
+     "pista_es": "El país va detrás de «Jeg kommer fra…».",
+     "respuestas_modelo_no": [
+      "Jeg kommer fra Spania."
+     ],
+     "bloques_no": [
+      "Jeg kommer fra …"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Og hvor bor du?",
+     "larsito_es": "¿Y dónde vives?",
+     "pista_es": "La ciudad va detrás de «Jeg bor i…».",
+     "respuestas_modelo_no": [
+      "Jeg bor i Oslo."
+     ],
+     "bloques_no": [
+      "Jeg bor i …"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Jeg bor i Lillestrøm. Vi sees i pausen.",
+     "larsito_es": "Yo vivo en Lillestrøm. Nos vemos en la pausa.",
+     "pista_es": "Devuelve la despedida: «Vi sees» o «Ja, vi sees».",
+     "respuestas_modelo_no": [
+      "Vi sees.",
+      "Ja, vi sees."
+     ],
+     "bloques_no": [
+      "Vi sees."
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Hei. Hva heter du?",
+     "larsito_es": "(Recepción) Hola. ¿Cómo te llamas?",
+     "pista_es": "Nombre y apellido de la tarjeta.",
+     "respuestas_modelo_no": [
+      "Lucía Santos.",
+      "Jeg heter Lucía Santos."
+     ],
+     "bloques_no": [
+      "Jeg heter …"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Kan du stave etternavnet ditt?",
+     "larsito_es": "¿Puedes deletrear tu apellido?",
+     "pista_es": "Letra a letra: S, A, N, T, O, S. Recuerda que la o noruega suena cerrada.",
+     "respuestas_modelo_no": [
+      "S-A-N-T-O-S.",
+      "Ja. S-A-N-T-O-S."
+     ],
+     "bloques_no": [
+      "S-A-N-T-O-S"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Takk. Koden din er D-fire-to-null.",
+     "larsito_es": "Gracias. Tu código es D-4-2-0.",
+     "pista_es": "Confirma el código con «Sa du…?».",
+     "respuestas_modelo_no": [
+      "Sa du D-fire-to-null?",
+      "D-fire-to-null?"
+     ],
+     "bloques_no": [
+      "Sa du …?"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Ja, det stemmer.",
+     "larsito_es": "Sí, es correcto.",
+     "pista_es": "Cierra con «Takk».",
+     "respuestas_modelo_no": [
+      "Takk.",
+      "Takk. Ha det."
+     ],
+     "bloques_no": [
+      "Takk."
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    }
+   ],
+   "cierre": {
+    "conserva": "Has usado los tres bloques con «Jeg» y has confirmado el código.",
+    "ahora": "Si te has quedado en blanco en algún turno, vuelve a la lección que lo enseña.",
+    "repite": "Cambia la tarjeta: Leo Martín · Argentina · Trondheim · código A-118."
+   }
+  }
+ ],
+ "listening": [],
+ "audio_estatico": false
+}
