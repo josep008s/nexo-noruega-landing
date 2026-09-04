@@ -1056,9 +1056,11 @@
     var cols = el("div", "parejas");
     var izq = el("div", "col izq"), der = el("div", "col der");
     var seleccion = null, hechas = 0, fallos = 0;
+    var langDer = item.pares_lang_es === "nb" ? "nb" : "";
     item.derecha.forEach(function (es) {
       var t = el("button", "tarjeta es", es);
       t.type = "button";
+      if (langDer) t.lang = langDer;
       t.addEventListener("click", function () { if (seleccion) intentar(seleccion, t); });
       der.appendChild(t);
     });
@@ -1104,6 +1106,7 @@
     cols.appendChild(izq); cols.appendChild(der);
     caja.appendChild(el("p", "ayuda-item", item.fuente === "anexo"
       ? "Arrastra cada expresión hasta su significado, o toca una y después la otra."
+      : langDer ? "Arrastra cada pregunta hasta su respuesta, o toca una y después la otra."
       : "Arrastra cada frase noruega hasta su significado, o toca una y después la otra."));
     caja.appendChild(cols);
   }

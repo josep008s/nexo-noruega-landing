@@ -4,6 +4,22 @@
  "generado": "2026-09-04",
  "aviso": "Escenarios ficticios para practicar. Larsito reconoce únicamente las respuestas preparadas de cada turno; no analiza pronunciación, no inventa correcciones y no guarda el contenido de lo que dices. Usa solo los datos de la tarjeta, nunca los tuyos.",
  "reglas_nivel": {
+  "A1": {
+   "turnos_larsito": "una o dos frases, despacio",
+   "apoyo": "pista en castellano y bloque visible; en la segunda vuelta, sin bloques",
+   "modos": [
+    "REAL_LIFE",
+    "DEEP_CORRECTION"
+   ],
+   "correccion": "en cada turno se enseña el modelo para comparar; no se analiza pronunciación ni se afirma nada que no se haya comprobado",
+   "pronunciacion": "NOT_OBSERVED",
+   "escalera": [
+    "repetir la frase más despacio",
+    "dar la pista en castellano",
+    "enseñar el bloque",
+    "enseñar el modelo entero"
+   ]
+  },
   "Pre-A1": {
    "turnos_larsito": "una frase, muy despacio",
    "apoyo": "pista en castellano y bloque visible",
@@ -21,6 +37,416 @@
   }
  },
  "escenarios": [
+  {
+   "id": "LARS-A1-U01",
+   "modo": "rollespill",
+   "modo_contrato": "REAL_LIFE",
+   "nivel": "A1",
+   "titulo": "Nuevo en el curso, y en recepción",
+   "leccion": [
+    "A1-U01-L01",
+    "A1-U01-L02"
+   ],
+   "contexto_es": "Role-play ficticio en dos partes. Primero, un compañero de curso te hace preguntas con el verbo delante y tú le devuelves dos y le presentas a alguien. Después, la recepción escribe mal un dato y tú lo aíslas y lo corriges. Usa la tarjeta ficticia.",
+   "datos_ficticios_es": "Leo Santos · viene de Argentina · vive en Trondheim · trabaja en un restaurante · su compañera es Ana · teléfono ficticio 412 35 806.",
+   "turnos": [
+    {
+     "larsito_no": "Hei. Jeg heter Amir. Er du ny her?",
+     "larsito_es": "Hola. Me llamo Amir. ¿Eres nuevo aquí?",
+     "pista_es": "Responde con «Ja» y di que empiezas hoy.",
+     "respuestas_modelo_no": [
+      "Ja, jeg begynner i dag.",
+      "Ja, jeg begynner i dag. Jeg heter Leo."
+     ],
+     "bloques_no": [
+      "Ja, jeg begynner i dag."
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Hvor kommer du fra?",
+     "larsito_es": "¿De dónde vienes?",
+     "pista_es": "El país de la tarjeta y, después, dónde vives.",
+     "respuestas_modelo_no": [
+      "Jeg kommer fra Argentina, men jeg bor i Trondheim.",
+      "Jeg kommer fra Argentina."
+     ],
+     "bloques_no": [
+      "Jeg kommer fra …",
+      "Jeg bor i …"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Jobber du her?",
+     "larsito_es": "¿Trabajas aquí?",
+     "pista_es": "Di que no con «Nei» y dónde trabajas de verdad (según la tarjeta).",
+     "respuestas_modelo_no": [
+      "Nei, jeg jobber på en restaurant.",
+      "Nei. Jeg jobber på en restaurant."
+     ],
+     "bloques_no": [
+      "Jeg jobber på …"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Jeg jobber på lageret. Hva med deg? Bor du i Oslo?",
+     "larsito_es": "Yo trabajo en el almacén. ¿Y tú? ¿Vives en Oslo?",
+     "pista_es": "Niega con «ikke» detrás del verbo y da tu ciudad.",
+     "respuestas_modelo_no": [
+      "Nei, jeg bor ikke i Oslo. Jeg bor i Trondheim."
+     ],
+     "bloques_no": [
+      "Jeg bor ikke i …"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Hvem er det?",
+     "larsito_es": "¿Quién es?",
+     "pista_es": "Presenta a Ana: «Dette er …» y un dato.",
+     "respuestas_modelo_no": [
+      "Dette er Ana. Hun er en kollega."
+     ],
+     "bloques_no": [
+      "Dette er …",
+      "Hun er en kollega."
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Hei. Kan jeg hjelpe deg? Hva heter du?",
+     "larsito_es": "Hola. ¿Puedo ayudarte? ¿Cómo te llamas?",
+     "pista_es": "Nombre y apellido de la tarjeta.",
+     "respuestas_modelo_no": [
+      "Leo Santos.",
+      "Jeg heter Leo Santos."
+     ],
+     "bloques_no": [
+      "Jeg heter …"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Santos. Var det S-A-N-T-U-S?",
+     "larsito_es": "Santos. ¿Era S-A-N-T-U-S?",
+     "pista_es": "Ha escrito una U: corrige con «Nei, det er» y las letras una a una.",
+     "respuestas_modelo_no": [
+      "Nei, det er S-A-N-T-O-S."
+     ],
+     "bloques_no": [
+      "Nei, det er …"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Takk. Hva er telefonnummeret ditt?",
+     "larsito_es": "Gracias. ¿Cuál es tu número de teléfono?",
+     "pista_es": "El teléfono ficticio de la tarjeta, cifra a cifra.",
+     "respuestas_modelo_no": [
+      "Det er 412 35 806."
+     ],
+     "bloques_no": [
+      "Det er …"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Sa du 412 35 806?",
+     "larsito_es": "¿Has dicho 412 35 806?",
+     "pista_es": "El dato entero es correcto: confirma.",
+     "respuestas_modelo_no": [
+      "Ja, det stemmer."
+     ],
+     "bloques_no": [
+      "Ja, det stemmer."
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Fint. Vent her.",
+     "larsito_es": "Bien. Espera aquí.",
+     "pista_es": "Cierra con «Takk» o «Greit».",
+     "respuestas_modelo_no": [
+      "Takk.",
+      "Greit."
+     ],
+     "bloques_no": [
+      "Takk."
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    }
+   ],
+   "cierre": {
+    "conserva": "Si has respondido con «Ja» o «Nei» a las preguntas con el verbo delante, has presentado a Ana y has corregido la letra con «Nei, det er», esta escena está hecha.",
+    "ahora": "Si te has quedado en blanco al negar, vuelve a «ikke detrás del verbo» en Me presento.",
+    "repite": "Cambia la tarjeta: Samira · Marokko · Sandvika · barnehage · compañero Omar · teléfono ficticio 412 35 806."
+   }
+  },
+  {
+   "id": "LARS-A1-U02",
+   "modo": "rollespill",
+   "modo_contrato": "REAL_LIFE",
+   "nivel": "A1",
+   "titulo": "La pausa y el cambio de turno",
+   "leccion": [
+    "A1-U02-L01",
+    "A1-U02-L02"
+   ],
+   "contexto_es": "Role-play ficticio en dos partes. Primero, en la pausa, un compañero te pregunta por tu rutina y tú le preguntas por la suya. Después, tu responsable te cambia el turno de mañana: confirmas la hora nueva y explicas dónde estarás con el verbo en segundo lugar. Usa la tarjeta ficticia.",
+   "datos_ficticios_es": "Te levantas a las seis · vas en autobús · empiezas a las ocho · terminas a las cuatro · mañana empiezas a las nueve y trabajas en recepción antes de la pausa.",
+   "turnos": [
+    {
+     "larsito_no": "Hei. Når står du opp?",
+     "larsito_es": "Hola. ¿Cuándo te levantas?",
+     "pista_es": "La hora de la tarjeta con «Jeg står opp klokka …».",
+     "respuestas_modelo_no": [
+      "Jeg står opp klokka seks."
+     ],
+     "bloques_no": [
+      "Jeg står opp klokka …"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Tar du bussen til jobb?",
+     "larsito_es": "¿Vas al trabajo en autobús?",
+     "pista_es": "Responde con «Ja» y el bloque entero.",
+     "respuestas_modelo_no": [
+      "Ja, jeg tar bussen til jobb."
+     ],
+     "bloques_no": [
+      "Jeg tar bussen til jobb."
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Når begynner du?",
+     "larsito_es": "¿Cuándo empiezas?",
+     "pista_es": "Hora de inicio y hora de final, y devuélvele la pregunta.",
+     "respuestas_modelo_no": [
+      "Jeg begynner klokka åtte og slutter klokka fire. Når begynner du?",
+      "Jeg begynner klokka åtte. Når begynner du?"
+     ],
+     "bloques_no": [
+      "Jeg begynner klokka …",
+      "Når begynner du?"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Jeg begynner halv ni. Når slutter du?",
+     "larsito_es": "Yo empiezo a las ocho y media. ¿Cuándo terminas?",
+     "pista_es": "La hora de final de la tarjeta.",
+     "respuestas_modelo_no": [
+      "Jeg slutter klokka fire."
+     ],
+     "bloques_no": [
+      "Jeg slutter klokka …"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Hei. I morgen begynner du klokka ni, ikke klokka åtte.",
+     "larsito_es": "Hola. Mañana empiezas a las nueve, no a las ocho.",
+     "pista_es": "Confirma la hora nueva con «Sa du …?».",
+     "respuestas_modelo_no": [
+      "Sa du klokka ni?"
+     ],
+     "bloques_no": [
+      "Sa du …?"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Ja, det stemmer. Hvor jobber du før pausen?",
+     "larsito_es": "Sí, es correcto. ¿Dónde trabajas antes de la pausa?",
+     "pista_es": "Empieza por «I morgen» y pon el verbo segundo: mañana trabajas en recepción.",
+     "respuestas_modelo_no": [
+      "I morgen jobber jeg i resepsjonen.",
+      "Jeg jobber i resepsjonen."
+     ],
+     "bloques_no": [
+      "I morgen jobber jeg …"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Fint. Og vanligvis?",
+     "larsito_es": "Bien. ¿Y normalmente?",
+     "pista_es": "Empieza por «Vanligvis» y pon el verbo segundo: normalmente empiezas a las ocho.",
+     "respuestas_modelo_no": [
+      "Vanligvis begynner jeg klokka åtte."
+     ],
+     "bloques_no": [
+      "Vanligvis begynner jeg …"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Greit. Da sees vi i resepsjonen.",
+     "larsito_es": "Vale. Entonces nos vemos en recepción.",
+     "pista_es": "Cierra con «Greit» o «Da sees vi der».",
+     "respuestas_modelo_no": [
+      "Greit. Da sees vi der.",
+      "Greit."
+     ],
+     "bloques_no": [
+      "Da sees vi …"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    }
+   ],
+   "cierre": {
+    "conserva": "Si has contado tu rutina con el verbo en «-r», has confirmado la hora nueva y has puesto el verbo segundo detrás de «I morgen» y «Vanligvis», esta escena está hecha.",
+    "ahora": "Si te ha salido «I morgen jeg jobber», vuelve al esqueleto de dos campos de Hoy cambia el horario.",
+    "repite": "Cambia la tarjeta: te levantas a las seis y media · tren · empiezas a las ocho y media · terminas a las cuatro menos cuarto · mañana empiezas a las diez."
+   }
+  },
+  {
+   "id": "LARS-A1-U03",
+   "modo": "rollespill",
+   "modo_contrato": "REAL_LIFE",
+   "nivel": "A1",
+   "titulo": "La zona común y el paquete perdido",
+   "leccion": [
+    "A1-U03-L01",
+    "A1-U03-L02"
+   ],
+   "contexto_es": "Role-play ficticio en dos partes. Primero, un compañero te enseña la zona común y tú preguntas por la cocina, la cafetera y tu taquilla. Después, ese compañero no encuentra un paquete, el cargador y las llaves, y tú le dices dónde está cada cosa con una referencia y sin repetir el nombre. Usa la tarjeta ficticia.",
+   "datos_ficticios_es": "Tu taquilla es la número 18 · el paquete está en la balda, al lado de la caja azul · el cargador está en el armario junto a la puerta · las llaves están sobre la mesa, al lado de la pantalla.",
+   "turnos": [
+    {
+     "larsito_no": "Her er garderoben. Her er et skap du kan bruke.",
+     "larsito_es": "Aquí está el vestuario. Aquí hay una taquilla que puedes usar.",
+     "pista_es": "Pregunta cuál: «Hvilket skap?».",
+     "respuestas_modelo_no": [
+      "Hvilket skap?"
+     ],
+     "bloques_no": [
+      "Hvilket skap?"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Det er skapet med nummer atten. Her er nøkkelen.",
+     "larsito_es": "Es la taquilla número dieciocho. Aquí está la llave.",
+     "pista_es": "Da las gracias y pregunta dónde está la cocina.",
+     "respuestas_modelo_no": [
+      "Takk. Hvor er kjøkkenet?"
+     ],
+     "bloques_no": [
+      "Hvor er …?"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Kjøkkenet er der borte.",
+     "larsito_es": "La cocina está allí.",
+     "pista_es": "Pregunta si hay una cafetera: «Er det en …?».",
+     "respuestas_modelo_no": [
+      "Er det en kaffemaskin?"
+     ],
+     "bloques_no": [
+      "Er det en …?"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Ja, kaffemaskinen står ved vinduet. Og nå: hvor er pakken?",
+     "larsito_es": "Sí, la cafetera está junto a la ventana. Y ahora: ¿dónde está el paquete?",
+     "pista_es": "Sin repetir «pakken»: «Den er» más soporte y referencia.",
+     "respuestas_modelo_no": [
+      "Den er på hyllen, ved siden av den blå boksen."
+     ],
+     "bloques_no": [
+      "Den er …",
+      "ved siden av …"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Jeg finner den ikke. Og hvor er laderen?",
+     "larsito_es": "No lo encuentro. ¿Y dónde está el cargador?",
+     "pista_es": "«Den er» más dentro del armario y la referencia.",
+     "respuestas_modelo_no": [
+      "Den er i skapet ved døren."
+     ],
+     "bloques_no": [
+      "Den er i …"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Takk. Og nøklene?",
+     "larsito_es": "Gracias. ¿Y las llaves?",
+     "pista_es": "Son varias: «De er» más soporte y referencia.",
+     "respuestas_modelo_no": [
+      "De er på bordet, ved siden av skjermen."
+     ],
+     "bloques_no": [
+      "De er …"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Å ja, der er de. Er dette kortet ditt?",
+     "larsito_es": "Ah sí, ahí están. ¿Es esta tu tarjeta?",
+     "pista_es": "Sí, es tu tarjeta: «Ja, det er kortet mitt».",
+     "respuestas_modelo_no": [
+      "Ja, det er kortet mitt."
+     ],
+     "bloques_no": [
+      "Det er kortet mitt."
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Flott. Takk!",
+     "larsito_es": "Estupendo. ¡Gracias!",
+     "pista_es": "Responde «Bare hyggelig».",
+     "respuestas_modelo_no": [
+      "Bare hyggelig."
+     ],
+     "bloques_no": [
+      "Bare hyggelig."
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    }
+   ],
+   "cierre": {
+    "conserva": "Si has preguntado con «Er det en …?» y «Hvor er …?», y has dado cada ubicación con «den», «det» o «de» y una referencia, esta escena está hecha.",
+    "ahora": "Si has repetido el nombre de la cosa en cada frase, vuelve a la tabla de «den, det, de» de Dónde está.",
+    "repite": "Cambia la tarjeta: taquilla 24 · el paquete debajo del cartel · el cargador sobre la mesa junto a la ventana · las llaves detrás de la puerta."
+   }
+  },
   {
    "id": "LARS-PREA1-U01",
    "modo": "rollespill",
@@ -90,7 +516,7 @@
    "cierre": {
     "conserva": "Si has repetido las cuatro palabras después de oírlas, esta escena está hecha.",
     "ahora": "Vuelve a la lección y escucha los pares de vocal larga y corta una vez más.",
-    "repite": "Repite el eco otro día con «takk», «by», «søndag» y «nå»."
+    "repite": "Vuelve a hacer el eco otro día con las mismas cuatro palabras, sin mirar la pista."
    }
   },
   {
@@ -220,6 +646,262 @@
     "repite": "Cambia la tarjeta: Omar Aziz · Syria · Lillestrøm · código A-118."
    },
    "modo_contrato": "REAL_LIFE"
+  },
+  {
+   "id": "LARS-PREA1-U03",
+   "modo": "rollespill",
+   "modo_contrato": "REAL_LIFE",
+   "nivel": "Pre-A1",
+   "titulo": "El quiosco y la cita",
+   "leccion": [
+    "PREA1-U03-L01",
+    "PREA1-U03-L02"
+   ],
+   "contexto_es": "Role-play ficticio en dos partes. Primero compras dos cafés en el quiosco de la estación y confirmas el precio. Después te llaman para darte una cita y la confirmas con el día y la hora. Usa la tarjeta ficticia.",
+   "datos_ficticios_es": "Pides dos cafés · un café cuesta 40 coronas · tu cita es el lunes a las diez.",
+   "turnos": [
+    {
+     "larsito_no": "Hei. Hva vil du ha?",
+     "larsito_es": "Hola. ¿Qué te pongo?",
+     "pista_es": "Pregunta el precio del café con «Hva koster en kaffe?».",
+     "respuestas_modelo_no": [
+      "Hva koster en kaffe?",
+      "Hei. Hva koster en kaffe?"
+     ],
+     "bloques_no": [
+      "Hva koster en kaffe?"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Førti kroner.",
+     "larsito_es": "Cuarenta coronas.",
+     "pista_es": "Pide dos cafés: cantidad, cosa y «takk».",
+     "respuestas_modelo_no": [
+      "To kaffe, takk."
+     ],
+     "bloques_no": [
+      "To kaffe, takk."
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Åtti kroner. Kort eller kontant?",
+     "larsito_es": "Ochenta coronas. ¿Tarjeta o efectivo?",
+     "pista_es": "Confirma el precio con el número y «kroner», y di que pagas con tarjeta.",
+     "respuestas_modelo_no": [
+      "Åtti kroner? Kort.",
+      "Kort."
+     ],
+     "bloques_no": [
+      "Åtti kroner?",
+      "Kort."
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Vær så god.",
+     "larsito_es": "Aquí tiene.",
+     "pista_es": "Cierra con «Takk».",
+     "respuestas_modelo_no": [
+      "Takk."
+     ],
+     "bloques_no": [
+      "Takk."
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Hei. Du har time på mandag klokka ti.",
+     "larsito_es": "Hola. Tienes cita el lunes a las diez.",
+     "pista_es": "Confirma la cita: día, «klokka» y hora, con la voz subiendo.",
+     "respuestas_modelo_no": [
+      "Mandag klokka ti?"
+     ],
+     "bloques_no": [
+      "Mandag klokka ti?"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Ja, det stemmer.",
+     "larsito_es": "Sí, es correcto.",
+     "pista_es": "Cierra con «Takk».",
+     "respuestas_modelo_no": [
+      "Takk."
+     ],
+     "bloques_no": [
+      "Takk."
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    }
+   ],
+   "cierre": {
+    "conserva": "Si has pedido con la cantidad delante y has confirmado el precio y la cita con el número dentro, esta escena está hecha.",
+    "ahora": "Si te has quedado en blanco con un número, vuelve a la lección de números y escucha los precios otra vez.",
+    "repite": "Vuelve a hacer la escena con la misma tarjeta, sin mirar la pista ni los bloques."
+   }
+  },
+  {
+   "id": "LARS-PREA1-U04",
+   "modo": "rollespill",
+   "modo_contrato": "REAL_LIFE",
+   "nivel": "Pre-A1",
+   "titulo": "La parada y el primer contacto",
+   "leccion": [
+    "PREA1-U04-L01",
+    "PREA1-U04-L02"
+   ],
+   "contexto_es": "Role-play ficticio en dos partes. Primero, un vecino en la parada te dice algo deprisa y tú pides que lo repita y que hable más despacio. Después, la recepción de tu primer día: nombre, apellido deletreado, ciudad, número, una instrucción y la despedida. Usa la tarjeta ficticia.",
+   "datos_ficticios_es": "Omar Aziz · vive en Lillestrøm · número de empleado 2351 (to-tre-fem-én).",
+   "turnos": [
+    {
+     "larsito_no": "Bussen er forsinket.",
+     "larsito_es": "El autobús va con retraso.",
+     "pista_es": "No lo has entendido: pide que lo repita, con «Unnskyld» delante.",
+     "respuestas_modelo_no": [
+      "Unnskyld, kan du si det en gang til?"
+     ],
+     "bloques_no": [
+      "Unnskyld, kan du si det en gang til?"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Bussen er forsinket. Den kommer klokka halv ni.",
+     "larsito_es": "El autobús va con retraso. Llega a las ocho y media.",
+     "pista_es": "Sigue yendo deprisa: pide que hable más despacio.",
+     "respuestas_modelo_no": [
+      "Kan du snakke saktere?"
+     ],
+     "bloques_no": [
+      "Kan du snakke saktere?"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Klokka halv ni.",
+     "larsito_es": "A las ocho y media.",
+     "pista_es": "Confirma la hora y da las gracias.",
+     "respuestas_modelo_no": [
+      "Halv ni? Takk."
+     ],
+     "bloques_no": [
+      "Halv ni?",
+      "Takk."
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Hei. Velkommen. Hva heter du?",
+     "larsito_es": "Hola. Bienvenido. ¿Cómo te llamas?",
+     "pista_es": "Saluda y di el nombre y el apellido de la tarjeta.",
+     "respuestas_modelo_no": [
+      "Hei. Jeg heter Omar Aziz.",
+      "Jeg heter Omar Aziz."
+     ],
+     "bloques_no": [
+      "Jeg heter …"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Kan du stave etternavnet ditt?",
+     "larsito_es": "¿Puedes deletrear tu apellido?",
+     "pista_es": "Letra a letra: A, Z, I, Z. Recuerda que la z se llama «sett».",
+     "respuestas_modelo_no": [
+      "A-Z-I-Z."
+     ],
+     "bloques_no": [
+      "A-Z-I-Z"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Takk. Hvor bor du?",
+     "larsito_es": "Gracias. ¿Dónde vives?",
+     "pista_es": "La ciudad de la tarjeta, detrás de «Jeg bor i…».",
+     "respuestas_modelo_no": [
+      "Jeg bor i Lillestrøm."
+     ],
+     "bloques_no": [
+      "Jeg bor i …"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Og ansattnummeret ditt?",
+     "larsito_es": "¿Y tu número de empleado?",
+     "pista_es": "Si no lo has entendido, pide que lo repita; si sí, dilo cifra a cifra.",
+     "respuestas_modelo_no": [
+      "Unnskyld, kan du si det en gang til?",
+      "To-tre-fem-én."
+     ],
+     "bloques_no": [
+      "Unnskyld, kan du si det en gang til?",
+      "To-tre-fem-én."
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Ansattnummeret ditt.",
+     "larsito_es": "Tu número de empleado.",
+     "pista_es": "Cifra a cifra: 2, 3, 5, 1.",
+     "respuestas_modelo_no": [
+      "To-tre-fem-én."
+     ],
+     "bloques_no": [
+      "To-tre-fem-én."
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "To-tre-fem-én. Sett deg. Vent litt.",
+     "larsito_es": "2, 3, 5, 1. Siéntate. Espera un momento.",
+     "pista_es": "Es una instrucción: basta con «Takk».",
+     "respuestas_modelo_no": [
+      "Takk."
+     ],
+     "bloques_no": [
+      "Takk."
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Vær så god. Ha det.",
+     "larsito_es": "Aquí tiene. Adiós.",
+     "pista_es": "Despídete.",
+     "respuestas_modelo_no": [
+      "Ha det.",
+      "Takk. Ha det."
+     ],
+     "bloques_no": [
+      "Ha det."
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    }
+   ],
+   "cierre": {
+    "conserva": "Si has pedido repetición con «Unnskyld» delante y has respondido a cada pregunta con su bloque, el primer contacto está hecho.",
+    "ahora": "Si te has quedado en blanco en algún turno, la lección de esa pieza está en la tabla de «Repara» de Første kontakt.",
+    "repite": "Vuelve a hacer la escena con la misma tarjeta, sin mirar la pista ni los bloques."
+   }
   }
  ],
  "listening": [],
