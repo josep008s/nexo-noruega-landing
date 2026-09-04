@@ -10,7 +10,7 @@
    "modos": [
     "REAL_LIFE"
    ],
-   "correccion": "una sola prioridad al final: si el bloque completo estaba",
+   "correccion": "en cada turno se enseña el modelo para comparar; no se analiza pronunciación ni se afirma nada que no se haya comprobado",
    "pronunciacion": "NOT_OBSERVED",
    "escalera": [
     "repetir la frase más despacio",
@@ -21,6 +21,78 @@
   }
  },
  "escenarios": [
+  {
+   "id": "LARS-PREA1-U01",
+   "modo": "rollespill",
+   "modo_contrato": "REAL_LIFE",
+   "nivel": "Pre-A1",
+   "titulo": "Eco: cuatro palabras despacio",
+   "leccion": [
+    "PREA1-U01-L01",
+    "PREA1-U01-L02"
+   ],
+   "contexto_es": "Todavía no hay conversación: Larsito dice una palabra muy despacio y tú la repites. Sirve para poner la boca en los sonidos nuevos antes de tener frases.",
+   "datos_ficticios_es": "No hace falta tarjeta: solo repites lo que oyes.",
+   "turnos": [
+    {
+     "larsito_no": "Takk.",
+     "larsito_es": "Gracias.",
+     "pista_es": "Repite «takk»: vocal corta y la k apretada.",
+     "respuestas_modelo_no": [
+      "Takk."
+     ],
+     "bloques_no": [
+      "Takk."
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Hyggelig.",
+     "larsito_es": "Agradable.",
+     "pista_es": "Repite «hyggelig»: la h suena y la y va con los labios redondeados.",
+     "respuestas_modelo_no": [
+      "Hyggelig."
+     ],
+     "bloques_no": [
+      "Hyggelig."
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "År.",
+     "larsito_es": "Año.",
+     "pista_es": "Repite «år»: una o abierta, nunca una a.",
+     "respuestas_modelo_no": [
+      "År."
+     ],
+     "bloques_no": [
+      "År."
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Øl.",
+     "larsito_es": "Cerveza.",
+     "pista_es": "Repite «øl»: una e con los labios redondeados.",
+     "respuestas_modelo_no": [
+      "Øl."
+     ],
+     "bloques_no": [
+      "Øl."
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    }
+   ],
+   "cierre": {
+    "conserva": "Si has repetido las cuatro palabras después de oírlas, esta escena está hecha.",
+    "ahora": "Vuelve a la lección y escucha los pares de vocal larga y corta una vez más.",
+    "repite": "Repite el eco otro día con «takk», «by», «søndag» y «nå»."
+   }
+  },
   {
    "id": "LARS-PREA1-U02",
    "modo": "rollespill",
@@ -92,7 +164,6 @@
      "larsito_es": "(Recepción) Hola. ¿Cómo te llamas?",
      "pista_es": "Nombre y apellido de la tarjeta.",
      "respuestas_modelo_no": [
-      "Lucía Santos.",
       "Jeg heter Lucía Santos."
      ],
      "bloques_no": [
@@ -104,7 +175,7 @@
     {
      "larsito_no": "Kan du stave etternavnet ditt?",
      "larsito_es": "¿Puedes deletrear tu apellido?",
-     "pista_es": "Letra a letra: S, A, N, T, O, S. Recuerda que la o noruega suena cerrada.",
+     "pista_es": "Letra a letra: S, A, N, T, O, S. Recuerda que el nombre de la letra «o» suena como una u castellana.",
      "respuestas_modelo_no": [
       "S-A-N-T-O-S.",
       "Ja. S-A-N-T-O-S."
@@ -134,8 +205,7 @@
      "larsito_es": "Sí, es correcto.",
      "pista_es": "Cierra con «Takk».",
      "respuestas_modelo_no": [
-      "Takk.",
-      "Takk. Ha det."
+      "Takk."
      ],
      "bloques_no": [
       "Takk."
@@ -145,10 +215,11 @@
     }
    ],
    "cierre": {
-    "conserva": "Has usado los tres bloques con «Jeg» y has confirmado el código.",
+    "conserva": "Si tus frases llevaban el bloque completo con «Jeg» y has confirmado el código con «Sa du …?», esta escena está hecha.",
     "ahora": "Si te has quedado en blanco en algún turno, vuelve a la lección que lo enseña.",
-    "repite": "Cambia la tarjeta: Leo Martín · Argentina · Trondheim · código A-118."
-   }
+    "repite": "Cambia la tarjeta: Omar Aziz · Syria · Lillestrøm · código A-118."
+   },
+   "modo_contrato": "REAL_LIFE"
   }
  ],
  "listening": [],
