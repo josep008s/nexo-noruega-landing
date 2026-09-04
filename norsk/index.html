@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Norskprøven B1 · NEXO NORSK</title>
-  <meta name="description" content="Preparación de la Norskprøven B1 en español: las cuatro pruebas explicadas, los saltos de A2 a B1 y práctica oral de verdad. En construcción, con lista de espera abierta.">
+  <title>Curso de noruego B1 · NEXO NORSK</title>
+  <meta name="description" content="Curso de noruego B1 para hispanohablantes con base A2: práctica interactiva, preparación de la Norskprøven y entrenamiento oral con Larsito.">
   <link rel="canonical" href="https://www.nexonoruega.com/norsk/">
 
-  <meta property="og:title" content="Norskprøven B1, explicada en español">
-  <meta property="og:description" content="El nivel de noruego que pide la ciudadanía se demuestra hablando. Así lo preparamos: las cuatro pruebas, los saltos de A2 a B1 y práctica oral.">
+  <meta property="og:title" content="Curso B1 para usar el noruego, no solo estudiarlo">
+  <meta property="og:description" content="Un recorrido para hispanohablantes con base A2: misión, primer intento, una corrección concreta y segundo intento.">
   <meta property="og:image" content="https://www.nexonoruega.com/og-image.png">
   <meta property="og:url" content="https://www.nexonoruega.com/norsk/">
   <meta property="og:type" content="website">
@@ -25,8 +25,8 @@
   {
     "@context": "https://schema.org",
     "@type": "Course",
-    "name": "NEXO NORSK: preparación de la Norskprøven B1 en español",
-    "description": "Preparación en español de la Norskprøven, la prueba de noruego que Noruega pide para la ciudadanía: las cuatro partes del examen, los mecanismos que separan el A2 del B1 y práctica oral con feedback.",
+    "name": "NEXO NORSK: curso de noruego B1 para hispanohablantes",
+    "description": "Curso de noruego para personas con una base A2: mecanismos que separan el A2 del B1, práctica interactiva, entrenamiento oral y preparación de las cuatro partes de la Norskprøven.",
     "url": "https://www.nexonoruega.com/norsk/",
     "inLanguage": ["es", "no"],
     "provider": { "@type": "Organization", "name": "Nexo Noruega", "url": "https://www.nexonoruega.com" },
@@ -118,6 +118,31 @@
     .aviso-obra{display:flex;gap:14px;align-items:flex-start;background:var(--blanco);border:1px solid var(--linea-clara);border-left:3px solid var(--alerta);border-radius:10px;padding:16px 18px;margin-top:32px;max-width:64ch}
     .aviso-obra .eti{font-family:var(--sg);font-weight:700;font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--alerta);flex:none;padding-top:3px}
     .aviso-obra p{font-size:.98rem}
+
+    /* ===== Punto de entrada ===== */
+    .nivel-tabs{display:flex;flex-wrap:wrap;gap:10px;margin:26px 0 18px}
+    .nivel-tab{font-family:var(--sg);font-weight:700;font-size:.9rem;color:var(--noche);background:var(--blanco);border:1px solid var(--linea-clara);border-radius:999px;padding:11px 17px;min-height:44px;cursor:pointer;transition:background .2s,border-color .2s,transform .2s var(--ease)}
+    .nivel-tab:hover{border-color:var(--fiordo);transform:translateY(-1px)}
+    .nivel-tab[aria-pressed="true"]{background:var(--noche);border-color:var(--noche);color:var(--nieve)}
+    .nivel-respuesta{min-height:218px;background:var(--blanco);border-radius:16px;padding:27px 28px;box-shadow:var(--sombra-clara);max-width:70ch}
+    .nivel-respuesta .eti{font-family:var(--sg);font-weight:700;font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--fiordo);margin-bottom:10px}
+    .nivel-respuesta h3{font-family:var(--sg);font-size:clamp(1.25rem,3vw,1.65rem);line-height:1.22;color:var(--noche);margin-bottom:10px;max-width:30ch}
+    .nivel-respuesta p{font-size:1.04rem;max-width:56ch;margin-bottom:18px}
+
+    /* ===== Bucle y volumen ===== */
+    .ciclo{display:grid;grid-template-columns:repeat(5,1fr);gap:18px;margin-top:32px}
+    .ciclo-paso{padding-top:14px;position:relative}
+    .ciclo-paso::before{content:"";position:absolute;left:0;top:0;width:30px;height:4px;background:var(--aurora);border-radius:999px}
+    .ciclo-paso .num{font-family:var(--caesar);font-size:1.75rem;line-height:1;color:var(--fiordo);display:block;margin-bottom:8px}
+    .ciclo-paso h3{font-family:var(--sg);font-size:1rem;color:var(--noche);margin-bottom:6px}
+    .ciclo-paso p{font-size:.94rem;line-height:1.55}
+    .principio{margin-top:34px;max-width:64ch;font-size:1.15rem;color:var(--noche);border-left:4px solid var(--aurora);padding:4px 0 4px 20px}
+    .inventario{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;margin-top:42px}
+    .inventario article{padding-top:17px;border-top:1px solid var(--linea-clara)}
+    .inventario strong{display:block;font-family:var(--caesar);font-weight:400;font-size:clamp(2.1rem,5vw,3rem);line-height:1;color:var(--fiordo);margin-bottom:9px}
+    .inventario h3{font-family:var(--sg);font-size:1.05rem;color:var(--noche);margin-bottom:7px}
+    .inventario p{font-size:.96rem}
+    .volumen-pie{font-family:var(--sg);font-weight:500;font-size:.9rem;color:var(--fiordo);margin-top:28px;max-width:62ch}
 
     /* ===== El examen ===== */
     .pruebas{display:grid;gap:14px;margin-top:22px}
@@ -212,6 +237,9 @@
       .marca span{font-size:.82rem}
       .larsito-caja,.sprint,.cruce{padding:22px}
       .burbuja{max-width:100%}
+      .nivel-tabs{display:grid;grid-template-columns:1fr}.nivel-tab{text-align:left}.nivel-respuesta{padding:23px 21px;min-height:260px}
+      .ciclo{grid-template-columns:1fr;gap:24px}.ciclo-paso{display:grid;grid-template-columns:44px 1fr;column-gap:10px}.ciclo-paso::before{display:none}.ciclo-paso .num{grid-row:1 / span 2}.ciclo-paso h3{padding-top:2px}.ciclo-paso p{grid-column:2}
+      .inventario{grid-template-columns:1fr;gap:28px}
     }
     @media (prefers-reduced-motion:reduce){
       html{scroll-behavior:auto}
@@ -242,211 +270,131 @@
   </header>
 
   <main>
-    <!-- S1 · HERO -->
     <section class="hero">
       <div class="cielo" aria-hidden="true"></div>
       <div class="wrap">
-        <p class="kicker caesar reveal">NEXO NORSK</p>
-        <h1 class="reveal" style="--d:.08s">Tu ciudadanía se juega en <mark class="marcado">veinte minutos hablando</mark>.</h1>
-        <p class="sub reveal" style="--d:.16s">La Norskprøven es la prueba de noruego que Noruega te pide para la ciudadanía, y el nivel que exige la regla general es el B1 oral. No se aprueba acumulando apuntes. Se aprueba abriendo la boca antes del día del examen.</p>
+        <p class="kicker caesar reveal">NEXO NORSK · CURSO B1</p>
+        <h1 class="reveal" style="--d:.08s">Habla. Entiende el fallo. <mark class="marcado">Vuelve a intentarlo.</mark></h1>
+        <p class="sub reveal" style="--d:.16s">Un curso de noruego para hispanohablantes que ya tienen una base A2 y quieren llegar a B1. Misiones reales, práctica interactiva y una corrección concreta cada vez.</p>
         <div class="botones reveal" style="--d:.24s">
-          <a class="cta" href="https://nexonoruega.substack.com/subscribe?utm_source=nexonoruega.com&utm_medium=web&utm_campaign=norsk">Avísame cuando abra</a>
-          <a class="cta ghost" href="#examen">Ver cómo es el examen</a>
+          <a class="cta" href="/norsk/curso/">Probar una sesión gratis</a>
+          <a class="cta ghost" href="#punto">Ver si es para mí</a>
         </div>
-
+        <p class="microcopy reveal" style="--d:.28s">Sin registro. Empiezas con el diagnóstico o con el primer mecanismo.</p>
         <div class="aviso-obra reveal" style="--d:.32s">
-          <span class="eti">En obras</span>
-          <p>El curso completo está en producción y no se vende todavía. Lo que sí existe hoy es el entrenamiento oral sin plazas ni calendario, y esta página, donde te cuento el examen entero sin pedirte nada a cambio.</p>
+          <span class="eti">En revisión</span>
+          <p>El curso está construido y se está revisando por dentro. La venta sigue cerrada. Ya puedes probar la muestra del curso y doce prácticas de Larsito.</p>
         </div>
       </div>
     </section>
 
-    <!-- S2 · EL EXAMEN -->
+    <section class="banda" id="punto">
+      <div class="wrap">
+        <p class="kicker reveal">Tu punto real</p>
+        <h2 class="reveal" style="--d:.08s">Antes de enseñarte todo, dime desde dónde empiezas.</h2>
+        <p class="parrafo reveal" style="--d:.14s">El mismo curso no sirve igual a quien no sabe decir su nombre y a quien se bloquea al defender una opinión. Elige la frase que más se parece a ti.</p>
+        <div class="nivel-tabs reveal" style="--d:.2s" role="group" aria-label="Elige tu punto de partida">
+          <button class="nivel-tab" type="button" data-nivel="cero" aria-pressed="false">Empiezo de cero</button>
+          <button class="nivel-tab" type="button" data-nivel="base" aria-pressed="true">Ya me defiendo un poco</button>
+          <button class="nivel-tab" type="button" data-nivel="examen" aria-pressed="false">Tengo fecha de examen</button>
+        </div>
+        <div id="nivelRespuesta" class="nivel-respuesta reveal" style="--d:.24s" aria-live="polite">
+          <p class="eti">Tu entrada</p>
+          <h3>Estás en el punto para el que se ha construido este curso.</h3>
+          <p>Si entiendes instrucciones breves y puedes formar frases propias, aunque tardes y cometas errores, el diagnóstico te dirá qué destreza conviene atacar primero.</p>
+          <a class="cta" href="/norsk/curso/#DIAGNOSTICO_B1">Hacer el diagnóstico</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="banda" id="metodo">
+      <div class="wrap">
+        <p class="kicker reveal">Cómo se aprende aquí</p>
+        <h2 class="reveal" style="--d:.08s">No terminas una lección. Resuelves mejor la segunda vez.</h2>
+        <p class="parrafo reveal" style="--d:.14s">Cada sesión tiene un trabajo concreto. Puedes probarte primero o entender el mecanismo antes de practicar; la teoría está al servicio de lo que vas a hacer, no de llenar una pantalla.</p>
+        <div class="ciclo" aria-label="Los cinco movimientos de una sesión">
+          <article class="ciclo-paso reveal" style="--d:.18s"><span class="num">01</span><h3>Recupera</h3><p>Una frase que ya trabajaste vuelve cuando toca.</p></article>
+          <article class="ciclo-paso reveal" style="--d:.22s"><span class="num">02</span><h3>Resuelve</h3><p>Hablas, ordenas, eliges o escribes sin ver el modelo.</p></article>
+          <article class="ciclo-paso reveal" style="--d:.26s"><span class="num">03</span><h3>Entiende</h3><p>La corrección señala el fallo y el mecanismo que lo explica.</p></article>
+          <article class="ciclo-paso reveal" style="--d:.3s"><span class="num">04</span><h3>Repite</h3><p>Lo vuelves a usar con una variación, no copiando la solución.</p></article>
+          <article class="ciclo-paso reveal" style="--d:.34s"><span class="num">05</span><h3>Guarda</h3><p>Lo que fallas regresa a los 1, 3, 7 y 14 días.</p></article>
+        </div>
+        <p class="principio reveal" style="--d:.38s">Tú ves una sola acción siguiente. Detrás queda todo el material para cuando quieras buscar algo concreto.</p>
+        <div class="inventario">
+          <article class="reveal" style="--d:.2s"><strong>21</strong><h3>Actuaciones orales</h3><p>Situaciones cotidianas y tareas de examen para sostener una respuesta, repararla y volver a empezar.</p></article>
+          <article class="reveal" style="--d:.26s"><strong>2.339</strong><h3>Ejercicios opcionales</h3><p>Ordenar, arrastrar, elegir, completar, relacionar y escribir. Tú decides cuándo seguir practicando.</p></article>
+          <article class="reveal" style="--d:.32s"><strong>6</strong><h3>Cuadernos descargables</h3><p>La teoría, los esquemas y los ejercicios del curso en tomos para imprimir o trabajar sin conexión.</p></article>
+        </div>
+        <p class="volumen-pie reveal" style="--d:.38s">Más contenido no obliga a hacer más. El recorrido guiado separa lo esencial de la práctica extra y de la biblioteca.</p>
+        <div class="reveal" style="--d:.42s;margin-top:26px"><a class="cta" href="/norsk/curso/">Entrar en la muestra</a></div>
+      </div>
+    </section>
+
     <section class="banda" id="examen">
       <div class="wrap">
         <p class="kicker reveal">La Norskprøven por dentro</p>
-        <h2 class="reveal" style="--d:.08s">Una prueba, cuatro exámenes distintos.</h2>
-        <p class="parrafo reveal" style="--d:.14s">La Norskprøven no es un examen, son cuatro pruebas que se hacen por separado y se aprueban por separado. Puedes salir con B1 en lectura y A2 en habla. Y es la de habla la que decide tu ciudadanía.</p>
-
+        <h2 class="reveal" style="--d:.08s">Cuatro destrezas. Un resultado distinto en cada una.</h2>
+        <p class="parrafo reveal" style="--d:.14s">Escucha, lectura, escritura y habla se hacen y se califican por separado. NEXO NORSK conecta las cuatro, pero da más peso a producir noruego porque es donde estudiar en silencio deja de servir.</p>
         <div class="pruebas">
-          <article class="prueba reveal" style="--d:.2s">
-            <p class="no" lang="nb">Lytteforståelse</p>
-            <p class="es">Comprensión oral</p>
-            <p>Se hace por ordenador y se adapta a ti. Cuantas más aciertas, más difíciles vienen. Todos los candidatos se inscriben a la misma prueba, sin elegir nivel: el nivel sale al final.</p>
-          </article>
-          <article class="prueba reveal" style="--d:.24s">
-            <p class="no" lang="nb">Leseforståelse</p>
-            <p class="es">Comprensión lectora</p>
-            <p>Mismo mecanismo adaptativo que la de escucha, con textos. Suele ser la parte que mejor llevan los hispanohablantes, y por eso engaña: aprobar aquí no anticipa lo que pasa al hablar.</p>
-          </article>
-          <article class="prueba reveal" style="--d:.28s">
-            <p class="no" lang="nb">Skriftlig framstilling</p>
-            <p class="es">Expresión escrita</p>
-            <p>Aquí sí eliges nivel al inscribirte. Si vas a por el B1, te apuntas al tramo A2-B1. Elegir mal el tramo es uno de los errores caros del día de la inscripción, y nadie te avisa.</p>
-          </article>
-          <article class="prueba clave reveal" style="--d:.32s">
-            <p class="no" lang="nb">Muntlig kommunikasjon</p>
-            <p class="es">Expresión oral</p>
-            <p>Entre veinte y veinticinco minutos delante de un examinador, con un evaluador presente. Se habla, se conversa y se defiende una opinión.</p>
-            <span class="marca-clave">La que pide la ciudadanía</span>
-          </article>
+          <article class="prueba reveal" style="--d:.2s"><p class="no" lang="nb">Lytteforståelse</p><p class="es">Comprensión oral</p><p>Se hace por ordenador y es parcialmente adaptativa. La dificultad cambia según tus respuestas.</p></article>
+          <article class="prueba reveal" style="--d:.24s"><p class="no" lang="nb">Leseforståelse</p><p class="es">Comprensión lectora</p><p>También se hace por ordenador y es parcialmente adaptativa. Entrenas intención, condiciones y detalle.</p></article>
+          <article class="prueba reveal" style="--d:.28s"><p class="no" lang="nb">Skriftlig framstilling</p><p class="es">Expresión escrita</p><p>Para buscar un resultado B1 te inscribes en el tramo A2-B1. Practicas tareas, modelos y criterios.</p></article>
+          <article class="prueba clave reveal" style="--d:.32s"><p class="no" lang="nb">Muntlig kommunikasjon</p><p class="es">Expresión oral</p><p>Dura entre veinte y veinticinco minutos y se realiza con dos candidatos, un examinador y un evaluador.</p><span class="marca-clave">B1 oral: regla general de ciudadanía</span></article>
         </div>
-
         <div class="nota-ruta reveal" style="--d:.38s">
-          <p>Para la ciudadanía, la regla general pide acreditar noruego oral B1 y además aprobar una prueba de conocimientos sobre Noruega. Son dos cosas distintas y se preparan aparte. UDI tasa las excepciones, y hay casos concretos en los que basta el A2.</p>
-          <p><a href="/pass/requisitos-ciudadania-noruega/">Ver requisitos, plazos y excepciones</a></p>
+          <p>Para la ciudadanía, la regla general exige acreditar noruego oral B1 y aprobar además una prueba de conocimientos sobre Noruega. Son requisitos distintos. UDI recoge excepciones concretas.</p>
+          <p><a href="/pass/requisitos-ciudadania-noruega/">Ver requisitos y excepciones en NEXO PASS</a></p>
         </div>
-        <p class="fuente reveal" style="--d:.42s"><a href="https://hkdir.no/voksenopplaering/norsk-og-samfunnskunnskap/om-norskprovene/norskproven-a1-b2">HK-dir</a> y <a href="https://www.udi.no/en/word-definitions/test-requirements-norwegian-citizenship/">UDI</a> · Verificado en agosto de 2026</p>
+        <p class="fuente reveal" style="--d:.42s"><a href="https://hkdir.no/voksenopplaering/norsk-og-samfunnskunnskap/om-norskprovene/norskproven-a1-b2">HK-dir</a> y <a href="https://www.udi.no/en/word-definitions/test-requirements-norwegian-citizenship/">UDI</a> · Verificado en septiembre de 2026</p>
       </div>
     </section>
 
-    <!-- S3 · MÉTODO -->
-    <section class="banda">
-      <div class="wrap">
-        <p class="kicker reveal">Cómo lo preparamos</p>
-        <h2 class="reveal" style="--d:.08s">Aprobar sobrado y hablar de verdad son el mismo trabajo.</h2>
-        <p class="parrafo reveal" style="--d:.14s">Casi todo el material que existe elige un lado. O te entrena para el examen y luego no sabes pedir cita en el médico, o te enseña noruego bonito que no se parece a lo que te van a pedir esos veinte minutos. Aquí no separamos las dos cosas, porque en tu vida tampoco están separadas.</p>
-
-        <div class="pasos">
-          <div class="paso reveal" style="--d:.2s">
-            <span class="num">01</span>
-            <p class="titulo">Dónde estás de verdad</p>
-            <p>Un diagnóstico por destreza, no una etiqueta global. Saber que escuchas a B1 y hablas a A2 cambia por completo lo que tienes que hacer las próximas semanas.</p>
-          </div>
-          <div class="paso reveal" style="--d:.26s">
-            <span class="num">02</span>
-            <p class="titulo">Los saltos que separan A2 de B1</p>
-            <p>Dieciséis mecanismos concretos. No es gramática por gramática: cada uno resuelve algo que ahora te deja a medias, como contar lo que pasó, matizar sin sonar brusco o defender una opinión.</p>
-          </div>
-          <div class="paso reveal" style="--d:.32s">
-            <span class="num">03</span>
-            <p class="titulo">Hablar desde el primer día</p>
-            <p>Con ejercicios de respuesta cronometrada y conversación real. La fluidez no llega estudiando más, llega bajando el tiempo que tardas en arrancar la frase.</p>
-          </div>
-        </div>
-
-        <div class="reveal" style="--d:.34s;margin-top:26px">
-          <a class="cta" href="/norsk/curso/">Ver el curso por dentro</a>
-          <p class="microcopy">El primer mecanismo entero, gratis y sin registro. Y el mapa de los otros quince.</p>
-        </div>
-
-        <div class="doble">
-          <div class="mitad reveal" style="--d:.4s">
-            <h3>Para el examen</h3>
-            <p>Entrenamiento separado de las cuatro pruebas, con el formato de cada una, y simulacros completos cronometrados. Formato similar al oficial, nunca preguntas reales copiadas.</p>
-          </div>
-          <div class="mitad reveal" style="--d:.44s">
-            <h3>Para el lunes</h3>
-            <p>Las situaciones que de verdad te tocan: la reunión de trabajo, el fastlege, la barnehage, el vecino que te habla rápido. Mismo noruego, otro escenario.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- S4 · LARSITO -->
     <section class="banda" id="larsito">
       <div class="wrap">
-        <p class="kicker reveal">Práctica oral</p>
-        <h2 class="reveal" style="--d:.08s">Te presento a Larsito.</h2>
-        <p class="parrafo reveal" style="--d:.14s">El problema de la prueba oral es que para entrenarla necesitas a alguien enfrente, y a las once de la noche no hay nadie. Larsito es un compañero de conversación con el que puedes hablar noruego cuando te venga bien, que te corrige en español y que no se cansa de repetir.</p>
-
+        <p class="kicker reveal">El motor oral del curso</p>
+        <h2 class="reveal" style="--d:.08s">Larsito no es otro curso. Es donde usas este.</h2>
+        <p class="parrafo reveal" style="--d:.14s">Cuando una regla ya está entendida, queda conseguir que aparezca mientras hablas. Larsito te plantea la situación en noruego, sigue la conversación y devuelve una sola prioridad para el segundo intento.</p>
         <div class="larsito-caja reveal" style="--d:.2s">
-          <p class="eti">Así funciona</p>
-          <h3>Le hablas en noruego. Te contesta en noruego. Te explica en español.</h3>
-          <p class="lede">Cuatro modos: conversación libre, simulacro del examen oral con su estructura real, situaciones del día a día y corrección a fondo.</p>
-
+          <p class="eti">Una corrección útil, no veinte marcas rojas</p>
+          <h3>Le hablas en noruego. Te responde en noruego. Te explica el bloqueo en español.</h3>
+          <p class="lede">La práctica completa conectará conversación cotidiana, tareas de formato oral, escucha y recuperación espaciada con el mecanismo exacto del curso.</p>
           <div class="chat" aria-label="Ejemplo de conversación con Larsito">
-            <div class="burbuja lars">
-              <p class="quien">Larsito</p>
-              <p class="no" lang="nb">Fortell meg om en gang du måtte klage på noe. Hva skjedde?</p>
-              <p class="es">Cuéntame una vez que tuviste que reclamar algo. ¿Qué pasó?</p>
-              <div class="onda" aria-hidden="true">
-                <i style="height:40%"></i><i style="height:75%"></i><i style="height:55%"></i><i style="height:100%"></i><i style="height:65%"></i><i style="height:85%"></i><i style="height:35%"></i><i style="height:70%"></i><i style="height:50%"></i>
-              </div>
-            </div>
-            <div class="burbuja tu">
-              <p class="quien">Tú</p>
-              <p class="no" lang="nb">Jeg har klaget på strømregningen min i fjor fordi den var altfor høy.</p>
-            </div>
-            <div class="burbuja lars">
-              <p class="quien">Larsito</p>
-              <p class="no" lang="nb">Ja, det skjønner jeg godt. Hva svarte de deg?</p>
-              <p class="es">Sí, lo entiendo perfectamente. ¿Qué te contestaron?</p>
-              <div class="correccion">
-                <b>Una cosa</b>
-                Con <i lang="nb">i fjor</i> el hecho ya está cerrado en el pasado, así que va en pretérito: <i lang="nb">jeg klaget</i>, no <i lang="nb">jeg har klaget</i>. Ese salto es justo lo que el examinador escucha para separar A2 de B1.
-              </div>
-            </div>
+            <div class="burbuja lars"><p class="quien">Larsito</p><p class="no" lang="nb">Fortell meg om en gang du måtte klage på noe. Hva skjedde?</p><p class="es">Cuéntame una vez que tuviste que reclamar algo. ¿Qué pasó?</p><div class="onda" aria-hidden="true"><i style="height:40%"></i><i style="height:75%"></i><i style="height:55%"></i><i style="height:100%"></i><i style="height:65%"></i><i style="height:85%"></i><i style="height:35%"></i><i style="height:70%"></i><i style="height:50%"></i></div></div>
+            <div class="burbuja tu"><p class="quien">Tú</p><p class="no" lang="nb">Jeg har klaget på strømregningen min i fjor fordi den var altfor høy.</p></div>
+            <div class="burbuja lars"><p class="quien">Larsito</p><p class="no" lang="nb">Ja, det skjønner jeg godt. Hva svarte de deg?</p><p class="es">Sí, lo entiendo perfectamente. ¿Qué te contestaron?</p><div class="correccion"><b>Una cosa</b>Con <i lang="nb">i fjor</i> el hecho está cerrado en el pasado. Aquí necesitas <i lang="nb">jeg klaget</i>, no <i lang="nb">jeg har klaget</i>. Conserva el resto y cuéntalo otra vez.</div></div>
           </div>
-
-          <p class="larsito-pie"><b>Ya puedes probarlo.</b> La versión de demostración trae seis situaciones guiadas y seis ejercicios de escucha. La conversación libre llega con el curso.</p>
-          <a class="cta" href="/norsk/larsito/" style="margin-top:16px">Probar a Larsito</a>
+          <p class="larsito-pie"><b>Ya puedes probarlo.</b> La demo incluye seis conversaciones ficticias y seis ejercicios de escucha. No guarda el contenido de tus respuestas.</p>
+          <div class="botones" style="margin-top:18px"><a class="cta" href="/norsk/larsito/">Probar a Larsito</a><a class="cta ghost" href="/norsk/entrenamiento-oral/" style="color:var(--nieve);border-color:var(--linea-oscura)">Ver el entrenamiento oral</a></div>
         </div>
       </div>
     </section>
 
-    <!-- S5 · SPRINT ORAL -->
-    <section class="banda" id="sprint">
-      <div class="wrap">
-        <p class="kicker reveal">La parte que más se suspende</p>
-        <h2 class="reveal" style="--d:.08s">Hablar se entrena hablando. Y para eso está Larsito.</h2>
-
-        <div class="sprint reveal" style="--d:.16s">
-          <p class="eti">Entrenamiento oral B1</p>
-          <h3>Práctica oral a tu ritmo, con las tres tareas del examen.</h3>
-          <p>Consignas como las de la prueba, un plan de práctica diaria que tú decides cuándo seguir, y simulacros completos del oral con Larsito haciendo de examinador. Sin plazas, sin calendario y sin nadie juzgándote mientras te equivocas, que es exactamente como se coge soltura.</p>
-          <div class="sprint-datos">
-            <span>Las 3 tareas del oral</span>
-            <span>Una prioridad por corrección</span>
-            <span>Simulacros de 20 a 25 minutos</span>
-            <span>A tu ritmo</span>
-          </div>
-          <a class="cta" href="/norsk/entrenamiento-oral/">Ver el entrenamiento oral</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- S6 · FAQ + CRUCE -->
     <section class="banda">
       <div class="wrap">
         <p class="kicker reveal">Preguntas rápidas</p>
         <div class="faq reveal" style="--d:.1s">
-          <details>
-            <summary>¿Esto sustituye a la escuela de noruego?</summary>
-            <p>No. Si tienes derecho a clases gratuitas, ve a clase. Esto es la capa que casi ninguna escuela cubre: preparar el formato concreto de la Norskprøven y entrenar la parte oral hasta que deje de darte miedo.</p>
-          </details>
-          <details>
-            <summary>¿Qué nivel necesito para empezar?</summary>
-            <p>Está pensado para quien ya se defiende un poco, más o menos un A2, y se queda corto justo cuando tiene que hablar. Si empiezas de cero, el punto de partida es otro y te lo diremos claro en el diagnóstico.</p>
-          </details>
-          <details>
-            <summary>Mi objetivo es la residencia permanente, no la ciudadanía. ¿Me sirve?</summary>
-            <p>Sí, aunque el listón es distinto. Para la residencia permanente por la vía general se pide oral A2, no B1. El material es el mismo, cambia hasta dónde tienes que llegar. Los detalles de cada trámite están en <a href="/pass/requisitos-ciudadania-noruega/">la guía de requisitos</a>.</p>
-          </details>
-          <details>
-            <summary>¿Cuándo abre y cuánto va a costar?</summary>
-            <p>Todavía no hay fecha ni precio publicados, y no voy a inventarlos para que te suscribas. Cuando estén, lo sabrás por correo. Las fechas de convocatoria e inscripción del examen las publica HK-dir en su web.</p>
-          </details>
+          <details><summary>¿Esto sustituye a la escuela de noruego?</summary><p>No. Si tienes derecho a clases gratuitas, aprovéchalas. NEXO NORSK añade práctica individual, explicación en español, preparación del formato de la Norskprøven y una forma de repetir sin depender de un horario.</p></details>
+          <details><summary>¿Qué nivel necesito para empezar?</summary><p>Está pensado para quien ya se defiende un poco, aproximadamente un A2 funcional: entiende instrucciones breves y puede producir frases propias. Si empiezas de cero, necesitas antes otro tramo. No te vamos a llamar principiante para venderte un B1.</p></details>
+          <details><summary>Mi objetivo es la residencia permanente, no la ciudadanía. ¿Me sirve?</summary><p>Sí, aunque el listón es distinto. Para la residencia permanente por la vía general se pide oral A2, no B1. El material es el mismo, cambia hasta dónde tienes que llegar. Los detalles están en <a href="/pass/requisitos-ciudadania-noruega/">la guía de requisitos</a>.</p></details>
+          <details><summary>¿Cuándo abre y cuánto va a costar?</summary><p>La venta sigue cerrada. Cuando el curso termine la revisión lingüística y los sistemas de acceso estén preparados, las condiciones aparecerán aquí antes de que puedas pagar.</p></details>
         </div>
-
         <div class="cruce reveal" style="--d:.2s">
           <p class="eti">La otra mitad del requisito</p>
-          <h3>El idioma es solo uno de los dos exámenes.</h3>
-          <p>Para la ciudadanía también tienes que aprobar la statsborgerprøven o la samfunnskunnskapsprøven, la prueba de conocimientos sobre Noruega. Esa ya está construida y puedes hacer un simulacro gratis ahora mismo.</p>
+          <h3>Idioma y conocimientos sobre Noruega son dos productos distintos.</h3>
+          <p>NEXO NORSK prepara el idioma. NEXO PASS explica y practica la prueba de ciudadanía o la de conocimientos sociales. No los mezclamos porque miden cosas diferentes.</p>
           <p><a class="enlace" href="/pass/">Ver NEXO PASS</a></p>
         </div>
       </div>
     </section>
 
-    <!-- S7 · CIERRE -->
     <section class="cierre banda">
       <div class="cielo" aria-hidden="true"></div>
       <div class="wrap">
-        <h2 class="reveal">Entender noruego y hablarlo no son la misma habilidad. El examen lo sabe.</h2>
-        <p class="sub reveal" style="--d:.08s">Te aviso cuando el curso abra. Sin prisa artificial y sin cuenta atrás falsa.</p>
+        <h2 class="reveal">No necesitas otro montón de apuntes. Necesitas volver a intentarlo mejor.</h2>
+        <p class="sub reveal" style="--d:.08s">Prueba primero la muestra. Si después quieres saber cuándo abre el curso completo, te aviso por correo.</p>
         <div class="botones reveal" style="--d:.14s">
-          <a class="cta" href="https://nexonoruega.substack.com/subscribe?utm_source=nexonoruega.com&utm_medium=web&utm_campaign=norsk">Avísame cuando abra</a>
-          <a class="cta ghost" href="/norsk/entrenamiento-oral/">Ver el entrenamiento oral</a>
+          <a class="cta" href="/norsk/curso/">Probar una sesión gratis</a>
+          <a class="cta ghost" href="https://nexonoruega.substack.com/subscribe?utm_source=nexonoruega.com&utm_medium=web&utm_campaign=norsk">Avísame cuando abra</a>
         </div>
       </div>
     </section>
@@ -485,6 +433,46 @@
     } else {
       observados.forEach(function (el) { el.classList.add("visible"); });
     }
+
+    var respuestas = {
+      cero: {
+        eti: "Todavía no",
+        titulo: "Este curso B1 no es tu punto de partida.",
+        texto: "Primero necesitas construir el tramo A1-A2: comprender mensajes básicos, presentarte, preguntar y producir frases sencillas. NEXO NORSK lo tratará como un recorrido separado, no como un prólogo comprimido dentro del B1.",
+        cta: "Avísame del tramo inicial",
+        href: "https://nexonoruega.substack.com/subscribe?utm_source=nexonoruega.com&utm_medium=web&utm_campaign=norsk-a1"
+      },
+      base: {
+        eti: "Tu entrada",
+        titulo: "Estás en el punto para el que se ha construido este curso.",
+        texto: "Si entiendes instrucciones breves y puedes formar frases propias, aunque tardes y cometas errores, el diagnóstico te dirá qué destreza conviene atacar primero.",
+        cta: "Hacer el diagnóstico",
+        href: "/norsk/curso/#DIAGNOSTICO_B1"
+      },
+      examen: {
+        eti: "Ve al núcleo",
+        titulo: "Necesitas producir, corregir y repetir con tiempo real.",
+        texto: "Empieza por una práctica oral, detecta el mecanismo que más se repite y vuelve al curso solo para repararlo. Después haz otra actuación y un simulacro de formato similar al oficial.",
+        cta: "Probar el entrenamiento oral",
+        href: "/norsk/larsito/"
+      }
+    };
+    var nivelRespuesta = document.getElementById("nivelRespuesta");
+    document.querySelectorAll("[data-nivel]").forEach(function (boton) {
+      boton.addEventListener("click", function () {
+        var dato = respuestas[boton.getAttribute("data-nivel")];
+        if (!dato || !nivelRespuesta) return;
+        document.querySelectorAll("[data-nivel]").forEach(function (otro) {
+          otro.setAttribute("aria-pressed", otro === boton ? "true" : "false");
+        });
+        nivelRespuesta.innerHTML = '<p class="eti"></p><h3></h3><p></p><a class="cta"></a>';
+        nivelRespuesta.querySelector(".eti").textContent = dato.eti;
+        nivelRespuesta.querySelector("h3").textContent = dato.titulo;
+        nivelRespuesta.querySelector("p:not(.eti)").textContent = dato.texto;
+        nivelRespuesta.querySelector("a").textContent = dato.cta;
+        nivelRespuesta.querySelector("a").href = dato.href;
+      });
+    });
   })();
   </script>
 </body>
