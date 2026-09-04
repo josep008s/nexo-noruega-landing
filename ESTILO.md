@@ -109,6 +109,16 @@ Etiquetas vigentes desde el 02.09.2026: `Norsk` (antes `Noruego`, porque es el n
 
 Cada titular señala una única promesa con `<mark class="marcado">`: `Vuelve a intentarlo` en Norsk y `explicado en español` en Ciudadanía. El resaltado Aurora es semántico, no una selección de texto simulada ni un adorno repartido por el hero.
 
+En `/norsk/`, la promesa se demuestra antes de explicarse: el hero contiene una micropráctica funcional con dos respuestas y una corrección exacta. No se usa un mockup ni una lista de prestaciones en ese primer contacto. La entrada principal de quien ya tiene base abre `M01`; el diagnóstico existe como herramienta opcional, nunca como peaje.
+
+El método visible de NEXO NORSK se nombra siempre `Responde · Repara · Repite`:
+
+1. `Responde`: el alumno habla, ordena, elige o escribe sin ver el modelo.
+2. `Repara`: la devolución localiza una diferencia y explica el mecanismo que la provoca.
+3. `Repite`: el alumno vuelve a usar el mecanismo con datos nuevos.
+
+La recuperación a los 1, 3, 7 y 14 días funciona por detrás y se explica como comportamiento del sistema, no como un cuarto paso que el alumno deba gestionar.
+
 ```html
 <header>
   <div class="head-inner">
