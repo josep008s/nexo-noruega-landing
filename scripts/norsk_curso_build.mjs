@@ -1,5 +1,5 @@
 // Valida el curso Norskprøven B1 exportado del Drive y lo sube a Supabase.
-// Uso:  SUPABASE_URL=... SUPABASE_SERVICE_KEY=... node scripts/norsk_curso_build.mjs [--dry]
+// Uso:  SUPABASE_URL=... SUPABASE_SERVICE_KEY=... node scripts/norsk_curso_build.mjs [--ruta=norskproven-b1|norsk-desde-cero-a2] [--dry]
 //
 // Entrada (GITIGNORED, el repo es público y el curso es contenido de pago):
 //   scripts/_norsk_curso/curso.json  <- lo genera scripts/norsk_curso_export.mjs
@@ -13,13 +13,19 @@ import { createHash } from "node:crypto";
 import { fileURLToPath } from "node:url";
 
 const ROOT = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
-const CURSO = path.join(ROOT, "scripts", "_norsk_curso", "curso.json");
-const MANIFIESTO = path.join(ROOT, "scripts", "_norsk_curso", "manifiesto.json");
+// Dos rutas comparten tabla y endpoint (columna ruta, migración 0008). La B1 sigue
+// en la carpeta de siempre; el recorrido desde cero en una subcarpeta.
+const RUTAS_VALIDAS = ["norskproven-b1", "norsk-desde-cero-a2"];
+const RUTA = (process.argv.find((a) => a.startsWith("--ruta=")) || "").slice(7).trim() || "norskproven-b1";
+if (!RUTAS_VALIDAS.includes(RUTA)) { console.error(`Ruta desconocida: ${RUTA}. Válidas: ${RUTAS_VALIDAS.join(", ")}`); process.exit(1); }
+const CARPETA = RUTA === "norskproven-b1" ? path.join(ROOT, "scripts", "_norsk_curso") : path.join(ROOT, "scripts", "_norsk_curso", RUTA);
+const CURSO = path.join(CARPETA, "curso.json");
+const MANIFIESTO = path.join(CARPETA, "manifiesto.json");
 const DRY = process.argv.includes("--dry");
 const FINGERPRINT_VERSION = "sha256-ruta-contenido-v1";
 
 const CODIGO_VALIDO = /^[A-Z0-9_-]{3,40}$/;
-const TIPOS = ["diagnostico", "mecanismo", "anexo", "lytt", "les", "skriv", "muntlig", "simulacro"];
+const TIPOS = ["diagnostico", "mecanismo", "anexo", "lytt", "les", "skriv", "muntlig", "simulacro", "leccion", "puente", "salto"];
 const PROHIBIDAS = /increíble|brutal|paraíso|trucos|hola chicos/i;
 const NO_PENINSULAR = /\b(celular|manejar|acá|computadora|plata|carro)\b/i;
 const SECCION_INTERNA = /^(?:notas-para-la-revision-nativa|puertas-abiertas-de-esta-leccion|puertas-abiertas-de-este-documento|registro-de-dudas-para-contraste-humano-opcional|registro-historico-de-dudas-de-lengua|registro-de-revision-de-lengua|registro-de-produccion|estado-y-controles-separados-de-esta-leccion|estado-reconciliado-de-esta-leccion|estado-reconciliado-y-mejoras-opcionales|estado-y-trabajo-abierto|controles-y-pendientes-separados|lo-que-este-banco-todavia-no-tiene|hoja-interna-de-observacion-siete-puertas-y-alcance|control-de-calidad-de-este-bloque|comprobaciones-pasadas-sobre-este-archivo|comprobaciones-internas-de-este-lote|siguiente-paso)$/;
@@ -146,10 +152,14 @@ function validarPieza(p, errores, avisos, vistos) {
   const meta = p.meta || {};
   if (String(meta.lupa || "").toUpperCase() === "FAIL") fallo(errores, id, "lupa en FAIL, no se sube");
   if (!meta.lupa) avisos.push(`${id}: sin marca de La Lupa`);
-  if (meta.qa_lengua !== "SISTEMICA_TECNICA_ACEPTADA"
+  // La B1 lleva la QA sistémica/técnica aceptada; el recorrido desde cero solo
+  // sube una pieza cuando ha pasado sus seis pasadas. Ningún otro estado se sube.
+  const QA_ACEPTADA = ["SISTEMICA_TECNICA_ACEPTADA", "SISTEMICA_6_PASADAS"];
+  if (!QA_ACEPTADA.includes(meta.qa_lengua)
       || meta.qa_lengua_alcance !== "NO_FIRMA_HUMANA_NATIVA") {
-    fallo(errores, id, "QA de lengua sin alcance sistémico/técnico canónico");
+    fallo(errores, id, `QA de lengua sin cerrar (${meta.qa_lengua || "sin estado"}): no se sube`);
   }
+  if (p.tipo === "leccion" && (!Array.isArray(meta.ejercicios) || !meta.ejercicios.length)) fallo(errores, id, "lección sin ejercicios");
   if (Object.prototype.hasOwnProperty.call(meta, "revision_nativa")) {
     fallo(errores, id, "metadato legacy revision_nativa no permitido en artefacto de alumno");
   }
@@ -183,7 +193,7 @@ async function subir(tabla, filas, onConflict) {
 // ---------- main ----------
 
 if (!fs.existsSync(CURSO)) {
-  console.error(`No existe ${CURSO}. Exporta antes el material del Drive: node scripts/norsk_curso_export.mjs`);
+  console.error(`No existe ${CURSO}. Exporta antes el material del Drive: node scripts/norsk_curso_export.mjs --ruta=${RUTA}`);
   process.exit(1);
 }
 
@@ -218,6 +228,7 @@ if (!piezas.length) {
 }
 
 const filas = piezas.map((p) => ({
+  ruta: RUTA,
   codigo: p.codigo,
   tipo: p.tipo,
   titulo: p.titulo,
@@ -230,7 +241,7 @@ const filas = piezas.map((p) => ({
 }));
 
 if (DRY) {
-  console.log(`\n--dry: validación OK. Subiría ${filas.length} piezas a norsk_curso:`);
+  console.log(`\n--dry: validación OK. Subiría ${filas.length} piezas a norsk_curso (ruta ${RUTA}):`);
   filas.forEach((f) => console.log(`  ${f.codigo} · ${f.tipo} · orden ${f.orden} · ${f.secciones.length} secciones · ${f.palabras || 0} palabras`));
   console.log("No se ha tocado Supabase.");
   process.exit(0);
@@ -238,7 +249,7 @@ if (DRY) {
 
 comprobarEntorno();
 
-await subir("norsk_curso", filas, "codigo");
+await subir("norsk_curso", filas, "ruta,codigo");
 console.log(`\nSubidas ${filas.length} piezas a norsk_curso.`);
 
 // Desactivar lo retirado: cualquier pieza activa en Supabase que ya no esté en el
@@ -247,14 +258,14 @@ console.log(`\nSubidas ${filas.length} piezas a norsk_curso.`);
   const url = process.env.SUPABASE_URL;
   const key = process.env.SUPABASE_SERVICE_KEY;
   const canonicos = new Set(filas.map((f) => f.codigo));
-  const r = await fetch(`${url}/rest/v1/norsk_curso?select=codigo&activa=is.true&limit=10000`, {
+  const r = await fetch(`${url}/rest/v1/norsk_curso?select=codigo&ruta=eq.${encodeURIComponent(RUTA)}&activa=is.true&limit=10000`, {
     headers: { apikey: key, Authorization: `Bearer ${key}` },
   });
   if (!r.ok) throw new Error(`Supabase listar codigos ${r.status}: ${await r.text()}`);
   const enDb = await r.json();
   const huerfanas = enDb.map((x) => x.codigo).filter((c) => !canonicos.has(c));
   for (const codigo of huerfanas) {
-    const p = await fetch(`${url}/rest/v1/norsk_curso?codigo=eq.${encodeURIComponent(codigo)}`, {
+    const p = await fetch(`${url}/rest/v1/norsk_curso?ruta=eq.${encodeURIComponent(RUTA)}&codigo=eq.${encodeURIComponent(codigo)}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json", apikey: key, Authorization: `Bearer ${key}`, Prefer: "return=minimal" },
       body: JSON.stringify({ activa: false, updated_at: new Date().toISOString() }),

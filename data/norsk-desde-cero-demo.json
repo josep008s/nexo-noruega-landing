@@ -1,0 +1,1703 @@
+{
+ "meta": {
+  "producto": "NEXO NORSK · Noruego desde cero hasta A2",
+  "ruta": "norsk-desde-cero-a2",
+  "actualizado": "2026-09-04",
+  "aviso": "Material propio de NEXO NORSK. NEXO NORSK es un proyecto independiente y no tiene relación con HK-dir, con UDI ni con ningún centro de examen. Este recorrido no promete un nivel, un aprobado ni un trámite.",
+  "piezas_totales": 2,
+  "lecciones_totales": 2
+ },
+ "piezas": [
+  {
+   "codigo": "PREA1-U02-L01",
+   "tipo": "leccion",
+   "titulo": "Hei, jeg heter…",
+   "orden": 1,
+   "meta": {
+    "ruta": "norsk-desde-cero-a2",
+    "zona": "PREA1",
+    "unidad": "PREA1-U02",
+    "mision": "Presentarte con datos de una tarjeta ficticia y responder a las tres preguntas de otra persona.",
+    "objetivo": "Decir quién eres con tres bloques fijos y entender lo mismo cuando lo dice otra persona.",
+    "conocimientos_previos": [
+     "PREA1-U01-L02"
+    ],
+    "conexion_posterior": [
+     "PREA1-U02-L02",
+     "PREA1-U04-L02",
+     "A1-U01-L01"
+    ],
+    "conexion_m01_m16": [],
+    "competencias": [
+     "C-P-LYT-01",
+     "C-P-MUN-01",
+     "C-P-INT-01",
+     "C-P-INT-02",
+     "C-P-GRA-01",
+     "C-P-GRA-03"
+    ],
+    "destrezas": [
+     "LYT",
+     "MUN",
+     "INT"
+    ],
+    "evidencia": "Dices tres frases sobre una tarjeta y respondes a Hva heter du?, Hvor kommer du fra? y Hvor bor du? en un intercambio con Larsito.",
+    "larsito": "LARS-PREA1-U02",
+    "audio": [
+     "AU-A1-E02-M",
+     "AU-A1-E02-TR"
+    ],
+    "audios": {
+     "AU-A1-E02-M": {
+      "texto": "AMIR: Hei. Jeg heter Amir. Jeg er ny her.\nELENA: Hei, Amir. Jeg heter Elena.\nAMIR: Hyggelig å møte deg. Hvor kommer du fra?\nELENA: Jeg kommer fra Spania, men jeg bor i Drammen. Og du?\nAMIR: Jeg kommer fra Syria. Nå bor jeg i Lillestrøm.\nELENA: Jobber du her?\nAMIR: Ja, jeg jobber på lageret. Hva med deg?\nELENA: Jeg jobber på kontoret.\nAMIR: Vi sees i pausen.\nELENA: Ja, vi sees.",
+      "duracion_s": 32.48,
+      "estado": "APROBADO_PROPIETARIO_2026-08-14",
+      "funcion": "modelo",
+      "descripcion": null
+     },
+     "AU-A1-E02-TR": {
+      "texto": "NORA: Hei. Jeg heter Nora. Hva heter du?\nDIEGO: Hei, jeg heter Diego.\nNORA: Er du ny på kurset?\nDIEGO: Ja, jeg begynner i dag.\nNORA: Hvor kommer du fra?\nDIEGO: Jeg kommer fra Argentina, men jeg bor i Bergen nå. Hva med deg?\nNORA: Jeg kommer fra Tromsø. Jobber du i Bergen?\nDIEGO: Ja, jeg jobber på et hotell.\nNORA: Velkommen. Vi sees senere.\nDIEGO: Takk. Vi sees.",
+      "duracion_s": 32.72,
+      "estado": "APROBADO_PROPIETARIO_2026-08-14",
+      "funcion": "transferencia",
+      "descripcion": null
+     }
+    },
+    "ejercicios": [
+     {
+      "id": "PREA1-U02-L01-E01",
+      "tipo": "escucha_elige",
+      "esencial": true,
+      "audio": "AU-A1-E02-M",
+      "pregunta": "¿De dónde viene Elena?",
+      "opciones": [
+       "Spania",
+       "Syria",
+       "Drammen"
+      ],
+      "correcta": 0,
+      "frase_no": "Jeg kommer fra Spania, men jeg bor i Drammen.",
+      "mecanismo": "BLOQUE",
+      "feedback": {
+       "regla": "Los tres bloques empiezan siempre por «jeg» y el dato va al final: jeg heter + nombre, jeg kommer fra + país, jeg bor i + ciudad.",
+       "conserva": "Has buscado el país detrás de «kommer fra»: esa es la pista.",
+       "cambia": "«Drammen» va detrás de «bor i», así que es donde vive, no de donde viene. «Syria» lo dice Amir."
+      },
+      "fuente": "PREA1-U02-L01#responde",
+      "nivel": "Pre-A1"
+     },
+     {
+      "id": "PREA1-U02-L01-E02",
+      "tipo": "escucha_elige",
+      "esencial": true,
+      "audio": "AU-A1-E02-M",
+      "pregunta": "¿Dónde vive Amir?",
+      "opciones": [
+       "Lillestrøm",
+       "Drammen",
+       "Syria"
+      ],
+      "correcta": 0,
+      "frase_no": "Nå bor jeg i Lillestrøm.",
+      "mecanismo": "BLOQUE",
+      "feedback": {
+       "regla": "Los tres bloques empiezan siempre por «jeg» y el dato va al final: jeg heter + nombre, jeg kommer fra + país, jeg bor i + ciudad.",
+       "conserva": "Buscas la ciudad detrás de «bor i».",
+       "cambia": "Amir dice «Nå bor jeg i Lillestrøm». «Drammen» es la ciudad de Elena y «Syria» es de donde viene Amir."
+      },
+      "fuente": "PREA1-U02-L01#responde",
+      "nivel": "Pre-A1"
+     },
+     {
+      "id": "PREA1-U02-L01-E03",
+      "tipo": "empareja",
+      "esencial": true,
+      "pares": [
+       {
+        "no": "Jeg heter …",
+        "es": "Me llamo…"
+       },
+       {
+        "no": "Jeg bor i …",
+        "es": "Vivo en…"
+       },
+       {
+        "no": "Hvor kommer du fra?",
+        "es": "¿De dónde vienes?"
+       },
+       {
+        "no": "Og du?",
+        "es": "¿Y tú?"
+       }
+      ],
+      "mecanismo": "BLOQUE",
+      "feedback": {
+       "regla": "Los tres bloques empiezan siempre por «jeg» y el dato va al final: jeg heter + nombre, jeg kommer fra + país, jeg bor i + ciudad.",
+       "conserva": "Los bloques con «jeg» hablan de ti; los que llevan «du» preguntan a la otra persona.",
+       "cambia": "Mira la palabra que sigue a «jeg»: «heter» es llamarse, «bor» es vivir, «kommer fra» es venir de."
+      },
+      "fuente": "PREA1-U02-L01#bloques",
+      "nivel": "Pre-A1"
+     },
+     {
+      "id": "PREA1-U02-L01-E04",
+      "tipo": "elige",
+      "esencial": true,
+      "pregunta": "¿Qué pregunta hace falta para saber el nombre?",
+      "opciones": [
+       "Hva heter du?",
+       "Hvor bor du?",
+       "Hvor kommer du fra?"
+      ],
+      "correcta": 0,
+      "frase_no": "Hva heter du?",
+      "mecanismo": "PREG-HV",
+      "feedback": {
+       "regla": "«Hva» pregunta por el nombre (hva heter du); «hvor» pregunta por el lugar (hvor bor du, hvor kommer du fra). En la pregunta el verbo va delante de «du».",
+       "conserva": "Has buscado «heter», que es la palabra del nombre.",
+       "cambia": "«Hvor bor du?» pregunta dónde vives y «Hvor kommer du fra?» de dónde vienes: las dos empiezan por «hvor», que es lugar."
+      },
+      "fuente": "PREA1-U02-L01#bloques",
+      "nivel": "Pre-A1"
+     },
+     {
+      "id": "PREA1-U02-L01-E05",
+      "tipo": "ordena",
+      "esencial": true,
+      "frase_no": "Jeg kommer fra Spania.",
+      "es": "Vengo de España.",
+      "aceptadas": [
+       "Jeg kommer fra Spania."
+      ],
+      "mecanismo": "BLOQUE",
+      "feedback": {
+       "regla": "Los tres bloques empiezan siempre por «jeg» y el dato va al final: jeg heter + nombre, jeg kommer fra + país, jeg bor i + ciudad.",
+       "conserva": "Tienes las cuatro fichas; solo cambia el orden.",
+       "cambia": "El bloque empieza por «Jeg»; después «kommer fra» juntos y el país al final."
+      },
+      "fuente": "PREA1-U02-L01#practica",
+      "nivel": "Pre-A1"
+     },
+     {
+      "id": "PREA1-U02-L01-E06",
+      "tipo": "completa",
+      "esencial": true,
+      "frase_no": "Jeg bor i Oslo.",
+      "frase_hueco": "Jeg ___ i Oslo.",
+      "opciones": [
+       "bor",
+       "heter",
+       "kommer"
+      ],
+      "correcta": "bor",
+      "mecanismo": "BLOQUE",
+      "feedback": {
+       "regla": "Los tres bloques empiezan siempre por «jeg» y el dato va al final: jeg heter + nombre, jeg kommer fra + país, jeg bor i + ciudad.",
+       "conserva": "Has visto que detrás del hueco viene «i» más una ciudad.",
+       "cambia": "Con «i» y una ciudad va «bor» (vivir). «Heter» va con un nombre y «kommer» con «fra» y un país."
+      },
+      "fuente": "PREA1-U02-L01#practica",
+      "nivel": "Pre-A1"
+     },
+     {
+      "id": "PREA1-U02-L01-E07",
+      "tipo": "escribe",
+      "esencial": true,
+      "enunciado": "Escribe cómo dirías «Vivo en Bergen».",
+      "frase_no": "Jeg bor i Bergen.",
+      "aceptadas": [
+       "Jeg bor i Bergen.",
+       "Jeg bor i Bergen"
+      ],
+      "mecanismo": "BLOQUE",
+      "feedback": {
+       "regla": "Los tres bloques empiezan siempre por «jeg» y el dato va al final: jeg heter + nombre, jeg kommer fra + país, jeg bor i + ciudad.",
+       "conserva": "Conserva «Jeg bor i» entero.",
+       "cambia": "Solo cambia la ciudad al final: Bergen."
+      },
+      "fuente": "PREA1-U02-L01#practica",
+      "nivel": "Pre-A1"
+     },
+     {
+      "id": "PREA1-U02-L01-E08",
+      "tipo": "graba_compara",
+      "esencial": true,
+      "tarjeta": "Lucía · Spania · Oslo",
+      "modelo_no": "Jeg heter Lucía. Jeg kommer fra Spania. Jeg bor i Oslo.",
+      "frase_no": "Jeg heter Lucía",
+      "audio": null,
+      "mecanismo": "BLOQUE",
+      "feedback": {
+       "regla": "Los tres bloques empiezan siempre por «jeg» y el dato va al final: jeg heter + nombre, jeg kommer fra + país, jeg bor i + ciudad.",
+       "conserva": "Cada frase empieza por «Jeg».",
+       "cambia": "Compara solo dos cosas con el modelo: que las tres frases empiecen por «Jeg» y que el dato vaya al final. Nadie evalúa tu acento aquí."
+      },
+      "fuente": "PREA1-U02-L01#practica",
+      "nivel": "Pre-A1"
+     },
+     {
+      "id": "PREA1-U02-L01-O01",
+      "tipo": "ordena",
+      "esencial": false,
+      "frase_no": "Jeg heter Elena.",
+      "es": "Me llamo Elena.",
+      "aceptadas": [
+       "Jeg heter Elena."
+      ],
+      "mecanismo": "BLOQUE",
+      "feedback": {
+       "regla": "Los tres bloques empiezan siempre por «jeg» y el dato va al final: jeg heter + nombre, jeg kommer fra + país, jeg bor i + ciudad.",
+       "conserva": "Las fichas son las palabras correctas.",
+       "cambia": "Coloca primero «Jeg» (o la palabra de pregunta) y el dato al final."
+      },
+      "fuente": "PREA1-U02-L01#repara",
+      "nivel": "Pre-A1"
+     },
+     {
+      "id": "PREA1-U02-L01-O02",
+      "tipo": "ordena",
+      "esencial": false,
+      "frase_no": "Jeg bor i Drammen.",
+      "es": "Vivo en Drammen.",
+      "aceptadas": [
+       "Jeg bor i Drammen."
+      ],
+      "mecanismo": "BLOQUE",
+      "feedback": {
+       "regla": "Los tres bloques empiezan siempre por «jeg» y el dato va al final: jeg heter + nombre, jeg kommer fra + país, jeg bor i + ciudad.",
+       "conserva": "Las fichas son las palabras correctas.",
+       "cambia": "Coloca primero «Jeg» (o la palabra de pregunta) y el dato al final."
+      },
+      "fuente": "PREA1-U02-L01#repara",
+      "nivel": "Pre-A1"
+     },
+     {
+      "id": "PREA1-U02-L01-O03",
+      "tipo": "ordena",
+      "esencial": false,
+      "frase_no": "Jeg kommer fra Syria.",
+      "es": "Vengo de Siria.",
+      "aceptadas": [
+       "Jeg kommer fra Syria."
+      ],
+      "mecanismo": "BLOQUE",
+      "feedback": {
+       "regla": "Los tres bloques empiezan siempre por «jeg» y el dato va al final: jeg heter + nombre, jeg kommer fra + país, jeg bor i + ciudad.",
+       "conserva": "Las fichas son las palabras correctas.",
+       "cambia": "Coloca primero «Jeg» (o la palabra de pregunta) y el dato al final."
+      },
+      "fuente": "PREA1-U02-L01#repara",
+      "nivel": "Pre-A1"
+     },
+     {
+      "id": "PREA1-U02-L01-O04",
+      "tipo": "ordena",
+      "esencial": false,
+      "frase_no": "Hvor bor du?",
+      "es": "¿Dónde vives?",
+      "aceptadas": [
+       "Hvor bor du?"
+      ],
+      "mecanismo": "PREG-HV",
+      "feedback": {
+       "regla": "«Hva» pregunta por el nombre (hva heter du); «hvor» pregunta por el lugar (hvor bor du, hvor kommer du fra). En la pregunta el verbo va delante de «du».",
+       "conserva": "Las fichas son las palabras correctas.",
+       "cambia": "Coloca primero «Jeg» (o la palabra de pregunta) y el dato al final."
+      },
+      "fuente": "PREA1-U02-L01#repara",
+      "nivel": "Pre-A1"
+     },
+     {
+      "id": "PREA1-U02-L01-O05",
+      "tipo": "ordena",
+      "esencial": false,
+      "frase_no": "Hva heter du?",
+      "es": "¿Cómo te llamas?",
+      "aceptadas": [
+       "Hva heter du?"
+      ],
+      "mecanismo": "PREG-HV",
+      "feedback": {
+       "regla": "«Hva» pregunta por el nombre (hva heter du); «hvor» pregunta por el lugar (hvor bor du, hvor kommer du fra). En la pregunta el verbo va delante de «du».",
+       "conserva": "Las fichas son las palabras correctas.",
+       "cambia": "Coloca primero «Jeg» (o la palabra de pregunta) y el dato al final."
+      },
+      "fuente": "PREA1-U02-L01#repara",
+      "nivel": "Pre-A1"
+     },
+     {
+      "id": "PREA1-U02-L01-O06",
+      "tipo": "ordena",
+      "esencial": false,
+      "frase_no": "Hvor kommer du fra?",
+      "es": "¿De dónde vienes?",
+      "aceptadas": [
+       "Hvor kommer du fra?"
+      ],
+      "mecanismo": "PREG-HV",
+      "feedback": {
+       "regla": "«Hva» pregunta por el nombre (hva heter du); «hvor» pregunta por el lugar (hvor bor du, hvor kommer du fra). En la pregunta el verbo va delante de «du».",
+       "conserva": "Las fichas son las palabras correctas.",
+       "cambia": "Coloca primero «Jeg» (o la palabra de pregunta) y el dato al final."
+      },
+      "fuente": "PREA1-U02-L01#repara",
+      "nivel": "Pre-A1"
+     },
+     {
+      "id": "PREA1-U02-L01-O07",
+      "tipo": "ordena",
+      "esencial": false,
+      "frase_no": "Jeg bor i Trondheim.",
+      "es": "Vivo en Trondheim.",
+      "aceptadas": [
+       "Jeg bor i Trondheim."
+      ],
+      "mecanismo": "BLOQUE",
+      "feedback": {
+       "regla": "Los tres bloques empiezan siempre por «jeg» y el dato va al final: jeg heter + nombre, jeg kommer fra + país, jeg bor i + ciudad.",
+       "conserva": "Las fichas son las palabras correctas.",
+       "cambia": "Coloca primero «Jeg» (o la palabra de pregunta) y el dato al final."
+      },
+      "fuente": "PREA1-U02-L01#repara",
+      "nivel": "Pre-A1"
+     },
+     {
+      "id": "PREA1-U02-L01-O08",
+      "tipo": "ordena",
+      "esencial": false,
+      "frase_no": "Jeg kommer fra Argentina.",
+      "es": "Vengo de Argentina.",
+      "aceptadas": [
+       "Jeg kommer fra Argentina."
+      ],
+      "mecanismo": "BLOQUE",
+      "feedback": {
+       "regla": "Los tres bloques empiezan siempre por «jeg» y el dato va al final: jeg heter + nombre, jeg kommer fra + país, jeg bor i + ciudad.",
+       "conserva": "Las fichas son las palabras correctas.",
+       "cambia": "Coloca primero «Jeg» (o la palabra de pregunta) y el dato al final."
+      },
+      "fuente": "PREA1-U02-L01#repara",
+      "nivel": "Pre-A1"
+     },
+     {
+      "id": "PREA1-U02-L01-O09",
+      "tipo": "completa",
+      "esencial": false,
+      "frase_no": "Jeg heter Elena.",
+      "frase_hueco": "Jeg ___ Elena.",
+      "opciones": [
+       "heter",
+       "bor",
+       "kommer"
+      ],
+      "correcta": "heter",
+      "mecanismo": "BLOQUE",
+      "feedback": {
+       "regla": "Los tres bloques empiezan siempre por «jeg» y el dato va al final: jeg heter + nombre, jeg kommer fra + país, jeg bor i + ciudad.",
+       "conserva": "El resto de la frase ya está bien.",
+       "cambia": "En este hueco va «heter»."
+      },
+      "fuente": "PREA1-U02-L01#repara",
+      "nivel": "Pre-A1"
+     },
+     {
+      "id": "PREA1-U02-L01-O10",
+      "tipo": "completa",
+      "esencial": false,
+      "frase_no": "Jeg kommer fra Syria.",
+      "frase_hueco": "Jeg ___ fra Syria.",
+      "opciones": [
+       "kommer",
+       "bor",
+       "heter"
+      ],
+      "correcta": "kommer",
+      "mecanismo": "BLOQUE",
+      "feedback": {
+       "regla": "Los tres bloques empiezan siempre por «jeg» y el dato va al final: jeg heter + nombre, jeg kommer fra + país, jeg bor i + ciudad.",
+       "conserva": "El resto de la frase ya está bien.",
+       "cambia": "En este hueco va «kommer»."
+      },
+      "fuente": "PREA1-U02-L01#repara",
+      "nivel": "Pre-A1"
+     },
+     {
+      "id": "PREA1-U02-L01-O11",
+      "tipo": "completa",
+      "esencial": false,
+      "frase_no": "Hva heter du?",
+      "frase_hueco": "___ heter du?",
+      "opciones": [
+       "Hva",
+       "Hvor",
+       "Og"
+      ],
+      "correcta": "Hva",
+      "mecanismo": "PREG-HV",
+      "feedback": {
+       "regla": "«Hva» pregunta por el nombre (hva heter du); «hvor» pregunta por el lugar (hvor bor du, hvor kommer du fra). En la pregunta el verbo va delante de «du».",
+       "conserva": "El resto de la frase ya está bien.",
+       "cambia": "En este hueco va «Hva»."
+      },
+      "fuente": "PREA1-U02-L01#repara",
+      "nivel": "Pre-A1"
+     },
+     {
+      "id": "PREA1-U02-L01-O12",
+      "tipo": "completa",
+      "esencial": false,
+      "frase_no": "Hvor bor du?",
+      "frase_hueco": "___ bor du?",
+      "opciones": [
+       "Hvor",
+       "Hva",
+       "Og"
+      ],
+      "correcta": "Hvor",
+      "mecanismo": "PREG-HV",
+      "feedback": {
+       "regla": "«Hva» pregunta por el nombre (hva heter du); «hvor» pregunta por el lugar (hvor bor du, hvor kommer du fra). En la pregunta el verbo va delante de «du».",
+       "conserva": "El resto de la frase ya está bien.",
+       "cambia": "En este hueco va «Hvor»."
+      },
+      "fuente": "PREA1-U02-L01#repara",
+      "nivel": "Pre-A1"
+     },
+     {
+      "id": "PREA1-U02-L01-O13",
+      "tipo": "completa",
+      "esencial": false,
+      "frase_no": "Jeg bor i Drammen.",
+      "frase_hueco": "Jeg bor ___ Drammen.",
+      "opciones": [
+       "i",
+       "fra",
+       "og"
+      ],
+      "correcta": "i",
+      "mecanismo": "BLOQUE",
+      "feedback": {
+       "regla": "Los tres bloques empiezan siempre por «jeg» y el dato va al final: jeg heter + nombre, jeg kommer fra + país, jeg bor i + ciudad.",
+       "conserva": "El resto de la frase ya está bien.",
+       "cambia": "En este hueco va «i»."
+      },
+      "fuente": "PREA1-U02-L01#repara",
+      "nivel": "Pre-A1"
+     },
+     {
+      "id": "PREA1-U02-L01-O14",
+      "tipo": "completa",
+      "esencial": false,
+      "frase_no": "Jeg kommer fra Spania.",
+      "frase_hueco": "Jeg kommer ___ Spania.",
+      "opciones": [
+       "fra",
+       "i",
+       "og"
+      ],
+      "correcta": "fra",
+      "mecanismo": "BLOQUE",
+      "feedback": {
+       "regla": "Los tres bloques empiezan siempre por «jeg» y el dato va al final: jeg heter + nombre, jeg kommer fra + país, jeg bor i + ciudad.",
+       "conserva": "El resto de la frase ya está bien.",
+       "cambia": "En este hueco va «fra»."
+      },
+      "fuente": "PREA1-U02-L01#repara",
+      "nivel": "Pre-A1"
+     },
+     {
+      "id": "PREA1-U02-L01-O15",
+      "tipo": "elige",
+      "esencial": false,
+      "pregunta": "¿Qué significa «Og du?»?",
+      "opciones": [
+       "¿Y tú?",
+       "Encantado",
+       "Nos vemos"
+      ],
+      "correcta": 0,
+      "frase_no": "Og du?",
+      "mecanismo": "BLOQUE",
+      "feedback": {
+       "regla": "Los saludos y las devoluciones son bloques fijos: se reconocen enteros.",
+       "conserva": "Has reconocido el bloque.",
+       "cambia": "«Og du?» significa «¿Y tú?»."
+      },
+      "fuente": "PREA1-U02-L01#bloques",
+      "nivel": "Pre-A1"
+     },
+     {
+      "id": "PREA1-U02-L01-O16",
+      "tipo": "elige",
+      "esencial": false,
+      "pregunta": "¿Qué significa «Hva med deg?»?",
+      "opciones": [
+       "¿Y tú?",
+       "¿Trabajas aquí?",
+       "Soy nuevo aquí"
+      ],
+      "correcta": 0,
+      "frase_no": "Hva med deg?",
+      "mecanismo": "BLOQUE",
+      "feedback": {
+       "regla": "Los saludos y las devoluciones son bloques fijos: se reconocen enteros.",
+       "conserva": "Has reconocido el bloque.",
+       "cambia": "«Hva med deg?» significa «¿Y tú?»."
+      },
+      "fuente": "PREA1-U02-L01#bloques",
+      "nivel": "Pre-A1"
+     },
+     {
+      "id": "PREA1-U02-L01-O17",
+      "tipo": "elige",
+      "esencial": false,
+      "pregunta": "¿Qué significa «Hyggelig å møte deg.»?",
+      "opciones": [
+       "Encantado de conocerte.",
+       "Nos vemos",
+       "¿Y tú?"
+      ],
+      "correcta": 0,
+      "frase_no": "Hyggelig å møte deg.",
+      "mecanismo": "BLOQUE",
+      "feedback": {
+       "regla": "Los saludos y las devoluciones son bloques fijos: se reconocen enteros.",
+       "conserva": "Has reconocido el bloque.",
+       "cambia": "«Hyggelig å møte deg.» significa «Encantado de conocerte.»."
+      },
+      "fuente": "PREA1-U02-L01#bloques",
+      "nivel": "Pre-A1"
+     },
+     {
+      "id": "PREA1-U02-L01-O18",
+      "tipo": "elige",
+      "esencial": false,
+      "pregunta": "¿Qué significa «Jeg er ny her.»?",
+      "opciones": [
+       "Soy nuevo aquí.",
+       "Vivo aquí",
+       "¿Trabajas aquí?"
+      ],
+      "correcta": 0,
+      "frase_no": "Jeg er ny her.",
+      "mecanismo": "BLOQUE",
+      "feedback": {
+       "regla": "Los saludos y las devoluciones son bloques fijos: se reconocen enteros.",
+       "conserva": "Has reconocido el bloque.",
+       "cambia": "«Jeg er ny her.» significa «Soy nuevo aquí.»."
+      },
+      "fuente": "PREA1-U02-L01#bloques",
+      "nivel": "Pre-A1"
+     },
+     {
+      "id": "PREA1-U02-L01-O19",
+      "tipo": "elige",
+      "esencial": false,
+      "pregunta": "¿Qué significa «Vi sees.»?",
+      "opciones": [
+       "Nos vemos.",
+       "Encantado",
+       "Hola"
+      ],
+      "correcta": 0,
+      "frase_no": "Vi sees.",
+      "mecanismo": "BLOQUE",
+      "feedback": {
+       "regla": "Los saludos y las devoluciones son bloques fijos: se reconocen enteros.",
+       "conserva": "Has reconocido el bloque.",
+       "cambia": "«Vi sees.» significa «Nos vemos.»."
+      },
+      "fuente": "PREA1-U02-L01#bloques",
+      "nivel": "Pre-A1"
+     },
+     {
+      "id": "PREA1-U02-L01-O20",
+      "tipo": "elige",
+      "esencial": false,
+      "pregunta": "¿Cómo se dice «¿Dónde vives?»?",
+      "opciones": [
+       "Hvor bor du?",
+       "Hva heter du?",
+       "Hvor kommer du fra?"
+      ],
+      "correcta": 0,
+      "frase_no": "Hvor bor du?",
+      "mecanismo": "PREG-HV",
+      "feedback": {
+       "regla": "«Hva» pregunta por el nombre (hva heter du); «hvor» pregunta por el lugar (hvor bor du, hvor kommer du fra). En la pregunta el verbo va delante de «du».",
+       "conserva": "Has elegido por la palabra clave (heter, bor, kommer fra).",
+       "cambia": "«¿Dónde vives?» es «Hvor bor du?»."
+      },
+      "fuente": "PREA1-U02-L01#bloques",
+      "nivel": "Pre-A1"
+     },
+     {
+      "id": "PREA1-U02-L01-O21",
+      "tipo": "elige",
+      "esencial": false,
+      "pregunta": "¿Cómo se dice «¿De dónde vienes?»?",
+      "opciones": [
+       "Hvor kommer du fra?",
+       "Hvor bor du?",
+       "Og du?"
+      ],
+      "correcta": 0,
+      "frase_no": "Hvor kommer du fra?",
+      "mecanismo": "PREG-HV",
+      "feedback": {
+       "regla": "«Hva» pregunta por el nombre (hva heter du); «hvor» pregunta por el lugar (hvor bor du, hvor kommer du fra). En la pregunta el verbo va delante de «du».",
+       "conserva": "Has elegido por la palabra clave (heter, bor, kommer fra).",
+       "cambia": "«¿De dónde vienes?» es «Hvor kommer du fra?»."
+      },
+      "fuente": "PREA1-U02-L01#bloques",
+      "nivel": "Pre-A1"
+     },
+     {
+      "id": "PREA1-U02-L01-O22",
+      "tipo": "elige",
+      "esencial": false,
+      "pregunta": "¿Cómo se dice «Me llamo…»?",
+      "opciones": [
+       "Jeg heter …",
+       "Jeg bor i …",
+       "Jeg kommer fra …"
+      ],
+      "correcta": 0,
+      "frase_no": "Jeg heter …",
+      "mecanismo": "BLOQUE",
+      "feedback": {
+       "regla": "Los tres bloques empiezan siempre por «jeg» y el dato va al final: jeg heter + nombre, jeg kommer fra + país, jeg bor i + ciudad.",
+       "conserva": "Has elegido por la palabra clave (heter, bor, kommer fra).",
+       "cambia": "«Me llamo…» es «Jeg heter …»."
+      },
+      "fuente": "PREA1-U02-L01#bloques",
+      "nivel": "Pre-A1"
+     },
+     {
+      "id": "PREA1-U02-L01-O23",
+      "tipo": "escucha_elige",
+      "esencial": false,
+      "audio": "AU-A1-E02-TR",
+      "pregunta": "¿De dónde viene Diego?",
+      "opciones": [
+       "Argentina",
+       "Bergen",
+       "Tromsø"
+      ],
+      "correcta": 0,
+      "frase_no": "Jeg kommer fra Argentina, men jeg bor i Bergen nå.",
+      "mecanismo": "BLOQUE",
+      "feedback": {
+       "regla": "Los tres bloques empiezan siempre por «jeg» y el dato va al final: jeg heter + nombre, jeg kommer fra + país, jeg bor i + ciudad.",
+       "conserva": "Buscas el dato detrás de «kommer fra» o de «bor i».",
+       "cambia": "Vuelve a escuchar solo la frase de esa persona y fíjate en qué palabra va delante del nombre de lugar."
+      },
+      "fuente": "PREA1-U02-L01#repite",
+      "nivel": "Pre-A1"
+     },
+     {
+      "id": "PREA1-U02-L01-O24",
+      "tipo": "escucha_elige",
+      "esencial": false,
+      "audio": "AU-A1-E02-TR",
+      "pregunta": "¿Dónde vive Diego?",
+      "opciones": [
+       "Bergen",
+       "Argentina",
+       "Tromsø"
+      ],
+      "correcta": 0,
+      "frase_no": "Jeg kommer fra Argentina, men jeg bor i Bergen nå.",
+      "mecanismo": "BLOQUE",
+      "feedback": {
+       "regla": "Los tres bloques empiezan siempre por «jeg» y el dato va al final: jeg heter + nombre, jeg kommer fra + país, jeg bor i + ciudad.",
+       "conserva": "Buscas el dato detrás de «kommer fra» o de «bor i».",
+       "cambia": "Vuelve a escuchar solo la frase de esa persona y fíjate en qué palabra va delante del nombre de lugar."
+      },
+      "fuente": "PREA1-U02-L01#repite",
+      "nivel": "Pre-A1"
+     },
+     {
+      "id": "PREA1-U02-L01-O25",
+      "tipo": "escucha_elige",
+      "esencial": false,
+      "audio": "AU-A1-E02-TR",
+      "pregunta": "¿De dónde viene Nora?",
+      "opciones": [
+       "Tromsø",
+       "Bergen",
+       "Argentina"
+      ],
+      "correcta": 0,
+      "frase_no": "Jeg kommer fra Tromsø.",
+      "mecanismo": "BLOQUE",
+      "feedback": {
+       "regla": "Los tres bloques empiezan siempre por «jeg» y el dato va al final: jeg heter + nombre, jeg kommer fra + país, jeg bor i + ciudad.",
+       "conserva": "Buscas el dato detrás de «kommer fra» o de «bor i».",
+       "cambia": "Vuelve a escuchar solo la frase de esa persona y fíjate en qué palabra va delante del nombre de lugar."
+      },
+      "fuente": "PREA1-U02-L01#repite",
+      "nivel": "Pre-A1"
+     },
+     {
+      "id": "PREA1-U02-L01-O26",
+      "tipo": "empareja",
+      "esencial": false,
+      "pares": [
+       {
+        "no": "Hva heter du?",
+        "es": "¿Cómo te llamas?"
+       },
+       {
+        "no": "Hvor bor du?",
+        "es": "¿Dónde vives?"
+       },
+       {
+        "no": "Hva med deg?",
+        "es": "¿Y tú?"
+       },
+       {
+        "no": "Jeg kommer fra …",
+        "es": "Vengo de…"
+       }
+      ],
+      "mecanismo": "PREG-HV",
+      "feedback": {
+       "regla": "«Hva» pregunta por el nombre (hva heter du); «hvor» pregunta por el lugar (hvor bor du, hvor kommer du fra). En la pregunta el verbo va delante de «du».",
+       "conserva": "Distingues «hva» (qué) de «hvor» (dónde).",
+       "cambia": "Mira la primera palabra: «hva» va con el nombre; «hvor» con un lugar."
+      },
+      "fuente": "PREA1-U02-L01#bloques",
+      "nivel": "Pre-A1"
+     },
+     {
+      "id": "PREA1-U02-L01-O27",
+      "tipo": "escribe",
+      "esencial": false,
+      "enunciado": "Escribe cómo dirías «Vengo de Argentina».",
+      "frase_no": "Jeg kommer fra Argentina.",
+      "aceptadas": [
+       "Jeg kommer fra Argentina.",
+       "Jeg kommer fra Argentina"
+      ],
+      "mecanismo": "BLOQUE",
+      "feedback": {
+       "regla": "Los tres bloques empiezan siempre por «jeg» y el dato va al final: jeg heter + nombre, jeg kommer fra + país, jeg bor i + ciudad.",
+       "conserva": "Conserva el bloque con «Jeg» delante.",
+       "cambia": "Cambia solo el dato del final."
+      },
+      "fuente": "PREA1-U02-L01#repite",
+      "nivel": "Pre-A1"
+     },
+     {
+      "id": "PREA1-U02-L01-O28",
+      "tipo": "escribe",
+      "esencial": false,
+      "enunciado": "Escribe cómo dirías «Me llamo Lucía».",
+      "frase_no": "Jeg heter Lucía.",
+      "aceptadas": [
+       "Jeg heter Lucía.",
+       "Jeg heter Lucía"
+      ],
+      "mecanismo": "BLOQUE",
+      "feedback": {
+       "regla": "Los tres bloques empiezan siempre por «jeg» y el dato va al final: jeg heter + nombre, jeg kommer fra + país, jeg bor i + ciudad.",
+       "conserva": "Conserva el bloque con «Jeg» delante.",
+       "cambia": "Cambia solo el dato del final."
+      },
+      "fuente": "PREA1-U02-L01#repite",
+      "nivel": "Pre-A1"
+     },
+     {
+      "id": "PREA1-U02-L01-O29",
+      "tipo": "escribe",
+      "esencial": false,
+      "enunciado": "Escribe cómo dirías «Vivo en Sandvika».",
+      "frase_no": "Jeg bor i Sandvika.",
+      "aceptadas": [
+       "Jeg bor i Sandvika.",
+       "Jeg bor i Sandvika"
+      ],
+      "mecanismo": "BLOQUE",
+      "feedback": {
+       "regla": "Los tres bloques empiezan siempre por «jeg» y el dato va al final: jeg heter + nombre, jeg kommer fra + país, jeg bor i + ciudad.",
+       "conserva": "Conserva el bloque con «Jeg» delante.",
+       "cambia": "Cambia solo el dato del final."
+      },
+      "fuente": "PREA1-U02-L01#repite",
+      "nivel": "Pre-A1"
+     },
+     {
+      "id": "PREA1-U02-L01-O30",
+      "tipo": "escribe",
+      "esencial": false,
+      "enunciado": "Escribe cómo dirías «Vengo de Marruecos».",
+      "frase_no": "Jeg kommer fra Marokko.",
+      "aceptadas": [
+       "Jeg kommer fra Marokko.",
+       "Jeg kommer fra Marokko"
+      ],
+      "mecanismo": "BLOQUE",
+      "feedback": {
+       "regla": "Los tres bloques empiezan siempre por «jeg» y el dato va al final: jeg heter + nombre, jeg kommer fra + país, jeg bor i + ciudad.",
+       "conserva": "Conserva el bloque con «Jeg» delante.",
+       "cambia": "Cambia solo el dato del final."
+      },
+      "fuente": "PREA1-U02-L01#repite",
+      "nivel": "Pre-A1"
+     }
+    ]
+   },
+   "secciones": [
+    {
+     "id": "responde",
+     "titulo": "Responde",
+     "html": "<p>Primer día en un almacén de Lillestrøm. En la sala de descanso hay una persona que también es nueva. Se acerca y dice algo. Tú tienes exactamente tres frases en la cabeza y te sirven.</p>\n<p>Escucha la conversación entre Amir y Elena. No intentes entenderlo todo. Busca solo tres cosas: cómo se llaman, de dónde vienen y dónde viven.</p>\n<p>Audio: <code>AU-A1-E02-M</code> (32 segundos, dos escuchas).</p>\n<p>Antes de leer nada más, responde a esto:</p>\n<ol><li>¿De dónde viene Elena?</li><li>¿Dónde vive Amir?</li></ol>\n<p>Si has cazado <code>Spania</code> y <code>Lillestrøm</code>, ya has hecho lo más importante de esta lección: reconocer tus tres bloques en boca de otra persona.</p>"
+    },
+    {
+     "id": "repara",
+     "titulo": "Repara",
+     "html": "<p>Esto es lo que has oído. Léelo una vez con el audio y otra sin él.</p>\n<p><strong>Amir:</strong> Hei. Jeg heter Amir. Jeg er ny her.<br><strong>Elena:</strong> Hei, Amir. Jeg heter Elena.<br><strong>Amir:</strong> Hyggelig å møte deg. Hvor kommer du fra?<br><strong>Elena:</strong> Jeg kommer fra Spania, men jeg bor i Drammen. Og du?<br><strong>Amir:</strong> Jeg kommer fra Syria. Nå bor jeg i Lillestrøm.<br><strong>Elena:</strong> Jobber du her?<br><strong>Amir:</strong> Ja, jeg jobber på lageret. Hva med deg?<br><strong>Elena:</strong> Jeg jobber på kontoret.<br><strong>Amir:</strong> Vi sees i pausen.<br><strong>Elena:</strong> Ja, vi sees.</p>\n<p>La grieta. En castellano dices «Vivo en Drammen» y el «yo» no aparece. En noruego el pronombre está siempre: <code>Jeg bor i Drammen</code>. Si lo quitas, la frase se rompe. No hay que entender por qué todavía. Hay que guardar el bloque entero, con <code>jeg</code> dentro.</p>\n<p>El mecanismo, reducido a lo que necesitas hoy. Tres bloques con <code>jeg</code> y tres preguntas con <code>du</code>:</p>\n<table><thead><tr><th>Yo digo</th><th>Me preguntan</th></tr></thead><tbody><tr><td><code>Jeg heter Elena.</code></td><td><code>Hva heter du?</code></td></tr><tr><td><code>Jeg kommer fra Spania.</code></td><td><code>Hvor kommer du fra?</code></td></tr><tr><td><code>Jeg bor i Drammen.</code></td><td><code>Hvor bor du?</code></td></tr></tbody></table>\n<p>Fíjate en el contraste. <code>Jeg heter</code> y <code>Hva heter du</code> llevan la misma palabra, <code>heter</code>, y no cambia. En noruego el verbo no se conjuga por persona: <code>jeg bor</code>, <code>du bor</code>, <code>Amir bor</code>. Eso te ahorra la mitad del trabajo que hacías en castellano. Lo que sí cambia es el orden: en la pregunta, <code>heter</code> va delante de <code>du</code>. Por ahora no lo construyas; reconócelo.</p>\n<p>Qué conservar: el bloque completo, con <code>jeg</code> delante. Qué cambiar: solo el dato del final (nombre, país, ciudad). Lo demás no se toca.</p>\n<p>Dos detalles de oído. <code>jeg</code> suena aproximadamente «yai», con una sola sílaba. Y <code>Hva</code> empieza con una h que se oye poco: escucharás casi «va».</p>"
+    },
+    {
+     "id": "bloques",
+     "titulo": "Bloques",
+     "html": "<p>Estos son los que produces tú (P). Los de la segunda tabla solo hay que reconocerlos (R); los harás tuyos en A1.</p>\n<table><thead><tr><th>Noruego</th><th>Castellano</th><th>Audio</th></tr></thead><tbody><tr><td><code>Hei.</code></td><td>Hola.</td><td>AU-A1-E02-M</td></tr><tr><td><code>Jeg heter …</code></td><td>Me llamo…</td><td>AU-A1-E02-M</td></tr><tr><td><code>Jeg kommer fra …</code></td><td>Vengo de…</td><td>AU-A1-E02-M</td></tr><tr><td><code>Jeg bor i …</code></td><td>Vivo en…</td><td>AU-A1-E02-M</td></tr><tr><td><code>Hva heter du?</code></td><td>¿Cómo te llamas?</td><td>AU-A1-E02-TR</td></tr><tr><td><code>Hvor kommer du fra?</code></td><td>¿De dónde vienes?</td><td>AU-A1-E02-M</td></tr><tr><td><code>Hvor bor du?</code></td><td>¿Dónde vives?</td><td>(sin pista; lo dice Larsito)</td></tr><tr><td><code>Og du?</code></td><td>¿Y tú?</td><td>AU-A1-E02-M</td></tr><tr><td><code>Hva med deg?</code></td><td>¿Y tú? (más largo, misma función)</td><td>AU-A1-E02-M</td></tr></tbody></table>\n<p>Solo reconocer:</p>\n<table><thead><tr><th>Noruego</th><th>Castellano</th></tr></thead><tbody><tr><td><code>Hyggelig å møte deg.</code></td><td>Encantado de conocerte.</td></tr><tr><td><code>Jeg er ny her.</code></td><td>Soy nuevo aquí.</td></tr><tr><td><code>Vi sees.</code></td><td>Nos vemos.</td></tr><tr><td><code>Jobber du her?</code></td><td>¿Trabajas aquí?</td></tr></tbody></table>"
+    },
+    {
+     "id": "practica",
+     "titulo": "Practica",
+     "html": "<p>Ocho pasos. Los cuatro primeros son de reconocer; los cuatro últimos, de producir.</p>\n<ol><li>Escucha <code>AU-A1-E02-M</code> y elige: ¿de dónde viene Elena? <code>Spania</code> · <code>Syria</code> · <code>Drammen</code>.</li><li>Escucha otra vez y elige: ¿dónde vive Amir? <code>Lillestrøm</code> · <code>Drammen</code> · <code>Syria</code>.</li><li>Empareja cada bloque con lo que significa: <code>Jeg heter …</code> · <code>Jeg bor i …</code> · <code>Hvor kommer du fra?</code> · <code>Og du?</code> con «Vivo en…», «Me llamo…», «¿Y tú?», «¿De dónde vienes?».</li><li>Elige la pregunta para saber el nombre: <code>Hva heter du?</code> · <code>Hvor bor du?</code> · <code>Hvor kommer du fra?</code>.</li><li>Ordena las fichas: <code>fra</code> · <code>Jeg</code> · <code>Spania</code> · <code>kommer</code>.</li><li>Completa: <code>Jeg ___ i Oslo.</code> con <code>bor</code> · <code>heter</code> · <code>kommer</code>.</li><li>Escribe cómo dirías «Vivo en Bergen».</li><li>Graba las tres frases con esta tarjeta y compáralas con el modelo: Lucía · Spania · Oslo.</li></ol>"
+    },
+    {
+     "id": "repite",
+     "titulo": "Repite",
+     "html": "<p>Ahora cambian los datos y tú conservas los bloques. Di las tres frases con cada tarjeta, en voz alta, sin mirar la tabla si puedes.</p>\n<ul><li>Tarjeta A: Leo · Argentina · Trondheim.</li><li>Tarjeta B: Samira · Marokko · Sandvika.</li><li>Tarjeta C: tu nombre real, tu país real y una ciudad noruega inventada. Los datos que dices en voz alta se quedan en tu dispositivo.</li></ul>\n<p>Segunda vuelta, con solo tres palabras a la vista: <code>heter</code> · <code>fra</code> · <code>bor</code>. Tercera vuelta: escucha <code>AU-A1-E02-TR</code>, donde Nora pregunta y Diego responde. Cuando Nora pregunte, para el audio y responde tú antes que Diego, con la tarjeta A.</p>"
+    },
+    {
+     "id": "con-larsito",
+     "titulo": "Con Larsito",
+     "html": "<p>Escenario <code>LARS-PREA1-U02</code>: Larsito hace de compañero nuevo en la sala de descanso. Te hace las tres preguntas, muy despacio, y te da una pista en castellano si te quedas en blanco. Tú respondes con la tarjeta que elijas. En este nivel Larsito reconoce solo las respuestas preparadas: no analiza tu pronunciación ni inventa correcciones. Si tu frase lleva el bloque completo, te lo dice y pasa a la siguiente.</p>"
+    },
+    {
+     "id": "cierre",
+     "titulo": "Cierre",
+     "html": "<p>Lo has hecho si:</p>\n<ul><li>dices <code>Jeg heter …</code>, <code>Jeg kommer fra …</code> y <code>Jeg bor i …</code> con una tarjeta nueva sin mirar la tabla;</li><li>respondes a las tres preguntas de Larsito con el dato correcto;</li><li>reconoces <code>Hva heter du?</code> cuando lo oyes, aunque lo digan deprisa.</li></ul>\n<p>Lo que falles vuelve mañana, a los tres días, a la semana y a las dos semanas. No tienes que apuntarlo: la app lo trae.</p>\n<p>Siguiente: <code>PREA1-U02-L02</code>, Kan du stave det?, porque en Noruega te van a pedir que deletrees tu apellido más veces de las que imaginas.</p>"
+    },
+    {
+     "id": "soluciones",
+     "titulo": "Soluciones",
+     "html": "<ol><li><code>Spania</code>. Elena dice <code>Jeg kommer fra Spania</code>. <code>Drammen</code> es donde vive, no de donde viene.</li><li><code>Lillestrøm</code>. Amir dice <code>Nå bor jeg i Lillestrøm</code>. <code>Syria</code> es su origen.</li><li><code>Jeg heter …</code> = Me llamo…; <code>Jeg bor i …</code> = Vivo en…; <code>Hvor kommer du fra?</code> = ¿De dónde vienes?; <code>Og du?</code> = ¿Y tú?</li><li><code>Hva heter du?</code>. <code>Hvor bor du?</code> pregunta dónde vives y <code>Hvor kommer du fra?</code> de dónde vienes.</li><li><code>Jeg kommer fra Spania.</code> El bloque empieza siempre por <code>Jeg</code>.</li><li><code>bor</code>. Vivir en un sitio es <code>bo</code>; <code>heter</code> es llamarse y <code>kommer fra</code> venir de.</li><li><code>Jeg bor i Bergen.</code> Se acepta también con el nombre de la ciudad en otra posición si conservas <code>Jeg bor i</code>.</li><li>Modelo: <code>Jeg heter Lucía. Jeg kommer fra Spania. Jeg bor i Oslo.</code> Compara solo dos cosas: que cada frase empiece por <code>Jeg</code> y que el dato esté al final.</li></ol>"
+    }
+   ],
+   "palabras": 1029,
+   "resumen": "Presentarte con datos de una tarjeta ficticia y responder a las tres preguntas de otra persona."
+  },
+  {
+   "codigo": "PREA1-U02-L02",
+   "tipo": "leccion",
+   "titulo": "Kan du stave det?",
+   "orden": 2,
+   "meta": {
+    "ruta": "norsk-desde-cero-a2",
+    "zona": "PREA1",
+    "unidad": "PREA1-U02",
+    "mision": "En una recepción, deletrear tu apellido ficticio, confirmar una letra dudosa y dar un número ficticio sin perder ninguna cifra.",
+    "objetivo": "Deletrear tu nombre, entender un nombre deletreado y dar un número de teléfono ficticio cifra a cifra.",
+    "conocimientos_previos": [
+     "PREA1-U02-L01"
+    ],
+    "conexion_posterior": [
+     "PREA1-U03-L01",
+     "PREA1-U04-L01",
+     "A1-U01-L02"
+    ],
+    "conexion_m01_m16": [
+     "M16"
+    ],
+    "competencias": [
+     "C-P-LYT-02",
+     "C-P-LES-03",
+     "C-P-SKR-01",
+     "C-P-MUN-02",
+     "C-P-INT-04",
+     "C-P-GRA-02"
+    ],
+    "destrezas": [
+     "LYT",
+     "MUN",
+     "INT",
+     "SKR"
+    ],
+    "evidencia": "Deletreas un apellido de una tarjeta, escribes en cifras un número que oyes y confirmas un dato con Sa du …? y Ja, det stemmer.",
+    "larsito": "LARS-PREA1-U02",
+    "audio": [
+     "AU-A1-E01-M",
+     "AU-A1-E01-TR",
+     "AU-P-U02-L02-ALF",
+     "AU-P-U02-L02-TALL"
+    ],
+    "audios": {
+     "AU-A1-E01-M": {
+      "texto": "RECEPCIÓN: Hei. Da skal jeg lage adgangskortet ditt. Hva heter du?\nMATEO: Mateo Ruiz.\nRECEPCIÓN: Kan du stave etternavnet ditt?\nMATEO: Ja. R-U-I-Z.\nRECEPCIÓN: Beklager, sa du U eller O?\nMATEO: U.\nRECEPCIÓN: Takk. Og fornavnet?\nMATEO: Mateo. M-A-T-E-O.\nRECEPCIÓN: Kan du si det en gang til, litt saktere?\nMATEO: Ja. M-A-T-E-O.\nRECEPCIÓN: Flott. Ansattnummeret ditt er fire-null-sju-to.\nMATEO: Sa du fire-null-sju-to?\nRECEPCIÓN: Ja, det stemmer.\nMATEO: Takk.",
+      "duracion_s": 52.96,
+      "estado": "APROBADO_PROPIETARIO_2026-08-14",
+      "funcion": "modelo",
+      "descripcion": null
+     },
+     "AU-A1-E01-TR": {
+      "texto": "RECEPCIÓN: Hei. Velkommen. Hva heter du?\nINES: Ines Mora.\nRECEPCIÓN: Kan du stave etternavnet?\nINES: Ja. M-O-R-A.\nRECEPCIÓN: Takk. Skal du til andre etasje?\nINES: Beklager, sa du andre eller tredje etasje?\nRECEPCIÓN: Andre etasje. Du skal til rom B-tre-null-fem.\nINES: B-tre-null-fem. Stemmer det?\nRECEPCIÓN: Ja, det stemmer.\nINES: Takk.",
+      "duracion_s": 35.92,
+      "estado": "APROBADO_PROPIETARIO_2026-08-14",
+      "funcion": "transferencia",
+      "descripcion": null
+     },
+     "AU-P-U02-L02-ALF": {
+      "texto": "",
+      "duracion_s": null,
+      "estado": "PENDIENTE_GENERACION",
+      "funcion": "modelo",
+      "descripcion": "las 29 letras del alfabeto, una a una"
+     },
+     "AU-P-U02-L02-TALL": {
+      "texto": "",
+      "duracion_s": null,
+      "estado": "PENDIENTE_GENERACION",
+      "funcion": "modelo",
+      "descripcion": "los dígitos 0 a 9 y tres teléfonos ficticios dichos cifra a cifra y por pares"
+     }
+    },
+    "ejercicios": [
+     {
+      "id": "PREA1-U02-L02-E01",
+      "tipo": "escucha_elige",
+      "esencial": true,
+      "audio": "AU-A1-E01-M",
+      "pregunta": "¿Entre qué dos letras duda recepción?",
+      "opciones": [
+       "U eller O",
+       "I eller E",
+       "R eller L"
+      ],
+      "correcta": 0,
+      "frase_no": "Beklager, sa du U eller O?",
+      "mecanismo": "ALF",
+      "feedback": {
+       "regla": "Al deletrear, «o» suena cerrada y parecida a la u castellana; «u» se dice con los labios adelantados. Si dices «u» a la española, te oyen «o».",
+       "conserva": "Has cazado la pregunta que empieza por «sa du».",
+       "cambia": "Recepción dice «sa du U eller O?» justo después de «R-U-I-Z». Las otras parejas no aparecen."
+      },
+      "fuente": "PREA1-U02-L02#responde",
+      "nivel": "Pre-A1"
+     },
+     {
+      "id": "PREA1-U02-L02-E02",
+      "tipo": "dictado",
+      "esencial": true,
+      "audio": "AU-A1-E01-M",
+      "enunciado": "Escucha y escribe en cifras el número de empleado de Mateo.",
+      "frase_no": "fire-null-sju-to",
+      "aceptadas": [
+       "4072"
+      ],
+      "mecanismo": "NUM",
+      "feedback": {
+       "regla": "Un número interno o un teléfono se dice cifra a cifra: null 0, én 1, to 2, tre 3, fire 4, fem 5, seks 6, sju 7, åtte 8, ni 9.",
+       "conserva": "Cada palabra es una cifra.",
+       "cambia": "«fire-null-sju-to» es 4, 0, 7, 2: 4072. Si te falta una cifra, vuelve a escuchar solo esa frase."
+      },
+      "fuente": "PREA1-U02-L02#responde",
+      "nivel": "Pre-A1"
+     },
+     {
+      "id": "PREA1-U02-L02-E03",
+      "tipo": "escribe",
+      "esencial": true,
+      "enunciado": "Escribe en cifras: tre-to-ni-fem.",
+      "frase_no": "tre-to-ni-fem",
+      "aceptadas": [
+       "3295"
+      ],
+      "mecanismo": "NUM",
+      "feedback": {
+       "regla": "Un número interno o un teléfono se dice cifra a cifra: null 0, én 1, to 2, tre 3, fire 4, fem 5, seks 6, sju 7, åtte 8, ni 9.",
+       "conserva": "Vas cifra a cifra.",
+       "cambia": "tre 3, to 2, ni 9, fem 5."
+      },
+      "fuente": "PREA1-U02-L02#practica",
+      "nivel": "Pre-A1"
+     },
+     {
+      "id": "PREA1-U02-L02-E04",
+      "tipo": "escribe",
+      "esencial": true,
+      "enunciado": "Escribe en cifras: åtte-én-null-seks.",
+      "frase_no": "åtte-én-null-seks",
+      "aceptadas": [
+       "8106"
+      ],
+      "mecanismo": "NUM",
+      "feedback": {
+       "regla": "Un número interno o un teléfono se dice cifra a cifra: null 0, én 1, to 2, tre 3, fire 4, fem 5, seks 6, sju 7, åtte 8, ni 9.",
+       "conserva": "Has distinguido «én» (1) de «null» (0).",
+       "cambia": "åtte 8, én 1, null 0, seks 6."
+      },
+      "fuente": "PREA1-U02-L02#practica",
+      "nivel": "Pre-A1"
+     },
+     {
+      "id": "PREA1-U02-L02-E05",
+      "tipo": "ordena",
+      "esencial": true,
+      "frase_no": "Kan du stave det?",
+      "es": "¿Puedes deletrearlo?",
+      "aceptadas": [
+       "Kan du stave det?"
+      ],
+      "mecanismo": "PREG-V1",
+      "feedback": {
+       "regla": "En la pregunta el verbo va delante de «du»: Kan du…, Hva heter du…",
+       "conserva": "Tienes las palabras correctas.",
+       "cambia": "Empieza por «Kan», después «du», y «det» al final."
+      },
+      "fuente": "PREA1-U02-L02#practica",
+      "nivel": "Pre-A1"
+     },
+     {
+      "id": "PREA1-U02-L02-E06",
+      "tipo": "completa",
+      "esencial": true,
+      "frase_no": "Sa du U eller O?",
+      "frase_hueco": "Sa du U ___ O?",
+      "opciones": [
+       "eller",
+       "og",
+       "ja"
+      ],
+      "correcta": "eller",
+      "mecanismo": "REPAR",
+      "feedback": {
+       "regla": "Para confirmar un dato se dice «Sa du …?» con el dato dentro. Si es correcto: «Ja, det stemmer». Si no: «Nei, det er …».",
+       "conserva": "Has reconocido la pregunta de confirmación.",
+       "cambia": "Entre dos opciones va «eller» (o). «Og» es «y»."
+      },
+      "fuente": "PREA1-U02-L02#practica",
+      "nivel": "Pre-A1"
+     },
+     {
+      "id": "PREA1-U02-L02-E07",
+      "tipo": "elige",
+      "esencial": true,
+      "pregunta": "Te preguntan «Sa du fire-null-sju-to?» y el dato es correcto. ¿Qué respondes?",
+      "opciones": [
+       "Ja, det stemmer.",
+       "Nei, det er U.",
+       "Kan du stave det?"
+      ],
+      "correcta": 0,
+      "frase_no": "Ja, det stemmer.",
+      "mecanismo": "REPAR",
+      "feedback": {
+       "regla": "Para confirmar un dato se dice «Sa du …?» con el dato dentro. Si es correcto: «Ja, det stemmer». Si no: «Nei, det er …».",
+       "conserva": "Has elegido la respuesta de confirmación.",
+       "cambia": "«Nei, det er U» corrige una letra y «Kan du stave det?» pide deletreo; ninguna confirma."
+      },
+      "fuente": "PREA1-U02-L02#practica",
+      "nivel": "Pre-A1"
+     },
+     {
+      "id": "PREA1-U02-L02-E08",
+      "tipo": "graba_compara",
+      "esencial": true,
+      "tarjeta": "Teléfono ficticio 412 35 806",
+      "modelo_no": "fire én to tre fem åtte null seks",
+      "frase_no": "fire én to tre fem åtte null seks",
+      "audio": null,
+      "mecanismo": "NUM",
+      "feedback": {
+       "regla": "Un número interno o un teléfono se dice cifra a cifra: null 0, én 1, to 2, tre 3, fire 4, fem 5, seks 6, sju 7, åtte 8, ni 9.",
+       "conserva": "Cifra a cifra, sin prisa.",
+       "cambia": "Compara solo que no falte ninguna cifra y que el cero sea «null». Se acepta «en» por «én»."
+      },
+      "fuente": "PREA1-U02-L02#practica",
+      "nivel": "Pre-A1"
+     },
+     {
+      "id": "PREA1-U02-L02-O01",
+      "tipo": "ordena",
+      "esencial": false,
+      "frase_no": "Sa du U eller O?",
+      "es": "¿Has dicho U u O?",
+      "aceptadas": [
+       "Sa du U eller O?"
+      ],
+      "mecanismo": "REPAR",
+      "feedback": {
+       "regla": "Para confirmar un dato se dice «Sa du …?» con el dato dentro. Si es correcto: «Ja, det stemmer». Si no: «Nei, det er …».",
+       "conserva": "Las fichas son correctas.",
+       "cambia": "«Sa du» va delante; el dato después; «Ja, det stemmer» empieza por «Ja»."
+      },
+      "fuente": "PREA1-U02-L02#bloques",
+      "nivel": "Pre-A1"
+     },
+     {
+      "id": "PREA1-U02-L02-O02",
+      "tipo": "ordena",
+      "esencial": false,
+      "frase_no": "Ja, det stemmer.",
+      "es": "Sí, es correcto.",
+      "aceptadas": [
+       "Ja, det stemmer."
+      ],
+      "mecanismo": "REPAR",
+      "feedback": {
+       "regla": "Para confirmar un dato se dice «Sa du …?» con el dato dentro. Si es correcto: «Ja, det stemmer». Si no: «Nei, det er …».",
+       "conserva": "Las fichas son correctas.",
+       "cambia": "«Sa du» va delante; el dato después; «Ja, det stemmer» empieza por «Ja»."
+      },
+      "fuente": "PREA1-U02-L02#bloques",
+      "nivel": "Pre-A1"
+     },
+     {
+      "id": "PREA1-U02-L02-O03",
+      "tipo": "ordena",
+      "esencial": false,
+      "frase_no": "Sa du fire-null-sju-to?",
+      "es": "¿Has dicho 4072?",
+      "aceptadas": [
+       "Sa du fire-null-sju-to?"
+      ],
+      "mecanismo": "REPAR",
+      "feedback": {
+       "regla": "Para confirmar un dato se dice «Sa du …?» con el dato dentro. Si es correcto: «Ja, det stemmer». Si no: «Nei, det er …».",
+       "conserva": "Las fichas son correctas.",
+       "cambia": "«Sa du» va delante; el dato después; «Ja, det stemmer» empieza por «Ja»."
+      },
+      "fuente": "PREA1-U02-L02#bloques",
+      "nivel": "Pre-A1"
+     },
+     {
+      "id": "PREA1-U02-L02-O04",
+      "tipo": "ordena",
+      "esencial": false,
+      "frase_no": "Nei, det er U.",
+      "es": "No, es U.",
+      "aceptadas": [
+       "Nei, det er U."
+      ],
+      "mecanismo": "REPAR",
+      "feedback": {
+       "regla": "Para confirmar un dato se dice «Sa du …?» con el dato dentro. Si es correcto: «Ja, det stemmer». Si no: «Nei, det er …».",
+       "conserva": "Las fichas son correctas.",
+       "cambia": "«Sa du» va delante; el dato después; «Ja, det stemmer» empieza por «Ja»."
+      },
+      "fuente": "PREA1-U02-L02#bloques",
+      "nivel": "Pre-A1"
+     },
+     {
+      "id": "PREA1-U02-L02-O05",
+      "tipo": "completa",
+      "esencial": false,
+      "frase_no": "Ja, det stemmer.",
+      "frase_hueco": "Ja, det ___.",
+      "opciones": [
+       "stemmer",
+       "stave",
+       "eller"
+      ],
+      "correcta": "stemmer",
+      "mecanismo": "REPAR",
+      "feedback": {
+       "regla": "Para confirmar un dato se dice «Sa du …?» con el dato dentro. Si es correcto: «Ja, det stemmer». Si no: «Nei, det er …».",
+       "conserva": "El resto de la fórmula está bien.",
+       "cambia": "Aquí va «stemmer»."
+      },
+      "fuente": "PREA1-U02-L02#bloques",
+      "nivel": "Pre-A1"
+     },
+     {
+      "id": "PREA1-U02-L02-O06",
+      "tipo": "completa",
+      "esencial": false,
+      "frase_no": "Kan du stave det?",
+      "frase_hueco": "Kan du ___ det?",
+      "opciones": [
+       "stave",
+       "stemmer",
+       "sa"
+      ],
+      "correcta": "stave",
+      "mecanismo": "REPAR",
+      "feedback": {
+       "regla": "Para confirmar un dato se dice «Sa du …?» con el dato dentro. Si es correcto: «Ja, det stemmer». Si no: «Nei, det er …».",
+       "conserva": "El resto de la fórmula está bien.",
+       "cambia": "Aquí va «stave»."
+      },
+      "fuente": "PREA1-U02-L02#bloques",
+      "nivel": "Pre-A1"
+     },
+     {
+      "id": "PREA1-U02-L02-O07",
+      "tipo": "completa",
+      "esencial": false,
+      "frase_no": "Sa du fire-null-sju-to?",
+      "frase_hueco": "Sa ___ fire-null-sju-to?",
+      "opciones": [
+       "du",
+       "jeg",
+       "det"
+      ],
+      "correcta": "du",
+      "mecanismo": "REPAR",
+      "feedback": {
+       "regla": "Para confirmar un dato se dice «Sa du …?» con el dato dentro. Si es correcto: «Ja, det stemmer». Si no: «Nei, det er …».",
+       "conserva": "El resto de la fórmula está bien.",
+       "cambia": "Aquí va «du»."
+      },
+      "fuente": "PREA1-U02-L02#bloques",
+      "nivel": "Pre-A1"
+     },
+     {
+      "id": "PREA1-U02-L02-O08",
+      "tipo": "completa",
+      "esencial": false,
+      "frase_no": "Nei, det er U.",
+      "frase_hueco": "Nei, det ___ U.",
+      "opciones": [
+       "er",
+       "stemmer",
+       "sa"
+      ],
+      "correcta": "er",
+      "mecanismo": "REPAR",
+      "feedback": {
+       "regla": "Para confirmar un dato se dice «Sa du …?» con el dato dentro. Si es correcto: «Ja, det stemmer». Si no: «Nei, det er …».",
+       "conserva": "El resto de la fórmula está bien.",
+       "cambia": "Aquí va «er»."
+      },
+      "fuente": "PREA1-U02-L02#bloques",
+      "nivel": "Pre-A1"
+     },
+     {
+      "id": "PREA1-U02-L02-O09",
+      "tipo": "escribe",
+      "esencial": false,
+      "enunciado": "Escribe en cifras: fem-fem-to-null.",
+      "frase_no": "fem-fem-to-null",
+      "aceptadas": [
+       "5520"
+      ],
+      "mecanismo": "NUM",
+      "feedback": {
+       "regla": "Un número interno o un teléfono se dice cifra a cifra: null 0, én 1, to 2, tre 3, fire 4, fem 5, seks 6, sju 7, åtte 8, ni 9.",
+       "conserva": "Cifra a cifra.",
+       "cambia": "fem 5 fem 5 to 2 null 0"
+      },
+      "fuente": "PREA1-U02-L02#registro-interno",
+      "nivel": "Pre-A1"
+     },
+     {
+      "id": "PREA1-U02-L02-O10",
+      "tipo": "escribe",
+      "esencial": false,
+      "enunciado": "Escribe en cifras: tre-ni-null-to.",
+      "frase_no": "tre-ni-null-to",
+      "aceptadas": [
+       "3902"
+      ],
+      "mecanismo": "NUM",
+      "feedback": {
+       "regla": "Un número interno o un teléfono se dice cifra a cifra: null 0, én 1, to 2, tre 3, fire 4, fem 5, seks 6, sju 7, åtte 8, ni 9.",
+       "conserva": "Cifra a cifra.",
+       "cambia": "tre 3 ni 9 null 0 to 2"
+      },
+      "fuente": "PREA1-U02-L02#registro-interno",
+      "nivel": "Pre-A1"
+     },
+     {
+      "id": "PREA1-U02-L02-O11",
+      "tipo": "escribe",
+      "esencial": false,
+      "enunciado": "Escribe en cifras: sju-fem-fire-én.",
+      "frase_no": "sju-fem-fire-én",
+      "aceptadas": [
+       "7541"
+      ],
+      "mecanismo": "NUM",
+      "feedback": {
+       "regla": "Un número interno o un teléfono se dice cifra a cifra: null 0, én 1, to 2, tre 3, fire 4, fem 5, seks 6, sju 7, åtte 8, ni 9.",
+       "conserva": "Cifra a cifra.",
+       "cambia": "sju 7 fem 5 fire 4 én 1"
+      },
+      "fuente": "PREA1-U02-L02#registro-interno",
+      "nivel": "Pre-A1"
+     },
+     {
+      "id": "PREA1-U02-L02-O12",
+      "tipo": "escribe",
+      "esencial": false,
+      "enunciado": "Escribe en cifras: to-null-seks-åtte.",
+      "frase_no": "to-null-seks-åtte",
+      "aceptadas": [
+       "2068"
+      ],
+      "mecanismo": "NUM",
+      "feedback": {
+       "regla": "Un número interno o un teléfono se dice cifra a cifra: null 0, én 1, to 2, tre 3, fire 4, fem 5, seks 6, sju 7, åtte 8, ni 9.",
+       "conserva": "Cifra a cifra.",
+       "cambia": "to 2 null 0 seks 6 åtte 8"
+      },
+      "fuente": "PREA1-U02-L02#registro-interno",
+      "nivel": "Pre-A1"
+     },
+     {
+      "id": "PREA1-U02-L02-O13",
+      "tipo": "escribe",
+      "esencial": false,
+      "enunciado": "Escribe con palabras, separadas por guiones: 6184.",
+      "frase_no": "seks-én-åtte-fire",
+      "aceptadas": [
+       "seks-én-åtte-fire",
+       "seks-en-åtte-fire",
+       "seks én åtte fire",
+       "seks en åtte fire"
+      ],
+      "mecanismo": "NUM",
+      "feedback": {
+       "regla": "Un número interno o un teléfono se dice cifra a cifra: null 0, én 1, to 2, tre 3, fire 4, fem 5, seks 6, sju 7, åtte 8, ni 9.",
+       "conserva": "Cada cifra tiene su palabra.",
+       "cambia": "6184 es seks-én-åtte-fire. Se acepta «en» por «én»."
+      },
+      "fuente": "PREA1-U02-L02#registro-interno",
+      "nivel": "Pre-A1"
+     },
+     {
+      "id": "PREA1-U02-L02-O14",
+      "tipo": "escribe",
+      "esencial": false,
+      "enunciado": "Escribe con palabras, separadas por guiones: 3902.",
+      "frase_no": "tre-ni-null-to",
+      "aceptadas": [
+       "tre-ni-null-to",
+       "tre-ni-null-to",
+       "tre ni null to",
+       "tre ni null to"
+      ],
+      "mecanismo": "NUM",
+      "feedback": {
+       "regla": "Un número interno o un teléfono se dice cifra a cifra: null 0, én 1, to 2, tre 3, fire 4, fem 5, seks 6, sju 7, åtte 8, ni 9.",
+       "conserva": "Cada cifra tiene su palabra.",
+       "cambia": "3902 es tre-ni-null-to. Se acepta «en» por «én»."
+      },
+      "fuente": "PREA1-U02-L02#registro-interno",
+      "nivel": "Pre-A1"
+     },
+     {
+      "id": "PREA1-U02-L02-O15",
+      "tipo": "escribe",
+      "esencial": false,
+      "enunciado": "Escribe con palabras, separadas por guiones: 2068.",
+      "frase_no": "to-null-seks-åtte",
+      "aceptadas": [
+       "to-null-seks-åtte",
+       "to-null-seks-åtte",
+       "to null seks åtte",
+       "to null seks åtte"
+      ],
+      "mecanismo": "NUM",
+      "feedback": {
+       "regla": "Un número interno o un teléfono se dice cifra a cifra: null 0, én 1, to 2, tre 3, fire 4, fem 5, seks 6, sju 7, åtte 8, ni 9.",
+       "conserva": "Cada cifra tiene su palabra.",
+       "cambia": "2068 es to-null-seks-åtte. Se acepta «en» por «én»."
+      },
+      "fuente": "PREA1-U02-L02#registro-interno",
+      "nivel": "Pre-A1"
+     },
+     {
+      "id": "PREA1-U02-L02-O16",
+      "tipo": "elige",
+      "esencial": false,
+      "pregunta": "¿Qué significa «Beklager.»?",
+      "opciones": [
+       "Perdona.",
+       "Gracias.",
+       "Estupendo."
+      ],
+      "correcta": 0,
+      "frase_no": "Beklager.",
+      "mecanismo": "BLOQUE",
+      "feedback": {
+       "regla": "Estas frases se reconocen enteras; las producirás más adelante.",
+       "conserva": "Has reconocido el bloque.",
+       "cambia": "«Beklager.» significa «Perdona.»."
+      },
+      "fuente": "PREA1-U02-L02#bloques",
+      "nivel": "Pre-A1"
+     },
+     {
+      "id": "PREA1-U02-L02-O17",
+      "tipo": "elige",
+      "esencial": false,
+      "pregunta": "¿Qué significa «Flott.»?",
+      "opciones": [
+       "Estupendo.",
+       "Perdona.",
+       "¿Y el nombre?"
+      ],
+      "correcta": 0,
+      "frase_no": "Flott.",
+      "mecanismo": "BLOQUE",
+      "feedback": {
+       "regla": "Estas frases se reconocen enteras; las producirás más adelante.",
+       "conserva": "Has reconocido el bloque.",
+       "cambia": "«Flott.» significa «Estupendo.»."
+      },
+      "fuente": "PREA1-U02-L02#bloques",
+      "nivel": "Pre-A1"
+     },
+     {
+      "id": "PREA1-U02-L02-O18",
+      "tipo": "elige",
+      "esencial": false,
+      "pregunta": "¿Qué significa «Og fornavnet?»?",
+      "opciones": [
+       "¿Y el nombre?",
+       "¿Y el apellido?",
+       "Gracias."
+      ],
+      "correcta": 0,
+      "frase_no": "Og fornavnet?",
+      "mecanismo": "BLOQUE",
+      "feedback": {
+       "regla": "Estas frases se reconocen enteras; las producirás más adelante.",
+       "conserva": "Has reconocido el bloque.",
+       "cambia": "«Og fornavnet?» significa «¿Y el nombre?»."
+      },
+      "fuente": "PREA1-U02-L02#bloques",
+      "nivel": "Pre-A1"
+     },
+     {
+      "id": "PREA1-U02-L02-O19",
+      "tipo": "elige",
+      "esencial": false,
+      "pregunta": "¿Qué significa «Kan du si det en gang til, litt saktere?»?",
+      "opciones": [
+       "¿Puedes decirlo otra vez, más despacio?",
+       "¿Puedes deletrearlo?",
+       "¿Has dicho U u O?"
+      ],
+      "correcta": 0,
+      "frase_no": "Kan du si det en gang til, litt saktere?",
+      "mecanismo": "BLOQUE",
+      "feedback": {
+       "regla": "Estas frases se reconocen enteras; las producirás más adelante.",
+       "conserva": "Has reconocido el bloque.",
+       "cambia": "«Kan du si det en gang til, litt saktere?» significa «¿Puedes decirlo otra vez, más despacio?»."
+      },
+      "fuente": "PREA1-U02-L02#bloques",
+      "nivel": "Pre-A1"
+     },
+     {
+      "id": "PREA1-U02-L02-O20",
+      "tipo": "elige",
+      "esencial": false,
+      "pregunta": "¿Qué significa «Kan du stave etternavnet ditt?»?",
+      "opciones": [
+       "¿Puedes deletrear tu apellido?",
+       "¿Puedes decirlo otra vez?",
+       "¿Es correcto?"
+      ],
+      "correcta": 0,
+      "frase_no": "Kan du stave etternavnet ditt?",
+      "mecanismo": "BLOQUE",
+      "feedback": {
+       "regla": "Estas frases se reconocen enteras; las producirás más adelante.",
+       "conserva": "Has reconocido el bloque.",
+       "cambia": "«Kan du stave etternavnet ditt?» significa «¿Puedes deletrear tu apellido?»."
+      },
+      "fuente": "PREA1-U02-L02#bloques",
+      "nivel": "Pre-A1"
+     },
+     {
+      "id": "PREA1-U02-L02-O21",
+      "tipo": "escucha_elige",
+      "esencial": false,
+      "audio": "AU-A1-E01-TR",
+      "pregunta": "¿Entre qué dos plantas duda Ines?",
+      "opciones": [
+       "andre eller tredje",
+       "første eller andre",
+       "tredje eller fjerde"
+      ],
+      "correcta": 0,
+      "frase_no": "andre eller tredje etasje",
+      "mecanismo": "REPAR",
+      "feedback": {
+       "regla": "Para confirmar un dato se dice «Sa du …?» con el dato dentro. Si es correcto: «Ja, det stemmer». Si no: «Nei, det er …».",
+       "conserva": "Has cazado «sa du … eller …?» aunque no entiendas «etasje».",
+       "cambia": "Ines dice «Beklager, sa du andre eller tredje etasje?»."
+      },
+      "fuente": "PREA1-U02-L02#repite",
+      "nivel": "Pre-A1"
+     },
+     {
+      "id": "PREA1-U02-L02-O22",
+      "tipo": "escucha_elige",
+      "esencial": false,
+      "audio": "AU-A1-E01-TR",
+      "pregunta": "¿A qué sala tiene que ir Ines?",
+      "opciones": [
+       "B-tre-null-fem",
+       "B-tre-null-fire",
+       "D-tre-null-fem"
+      ],
+      "correcta": 0,
+      "frase_no": "B-tre-null-fem",
+      "mecanismo": "NUM",
+      "feedback": {
+       "regla": "Un número interno o un teléfono se dice cifra a cifra: null 0, én 1, to 2, tre 3, fire 4, fem 5, seks 6, sju 7, åtte 8, ni 9.",
+       "conserva": "Letra y cifras, una a una.",
+       "cambia": "Recepción dice «rom B-tre-null-fem» e Ines lo repite para confirmar."
+      },
+      "fuente": "PREA1-U02-L02#repite",
+      "nivel": "Pre-A1"
+     },
+     {
+      "id": "PREA1-U02-L02-O23",
+      "tipo": "reconstruye",
+      "esencial": false,
+      "audio": "AU-A1-E01-M",
+      "enunciado": "Escucha cómo Mateo confirma el número y reconstruye la frase.",
+      "frase_no": "Sa du fire-null-sju-to?",
+      "aceptadas": [
+       "Sa du fire-null-sju-to?"
+      ],
+      "mecanismo": "REPAR",
+      "feedback": {
+       "regla": "Para confirmar un dato se dice «Sa du …?» con el dato dentro. Si es correcto: «Ja, det stemmer». Si no: «Nei, det er …».",
+       "conserva": "Has oído la fórmula entera.",
+       "cambia": "«Sa du» delante y el número detrás, cifra a cifra."
+      },
+      "fuente": "PREA1-U02-L02#repara",
+      "nivel": "Pre-A1"
+     },
+     {
+      "id": "PREA1-U02-L02-O24",
+      "tipo": "empareja",
+      "esencial": false,
+      "pares": [
+       {
+        "no": "null",
+        "es": "0"
+       },
+       {
+        "no": "én",
+        "es": "1"
+       },
+       {
+        "no": "sju",
+        "es": "7"
+       },
+       {
+        "no": "åtte",
+        "es": "8"
+       },
+       {
+        "no": "ni",
+        "es": "9"
+       }
+      ],
+      "mecanismo": "NUM",
+      "feedback": {
+       "regla": "Un número interno o un teléfono se dice cifra a cifra: null 0, én 1, to 2, tre 3, fire 4, fem 5, seks 6, sju 7, åtte 8, ni 9.",
+       "conserva": "Las cifras altas son las que más se confunden.",
+       "cambia": "sju 7, åtte 8, ni 9; null es el cero."
+      },
+      "fuente": "PREA1-U02-L02#bloques",
+      "nivel": "Pre-A1"
+     },
+     {
+      "id": "PREA1-U02-L02-O25",
+      "tipo": "empareja",
+      "esencial": false,
+      "pares": [
+       {
+        "no": "to",
+        "es": "2"
+       },
+       {
+        "no": "tre",
+        "es": "3"
+       },
+       {
+        "no": "fire",
+        "es": "4"
+       },
+       {
+        "no": "fem",
+        "es": "5"
+       },
+       {
+        "no": "seks",
+        "es": "6"
+       }
+      ],
+      "mecanismo": "NUM",
+      "feedback": {
+       "regla": "Un número interno o un teléfono se dice cifra a cifra: null 0, én 1, to 2, tre 3, fire 4, fem 5, seks 6, sju 7, åtte 8, ni 9.",
+       "conserva": "Del 2 al 6.",
+       "cambia": "to 2, tre 3, fire 4, fem 5, seks 6."
+      },
+      "fuente": "PREA1-U02-L02#bloques",
+      "nivel": "Pre-A1"
+     }
+    ]
+   },
+   "secciones": [
+    {
+     "id": "responde",
+     "titulo": "Responde",
+     "html": "<p>Recepción de una empresa. Mateo va a recoger su tarjeta de acceso. La persona de recepción necesita dos cosas: cómo se escribe su apellido y confirmar un número. Nada más. Y aun así la conversación se atasca dos veces.</p>\n<p>Escucha <code>AU-A1-E01-M</code> (53 segundos, dos escuchas) y responde antes de leer:</p>\n<ol><li>Recepción duda entre dos letras. ¿Cuáles?</li><li>¿Cuál es el número de empleado de Mateo?</li></ol>\n<p>Si has oído <code>U eller O</code> y <code>fire-null-sju-to</code>, ya has hecho lo difícil: cazar una letra y cuatro cifras dentro de una frase que no entiendes entera.</p>"
+    },
+    {
+     "id": "repara",
+     "titulo": "Repara",
+     "html": "<p>Lo que has oído:</p>\n<p><strong>Recepción:</strong> Hei. Da skal jeg lage adgangskortet ditt. Hva heter du?<br><strong>Mateo:</strong> Mateo Ruiz.<br><strong>Recepción:</strong> Kan du stave etternavnet ditt?<br><strong>Mateo:</strong> Ja. R-U-I-Z.<br><strong>Recepción:</strong> Beklager, sa du U eller O?<br><strong>Mateo:</strong> U.<br><strong>Recepción:</strong> Takk. Og fornavnet?<br><strong>Mateo:</strong> Mateo. M-A-T-E-O.<br><strong>Recepción:</strong> Kan du si det en gang til, litt saktere?<br><strong>Mateo:</strong> Ja. M-A-T-E-O.<br><strong>Recepción:</strong> Flott. Ansattnummeret ditt er fire-null-sju-to.<br><strong>Mateo:</strong> Sa du fire-null-sju-to?<br><strong>Recepción:</strong> Ja, det stemmer.<br><strong>Mateo:</strong> Takk.</p>\n<p>La grieta. Un hispanohablante que deletrea <code>Ruiz</code> a la española dice «u» con el sonido de la letra noruega <code>o</code>. Por eso recepción pregunta <code>U eller O?</code>. No es un error de Mateo: es que dos letras se llaman casi igual en los dos idiomas y significan letras distintas. Deletrear no es decir las letras que sabes; es decir las letras que la otra persona espera oír.</p>\n<p>El mecanismo tiene tres piezas.</p>\n<p>Uno, el alfabeto. Son 29 letras: las 26 de siempre más <code>æ</code>, <code>ø</code> y <code>å</code>, al final. Escucha <code>AU-P-U02-L02-ALF</code> y repite. Las cinco que engañan a un hispanohablante:</p>\n<table><thead><tr><th>Letra</th><th>Cómo suena su nombre</th><th>Trampa</th></tr></thead><tbody><tr><td><code>e</code></td><td>como la e castellana, larga</td><td>ninguna</td></tr><tr><td><code>i</code></td><td>como la i castellana, larga</td><td>ninguna</td></tr><tr><td><code>y</code></td><td>entre i y u, con los labios redondeados</td><td>no es «i griega»</td></tr><tr><td><code>u</code></td><td>una u con los labios muy adelantados</td><td>suena distinta de la u castellana</td></tr><tr><td><code>o</code></td><td>cerrada, parecida a la u castellana</td><td>es la que confunde: si dices «u» a la española, oyen <code>o</code></td></tr></tbody></table>\n<p>Dos, la fórmula para pedir y para confirmar. <code>Kan du stave det?</code> pide deletreo. <code>Sa du U eller O?</code> confirma entre dos posibilidades: <code>sa du</code> es «¿has dicho…?» y <code>eller</code> es «o». Se responde con la letra, o con <code>Ja, det stemmer</code> (sí, es correcto) o <code>Nei, det er …</code> (no, es…).</p>\n<p>Tres, las cifras del 0 al 9: <code>null, én, to, tre, fire, fem, seks, sju, åtte, ni</code>. Un número interno o un teléfono se dice cifra a cifra, como hace recepción: <code>fire-null-sju-to</code>. Escucha <code>AU-P-U02-L02-TALL</code>. Verás que un noruego a veces dice un teléfono por parejas, <code>førtién, tjuetre…</code>; eso lo reconocerás en A1, hoy lo dices cifra a cifra y te entienden igual.</p>\n<p>Qué conservar: <code>Sa du …?</code> con el dato dentro y <code>Ja, det stemmer</code> como cierre. Qué cambiar: solo la letra o la cifra que dudas. En el diálogo aparece también <code>Kan du si det en gang til, litt saktere?</code>, que es pedir que lo repitan más despacio: reconócelo; lo producirás en <code>PREA1-U04-L01</code>.</p>"
+    },
+    {
+     "id": "bloques",
+     "titulo": "Bloques",
+     "html": "<table><thead><tr><th>Noruego</th><th>Castellano</th><th>Audio</th></tr></thead><tbody><tr><td><code>Kan du stave det?</code></td><td>¿Puedes deletrearlo?</td><td>(sin pista; en el diálogo aparece <code>Kan du stave etternavnet ditt?</code>)</td></tr><tr><td><code>R-U-I-Z.</code></td><td>R, U, I, Z</td><td>AU-A1-E01-M</td></tr><tr><td><code>Sa du U eller O?</code></td><td>¿Has dicho U u O?</td><td>AU-A1-E01-M</td></tr><tr><td><code>Ja, det stemmer.</code></td><td>Sí, es correcto.</td><td>AU-A1-E01-M</td></tr><tr><td><code>Nei, det er …</code></td><td>No, es…</td><td>(sin pista)</td></tr><tr><td><code>null, én, to, tre, fire, fem, seks, sju, åtte, ni</code></td><td>0 a 9</td><td>AU-P-U02-L02-TALL</td></tr><tr><td><code>Takk.</code></td><td>Gracias.</td><td>AU-A1-E01-M</td></tr></tbody></table>\n<p>Solo reconocer:</p>\n<table><thead><tr><th>Noruego</th><th>Castellano</th></tr></thead><tbody><tr><td><code>Kan du stave etternavnet ditt?</code></td><td>¿Puedes deletrear tu apellido?</td></tr><tr><td><code>Og fornavnet?</code></td><td>¿Y el nombre?</td></tr><tr><td><code>Kan du si det en gang til, litt saktere?</code></td><td>¿Puedes decirlo otra vez, más despacio?</td></tr><tr><td><code>Beklager.</code></td><td>Perdona.</td></tr><tr><td><code>Flott.</code></td><td>Estupendo.</td></tr></tbody></table>"
+    },
+    {
+     "id": "practica",
+     "titulo": "Practica",
+     "html": "<ol><li>Escucha <code>AU-A1-E01-M</code> y elige qué letras duda recepción: <code>U eller O</code> · <code>I eller E</code> · <code>R eller L</code>.</li><li>Escucha otra vez y escribe en cifras el número de empleado.</li><li>Escribe en cifras: <code>tre-to-ni-fem</code>.</li><li>Escribe en cifras: <code>åtte-én-null-seks</code>.</li><li>Ordena las fichas: <code>stave</code> · <code>Kan</code> · <code>det</code> · <code>du</code>.</li><li>Completa: <code>Sa du U ___ O?</code> con <code>eller</code> · <code>og</code> · <code>ja</code>.</li><li>Elige la respuesta correcta a <code>Sa du fire-null-sju-to?</code> cuando el dato es correcto: <code>Ja, det stemmer.</code> · <code>Nei, det er U.</code> · <code>Kan du stave det?</code>.</li><li>Graba el teléfono ficticio 412 35 806 cifra a cifra y compáralo con el modelo.</li></ol>"
+    },
+    {
+     "id": "repite",
+     "titulo": "Repite",
+     "html": "<p>Cambian el nombre y el código; tú conservas las fórmulas. Deletrea el apellido, di el código cifra a cifra y confirma con <code>Sa du …?</code>.</p>\n<ul><li>Tarjeta A: Maja Sørli · código C-305.</li><li>Tarjeta B: Omar Aziz · código A-118.</li><li>Tarjeta C: un apellido inventado con una <code>o</code> o una <code>u</code> dentro · código D-420.</li></ul>\n<p>Segunda vuelta con <code>AU-A1-E01-TR</code>: Ines Mora llega a otra recepción y duda entre <code>andre</code> y <code>tredje etasje</code>. No necesitas entender qué es <code>etasje</code> (planta); fíjate solo en cómo confirma, <code>B-tre-null-fem. Stemmer det?</code>, y responde tú como recepción: <code>Ja, det stemmer.</code></p>"
+    },
+    {
+     "id": "con-larsito",
+     "titulo": "Con Larsito",
+     "html": "<p>Escenario <code>LARS-PREA1-U02</code>, segunda parte: Larsito hace de recepción, te pide que deletrees un apellido de la tarjeta y te dice un código de tres cifras. Tú lo confirmas con <code>Sa du …?</code>. Larsito solo reconoce las letras y cifras preparadas; si dudas, te da la letra en castellano y te pide que la digas en noruego.</p>"
+    },
+    {
+     "id": "cierre",
+     "titulo": "Cierre",
+     "html": "<p>Lo has hecho si:</p>\n<ul><li>deletreas un apellido de la tarjeta y la <code>o</code> y la <code>u</code> salen en el orden que espera un noruego;</li><li>escribes en cifras un número de cuatro dígitos que oyes;</li><li>confirmas un dato con <code>Sa du …?</code> y cierras con <code>Ja, det stemmer</code> o <code>Nei, det er …</code>.</li></ul>\n<p>Lo que falles vuelve a los 1, 3, 7 y 14 días sin que lo apuntes.</p>\n<p>Siguiente: <code>PREA1-U03-L01</code>, Tall og priser, para pasar del 9 al 100 y entender lo que cuesta un café.</p>"
+    },
+    {
+     "id": "soluciones",
+     "titulo": "Soluciones",
+     "html": "<ol><li><code>U eller O</code>. Recepción dice <code>Beklager, sa du U eller O?</code> después de <code>R-U-I-Z</code>.</li><li><code>4072</code>. <code>fire-null-sju-to</code>, cifra a cifra.</li><li><code>3295</code>.</li><li><code>8106</code>. <code>én</code> es 1 y <code>null</code> es 0.</li><li><code>Kan du stave det?</code> Primero <code>Kan</code>, después <code>du</code>: en la pregunta el verbo va delante, como en <code>Hva heter du?</code>.</li><li><code>eller</code>. Es «o» entre dos opciones; <code>og</code> es «y».</li><li><code>Ja, det stemmer.</code> Confirma que el dato es correcto. <code>Nei, det er U</code> corrige una letra, y <code>Kan du stave det?</code> pide deletreo.</li><li>Modelo: <code>fire én to tre fem åtte null seks</code>. Se acepta <code>en</code> en lugar de <code>én</code>. Compara solo que no falte ninguna cifra y que <code>null</code> sea el cero.</li></ol>"
+    }
+   ],
+   "palabras": 1036,
+   "resumen": "En una recepción, deletrear tu apellido ficticio, confirmar una letra dudosa y dar un número ficticio sin perder ninguna cifra."
+  }
+ ],
+ "indice": []
+}

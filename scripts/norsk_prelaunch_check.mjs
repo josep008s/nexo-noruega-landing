@@ -36,6 +36,7 @@ ok(`modo: ${VENTA ? "VENTA ABIERTA" : "pre-venta (lista de espera, sin checkout)
 // Páginas publicables (indexables o de venta). Excluye app/gracias/acceso.
 const PUBLICABLES = [
   "norsk/index.html", "norsk/entrenamiento-oral/index.html",
+  "norsk/desde-cero/index.html", "norsk/ruta-completa/index.html",
   "pass/index.html", "pass/leccion-0/index.html", "pass/preguntas-de-ejemplo/index.html",
   "pass/que-examen-necesitas/index.html", "pass/como-inscribirse/index.html",
   "pass/requisitos-ciudadania-noruega/index.html",
@@ -1010,6 +1011,33 @@ if (exists("norsk/curso/app.js")) {
     .map((e) => e.name);
   if (grandes.length) duro(`api/: archivos de más de 200 KB que no deberían estar en un repo público: ${grandes.join(", ")}`);
   else ok("api/: ningún archivo de más de 200 KB fuera del curso privado ignorado");
+}
+
+// 5l) Recorrido «Noruego desde cero hasta A2»: la demo pública es válida, no
+// expone nada editorial ni de pago, y el autotest de su banco de ejercicios pasa.
+{
+  const DEMO_CERO = "data/norsk-desde-cero-demo.json";
+  if (!exists(DEMO_CERO)) duro(`Falta ${DEMO_CERO}`);
+  else {
+    try {
+      const d = JSON.parse(read(DEMO_CERO));
+      const raw = read(DEMO_CERO);
+      if (!d.meta || d.meta.ruta !== "norsk-desde-cero-a2") duro("demo desde cero: ruta incorrecta");
+      if (!Array.isArray(d.piezas) || !d.piezas.length) duro("demo desde cero: sin piezas abiertas");
+      if (raw.includes("\u2014")) duro("demo desde cero: em dash");
+      if (/revisi[oó]n nativa|firma nativa|PENDIENTE_6_PASADAS/.test(raw)) duro("demo desde cero: expone estado editorial interno");
+      if (PROHIBIDAS.test(raw)) duro("demo desde cero: palabra prohibida de marca");
+      (d.indice || []).forEach((m) => { if (m.secciones || m.html) duro(`demo desde cero: ${m.codigo} lleva cuerpo en el índice`); });
+      if (!duros.some((x) => x.startsWith("demo desde cero"))) ok(`demo desde cero: ${d.piezas.length} lección(es) abierta(s) + índice de ${(d.indice || []).length}`);
+    } catch (e) { duro("demo desde cero: JSON inválido"); }
+  }
+  const SELFTEST_CERO = "scripts/norsk_desde_cero_selftest.mjs";
+  if (!exists(SELFTEST_CERO)) duro(`Falta ${SELFTEST_CERO}`);
+  else {
+    const r = spawnSync(process.execPath, [rel(SELFTEST_CERO)], { encoding: "utf8" });
+    if (r.status !== 0) duro(`${SELFTEST_CERO} falla: ${(r.stdout || r.stderr || "").split("\n").filter(Boolean).slice(-3).join(" | ")}`);
+    else ok("recorrido desde cero: banco explícito, tipos y ratio de práctica extra verificados sin navegador");
+  }
 }
 
 if (process.argv.includes("--env")) {

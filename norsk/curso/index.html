@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Curso B1 · NEXO NORSK</title>
-  <meta name="description" content="Curso Norskprøven B1: fluidez oral, mecanismos, práctica por destrezas y simulacros.">
+  <title>Cursos de noruego · NEXO NORSK</title>
+  <meta name="description" content="Los cursos de noruego de NEXO NORSK: desde cero hasta A2 y de A2 a B1. Responde, repara, repite.">
   <meta name="robots" content="noindex">
   <link rel="canonical" href="https://www.nexonoruega.com/norsk/curso/">
 
@@ -385,6 +385,35 @@
     .origen.mal{background:rgba(143,90,15,.08)}
     .origen.mal .frase-origen{text-decoration:underline;text-decoration-style:wavy;text-decoration-color:var(--alerta);text-underline-offset:5px}
   
+
+    /* Recorrido desde cero: lección, sesión, audio y grabación */
+    .cambio-ruta{font-family:var(--sg);font-size:.82rem;color:var(--tinta-suave);margin-top:14px}
+    .cambio-ruta a{color:var(--fiordo);font-weight:700;text-underline-offset:3px}
+    .leccion-ficha{margin-top:22px;padding:16px 18px;border-left:3px solid var(--aurora);background:rgba(63,203,148,.08);max-width:66ch}
+    .leccion-ficha p{font-size:1.02rem;line-height:1.6;margin:0}
+    .leccion-ficha p+p{margin-top:8px}
+    .leccion-ficha b{font-family:var(--sg);color:var(--fiordo)}
+    .sesion-esencial{margin-top:26px;padding-top:0;border-top:0}
+    .sesion-esencial .practica-cab h2{font-size:clamp(1.25rem,3vw,1.6rem);margin-top:10px}
+    .seccion-practica .seccion-cuerpo{display:none}
+    .audio-fila{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 6px}
+    .audio-boton{padding:10px 16px;font-size:.9rem}
+    .audio-nota{font-family:var(--sg);font-size:.82rem;color:var(--tinta-suave);margin:4px 0 12px}
+    .audio-texto{margin:6px 0 12px}
+    .audio-texto summary{font-family:var(--sg);font-size:.85rem;color:var(--fiordo);cursor:pointer}
+    .voz-bloque{padding:6px 12px;font-size:.78rem;min-width:0}
+    .sin-voz{font-family:var(--sg);font-size:.74rem;color:var(--tinta-suave)}
+    .tarjeta-datos{font-family:var(--sg);font-size:1rem;margin:10px 0 14px;padding:10px 14px;border-radius:12px;background:rgba(44,90,114,.06)}
+    .tarjeta-datos .eti{font-weight:700;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--fiordo)}
+    .modelo-graba{padding:14px 16px;border-radius:14px;background:rgba(63,203,148,.1);margin:8px 0 14px}
+    .modelo-graba .eti{font-family:var(--sg);font-weight:700;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--fiordo)}
+    .modelo-graba .frase-origen{font-family:var(--sg);font-size:1.12rem;margin:6px 0 10px}
+    .veredicto-graba{margin-top:18px;padding-top:14px;border-top:1px solid var(--linea-clara)}
+    .feedback .feedback-parte{margin:0 0 8px;font-size:1rem;line-height:1.6}
+    .feedback .feedback-eti{font-family:var(--sg);color:var(--fiordo)}
+    .practica-extra{margin-top:40px}
+    @media (max-width:640px){.audio-fila .btn{flex:1;text-align:center}.veredicto-graba .btn{width:100%}}
+
     /* Repaso entre piezas */
     .repaso-tarjeta{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:16px;align-items:center;margin-top:28px;padding:18px 20px;border-radius:16px;background:#fff;border:1px solid var(--linea-clara);box-shadow:var(--sombra-clara);max-width:760px}
     .repaso-tarjeta.vence{border-left:4px solid var(--aurora)}
@@ -441,8 +470,8 @@
     </div>
   </footer>
 
-  <script src="/norsk/curso/practica.js?v=20260904b"></script>
+  <script src="/norsk/curso/practica.js?v=20260905a"></script>
 
-  <script src="/norsk/curso/app.js?v=20260904c"></script>
+  <script src="/norsk/curso/app.js?v=20260905a"></script>
 </body>
 </html>

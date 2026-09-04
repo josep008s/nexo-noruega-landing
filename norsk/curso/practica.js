@@ -1,4 +1,5 @@
-// Práctica interactiva del curso B1 de NEXO NORSK.
+// Práctica interactiva de los cursos de NEXO NORSK (Ruta Norskprøven B1 y
+// Noruego desde cero hasta A2).
 //
 // Construye un banco grande de ejercicios por pieza a partir del contenido ya
 // revisado (nunca inventa noruego): los bloques para llevarte, la ficha T (modelo),
@@ -7,6 +8,12 @@
 // Tipos: elegir la respuesta o la correcta, ordenar palabras arrastrando, completar
 // el hueco, emparejar, transformar una frase y escribirla. Todo ocurre en el
 // navegador; el progreso guarda ids, aciertos y tandas, nunca las respuestas.
+//
+// El recorrido desde cero trae además un banco explícito por lección (escrito en
+// el Drive, 02_ejercicios/*.json): ejercicios esenciales en orden (la sesión) y
+// opcionales, con tipos propios (escuchar y elegir, dictado, reconstruir, grabar
+// y comparar, Larsito). El audio grabado llega con el curso; mientras no está,
+// la voz local del navegador en noruego hace de reserva y se declara como tal.
 (function (root) {
   "use strict";
 
@@ -130,8 +137,15 @@
     return n >= (min || 3) && n <= (max || 14);
   }
 
+  function primeraTabla(html) {
+    var m = /<table>[\s\S]*?<\/table>/i.exec(String(html || ""));
+    return m ? m[0] : "";
+  }
+
   function extraerBloques(pieza) {
-    var html = seccion(pieza, "bloques-para-llevarte");
+    // B1: «Bloques para llevarte». Desde cero: solo la primera tabla de «Bloques»,
+    // que es la de los bloques productivos; la de «solo reconocer» no genera ejercicios.
+    var html = seccion(pieza, "bloques-para-llevarte") || primeraTabla(seccion(pieza, "bloques"));
     var pares = [];
     filas(html).forEach(function (celdas) {
       if (celdas.length < 2) return;
@@ -454,9 +468,89 @@
 
   var bancos = {};
 
+  // ---------- Banco explícito (recorrido desde cero) ----------
+  // Las lecciones del recorrido desde cero traen sus ejercicios escritos en el
+  // Drive. Aquí solo se convierten al formato interno; el banco automático sobre
+  // los bloques productivos se suma después como práctica opcional. No se inventa
+  // ninguna frase: todo procede de la lección.
+  function itemExplicito(e, propios, rnd) {
+    var base = { id: e.id, fuente: e.esencial ? "esencial" : "opcional", esencial: !!e.esencial, regla: e.mecanismo || "", feedback: e.feedback || null, audio: e.audio || null, nivel: e.nivel || "", frase: e.frase_no || "", enunciado: e.enunciado || "" };
+    var t = e.tipo;
+    if (t === "arrastra" || t === "reconstruye") t = "ordena";
+    if (t === "ordena") {
+      var sol = tokens(e.frase_no);
+      if (sol.length < 2) return null;
+      var fichas = Array.isArray(e.fichas) && e.fichas.length ? e.fichas.slice() : sol;
+      return Object.assign(base, { tipo: "ordena", subtipo: e.tipo, fichas: mezclaDistinta(fichas, rnd), solucion: sol, pista: e.es || "", motivo: "", parcial: false, aceptadas: e.aceptadas || [] });
+    }
+    if (t === "completa") {
+      var partes = String(e.frase_hueco || "").split("___");
+      if (partes.length !== 2 || !Array.isArray(e.opciones)) return null;
+      var m = /^([.,!?;:]*)\s*([\s\S]*)$/.exec(partes[1].trim());
+      return Object.assign(base, { tipo: "completa", antes: tokens(partes[0]), despues: tokens(m ? m[2] : partes[1]), puntuacion: m ? m[1] : "", respuesta: e.correcta, opciones: barajar(e.opciones.slice(), rnd), es: e.es || "", motivo: "" });
+    }
+    if (t === "empareja") {
+      if (!Array.isArray(e.pares) || e.pares.length < 3) return null;
+      return Object.assign(base, { tipo: "empareja", pares: e.pares, derecha: barajar(e.pares.map(function (x) { return x.es; }), rnd) });
+    }
+    if (t === "elige" || t === "escucha_elige") {
+      if (!Array.isArray(e.opciones) || e.opciones.length < 2) return null;
+      var correctaTxt = e.opciones[e.correcta];
+      var ops = barajar(e.opciones.slice(), rnd);
+      return Object.assign(base, { tipo: t, pregunta: e.pregunta || "", opciones: ops, correcta: ops.indexOf(correctaTxt), explicacion: "", opcionesNb: e.opciones.some(function (o) { return /[æøå]/i.test(o) || /^[A-ZÆØÅ][a-zæøå]+/.test(o); }) });
+    }
+    if (t === "escribe" || t === "dictado") {
+      var resp = (Array.isArray(e.aceptadas) && e.aceptadas[0]) || e.frase_no || "";
+      var solE = tokens(resp);
+      return Object.assign(base, { tipo: t, respuesta: resp, aceptadas: Array.isArray(e.aceptadas) ? e.aceptadas : [resp], explicacion: "", fichas: mezclaDistinta(solE, rnd), solucion: solE, sinPista: t === "dictado" || solE.length < 3 });
+    }
+    if (t === "graba_compara") return Object.assign(base, { tipo: "graba_compara", tarjeta: e.tarjeta || "", modelo: e.modelo_no || "", audioModelo: e.audio_modelo || null });
+    if (t === "larsito") return Object.assign(base, { tipo: "larsito", escenario: e.escenario || "" });
+    return null;
+  }
+
+  function bancoExplicito(pieza, clave) {
+    var rnd = prng(semillaDe("banco:" + pieza.codigo));
+    var propios = nombresPropios(pieza, null);
+    var audios = (pieza.meta && pieza.meta.audios) || {};
+    var items = [];
+    (pieza.meta.ejercicios || []).forEach(function (e) { var it = itemExplicito(e, propios, rnd); if (it) { it.audios = audios; items.push(it); } });
+    var bloques = extraerBloques(pieza);
+    var contenido = [];
+    bloques.forEach(function (b) { tokens(b.no).forEach(function (t) { var l = limpiarToken(t); if (l.length >= 3 && !FUNC[l] && !/\d/.test(l) && !/^[A-ZÆØÅ]/.test(t)) contenido.push(l); }); });
+    bloques.forEach(function (b) {
+      if (!fraseValida(b.no, 3, 12)) return;
+      items.push(itemOrdena(b.no, { pista: b.es, parcial: b.parcial }, propios, rnd, "bloques"));
+      posicionesHueco(tokens(b.no), rnd, 1).forEach(function (idx) { items.push(itemCompleta(b.no, idx, b.es, contenido, rnd, "bloques")); });
+    });
+    if (bloques.length >= 4) {
+      bloques.forEach(function (b) {
+        items.push(itemElige("¿Qué significa «" + b.no + (b.parcial ? "…" : "") + "»?", b.es, bloques.map(function (x) { return x.es; }), "«" + b.no + "» significa: " + b.es + ".", rnd, "bloques", false, "sig|" + b.no));
+      });
+      items = items.concat(itemsEmpareja(bloques, rnd, "bloques", "bloques"));
+    }
+    items = items.filter(Boolean);
+    var vistos = {}, unicos = [];
+    items.forEach(function (it) { if (!vistos[it.id]) { vistos[it.id] = true; it.mecanismo = pieza.codigo; if (!it.esencial) it.esencial = false; unicos.push(it); } });
+    var porTipo = {}, porFuente = {};
+    unicos.forEach(function (it) { porTipo[it.tipo] = (porTipo[it.tipo] || 0) + 1; porFuente[it.fuente] = (porFuente[it.fuente] || 0) + 1; });
+    var resultado = {
+      items: unicos,
+      explicito: true,
+      esenciales: unicos.filter(function (it) { return it.esencial; }),
+      opcionales: unicos.filter(function (it) { return !it.esencial; }),
+      porTipo: porTipo,
+      porFuente: porFuente,
+      fuentes: { bloques: bloques.length, explicitos: (pieza.meta.ejercicios || []).length, fichaT: 0, fichaP: 0, fichaEprod: 0, fichaE: 0, ejemplos: 0, expresiones: 0 },
+    };
+    bancos[clave] = resultado;
+    return resultado;
+  }
+
   function banco(pieza, anexoHtml) {
     var clave = pieza.codigo + (anexoHtml ? "+anexo" : "");
     if (bancos[clave]) return bancos[clave];
+    if (pieza.meta && Array.isArray(pieza.meta.ejercicios) && pieza.meta.ejercicios.length) return bancoExplicito(pieza, clave);
     var d = extraer(pieza, anexoHtml);
     var rnd = prng(semillaDe("banco:" + pieza.codigo));
     var items = [];
@@ -534,7 +628,7 @@
     return resultado;
   }
 
-  var ORDEN_TIPOS = ["mc", "elige", "empareja", "ordena", "completa", "transforma", "escribe"];
+  var ORDEN_TIPOS = ["mc", "elige", "escucha_elige", "empareja", "ordena", "completa", "transforma", "dictado", "escribe", "graba_compara", "larsito"];
 
   function filtrar(items, filtro) {
     if (!filtro || filtro === "todos") return items;
@@ -590,6 +684,45 @@
     M15: "Los conectores de párrafo («likevel», «dessuten», «derfor») ocupan la primera posición y empujan el verbo a la segunda. «Det» de relleno abre frases sin sujeto real.",
     M16: "Al reparar en directo se retoma la idea con un conector («altså», «jeg mener») y se termina la frase; no se vuelve a empezar desde cero.",
   };
+
+  // Reglas del recorrido desde cero. Las claves son las del campo «mecanismo» de
+  // los ejercicios explícitos (02_ejercicios/*.json) y se suman al mismo mapa.
+  var REGLAS_CERO = {
+    BLOQUE: "Los bloques se guardan enteros, con «jeg» delante y el dato al final. Cambia solo el dato.",
+    "ORD-SV": "En la frase principal el sujeto va delante del verbo: «jeg bor», «hun jobber».",
+    "PREG-V1": "En una pregunta de sí o no el verbo va delante del sujeto: «Bor du i Oslo?», «Kan du stave det?».",
+    "PREG-HV": "«Hva» pregunta por una cosa o un nombre; «hvor», por un lugar; «når», por un momento. Después va el verbo y luego «du».",
+    "V2-TIEMPO": "Si la frase empieza por un tiempo («i dag», «i morgen», «neste uke»), el verbo va justo después y el sujeto detrás del verbo.",
+    "NEG-IKKE": "En la frase principal «ikke» va detrás del verbo conjugado: «Jeg har ikke bil».",
+    "NEG-SUB": "Dentro de una subordinada con «fordi» o «at», «ikke» va delante del verbo: «fordi jeg ikke har tid».",
+    "NOM-GEN": "«En» para la mayoría de los sustantivos y «et» para los neutros. El artículo se aprende con la palabra.",
+    "NOM-DEF": "Lo ya nombrado lleva el artículo pegado al final: «en bil» pasa a «bilen», «et hus» a «huset».",
+    "NOM-PLUR": "El plural indefinido suele acabar en «-er» («biler») y el definido en «-ene» («bilene»).",
+    "ADJ-CONC": "El adjetivo concuerda: «en stor bil», «et stort hus», «store biler»; con artículo definido lleva «-e».",
+    MOD: "Modal más infinitivo sin «å»: «kan», «må», «vil», «skal» y «bør» llevan el verbo en infinitivo detrás.",
+    PRET: "Con una fecha o un momento cerrado va preteritum: «-et», «-te» o la forma irregular.",
+    PERF: "Sin fecha, para una experiencia o algo que sigue, va «har» más participio: «har bodd», «har jobbet».",
+    FUT: "«Skal» para un plan decidido, «kommer til å» para una previsión; el presente vale con «i morgen».",
+    SEC: "Un relato se ordena con «først», «så», «etterpå» y «til slutt»; cada uno empuja el verbo a la segunda posición.",
+    FORDI: "«Fordi» da el motivo y abre una subordinada: el sujeto va delante del verbo y «ikke» delante del verbo.",
+    SAA: "«Så» da la consecuencia y abre otra frase: «Det regnet, så vi ble hjemme».",
+    HVIS: "«Hvis» pone la condición; si va delante, después de la coma viene el verbo de la principal: «Hvis du jobber helg, får du tillegg».",
+    SOM: "«Som» va pegado al nombre que describe y no se puede quitar cuando hace de sujeto: «naboen som bor over meg».",
+    COMP: "Se compara con «-ere» o «mer» más «enn»: «større enn», «mer praktisk enn». El superlativo lleva «-est».",
+    POS: "«Min», «din», «hans», «hennes», «vår», «deres»; el posesivo va detrás del nombre con artículo: «bilen min».",
+    OBJ: "Como objeto: «meg», «deg», «ham», «henne», «oss», «dem».",
+    INDEF: "«Noen» en preguntas y afirmaciones; «ingen» o «ikke noen» en negativas; «mange» con lo que se cuenta y «mye» con lo que no.",
+    "SA-AT": "Para contar lo que dijo alguien: «sa at» más la frase; en A2 el tiempo del verbo no cambia.",
+    "PREP-LUGAR": "«I» para dentro de algo o una ciudad, «på» para superficies y muchos sitios de trabajo, «ved siden av» y «bak» para la posición relativa.",
+    "PREP-TIEMPO": "«I tre dager» (duración), «siden mandag» (desde), «for to uker siden» (hace), «om en uke» (dentro de).",
+    HORA: "«Klokka» más la hora; «halv» va con la hora siguiente: «halv ni» es las ocho y media.",
+    NUM: "Un número interno o un teléfono se dice cifra a cifra: null 0, én 1, to 2, tre 3, fire 4, fem 5, seks 6, sju 7, åtte 8, ni 9.",
+    ALF: "Al deletrear, «o» suena cerrada, parecida a la u castellana, y «u» se dice con los labios adelantados. Si dices «u» a la española, oyen «o».",
+    REPAR: "Para confirmar un dato: «Sa du …?». Si es correcto, «Ja, det stemmer»; si no, «Nei, det er …». Para que repitan: «Kan du si det en gang til?».",
+    "PRO-VOCAL": "La vocal larga se escribe con una consonante; la corta, con dos: «tak» (tejado) frente a «takk» (gracias).",
+    "PRO-SJKJ": "«Sj» y «skj» suenan como una «sh»; «kj» es más suave, con la lengua cerca del paladar.",
+  };
+  Object.keys(REGLAS_CERO).forEach(function (k) { REGLAS[k] = REGLAS_CERO[k]; });
 
   var PARES = [
     [["at", "om"], "«at» introduce una afirmación o una opinión; «om» una pregunta de sí o no."],
@@ -850,7 +983,8 @@
 
     comprobar.addEventListener("click", function () {
       var dado = Array.prototype.map.call(linea.children, function (c) { return c.textContent; });
-      var bien = normalizar(dado.join(" ")) === normalizar(solucion.join(" "));
+      var bien = normalizar(dado.join(" ")) === normalizar(solucion.join(" "))
+        || (item.aceptadas || []).some(function (a) { return normalizar(a) === normalizar(dado.join(" ")); });
       Array.prototype.forEach.call(linea.children, function (c, i) {
         c.classList.toggle("bien", normalizar(c.textContent) === normalizar(solucion[i]));
         c.classList.toggle("mal", normalizar(c.textContent) !== normalizar(solucion[i]));
@@ -1017,15 +1151,16 @@
     campo.autocomplete = "off";
     campo.autocapitalize = "sentences";
     campo.spellcheck = false;
-    campo.placeholder = "Escribe la frase en noruego";
-    campo.setAttribute("aria-label", "Tu frase en noruego");
+    campo.placeholder = item.tipo === "dictado" ? "Escribe lo que oyes" : "Escribe la frase en noruego";
+    campo.setAttribute("aria-label", item.tipo === "dictado" ? "Lo que has oído" : "Tu frase en noruego");
     caja.appendChild(campo);
     var fila = el("div", "fila-acciones");
     var comprobar = el("button", "btn", "Comprobar");
     comprobar.type = "button";
     var pista = el("button", "btn ghost", "Dame las palabras");
     pista.type = "button";
-    fila.appendChild(comprobar); fila.appendChild(pista);
+    fila.appendChild(comprobar);
+    if (!item.sinPista) fila.appendChild(pista);
     caja.appendChild(fila);
     var zonaOrdena = null;
     pista.addEventListener("click", function () {
@@ -1038,7 +1173,8 @@
     function evaluar() {
       var dado = normalizar(campo.value), sol = normalizar(item.respuesta);
       if (!dado) { campo.focus(); return; }
-      var bien = dado === sol || (sol.length > 20 && distancia(dado, sol) <= 2);
+      var bien = dado === sol || (sol.length > 20 && distancia(dado, sol) <= 2)
+        || (item.aceptadas || []).some(function (a) { return normalizar(a) === dado; });
       campo.classList.add(bien ? "bien" : "mal");
       campo.disabled = true; comprobar.disabled = true; pista.disabled = true;
       alResolver(bien, campo.value);
@@ -1047,8 +1183,133 @@
     campo.addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); evaluar(); } });
   }
 
-  var TITULOS = { mc: "Elige la respuesta", elige: "Elige la correcta", ordena: "Ordena la frase", transforma: "Transforma la frase", completa: "Completa el hueco", empareja: "Empareja", escribe: "Escríbela tú" };
-  var NOMBRES_FILTRO = { todos: "Todo", mc: "Preguntas", elige: "Elegir", ordena: "Ordenar", completa: "Huecos", empareja: "Emparejar", transforma: "Transformar", escribe: "Escribir", anexo: "Expresiones" };
+  // ---------- Audio: grabado si la app lo tiene; voz local del navegador si no ----------
+  // Misma regla que Larsito: solo una voz local en noruego (nb/no). Sin voz local no
+  // se sintetiza nada y se ofrece el texto. Nunca se llama a un servicio remoto.
+  var vozNb = null, vozBuscada = false;
+  function vozLocalNb() {
+    if (typeof speechSynthesis === "undefined") return null;
+    if (vozBuscada && vozNb) return vozNb;
+    vozBuscada = true;
+    var voces = [];
+    try { voces = speechSynthesis.getVoices() || []; } catch (err) { voces = []; }
+    vozNb = voces.filter(function (v) { return /^(nb|no)\b/i.test(v.lang) && v.localService; })[0] || null;
+    return vozNb;
+  }
+  var audioActual = null;
+  function pararAudio() {
+    if (audioActual) { try { audioActual.pause(); } catch (err) { /* nada */ } audioActual = null; }
+    if (typeof speechSynthesis !== "undefined") { try { speechSynthesis.cancel(); } catch (err) { /* nada */ } }
+  }
+  function decirNb(texto, despacio) {
+    var v = vozLocalNb();
+    if (!v) return false;
+    String(texto).split("\n").map(function (l) { return l.replace(/^[A-ZÁÉÍÓÚÑ ]+:\s*/, "").trim(); }).filter(Boolean).forEach(function (l) {
+      var u = new SpeechSynthesisUtterance(l);
+      u.voice = v; u.lang = v.lang; u.rate = despacio ? 0.7 : 0.85;
+      speechSynthesis.speak(u);
+    });
+    return true;
+  }
+  function montarAudio(item, caja, mostrarTexto) {
+    var info = (item.audios && item.audio && item.audios[item.audio]) || null;
+    var url = item.audio_url || (info && info.url) || null;
+    var texto = info ? String(info.texto || "") : "";
+    var fila = el("div", "audio-fila");
+    var boton = el("button", "btn ghost audio-boton", "Escuchar"); boton.type = "button";
+    var lento = el("button", "btn ghost audio-boton", "Más despacio"); lento.type = "button";
+    var nota = el("p", "audio-nota");
+    if (url) nota.textContent = "Audio grabado" + (info && info.duracion_s ? " · " + Math.round(info.duracion_s) + " s" : "") + ". Escúchalo dos veces.";
+    else if (texto && vozLocalNb()) nota.textContent = "Voz del navegador, provisional: el audio grabado llega con el curso. Escúchalo dos veces.";
+    else if (texto) { nota.textContent = "Tu navegador no tiene voz en noruego. Lee el texto en voz alta o pide a alguien que te lo lea."; boton.disabled = true; lento.disabled = true; mostrarTexto = true; }
+    else { nota.textContent = "Audio pendiente."; boton.disabled = true; lento.disabled = true; }
+    function reproducir(despacio) {
+      pararAudio();
+      if (url) { audioActual = new Audio(url); audioActual.playbackRate = despacio ? 0.8 : 1; audioActual.play().catch(function () { /* nada */ }); return; }
+      decirNb(texto, despacio);
+    }
+    boton.addEventListener("click", function () { reproducir(false); });
+    lento.addEventListener("click", function () { reproducir(true); });
+    fila.appendChild(boton); fila.appendChild(lento);
+    caja.appendChild(fila); caja.appendChild(nota);
+    if (texto && mostrarTexto) {
+      var det = document.createElement("details"); det.className = "audio-texto";
+      var sum = document.createElement("summary"); sum.textContent = "Ver el texto"; det.appendChild(sum);
+      var pre = el("p", "texto-ctx", texto); pre.lang = "nb"; det.appendChild(pre);
+      caja.appendChild(det);
+    }
+  }
+
+  // Grabar y comparar: la grabación vive solo en memoria y se libera; la app no
+  // puntúa la pronunciación. La persona decide si se parece al modelo.
+  function montarGraba(item, caja, alResolver) {
+    caja.appendChild(el("p", "consigna", item.enunciado || "Graba tu versión y compárala con el modelo. La grabación se queda en memoria y se borra al salir; nadie la evalúa."));
+    if (item.tarjeta) { var tj = el("p", "tarjeta-datos"); tj.appendChild(el("span", "eti", "Tarjeta")); tj.appendChild(document.createTextNode(" " + item.tarjeta)); caja.appendChild(tj); }
+    var modelo = el("div", "modelo-graba");
+    modelo.appendChild(el("span", "eti", "Modelo"));
+    var pm = el("p", "frase-origen", item.modelo); pm.lang = "nb"; modelo.appendChild(pm);
+    var escuchar = el("button", "btn ghost", "Escuchar el modelo"); escuchar.type = "button";
+    escuchar.addEventListener("click", function () {
+      pararAudio();
+      if (item.audioModelo) { audioActual = new Audio(item.audioModelo); audioActual.play().catch(function () { /* nada */ }); return; }
+      if (!decirNb(item.modelo, true)) { escuchar.disabled = true; escuchar.textContent = "Sin voz en noruego en este navegador"; }
+    });
+    modelo.appendChild(escuchar);
+    caja.appendChild(modelo);
+    var fila = el("div", "fila-acciones");
+    var grabar = el("button", "btn", "Grabar"); grabar.type = "button";
+    var oir = el("button", "btn ghost", "Oír mi grabación"); oir.type = "button"; oir.disabled = true;
+    var estado = el("p", "audio-nota", "");
+    var rec = null, trozos = [], blobUrl = null, stream = null;
+    var soporta = typeof MediaRecorder !== "undefined" && navigator.mediaDevices && navigator.mediaDevices.getUserMedia;
+    if (!soporta) { grabar.disabled = true; estado.textContent = "Este navegador no permite grabar. Di la frase en voz alta y compárala con el modelo."; }
+    function liberar() {
+      if (blobUrl) { try { URL.revokeObjectURL(blobUrl); } catch (err) { /* nada */ } blobUrl = null; }
+      if (stream) { stream.getTracks().forEach(function (t) { t.stop(); }); stream = null; }
+    }
+    grabar.addEventListener("click", function () {
+      if (rec && rec.state === "recording") { rec.stop(); return; }
+      navigator.mediaDevices.getUserMedia({ audio: true }).then(function (s) {
+        stream = s; trozos = []; rec = new MediaRecorder(s);
+        rec.ondataavailable = function (e) { if (e.data && e.data.size) trozos.push(e.data); };
+        rec.onstop = function () {
+          if (stream) { stream.getTracks().forEach(function (t) { t.stop(); }); stream = null; }
+          if (blobUrl) { try { URL.revokeObjectURL(blobUrl); } catch (err) { /* nada */ } }
+          blobUrl = URL.createObjectURL(new Blob(trozos, { type: rec.mimeType || "audio/webm" }));
+          oir.disabled = false; grabar.textContent = "Grabar otra vez"; estado.textContent = "Grabado. Escúchate y compara con el modelo.";
+        };
+        rec.start(); grabar.textContent = "Parar"; estado.textContent = "Grabando… pulsa Parar cuando termines.";
+        setTimeout(function () { if (rec && rec.state === "recording") rec.stop(); }, 30000);
+      }).catch(function () { estado.textContent = "Sin permiso de micrófono. Di la frase en voz alta y compárala con el modelo."; });
+    });
+    oir.addEventListener("click", function () { if (!blobUrl) return; pararAudio(); audioActual = new Audio(blobUrl); audioActual.play().catch(function () { /* nada */ }); });
+    fila.appendChild(grabar); fila.appendChild(oir);
+    caja.appendChild(fila); caja.appendChild(estado);
+    var veredicto = el("div", "fila-acciones veredicto-graba");
+    var bien = el("button", "btn", "Se parece al modelo"); bien.type = "button";
+    var otra = el("button", "btn ghost", "Lo repito mañana"); otra.type = "button";
+    function cerrar(ok) { bien.disabled = true; otra.disabled = true; grabar.disabled = true; oir.disabled = true; liberar(); alResolver(ok, ok ? "se parece" : "lo repito"); }
+    bien.addEventListener("click", function () { cerrar(true); });
+    otra.addEventListener("click", function () { cerrar(false); });
+    veredicto.appendChild(bien); veredicto.appendChild(otra);
+    caja.appendChild(veredicto);
+    caja.appendChild(el("p", "ayuda-item", "Tú decides si se parece. La app no puntúa tu pronunciación."));
+    window.addEventListener("pagehide", liberar, { once: true });
+  }
+
+  function montarLarsito(item, caja, alResolver) {
+    caja.appendChild(el("p", "consigna", item.enunciado || "Lleva estas frases a una conversación con Larsito y vuelve."));
+    var a = el("a", "btn", "Abrir el escenario con Larsito");
+    a.href = "/norsk/larsito/?escenario=" + encodeURIComponent(item.escenario || "");
+    a.target = "_blank"; a.rel = "noopener";
+    caja.appendChild(a);
+    var hecho = el("button", "btn ghost", "Ya lo he hecho"); hecho.type = "button";
+    hecho.addEventListener("click", function () { hecho.disabled = true; alResolver(true, "larsito"); });
+    var fila = el("div", "fila-acciones"); fila.appendChild(hecho); caja.appendChild(fila);
+  }
+
+  var TITULOS = { mc: "Elige la respuesta", elige: "Elige la correcta", escucha_elige: "Escucha y elige", ordena: "Ordena la frase", transforma: "Transforma la frase", completa: "Completa el hueco", empareja: "Empareja", escribe: "Escríbela tú", dictado: "Escucha y escribe", graba_compara: "Graba y compara", larsito: "Con Larsito" };
+  var NOMBRES_FILTRO = { todos: "Todo", mc: "Preguntas", elige: "Elegir", escucha_elige: "Escuchar", ordena: "Ordenar", completa: "Huecos", empareja: "Emparejar", transforma: "Transformar", escribe: "Escribir", dictado: "Dictado", graba_compara: "Grabar", larsito: "Larsito", anexo: "Expresiones" };
 
   function montarItem(item, indice, total, alResolver) {
     var tarjeta = el("section", "ejercicio tipo-" + item.tipo);
@@ -1057,10 +1318,12 @@
     tarjeta.appendChild(cab);
     var caja = el("div", "ejercicio-cuerpo");
     if (item.tipo === "ordena") {
+      if (item.subtipo === "reconstruye") montarAudio(item, caja, false);
+      if (item.enunciado) caja.appendChild(el("p", "consigna", item.enunciado));
       if (item.pista) {
         caja.appendChild(el("p", "consigna", item.parcial ? "Construye el arranque noruego que significa:" : (item.fuente === "fichas" && item.pista.length > 60 ? "Construye la frase que resuelve esto:" : "Construye la frase noruega que significa:")));
         caja.appendChild(el("p", "pista-es", item.pista + (item.parcial ? "…" : "")));
-      } else {
+      } else if (!item.enunciado) {
         caja.appendChild(el("p", "consigna", "Ordena las palabras hasta que la frase esté bien construida."));
       }
       montarOrdena(item, caja, alResolver);
@@ -1080,14 +1343,26 @@
     } else if (item.tipo === "mc" || item.tipo === "elige") {
       montarMc(item, caja, alResolver);
     } else if (item.tipo === "escribe") {
+      if (item.enunciado && !item.subtipo) { /* el enunciado lo pinta montarEscribe */ }
       montarEscribe(item, caja, alResolver);
+    } else if (item.tipo === "escucha_elige") {
+      montarAudio(item, caja, false);
+      montarMc(item, caja, alResolver);
+    } else if (item.tipo === "dictado") {
+      montarAudio(item, caja, false);
+      montarEscribe(item, caja, alResolver);
+    } else if (item.tipo === "graba_compara") {
+      montarGraba(item, caja, alResolver);
+    } else if (item.tipo === "larsito") {
+      montarLarsito(item, caja, alResolver);
     }
     tarjeta.appendChild(caja);
     return tarjeta;
   }
 
   function textoFeedback(item, bien) {
-    if (item.tipo === "mc" || item.tipo === "elige") return item.explicacion || "";
+    if (item.feedback) return "";
+    if (item.tipo === "mc" || item.tipo === "elige" || item.tipo === "escucha_elige") return item.explicacion || "";
     if (item.tipo === "transforma") return item.motivo || "";
     if (item.tipo === "escribe") return item.explicacion || "";
     if (item.tipo === "completa") return item.motivo || (bien ? "" : (item.es ? "La palabra era «" + item.respuesta + "». " + item.es : "La palabra era «" + item.respuesta + "»."));
@@ -1096,6 +1371,8 @@
   }
 
   function fraseSolucion(item) {
+    if (item.tipo === "graba_compara" || item.tipo === "larsito" || item.tipo === "escucha_elige") return "";
+    if (item.tipo === "dictado") return item.respuesta || "";
     if (item.tipo === "ordena" || item.tipo === "transforma" || item.tipo === "escribe") return item.frase || item.respuesta || item.solucion.join(" ");
     if (item.tipo === "completa") return item.frase;
     return "";
@@ -1104,7 +1381,7 @@
   function diagnosticar(item, dado, mecanismo) {
     try {
       if (item.tipo === "ordena" || item.tipo === "transforma") return diagnosticoOrden(tokens(dado), item.solucion, mecanismo);
-      if (item.tipo === "escribe") {
+      if (item.tipo === "escribe" || item.tipo === "dictado") {
         var ts = tokens(String(dado || "").replace(/[«»"“”]/g, ""));
         var mismoConjunto = ts.length === item.solucion.length && ts.map(normalizar).sort().join("|") === item.solucion.map(normalizar).sort().join("|");
         return mismoConjunto ? diagnosticoOrden(ts, item.solucion, mecanismo) : diagnosticoEscrito(dado, item.respuesta, mecanismo);
@@ -1220,14 +1497,31 @@
           transforma: "Revisa el cambio.",
           escribe: "Compara tu frase.",
           mc: "Compara las opciones.",
+          escucha_elige: "Vuelve a escuchar.",
+          dictado: "Compara lo que has escrito.",
+          graba_compara: "Lo repites mañana.",
+          larsito: "Pendiente.",
         };
         fb.appendChild(el("b", null, acierto ? "Bien." : (bien && conPista ? "Con ayuda, pero bien." : (titulosError[item.tipo] || "Revísalo una vez más."))));
-        var diag = acierto ? "" : diagnosticar(item, dado, item.mecanismo);
+        var diag = acierto ? "" : diagnosticar(item, dado, item.regla || item.mecanismo);
         if (diag) fb.appendChild(el("p", "diagnostico", diag));
         var sol = fraseSolucion(item);
         if (sol && !acierto) { var ps = el("p", "solucion", sol); ps.lang = "nb"; fb.appendChild(ps); }
         var txt = textoFeedback(item, acierto);
         if (txt) fb.appendChild(el("p", null, txt));
+        // Ejercicios explícitos: la devolución dice qué conservar y qué cambiar, y la regla.
+        if (item.feedback) {
+          var partes = acierto
+            ? [["Conserva", item.feedback.conserva]]
+            : [["Qué cambiar", item.feedback.cambia], ["Qué conservar", item.feedback.conserva], ["Regla", item.feedback.regla]];
+          partes.forEach(function (par) {
+            if (!par[1]) return;
+            var pf = el("p", "feedback-parte");
+            pf.appendChild(el("b", "feedback-eti", par[0] + ". "));
+            pf.appendChild(document.createTextNode(par[1]));
+            fb.appendChild(pf);
+          });
+        }
         var sig = el("button", "btn", indice === items.length - 1 ? "Ver el resultado" : "Siguiente");
         sig.type = "button";
         sig.addEventListener("click", function () { indice++; mostrar(); });
@@ -1249,21 +1543,25 @@
     var estado = opciones.estado;
     var registro = registroDe(estado, pieza.codigo);
     var b = banco(pieza, opciones.anexoHtml || null);
-    if (!b.items.length) return null;
+    // Con banco explícito, aquí solo va la práctica extra: la sesión de esenciales la monta montarEsenciales.
+    var itemsBase = b.explicito ? b.opcionales : itemsBase;
+    if (!itemsBase.length) return null;
     if (opciones.filtro) { registro.filtro = opciones.filtro; opciones.guardar(); }
     var filtro = registro.filtro || "todos";
-    if (!filtrar(b.items, filtro).length) filtro = "todos";
+    if (!filtrar(itemsBase, filtro).length) filtro = "todos";
 
     var raiz = el("section", "practica-pieza");
     raiz.id = "practica";
 
     var cab = el("div", "practica-cab");
-    cab.appendChild(el("p", "kicker", "Ponlo a prueba"));
-    cab.appendChild(el("h2", null, "Practica " + pieza.codigo + " sin salir de aquí"));
-    cab.appendChild(el("p", "practica-intro", "Esta pieza tiene " + numero(b.items.length) + " ejercicios hechos con sus propias frases: elegir, ordenar arrastrando, completar, emparejar, transformar y escribir. Van de ocho en ocho, sin repetir hasta que los hayas visto todos, y cada uno te dice al momento cómo ha ido y por qué. Lo que falles vuelve a salir en el repaso del índice."));
+    cab.appendChild(el("p", "kicker", b.explicito ? "Si te queda energía" : "Ponlo a prueba"));
+    cab.appendChild(el("h2", null, b.explicito ? "Práctica extra, solo si la pides" : "Practica " + pieza.codigo + " sin salir de aquí"));
+    cab.appendChild(el("p", "practica-intro", b.explicito
+      ? numero(itemsBase.length) + " ejercicios opcionales hechos con las frases de esta lección. Van de ocho en ocho, sin repetir hasta que los hayas visto todos. Lo que falles vuelve en el repaso; nada de esto es obligatorio."
+      : "Esta pieza tiene " + numero(itemsBase.length) + " ejercicios hechos con sus propias frases: elegir, ordenar arrastrando, completar, emparejar, transformar y escribir. Van de ocho en ocho, sin repetir hasta que los hayas visto todos, y cada uno te dice al momento cómo ha ido y por qué. Lo que falles vuelve a salir en el repaso del índice."));
     var stats = el("p", "practica-stats");
     function pintarStats() {
-      stats.textContent = "Hechos " + numero(registro.hechos) + " de " + numero(b.items.length)
+      stats.textContent = "Hechos " + numero(registro.hechos) + " de " + numero(itemsBase.length)
         + (registro.hechos ? " · aciertos " + Math.round(100 * registro.aciertos / Math.max(1, registro.hechos)) + " %" : "")
         + (registro.mejor ? " · mejor tanda " + registro.mejor.aciertos + " de " + registro.mejor.total : "");
     }
@@ -1276,7 +1574,7 @@
     var claves = ["todos"].concat(ORDEN_TIPOS.filter(function (t) { return b.porTipo[t]; }));
     if (b.porFuente.anexo) claves.push("anexo");
     claves.forEach(function (k) {
-      var n = k === "todos" ? b.items.length : (k === "anexo" ? b.porFuente.anexo : b.porTipo[k]);
+      var n = k === "todos" ? itemsBase.length : (k === "anexo" ? b.porFuente.anexo : b.porTipo[k]);
       var chipF = el("button", "chip-filtro" + (k === filtro ? " activo" : ""), NOMBRES_FILTRO[k] + " · " + n);
       chipF.type = "button";
       chipF.setAttribute("aria-pressed", k === filtro ? "true" : "false");
@@ -1295,16 +1593,16 @@
     registro.vistos.forEach(function (id) { vistosMapa[id] = true; });
     var seleccion;
     if (opciones.soloFalladas && opciones.soloFalladas.length) {
-      seleccion = { items: b.items.filter(function (it) { return opciones.soloFalladas.indexOf(it.id) >= 0; }), reinicio: false, restantes: 0 };
+      seleccion = { items: itemsBase.filter(function (it) { return opciones.soloFalladas.indexOf(it.id) >= 0; }), reinicio: false, restantes: 0 };
     }
     if (!seleccion || !seleccion.items.length) {
-      seleccion = tanda(filtrar(b.items, filtro), { vistos: vistosMapa, semilla: pieza.codigo + ":" + filtro + ":" + registro.tandas });
+      seleccion = tanda(filtrar(itemsBase, filtro), { vistos: vistosMapa, semilla: pieza.codigo + ":" + filtro + ":" + registro.tandas });
     }
     var items = seleccion.items;
     if (seleccion.reinicio && registro.vistos.length) {
       raiz.appendChild(el("p", "practica-aviso", "Ya has pasado por todos los ejercicios de este tipo. Vuelven mezclados, así que es una vuelta más de repaso."));
       var delFiltro = {};
-      filtrar(b.items, filtro).forEach(function (it) { delFiltro[it.id] = true; });
+      filtrar(itemsBase, filtro).forEach(function (it) { delFiltro[it.id] = true; });
       registro.vistos = registro.vistos.filter(function (id) { return !delFiltro[id]; });
       opciones.guardar();
     }
@@ -1331,7 +1629,7 @@
         opciones.guardar();
         pintarStats();
 
-        var quedan = filtrar(b.items, filtro).filter(function (it) { return registro.vistos.indexOf(it.id) < 0; }).length;
+        var quedan = filtrar(itemsBase, filtro).filter(function (it) { return registro.vistos.indexOf(it.id) < 0; }).length;
         var caja = el("section", "resumen-practica " + (aciertos === total ? "pleno" : aciertos >= total * 0.6 ? "bien" : "flojo"));
         caja.appendChild(el("p", "eti", "Resultado de la tanda"));
         caja.appendChild(el("p", "marcador", aciertos + " de " + total));
@@ -1359,6 +1657,65 @@
           nuevo.scrollIntoView({ block: "start", behavior: "smooth" });
         });
         acciones.appendChild(seguir);
+        caja.appendChild(acciones);
+        if (opciones.alTerminar) opciones.alTerminar(registro);
+        return caja;
+      },
+    });
+    return raiz;
+  }
+
+  // Sesión de una lección del recorrido desde cero: los ejercicios esenciales en su
+  // orden, sin barajar. Cada paso devuelve qué conservar y qué cambiar; lo que se
+  // falla entra en el repaso 1-3-7-14. La práctica extra va aparte, con montar().
+  function montarEsenciales(pieza, opciones) {
+    var estado = opciones.estado;
+    var registro = registroDe(estado, pieza.codigo);
+    var b = banco(pieza, null);
+    if (!b.explicito || !b.esenciales.length) return null;
+    var items = opciones.soloFalladas && opciones.soloFalladas.length
+      ? b.esenciales.filter(function (it) { return opciones.soloFalladas.indexOf(it.id) >= 0; })
+      : b.esenciales;
+    if (!items.length) items = b.esenciales;
+    var raiz = el("section", "practica-pieza sesion-esencial");
+    raiz.id = "sesion";
+    var cab = el("div", "practica-cab");
+    cab.appendChild(el("p", "kicker", opciones.kicker || "La sesión"));
+    cab.appendChild(el("h2", null, opciones.encabezado || "Responde, repara, repite"));
+    cab.appendChild(el("p", "practica-intro", opciones.intro || (items.length + " pasos en orden. Cada uno te dice qué conservar y qué cambiar. Lo que falles vuelve mañana sin que lo apuntes.")));
+    raiz.appendChild(cab);
+    var aciertos = 0;
+    montarTandaEnRaiz(raiz, items, {
+      alResolver: function (item, acierto) {
+        if (acierto) aciertos++;
+        registro.hechos++;
+        if (acierto) registro.aciertos++;
+        if (registro.vistos.indexOf(item.id) < 0) registro.vistos.push(item.id);
+        programarRepaso(estado, pieza.codigo, item, acierto);
+        opciones.guardar();
+      },
+      resumen: function (resultados, items) {
+        var total = items.length;
+        var falladas = items.filter(function (it, i) { return !resultados[i]; }).map(function (it) { return it.id; });
+        registro.sesion = { aciertos: aciertos, total: total, fecha: new Date().toISOString(), falladas: falladas };
+        opciones.guardar();
+        var caja = el("section", "resumen-practica " + (aciertos === total ? "pleno" : aciertos >= total * 0.6 ? "bien" : "flojo"));
+        caja.appendChild(el("p", "eti", "Sesión hecha"));
+        caja.appendChild(el("p", "marcador", aciertos + " de " + total));
+        caja.appendChild(el("p", "lectura", aciertos === total
+          ? "Todo bien. Sigue con Repite y cierra la lección."
+          : falladas.length + (falladas.length === 1 ? " paso vuelve" : " pasos vuelven") + " mañana en el repaso. Puedes repetirlos ahora o seguir con Repite."));
+        var acciones = el("div", "fila-acciones");
+        if (falladas.length) {
+          var rep = el("button", "btn", "Repetir los fallados (" + falladas.length + ")");
+          rep.type = "button";
+          rep.addEventListener("click", function () {
+            var nuevo = montarEsenciales(pieza, Object.assign({}, opciones, { soloFalladas: falladas }));
+            raiz.replaceWith(nuevo);
+            nuevo.scrollIntoView({ block: "start", behavior: "smooth" });
+          });
+          acciones.appendChild(rep);
+        }
         caja.appendChild(acciones);
         if (opciones.alTerminar) opciones.alTerminar(registro);
         return caja;
@@ -1438,5 +1795,5 @@
     return caja;
   }
 
-  root.NexoPractica = Object.freeze({ extraer: extraer, banco: banco, tanda: tanda, filtrar: filtrar, montar: montar, montarRepaso: montarRepaso, programarRepaso: programarRepaso, repasoPendiente: repasoPendiente, llamada: llamada, seccionAnexo: seccionAnexo, diagnosticar: diagnosticar, REGLAS: REGLAS, TANDA: TANDA });
+  root.NexoPractica = Object.freeze({ extraer: extraer, banco: banco, bancoExplicito: bancoExplicito, tanda: tanda, filtrar: filtrar, montar: montar, montarEsenciales: montarEsenciales, montarRepaso: montarRepaso, pararAudio: pararAudio, vozLocalNb: vozLocalNb, programarRepaso: programarRepaso, repasoPendiente: repasoPendiente, llamada: llamada, seccionAnexo: seccionAnexo, diagnosticar: diagnosticar, REGLAS: REGLAS, TANDA: TANDA });
 })(typeof window !== "undefined" ? window : globalThis);

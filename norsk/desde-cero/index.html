@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Noruego desde cero hasta A2 · NEXO NORSK</title>
+  <meta name="description" content="Curso de noruego desde cero hasta A2 para hispanohablantes: lecciones de 15 a 20 minutos, corrección que dice qué cambiar, Larsito desde el primer día y un puente al curso de A2 a B1.">
+  <link rel="canonical" href="https://www.nexonoruega.com/norsk/desde-cero/">
+
+  <meta property="og:title" content="Noruego desde cero hasta A2, para usarlo desde la primera semana">
+  <meta property="og:description" content="Lecciones cortas: respondes antes de leer, entiendes una corrección concreta y lo repites con datos nuevos. Termina justo donde empieza el curso de A2 a B1.">
+  <meta property="og:image" content="https://www.nexonoruega.com/og-image.png">
+  <meta property="og:url" content="https://www.nexonoruega.com/norsk/desde-cero/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_ES">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+  <link rel="stylesheet" href="/fonts/fonts.css">
+
+  <style>
+    :root{
+      --noche:#0E1B26; --nieve:#F3F5F4; --aurora:#3FCB94; --fiordo:#2C5A72; --niebla:#8DA1AB;
+      --blanco:#FFFFFF;
+      --tinta-suave:rgba(14,27,38,.72);
+      --linea-clara:rgba(14,27,38,.14);
+      --linea-oscura:rgba(243,245,244,.12);
+      --sombra-clara:0 14px 34px rgba(14,27,38,.08);
+      --alerta:#8F5A0F;
+      --sg:"Space Grotesk",system-ui,sans-serif;
+      --serif:"Source Serif 4",Georgia,serif;
+      --caesar:"Caesar Dressing",var(--sg);
+      --ease:cubic-bezier(0.16,1,0.3,1);
+      --ancho:860px;
+    }
+    *{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{font-family:var(--serif);background:var(--nieve);color:var(--noche);line-height:1.7;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden}
+    ::selection{background:var(--aurora);color:var(--noche)}
+    a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var(--fiordo);outline-offset:3px}
+    img,svg{max-width:100%}
+    body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:80;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+      opacity:.028;mix-blend-mode:multiply}
+    .wrap{max-width:var(--ancho);margin:0 auto;padding:0 24px;position:relative;z-index:1}
+    section{padding:66px 0;position:relative}
+    .cielo{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+    .cielo::before{content:"";position:absolute;top:-12%;left:-10%;width:120%;height:80%;
+      background:radial-gradient(50% 60% at 28% 22%,rgba(63,203,148,.10),transparent 70%),
+                 radial-gradient(44% 50% at 78% 10%,rgba(44,90,114,.07),transparent 72%);
+      animation:deriva 46s ease-in-out infinite alternate}
+    @keyframes deriva{from{transform:translate3d(-2%,-1%,0) scale(1.03)}to{transform:translate3d(2%,1.5%,0) scale(1)}}
+    header{position:sticky;top:0;z-index:60;background:rgba(243,245,244,.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--linea-clara)}
+    .head-inner{max-width:var(--ancho);margin:0 auto;padding:16px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .marca{display:flex;align-items:center;gap:11px;text-decoration:none;color:var(--noche)}
+    .marca svg{width:26px;height:26px;flex:none}
+    .marca span{font-family:var(--sg);font-weight:500;font-size:.9rem;letter-spacing:.02em}
+    .marca b{font-weight:700}
+    .head-nav{display:flex;gap:20px}
+    .head-nav a{font-family:var(--sg);font-weight:500;font-size:.84rem;color:var(--fiordo);text-decoration:none;padding:4px 0 3px;border-bottom:3px solid transparent;transition:color .2s,border-color .2s}
+    .head-nav a:hover{color:var(--noche)}
+    .head-nav a[aria-current="page"]{color:var(--noche);font-weight:700;border-bottom-color:var(--aurora)}
+    .kicker{font-family:var(--sg);font-weight:700;font-size:.78rem;letter-spacing:.22em;text-transform:uppercase;margin-bottom:20px;color:var(--fiordo)}
+    .caesar{font-family:var(--caesar);font-weight:400;text-transform:uppercase;letter-spacing:.1em}
+    h1,h2{font-family:var(--sg);font-weight:700;letter-spacing:-.02em;line-height:1.12;color:var(--noche)}
+    h1{font-size:clamp(2.1rem,5.4vw,3.4rem);max-width:17ch;margin-bottom:20px}
+    h2{font-size:clamp(1.7rem,3.6vw,2.3rem);margin-bottom:24px;max-width:24ch}
+    .sub{font-size:1.16rem;color:var(--tinta-suave);max-width:56ch;margin-bottom:28px}
+    p{color:var(--tinta-suave)}
+    .parrafo{font-size:1.1rem;max-width:60ch;margin-bottom:18px}
+    mark.marcado{color:inherit;background-color:transparent;
+      background-image:linear-gradient(180deg,rgba(63,203,148,.42),rgba(63,203,148,.30));
+      background-repeat:no-repeat;background-size:100% 100%;
+      border-radius:.25em .4em .3em .35em / .4em .25em .35em .3em;
+      padding:.06em .16em;margin:0 -.06em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+    .js .reveal mark.marcado{background-size:0% 100%;transition:background-size .7s var(--ease);transition-delay:calc(var(--d,0s) + .55s)}
+    .js .reveal.visible mark.marcado{background-size:100% 100%}
+    .botones{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+    .cta{display:inline-block;font-family:var(--sg);font-weight:700;font-size:1rem;color:var(--noche);
+      background:var(--aurora);border:none;text-decoration:none;text-align:center;padding:16px 32px;border-radius:4px;cursor:pointer;
+      transition:transform .2s var(--ease),box-shadow .25s,filter .18s}
+    .cta:hover{transform:translateY(-2px);filter:brightness(1.05);box-shadow:0 8px 26px rgba(63,203,148,.4)}
+    .cta.ghost{background:none;border:1px solid var(--linea-clara);color:var(--noche)}
+    .cta.ghost:hover{box-shadow:none;border-color:var(--fiordo)}
+    .microcopy{font-family:var(--sg);font-weight:500;font-size:.8rem;letter-spacing:.05em;color:var(--fiordo);margin-top:14px}
+    .hero{padding-top:56px;padding-bottom:52px}
+    .hero-prueba{margin-top:34px;max-width:70ch;background:var(--blanco);border:1px solid var(--linea-clara);border-radius:18px;padding:25px 26px 24px;box-shadow:var(--sombra-clara)}
+    .prueba-cab{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:13px;font-family:var(--sg);font-weight:700;font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;color:var(--fiordo)}
+    .prueba-cab span:last-child{font-weight:500;letter-spacing:.08em}
+    .hero-prueba h2{font-size:clamp(1.25rem,3vw,1.58rem);margin-bottom:7px}
+    .hero-prueba > p{font-size:.98rem;margin-bottom:17px}
+    .prueba-opciones{display:grid;gap:9px}
+    .frase-opcion{display:grid;grid-template-columns:34px minmax(0,1fr);gap:11px;align-items:center;width:100%;min-height:54px;padding:10px 14px;text-align:left;background:var(--nieve);color:var(--noche);border:1px solid transparent;border-radius:12px;cursor:pointer;font:600 1rem/1.45 var(--sg);transition:border-color .2s,background .2s,transform .2s var(--ease)}
+    .frase-opcion:hover{border-color:var(--fiordo);transform:translateY(-1px)}
+    .frase-opcion .letra{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--blanco);color:var(--fiordo);font-size:.76rem}
+    .frase-opcion[aria-pressed="true"]{border-color:var(--fiordo);background:rgba(44,90,114,.07)}
+    .hero-prueba[data-estado="bien"] .frase-opcion[data-prueba="bien"]{border-color:var(--aurora);box-shadow:inset 3px 0 0 var(--aurora)}
+    .hero-prueba[data-estado="mal"] .frase-opcion[data-prueba="mal"]{border-color:var(--alerta);box-shadow:inset 3px 0 0 var(--alerta)}
+    .feedback-rapido{margin-top:16px;padding:17px 18px;border-left:4px solid var(--aurora);border-radius:4px 12px 12px 4px;background:rgba(63,203,148,.12)}
+    .hero-prueba[data-estado="mal"] .feedback-rapido{border-left-color:var(--alerta);background:rgba(143,90,15,.07)}
+    .feedback-rapido .veredicto{font-family:var(--sg);font-weight:700;color:var(--noche);margin-bottom:4px}
+    .feedback-rapido p{font-size:.98rem;margin-bottom:11px}
+    .feedback-rapido a{font-family:var(--sg);font-weight:700;color:var(--fiordo);text-underline-offset:3px}
+    .estado-curso{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;margin-top:17px;font-family:var(--sg);font-size:.78rem;font-weight:500;color:var(--fiordo)}
+    .estado-curso strong{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--alerta);border-left:3px solid var(--alerta);padding-left:9px}
+    .zonas{display:grid;gap:14px;margin-top:22px}
+    @media (min-width:721px){.zonas{grid-template-columns:repeat(2,1fr)}}
+    .zona{border:1px solid var(--linea-clara);border-radius:12px;padding:20px;background:var(--blanco);box-shadow:var(--sombra-clara)}
+    .zona .num{font-family:var(--caesar);font-size:1.75rem;line-height:1;color:var(--fiordo);display:block;margin-bottom:8px}
+    .zona h3{font-family:var(--sg);font-size:1.05rem;color:var(--noche);margin-bottom:6px}
+    .zona p{font-size:.96rem;line-height:1.6}
+    .zona .cuenta{font-family:var(--sg);font-weight:700;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--fiordo);display:inline-block;margin-top:10px}
+    .ciclo{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:32px}
+    .ciclo-paso{padding-top:14px;position:relative}
+    .ciclo-paso::before{content:"";position:absolute;left:0;top:0;width:30px;height:4px;background:var(--aurora);border-radius:999px}
+    .ciclo-paso .num{font-family:var(--caesar);font-size:1.75rem;line-height:1;color:var(--fiordo);display:block;margin-bottom:8px}
+    .ciclo-paso h3{font-family:var(--sg);font-size:1rem;color:var(--noche);margin-bottom:6px}
+    .ciclo-paso p{font-size:.94rem;line-height:1.55}
+    .principio{margin-top:34px;max-width:64ch;font-size:1.15rem;color:var(--noche);border-left:4px solid var(--aurora);padding:4px 0 4px 20px}
+    .familia{display:grid;gap:14px;margin-top:22px}
+    @media (min-width:721px){.familia{grid-template-columns:repeat(3,1fr)}}
+    .producto{border-top:3px solid var(--linea-clara);padding-top:16px}
+    .producto.actual{border-top-color:var(--aurora)}
+    .producto h3{font-family:var(--sg);font-size:1.05rem;color:var(--noche);margin-bottom:8px}
+    .producto p{font-size:.96rem}
+    .producto a{font-family:var(--sg);font-weight:700;color:var(--fiordo);text-underline-offset:3px}
+    .larsito-caja{background:var(--noche);color:var(--nieve);border-radius:18px;padding:28px;margin-top:8px;position:relative;overflow:hidden}
+    .larsito-caja .eti{font-family:var(--sg);font-weight:700;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--aurora);margin-bottom:12px}
+    .larsito-caja h3{font-family:var(--sg);font-weight:700;font-size:clamp(1.3rem,3vw,1.8rem);line-height:1.2;color:var(--nieve);max-width:24ch;margin-bottom:10px}
+    .larsito-caja .lede{color:var(--niebla);font-size:1.04rem;max-width:52ch;margin-bottom:22px}
+    .chat{display:grid;gap:10px;max-width:520px}
+    .burbuja{border-radius:14px;padding:13px 16px;max-width:88%}
+    .burbuja.lars{background:rgba(63,203,148,.14);border:1px solid rgba(63,203,148,.34);justify-self:start;border-bottom-left-radius:4px}
+    .burbuja.tu{background:rgba(243,245,244,.06);border:1px solid var(--linea-oscura);justify-self:end;border-bottom-right-radius:4px}
+    .burbuja .quien{font-family:var(--sg);font-weight:700;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--niebla);margin-bottom:5px}
+    .burbuja .no{font-family:var(--sg);font-weight:500;font-size:1.02rem;color:var(--nieve);line-height:1.45}
+    .burbuja .es{font-size:.9rem;color:var(--niebla);font-style:italic;margin-top:4px}
+    .larsito-pie{font-family:var(--sg);font-size:.82rem;color:var(--niebla);margin-top:22px}
+    .larsito-pie b{color:var(--aurora)}
+    .faq{margin-top:6px;max-width:70ch}
+    details{border-top:1px solid var(--linea-clara);padding:14px 0}
+    details:last-of-type{border-bottom:1px solid var(--linea-clara)}
+    summary{font-family:var(--sg);font-weight:700;font-size:1rem;cursor:pointer;color:var(--noche);list-style:none;display:flex;justify-content:space-between;gap:14px;align-items:baseline}
+    summary::-webkit-details-marker{display:none}
+    summary::after{content:"+";font-family:var(--sg);color:var(--fiordo);flex:none}
+    details[open] summary::after{content:"–"}
+    details p{margin-top:10px;font-size:1.02rem;max-width:62ch}
+    details a{color:var(--fiordo)}
+    .banda{border-top:1px solid var(--linea-clara)}
+    .cierre{padding:62px 0}
+    .cierre h2{max-width:26ch}
+    footer{border-top:1px solid var(--linea-clara);padding:32px 0;background:var(--nieve)}
+    .foot-inner{max-width:var(--ancho);margin:0 auto;padding:0 24px;display:flex;flex-wrap:wrap;gap:18px;align-items:center;justify-content:space-between}
+    .foot-inner p{font-family:var(--sg);font-size:.78rem;color:var(--fiordo)}
+    .footer-links{display:flex;flex-wrap:wrap;gap:20px}
+    .footer-links a{font-family:var(--sg);font-size:.82rem;color:var(--fiordo);text-decoration:none;background-image:linear-gradient(currentColor,currentColor);background-size:0% 1px;background-repeat:no-repeat;background-position:left bottom;transition:background-size .25s ease,color .2s ease}
+    .footer-links a:hover{background-size:100% 1px;color:var(--noche)}
+    .reveal{transition:opacity .8s var(--ease),transform .8s var(--ease);transition-delay:var(--d,0s)}
+    .js .reveal{opacity:0;transform:translateY(20px)}
+    .js .reveal.visible{opacity:1;transform:none}
+    @media (max-width:640px){
+      section{padding:52px 0}
+      .hero{padding-top:38px;padding-bottom:44px}
+      .head-nav{gap:14px}
+      .head-nav a{font-size:.78rem;padding:11px 0}
+      .marca span{font-size:.82rem}
+      .larsito-caja{padding:22px}
+      .burbuja{max-width:100%}
+      .hero-prueba{padding:20px 18px;border-radius:15px}.prueba-cab{align-items:flex-start}.frase-opcion{font-size:.93rem}
+      .ciclo{grid-template-columns:1fr;gap:24px}.ciclo-paso{display:grid;grid-template-columns:44px 1fr;column-gap:10px}.ciclo-paso::before{display:none}.ciclo-paso .num{grid-row:1 / span 2}.ciclo-paso h3{padding-top:2px}.ciclo-paso p{grid-column:2}
+      .footer-links a{padding:9px 0}
+    }
+    @media (prefers-reduced-motion:reduce){
+      html{scroll-behavior:auto}
+      .cielo::before{animation:none}
+      .js .reveal{opacity:1;transform:none;transition:none}
+      .js .reveal mark.marcado{background-size:100% 100%;transition:none}
+      .cta:hover{transform:none}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="head-inner">
+      <a class="marca" href="/norsk/" aria-label="NEXO NORSK, inicio">
+        <svg viewBox="0 0 800 800" aria-hidden="true">
+          <path d="M223 532 L223 298 L320 402 L320 265" fill="none" stroke="#2C5A72" stroke-opacity=".45" stroke-width="34" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M478 532 L478 264 L577 398 L577 532" fill="none" stroke="#2C5A72" stroke-width="34" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>NEXO <b>NORSK</b></span>
+      </a>
+      <nav class="head-nav" aria-label="Secciones">
+        <a href="/norsk/" aria-current="page">Norsk</a>
+        <a href="/pass/">Ciudadanía</a>
+        <a href="https://www.nexonoruega.com">Nexo Noruega</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="cielo" aria-hidden="true"></div>
+      <div class="wrap">
+        <p class="kicker caesar reveal">NEXO NORSK · NORUEGO DESDE CERO HASTA A2</p>
+        <h1 class="reveal" style="--d:.08s">Tu primera frase en noruego, <mark class="marcado">hoy mismo.</mark></h1>
+        <p class="sub reveal" style="--d:.16s">Para hispanohablantes que no saben nada de noruego. Lecciones de 15 a 20 minutos: escuchas, respondes, entiendes una corrección concreta y lo repites con datos nuevos. Termina justo donde empieza el curso de A2 a B1.</p>
+        <div class="botones reveal" style="--d:.24s">
+          <a class="cta" href="/norsk/curso/?ruta=norsk-desde-cero-a2#PREA1-U02-L01">Probar una lección gratis</a>
+          <a class="cta ghost" href="#recorrido">Ver el recorrido</a>
+        </div>
+        <p class="microcopy reveal" style="--d:.28s">Sin registro. La muestra abre dos lecciones enteras de la unidad piloto.</p>
+        <div id="pruebaRapida" class="hero-prueba reveal" style="--d:.32s">
+          <div class="prueba-cab"><span>Prueba 20 segundos</span><span>Primer contacto · deletrear</span></div>
+          <h2>Te preguntan «Sa du U eller O?». Has dicho «U». ¿Qué respondes?</h2>
+          <p>Elige antes de mirar ninguna explicación.</p>
+          <div class="prueba-opciones" role="group" aria-label="Elige la respuesta">
+            <button class="frase-opcion" type="button" data-prueba="mal" aria-pressed="false"><span class="letra">A</span><span lang="nb">Kan du stave det?</span></button>
+            <button class="frase-opcion" type="button" data-prueba="bien" aria-pressed="false"><span class="letra">B</span><span lang="nb">U. Ja, det stemmer.</span></button>
+          </div>
+          <div id="feedbackRapido" class="feedback-rapido" aria-live="polite" tabindex="-1" hidden>
+            <p class="veredicto"></p>
+            <p class="explicacion-rapida"></p>
+            <a href="/norsk/curso/?ruta=norsk-desde-cero-a2#PREA1-U02-L02">Hacer la lección entera</a>
+          </div>
+        </div>
+        <p class="estado-curso reveal" style="--d:.36s"><strong>Venta cerrada</strong><span>Muestra abierta · recorrido en construcción</span></p>
+      </div>
+    </section>
+
+    <section class="banda" id="recorrido">
+      <div class="wrap">
+        <p class="kicker reveal">El recorrido</p>
+        <h2 class="reveal" style="--d:.08s">Cuatro zonas. Una lección cada vez.</h2>
+        <p class="parrafo reveal" style="--d:.14s">Puedes entrar por donde estés: la app te propone un salto corto si ya sabes presentarte o si ya te defiendes en lo cotidiano. Nadie te obliga a empezar por el principio ni a hacer un examen largo.</p>
+        <div class="zonas">
+          <article class="zona reveal" style="--d:.18s"><span class="num">00</span><h3>Primer contacto</h3><p>Sonidos y letras que cambian el sentido, presentarte, deletrear, números, horas y pedir que repitan. Reconocer antes que producir.</p><span class="cuenta">8 lecciones</span></article>
+          <article class="zona reveal" style="--d:.24s"><span class="num">01</span><h3>A1</h3><p>Tu día, tu casa, comprar, moverte, pedir ayuda, el primer día de trabajo y quedar con alguien. Con audio en cada escena.</p><span class="cuenta">16 lecciones</span></article>
+          <article class="zona reveal" style="--d:.3s"><span class="num">02</span><h3>A2</h3><p>Contar lo que pasó y lo que viene, vivienda, trabajo, consulta, escuela, servicios y entrar en una conversación.</p><span class="cuenta">24 lecciones</span></article>
+          <article class="zona reveal" style="--d:.36s"><span class="num">03</span><h3>Puente hacia el curso A2→B1</h3><p>Doce a quince minutos que te dicen, mecanismo a mecanismo, si puedes abrir M01 y qué conviene repasar antes.</p><span class="cuenta">1 comprobación</span></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="banda" id="metodo">
+      <div class="wrap">
+        <p class="kicker reveal">Cómo se aprende aquí</p>
+        <h2 class="reveal" style="--d:.08s">Responde. Repara. Repite.</h2>
+        <p class="parrafo reveal" style="--d:.14s">La explicación llega después de que lo hayas intentado. La corrección no dice «mal»: dice qué difiere, dónde, qué regla lo explica, qué conservar y qué cambiar.</p>
+        <div class="ciclo" aria-label="Los tres movimientos de una sesión">
+          <article class="ciclo-paso reveal" style="--d:.18s"><span class="num">01</span><h3>Responde</h3><p>Escucha, elige, ordena, completa o di la frase sin ver el modelo.</p></article>
+          <article class="ciclo-paso reveal" style="--d:.24s"><span class="num">02</span><h3>Repara</h3><p>La corrección localiza la diferencia y la regla que la provoca.</p></article>
+          <article class="ciclo-paso reveal" style="--d:.3s"><span class="num">03</span><h3>Repite</h3><p>La misma función con datos nuevos, sin copiar.</p></article>
+        </div>
+        <p class="principio reveal" style="--d:.36s">Lo que fallas vuelve a los 1, 3, 7 y 14 días. Tú solo ves la siguiente acción.</p>
+      </div>
+    </section>
+
+    <section class="banda" id="larsito">
+      <div class="wrap">
+        <p class="kicker reveal">Larsito desde la primera lección</p>
+        <h2 class="reveal" style="--d:.08s">Muy despacio, con pista en castellano si te quedas en blanco.</h2>
+        <div class="larsito-caja reveal" style="--d:.2s">
+          <p class="eti">Primer contacto</p>
+          <h3>Tres preguntas. Tres bloques. Nada más.</h3>
+          <p class="lede">En este nivel Larsito reconoce solo las respuestas preparadas de cada turno. No analiza tu pronunciación ni inventa correcciones.</p>
+          <div class="chat" aria-label="Ejemplo de conversación con Larsito">
+            <div class="burbuja lars"><p class="quien">Larsito</p><p class="no" lang="nb">Hei. Jeg heter Amir. Hva heter du?</p><p class="es">Hola. Me llamo Amir. ¿Cómo te llamas?</p></div>
+            <div class="burbuja tu"><p class="quien">Tú</p><p class="no" lang="nb">Jeg heter Lucía.</p></div>
+            <div class="burbuja lars"><p class="quien">Larsito</p><p class="no" lang="nb">Hvor kommer du fra?</p><p class="es">¿De dónde vienes? Pista: el país va detrás de «Jeg kommer fra…».</p></div>
+          </div>
+          <p class="larsito-pie"><b>Datos ficticios siempre.</b> Usa la tarjeta de la lección, nunca los tuyos.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="banda" id="familia">
+      <div class="wrap">
+        <p class="kicker reveal">Tres formas de entrar</p>
+        <h2 class="reveal" style="--d:.08s">Un mismo método, tres productos.</h2>
+        <div class="familia">
+          <article class="producto actual reveal" style="--d:.16s"><h3>Noruego desde cero hasta A2</h3><p>Este recorrido. Termina en el punto exacto donde empieza el siguiente.</p></article>
+          <article class="producto reveal" style="--d:.22s"><h3>Noruego de A2 a B1</h3><p>Los 16 mecanismos que separan A2 de B1, entrenamiento oral y preparación de la Norskprøven. <a href="/norsk/">Ver el curso</a></p></article>
+          <article class="producto reveal" style="--d:.28s"><h3>Ruta completa desde cero hasta B1</h3><p>Los dos recorridos, unidos. No es un tercer curso: es el camino entero con un solo progreso. <a href="/norsk/ruta-completa/">Ver la ruta completa</a></p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="banda">
+      <div class="wrap">
+        <p class="kicker reveal">Preguntas rápidas</p>
+        <div class="faq reveal" style="--d:.1s">
+          <details><summary>¿De verdad no necesito saber nada?</summary><p>Nada de noruego. Sí necesitas leer y escribir en castellano con el alfabeto latino. La primera zona enseña los sonidos y las letras antes de pedirte una frase.</p></details>
+          <details><summary>¿Qué significa «A2 funcional»?</summary><p>Que resuelves tareas cotidianas conocidas con lenguaje sencillo aunque cometas errores: contar lo que hiciste, pedir cita, reclamar, invitar, entender un aviso. No es un certificado ni un resultado de la Norskprøven.</p></details>
+          <details><summary>¿Hay audio?</summary><p>Sí, grabado con voces sintéticas en noruego normalizado del este del país y revisado pieza a pieza. En la muestra, mientras el curso no está abierto, la app usa la voz en noruego del navegador y lo dice cuando lo hace.</p></details>
+          <details><summary>¿Cuándo abre y cuánto cuesta?</summary><p>La venta sigue cerrada. Cuando el recorrido termine su revisión, las condiciones aparecerán aquí antes de que puedas pagar.</p></details>
+        </div>
+      </div>
+    </section>
+
+    <section class="cierre banda">
+      <div class="cielo" aria-hidden="true"></div>
+      <div class="wrap">
+        <h2 class="reveal">Haz una lección. Decide después.</h2>
+        <p class="sub reveal" style="--d:.08s">La muestra no pide registro. Si te sirve, puedes dejar tu correo para saber cuándo abre.</p>
+        <div class="botones reveal" style="--d:.14s">
+          <a class="cta" href="/norsk/curso/?ruta=norsk-desde-cero-a2#PREA1-U02-L01">Probar una lección gratis</a>
+          <a class="cta ghost" href="https://nexonoruega.substack.com/subscribe?utm_source=nexonoruega.com&utm_medium=web&utm_campaign=norsk-desde-cero">Avísame cuando abra</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="foot-inner">
+      <p>Nexo Noruega no está afiliado a HK-dir, a UDI ni a ningún organismo oficial noruego.</p>
+      <nav class="footer-links" aria-label="Enlaces">
+        <a href="https://www.nexonoruega.com">Inicio</a>
+        <a href="/norsk/">Norsk</a>
+        <a href="/pass/">Ciudadanía</a>
+        <a href="/pass/condiciones/">Condiciones</a>
+        <a href="/pass/privacidad/">Privacidad</a>
+        <a href="https://nexonoruega.substack.com/?utm_source=nexonoruega.com&utm_medium=web&utm_campaign=norsk-desde-cero">Newsletter</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+  (function () {
+    "use strict";
+    document.documentElement.classList.add("js");
+    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var observados = document.querySelectorAll(".reveal");
+    if ("IntersectionObserver" in window && !reduce) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("visible"); io.unobserve(e.target); } });
+      }, { threshold: 0.18 });
+      observados.forEach(function (el) { io.observe(el); });
+      setTimeout(function () { observados.forEach(function (el) { el.classList.add("visible"); }); }, 6000);
+    } else {
+      observados.forEach(function (el) { el.classList.add("visible"); });
+    }
+    var pruebaRapida = document.getElementById("pruebaRapida");
+    var feedbackRapido = document.getElementById("feedbackRapido");
+    document.querySelectorAll("[data-prueba]").forEach(function (boton) {
+      boton.addEventListener("click", function () {
+        if (!pruebaRapida || !feedbackRapido) return;
+        var acierto = boton.getAttribute("data-prueba") === "bien";
+        pruebaRapida.setAttribute("data-estado", acierto ? "bien" : "mal");
+        document.querySelectorAll("[data-prueba]").forEach(function (otra) { otra.setAttribute("aria-pressed", otra === boton ? "true" : "false"); });
+        feedbackRapido.querySelector(".veredicto").textContent = acierto ? "Sí. Confirmas la letra y cierras." : "Eso pide que deletreen otra vez.";
+        feedbackRapido.querySelector(".explicacion-rapida").textContent = acierto
+          ? "Te preguntan entre dos letras: respondes con la letra y «Ja, det stemmer» confirma que es correcto."
+          : "«Kan du stave det?» es lo que dice quien necesita el deletreo. Tú ya lo has hecho: responde con la letra, «U», y confirma con «Ja, det stemmer».";
+        feedbackRapido.hidden = false;
+      });
+    });
+  })();
+  </script>
+</body>
+</html>

@@ -148,6 +148,35 @@ export async function compraActiva(compraId) {
   return c;
 }
 
+// Derecho de acceso de una compra a una ruta del curso (migración 0008, columna
+// norsk_compras.rutas). Regla de compatibilidad: una compra sin rutas declaradas
+// (todas las anteriores a la 0008) entra donde entraba, que es la Ruta B1; el
+// recorrido desde cero exige que la compra lo lleve escrito, o que lleve
+// "completa" (la ruta completa desde cero hasta B1). Si la columna aún no existe,
+// la consulta falla y la ruta nueva queda cerrada: fallo cerrado, nunca abierto.
+export const RUTAS_CURSO = Object.freeze(["norskproven-b1", "norsk-desde-cero-a2"]);
+export const RUTA_POR_DEFECTO = "norskproven-b1";
+
+export function rutaAutorizada(rutasCompra, ruta) {
+  const lista = Array.isArray(rutasCompra) ? rutasCompra : [];
+  if (lista.includes("completa")) return true;
+  if (lista.includes(ruta)) return true;
+  return lista.length === 0 && ruta === RUTA_POR_DEFECTO;
+}
+
+export async function accesoARuta(compraId, ruta) {
+  if (!RUTAS_CURSO.includes(ruta)) return false;
+  let rows;
+  try {
+    rows = await sbSelect(`norsk_compras?id=eq.${encodeURIComponent(compraId)}&select=rutas`);
+  } catch (e) {
+    // Sin columna rutas (0008 no aplicada) solo se puede seguir sirviendo la B1.
+    return ruta === RUTA_POR_DEFECTO;
+  }
+  if (!rows || !rows.length) return false;
+  return rutaAutorizada(rows[0].rutas, ruta);
+}
+
 // Rate limit persistente vía RPC (ver SQL en pass/PASS_SETUP.md). Devuelve el contador del día
 // para ese tipo. Tipos separados: "api" (práctica/simulacros) y "reenvio" (magic links),
 // para que reenviar un enlace nunca queme la cuota de estudio ni al revés.

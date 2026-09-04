@@ -1,6 +1,9 @@
 // Sirve el curso Norskprøven B1 a compradores con acceso activo. El muro del curso.
-// GET ?modo=indice                -> lista de piezas sin cuerpo (sin gastar cuota)
-// GET ?modo=pieza&codigo=M01      -> una pieza entera, con sus secciones en HTML
+// GET ?modo=indice[&ruta=…]              -> lista de piezas sin cuerpo (sin gastar cuota)
+// GET ?modo=pieza&codigo=M01[&ruta=…]    -> una pieza entera, con sus secciones en HTML
+//
+// ruta: norskproven-b1 (por defecto) o norsk-desde-cero-a2. Las dos viven en la
+// misma tabla (migración 0008) y la compra tiene que dar derecho a esa ruta.
 //
 // Nunca existe un endpoint que devuelva el curso entero: una pieza por llamada, y
 // rate limit persistente de 300 peticiones/día por compra (tabla norsk_uso, tipo
@@ -9,7 +12,7 @@
 // La demo pública del curso no pasa por aquí: vive en data/norsk-curso-demo.json y
 // la sirve el estático, porque es lo único que puede leerse sin haber pagado.
 
-import { readSessionCookie, compraActiva, tickUso, sbSelect } from "./_norsk_lib.js";
+import { readSessionCookie, compraActiva, tickUso, sbSelect, accesoARuta, RUTAS_CURSO, RUTA_POR_DEFECTO } from "./_norsk_lib.js";
 
 // Tope diario por compra para el tipo "curso". Contador propio, separado del de
 // práctica ("api") y del de Larsito: leer una lección no debe quemar la cuota de
@@ -37,13 +40,33 @@ export default async function handler(req, res) {
 
   const q = req.query || {};
   const modo = q.modo === "pieza" ? "pieza" : "indice";
+  const ruta = q.ruta ? String(q.ruta) : RUTA_POR_DEFECTO;
+  if (!RUTAS_CURSO.includes(ruta)) { res.status(400).json({ ok: false, error: "ruta" }); return; }
+  let autorizada = false;
+  try { autorizada = await accesoARuta(compra.id, ruta); } catch (e) {
+    console.error("norsk-curso acceso a ruta", e);
+    res.status(500).json({ ok: false, error: "interno" });
+    return;
+  }
+  if (!autorizada) { res.status(403).json({ ok: false, error: "ruta_no_incluida", ruta }); return; }
+  const filtroRuta = `ruta=eq.${encodeURIComponent(ruta)}`;
+  // Si la migración 0008 aún no está aplicada, la columna ruta no existe y
+  // PostgREST responde 400. En ese caso, y solo para la ruta por defecto, se
+  // repite la consulta sin el filtro: la B1 sigue sirviéndose como hasta ahora.
+  async function selectCurso(query) {
+    try { return await sbSelect(`norsk_curso?${filtroRuta}&${query}`); }
+    catch (e) {
+      if (ruta === RUTA_POR_DEFECTO && /\b400\b/.test(String(e && e.message))) return sbSelect(`norsk_curso?${query}`);
+      throw e;
+    }
+  }
 
   // El índice no gasta cuota: la app lo pide al arrancar y cada vez que vuelve al
   // menú, igual que el modo=ping de norsk-preguntas.
   if (modo === "indice") {
     try {
-      const rows = await sbSelect(`norsk_curso?activa=is.true&select=${CAMPOS_INDICE}&order=orden.asc`);
-      res.status(200).json({ ok: true, modo, piezas: rows || [] });
+      const rows = await selectCurso(`activa=is.true&select=${CAMPOS_INDICE}&order=orden.asc`);
+      res.status(200).json({ ok: true, modo, ruta, piezas: rows || [] });
     } catch (e) {
       console.error("norsk-curso indice", e);
       res.status(500).json({ ok: false, error: "interno" });
@@ -73,10 +96,10 @@ export default async function handler(req, res) {
   }
 
   try {
-    const rows = await sbSelect(
-      `norsk_curso?codigo=eq.${encodeURIComponent(codigo)}&activa=is.true&select=${CAMPOS_PIEZA}&limit=1`);
+    const rows = await selectCurso(
+      `codigo=eq.${encodeURIComponent(codigo)}&activa=is.true&select=${CAMPOS_PIEZA}&limit=1`);
     if (!rows || !rows.length) { res.status(404).json({ ok: false, error: "pieza" }); return; }
-    res.status(200).json({ ok: true, modo, pieza: rows[0] });
+    res.status(200).json({ ok: true, modo, ruta, pieza: rows[0] });
   } catch (e) {
     console.error("norsk-curso pieza", e);
     res.status(500).json({ ok: false, error: "interno" });

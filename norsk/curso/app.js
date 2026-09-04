@@ -1,18 +1,34 @@
-// App del curso Norskprøven B1 de NEXO NORSK.
+// App de los cursos de NEXO NORSK: la Ruta Norskprøven B1 y «Noruego desde cero
+// hasta A2». Una sola app, una ruta activa (?ruta=…), un progreso por ruta en
+// este navegador.
 //
 // Dos modos:
-//   - Demo pública: muestra el diagnóstico, M01 y el mapa del curso.
+//   - Demo pública: muestra las piezas abiertas y el mapa del curso.
 //   - Con acceso: pide el índice y cada pieza al servidor protegido.
 //
 // El progreso se guarda solo en este navegador.
 (function () {
   "use strict";
 
-  var DEMO = "/data/norsk-curso-demo.json";
-  var API = "/api/norsk-curso/";
+  // Las dos rutas comparten app, endpoint y tabla. La B1 sigue siendo la ruta por
+  // defecto: sin ?ruta= la app se comporta como hasta ahora.
+  var RUTAS = {
+    "norskproven-b1": { clave: "nexo_curso_v1", demo: "/data/norsk-curso-demo.json", cuaderno: "/data/norsk-cuaderno.json", muestra: "/norsk/curso/muestra/NEXO-NORSK_Cuaderno-B1_Muestra.pdf", kicker: "Curso B1", nombre: "Noruego de A2 a B1", landing: "/norsk/", titulo: "Curso B1 · NEXO NORSK", inventario: "21 actuaciones orales · 16 mecanismos B1 · 4 destrezas conectadas · más de 2.300 ejercicios opcionales" },
+    "norsk-desde-cero-a2": { clave: "nexo_curso_cero_v1", demo: "/data/norsk-desde-cero-demo.json", cuaderno: null, muestra: null, kicker: "Noruego desde cero hasta A2", nombre: "Noruego desde cero hasta A2", landing: "/norsk/desde-cero/", titulo: "Noruego desde cero hasta A2 · NEXO NORSK", inventario: "4 zonas · 49 lecciones de 15 a 20 minutos · puente hacia el curso A2→B1 · Larsito desde la primera lección" },
+  };
+  var RUTA = (function () {
+    var m = /[?&]ruta=([a-z0-9-]+)/.exec(window.location.search || "");
+    return m && RUTAS[m[1]] ? m[1] : "norskproven-b1";
+  })();
+  var CFG = RUTAS[RUTA];
+  var ES_CERO = RUTA === "norsk-desde-cero-a2";
+  var DEMO = CFG.demo;
+  var API_Q = "/api/norsk-curso/?ruta=" + encodeURIComponent(RUTA) + "&";
   var PRACTICA_META = "/data/norsk-practica-meta.json";
   var practicaMeta = null;
-  var CLAVE = "nexo_curso_v1";
+  var CLAVE = CFG.clave;
+  var QUERY_RUTA = "?ruta=" + encodeURIComponent(RUTA);
+  document.title = CFG.titulo;
 
   var app = document.getElementById("app");
   var chip = document.getElementById("estado");
@@ -138,8 +154,32 @@
 
   function etiquetaCodigo(pieza) {
     if (Object.prototype.hasOwnProperty.call(ETIQUETAS_CODIGO, pieza.codigo)) return ETIQUETAS_CODIGO[pieza.codigo];
+    var l = /^(?:PREA1|A1|A2)-U(\d\d)-L(\d\d)$/.exec(pieza.codigo);
+    if (l) return "U" + l[1] + " · L" + l[2];
+    if (/^PUENTE-/.test(pieza.codigo)) return "Puente";
+    if (/^SALTO-/.test(pieza.codigo)) return "Salto";
     return pieza.codigo.replace(/_v.*/, "").slice(0, 12);
   }
+
+  // Zona de una pieza del recorrido desde cero, deducida del código: el índice
+  // protegido solo trae código, tipo, título y orden.
+  function zonaDe(pieza) {
+    if (pieza.zona) return pieza.zona;
+    if (pieza.meta && pieza.meta.zona) return pieza.meta.zona;
+    var c = String(pieza.codigo || "");
+    if (/^PREA1-/.test(c) || c === "SALTO-PREA1-A1") return "PREA1";
+    if (/^A1-/.test(c) || c === "SALTO-A1-A2") return "A1";
+    if (/^A2-/.test(c)) return "A2";
+    if (/^PUENTE-/.test(c)) return "PUENTE";
+    return "";
+  }
+  var ZONAS = {
+    PREA1: { titulo: "Primer contacto", nota: "Sonidos, letras, presentarte, deletrear, números, horas y pedir repetición. Reconocer antes que producir." },
+    A1: { titulo: "A1", nota: "Presentarte, tu día, tu casa, comprar, moverte, pedir ayuda, el primer día de trabajo y quedar." },
+    A2: { titulo: "A2", nota: "Contar lo que pasó y lo que viene, vivienda, trabajo, consulta, escuela, servicios y entrar en la conversación." },
+    PUENTE: { titulo: "Puente hacia el curso A2→B1", nota: "Doce a quince minutos para saber si puedes abrir M01 y qué conviene repasar antes." },
+  };
+  var ORDEN_ZONAS = ["PREA1", "A1", "A2", "PUENTE"];
 
   var TIPOS = {
     diagnostico: { titulo: "Diagnóstico", nota: "Localiza qué destreza necesita trabajo antes de abrir más material." },
@@ -151,6 +191,9 @@
     anexo: { titulo: "Banco de expresiones", nota: "Expresiones de UTTRYKK colocadas donde activan cada mecanismo." },
     simulacro: { titulo: "Simulacros", nota: "La prueba completa cuando ya toca medir el recorrido entero." },
     larsito: { titulo: "Practicar con Larsito", nota: "El compañero de conversación del entrenamiento oral: conversación, segundo intento e informe." },
+    leccion: { titulo: "Lección", nota: "Una sesión de 15 a 20 minutos: responde, repara, repite y cierra." },
+    puente: { titulo: "Puente", nota: "Comprueba si puedes abrir el curso A2→B1." },
+    salto: { titulo: "Salto", nota: "Entra en la zona siguiente sin recorrer la anterior." },
   };
 
   var ORDEN_TIPOS = ["diagnostico", "muntlig", "mecanismo", "lytt", "les", "skriv", "anexo", "simulacro"];
@@ -289,7 +332,7 @@
     copia.appendChild(el("p", null, "Larsito convierte cada actuación en conversación y feedback, sin guardar el contenido de tu respuesta."));
     franja.appendChild(copia);
     var a = el("a", null, "Practicar con Larsito →");
-    a.href = "/norsk/larsito/";
+    a.href = "/norsk/larsito/" + (ES_CERO ? QUERY_RUTA : "");
     franja.appendChild(a);
     return franja;
   }
@@ -299,9 +342,9 @@
   // Con acceso, cada tomo enlaza a /api/norsk-cuaderno/?tomo=N, que comprueba la
   // compra y redirige a una URL firmada de quince minutos. En la demo no se llama
   // a nada: se enseña lo que hay y se ofrece la muestra gratuita.
-  var CUADERNO_META = "/data/norsk-cuaderno.json";
-  var CUADERNO_API = "/api/norsk-cuaderno/";
-  var CUADERNO_MUESTRA = "/norsk/curso/muestra/NEXO-NORSK_Cuaderno-B1_Muestra.pdf";
+  var CUADERNO_META = CFG.cuaderno;
+  var CUADERNO_API = "/api/norsk-cuaderno/" + QUERY_RUTA + "&";
+  var CUADERNO_MUESTRA = CFG.muestra;
 
   function renderCuaderno() {
     var sec = el("section", "cuaderno");
@@ -314,10 +357,14 @@
     sec.appendChild(cab);
     var lista = el("div", "cuaderno-lista");
     sec.appendChild(lista);
-    if (!conAcceso) {
+    if (!conAcceso && CUADERNO_MUESTRA) {
       var m = el("a", "btn cuaderno-muestra", "Descargar la muestra gratis (PDF)");
       m.href = CUADERNO_MUESTRA; m.setAttribute("download", "");
       sec.appendChild(m);
+    }
+    if (!CUADERNO_META) {
+      lista.appendChild(el("p", "cuaderno-intro", "El cuaderno en PDF de este recorrido está en preparación. Cuando exista, aparecerá aquí tomo a tomo."));
+      return sec;
     }
     fetch(CUADERNO_META, { credentials: "same-origin" })
       .then(function (r) { return r.ok ? r.json() : null; })
@@ -331,7 +378,7 @@
           txt.appendChild(el("small", null, t.que + " · " + t.paginas + " páginas"));
           fila.appendChild(txt);
           if (conAcceso) {
-            fila.href = CUADERNO_API + "?tomo=" + t.n;
+            fila.href = CUADERNO_API + "tomo=" + t.n;
             fila.setAttribute("rel", "nofollow");
             fila.appendChild(el("span", "cuaderno-accion", "Descargar"));
           } else {
@@ -340,7 +387,9 @@
           lista.appendChild(fila);
         });
       })
-      .catch(function () { /* sin metadatos no se pinta la lista; el bloque sigue teniendo sentido */ });
+      .catch(function () {
+        if (ES_CERO) lista.appendChild(el("p", "cuaderno-intro", "El cuaderno en PDF de este recorrido está en preparación. Cuando exista, aparecerá aquí tomo a tomo."));
+      });
     return sec;
   }
 
@@ -363,6 +412,9 @@
   function motivoSiguiente(pieza) {
     if (!pieza) return "Has completado lo que tienes abierto. Puedes reforzar un mecanismo o entrar en la biblioteca.";
     if (estado.ultimaPieza === pieza.codigo) return "Retoma donde lo dejaste. Tu progreso y la última sección siguen en este navegador.";
+    if (pieza.tipo === "leccion") return pieza.resumen || "Responde antes de leer, entiende una corrección y vuelve a usarla con datos nuevos.";
+    if (pieza.tipo === "puente") return "Doce a quince minutos. Te dice, mecanismo a mecanismo, si puedes abrir M01 y qué repasar.";
+    if (pieza.tipo === "salto") return "Ocho o doce pasos para entrar directamente en la zona siguiente.";
     if (pieza.tipo === "mecanismo") return "Lee solo lo necesario, haz una tanda interactiva y termina con una segunda respuesta.";
     if (pieza.codigo === "KIT_ORAL_21_JORNADAS") return "Ya tienes los mecanismos. Ahora toca sostener respuestas completas en situaciones diferentes.";
     if (pieza.codigo === "SIMULACROS_ORAL") return "Junta lo trabajado y comprueba cómo respondes con el formato y el tiempo de la prueba.";
@@ -412,14 +464,16 @@
     var practica = el("article", "herramienta");
     practica.appendChild(el("p", "eti", "Banco interactivo"));
     var tituloPractica = el("h3");
-    var cantidad = el("span", null, practicaMeta && practicaMeta.ejercicios_totales ? formatoNumero(practicaMeta.ejercicios_totales) : "Más de 2.300");
+    var cantidad = el("span", null, ES_CERO ? formatoNumero(totalPracticaCero()) : (practicaMeta && practicaMeta.ejercicios_totales ? formatoNumero(practicaMeta.ejercicios_totales) : "Más de 2.300"));
     cantidad.setAttribute("data-practica-total", "");
     tituloPractica.appendChild(cantidad);
     tituloPractica.appendChild(document.createTextNode(" ejercicios opcionales"));
     practica.appendChild(tituloPractica);
-    practica.appendChild(el("p", null, "Arrastra, ordena, relaciona, completa, elige y escribe. Los fallos se pueden guardar para el repaso de 1, 3, 7 y 14 días."));
-    var mecanismo = proxima && proxima.tipo === "mecanismo" ? proxima : (indice.filter(function (p) {
-      return p.tipo === "mecanismo" && p.abierta && !estado.hechas[p.codigo];
+    practica.appendChild(el("p", null, ES_CERO
+      ? "Cada lección lleva su práctica extra opcional, hecha con sus propias frases: escuchar, ordenar, completar, emparejar, dictado y grabarte. Lo que falles vuelve a los 1, 3, 7 y 14 días."
+      : "Arrastra, ordena, relaciona, completa, elige y escribe. Los fallos se pueden guardar para el repaso de 1, 3, 7 y 14 días."));
+    var mecanismo = proxima && (proxima.tipo === "mecanismo" || proxima.tipo === "leccion") ? proxima : (indice.filter(function (p) {
+      return (p.tipo === "mecanismo" || p.tipo === "leccion") && p.abierta && !estado.hechas[p.codigo];
     })[0] || piezaEnIndice("M01"));
     if (mecanismo && mecanismo.abierta) {
       var boton = el("button", "btn ghost", "Abrir una práctica");
@@ -431,9 +485,11 @@
     var larsito = el("article", "herramienta");
     larsito.appendChild(el("p", "eti", "Práctica oral"));
     larsito.appendChild(el("h3", null, "Habla con Larsito"));
-    larsito.appendChild(el("p", null, "Lleva el mecanismo a una conversación, recibe una prioridad y vuelve a responder. La demo incluye seis situaciones y seis ejercicios de escucha."));
+    larsito.appendChild(el("p", null, ES_CERO
+      ? "Desde la primera lección: Larsito te hace las preguntas muy despacio, te da una pista en castellano si te quedas en blanco y solo reconoce las respuestas preparadas. No analiza tu pronunciación."
+      : "Lleva el mecanismo a una conversación, recibe una prioridad y vuelve a responder. La demo incluye seis situaciones y seis ejercicios de escucha."));
     var enlace = el("a", "btn", "Abrir Larsito");
-    enlace.href = "/norsk/larsito/";
+    enlace.href = "/norsk/larsito/" + (ES_CERO ? QUERY_RUTA : "");
     larsito.appendChild(enlace);
     grid.appendChild(larsito);
 
@@ -448,7 +504,7 @@
     var resumen = document.createElement("summary");
     var copia = el("div");
     copia.appendChild(el("p", "eti", "Biblioteca completa"));
-    copia.appendChild(el("h2", null, "Explorar " + total + " piezas y los seis tomos"));
+    copia.appendChild(el("h2", null, ES_CERO ? "Explorar las " + total + " piezas del recorrido" : "Explorar " + total + " piezas y los seis tomos"));
     resumen.appendChild(copia);
     resumen.appendChild(el("span", "abrir", "Abrir"));
     detalles.appendChild(resumen);
@@ -465,7 +521,7 @@
 
     var paso = el("div", "step step-indice");
     var hero = el("section", "curso-hero");
-    hero.appendChild(el("p", "kicker caesar", "Curso B1"));
+    hero.appendChild(el("p", "kicker caesar", CFG.kicker));
 
     var h1 = el("h1");
     h1.appendChild(document.createTextNode("Abre tu "));
@@ -476,12 +532,21 @@
 
     hero.appendChild(el("p", "intro", conAcceso
       ? "Tu trabajo aquí no es recorrer un índice. Haz una sesión: responde, repara, repite y cierra."
-      : "Empieza con el primer mecanismo completo. Si no sabes qué necesitas reforzar, el diagnóstico opcional está en la biblioteca."));
+      : (ES_CERO
+        ? "Empieza por una lección abierta de la unidad piloto: escuchas, respondes, entiendes una corrección y vuelves a intentarlo. El resto del recorrido se abre con el curso."
+        : "Empieza con el primer mecanismo completo. Si no sabes qué necesitas reforzar, el diagnóstico opcional está en la biblioteca.")));
+    var otraRuta = ES_CERO ? "norskproven-b1" : "norsk-desde-cero-a2";
+    var cambio = el("p", "cambio-ruta");
+    cambio.appendChild(document.createTextNode("Estás en " + CFG.nombre + ". "));
+    var aCambio = el("a", null, "Ir a " + RUTAS[otraRuta].nombre);
+    aCambio.href = "/norsk/curso/?ruta=" + otraRuta;
+    cambio.appendChild(aCambio);
+    hero.appendChild(cambio);
 
     if (!conAcceso) {
       hero.appendChild(el("p", "nota-demo", "Muestra sin registro. El contenido bloqueado solo enseña su nombre; no expone el material de pago."));
     }
-    hero.appendChild(el("p", "curso-inventario", "21 actuaciones orales · 16 mecanismos B1 · 4 destrezas conectadas · más de 2.300 ejercicios opcionales"));
+    hero.appendChild(el("p", "curso-inventario", CFG.inventario));
     paso.appendChild(hero);
     requestAnimationFrame(pintarDatoPractica);
 
@@ -514,11 +579,16 @@
 
     var recorrido = el("div", "recorrido");
     var numeroBloque = 0;
-    ORDEN_TIPOS.forEach(function (tipo) {
-      var piezas = indice.filter(function (p) { return p.tipo === tipo; });
+    // La B1 se agrupa por tipo de material; el recorrido desde cero, por zona.
+    var grupos = ES_CERO
+      ? ORDEN_ZONAS.map(function (z) { return { clave: z, info: ZONAS[z], piezas: indice.filter(function (p) { return zonaDe(p) === z; }) }; })
+      : ORDEN_TIPOS.map(function (t) { return { clave: t, info: TIPOS[t] || { titulo: t, nota: "" }, piezas: indice.filter(function (p) { return p.tipo === t; }) }; });
+    grupos.forEach(function (grupo) {
+      var tipo = grupo.clave;
+      var piezas = grupo.piezas;
       if (!piezas.length) return;
       numeroBloque++;
-      var info = TIPOS[tipo] || { titulo: tipo, nota: "" };
+      var info = grupo.info;
 
       var bloque = el("section", "bloque bloque-" + tipo);
       var cab = el("div", "bloque-cab");
@@ -527,7 +597,7 @@
       tit.appendChild(el("h2", null, info.titulo));
       if (info.nota) tit.appendChild(el("p", null, info.nota));
       cab.appendChild(tit);
-      cab.appendChild(el("span", "cuenta", piezas.length === 1 ? "1 pieza" : piezas.length + " piezas"));
+      cab.appendChild(el("span", "cuenta", piezas.length === 1 ? (ES_CERO ? "1 lección" : "1 pieza") : piezas.length + (ES_CERO ? " lecciones" : " piezas")));
       bloque.appendChild(cab);
 
       var lista = el("div", "lista");
@@ -559,7 +629,7 @@
         lista.appendChild(b);
       });
       bloque.appendChild(lista);
-      if (tipo === "muntlig") bloque.appendChild(renderLarsito());
+      if (tipo === "muntlig" || (ES_CERO && tipo === "PREA1")) bloque.appendChild(renderLarsito());
       recorrido.appendChild(bloque);
     });
     paso.appendChild(renderBiblioteca(recorrido));
@@ -569,7 +639,7 @@
       cierre.appendChild(el("h2", null, "El curso completo todavía no está a la venta."));
       cierre.appendChild(el("p", null, "Cuando abra, se avisará por correo. Sin cuenta atrás y sin urgencia fabricada."));
       var aS = el("a", "btn", "Avísame cuando abra");
-      aS.href = "https://nexonoruega.substack.com/subscribe?utm_source=nexonoruega.com&utm_medium=web&utm_campaign=norsk-curso";
+      aS.href = "https://nexonoruega.substack.com/subscribe?utm_source=nexonoruega.com&utm_medium=web&utm_campaign=" + (ES_CERO ? "norsk-desde-cero" : "norsk-curso");
       cierre.appendChild(aS);
       paso.appendChild(cierre);
     }
@@ -598,7 +668,7 @@
       return error("Esta pieza pertenece al curso completo.");
     }
 
-    fetch(API + "?modo=pieza&codigo=" + encodeURIComponent(codigo), { credentials: "same-origin" })
+    fetch(API_Q + "modo=pieza&codigo=" + encodeURIComponent(codigo), { credentials: "same-origin" })
       .then(function (r) { return r.json(); })
       .then(function (d) {
         if (!d || !d.ok || !d.pieza) throw new Error(d && d.error ? d.error : "pieza");
@@ -618,7 +688,7 @@
     var enDemo = ((demo && demo.piezas) || []).filter(function (p) { return p.codigo === codigo; })[0];
     if (enDemo) { cache[codigo] = conTituloAlumno(enDemo); return Promise.resolve(cache[codigo]); }
     if (!conAcceso) return Promise.resolve(null);
-    return fetch(API + "?modo=pieza&codigo=" + encodeURIComponent(codigo), { credentials: "same-origin" })
+    return fetch(API_Q + "modo=pieza&codigo=" + encodeURIComponent(codigo), { credentials: "same-origin" })
       .then(function (r) { return r.json(); })
       .then(function (d) {
         if (!d || !d.ok || !d.pieza) return null;
@@ -631,12 +701,26 @@
   function formatoNumero(n) { return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, "."); }
 
   function totalPracticaDe(codigo) {
+    if (ES_CERO) {
+      var p = cache[codigo];
+      if (p && p.meta && Array.isArray(p.meta.ejercicios) && window.NexoPractica) { try { return window.NexoPractica.banco(p, null).opcionales.length; } catch (err) { return 0; } }
+      return practicaMeta && practicaMeta.por_ruta && practicaMeta.por_ruta[RUTA] && practicaMeta.por_ruta[RUTA][codigo] ? practicaMeta.por_ruta[RUTA][codigo] : 0;
+    }
     return practicaMeta && practicaMeta.por_pieza && practicaMeta.por_pieza[codigo] ? practicaMeta.por_pieza[codigo] : 0;
+  }
+
+  // Total de práctica extra de las piezas abiertas del recorrido desde cero (la demo no lleva metadatos por ruta).
+  function totalPracticaCero() {
+    if (practicaMeta && practicaMeta.por_ruta && practicaMeta.por_ruta[RUTA] && practicaMeta.por_ruta[RUTA].total) return practicaMeta.por_ruta[RUTA].total;
+    var n = 0;
+    Object.keys(cache).forEach(function (c) { n += totalPracticaDe(c); });
+    return n;
   }
 
   function pintarDatoPractica() {
     document.querySelectorAll("[data-practica-total]").forEach(function (n) {
-      if (practicaMeta && practicaMeta.ejercicios_totales) n.textContent = formatoNumero(practicaMeta.ejercicios_totales);
+      if (ES_CERO) n.textContent = formatoNumero(totalPracticaCero());
+      else if (practicaMeta && practicaMeta.ejercicios_totales) n.textContent = formatoNumero(practicaMeta.ejercicios_totales);
     });
     var datos = document.querySelector(".curso-datos");
     if (!datos || datos.querySelector(".dato-practica") || !practicaMeta || !practicaMeta.ejercicios_totales) return;
@@ -726,6 +810,137 @@
     });
   }
 
+  // ---------- Lección del recorrido desde cero ----------
+  // Orden fijo de la sesión: Responde (escena y primera acción), Repara, Bloques
+  // con voz, Practica (los pasos esenciales, en orden), Repite, Con Larsito, Cierre.
+  // La práctica extra y las soluciones quedan plegadas: solo si se piden.
+  function botonVozBloque(texto) {
+    var b = el("button", "btn ghost voz-bloque", "Escuchar");
+    b.type = "button";
+    b.setAttribute("aria-label", "Escuchar «" + texto + "» con la voz del navegador");
+    b.addEventListener("click", function () {
+      window.NexoPractica.pararAudio();
+      var v = window.NexoPractica.vozLocalNb();
+      if (!v) { b.disabled = true; b.textContent = "Sin voz"; return; }
+      var u = new SpeechSynthesisUtterance(texto);
+      u.voice = v; u.lang = v.lang; u.rate = 0.85;
+      speechSynthesis.speak(u);
+    });
+    return b;
+  }
+
+  function renderLeccion(pieza, secciones, lector) {
+    var porId = {};
+    secciones.forEach(function (s) { porId[s.id] = s; });
+    var P = window.NexoPractica;
+    var banco = P.banco(pieza, null);
+    var esenciales = banco.esenciales || [];
+    var deResponde = esenciales.filter(function (it) { return /#responde$/.test(String(it.fuente === "esencial" ? (pieza.meta.ejercicios.filter(function (e) { return e.id === it.id; })[0] || {}).fuente || "" : "")); });
+    var idsResponde = {};
+    deResponde.forEach(function (it) { idsResponde[it.id] = true; });
+    var dePractica = esenciales.filter(function (it) { return !idsResponde[it.id]; });
+
+    function seccionHtml(id, destino) {
+      var s = porId[id];
+      if (!s) return null;
+      var bloque = el("section", "lector-seccion seccion-" + id);
+      bloque.id = "apartado-" + id;
+      bloque.appendChild(el("h2", null, s.titulo));
+      var cuerpo = el("div", "seccion-cuerpo");
+      cuerpo.innerHTML = s.html || "";
+      bloque.appendChild(cuerpo);
+      (destino || lector).appendChild(bloque);
+      return bloque;
+    }
+    function sesion(items, kicker, encabezado, intro, destino) {
+      if (!items.length) return;
+      var hueco = el("div", "sesion-hueco");
+      destino.appendChild(hueco);
+      var opts = {
+        estado: estado, guardar: guardar, kicker: kicker, encabezado: encabezado, intro: intro,
+        alTerminar: function (registro) {
+          if (registro.sesion && registro.sesion.aciertos === registro.sesion.total && items === dePractica && !estado.hechas[pieza.codigo]) { estado.hechas[pieza.codigo] = true; guardar(); }
+        },
+      };
+      // montarEsenciales monta todos los esenciales; aquí se limita al subconjunto de esta parte.
+      var nodo = P.montarEsenciales(pieza, Object.assign({}, opts, { soloFalladas: items.map(function (it) { return it.id; }) }));
+      if (nodo) hueco.replaceWith(nodo); else hueco.remove();
+    }
+
+    var responde = seccionHtml("responde");
+    if (responde) sesion(deResponde, "Responde", "Escucha y responde antes de leer nada más", "Dos escuchas. No hace falta entenderlo todo: busca solo los datos que se piden.", responde);
+    seccionHtml("repara");
+    var bloques = seccionHtml("bloques");
+    if (bloques) {
+      // La columna «Audio» de la tabla lleva ids de grabación; en la app cada bloque se puede oír con la voz local del navegador.
+      var hayVoz = !!P.vozLocalNb();
+      var filas = bloques.querySelectorAll("tbody tr");
+      Array.prototype.forEach.call(filas, function (tr) {
+        var celdas = tr.querySelectorAll("td");
+        if (celdas.length < 3) return;
+        var codigo = celdas[0].querySelector("code");
+        if (!codigo) return;
+        var texto = codigo.textContent.replace(/\s*…\s*$/, "").trim();
+        celdas[2].textContent = "";
+        if (hayVoz && texto) celdas[2].appendChild(botonVozBloque(texto));
+        else celdas[2].appendChild(el("span", "sin-voz", "con el curso"));
+      });
+      var th = bloques.querySelectorAll("thead th");
+      Array.prototype.forEach.call(th, function (h) { if (/^Audio$/i.test(h.textContent.trim())) h.textContent = hayVoz ? "Oír" : "Audio"; });
+      bloques.appendChild(el("p", "audio-nota", hayVoz
+        ? "La voz es la del navegador, provisional. Las grabaciones llegan con el curso."
+        : "Este navegador no tiene voz en noruego; las grabaciones llegan con el curso."));
+    }
+    var practica = el("section", "lector-seccion seccion-practica");
+    practica.id = "apartado-practica";
+    practica.appendChild(el("h2", null, "Practica"));
+    lector.appendChild(practica);
+    sesion(dePractica, "Practica", "Ahora te toca a ti", dePractica.length + " pasos en orden. Cada uno te dice qué conservar y qué cambiar. Lo que falles vuelve mañana sin que lo apuntes.", practica);
+    seccionHtml("repite");
+    var larsito = seccionHtml("con-larsito");
+    if (larsito && pieza.meta && pieza.meta.larsito) {
+      var aL = el("a", "btn", "Abrir el escenario con Larsito");
+      aL.href = "/norsk/larsito/" + QUERY_RUTA + "&escenario=" + encodeURIComponent(pieza.meta.larsito);
+      larsito.appendChild(aL);
+    }
+    seccionHtml("cierre");
+
+    var extra = document.createElement("details");
+    extra.className = "lesson-apoyo practica-extra";
+    var resumenExtra = document.createElement("summary");
+    var copiaExtra = el("span", "lesson-apoyo-txt");
+    copiaExtra.appendChild(el("span", "eti", "Solo si la pides"));
+    copiaExtra.appendChild(el("strong", null, "Práctica extra: " + formatoNumero((banco.opcionales || []).length) + " ejercicios opcionales"));
+    resumenExtra.appendChild(copiaExtra);
+    resumenExtra.appendChild(el("span", "abrir", "Abrir"));
+    extra.appendChild(resumenExtra);
+    var interiorExtra = el("div", "lesson-apoyo-interior");
+    extra.appendChild(interiorExtra);
+    var montada = false;
+    extra.addEventListener("toggle", function () {
+      if (!extra.open || montada) return;
+      montada = true;
+      var nodo = P.montar(pieza, { estado: estado, guardar: guardar, anexoHtml: null });
+      if (nodo) interiorExtra.appendChild(nodo);
+    });
+    lector.appendChild(extra);
+
+    var apoyo = document.createElement("details");
+    apoyo.className = "lesson-apoyo";
+    var resumenApoyo = document.createElement("summary");
+    var copiaApoyo = el("span", "lesson-apoyo-txt");
+    copiaApoyo.appendChild(el("span", "eti", "Material de apoyo"));
+    copiaApoyo.appendChild(el("strong", null, "La práctica en texto y las soluciones"));
+    resumenApoyo.appendChild(copiaApoyo);
+    resumenApoyo.appendChild(el("span", "abrir", "Abrir"));
+    apoyo.appendChild(resumenApoyo);
+    var interiorApoyo = el("div", "lesson-apoyo-interior");
+    seccionHtml("practica", interiorApoyo);
+    seccionHtml("soluciones", interiorApoyo);
+    apoyo.appendChild(interiorApoyo);
+    lector.appendChild(apoyo);
+  }
+
   function renderPieza(pieza) {
     modoLector(true);
     limpiar();
@@ -741,7 +956,9 @@
     paso.appendChild(barraLeccion);
 
     var hero = el("header", "lesson-hero");
-    hero.appendChild(el("p", "kicker", pieza.tipo === "diagnostico" ? "Opcional" : ((TIPOS[pieza.tipo] || {}).titulo || pieza.tipo)));
+    hero.appendChild(el("p", "kicker", pieza.tipo === "diagnostico" ? "Opcional"
+      : (pieza.tipo === "leccion" ? ((ZONAS[zonaDe(pieza)] || {}).titulo || "Lección") + (pieza.meta && pieza.meta.unidad ? " · Unidad " + String(pieza.meta.unidad).replace(/^.*-U0?/, "") : "")
+        : ((TIPOS[pieza.tipo] || {}).titulo || pieza.tipo))));
     hero.appendChild(el("h1", null, pieza.titulo));
     if (fichaIndice.resumen) hero.appendChild(el("p", "lesson-lede", fichaIndice.resumen));
 
@@ -755,6 +972,12 @@
       // Con el curso completo el total incluye el anexo de expresiones; en la demo, solo lo que hay en la pieza.
       var totalCta = conAcceso ? totalPracticaDe(pieza.codigo) : window.NexoPractica.banco(pieza, null).items.length;
       hero.appendChild(window.NexoPractica.llamada(pieza, estado, totalCta));
+    }
+    if (pieza.tipo === "leccion" && pieza.meta) {
+      var fichaL = el("div", "leccion-ficha");
+      if (pieza.meta.mision) { var fm = el("p", "leccion-mision"); fm.appendChild(el("b", null, "Misión. ")); fm.appendChild(document.createTextNode(pieza.meta.mision)); fichaL.appendChild(fm); }
+      if (pieza.meta.evidencia) { var fe = el("p", "leccion-evidencia"); fe.appendChild(el("b", null, "Lo has hecho si… ")); fe.appendChild(document.createTextNode(pieza.meta.evidencia)); fichaL.appendChild(fe); }
+      hero.appendChild(fichaL);
     }
     paso.appendChild(hero);
 
@@ -872,6 +1095,8 @@
         navAct.appendChild(siguiente);
         paso.appendChild(navAct);
       }
+    } else if (pieza.tipo === "leccion" && window.NexoPractica) {
+      renderLeccion(pieza, secciones, lector);
     } else if (pieza.tipo === "mecanismo" && window.NexoPractica) {
       var idsEsenciales = { intro: true, "la-escena": true, "la-grieta": true, "el-mecanismo": true };
       var esenciales = secciones.filter(function (s) { return idsEsenciales[s.id]; });
@@ -989,6 +1214,7 @@
         titulo: tituloAlumno(p),
         orden: p.orden || (20 + i),
         resumen: p.grieta || p.resumen || "",
+        zona: p.zona || null,
         abierta: false,
       };
     });
@@ -1012,7 +1238,7 @@
     // (cookie nexo_norsk_ok, que pone el servidor al activar la compra). Si no
     // la hay, o el servidor dice que no, se cae a la demo sin error en consola.
     var hayAcceso = /(?:^|;\s*)nexo_norsk_ok=/.test(document.cookie);
-    (hayAcceso ? fetch(API + "?modo=indice", { credentials: "same-origin" }) : Promise.reject(new Error("sin acceso")))
+    (hayAcceso ? fetch(API_Q + "modo=indice", { credentials: "same-origin" }) : Promise.reject(new Error("sin acceso")))
       .then(function (r) { return r.ok ? r.json() : null; })
       .then(function (d) {
         if (d && d.ok && Array.isArray(d.piezas) && d.piezas.length) {

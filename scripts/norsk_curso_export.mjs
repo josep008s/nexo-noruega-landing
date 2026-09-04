@@ -1,5 +1,5 @@
 // Exporta a JSON el material del curso Norskprøven B1 (NEXO NORSK, línea Idioma).
-// Uso:  node scripts/norsk_curso_export.mjs [--dry] [--solo=M01]
+// Uso:  node scripts/norsk_curso_export.mjs [--ruta=norskproven-b1|norsk-desde-cero-a2] [--dry] [--solo=M01]
 //
 // Salida (GITIGNORED, el repo es público y el curso es contenido de pago):
 //   scripts/_norsk_curso/curso.json       <- todas las piezas con su cuerpo en HTML
@@ -26,26 +26,56 @@ const ROOT = path.dirname(path.dirname(EXPORTADOR_ARCHIVO));
 
 // Carpeta canónica del material en el Drive. El curso se escribe y se revisa ahí:
 // este script solo lee, nunca escribe en el Drive.
-const MATERIAL = "/Users/josep/Library/CloudStorage/GoogleDrive-josep.muttt@gmail.com/Mi unidad/Business/Nexo Noruega/norsk/idioma/rutas/norskproven-b1";
-
-const SALIDA = path.join(ROOT, "scripts", "_norsk_curso");
-const DEMO_PUBLICA = path.join(ROOT, "data", "norsk-curso-demo.json");
+//
+// Dos rutas comparten el pipeline: la Ruta Norskprøven B1 (por defecto) y el
+// recorrido «Noruego desde cero hasta A2». Se elige con --ruta=<slug>. Cada ruta
+// tiene su carpeta en el Drive, su salida gitignored y su demo pública.
+const DRIVE_RUTAS = "/Users/josep/Library/CloudStorage/GoogleDrive-josep.muttt@gmail.com/Mi unidad/Business/Nexo Noruega/norsk/idioma/rutas";
+const RUTAS = {
+  "norskproven-b1": {
+    producto: "NEXO NORSK · Ruta Norskprøven B1",
+    material: path.join(DRIVE_RUTAS, "norskproven-b1"),
+    salida: path.join(ROOT, "scripts", "_norsk_curso"),
+    demo: path.join(ROOT, "data", "norsk-curso-demo.json"),
+    // Orden de lectura, que es también el orden del curso: primero el diagnóstico de
+    // entrada (módulo 0), después los dieciséis mecanismos y al final el material por
+    // destreza. Las carpetas que aún no tienen contenido avisan y no rompen nada.
+    fuentes: [
+      { dir: "00_diagnostico", tipo: "diagnostico" },
+      { dir: "01_mecanismos", tipo: "mecanismo" },
+      { dir: "02_lytt/guiones", tipo: "lytt" },
+      { dir: "03_les", tipo: "les" },
+      { dir: "04_skriv", tipo: "skriv" },
+      { dir: "05_muntlig", tipo: "muntlig" },
+      { dir: "06_simulacros", tipo: "simulacro" },
+    ],
+  },
+  "norsk-desde-cero-a2": {
+    producto: "NEXO NORSK · Noruego desde cero hasta A2",
+    material: path.join(DRIVE_RUTAS, "norsk-desde-cero-a2"),
+    salida: path.join(ROOT, "scripts", "_norsk_curso", "norsk-desde-cero-a2"),
+    demo: path.join(ROOT, "data", "norsk-desde-cero-demo.json"),
+    fuentes: [{ dir: "01_unidades", tipo: "leccion" }],
+    // Cada lección lleva su banco de ejercicios explícito y sus audios declarados.
+    ejercicios: "02_ejercicios",
+    audio: path.join("03_audio", "manifiesto.json"),
+    // La demo pública abre estas piezas enteras; el resto solo enseña su nombre.
+    demoAbiertas: ["PREA1-U02-L01", "PREA1-U02-L02"],
+  },
+};
+const RUTA = (process.argv.find((a) => a.startsWith("--ruta=")) || "").slice(7).trim() || "norskproven-b1";
+if (!Object.prototype.hasOwnProperty.call(RUTAS, RUTA)) {
+  console.error(`Ruta desconocida: ${RUTA}. Rutas válidas: ${Object.keys(RUTAS).join(", ")}`);
+  process.exit(1);
+}
+const CFG = RUTAS[RUTA];
+const MATERIAL = CFG.material;
+const SALIDA = CFG.salida;
+const DEMO_PUBLICA = CFG.demo;
+const FUENTES = CFG.fuentes;
 
 const DRY = process.argv.includes("--dry");
 const SOLO = (process.argv.find((a) => a.startsWith("--solo=")) || "").slice(7).trim().toUpperCase() || null;
-
-// Orden de lectura, que es también el orden del curso: primero el diagnóstico de
-// entrada (módulo 0), después los dieciséis mecanismos y al final el material por
-// destreza. Las carpetas que aún no tienen contenido avisan y no rompen nada.
-const FUENTES = [
-  { dir: "00_diagnostico", tipo: "diagnostico" },
-  { dir: "01_mecanismos", tipo: "mecanismo" },
-  { dir: "02_lytt/guiones", tipo: "lytt" },
-  { dir: "03_les", tipo: "les" },
-  { dir: "04_skriv", tipo: "skriv" },
-  { dir: "05_muntlig", tipo: "muntlig" },
-  { dir: "06_simulacros", tipo: "simulacro" },
-];
 
 // El código de la pieza es la llave primaria en Supabase y viaja en la query del
 // endpoint, así que se acota aquí y se vuelve a acotar allí.
@@ -73,6 +103,7 @@ const SECCIONES_INTERNAS = new Set([
   "comprobaciones-pasadas-sobre-este-archivo",
   "comprobaciones-internas-de-este-lote",
   "siguiente-paso",
+  "registro-interno",
 ]);
 
 // Defensa de contenido, independiente de los títulos. Estos marcadores describen
@@ -688,6 +719,61 @@ function fraseDeGrieta(cuerpo, secciones) {
   return (corte ? corte[0] : texto).trim() || null;
 }
 
+
+// ---------- Recorrido desde cero: orden, ejercicios y audios ----------
+
+function claveLeccion(nombre) {
+  const c = codigoDeArchivo(nombre);
+  const zonas = { PREA1: 0, A1: 1, A2: 2 };
+  let m = c.match(/^(PREA1|A1|A2)-U(\d\d)-L(\d\d)$/);
+  if (m) return zonas[m[1]] * 10000 + Number(m[2]) * 100 + Number(m[3]);
+  m = c.match(/^SALTO-(PREA1|A1)-/);
+  if (m) return zonas[m[1]] * 10000 + 9900;
+  if (/^PUENTE-/.test(c)) return 30000;
+  return 40000;
+}
+
+let manifiestoAudio = null;
+function audiosDe(ids) {
+  if (!CFG.audio) return null;
+  if (!manifiestoAudio) {
+    const ruta = path.join(MATERIAL, CFG.audio);
+    manifiestoAudio = {};
+    if (fs.existsSync(ruta)) {
+      JSON.parse(fs.readFileSync(ruta, "utf8")).audios.forEach((a) => { manifiestoAudio[a.id] = a; });
+    }
+  }
+  const out = {};
+  ids.forEach((id) => {
+    const a = manifiestoAudio[id];
+    if (!a) { errores.push(`audio ${id} no está en ${CFG.audio}`); return; }
+    // Solo viaja lo que la app necesita: el texto para la voz local del navegador,
+    // la duración y el estado. Nunca la ruta del archivo en el Drive.
+    out[id] = { texto: a.texto || "", duracion_s: a.duracion_s || null, estado: a.estado, funcion: a.funcion || null, descripcion: a.descripcion || null };
+  });
+  return out;
+}
+
+function ejerciciosDe(codigo) {
+  if (!CFG.ejercicios) return null;
+  const ruta = path.join(MATERIAL, CFG.ejercicios, `${codigo}.ejercicios.json`);
+  if (!fs.existsSync(ruta)) { errores.push(`${codigo}: falta ${path.basename(ruta)}`); return null; }
+  let data;
+  try { data = JSON.parse(fs.readFileSync(ruta, "utf8")); } catch (e) { errores.push(`${codigo}: ejercicios JSON inválido`); return null; }
+  // El campo qa es trazabilidad de producción: se queda en el Drive. A la app y a
+  // Supabase solo viaja lo que el alumno usa.
+  const items = (Array.isArray(data.ejercicios) ? data.ejercicios : []).map((e) => { const { qa, ...resto } = e; return resto; });
+  const texto = JSON.stringify(items);
+  if (texto.includes("—")) errores.push(`${codigo}: em dash en los ejercicios`);
+  return items;
+}
+
+function listaMeta(valor) {
+  if (Array.isArray(valor)) return valor.map((x) => String(x).trim()).filter(Boolean);
+  if (typeof valor === "string" && valor.trim()) return valor.split(",").map((x) => x.trim()).filter(Boolean);
+  return [];
+}
+
 const errores = [];
 const avisos = [];
 const piezas = [];
@@ -703,6 +789,10 @@ for (const fuente of FUENTES) {
     continue;
   }
   const archivos = fs.readdirSync(dir).filter((f) => f.endsWith(".md")).sort();
+  // Las lecciones del recorrido desde cero se ordenan por zona, unidad y lección,
+  // no alfabéticamente (A1 iría antes que PREA1). Los saltos cierran su zona y el
+  // puente va al final.
+  if (fuente.tipo === "leccion") archivos.sort((a, b) => claveLeccion(a) - claveLeccion(b));
   if (!archivos.length) {
     avisos.push(`${fuente.dir}: la carpeta está vacía, se salta`);
     continue;
@@ -760,12 +850,37 @@ for (const fuente of FUENTES) {
 
     if (!meta.lupa) avisos.push(`${codigoFinal}: sin campo lupa en el front-matter`);
     const tipoFinal = codigoFinal === "ANEXO-UTTRYKK" ? "anexo" : fuente.tipo;
-    piezas.push({
-      codigo: codigoFinal,
-      tipo: tipoFinal,
-      titulo: tituloDe(meta, cuerpo, codigoFinal),
-      orden: piezas.length + 1,
-      meta: {
+    let metaPieza;
+    if (fuente.tipo === "leccion") {
+      // Recorrido desde cero: el front-matter de la lección es la ficha del alumno
+      // (zona, misión, competencias, prerrequisitos) y viaja con la pieza. El estado
+      // de QA se exporta tal cual está declarado: la subida a Supabase lo exige
+      // cerrado y por eso ninguna lección sin sus seis pasadas puede publicarse.
+      const idsAudio = listaMeta(meta.audio);
+      const ejercicios = ejerciciosDe(codigoFinal) || [];
+      ejercicios.forEach((e) => { if (e.audio && idsAudio.indexOf(e.audio) < 0) idsAudio.push(e.audio); });
+      metaPieza = {
+        ruta: RUTA,
+        zona: meta.zona || null,
+        unidad: meta.unidad || null,
+        mision: meta.mision || null,
+        objetivo: meta.objetivo_comunicativo || null,
+        conocimientos_previos: listaMeta(meta.conocimientos_previos),
+        conexion_posterior: listaMeta(meta.conexion_posterior),
+        conexion_m01_m16: listaMeta(meta.conexion_m01_m16),
+        competencias: listaMeta(meta.competencias),
+        destrezas: listaMeta(meta.destrezas),
+        evidencia: meta.evidencia_salida || null,
+        larsito: meta.larsito || null,
+        audio: idsAudio,
+        audios: audiosDe(idsAudio),
+        ejercicios,
+        lupa: meta.lupa || null,
+        qa_lengua: meta.qa_lengua || null,
+        qa_lengua_alcance: meta.qa_lengua_alcance || "NO_FIRMA_HUMANA_NATIVA",
+      };
+    } else {
+      metaPieza = {
         piezas_canon: meta.piezas_canon || null,
         unidades_destino: meta.unidades_destino || null,
         delprover: meta.delprover || null,
@@ -775,7 +890,14 @@ for (const fuente of FUENTES) {
         // no existe una firma humana o nativa.
         qa_lengua: "SISTEMICA_TECNICA_ACEPTADA",
         qa_lengua_alcance: "NO_FIRMA_HUMANA_NATIVA",
-      },
+      };
+    }
+    piezas.push({
+      codigo: codigoFinal,
+      tipo: tipoFinal,
+      titulo: tituloDe(meta, cuerpo, codigoFinal),
+      orden: piezas.length + 1,
+      meta: metaPieza,
       secciones,
       palabras,
       grieta: fraseDeGrieta(cuerpo, secciones),
@@ -821,7 +943,34 @@ function piezaLimpia(p) {
   return resto;
 }
 
+function construirDemoDesdeCero() {
+  const abiertas = CFG.demoAbiertas.map((c) => piezas.find((p) => p.codigo === c)).filter(Boolean);
+  if (abiertas.length !== CFG.demoAbiertas.length) { avisos.push("faltan piezas abiertas de la demo del recorrido desde cero"); }
+  const indice = piezas
+    .filter((p) => CFG.demoAbiertas.indexOf(p.codigo) < 0)
+    .map((p) => ({ codigo: p.codigo, tipo: p.tipo, titulo: p.titulo, orden: p.orden, zona: p.meta.zona, unidad: p.meta.unidad, resumen: p.meta.mision || "" }));
+  return {
+    meta: {
+      producto: CFG.producto,
+      ruta: RUTA,
+      actualizado: new Date().toISOString().slice(0, 10),
+      aviso: "Material propio de NEXO NORSK. NEXO NORSK es un proyecto independiente y no tiene relación con HK-dir, con UDI ni con ningún centro de examen. Este recorrido no promete un nivel, un aprobado ni un trámite.",
+      piezas_totales: piezas.length,
+      lecciones_totales: piezas.filter((p) => p.tipo === "leccion").length,
+    },
+    // La demo es pública: viaja sin los estados editoriales (lupa, qa_lengua), que
+    // son control de producción y ya los aplica la subida a Supabase.
+    piezas: abiertas.map((p) => {
+      const meta = Object.assign({}, p.meta);
+      delete meta.lupa; delete meta.qa_lengua; delete meta.qa_lengua_alcance;
+      return Object.assign({}, piezaLimpia(p), { meta, orden: p.orden, resumen: p.meta.mision || "" });
+    }),
+    indice,
+  };
+}
+
 function construirDemo() {
+  if (CFG.demoAbiertas) return construirDemoDesdeCero();
   const m01 = piezas.find((p) => p.codigo === "M01");
   if (!m01) { avisos.push("no hay M01: la demo se queda sin mecanismo de muestra"); return null; }
 
@@ -879,7 +1028,9 @@ function revisarDemo(demo) {
   if (texto.includes("—")) fallos.push("em dash en la demo");
   if (/increíble|brutal|paraíso|trucos|hola chicos/i.test(texto)) fallos.push("palabra prohibida de marca en la demo");
   if (/\b(celular|manejar|acá|computadora|plata|carro)\b/i.test(texto)) fallos.push("marcador no peninsular en la demo");
-  if (!demo.mecanismo || !demo.mecanismo.secciones.length) fallos.push("la demo no lleva el mecanismo M01 entero");
+  if (CFG.demoAbiertas) {
+    if (!Array.isArray(demo.piezas) || demo.piezas.length !== CFG.demoAbiertas.length) fallos.push("la demo no lleva las piezas abiertas previstas");
+  } else if (!demo.mecanismo || !demo.mecanismo.secciones.length) fallos.push("la demo no lleva el mecanismo M01 entero");
   // Nadie más que M01 puede llevar cuerpo en la demo.
   demo.indice.forEach((m) => {
     if (m.secciones || m.html) fallos.push(`${m.codigo}: el índice de la demo lleva cuerpo`);
@@ -935,13 +1086,18 @@ if (fallos.length) {
   fs.writeFileSync(path.join(SALIDA, "curso-demo.json"), json);
   fs.writeFileSync(DEMO_PUBLICA, json);
   console.log(`Escrito ${path.join(SALIDA, "curso-demo.json")} y su copia pública ${DEMO_PUBLICA}:`);
-  console.log(`  M01 (${demo.mecanismo.secciones.length} secciones, ${demo.mecanismo.palabras} palabras)` +
-    ` + índice de ${demo.indice.length} mecanismos` +
-    (demo.diagnostico ? ` + introducción del diagnóstico (${demo.diagnostico.secciones.length} secciones)` : " sin diagnóstico"));
+  if (demo.mecanismo) {
+    console.log(`  M01 (${demo.mecanismo.secciones.length} secciones, ${demo.mecanismo.palabras} palabras)` +
+      ` + índice de ${demo.indice.length} mecanismos` +
+      (demo.diagnostico ? ` + introducción del diagnóstico (${demo.diagnostico.secciones.length} secciones)` : " sin diagnóstico"));
+  } else {
+    console.log(`  ${demo.piezas.map((p) => `${p.codigo} (${p.secciones.length} secciones, ${p.palabras} palabras)`).join(" + ")} + índice de ${demo.indice.length} piezas`);
+  }
 }
 
 const manifiesto = {
   generado: new Date().toISOString(),
+  ruta: RUTA,
   material: MATERIAL,
   piezas: piezas.length,
   por_tipo: porTipo,
@@ -956,4 +1112,4 @@ const manifiesto = {
 };
 fs.writeFileSync(path.join(SALIDA, "manifiesto.json"), JSON.stringify(manifiesto, null, 1));
 console.log(`Escrito ${path.join(SALIDA, "manifiesto.json")}.`);
-console.log("\nSiguiente paso: node scripts/norsk_curso_build.mjs --dry para ver qué subiría a Supabase.");
+console.log(`\nSiguiente paso: node scripts/norsk_curso_build.mjs --ruta=${RUTA} --dry para ver qué subiría a Supabase.`);
