@@ -19,3 +19,7 @@ supabase/.temp/
 
 # Cuaderno en PDF: los seis tomos son contenido de pago y el repo es público
 scripts/_norsk_cuaderno/
+
+# Curso B1 completo generado para la revisión privada: contenido de pago, nunca entra en el repo
+# (se filtró en el PR #48 del 02.09.2026 y se retiró del índice el 04.09.2026; el guard lo vigila).
+api/_curso_privado*.js
