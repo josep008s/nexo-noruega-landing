@@ -115,9 +115,28 @@
 
     /* ===== Hero ===== */
     .hero{padding-top:56px;padding-bottom:52px}
-    .aviso-obra{display:flex;gap:14px;align-items:flex-start;background:var(--blanco);border:1px solid var(--linea-clara);border-left:3px solid var(--alerta);border-radius:10px;padding:16px 18px;margin-top:32px;max-width:64ch}
-    .aviso-obra .eti{font-family:var(--sg);font-weight:700;font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--alerta);flex:none;padding-top:3px}
-    .aviso-obra p{font-size:.98rem}
+    .hero-prueba{margin-top:34px;max-width:70ch;background:var(--blanco);border:1px solid var(--linea-clara);border-radius:18px;padding:25px 26px 24px;box-shadow:var(--sombra-clara)}
+    .prueba-cab{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:13px;font-family:var(--sg);font-weight:700;font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;color:var(--fiordo)}
+    .prueba-cab span:last-child{font-weight:500;letter-spacing:.08em}
+    .hero-prueba h2{font-size:clamp(1.25rem,3vw,1.58rem);margin-bottom:7px}
+    .hero-prueba > p{font-size:.98rem;margin-bottom:17px}
+    .prueba-opciones{display:grid;gap:9px}
+    .frase-opcion{display:grid;grid-template-columns:34px minmax(0,1fr);gap:11px;align-items:center;width:100%;min-height:54px;padding:10px 14px;text-align:left;background:var(--nieve);color:var(--noche);border:1px solid transparent;border-radius:12px;cursor:pointer;font:600 1rem/1.45 var(--sg);transition:border-color .2s,background .2s,transform .2s var(--ease)}
+    .frase-opcion:hover{border-color:var(--fiordo);transform:translateY(-1px)}
+    .frase-opcion .letra{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--blanco);color:var(--fiordo);font-size:.76rem}
+    .frase-opcion[aria-pressed="true"]{border-color:var(--fiordo);background:rgba(44,90,114,.07)}
+    .hero-prueba[data-estado="bien"] .frase-opcion[data-prueba="bien"]{border-color:var(--aurora);box-shadow:inset 3px 0 0 var(--aurora)}
+    .hero-prueba[data-estado="mal"] .frase-opcion[data-prueba="mal"]{border-color:var(--alerta);box-shadow:inset 3px 0 0 var(--alerta)}
+    .feedback-rapido{margin-top:16px;padding:17px 18px;border-left:4px solid var(--aurora);border-radius:4px 12px 12px 4px;background:rgba(63,203,148,.12)}
+    .hero-prueba[data-estado="mal"] .feedback-rapido{border-left-color:var(--alerta);background:rgba(143,90,15,.07)}
+    .feedback-rapido .veredicto{font-family:var(--sg);font-weight:700;color:var(--noche);margin-bottom:4px}
+    .feedback-rapido p{font-size:.98rem;margin-bottom:11px}
+    .feedback-rapido .mapa-frase{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0 14px;font-family:var(--sg);font-size:.8rem;font-weight:700;color:var(--fiordo)}
+    .feedback-rapido .mapa-frase span{background:var(--blanco);border:1px solid var(--linea-clara);border-radius:999px;padding:5px 10px}
+    .feedback-rapido .mapa-frase span:nth-child(2){background:rgba(63,203,148,.3);border-color:transparent;color:var(--noche)}
+    .feedback-rapido a{font-family:var(--sg);font-weight:700;color:var(--fiordo);text-underline-offset:3px}
+    .estado-curso{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;margin-top:17px;font-family:var(--sg);font-size:.78rem;font-weight:500;color:var(--fiordo)}
+    .estado-curso strong{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--alerta);border-left:3px solid var(--alerta);padding-left:9px}
 
     /* ===== Punto de entrada ===== */
     .nivel-tabs{display:flex;flex-wrap:wrap;gap:10px;margin:26px 0 18px}
@@ -128,9 +147,11 @@
     .nivel-respuesta .eti{font-family:var(--sg);font-weight:700;font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--fiordo);margin-bottom:10px}
     .nivel-respuesta h3{font-family:var(--sg);font-size:clamp(1.25rem,3vw,1.65rem);line-height:1.22;color:var(--noche);margin-bottom:10px;max-width:30ch}
     .nivel-respuesta p{font-size:1.04rem;max-width:56ch;margin-bottom:18px}
+    .nivel-acciones{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+    .nivel-acciones .enlace-secundario{font-family:var(--sg);font-weight:700;font-size:.9rem;color:var(--fiordo);text-underline-offset:3px;padding:10px 2px}
 
     /* ===== Bucle y volumen ===== */
-    .ciclo{display:grid;grid-template-columns:repeat(5,1fr);gap:18px;margin-top:32px}
+    .ciclo{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:32px}
     .ciclo-paso{padding-top:14px;position:relative}
     .ciclo-paso::before{content:"";position:absolute;left:0;top:0;width:30px;height:4px;background:var(--aurora);border-radius:999px}
     .ciclo-paso .num{font-family:var(--caesar);font-size:1.75rem;line-height:1;color:var(--fiordo);display:block;margin-bottom:8px}
@@ -142,7 +163,6 @@
     .inventario strong{display:block;font-family:var(--caesar);font-weight:400;font-size:clamp(2.1rem,5vw,3rem);line-height:1;color:var(--fiordo);margin-bottom:9px}
     .inventario h3{font-family:var(--sg);font-size:1.05rem;color:var(--noche);margin-bottom:7px}
     .inventario p{font-size:.96rem}
-    .volumen-pie{font-family:var(--sg);font-weight:500;font-size:.9rem;color:var(--fiordo);margin-top:28px;max-width:62ch}
 
     /* ===== El examen ===== */
     .pruebas{display:grid;gap:14px;margin-top:22px}
@@ -237,7 +257,8 @@
       .marca span{font-size:.82rem}
       .larsito-caja,.sprint,.cruce{padding:22px}
       .burbuja{max-width:100%}
-      .nivel-tabs{display:grid;grid-template-columns:1fr}.nivel-tab{text-align:left}.nivel-respuesta{padding:23px 21px;min-height:260px}
+      .hero-prueba{padding:20px 18px;border-radius:15px}.prueba-cab{align-items:flex-start}.frase-opcion{font-size:.93rem}
+      .nivel-tabs{display:grid;grid-template-columns:1fr}.nivel-tab{text-align:left}.nivel-respuesta{padding:23px 21px;min-height:250px}
       .ciclo{grid-template-columns:1fr;gap:24px}.ciclo-paso{display:grid;grid-template-columns:44px 1fr;column-gap:10px}.ciclo-paso::before{display:none}.ciclo-paso .num{grid-row:1 / span 2}.ciclo-paso h3{padding-top:2px}.ciclo-paso p{grid-column:2}
       .inventario{grid-template-columns:1fr;gap:28px}
     }
@@ -275,34 +296,46 @@
       <div class="wrap">
         <p class="kicker caesar reveal">NEXO NORSK · CURSO B1</p>
         <h1 class="reveal" style="--d:.08s">Habla. Entiende el fallo. <mark class="marcado">Vuelve a intentarlo.</mark></h1>
-        <p class="sub reveal" style="--d:.16s">Un curso de noruego para hispanohablantes que ya tienen una base A2 y quieren llegar a B1. Misiones reales, práctica interactiva y una corrección concreta cada vez.</p>
+        <p class="sub reveal" style="--d:.16s">Para hispanohablantes con base A2: ordenas, eliges, escribes y hablas; la corrección te dice qué cambiar antes del segundo intento.</p>
         <div class="botones reveal" style="--d:.24s">
           <a class="cta" href="/norsk/curso/">Probar una sesión gratis</a>
-          <a class="cta ghost" href="#punto">Ver si es para mí</a>
+          <a class="cta ghost" href="#punto">Elegir mi entrada</a>
         </div>
-        <p class="microcopy reveal" style="--d:.28s">Sin registro. Empiezas con el diagnóstico o con el primer mecanismo.</p>
-        <div class="aviso-obra reveal" style="--d:.32s">
-          <span class="eti">En revisión</span>
-          <p>El curso está construido y se está revisando por dentro. La venta sigue cerrada. Ya puedes probar la muestra del curso y doce prácticas de Larsito.</p>
+        <p class="microcopy reveal" style="--d:.28s">Sin registro. La muestra abre directamente el primer mecanismo.</p>
+        <div id="pruebaRapida" class="hero-prueba reveal" style="--d:.32s">
+          <div class="prueba-cab"><span>Prueba 20 segundos</span><span>M01 · orden</span></div>
+          <h2>¿Cuál de estas dos frases está bien?</h2>
+          <p>Elige antes de mirar ninguna explicación.</p>
+          <div class="prueba-opciones" role="group" aria-label="Elige la frase correcta">
+            <button class="frase-opcion" type="button" data-prueba="mal" aria-pressed="false"><span class="letra">A</span><span lang="nb">Neste uke hun begynner på den nye avdelingen.</span></button>
+            <button class="frase-opcion" type="button" data-prueba="bien" aria-pressed="false"><span class="letra">B</span><span lang="nb">Neste uke begynner hun på den nye avdelingen.</span></button>
+          </div>
+          <div id="feedbackRapido" class="feedback-rapido" aria-live="polite" tabindex="-1" hidden>
+            <p class="veredicto"></p>
+            <p class="explicacion-rapida"></p>
+            <div class="mapa-frase" aria-label="Orden de la frase correcta"><span lang="nb">Neste uke</span><span lang="nb">begynner</span><span lang="nb">hun</span><span lang="nb">på den nye avdelingen</span></div>
+            <a href="/norsk/curso/#M01">Practicar este mecanismo</a>
+          </div>
         </div>
+        <p class="estado-curso reveal" style="--d:.36s"><strong>Venta cerrada</strong><span>Muestra abierta · curso completo en revisión</span></p>
       </div>
     </section>
 
     <section class="banda" id="punto">
       <div class="wrap">
-        <p class="kicker reveal">Tu punto real</p>
-        <h2 class="reveal" style="--d:.08s">Antes de enseñarte todo, dime desde dónde empiezas.</h2>
-        <p class="parrafo reveal" style="--d:.14s">El mismo curso no sirve igual a quien no sabe decir su nombre y a quien se bloquea al defender una opinión. Elige la frase que más se parece a ti.</p>
+        <p class="kicker reveal">Elige tu entrada</p>
+        <h2 class="reveal" style="--d:.08s">¿Qué puedes hacer hoy en noruego?</h2>
+        <p class="parrafo reveal" style="--d:.14s">No tienes que recorrerlo todo ni empezar por un examen de nivel. Elige la frase más cercana y abre una primera sesión.</p>
         <div class="nivel-tabs reveal" style="--d:.2s" role="group" aria-label="Elige tu punto de partida">
-          <button class="nivel-tab" type="button" data-nivel="cero" aria-pressed="false">Empiezo de cero</button>
-          <button class="nivel-tab" type="button" data-nivel="base" aria-pressed="true">Ya me defiendo un poco</button>
-          <button class="nivel-tab" type="button" data-nivel="examen" aria-pressed="false">Tengo fecha de examen</button>
+          <button class="nivel-tab" type="button" data-nivel="cero" aria-pressed="false">Todavía casi nada</button>
+          <button class="nivel-tab" type="button" data-nivel="base" aria-pressed="true">Ya entiendo y formo frases</button>
+          <button class="nivel-tab" type="button" data-nivel="examen" aria-pressed="false">Tengo examen pronto</button>
         </div>
         <div id="nivelRespuesta" class="nivel-respuesta reveal" style="--d:.24s" aria-live="polite">
-          <p class="eti">Tu entrada</p>
-          <h3>Estás en el punto para el que se ha construido este curso.</h3>
-          <p>Si entiendes instrucciones breves y puedes formar frases propias, aunque tardes y cometas errores, el diagnóstico te dirá qué destreza conviene atacar primero.</p>
-          <a class="cta" href="/norsk/curso/#DIAGNOSTICO_B1">Hacer el diagnóstico</a>
+          <p class="eti">Tu primera sesión</p>
+          <h3>Empieza por el primer mecanismo.</h3>
+          <p>Ya tienes la base necesaria. Entra en M01 y practica; si después no sabes qué destreza te frena más, utiliza el diagnóstico opcional.</p>
+          <div class="nivel-acciones"><a class="cta" href="/norsk/curso/#M01">Empezar M01</a><a class="enlace-secundario" href="/norsk/curso/#DIAGNOSTICO_B1">Hacer el diagnóstico opcional</a></div>
         </div>
       </div>
     </section>
@@ -310,23 +343,20 @@
     <section class="banda" id="metodo">
       <div class="wrap">
         <p class="kicker reveal">Cómo se aprende aquí</p>
-        <h2 class="reveal" style="--d:.08s">No terminas una lección. Resuelves mejor la segunda vez.</h2>
-        <p class="parrafo reveal" style="--d:.14s">Cada sesión tiene un trabajo concreto. Puedes probarte primero o entender el mecanismo antes de practicar; la teoría está al servicio de lo que vas a hacer, no de llenar una pantalla.</p>
-        <div class="ciclo" aria-label="Los cinco movimientos de una sesión">
-          <article class="ciclo-paso reveal" style="--d:.18s"><span class="num">01</span><h3>Recupera</h3><p>Una frase que ya trabajaste vuelve cuando toca.</p></article>
-          <article class="ciclo-paso reveal" style="--d:.22s"><span class="num">02</span><h3>Resuelve</h3><p>Hablas, ordenas, eliges o escribes sin ver el modelo.</p></article>
-          <article class="ciclo-paso reveal" style="--d:.26s"><span class="num">03</span><h3>Entiende</h3><p>La corrección señala el fallo y el mecanismo que lo explica.</p></article>
-          <article class="ciclo-paso reveal" style="--d:.3s"><span class="num">04</span><h3>Repite</h3><p>Lo vuelves a usar con una variación, no copiando la solución.</p></article>
-          <article class="ciclo-paso reveal" style="--d:.34s"><span class="num">05</span><h3>Guarda</h3><p>Lo que fallas regresa a los 1, 3, 7 y 14 días.</p></article>
+        <h2 class="reveal" style="--d:.08s">Responde. Repara. Repite.</h2>
+        <p class="parrafo reveal" style="--d:.14s">La teoría ocupa el sitio justo. Primero haces algo; después entiendes una corrección y vuelves a usarla con datos nuevos.</p>
+        <div class="ciclo" aria-label="Los tres movimientos de una sesión">
+          <article class="ciclo-paso reveal" style="--d:.18s"><span class="num">01</span><h3>Responde</h3><p>Habla, ordena, elige o escribe sin mirar el modelo.</p></article>
+          <article class="ciclo-paso reveal" style="--d:.24s"><span class="num">02</span><h3>Repara</h3><p>La corrección señala una diferencia y la regla que la explica.</p></article>
+          <article class="ciclo-paso reveal" style="--d:.3s"><span class="num">03</span><h3>Repite</h3><p>Usa el mismo mecanismo en una situación nueva, sin copiar.</p></article>
         </div>
-        <p class="principio reveal" style="--d:.38s">Tú ves una sola acción siguiente. Detrás queda todo el material para cuando quieras buscar algo concreto.</p>
+        <p class="principio reveal" style="--d:.36s">Lo que fallas vuelve a los 1, 3, 7 y 14 días. Tú solo ves la siguiente acción.</p>
         <div class="inventario">
           <article class="reveal" style="--d:.2s"><strong>21</strong><h3>Actuaciones orales</h3><p>Situaciones cotidianas y tareas de examen para sostener una respuesta, repararla y volver a empezar.</p></article>
           <article class="reveal" style="--d:.26s"><strong>2.339</strong><h3>Ejercicios opcionales</h3><p>Ordenar, arrastrar, elegir, completar, relacionar y escribir. Tú decides cuándo seguir practicando.</p></article>
           <article class="reveal" style="--d:.32s"><strong>6</strong><h3>Cuadernos descargables</h3><p>La teoría, los esquemas y los ejercicios del curso en tomos para imprimir o trabajar sin conexión.</p></article>
         </div>
-        <p class="volumen-pie reveal" style="--d:.38s">Más contenido no obliga a hacer más. El recorrido guiado separa lo esencial de la práctica extra y de la biblioteca.</p>
-        <div class="reveal" style="--d:.42s;margin-top:26px"><a class="cta" href="/norsk/curso/">Entrar en la muestra</a></div>
+        <div class="reveal" style="--d:.4s;margin-top:28px"><a class="cta" href="/norsk/curso/">Ver una sesión por dentro</a></div>
       </div>
     </section>
 
@@ -351,20 +381,20 @@
 
     <section class="banda" id="larsito">
       <div class="wrap">
-        <p class="kicker reveal">El motor oral del curso</p>
-        <h2 class="reveal" style="--d:.08s">Larsito no es otro curso. Es donde usas este.</h2>
-        <p class="parrafo reveal" style="--d:.14s">Cuando una regla ya está entendida, queda conseguir que aparezca mientras hablas. Larsito te plantea la situación en noruego, sigue la conversación y devuelve una sola prioridad para el segundo intento.</p>
+        <p class="kicker reveal">Práctica oral con Larsito</p>
+        <h2 class="reveal" style="--d:.08s">Habla una vez. Corrige una cosa. Dilo de nuevo.</h2>
+        <p class="parrafo reveal" style="--d:.14s">Larsito plantea la situación en noruego, sigue la conversación y devuelve una sola prioridad. Después te pide otra respuesta para comprobar que el cambio ya sale hablando.</p>
         <div class="larsito-caja reveal" style="--d:.2s">
-          <p class="eti">Una corrección útil, no veinte marcas rojas</p>
-          <h3>Le hablas en noruego. Te responde en noruego. Te explica el bloqueo en español.</h3>
-          <p class="lede">La práctica completa conectará conversación cotidiana, tareas de formato oral, escucha y recuperación espaciada con el mecanismo exacto del curso.</p>
+          <p class="eti">Así devuelve el turno</p>
+          <h3>Noruego para conversar. Español para entender el bloqueo.</h3>
+          <p class="lede">Una corrección breve, enlazada con el mecanismo exacto del curso.</p>
           <div class="chat" aria-label="Ejemplo de conversación con Larsito">
             <div class="burbuja lars"><p class="quien">Larsito</p><p class="no" lang="nb">Fortell meg om en gang du måtte klage på noe. Hva skjedde?</p><p class="es">Cuéntame una vez que tuviste que reclamar algo. ¿Qué pasó?</p><div class="onda" aria-hidden="true"><i style="height:40%"></i><i style="height:75%"></i><i style="height:55%"></i><i style="height:100%"></i><i style="height:65%"></i><i style="height:85%"></i><i style="height:35%"></i><i style="height:70%"></i><i style="height:50%"></i></div></div>
             <div class="burbuja tu"><p class="quien">Tú</p><p class="no" lang="nb">Jeg har klaget på strømregningen min i fjor fordi den var altfor høy.</p></div>
             <div class="burbuja lars"><p class="quien">Larsito</p><p class="no" lang="nb">Ja, det skjønner jeg godt. Hva svarte de deg?</p><p class="es">Sí, lo entiendo perfectamente. ¿Qué te contestaron?</p><div class="correccion"><b>Una cosa</b>Con <i lang="nb">i fjor</i> el hecho está cerrado en el pasado. Aquí necesitas <i lang="nb">jeg klaget</i>, no <i lang="nb">jeg har klaget</i>. Conserva el resto y cuéntalo otra vez.</div></div>
           </div>
           <p class="larsito-pie"><b>Ya puedes probarlo.</b> La demo incluye seis conversaciones ficticias y seis ejercicios de escucha. No guarda el contenido de tus respuestas.</p>
-          <div class="botones" style="margin-top:18px"><a class="cta" href="/norsk/larsito/">Probar a Larsito</a><a class="cta ghost" href="/norsk/entrenamiento-oral/" style="color:var(--nieve);border-color:var(--linea-oscura)">Ver el entrenamiento oral</a></div>
+          <div class="botones" style="margin-top:18px"><a class="cta" href="/norsk/larsito/">Probar a Larsito</a><a class="cta ghost" href="/norsk/entrenamiento-oral/" style="color:var(--nieve);border-color:var(--linea-oscura)">Cómo funciona el entrenamiento</a></div>
         </div>
       </div>
     </section>
@@ -390,8 +420,8 @@
     <section class="cierre banda">
       <div class="cielo" aria-hidden="true"></div>
       <div class="wrap">
-        <h2 class="reveal">No necesitas otro montón de apuntes. Necesitas volver a intentarlo mejor.</h2>
-        <p class="sub reveal" style="--d:.08s">Prueba primero la muestra. Si después quieres saber cuándo abre el curso completo, te aviso por correo.</p>
+        <h2 class="reveal">Haz una sesión. Decide después.</h2>
+        <p class="sub reveal" style="--d:.08s">La muestra no pide registro. Si te sirve, puedes dejar tu correo para saber cuándo abre el curso completo.</p>
         <div class="botones reveal" style="--d:.14s">
           <a class="cta" href="/norsk/curso/">Probar una sesión gratis</a>
           <a class="cta ghost" href="https://nexonoruega.substack.com/subscribe?utm_source=nexonoruega.com&utm_medium=web&utm_campaign=norsk">Avísame cuando abra</a>
@@ -434,27 +464,49 @@
       observados.forEach(function (el) { el.classList.add("visible"); });
     }
 
+    var pruebaRapida = document.getElementById("pruebaRapida");
+    var feedbackRapido = document.getElementById("feedbackRapido");
+    document.querySelectorAll("[data-prueba]").forEach(function (boton) {
+      boton.addEventListener("click", function () {
+        if (!pruebaRapida || !feedbackRapido) return;
+        var acierto = boton.getAttribute("data-prueba") === "bien";
+        pruebaRapida.setAttribute("data-estado", acierto ? "bien" : "mal");
+        document.querySelectorAll("[data-prueba]").forEach(function (otra) {
+          otra.setAttribute("aria-pressed", otra === boton ? "true" : "false");
+        });
+        feedbackRapido.querySelector(".veredicto").textContent = acierto ? "Sí. Ese es el orden." : "El verbo ha quedado demasiado tarde.";
+        feedbackRapido.querySelector(".explicacion-rapida").textContent = acierto
+          ? "«Neste uke» ocupa la primera posición. El verbo «begynner» va inmediatamente después y el sujeto «hun» queda detrás."
+          : "Después de «Neste uke», coloca «begynner» en segunda posición. El sujeto «hun» pasa detrás del verbo.";
+        feedbackRapido.hidden = false;
+      });
+    });
+
     var respuestas = {
       cero: {
-        eti: "Todavía no",
-        titulo: "Este curso B1 no es tu punto de partida.",
-        texto: "Primero necesitas construir el tramo A1-A2: comprender mensajes básicos, presentarte, preguntar y producir frases sencillas. NEXO NORSK lo tratará como un recorrido separado, no como un prólogo comprimido dentro del B1.",
+        eti: "Antes de este curso",
+        titulo: "Primero necesitas un tramo A1-A2.",
+        texto: "Construye mensajes básicos, preguntas y frases sencillas antes de entrar en B1. NEXO NORSK lo tratará como un recorrido separado, no como un prólogo comprimido.",
         cta: "Avísame del tramo inicial",
         href: "https://nexonoruega.substack.com/subscribe?utm_source=nexonoruega.com&utm_medium=web&utm_campaign=norsk-a1"
       },
       base: {
-        eti: "Tu entrada",
-        titulo: "Estás en el punto para el que se ha construido este curso.",
-        texto: "Si entiendes instrucciones breves y puedes formar frases propias, aunque tardes y cometas errores, el diagnóstico te dirá qué destreza conviene atacar primero.",
-        cta: "Hacer el diagnóstico",
-        href: "/norsk/curso/#DIAGNOSTICO_B1"
+        eti: "Tu primera sesión",
+        titulo: "Empieza por el primer mecanismo.",
+        texto: "Ya tienes la base necesaria. Entra en M01 y practica; si después no sabes qué destreza te frena más, utiliza el diagnóstico opcional.",
+        cta: "Empezar M01",
+        href: "/norsk/curso/#M01",
+        secundario: "Hacer el diagnóstico opcional",
+        hrefSecundario: "/norsk/curso/#DIAGNOSTICO_B1"
       },
       examen: {
-        eti: "Ve al núcleo",
-        titulo: "Necesitas producir, corregir y repetir con tiempo real.",
-        texto: "Empieza por una práctica oral, detecta el mecanismo que más se repite y vuelve al curso solo para repararlo. Después haz otra actuación y un simulacro de formato similar al oficial.",
-        cta: "Probar el entrenamiento oral",
-        href: "/norsk/larsito/"
+        eti: "Tu primera sesión",
+        titulo: "Empieza hablando.",
+        texto: "Haz una práctica oral, detecta el mecanismo que más se repite y vuelve al curso para repararlo. Después repite con otra actuación.",
+        cta: "Probar a Larsito",
+        href: "/norsk/larsito/",
+        secundario: "Ver la muestra del curso",
+        hrefSecundario: "/norsk/curso/"
       }
     };
     var nivelRespuesta = document.getElementById("nivelRespuesta");
@@ -465,12 +517,20 @@
         document.querySelectorAll("[data-nivel]").forEach(function (otro) {
           otro.setAttribute("aria-pressed", otro === boton ? "true" : "false");
         });
-        nivelRespuesta.innerHTML = '<p class="eti"></p><h3></h3><p></p><a class="cta"></a>';
+        nivelRespuesta.innerHTML = '<p class="eti"></p><h3></h3><p></p><div class="nivel-acciones"><a class="cta"></a></div>';
         nivelRespuesta.querySelector(".eti").textContent = dato.eti;
         nivelRespuesta.querySelector("h3").textContent = dato.titulo;
         nivelRespuesta.querySelector("p:not(.eti)").textContent = dato.texto;
-        nivelRespuesta.querySelector("a").textContent = dato.cta;
-        nivelRespuesta.querySelector("a").href = dato.href;
+        var principal = nivelRespuesta.querySelector("a");
+        principal.textContent = dato.cta;
+        principal.href = dato.href;
+        if (dato.secundario && dato.hrefSecundario) {
+          var secundario = document.createElement("a");
+          secundario.className = "enlace-secundario";
+          secundario.textContent = dato.secundario;
+          secundario.href = dato.hrefSecundario;
+          nivelRespuesta.querySelector(".nivel-acciones").appendChild(secundario);
+        }
       });
     });
   })();
