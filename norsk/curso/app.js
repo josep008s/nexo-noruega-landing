@@ -390,10 +390,10 @@
 
   function renderMapaSesion() {
     var sec = el("section", "sesion-mapa");
-    sec.appendChild(el("h2", null, "Una sesión, cinco movimientos"));
-    sec.appendChild(el("p", null, "La sesión termina cuando puedes volver a usar lo corregido, no cuando llegas al final de una página."));
+    sec.appendChild(el("h2", null, "Responde. Repara. Repite."));
+    sec.appendChild(el("p", null, "La sesión termina cuando usas la corrección en una situación nueva. Lo que fallas vuelve a los 1, 3, 7 y 14 días."));
     var lista = el("ol", "sesion-pasos");
-    ["Recupera", "Resuelve", "Entiende", "Repite", "Guarda"].forEach(function (texto, i) {
+    ["Responde", "Repara", "Repite"].forEach(function (texto, i) {
       var item = el("li");
       item.appendChild(el("span", null, dosCifras(i + 1)));
       item.appendChild(document.createTextNode(texto));
@@ -475,7 +475,7 @@
     hero.appendChild(h1);
 
     hero.appendChild(el("p", "intro", conAcceso
-      ? "Tu trabajo aquí no es recorrer un índice. Haz una sesión: recupera, intenta, entiende una corrección, repite y cierra."
+      ? "Tu trabajo aquí no es recorrer un índice. Haz una sesión: responde, repara, repite y cierra."
       : "Empieza con el primer mecanismo completo. Si no sabes qué necesitas reforzar, el diagnóstico opcional está en la biblioteca."));
 
     if (!conAcceso) {
