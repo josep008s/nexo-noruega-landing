@@ -4,8 +4,8 @@
   "ruta": "norsk-desde-cero-a2",
   "actualizado": "2026-09-04",
   "aviso": "Material propio de NEXO NORSK. NEXO NORSK es un proyecto independiente y no tiene relación con HK-dir, con UDI ni con ningún centro de examen. Este recorrido no promete un nivel, un aprobado ni un trámite.",
-  "piezas_totales": 16,
-  "lecciones_totales": 16
+  "piezas_totales": 18,
+  "lecciones_totales": 18
  },
  "piezas": [
   {
@@ -2255,6 +2255,24 @@
    "zona": "A1",
    "unidad": "A1-U04",
    "resumen": "En una cafetería cerca del trabajo, pedir dos cosas, reaccionar cuando no tienen lo que pides, preguntar el precio, confirmarlo y pagar."
+  },
+  {
+   "codigo": "A1-U05-L01",
+   "tipo": "leccion",
+   "titulo": "¿Este bus va al centro?",
+   "orden": 17,
+   "zona": "A1",
+   "unidad": "A1-U05",
+   "resumen": "En una parada con dos marquesinas, subir al autobús correcto: decir adónde vas, preguntar cuál necesitas y desde dónde sale, y confirmar si tienes que cambiar."
+  },
+  {
+   "codigo": "A1-U05-L02",
+   "tipo": "leccion",
+   "titulo": "Recto, a la izquierda y diez minutos tarde",
+   "orden": 18,
+   "zona": "A1",
+   "unidad": "A1-U05",
+   "resumen": "Has bajado en la parada correcta y no ves el edificio: seguir la ruta que te dicen, avisar de que llegas diez minutos tarde y decir a qué hora estarás."
   }
  ]
 }

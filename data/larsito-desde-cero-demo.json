@@ -606,6 +606,148 @@
    }
   },
   {
+   "id": "LARS-A1-U05",
+   "modo": "rollespill",
+   "modo_contrato": "REAL_LIFE",
+   "nivel": "A1",
+   "titulo": "La parada y la llamada del retraso",
+   "leccion": [
+    "A1-U05-L01",
+    "A1-U05-L02"
+   ],
+   "contexto_es": "Role-play ficticio en dos partes. Primero, en una parada, Larsito hace de la persona que espera contigo: tú preguntas si este autobús va al centro, cuál tienes que coger, desde dónde sale, si hay que cambiar y cuándo sale el siguiente. Después llamas a un compañero: avisas de que llegas tarde, dices dónde estás y a qué hora llegas, recibes la ruta y confirmas que mandarás un mensaje. Usa la tarjeta ficticia.",
+   "datos_ficticios_es": "Vas al centro · el autobús correcto es el número 12 · sale de la parada de enfrente · es directo · el siguiente sale en cinco minutos. En la llamada: vas en el autobús, con diez minutos de retraso · llegas sobre las ocho y cuarto.",
+   "turnos": [
+    {
+     "larsito_no": "Hei.",
+     "larsito_es": "Hola.",
+     "pista_es": "Pregunta si este autobús va al centro: «Går denne bussen til …?».",
+     "respuestas_modelo_no": [
+      "Unnskyld, går denne bussen til sentrum?",
+      "Går denne bussen til sentrum?"
+     ],
+     "bloques_no": [
+      "Går denne bussen til …?"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Nei, du må ta buss nummer tolv.",
+     "larsito_es": "No, tienes que coger el autobús número doce.",
+     "pista_es": "Pregunta desde dónde sale.",
+     "respuestas_modelo_no": [
+      "Hvor går den fra?"
+     ],
+     "bloques_no": [
+      "Hvor går den fra?"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Fra holdeplassen på andre siden av gata.",
+     "larsito_es": "Desde la parada del otro lado de la calle.",
+     "pista_es": "Pregunta si tienes que cambiar.",
+     "respuestas_modelo_no": [
+      "Må jeg bytte?"
+     ],
+     "bloques_no": [
+      "Må jeg bytte?"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Nei, den går direkte.",
+     "larsito_es": "No, va directo.",
+     "pista_es": "Pregunta cuándo sale el siguiente.",
+     "respuestas_modelo_no": [
+      "Når går den neste?",
+      "Takk. Når går den neste?"
+     ],
+     "bloques_no": [
+      "Når går den neste?"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Om fem minutter.",
+     "larsito_es": "Dentro de cinco minutos.",
+     "pista_es": "Da las gracias por la ayuda.",
+     "respuestas_modelo_no": [
+      "Takk for hjelpen.",
+      "Flott, takk for hjelpen."
+     ],
+     "bloques_no": [
+      "Takk for hjelpen."
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Hei, det er Samir.",
+     "larsito_es": "Hola, soy Samir.",
+     "pista_es": "Avisa de que llegas un poco tarde.",
+     "respuestas_modelo_no": [
+      "Hei, jeg blir litt forsinket.",
+      "Jeg blir litt forsinket."
+     ],
+     "bloques_no": [
+      "Jeg blir litt forsinket."
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Ok. Hvor er du nå?",
+     "larsito_es": "Vale. ¿Dónde estás ahora?",
+     "pista_es": "Estás en el autobús y lleva diez minutos de retraso.",
+     "respuestas_modelo_no": [
+      "Jeg sitter på bussen. Den er ti minutter forsinket."
+     ],
+     "bloques_no": [
+      "Jeg sitter på bussen.",
+      "Den er ti minutter forsinket."
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Når er du her?",
+     "larsito_es": "¿Cuándo llegas?",
+     "pista_es": "Sobre las ocho y cuarto: «Cirka …».",
+     "respuestas_modelo_no": [
+      "Cirka kvart over åtte."
+     ],
+     "bloques_no": [
+      "Cirka kvart over åtte."
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Greit. Gå rett fram til butikken og ta til venstre ved banken. Send en melding når du er framme.",
+     "larsito_es": "Vale. Sigue recto hasta la tienda y gira a la izquierda en el banco. Manda un mensaje cuando llegues.",
+     "pista_es": "Confirma que lo harás.",
+     "respuestas_modelo_no": [
+      "Det gjør jeg."
+     ],
+     "bloques_no": [
+      "Det gjør jeg."
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    }
+   ],
+   "cierre": {
+    "conserva": "Si has preguntado con el verbo delante, «Går denne bussen …?», «Må jeg bytte?», y en la llamada has dado los minutos de retraso y la hora aproximada por separado, esta escena está hecha.",
+    "ahora": "Si has preguntado con una sola palabra, «Sentrum?», o has mezclado los diez minutos con la hora de llegada, vuelve a la tabla de las cuatro preguntas y a la llamada de Recto, a la izquierda y diez minutos tarde.",
+    "repite": "Vuelve a hacer las dos escenas con la misma tarjeta, sin mirar la pista ni los bloques."
+   }
+  },
+  {
    "id": "LARS-PREA1-U01",
    "modo": "rollespill",
    "modo_contrato": "REAL_LIFE",
