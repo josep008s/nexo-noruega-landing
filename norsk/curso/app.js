@@ -63,6 +63,22 @@
 
   // ---------- Utilidades ----------
 
+  // Las tablas anchas se desplazan en horizontal en móvil: la región que las
+  // contiene tiene que poder recibir el foco para que el teclado también llegue.
+  function envolverTablas(cuerpo) {
+    Array.prototype.slice.call(cuerpo.querySelectorAll("table")).forEach(function (t) {
+      if (t.parentElement && t.parentElement.classList.contains("tabla-scroll")) return;
+      var caja = document.createElement("div");
+      caja.className = "tabla-scroll";
+      caja.tabIndex = 0;
+      caja.setAttribute("role", "region");
+      var cabeceras = Array.prototype.slice.call(t.querySelectorAll("th")).map(function (th) { return th.textContent.trim(); }).filter(Boolean);
+      caja.setAttribute("aria-label", cabeceras.length ? "Tabla: " + cabeceras.join(", ") : "Tabla");
+      t.parentNode.insertBefore(caja, t);
+      caja.appendChild(t);
+    });
+  }
+
   function el(tag, clase, texto) {
     var n = document.createElement(tag);
     if (clase) n.className = clase;
@@ -848,6 +864,7 @@
       bloque.appendChild(el("h2", null, s.titulo));
       var cuerpo = el("div", "seccion-cuerpo");
       cuerpo.innerHTML = s.html || "";
+      envolverTablas(cuerpo);
       bloque.appendChild(cuerpo);
       (destino || lector).appendChild(bloque);
       return bloque;
@@ -990,6 +1007,7 @@
       if (s.titulo) bloque.appendChild(el("h2", null, s.titulo));
       var cuerpo = el("div", "seccion-cuerpo");
       cuerpo.innerHTML = s.html || "";
+      envolverTablas(cuerpo);
       bloque.appendChild(cuerpo);
       (destino || lector).appendChild(bloque);
     }

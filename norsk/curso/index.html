@@ -204,7 +204,9 @@
     .seccion-cuerpo pre code{color:inherit;background:none;border:0;padding:0;font-size:inherit}
     .seccion-cuerpo blockquote{background:transparent;border-left:3px solid var(--aurora);padding:3px 0 3px 22px;margin:30px 0}
     .seccion-cuerpo blockquote p{font-size:1.07rem;color:var(--tinta-suave);font-style:italic;margin-bottom:0}
-    .seccion-cuerpo table{border-collapse:separate;border-spacing:0;width:100%;margin:30px 0;font-size:.97rem;display:block;overflow-x:auto;background:var(--blanco);box-shadow:var(--sombra-clara)}
+    .seccion-cuerpo .tabla-scroll{margin:30px 0;overflow-x:auto;border-radius:6px}
+    .seccion-cuerpo .tabla-scroll:focus-visible{outline:2px solid var(--fiordo);outline-offset:3px}
+    .seccion-cuerpo table{border-collapse:separate;border-spacing:0;width:100%;margin:0;font-size:.97rem;background:var(--blanco);box-shadow:var(--sombra-clara)}
     .seccion-cuerpo thead{background:var(--noche);color:var(--nieve)}
     .seccion-cuerpo th,.seccion-cuerpo td{border-right:1px solid var(--linea-clara);border-bottom:1px solid var(--linea-clara);padding:13px 15px;text-align:left;vertical-align:top;min-width:150px}
     .seccion-cuerpo th{font-family:var(--sg);font-size:.74rem;letter-spacing:.07em;text-transform:uppercase;color:var(--nieve)}
@@ -264,7 +266,7 @@
       .lector-seccion{padding-top:42px}.lector-seccion > h2{grid-template-columns:38px 1fr;gap:10px}.seccion-cuerpo p{font-size:1.06rem;line-height:1.76}.seccion-cuerpo li{font-size:1.03rem}
       .lesson-apoyo > summary{gap:10px}.lesson-apoyo .abrir{font-size:0}.lesson-apoyo .abrir::after{font-size:1.15rem}
       .seccion-cuerpo pre{margin-left:-8px;margin-right:-8px;padding:21px 18px;font-size:.88rem}
-      .seccion-cuerpo table{width:calc(100% + 16px);margin-left:-8px}
+      .seccion-cuerpo .tabla-scroll{width:calc(100% + 16px);margin-left:-8px}
       .ruta21{margin-left:-4px;margin-right:-4px;padding:23px 20px}
       .marcar{grid-template-columns:1fr;padding:25px}.marcar .btn{min-width:0;width:100%}
       .nav-pieza{grid-template-columns:1fr}.nav-pieza .nav-card.siguiente{text-align:left}
@@ -470,8 +472,8 @@
     </div>
   </footer>
 
-  <script src="/norsk/curso/practica.js?v=20260905a"></script>
+  <script src="/norsk/curso/practica.js?v=20260905b"></script>
 
-  <script src="/norsk/curso/app.js?v=20260905a"></script>
+  <script src="/norsk/curso/app.js?v=20260905b"></script>
 </body>
 </html>
