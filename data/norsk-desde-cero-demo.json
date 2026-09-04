@@ -4,8 +4,8 @@
   "ruta": "norsk-desde-cero-a2",
   "actualizado": "2026-09-04",
   "aviso": "Material propio de NEXO NORSK. NEXO NORSK es un proyecto independiente y no tiene relación con HK-dir, con UDI ni con ningún centro de examen. Este recorrido no promete un nivel, un aprobado ni un trámite.",
-  "piezas_totales": 18,
-  "lecciones_totales": 18
+  "piezas_totales": 24,
+  "lecciones_totales": 24
  },
  "piezas": [
   {
@@ -2273,6 +2273,60 @@
    "zona": "A1",
    "unidad": "A1-U05",
    "resumen": "Has bajado en la parada correcta y no ves el edificio: seguir la ruta que te dicen, avisar de que llegas diez minutos tarde y decir a qué hora estarás."
+  },
+  {
+   "codigo": "A1-U06-L01",
+   "tipo": "leccion",
+   "titulo": "Necesito una cita",
+   "orden": 19,
+   "zona": "A1",
+   "unidad": "A1-U06",
+   "resumen": "Llamar a una recepción para pedir cita: decir qué te pasa con una frase, entender la hora que te ofrecen, rechazarla si no puedes, pedir otra y confirmar el día y la hora."
+  },
+  {
+   "codigo": "A1-U06-L02",
+   "tipo": "leccion",
+   "titulo": "¿Puedes decirlo otra vez?",
+   "orden": 20,
+   "zona": "A1",
+   "unidad": "A1-U06",
+   "resumen": "En una sala de consulta, no fingir que entiendes: confirmar la instrucción, decir dónde te duele y qué no puedes hacer, y pedir que te lo enseñen antes de moverte."
+  },
+  {
+   "codigo": "A1-U07-L01",
+   "tipo": "leccion",
+   "titulo": "Primero esto, después aquello",
+   "orden": 21,
+   "zona": "A1",
+   "unidad": "A1-U07",
+   "resumen": "Tu primer día: entender el orden de tres tareas y el horario que te dicen, preguntar dónde está lo que necesitas, confirmar qué protección usar y pasarle a un compañero dos datos de un cambio de turno."
+  },
+  {
+   "codigo": "A1-U07-L02",
+   "tipo": "leccion",
+   "titulo": "No adivines la tarea",
+   "orden": 22,
+   "zona": "A1",
+   "unidad": "A1-U07",
+   "resumen": "Te dicen «Ta kassene til rom tre», hay seis cajas y la persona ya se aleja: abrir la instrucción con preguntas pequeñas, avisar de que la carretilla no funciona y preguntar qué hacer."
+  },
+  {
+   "codigo": "A1-U08-L01",
+   "tipo": "leccion",
+   "titulo": "¿Tomamos un café el jueves?",
+   "orden": 23,
+   "zona": "A1",
+   "unidad": "A1-U08",
+   "resumen": "Un compañero te propone un café después del trabajo: reaccionar, decir cuándo puedes, proponer otra hora si la suya no te va, acordar el sitio y cerrar el plan repitiendo día, hora y lugar."
+  },
+  {
+   "codigo": "A1-U08-L02",
+   "tipo": "leccion",
+   "titulo": "Cambio de plan",
+   "orden": 24,
+   "zona": "A1",
+   "unidad": "A1-U08",
+   "resumen": "El plan estaba cerrado, tu turno acaba más tarde y la otra persona ya está en camino: avisar pronto, nombrar el cambio, proponer otra opción, conseguir la confirmación y, al acabar, despedirte bien."
   }
  ]
 }

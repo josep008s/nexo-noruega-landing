@@ -748,6 +748,460 @@
    }
   },
   {
+   "id": "LARS-A1-U06",
+   "modo": "rollespill",
+   "modo_contrato": "REAL_LIFE",
+   "nivel": "A1",
+   "titulo": "La cita por teléfono y la sala de consulta",
+   "leccion": [
+    "A1-U06-L01",
+    "A1-U06-L02"
+   ],
+   "contexto_es": "Role-play ficticio en dos partes, sin ningún dato médico real. Primero llamas a una recepción: pides cita para el jueves, dices el síntoma de la tarjeta, rechazas la primera hora, pides otra y confirmas día y hora. Después, en una sala de consulta, Larsito te da instrucciones: tú confirmas cuál es, pides que la repita, pides que te la enseñe, dices tu límite y confirmas con quién tienes que hablar. Usa solo la tarjeta ficticia; no digas nada sobre tu salud real.",
+   "datos_ficticios_es": "Cita para el jueves · te duele la cabeza · a las nueve no puedes · aceptas las once y media. En la sala: brazo izquierdo · no puedes levantar el brazo del todo · la persona con la que hablar después lleva chaqueta azul y está junto a la recepción.",
+   "turnos": [
+    {
+     "larsito_no": "God dag. Hva kan jeg hjelpe deg med?",
+     "larsito_es": "Buenos días. ¿En qué puedo ayudarte?",
+     "pista_es": "Pide una cita para el jueves: «Jeg vil gjerne bestille …».",
+     "respuestas_modelo_no": [
+      "Jeg vil gjerne bestille en time på torsdag.",
+      "Jeg vil gjerne bestille en time."
+     ],
+     "bloques_no": [
+      "Jeg vil gjerne bestille en time …"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Hva gjelder det?",
+     "larsito_es": "¿De qué se trata?",
+     "pista_es": "Te duele la cabeza: «Jeg har vondt i …».",
+     "respuestas_modelo_no": [
+      "Jeg har vondt i hodet."
+     ],
+     "bloques_no": [
+      "Jeg har vondt i …"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Vi har en time klokka ni.",
+     "larsito_es": "Tenemos una hora a las nueve.",
+     "pista_es": "A las nueve no puedes; pide una hora más tarde.",
+     "respuestas_modelo_no": [
+      "Jeg kan ikke klokka ni. Har dere en time senere?"
+     ],
+     "bloques_no": [
+      "Jeg kan ikke klokka …",
+      "Har dere en time senere?"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Ja, klokka halv tolv.",
+     "larsito_es": "Sí, a las once y media.",
+     "pista_es": "Acepta y confirma día y hora con «riktig?».",
+     "respuestas_modelo_no": [
+      "Det passer. Torsdag klokka halv tolv, riktig?"
+     ],
+     "bloques_no": [
+      "Det passer.",
+      "… riktig?"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Ja, det stemmer. Ha det.",
+     "larsito_es": "Sí, correcto. Adiós.",
+     "pista_es": "Da las gracias y despídete.",
+     "respuestas_modelo_no": [
+      "Takk. Ha det."
+     ],
+     "bloques_no": [
+      "Takk. Ha det."
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Sett deg her. Løft venstre arm.",
+     "larsito_es": "Siéntate aquí. Levanta el brazo izquierdo.",
+     "pista_es": "Confirma que es el brazo izquierdo: «Mener du …?».",
+     "respuestas_modelo_no": [
+      "Mener du venstre arm?"
+     ],
+     "bloques_no": [
+      "Mener du …?"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Ja, venstre arm. Beveg hånden sakte.",
+     "larsito_es": "Sí, el brazo izquierdo. Mueve la mano despacio.",
+     "pista_es": "No lo has entendido; pide que lo repita.",
+     "respuestas_modelo_no": [
+      "Beklager, kan du si det en gang til?",
+      "Kan du si det en gang til?"
+     ],
+     "bloques_no": [
+      "Kan du si det en gang til?"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Beveg hånden sakte.",
+     "larsito_es": "Mueve la mano despacio.",
+     "pista_es": "Pide que te lo enseñe.",
+     "respuestas_modelo_no": [
+      "Kan du vise meg?"
+     ],
+     "bloques_no": [
+      "Kan du vise meg?"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Ja, sånn. Gjør det vondt?",
+     "larsito_es": "Sí, así. ¿Duele?",
+     "pista_es": "Un poco, y no puedes levantar el brazo del todo.",
+     "respuestas_modelo_no": [
+      "Litt. Jeg kan ikke løfte armen helt.",
+      "Ja, litt. Jeg kan ikke løfte armen helt."
+     ],
+     "bloques_no": [
+      "Jeg kan ikke …"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Ok. Stopp. Snakk med personen i blå jakke ved resepsjonen.",
+     "larsito_es": "Vale. Para. Habla con la persona de la chaqueta azul junto a la recepción.",
+     "pista_es": "Confirma con quién: «Mener du personen …?».",
+     "respuestas_modelo_no": [
+      "Mener du personen i blå jakke ved resepsjonen?"
+     ],
+     "bloques_no": [
+      "Mener du personen i … ved …?"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    }
+   ],
+   "cierre": {
+    "conserva": "Si has pedido la cita entera, has rechazado la hora sin colgar y has confirmado con «riktig?», y en la sala has confirmado con «Mener du …?» antes de moverte y has dicho tu límite con «Jeg kan ikke», esta escena está hecha.",
+    "ahora": "Si has dicho «ja» a la primera hora sin poder, o has hecho la instrucción sin entenderla, vuelve a los cuatro pasos de Necesito una cita y a la tabla de reparar de ¿Puedes decirlo otra vez?.",
+    "repite": "Vuelve a hacer las dos escenas con la misma tarjeta, sin mirar la pista ni los bloques."
+   }
+  },
+  {
+   "id": "LARS-A1-U07",
+   "modo": "rollespill",
+   "modo_contrato": "REAL_LIFE",
+   "nivel": "A1",
+   "titulo": "El primer día y el almacén",
+   "leccion": [
+    "A1-U07-L01",
+    "A1-U07-L02"
+   ],
+   "contexto_es": "Role-play ficticio en dos partes, en una empresa inventada. Primero, tu responsable te dice las tareas del día: tú preguntas dónde está la lista, cuándo es la pausa y si tienes que usar guantes, confirmas que avisarás al terminar y devuelves un cambio de turno para comprobarlo. Después, en el almacén, te piden que lleves unas cajas: confirmas cuáles y cuántas, avisas de que la carretilla no funciona, dices qué le pasa y pides que te enseñen dónde está la otra. Usa la tarjeta ficticia.",
+   "datos_ficticios_es": "Tareas: revisar la lista (junto a la impresora) · reponer vasos y papel · pausa a las once · después de la pausa, el almacén, con guantes. Cambio de turno: martes, la una, Amir en el almacén. En el almacén: las cajas azules · solo las dos primeras · la carretilla no funciona, una rueda atascada.",
+   "turnos": [
+    {
+     "larsito_no": "Velkommen. I dag skal du først sjekke listen. Etterpå fyller du på med kopper og papir.",
+     "larsito_es": "Bienvenido. Hoy primero revisas la lista. Luego repones vasos y papel.",
+     "pista_es": "Pregunta dónde está la lista: «Hvor finner jeg …?».",
+     "respuestas_modelo_no": [
+      "Hvor finner jeg listen?"
+     ],
+     "bloques_no": [
+      "Hvor finner jeg …?"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Den ligger ved printeren.",
+     "larsito_es": "Está junto a la impresora.",
+     "pista_es": "Pregunta cuándo es la pausa.",
+     "respuestas_modelo_no": [
+      "Når har vi pause?",
+      "Ok. Når har vi pause?"
+     ],
+     "bloques_no": [
+      "Når har vi pause?"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Klokka elleve. Etter pausen jobber du på lageret.",
+     "larsito_es": "A las once. Después de la pausa trabajas en el almacén.",
+     "pista_es": "Pregunta si tienes que usar guantes allí: «Skal jeg …?».",
+     "respuestas_modelo_no": [
+      "Skal jeg bruke hansker der?"
+     ],
+     "bloques_no": [
+      "Skal jeg bruke …?"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Ja. Hansker og vernebriller ligger i skapet. Si fra når du er ferdig.",
+     "larsito_es": "Sí. Los guantes y las gafas están en el armario. Avisa cuando termines.",
+     "pista_es": "Confirma que lo harás.",
+     "respuestas_modelo_no": [
+      "Det skal jeg gjøre.",
+      "Det gjør jeg."
+     ],
+     "bloques_no": [
+      "Det skal jeg gjøre."
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Og en beskjed til Amir: På tirsdag begynner kveldsvakten klokka ett. Han skal være på lageret.",
+     "larsito_es": "Y un mensaje para Amir: el martes el turno de tarde empieza a la una. Él estará en el almacén.",
+     "pista_es": "Devuelve día, hora y lugar y pregunta si es correcto.",
+     "respuestas_modelo_no": [
+      "Tirsdag begynner kveldsvakten klokka ett. Amir skal være på lageret. Stemmer det?"
+     ],
+     "bloques_no": [
+      "… Stemmer det?"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Ja, det stemmer. Og nå: kan du ta kassene til rom tre?",
+     "larsito_es": "Sí, correcto. Y ahora: ¿puedes llevar las cajas a la sala tres?",
+     "pista_es": "Confirma el objeto: ¿las cajas azules?",
+     "respuestas_modelo_no": [
+      "Mener du de blå kassene?"
+     ],
+     "bloques_no": [
+      "Mener du …?"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Ja, de som står ved døren.",
+     "larsito_es": "Sí, las que están junto a la puerta.",
+     "pista_es": "Confirma la cantidad: ¿todas?",
+     "respuestas_modelo_no": [
+      "Skal jeg ta alle?"
+     ],
+     "bloques_no": [
+      "Skal jeg ta alle?"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Nei, bare de to første.",
+     "larsito_es": "No, solo las dos primeras.",
+     "pista_es": "Avisa de que la carretilla no funciona.",
+     "respuestas_modelo_no": [
+      "Ok. Men trallen virker ikke.",
+      "Trallen virker ikke."
+     ],
+     "bloques_no": [
+      "… virker ikke."
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Hva er problemet?",
+     "larsito_es": "¿Cuál es el problema?",
+     "pista_es": "Una de las ruedas está atascada.",
+     "respuestas_modelo_no": [
+      "Det ene hjulet sitter fast."
+     ],
+     "bloques_no": [
+      "Det ene hjulet sitter fast."
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "La den stå, og sett en lapp på den. Bruk den andre trallen.",
+     "larsito_es": "Déjala ahí y ponle una nota. Usa la otra carretilla.",
+     "pista_es": "Pide que te enseñe dónde está.",
+     "respuestas_modelo_no": [
+      "Kan du vise meg hvor den står?"
+     ],
+     "bloques_no": [
+      "Kan du vise meg hvor den står?"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Ja, kom.",
+     "larsito_es": "Sí, ven.",
+     "pista_es": "Da las gracias.",
+     "respuestas_modelo_no": [
+      "Takk."
+     ],
+     "bloques_no": [
+      "Takk."
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    }
+   ],
+   "cierre": {
+    "conserva": "Si has preguntado dónde, cuándo y qué se espera de ti antes de actuar, has devuelto el cambio con «Stemmer det?», y en el almacén has confirmado cuáles y cuántas y has dicho el problema con lo que se ve, esta escena está hecha.",
+    "ahora": "Si has dicho «ja» sin confirmar, o has propuesto arreglar la carretilla, vuelve a la tabla de confirmar de No adivines la tarea.",
+    "repite": "Vuelve a hacer las dos escenas con la misma tarjeta, sin mirar la pista ni los bloques."
+   }
+  },
+  {
+   "id": "LARS-A1-U08",
+   "modo": "rollespill",
+   "modo_contrato": "REAL_LIFE",
+   "nivel": "A1",
+   "titulo": "El café del jueves y el cambio de plan",
+   "leccion": [
+    "A1-U08-L01",
+    "A1-U08-L02"
+   ],
+   "contexto_es": "Role-play ficticio en dos partes. Primero, un compañero te propone un café el jueves: aceptas, dices que a las cuatro no puedes, aceptas la otra hora, preguntas dónde y cierras el plan con día, hora y lugar. Después, el jueves, le llamas: avisas de que llegas tarde y por qué, das la hora aproximada, propones quedar fuera de la cafetería, dices que mandarás un mensaje y, al acabar, te despides. Usa la tarjeta ficticia.",
+   "datos_ficticios_es": "Café el jueves después del trabajo · a las cuatro no puedes · quedáis a las cuatro y media en la cafetería de la biblioteca. El jueves: terminas más tarde · llegas sobre las cinco y cuarto · propones quedar fuera de la cafetería.",
+   "turnos": [
+    {
+     "larsito_no": "Vil du ta en kaffe etter jobb på torsdag?",
+     "larsito_es": "¿Quieres tomar un café después del trabajo el jueves?",
+     "pista_es": "Acepta, pero a las cuatro no puedes: «Gjerne, men …».",
+     "respuestas_modelo_no": [
+      "Gjerne, men jeg kan ikke klokka fire.",
+      "Ja, gjerne, men jeg kan ikke klokka fire."
+     ],
+     "bloques_no": [
+      "Gjerne, men jeg kan ikke klokka …"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Kan vi møtes halv fem?",
+     "larsito_es": "¿Podemos quedar a las cuatro y media?",
+     "pista_es": "Acepta y pregunta dónde.",
+     "respuestas_modelo_no": [
+      "Ja, det passer. Hvor møtes vi?"
+     ],
+     "bloques_no": [
+      "Ja, det passer.",
+      "Hvor møtes vi?"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "På kafeen ved biblioteket.",
+     "larsito_es": "En la cafetería de la biblioteca.",
+     "pista_es": "Cierra el plan repitiendo día, hora y lugar.",
+     "respuestas_modelo_no": [
+      "Fint. Torsdag halv fem på kafeen ved biblioteket.",
+      "Da sier vi torsdag halv fem på kafeen ved biblioteket."
+     ],
+     "bloques_no": [
+      "Da sier vi …"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Hei, det er Nora.",
+     "larsito_es": "Hola, soy Nora.",
+     "pista_es": "Avisa de que llegas tarde y por qué: terminas más tarde.",
+     "respuestas_modelo_no": [
+      "Hei, jeg blir litt forsinket. Jeg slutter senere i dag.",
+      "Jeg blir litt forsinket. Jeg slutter senere i dag."
+     ],
+     "bloques_no": [
+      "Jeg blir litt forsinket.",
+      "Jeg slutter senere i dag."
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Ok. Når kommer du?",
+     "larsito_es": "Vale. ¿Cuándo llegas?",
+     "pista_es": "Sobre las cinco y cuarto, y propón quedar fuera de la cafetería: «… i stedet?».",
+     "respuestas_modelo_no": [
+      "Cirka kvart over fem. Kan vi møtes utenfor kafeen i stedet?"
+     ],
+     "bloques_no": [
+      "Cirka …",
+      "Kan vi møtes … i stedet?"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Ja, det går fint. Jeg er på biblioteket nå.",
+     "larsito_es": "Sí, me va bien. Ahora estoy en la biblioteca.",
+     "pista_es": "Di que mandarás un mensaje cuando estés de camino.",
+     "respuestas_modelo_no": [
+      "Flott. Jeg sender en melding når jeg er på vei.",
+      "Jeg sender en melding når jeg er på vei."
+     ],
+     "bloques_no": [
+      "Jeg sender en melding når jeg er på vei."
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Gjør det. Vi sees snart.",
+     "larsito_es": "Hazlo. Nos vemos pronto.",
+     "pista_es": "Después del café: da las gracias por hoy.",
+     "respuestas_modelo_no": [
+      "Takk for i dag. Det var hyggelig."
+     ],
+     "bloques_no": [
+      "Takk for i dag.",
+      "Det var hyggelig."
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Takk, i like måte. Vi snakkes. God helg!",
+     "larsito_es": "Gracias, igualmente. Hablamos. ¡Buen fin de semana!",
+     "pista_es": "Devuelve el buen fin de semana.",
+     "respuestas_modelo_no": [
+      "God helg!",
+      "Ja. God helg!"
+     ],
+     "bloques_no": [
+      "God helg!"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    }
+   ],
+   "cierre": {
+    "conserva": "Si has dicho que sí y que no en la misma frase con «men», has cerrado el plan con día, hora y lugar, y después has avisado pronto, has propuesto otra opción con «i stedet» y te has despedido con el cierre que tocaba, esta escena está hecha.",
+    "ahora": "Si has respondido solo «ja» a la propuesta, o has explicado el retraso en cinco frases, vuelve a los cuatro pasos de ¿Tomamos un café el jueves? y a la tabla del cambio de Cambio de plan.",
+    "repite": "Vuelve a hacer las dos escenas con la misma tarjeta, sin mirar la pista ni los bloques."
+   }
+  },
+  {
    "id": "LARS-PREA1-U01",
    "modo": "rollespill",
    "modo_contrato": "REAL_LIFE",
