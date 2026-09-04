@@ -672,7 +672,7 @@
     var verboDicho = false;
     if (k > 0) {
       var posDado = dado.map(normalizar).indexOf(normalizar(solucion[k]));
-      if (posDado > k) {
+      if (posDado >= 0 && posDado !== k) {
         partes.push("«" + solucion[k] + "» es el verbo y va justo después de «" + solucion.slice(0, k).join(" ").replace(/[,.]$/, "") + "», en segunda posición.");
         verboDicho = true;
       }
@@ -1212,7 +1212,16 @@
         vibrar(acierto ? 10 : [30, 40, 30]);
         var fb = el("div", "feedback " + (acierto ? "bien" : "mal"));
         fb.setAttribute("role", "status");
-        fb.appendChild(el("b", null, acierto ? "Bien." : (bien && conPista ? "Con ayuda, pero bien." : "No es esa.")));
+        var titulosError = {
+          ordena: "Revisa el orden.",
+          completa: "Revisa el hueco.",
+          elige: "Compara las opciones.",
+          empareja: "Revisa la pareja.",
+          transforma: "Revisa el cambio.",
+          escribe: "Compara tu frase.",
+          mc: "Compara las opciones.",
+        };
+        fb.appendChild(el("b", null, acierto ? "Bien." : (bien && conPista ? "Con ayuda, pero bien." : (titulosError[item.tipo] || "Revísalo una vez más."))));
         var diag = acierto ? "" : diagnosticar(item, dado, item.mecanismo);
         if (diag) fb.appendChild(el("p", "diagnostico", diag));
         var sol = fraseSolucion(item);
@@ -1419,7 +1428,7 @@
     txt.appendChild(el("strong", null, hechos ? "Seguir practicando" : (total ? numero(total) + " ejercicios interactivos" : "Ejercicios interactivos")));
     txt.appendChild(el("small", null, hechos
       ? "Llevas " + numero(hechos) + (total ? " de " + numero(total) : "") + ". Arrastra, elige, completa y escribe con las frases de este mecanismo."
-      : "Al final de la pieza: arrastra, elige, completa, empareja y escribe con las frases de este mecanismo, de ocho en ocho."));
+      : "En esta sesión: arrastra, elige, completa, empareja y escribe con las frases del mecanismo, de ocho en ocho."));
     caja.appendChild(txt);
     caja.appendChild(el("span", "flecha", "↓"));
     caja.addEventListener("click", function (e) {
