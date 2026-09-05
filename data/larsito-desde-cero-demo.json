@@ -64,7 +64,7 @@
     "A1-U01-L02"
    ],
    "contexto_es": "Role-play ficticio en dos partes. Primero, un compañero de curso te hace preguntas con el verbo delante y tú le devuelves dos y le presentas a alguien. Después, la recepción escribe mal un dato y tú lo aíslas y lo corriges. Usa la tarjeta ficticia.",
-   "datos_ficticios_es": "Leo Santos · viene de Argentina · vive en Trondheim · trabaja en un restaurante · su compañera es Ana · teléfono ficticio 412 35 806.",
+   "datos_ficticios_es": "Leo Santos · viene de Argentina · vive en Trondheim · trabaja en un restaurante · su compañera es Ana · teléfono ficticio del audio, 412 35 806.",
    "turnos": [
     {
      "larsito_no": "Hei. Jeg heter Amir. Er du ny her?",
@@ -112,12 +112,41 @@
     {
      "larsito_no": "Jeg jobber på lageret. Hva med deg? Bor du i Oslo?",
      "larsito_es": "Yo trabajo en el almacén. ¿Y tú? ¿Vives en Oslo?",
-     "pista_es": "Niega con «ikke» detrás del verbo y da tu ciudad.",
+     "pista_es": "Niega con «ikke» detrás del verbo, da tu ciudad y devuélvele la pregunta.",
      "respuestas_modelo_no": [
+      "Nei, jeg bor ikke i Oslo. Jeg bor i Trondheim. Hvor bor du?",
       "Nei, jeg bor ikke i Oslo. Jeg bor i Trondheim."
      ],
      "bloques_no": [
-      "Jeg bor ikke i …"
+      "Jeg bor ikke i …",
+      "Hvor bor du?"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Jeg bor i Lillestrøm.",
+     "larsito_es": "Yo vivo en Lillestrøm.",
+     "pista_es": "Pregúntale si es nuevo aquí: «Er du …?».",
+     "respuestas_modelo_no": [
+      "Er du ny her?"
+     ],
+     "bloques_no": [
+      "Er du ny her?"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Nei, jeg jobber her.",
+     "larsito_es": "No, yo trabajo aquí.",
+     "pista_es": "Sigue: ahora te preguntan por Ana.",
+     "respuestas_modelo_no": [
+      "Ok.",
+      "Greit."
+     ],
+     "bloques_no": [
+      "Greit."
      ],
      "audio_no": null,
      "audio_modelo": null
@@ -159,6 +188,32 @@
      ],
      "bloques_no": [
       "Nei, det er …"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Takk. Og fornavnet, Leo: var det med E-O?",
+     "larsito_es": "Gracias. Y el nombre, Leo: ¿era con E-O?",
+     "pista_es": "No sabes si ha dicho E u O al final: aísla la duda con «Var det … eller …?».",
+     "respuestas_modelo_no": [
+      "Var det E eller O?"
+     ],
+     "bloques_no": [
+      "Var det … eller …?"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "O. L-E-O. Riktig?",
+     "larsito_es": "O. L-E-O. ¿Correcto?",
+     "pista_es": "Es correcto: confirma.",
+     "respuestas_modelo_no": [
+      "Ja, det stemmer."
+     ],
+     "bloques_no": [
+      "Ja, det stemmer."
      ],
      "audio_no": null,
      "audio_modelo": null
@@ -207,7 +262,7 @@
    "cierre": {
     "conserva": "Si has respondido con «Ja» o «Nei» a las preguntas con el verbo delante, has presentado a Ana y has corregido la letra con «Nei, det er», esta escena está hecha.",
     "ahora": "Si te has quedado en blanco al negar, vuelve a «ikke detrás del verbo» en Me presento.",
-    "repite": "Cambia la tarjeta: Samira · Marokko · Sandvika · barnehage · compañero Omar · teléfono ficticio 412 35 806."
+    "repite": "Vuelve a hacer la escena con la misma tarjeta, sin mirar la pista ni los bloques."
    }
   },
   {
@@ -221,7 +276,7 @@
     "A1-U02-L02"
    ],
    "contexto_es": "Role-play ficticio en dos partes. Primero, en la pausa, un compañero te pregunta por tu rutina y tú le preguntas por la suya. Después, tu responsable te cambia el turno de mañana: confirmas la hora nueva y explicas dónde estarás con el verbo en segundo lugar. Usa la tarjeta ficticia.",
-   "datos_ficticios_es": "Te levantas a las seis · vas en autobús · empiezas a las ocho · terminas a las cuatro · mañana empiezas a las nueve y trabajas en recepción antes de la pausa.",
+   "datos_ficticios_es": "Te levantas a las seis · vas en autobús · empiezas a las ocho · terminas a las cuatro · pausa a las doce · mañana empiezas a las nueve · el viernes trabajas en recepción.",
    "turnos": [
     {
      "larsito_no": "Hei. Når står du opp?",
@@ -252,27 +307,27 @@
     {
      "larsito_no": "Når begynner du?",
      "larsito_es": "¿Cuándo empiezas?",
-     "pista_es": "Hora de inicio y hora de final, y devuélvele la pregunta.",
+     "pista_es": "Hora de inicio y hora de final, y devuélvele la pregunta con «Når slutter du?».",
      "respuestas_modelo_no": [
-      "Jeg begynner klokka åtte og slutter klokka fire. Når begynner du?",
-      "Jeg begynner klokka åtte. Når begynner du?"
+      "Jeg begynner klokka åtte og slutter klokka fire. Når slutter du?",
+      "Jeg begynner klokka åtte. Når slutter du?"
      ],
      "bloques_no": [
       "Jeg begynner klokka …",
-      "Når begynner du?"
+      "Når slutter du?"
      ],
      "audio_no": null,
      "audio_modelo": null
     },
     {
-     "larsito_no": "Jeg begynner halv ni. Når slutter du?",
-     "larsito_es": "Yo empiezo a las ocho y media. ¿Cuándo terminas?",
-     "pista_es": "La hora de final de la tarjeta.",
+     "larsito_no": "Jeg slutter halv fire. Når har du pause?",
+     "larsito_es": "Yo termino a las tres y media. ¿Cuándo haces la pausa?",
+     "pista_es": "La pausa: a las doce.",
      "respuestas_modelo_no": [
-      "Jeg slutter klokka fire."
+      "Jeg har pause klokka tolv."
      ],
      "bloques_no": [
-      "Jeg slutter klokka …"
+      "Jeg har pause klokka …"
      ],
      "audio_no": null,
      "audio_modelo": null
@@ -291,15 +346,14 @@
      "audio_modelo": null
     },
     {
-     "larsito_no": "Ja, det stemmer. Hvor jobber du før pausen?",
-     "larsito_es": "Sí, es correcto. ¿Dónde trabajas antes de la pausa?",
-     "pista_es": "Empieza por «I morgen» y pon el verbo segundo: mañana trabajas en recepción.",
+     "larsito_no": "Ja, det stemmer. Og på fredag jobber du i resepsjonen. Hvor jobber du på fredag?",
+     "larsito_es": "Sí, correcto. Y el viernes trabajas en recepción. ¿Dónde trabajas el viernes?",
+     "pista_es": "Empieza por «På fredag» y pon el verbo segundo.",
      "respuestas_modelo_no": [
-      "I morgen jobber jeg i resepsjonen.",
-      "Jeg jobber i resepsjonen."
+      "På fredag jobber jeg i resepsjonen."
      ],
      "bloques_no": [
-      "I morgen jobber jeg …"
+      "På fredag jobber jeg …"
      ],
      "audio_no": null,
      "audio_modelo": null
@@ -333,9 +387,9 @@
     }
    ],
    "cierre": {
-    "conserva": "Si has contado tu rutina con el verbo en «-r», has confirmado la hora nueva y has puesto el verbo segundo detrás de «I morgen» y «Vanligvis», esta escena está hecha.",
-    "ahora": "Si te ha salido «I morgen jeg jobber», vuelve al esqueleto de dos campos de Hoy cambia el horario.",
-    "repite": "Cambia la tarjeta: te levantas a las seis y media · tren · empiezas a las ocho y media · terminas a las cuatro menos cuarto · mañana empiezas a las diez."
+    "conserva": "Si has contado tu rutina con el verbo en «-r», has confirmado la hora nueva y has puesto el verbo segundo detrás de «På fredag» y «Vanligvis», esta escena está hecha.",
+    "ahora": "Si te ha salido «På fredag jeg jobber», vuelve al esqueleto con el tiempo delante de Hoy cambia el horario.",
+    "repite": "Vuelve a hacer la escena con la misma tarjeta, sin mirar la pista ni los bloques."
    }
   },
   {
@@ -546,7 +600,7 @@
     },
     {
      "larsito_no": "Hei. Hva kan jeg hjelpe deg med?",
-     "larsito_es": "Hola. ¿En qué te puedo ayudar?",
+     "larsito_es": "(Ahora estás en la cafetería.) Hola. ¿En qué te puedo ayudar?",
      "pista_es": "Pide un café pequeño y un panecillo con queso: «Kan jeg få …?».",
      "respuestas_modelo_no": [
       "Kan jeg få en liten kaffe og et rundstykke med ost?"
@@ -631,7 +685,7 @@
     "A1-U05-L01",
     "A1-U05-L02"
    ],
-   "contexto_es": "Role-play ficticio en dos partes. Primero, en una parada, Larsito hace de la persona que espera contigo: tú preguntas si este autobús va al centro, cuál tienes que coger, desde dónde sale, si hay que cambiar y cuándo sale el siguiente. Después llamas a un compañero: avisas de que llegas tarde, dices dónde estás y a qué hora llegas, recibes la ruta y confirmas que mandarás un mensaje. Usa la tarjeta ficticia.",
+   "contexto_es": "Role-play ficticio en dos partes. Primero, en una parada, Larsito hace de la persona que espera contigo: tú preguntas si este autobús va al centro, qué autobús tienes que coger, desde dónde sale, si hay que cambiar y cuándo sale el siguiente. Después llamas a un compañero: avisas de que llegas tarde, dices dónde estás y a qué hora llegas, recibes la ruta y confirmas que mandarás un mensaje. Usa la tarjeta ficticia.",
    "datos_ficticios_es": "Vas al centro · el autobús correcto es el número 12 · sale de la parada de enfrente · es directo · el siguiente sale en cinco minutos. En la llamada: vas en el autobús, con diez minutos de retraso · llegas sobre las ocho y cuarto.",
    "turnos": [
     {
@@ -649,8 +703,21 @@
      "audio_modelo": null
     },
     {
-     "larsito_no": "Nei, du må ta buss nummer tolv.",
-     "larsito_es": "No, tienes que coger el autobús número doce.",
+     "larsito_no": "Nei, denne går ikke til sentrum.",
+     "larsito_es": "No, este no va al centro.",
+     "pista_es": "Pregunta qué autobús tienes que coger: «Hvilken buss …?».",
+     "respuestas_modelo_no": [
+      "Hvilken buss må jeg ta?"
+     ],
+     "bloques_no": [
+      "Hvilken buss må jeg ta?"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Buss nummer tolv.",
+     "larsito_es": "El autobús número doce.",
      "pista_es": "Pregunta desde dónde sale.",
      "respuestas_modelo_no": [
       "Hvor går den fra?"
@@ -744,8 +811,22 @@
      "audio_modelo": null
     },
     {
-     "larsito_no": "Greit. Gå rett fram til butikken og ta til venstre ved banken. Send en melding når du er framme.",
-     "larsito_es": "Vale. Sigue recto hasta la tienda y gira a la izquierda en el banco. Manda un mensaje cuando llegues.",
+     "larsito_no": "Greit. Gå rett fram til butikken og ta til venstre ved banken.",
+     "larsito_es": "Vale. Sigue recto hasta la tienda y gira a la izquierda en el banco.",
+     "pista_es": "Confirma que lo has entendido: «Greit» u «Ok».",
+     "respuestas_modelo_no": [
+      "Greit.",
+      "Ok."
+     ],
+     "bloques_no": [
+      "Greit."
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Send en melding når du er framme.",
+     "larsito_es": "Manda un mensaje cuando llegues.",
      "pista_es": "Confirma que lo harás.",
      "respuestas_modelo_no": [
       "Det gjør jeg."
@@ -899,8 +980,21 @@
      "audio_modelo": null
     },
     {
-     "larsito_no": "Ok. Stopp. Snakk med personen i blå jakke ved resepsjonen.",
-     "larsito_es": "Vale. Para. Habla con la persona de la chaqueta azul junto a la recepción.",
+     "larsito_no": "Ok. Stopp.",
+     "larsito_es": "Vale. Para.",
+     "pista_es": "Responde «Ja».",
+     "respuestas_modelo_no": [
+      "Ja."
+     ],
+     "bloques_no": [
+      "Ja."
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Snakk med personen i blå jakke ved resepsjonen.",
+     "larsito_es": "Habla con la persona de la chaqueta azul junto a la recepción.",
      "pista_es": "Confirma con quién: «Mener du personen …?».",
      "respuestas_modelo_no": [
       "Mener du personen i blå jakke ved resepsjonen?"
@@ -1080,7 +1174,7 @@
    ],
    "cierre": {
     "conserva": "Si has preguntado dónde, cuándo y qué se espera de ti antes de actuar, has devuelto el cambio con «Stemmer det?», y en el almacén has confirmado cuáles y cuántas y has dicho el problema con lo que se ve, esta escena está hecha.",
-    "ahora": "Si has dicho «ja» sin confirmar, o has propuesto arreglar la carretilla, vuelve a la tabla de confirmar de No adivines la tarea.",
+    "ahora": "Si has dicho «ja» sin confirmar, o has propuesto arreglar la carretilla, vuelve a la tabla de confirmar de No adivines la tarea. Y si una tarea implica maquinaria, productos, altura o cargas que no comprendes, detente y pide que te lo enseñen: la frase no sustituye la formación.",
     "repite": "Vuelve a hacer las dos escenas con la misma tarjeta, sin mirar la pista ni los bloques."
    }
   },
@@ -1089,17 +1183,17 @@
    "modo": "rollespill",
    "modo_contrato": "REAL_LIFE",
    "nivel": "A1",
-   "titulo": "El café del jueves y el cambio de plan",
+   "titulo": "El café del viernes y el cambio de plan",
    "leccion": [
     "A1-U08-L01",
     "A1-U08-L02"
    ],
-   "contexto_es": "Role-play ficticio en dos partes. Primero, un compañero te propone un café el jueves: aceptas, dices que a las cuatro no puedes, aceptas la otra hora, preguntas dónde y cierras el plan con día, hora y lugar. Después, el jueves, le llamas: avisas de que llegas tarde y por qué, das la hora aproximada, propones quedar fuera de la cafetería, dices que mandarás un mensaje y, al acabar, te despides. Usa la tarjeta ficticia.",
-   "datos_ficticios_es": "Café el jueves después del trabajo · a las cuatro no puedes · quedáis a las cuatro y media en la cafetería de la biblioteca. El jueves: terminas más tarde · llegas sobre las cinco y cuarto · propones quedar fuera de la cafetería.",
+   "contexto_es": "Role-play ficticio en dos partes. Primero, un compañero te propone un café el viernes: aceptas, dices que a las cuatro no puedes, aceptas la otra hora, preguntas dónde y cierras el plan con día, hora y lugar. Después, el viernes, le llamas: avisas de que llegas tarde y por qué, das la hora aproximada, propones quedar fuera de la cafetería, dices que mandarás un mensaje y, al acabar, te despides. Usa la tarjeta ficticia.",
+   "datos_ficticios_es": "Café el viernes después del trabajo · a las cuatro no puedes · quedáis a las cuatro y media en la cafetería de la biblioteca. El viernes: terminas más tarde · llegas sobre las cinco y cuarto · propones quedar fuera de la cafetería.",
    "turnos": [
     {
-     "larsito_no": "Vil du ta en kaffe etter jobb på torsdag?",
-     "larsito_es": "¿Quieres tomar un café después del trabajo el jueves?",
+     "larsito_no": "Vil du ta en kaffe etter jobb på fredag?",
+     "larsito_es": "¿Quieres tomar un café después del trabajo el viernes?",
      "pista_es": "Acepta, pero a las cuatro no puedes: «Gjerne, men …».",
      "respuestas_modelo_no": [
       "Gjerne, men jeg kan ikke klokka fire.",
@@ -1128,10 +1222,10 @@
     {
      "larsito_no": "På kafeen ved biblioteket.",
      "larsito_es": "En la cafetería de la biblioteca.",
-     "pista_es": "Cierra el plan repitiendo día, hora y lugar.",
+     "pista_es": "Cierra el plan repitiendo día, hora y lugar (el viernes).",
      "respuestas_modelo_no": [
-      "Fint. Torsdag halv fem på kafeen ved biblioteket.",
-      "Da sier vi torsdag halv fem på kafeen ved biblioteket."
+      "Fint. Fredag halv fem på kafeen ved biblioteket.",
+      "Da sier vi fredag halv fem på kafeen ved biblioteket."
      ],
      "bloques_no": [
       "Da sier vi …"
@@ -1185,6 +1279,20 @@
     {
      "larsito_no": "Gjør det. Vi sees snart.",
      "larsito_es": "Hazlo. Nos vemos pronto.",
+     "pista_es": "Confirma que lo harás y despídete hasta luego.",
+     "respuestas_modelo_no": [
+      "Det gjør jeg. Vi sees.",
+      "Vi sees."
+     ],
+     "bloques_no": [
+      "Vi sees."
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Nå må jeg hjem. Takk for kaffen!",
+     "larsito_es": "Ahora me tengo que ir a casa. ¡Gracias por el café!",
      "pista_es": "Después del café: da las gracias por hoy.",
      "respuestas_modelo_no": [
       "Takk for i dag. Det var hyggelig."

@@ -502,9 +502,9 @@
     if (t === "escribe" || t === "dictado") {
       var resp = (Array.isArray(e.aceptadas) && e.aceptadas[0]) || e.frase_no || "";
       var solE = tokens(resp);
-      return Object.assign(base, { tipo: t, respuesta: resp, aceptadas: Array.isArray(e.aceptadas) ? e.aceptadas : [resp], explicacion: "", fichas: mezclaDistinta(solE, rnd), solucion: solE, sinPista: t === "dictado" || solE.length < 3 });
+      return Object.assign(base, { tipo: t, respuesta: resp, aceptadas: Array.isArray(e.aceptadas) ? e.aceptadas : [resp], explicacion: "", fichas: mezclaDistinta(solE, rnd), solucion: solE, sinPista: t === "dictado" || solE.length < 3, estricto: !!e.estricto });
     }
-    if (t === "graba_compara") return Object.assign(base, { tipo: "graba_compara", tarjeta: e.tarjeta || "", modelo: e.modelo_no || "", audioModelo: e.audio_modelo || null });
+    if (t === "graba_compara") return Object.assign(base, { tipo: "graba_compara", tarjeta: e.tarjeta || "", modelo: e.modelo_no || "", audioModelo: e.audio_modelo || null, audioId: e.audio || null });
     if (t === "larsito") return Object.assign(base, { tipo: "larsito", escenario: e.escenario || "" });
     return null;
   }
@@ -1176,7 +1176,7 @@
     function evaluar() {
       var dado = normalizar(campo.value), sol = normalizar(item.respuesta);
       if (!dado) { campo.focus(); return; }
-      var bien = dado === sol || (sol.length > 20 && distancia(dado, sol) <= 2)
+      var bien = dado === sol || (!item.estricto && sol.length > 20 && distancia(dado, sol) <= 2)
         || (item.aceptadas || []).some(function (a) { return normalizar(a) === dado; });
       campo.classList.add(bien ? "bien" : "mal");
       campo.disabled = true; comprobar.disabled = true; pista.disabled = true;
@@ -1254,7 +1254,9 @@
     var escuchar = el("button", "btn ghost", "Escuchar el modelo"); escuchar.type = "button";
     escuchar.addEventListener("click", function () {
       pararAudio();
-      if (item.audioModelo) { audioActual = new Audio(item.audioModelo); audioActual.play().catch(function () { /* nada */ }); return; }
+      var infoModelo = (!item.audioModelo && item.audios && item.audioId && item.audios[item.audioId]) || null;
+      var urlModelo = item.audioModelo || (infoModelo && (infoModelo.url || infoModelo.src)) || null;
+      if (urlModelo) { audioActual = new Audio(urlModelo); audioActual.play().catch(function () { /* nada */ }); return; }
       if (!decirNb(item.modelo, true)) { escuchar.disabled = true; escuchar.textContent = "Sin voz en noruego en este navegador"; }
     });
     modelo.appendChild(escuchar);
@@ -1382,6 +1384,8 @@
   }
 
   function diagnosticar(item, dado, mecanismo) {
+    // Si el ítem trae su propia regla en «feedback», no se añade la regla genérica de la pieza (evita dos reglas distintas).
+    if (item.feedback && item.feedback.regla) mecanismo = "";
     try {
       if (item.tipo === "ordena" || item.tipo === "transforma") return diagnosticoOrden(tokens(dado), item.solucion, mecanismo);
       if (item.tipo === "escribe" || item.tipo === "dictado") {

@@ -163,7 +163,7 @@
       "mecanismo": "PREG-HV",
       "fuente": "PREA1-U02-L01#bloques",
       "feedback": {
-       "regla": "«Hva» es «qué» y va en la pregunta del nombre (hva heter du); «hvor» es «dónde» y va en las de lugar (hvor bor du, hvor kommer du fra). En la pregunta el verbo va delante de «du».",
+       "regla": "Las palabras de pregunta van delante y después el verbo, y luego «du»: «hva» qué (Hva heter du?), «hvor» dónde (Hvor bor du?), «når» cuándo (Når slutter du?), «hvordan» cómo (Hvordan staver du navnet ditt?), «hvem» quién, «hvilken» y «hvilket» cuál (Hvilket rom?). El verbo va siempre delante de «du».",
        "conserva": "Las tres opciones empiezan por una palabra de pregunta: eso ya lo tienes.",
        "cambia": "«Hvor bor du?» pregunta dónde vives y «Hvor kommer du fra?» de dónde vienes: las dos empiezan por «hvor», que es lugar. La del nombre lleva «heter»: «Hva heter du?»."
       }
@@ -195,8 +195,8 @@
       "frase_hueco": "Jeg ___ i Oslo.",
       "opciones": [
        "bor",
-       "heter",
-       "kommer"
+       "kommer",
+       "heter"
       ],
       "correcta": "bor",
       "mecanismo": "BLOQUE",
@@ -309,7 +309,7 @@
       ],
       "mecanismo": "PREG-HV",
       "feedback": {
-       "regla": "«Hva» es «qué» y va en la pregunta del nombre (hva heter du); «hvor» es «dónde» y va en las de lugar (hvor bor du, hvor kommer du fra). En la pregunta el verbo va delante de «du».",
+       "regla": "Las palabras de pregunta van delante y después el verbo, y luego «du»: «hva» qué (Hva heter du?), «hvor» dónde (Hvor bor du?), «når» cuándo (Når slutter du?), «hvordan» cómo (Hvordan staver du navnet ditt?), «hvem» quién, «hvilken» y «hvilket» cuál (Hvilket rom?). El verbo va siempre delante de «du».",
        "conserva": "Las fichas son las palabras correctas; solo cambia el orden.",
        "cambia": "La palabra de pregunta va primero («Hvor»), el verbo segundo y «du» detrás del verbo: Hvor bor du?"
       },
@@ -327,7 +327,7 @@
       ],
       "mecanismo": "PREG-HV",
       "feedback": {
-       "regla": "«Hva» es «qué» y va en la pregunta del nombre (hva heter du); «hvor» es «dónde» y va en las de lugar (hvor bor du, hvor kommer du fra). En la pregunta el verbo va delante de «du».",
+       "regla": "Las palabras de pregunta van delante y después el verbo, y luego «du»: «hva» qué (Hva heter du?), «hvor» dónde (Hvor bor du?), «når» cuándo (Når slutter du?), «hvordan» cómo (Hvordan staver du navnet ditt?), «hvem» quién, «hvilken» y «hvilket» cuál (Hvilket rom?). El verbo va siempre delante de «du».",
        "conserva": "Las fichas son las palabras correctas; solo cambia el orden.",
        "cambia": "La palabra de pregunta va primero («Hva»), el verbo segundo y «du» detrás del verbo: Hva heter du?"
       },
@@ -345,7 +345,7 @@
       ],
       "mecanismo": "PREG-HV",
       "feedback": {
-       "regla": "«Hva» es «qué» y va en la pregunta del nombre (hva heter du); «hvor» es «dónde» y va en las de lugar (hvor bor du, hvor kommer du fra). En la pregunta el verbo va delante de «du».",
+       "regla": "Las palabras de pregunta van delante y después el verbo, y luego «du»: «hva» qué (Hva heter du?), «hvor» dónde (Hvor bor du?), «når» cuándo (Når slutter du?), «hvordan» cómo (Hvordan staver du navnet ditt?), «hvem» quién, «hvilken» y «hvilket» cuál (Hvilket rom?). El verbo va siempre delante de «du».",
        "conserva": "Las fichas son las palabras correctas; solo cambia el orden.",
        "cambia": "«Hvor» primero, «kommer» segundo y «du» detrás del verbo; «fra» se queda al final: Hvor kommer du fra?"
       },
@@ -396,8 +396,8 @@
       "frase_hueco": "Jeg ___ Elena.",
       "opciones": [
        "heter",
-       "bor",
-       "kommer"
+       "kommer",
+       "bor"
       ],
       "correcta": "heter",
       "mecanismo": "BLOQUE",
@@ -416,9 +416,9 @@
       "frase_no": "Jeg kommer fra Syria.",
       "frase_hueco": "Jeg ___ fra Syria.",
       "opciones": [
-       "kommer",
+       "heter",
        "bor",
-       "heter"
+       "kommer"
       ],
       "correcta": "kommer",
       "mecanismo": "BLOQUE",
@@ -437,14 +437,14 @@
       "frase_no": "Hva heter du?",
       "frase_hueco": "___ heter du?",
       "opciones": [
-       "Hva",
        "Hvor",
+       "Hva",
        "Og"
       ],
       "correcta": "Hva",
       "mecanismo": "PREG-HV",
       "feedback": {
-       "regla": "«Hva» es «qué» y va en la pregunta del nombre (hva heter du); «hvor» es «dónde» y va en las de lugar (hvor bor du, hvor kommer du fra). En la pregunta el verbo va delante de «du».",
+       "regla": "Las palabras de pregunta van delante y después el verbo, y luego «du»: «hva» qué (Hva heter du?), «hvor» dónde (Hvor bor du?), «når» cuándo (Når slutter du?), «hvordan» cómo (Hvordan staver du navnet ditt?), «hvem» quién, «hvilken» y «hvilket» cuál (Hvilket rom?). El verbo va siempre delante de «du».",
        "conserva": "El resto de la frase ya está bien.",
        "cambia": "La pregunta lleva «heter», el nombre: empieza por «Hva». «Hvor» pregunta por un lugar y «Og du?» solo devuelve la pregunta."
       },
@@ -459,13 +459,13 @@
       "frase_hueco": "___ bor du?",
       "opciones": [
        "Hvor",
-       "Hva",
-       "Og"
+       "Og",
+       "Hva"
       ],
       "correcta": "Hvor",
       "mecanismo": "PREG-HV",
       "feedback": {
-       "regla": "«Hva» es «qué» y va en la pregunta del nombre (hva heter du); «hvor» es «dónde» y va en las de lugar (hvor bor du, hvor kommer du fra). En la pregunta el verbo va delante de «du».",
+       "regla": "Las palabras de pregunta van delante y después el verbo, y luego «du»: «hva» qué (Hva heter du?), «hvor» dónde (Hvor bor du?), «når» cuándo (Når slutter du?), «hvordan» cómo (Hvordan staver du navnet ditt?), «hvem» quién, «hvilken» y «hvilket» cuál (Hvilket rom?). El verbo va siempre delante de «du».",
        "conserva": "El resto de la frase ya está bien.",
        "cambia": "La pregunta lleva «bor», un lugar: empieza por «Hvor». «Hva» va con el nombre."
       },
@@ -480,8 +480,8 @@
       "frase_hueco": "Jeg bor ___ Drammen.",
       "opciones": [
        "i",
-       "fra",
-       "og"
+       "og",
+       "fra"
       ],
       "correcta": "i",
       "mecanismo": "BLOQUE",
@@ -501,8 +501,8 @@
       "frase_hueco": "Jeg kommer ___ Spania.",
       "opciones": [
        "fra",
-       "i",
-       "og"
+       "og",
+       "i"
       ],
       "correcta": "fra",
       "mecanismo": "BLOQUE",
@@ -529,7 +529,7 @@
       "mecanismo": "BLOQUE",
       "feedback": {
        "regla": "Cuando los dices tú, los tres bloques empiezan por «jeg» y el dato va al final: jeg heter + nombre, jeg kommer fra + país o ciudad de origen, jeg bor i + ciudad. Si la frase empieza por otra palabra, como «Nå bor jeg», «jeg» va detrás del verbo: eso solo lo reconoces.",
-       "conserva": "El bloque de la pregunta está en la lección; su primera palabra suele dar la pista.",
+       "conserva": "El bloque se aprende entero, con el significado que le da la lección.",
        "cambia": "«Og du?» significa «¿Y tú?»."
       },
       "fuente": "PREA1-U02-L01#leccion"
@@ -550,7 +550,7 @@
       "mecanismo": "BLOQUE",
       "feedback": {
        "regla": "Cuando los dices tú, los tres bloques empiezan por «jeg» y el dato va al final: jeg heter + nombre, jeg kommer fra + país o ciudad de origen, jeg bor i + ciudad. Si la frase empieza por otra palabra, como «Nå bor jeg», «jeg» va detrás del verbo: eso solo lo reconoces.",
-       "conserva": "El bloque de la pregunta está en la lección; su primera palabra suele dar la pista.",
+       "conserva": "El bloque se aprende entero, con el significado que le da la lección.",
        "cambia": "«Hva med deg?» significa «¿Y tú?»."
       },
       "fuente": "PREA1-U02-L01#leccion"
@@ -571,7 +571,7 @@
       "mecanismo": "BLOQUE",
       "feedback": {
        "regla": "Cuando los dices tú, los tres bloques empiezan por «jeg» y el dato va al final: jeg heter + nombre, jeg kommer fra + país o ciudad de origen, jeg bor i + ciudad. Si la frase empieza por otra palabra, como «Nå bor jeg», «jeg» va detrás del verbo: eso solo lo reconoces.",
-       "conserva": "El bloque de la pregunta está en la lección; su primera palabra suele dar la pista.",
+       "conserva": "El bloque se aprende entero, con el significado que le da la lección.",
        "cambia": "«Hyggelig å møte deg.» significa «Encantado/a de conocerte.»."
       },
       "fuente": "PREA1-U02-L01#leccion"
@@ -592,7 +592,7 @@
       "mecanismo": "BLOQUE",
       "feedback": {
        "regla": "Cuando los dices tú, los tres bloques empiezan por «jeg» y el dato va al final: jeg heter + nombre, jeg kommer fra + país o ciudad de origen, jeg bor i + ciudad. Si la frase empieza por otra palabra, como «Nå bor jeg», «jeg» va detrás del verbo: eso solo lo reconoces.",
-       "conserva": "El bloque de la pregunta está en la lección; su primera palabra suele dar la pista.",
+       "conserva": "El bloque se aprende entero, con el significado que le da la lección.",
        "cambia": "«Jeg er ny her.» significa «Soy nuevo/a aquí.»."
       },
       "fuente": "PREA1-U02-L01#leccion"
@@ -613,7 +613,7 @@
       "mecanismo": "BLOQUE",
       "feedback": {
        "regla": "Cuando los dices tú, los tres bloques empiezan por «jeg» y el dato va al final: jeg heter + nombre, jeg kommer fra + país o ciudad de origen, jeg bor i + ciudad. Si la frase empieza por otra palabra, como «Nå bor jeg», «jeg» va detrás del verbo: eso solo lo reconoces.",
-       "conserva": "El bloque de la pregunta está en la lección; su primera palabra suele dar la pista.",
+       "conserva": "El bloque se aprende entero, con el significado que le da la lección.",
        "cambia": "«Vi sees.» significa «Nos vemos.»."
       },
       "fuente": "PREA1-U02-L01#leccion"
@@ -633,8 +633,8 @@
       "frase_no": "Hvor bor du?",
       "mecanismo": "PREG-HV",
       "feedback": {
-       "regla": "«Hva» es «qué» y va en la pregunta del nombre (hva heter du); «hvor» es «dónde» y va en las de lugar (hvor bor du, hvor kommer du fra). En la pregunta el verbo va delante de «du».",
-       "conserva": "Las tres opciones son bloques de la lección; el que más se parece al castellano no siempre es el bueno.",
+       "regla": "Las palabras de pregunta van delante y después el verbo, y luego «du»: «hva» qué (Hva heter du?), «hvor» dónde (Hvor bor du?), «når» cuándo (Når slutter du?), «hvordan» cómo (Hvordan staver du navnet ditt?), «hvem» quién, «hvilken» y «hvilket» cuál (Hvilket rom?). El verbo va siempre delante de «du».",
+       "conserva": "Solo una de las tres es un bloque de la lección; las otras dos llevan un error de forma. La que más se parece al castellano no siempre es la buena.",
        "cambia": "«¿Dónde vives?» es «Hvor bor du?»."
       },
       "fuente": "PREA1-U02-L01#leccion"
@@ -654,8 +654,8 @@
       "frase_no": "Hvor kommer du fra?",
       "mecanismo": "PREG-HV",
       "feedback": {
-       "regla": "«Hva» es «qué» y va en la pregunta del nombre (hva heter du); «hvor» es «dónde» y va en las de lugar (hvor bor du, hvor kommer du fra). En la pregunta el verbo va delante de «du».",
-       "conserva": "Las tres opciones son bloques de la lección; el que más se parece al castellano no siempre es el bueno.",
+       "regla": "Las palabras de pregunta van delante y después el verbo, y luego «du»: «hva» qué (Hva heter du?), «hvor» dónde (Hvor bor du?), «når» cuándo (Når slutter du?), «hvordan» cómo (Hvordan staver du navnet ditt?), «hvem» quién, «hvilken» y «hvilket» cuál (Hvilket rom?). El verbo va siempre delante de «du».",
+       "conserva": "Solo una de las tres es un bloque de la lección; las otras dos llevan un error de forma. La que más se parece al castellano no siempre es la buena.",
        "cambia": "«¿De dónde vienes?» es «Hvor kommer du fra?»."
       },
       "fuente": "PREA1-U02-L01#leccion"
@@ -676,7 +676,7 @@
       "mecanismo": "BLOQUE",
       "feedback": {
        "regla": "Cuando los dices tú, los tres bloques empiezan por «jeg» y el dato va al final: jeg heter + nombre, jeg kommer fra + país o ciudad de origen, jeg bor i + ciudad. Si la frase empieza por otra palabra, como «Nå bor jeg», «jeg» va detrás del verbo: eso solo lo reconoces.",
-       "conserva": "Las tres opciones son bloques de la lección; el que más se parece al castellano no siempre es el bueno.",
+       "conserva": "Solo una de las tres es un bloque de la lección; las otras dos llevan un error de forma. La que más se parece al castellano no siempre es la buena.",
        "cambia": "«Me llamo…» es «Jeg heter …»."
       },
       "fuente": "PREA1-U02-L01#leccion"
@@ -698,7 +698,7 @@
       "mecanismo": "BLOQUE",
       "feedback": {
        "regla": "Cuando los dices tú, los tres bloques empiezan por «jeg» y el dato va al final: jeg heter + nombre, jeg kommer fra + país o ciudad de origen, jeg bor i + ciudad. Si la frase empieza por otra palabra, como «Nå bor jeg», «jeg» va detrás del verbo: eso solo lo reconoces.",
-       "conserva": "Las opciones son datos del audio; la palabra que va justo delante del dato es la pista, no la frase entera.",
+       "conserva": "La respuesta está en el audio, justo detrás de la palabra que la anuncia; no hace falta entender la frase entera.",
        "cambia": "Diego dice «Jeg kommer fra Argentina, men jeg bor i Bergen nå». Argentina va detrás de «kommer fra»: de ahí viene. Bergen va detrás de «bor i»: ahí vive."
       },
       "fuente": "PREA1-U02-L01#leccion"
@@ -720,7 +720,7 @@
       "mecanismo": "BLOQUE",
       "feedback": {
        "regla": "Cuando los dices tú, los tres bloques empiezan por «jeg» y el dato va al final: jeg heter + nombre, jeg kommer fra + país o ciudad de origen, jeg bor i + ciudad. Si la frase empieza por otra palabra, como «Nå bor jeg», «jeg» va detrás del verbo: eso solo lo reconoces.",
-       "conserva": "Las opciones son datos del audio; la palabra que va justo delante del dato es la pista, no la frase entera.",
+       "conserva": "La respuesta está en el audio, justo detrás de la palabra que la anuncia; no hace falta entender la frase entera.",
        "cambia": "Diego dice «men jeg bor i Bergen nå»: Bergen va detrás de «bor i», ahí vive ahora. Argentina es de donde viene y Tromsø es el dato de Nora."
       },
       "fuente": "PREA1-U02-L01#leccion"
@@ -742,7 +742,7 @@
       "mecanismo": "BLOQUE",
       "feedback": {
        "regla": "Cuando los dices tú, los tres bloques empiezan por «jeg» y el dato va al final: jeg heter + nombre, jeg kommer fra + país o ciudad de origen, jeg bor i + ciudad. Si la frase empieza por otra palabra, como «Nå bor jeg», «jeg» va detrás del verbo: eso solo lo reconoces.",
-       "conserva": "Las opciones son datos del audio; la palabra que va justo delante del dato es la pista, no la frase entera.",
+       "conserva": "La respuesta está en el audio, justo detrás de la palabra que la anuncia; no hace falta entender la frase entera.",
        "cambia": "Nora dice «Jeg kommer fra Tromsø». Bergen y Argentina son datos de Diego."
       },
       "fuente": "PREA1-U02-L01#leccion"
@@ -764,7 +764,7 @@
       "mecanismo": "BLOQUE",
       "feedback": {
        "regla": "Cuando los dices tú, los tres bloques empiezan por «jeg» y el dato va al final: jeg heter + nombre, jeg kommer fra + país o ciudad de origen, jeg bor i + ciudad. Si la frase empieza por otra palabra, como «Nå bor jeg», «jeg» va detrás del verbo: eso solo lo reconoces.",
-       "conserva": "Las opciones son datos del audio; la palabra que va justo delante del dato es la pista, no la frase entera.",
+       "conserva": "La respuesta está en el audio, justo detrás de la palabra que la anuncia; no hace falta entender la frase entera.",
        "cambia": "Diego responde de dónde viene y devuelve la pregunta con «Hva med deg?»; Nora contesta «Jeg kommer fra Tromsø». Amir está en el otro audio."
       },
       "fuente": "PREA1-U02-L01#leccion"
@@ -786,7 +786,7 @@
       "mecanismo": "BLOQUE",
       "feedback": {
        "regla": "Cuando los dices tú, los tres bloques empiezan por «jeg» y el dato va al final: jeg heter + nombre, jeg kommer fra + país o ciudad de origen, jeg bor i + ciudad. Si la frase empieza por otra palabra, como «Nå bor jeg», «jeg» va detrás del verbo: eso solo lo reconoces.",
-       "conserva": "Las opciones son datos del audio; la palabra que va justo delante del dato es la pista, no la frase entera.",
+       "conserva": "La respuesta está en el audio, justo detrás de la palabra que la anuncia; no hace falta entender la frase entera.",
        "cambia": "Nora empieza: «Hei. Jeg heter Nora. Hva heter du?». Diego responde y Elena está en el otro audio."
       },
       "fuente": "PREA1-U02-L01#leccion"
@@ -808,7 +808,7 @@
       "mecanismo": "BLOQUE",
       "feedback": {
        "regla": "Cuando los dices tú, los tres bloques empiezan por «jeg» y el dato va al final: jeg heter + nombre, jeg kommer fra + país o ciudad de origen, jeg bor i + ciudad. Si la frase empieza por otra palabra, como «Nå bor jeg», «jeg» va detrás del verbo: eso solo lo reconoces.",
-       "conserva": "Las opciones son datos del audio; la palabra que va justo delante del dato es la pista, no la frase entera.",
+       "conserva": "La respuesta está en el audio, justo detrás de la palabra que la anuncia; no hace falta entender la frase entera.",
        "cambia": "Diego cierra con «Takk. Vi sees.». «Vi sees i pausen» y «Ja, vi sees» son de Amir y Elena, en el otro audio."
       },
       "fuente": "PREA1-U02-L01#leccion"
@@ -889,7 +889,7 @@
       "mecanismo": "BLOQUE",
       "feedback": {
        "regla": "Cuando los dices tú, los tres bloques empiezan por «jeg» y el dato va al final: jeg heter + nombre, jeg kommer fra + país o ciudad de origen, jeg bor i + ciudad. Si la frase empieza por otra palabra, como «Nå bor jeg», «jeg» va detrás del verbo: eso solo lo reconoces.",
-       "conserva": "El arranque de la frase suele salir bien; lo que se pierde es el final.",
+       "conserva": "Conserva el bloque entero en ese orden; compara el final con el modelo.",
        "cambia": "La forma esperada es «Jeg kommer fra Argentina.»."
       },
       "fuente": "PREA1-U02-L01#leccion"
@@ -908,7 +908,7 @@
       "mecanismo": "BLOQUE",
       "feedback": {
        "regla": "Cuando los dices tú, los tres bloques empiezan por «jeg» y el dato va al final: jeg heter + nombre, jeg kommer fra + país o ciudad de origen, jeg bor i + ciudad. Si la frase empieza por otra palabra, como «Nå bor jeg», «jeg» va detrás del verbo: eso solo lo reconoces.",
-       "conserva": "El arranque de la frase suele salir bien; lo que se pierde es el final.",
+       "conserva": "Conserva el bloque entero en ese orden; compara el final con el modelo.",
        "cambia": "La forma esperada es «Jeg heter Lucía.»."
       },
       "fuente": "PREA1-U02-L01#leccion"
@@ -927,7 +927,7 @@
       "mecanismo": "BLOQUE",
       "feedback": {
        "regla": "Cuando los dices tú, los tres bloques empiezan por «jeg» y el dato va al final: jeg heter + nombre, jeg kommer fra + país o ciudad de origen, jeg bor i + ciudad. Si la frase empieza por otra palabra, como «Nå bor jeg», «jeg» va detrás del verbo: eso solo lo reconoces.",
-       "conserva": "El arranque de la frase suele salir bien; lo que se pierde es el final.",
+       "conserva": "Conserva el bloque entero en ese orden; compara el final con el modelo.",
        "cambia": "La forma esperada es «Jeg bor i Sandvika.»."
       },
       "fuente": "PREA1-U02-L01#leccion"
@@ -946,7 +946,7 @@
       "mecanismo": "BLOQUE",
       "feedback": {
        "regla": "Cuando los dices tú, los tres bloques empiezan por «jeg» y el dato va al final: jeg heter + nombre, jeg kommer fra + país o ciudad de origen, jeg bor i + ciudad. Si la frase empieza por otra palabra, como «Nå bor jeg», «jeg» va detrás del verbo: eso solo lo reconoces.",
-       "conserva": "El arranque de la frase suele salir bien; lo que se pierde es el final.",
+       "conserva": "Conserva el bloque entero en ese orden; compara el final con el modelo.",
        "cambia": "La forma esperada es «Jeg kommer fra Marokko.»."
       },
       "fuente": "PREA1-U02-L01#leccion"
@@ -965,7 +965,7 @@
       "mecanismo": "BLOQUE",
       "feedback": {
        "regla": "Cuando los dices tú, los tres bloques empiezan por «jeg» y el dato va al final: jeg heter + nombre, jeg kommer fra + país o ciudad de origen, jeg bor i + ciudad. Si la frase empieza por otra palabra, como «Nå bor jeg», «jeg» va detrás del verbo: eso solo lo reconoces.",
-       "conserva": "El arranque de la frase suele salir bien; lo que se pierde es el final.",
+       "conserva": "Conserva el bloque entero en ese orden; compara el final con el modelo.",
        "cambia": "La forma esperada es «Jeg kommer fra Syria.»."
       },
       "fuente": "PREA1-U02-L01#leccion"
@@ -984,7 +984,7 @@
       "mecanismo": "BLOQUE",
       "feedback": {
        "regla": "Cuando los dices tú, los tres bloques empiezan por «jeg» y el dato va al final: jeg heter + nombre, jeg kommer fra + país o ciudad de origen, jeg bor i + ciudad. Si la frase empieza por otra palabra, como «Nå bor jeg», «jeg» va detrás del verbo: eso solo lo reconoces.",
-       "conserva": "El arranque de la frase suele salir bien; lo que se pierde es el final.",
+       "conserva": "Conserva el bloque entero en ese orden; compara el final con el modelo.",
        "cambia": "La forma esperada es «Jeg bor i Drammen.»."
       },
       "fuente": "PREA1-U02-L01#leccion"
@@ -1004,7 +1004,7 @@
       "mecanismo": "BLOQUE",
       "feedback": {
        "regla": "Cuando los dices tú, los tres bloques empiezan por «jeg» y el dato va al final: jeg heter + nombre, jeg kommer fra + país o ciudad de origen, jeg bor i + ciudad. Si la frase empieza por otra palabra, como «Nå bor jeg», «jeg» va detrás del verbo: eso solo lo reconoces.",
-       "conserva": "El principio de la frase suele oírse bien; lo que se pierde es el final.",
+       "conserva": "Conserva el bloque entero en el orden en que suena; compara el final con el modelo.",
        "cambia": "Lo que suena es «Jeg heter Amir.». Si te falta algo, vuelve a escuchar solo esa parte."
       },
       "fuente": "PREA1-U02-L01#leccion"
@@ -1022,8 +1022,8 @@
       ],
       "mecanismo": "PREG-HV",
       "feedback": {
-       "regla": "«Hva» es «qué» y va en la pregunta del nombre (hva heter du); «hvor» es «dónde» y va en las de lugar (hvor bor du, hvor kommer du fra). En la pregunta el verbo va delante de «du».",
-       "conserva": "El principio de la frase suele oírse bien; lo que se pierde es el final.",
+       "regla": "Las palabras de pregunta van delante y después el verbo, y luego «du»: «hva» qué (Hva heter du?), «hvor» dónde (Hvor bor du?), «når» cuándo (Når slutter du?), «hvordan» cómo (Hvordan staver du navnet ditt?), «hvem» quién, «hvilken» y «hvilket» cuál (Hvilket rom?). El verbo va siempre delante de «du».",
+       "conserva": "Conserva el bloque entero en el orden en que suena; compara el final con el modelo.",
        "cambia": "Lo que suena es «Hvor kommer du fra?». Si te falta algo, vuelve a escuchar solo esa parte."
       },
       "fuente": "PREA1-U02-L01#leccion"
@@ -1257,8 +1257,8 @@
       "frase_no": "Ja, det stemmer.",
       "frase_hueco": "Ja, det ___.",
       "opciones": [
-       "stemmer",
        "stave",
+       "stemmer",
        "eller"
       ],
       "correcta": "stemmer",
@@ -1406,9 +1406,9 @@
       "frase_no": "Sa du U eller O?",
       "frase_hueco": "Sa du U ___ O?",
       "opciones": [
+       "ja",
        "eller",
-       "og",
-       "ja"
+       "og"
       ],
       "correcta": "eller",
       "mecanismo": "REPAR",
@@ -1427,9 +1427,9 @@
       "frase_no": "Kan du stave det?",
       "frase_hueco": "Kan du ___ det?",
       "opciones": [
-       "stave",
        "stemmer",
-       "sa"
+       "sa",
+       "stave"
       ],
       "correcta": "stave",
       "mecanismo": "REPAR",
@@ -1448,9 +1448,9 @@
       "frase_no": "Sa du fire-null-sju-to?",
       "frase_hueco": "Sa ___ fire-null-sju-to?",
       "opciones": [
-       "du",
        "det",
-       "og"
+       "og",
+       "du"
       ],
       "correcta": "du",
       "mecanismo": "REPAR",
@@ -1470,8 +1470,8 @@
       "frase_hueco": "Nei, det ___ U.",
       "opciones": [
        "er",
-       "stemmer",
-       "sa"
+       "sa",
+       "stemmer"
       ],
       "correcta": "er",
       "mecanismo": "REPAR",
@@ -1658,7 +1658,7 @@
       "mecanismo": "BLOQUE",
       "feedback": {
        "regla": "Cuando los dices tú, los tres bloques empiezan por «jeg» y el dato va al final: jeg heter + nombre, jeg kommer fra + país o ciudad de origen, jeg bor i + ciudad. Si la frase empieza por otra palabra, como «Nå bor jeg», «jeg» va detrás del verbo: eso solo lo reconoces.",
-       "conserva": "El bloque de la pregunta está en la lección; su primera palabra suele dar la pista.",
+       "conserva": "El bloque se aprende entero, con el significado que le da la lección.",
        "cambia": "«Beklager.» significa «Perdona.»."
       },
       "fuente": "PREA1-U02-L02#leccion"
@@ -1679,7 +1679,7 @@
       "mecanismo": "BLOQUE",
       "feedback": {
        "regla": "Cuando los dices tú, los tres bloques empiezan por «jeg» y el dato va al final: jeg heter + nombre, jeg kommer fra + país o ciudad de origen, jeg bor i + ciudad. Si la frase empieza por otra palabra, como «Nå bor jeg», «jeg» va detrás del verbo: eso solo lo reconoces.",
-       "conserva": "El bloque de la pregunta está en la lección; su primera palabra suele dar la pista.",
+       "conserva": "El bloque se aprende entero, con el significado que le da la lección.",
        "cambia": "«Flott.» significa «Estupendo.»."
       },
       "fuente": "PREA1-U02-L02#leccion"
@@ -1700,7 +1700,7 @@
       "mecanismo": "BLOQUE",
       "feedback": {
        "regla": "Cuando los dices tú, los tres bloques empiezan por «jeg» y el dato va al final: jeg heter + nombre, jeg kommer fra + país o ciudad de origen, jeg bor i + ciudad. Si la frase empieza por otra palabra, como «Nå bor jeg», «jeg» va detrás del verbo: eso solo lo reconoces.",
-       "conserva": "El bloque de la pregunta está en la lección; su primera palabra suele dar la pista.",
+       "conserva": "El bloque se aprende entero, con el significado que le da la lección.",
        "cambia": "«Og fornavnet?» significa «¿Y el nombre?»."
       },
       "fuente": "PREA1-U02-L02#leccion"
@@ -1721,7 +1721,7 @@
       "mecanismo": "BLOQUE",
       "feedback": {
        "regla": "Cuando los dices tú, los tres bloques empiezan por «jeg» y el dato va al final: jeg heter + nombre, jeg kommer fra + país o ciudad de origen, jeg bor i + ciudad. Si la frase empieza por otra palabra, como «Nå bor jeg», «jeg» va detrás del verbo: eso solo lo reconoces.",
-       "conserva": "El bloque de la pregunta está en la lección; su primera palabra suele dar la pista.",
+       "conserva": "El bloque se aprende entero, con el significado que le da la lección.",
        "cambia": "«Kan du si det en gang til, litt saktere?» significa «¿Puedes decirlo otra vez, más despacio?»."
       },
       "fuente": "PREA1-U02-L02#leccion"
@@ -1742,7 +1742,7 @@
       "mecanismo": "BLOQUE",
       "feedback": {
        "regla": "Cuando los dices tú, los tres bloques empiezan por «jeg» y el dato va al final: jeg heter + nombre, jeg kommer fra + país o ciudad de origen, jeg bor i + ciudad. Si la frase empieza por otra palabra, como «Nå bor jeg», «jeg» va detrás del verbo: eso solo lo reconoces.",
-       "conserva": "El bloque de la pregunta está en la lección; su primera palabra suele dar la pista.",
+       "conserva": "El bloque se aprende entero, con el significado que le da la lección.",
        "cambia": "«Kan du stave etternavnet ditt?» significa «¿Puedes deletrear tu apellido?»."
       },
       "fuente": "PREA1-U02-L02#leccion"
@@ -1763,7 +1763,7 @@
       "mecanismo": "REPAR",
       "feedback": {
        "regla": "Para confirmar un dato se dice «Sa du …?» con el dato dentro. Si te preguntan «X eller Y?» (o preguntas tú «Var det X eller Y?»), la respuesta es la letra o la cifra. Si repiten el dato entero, la respuesta es «Ja, det stemmer» o «Nei, det er …» con el dato correcto.",
-       "conserva": "Las tres opciones son bloques de la lección; el que más se parece al castellano no siempre es el bueno.",
+       "conserva": "Solo una de las tres es un bloque de la lección; las otras dos llevan un error de forma. La que más se parece al castellano no siempre es la buena.",
        "cambia": "«Sí, es correcto.» es «Ja, det stemmer.»."
       },
       "fuente": "PREA1-U02-L02#leccion"
@@ -1784,7 +1784,7 @@
       "mecanismo": "PREG-V1",
       "feedback": {
        "regla": "Una pregunta de sí o no empieza por el verbo: Kan du…? Er du…? Jobber du…? Después viene «du» y luego el resto.",
-       "conserva": "Las tres opciones son bloques de la lección; el que más se parece al castellano no siempre es el bueno.",
+       "conserva": "Solo una de las tres es un bloque de la lección; las otras dos llevan un error de forma. La que más se parece al castellano no siempre es la buena.",
        "cambia": "«¿Puedes deletrearlo?» es «Kan du stave det?»."
       },
       "fuente": "PREA1-U02-L02#leccion"
@@ -1805,7 +1805,7 @@
       "mecanismo": "BLOQUE",
       "feedback": {
        "regla": "Cuando los dices tú, los tres bloques empiezan por «jeg» y el dato va al final: jeg heter + nombre, jeg kommer fra + país o ciudad de origen, jeg bor i + ciudad. Si la frase empieza por otra palabra, como «Nå bor jeg», «jeg» va detrás del verbo: eso solo lo reconoces.",
-       "conserva": "Las tres opciones son bloques de la lección; el que más se parece al castellano no siempre es el bueno.",
+       "conserva": "Solo una de las tres es un bloque de la lección; las otras dos llevan un error de forma. La que más se parece al castellano no siempre es la buena.",
        "cambia": "«Perdona.» es «Beklager.»."
       },
       "fuente": "PREA1-U02-L02#leccion"
@@ -1826,7 +1826,7 @@
       "mecanismo": "BLOQUE",
       "feedback": {
        "regla": "Cuando los dices tú, los tres bloques empiezan por «jeg» y el dato va al final: jeg heter + nombre, jeg kommer fra + país o ciudad de origen, jeg bor i + ciudad. Si la frase empieza por otra palabra, como «Nå bor jeg», «jeg» va detrás del verbo: eso solo lo reconoces.",
-       "conserva": "Las tres opciones son bloques de la lección; el que más se parece al castellano no siempre es el bueno.",
+       "conserva": "Solo una de las tres es un bloque de la lección; las otras dos llevan un error de forma. La que más se parece al castellano no siempre es la buena.",
        "cambia": "«Gracias.» es «Takk.»."
       },
       "fuente": "PREA1-U02-L02#leccion"
@@ -1848,7 +1848,7 @@
       "mecanismo": "REPAR",
       "feedback": {
        "regla": "Para confirmar un dato se dice «Sa du …?» con el dato dentro. Si te preguntan «X eller Y?» (o preguntas tú «Var det X eller Y?»), la respuesta es la letra o la cifra. Si repiten el dato entero, la respuesta es «Ja, det stemmer» o «Nei, det er …» con el dato correcto.",
-       "conserva": "Las opciones son datos del audio; la palabra que va justo delante del dato es la pista, no la frase entera.",
+       "conserva": "La respuesta está en el audio, justo detrás de la palabra que la anuncia; no hace falta entender la frase entera.",
        "cambia": "Inés dice «Beklager, sa du andre eller tredje etasje?». No hace falta entender «etasje» para cazar las dos opciones."
       },
       "fuente": "PREA1-U02-L02#leccion"
@@ -1870,7 +1870,7 @@
       "mecanismo": "NUM",
       "feedback": {
        "regla": "Un número interno o un teléfono se dice cifra a cifra: null 0, én 1, to 2, tre 3, fire 4, fem 5, seks 6, sju 7 (también lo oirás como syv), åtte 8, ni 9.",
-       "conserva": "Las opciones son datos del audio; la palabra que va justo delante del dato es la pista, no la frase entera.",
+       "conserva": "La respuesta está en el audio, justo detrás de la palabra que la anuncia; no hace falta entender la frase entera.",
        "cambia": "Recepción dice «rom B-tre-null-fem» e Inés lo repite para confirmar."
       },
       "fuente": "PREA1-U02-L02#leccion"
@@ -1892,7 +1892,7 @@
       "mecanismo": "ALF",
       "feedback": {
        "regla": "Al deletrear, «o» suena cerrada y parecida a la u castellana; «u» se dice con los labios adelantados. Si dices «u» a la española, te oyen «o».",
-       "conserva": "Las opciones son datos del audio; la palabra que va justo delante del dato es la pista, no la frase entera.",
+       "conserva": "La respuesta está en el audio, justo detrás de la palabra que la anuncia; no hace falta entender la frase entera.",
        "cambia": "Inés dice «Ja. M-O-R-A». Fíjate en la «o»: su nombre suena como una u castellana."
       },
       "fuente": "PREA1-U02-L02#leccion"
@@ -1914,7 +1914,7 @@
       "mecanismo": "PREG-V1",
       "feedback": {
        "regla": "Una pregunta de sí o no empieza por el verbo: Kan du…? Er du…? Jobber du…? Después viene «du» y luego el resto.",
-       "conserva": "Las opciones son datos del audio; la palabra que va justo delante del dato es la pista, no la frase entera.",
+       "conserva": "La respuesta está en el audio, justo detrás de la palabra que la anuncia; no hace falta entender la frase entera.",
        "cambia": "Recepción dice «Kan du stave etternavnet?». «Hva heter du?» es la primera pregunta y «Skal du til andre etasje?» pregunta por la planta."
       },
       "fuente": "PREA1-U02-L02#leccion"
@@ -1933,7 +1933,7 @@
       "mecanismo": "REPAR",
       "feedback": {
        "regla": "Para confirmar un dato se dice «Sa du …?» con el dato dentro. Si te preguntan «X eller Y?» (o preguntas tú «Var det X eller Y?»), la respuesta es la letra o la cifra. Si repiten el dato entero, la respuesta es «Ja, det stemmer» o «Nei, det er …» con el dato correcto.",
-       "conserva": "Has oído la fórmula entera.",
+       "conserva": "La fórmula se dice entera.",
        "cambia": "La frase es «Sa du fire-null-sju-to?»."
       },
       "fuente": "PREA1-U02-L02#leccion"
@@ -1952,7 +1952,7 @@
       "mecanismo": "REPAR",
       "feedback": {
        "regla": "Para confirmar un dato se dice «Sa du …?» con el dato dentro. Si te preguntan «X eller Y?» (o preguntas tú «Var det X eller Y?»), la respuesta es la letra o la cifra. Si repiten el dato entero, la respuesta es «Ja, det stemmer» o «Nei, det er …» con el dato correcto.",
-       "conserva": "Has oído la fórmula entera.",
+       "conserva": "La fórmula se dice entera.",
        "cambia": "La frase es «B-tre-null-fem. Stemmer det?»."
       },
       "fuente": "PREA1-U02-L02#leccion"
@@ -2076,7 +2076,7 @@
       "mecanismo": "NUM",
       "feedback": {
        "regla": "Un número interno o un teléfono se dice cifra a cifra: null 0, én 1, to 2, tre 3, fire 4, fem 5, seks 6, sju 7 (también lo oirás como syv), åtte 8, ni 9.",
-       "conserva": "El principio de la frase suele oírse bien; lo que se pierde es el final.",
+       "conserva": "Conserva el bloque entero en el orden en que suena; compara el final con el modelo.",
        "cambia": "Lo que suena es «B-tre-null-fem». Si te falta algo, vuelve a escuchar solo esa parte."
       },
       "fuente": "PREA1-U02-L02#leccion"
@@ -2308,7 +2308,7 @@
    "orden": 22,
    "zona": "A1",
    "unidad": "A1-U07",
-   "resumen": "Te dicen «Ta kassene til rom tre», hay seis cajas y la persona ya se aleja: abrir la instrucción con preguntas pequeñas, avisar de que la carretilla no funciona y preguntar qué hacer."
+   "resumen": "Te dicen «Ta kassene til rom tre», hay seis cajas y la persona ya se aleja: abrir la instrucción con preguntas pequeñas, avisar de que el carrito no funciona y preguntar qué hacer."
   },
   {
    "codigo": "A1-U08-L01",
