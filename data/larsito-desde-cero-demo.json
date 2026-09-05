@@ -34,7 +34,8 @@
     "dar la pista en castellano",
     "enseñar el bloque",
     "enseñar el modelo entero"
-   ]
+   ],
+   "nota_modos": "En la demo solo se activan REAL_LIFE y DEEP_CORRECTION; la conversación libre corta prevista para A2 en el plan integral queda para el agente vivo, que sigue apagado."
   },
   "Pre-A1": {
    "turnos_larsito": "una frase, muy despacio",
@@ -1607,11 +1608,11 @@
      "audio_modelo": null
     },
     {
-     "larsito_no": "Hei! Sees vi på kurs i morgen?",
-     "larsito_es": "¡Hola! ¿Nos vemos mañana en el curso?",
-     "pista_es": "Tu hijo está enfermo, así que no puedes ir; propón el jueves.",
+     "larsito_no": "Hei! Kommer du på kurs i morgen?",
+     "larsito_es": "¡Hola! ¿Vienes al curso mañana?",
+     "pista_es": "Tu hijo está enfermo, así que no puedes ir; propón el jueves y pregunta si le va bien.",
      "respuestas_modelo_no": [
-      "Barnet mitt er sykt, så jeg kan ikke komme på kurs i morgen. Kan vi ta oppgaven på torsdag i stedet?"
+      "Barnet mitt er sykt, så jeg kan ikke komme på kurs i morgen. Kan vi ta oppgaven på torsdag i stedet? Passer det for deg?"
      ],
      "bloques_no": [
       "…, så jeg kan ikke komme …",
@@ -1636,7 +1637,7 @@
    ],
    "cierre": {
     "conserva": "Si has dicho el plan con «skal», la previsión con «kommer til å» y la duda con «kanskje» y el verbo detrás; has reaccionado a los cambios con la marca de tiempo delante; y has avisado con «så» y propuesto con «i stedet», esta escena está hecha.",
-    "ahora": "Si has usado «vil» para el futuro, has dicho «Kanskje jeg …» o «I morgen jeg kan ikke», vuelve a la tabla de los tres bloques de Skal og kommer til å y a la de las marcas de Mañana cambia el tiempo.",
+    "ahora": "Si has usado «vil» para el futuro, has dicho «I morgen jeg kan ikke», vuelve a la tabla de los tres bloques de Skal og kommer til å y a la de las marcas de Mañana cambia el tiempo.",
     "repite": "Vuelve a hacer las tres escenas con la misma tarjeta, sin mirar la pista ni los bloques."
    }
   },

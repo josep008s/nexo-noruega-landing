@@ -68,7 +68,8 @@ for (const pieza of piezas) {
   if (b.esenciales.map((i) => i.id).join(",") !== ordenJson) fallos.push(`${id}: la sesión no respeta el orden de los esenciales`);
   for (const it of b.items) {
     tipos[it.tipo] = (tipos[it.tipo] || 0) + 1;
-    if ((it.tipo === "ordena" || it.tipo === "escribe" || it.tipo === "dictado") && it.solucion && it.frase && it.solucion.join(" ").toLowerCase() !== String(it.frase || it.respuesta || "").toLowerCase() && !(it.aceptadas || []).some((a) => a.toLowerCase() === it.solucion.join(" ").toLowerCase())) fallos.push(`${id}: ${it.tipo} ${it.id} no reconstruye su frase`);
+    const sp = (x) => String(x || "").toLowerCase().replace(/[.,!?;:…«»"]/g, "").replace(/\s+/g, " ").trim();
+    if ((it.tipo === "ordena" || it.tipo === "escribe" || it.tipo === "dictado") && it.solucion && it.frase && sp(it.solucion.join(" ")) !== sp(it.frase || it.respuesta) && !(it.aceptadas || []).some((a) => sp(a) === sp(it.solucion.join(" ")))) fallos.push(`${id}: ${it.tipo} ${it.id} no reconstruye su frase`);
     if ((it.tipo === "elige" || it.tipo === "escucha_elige") && (it.correcta < 0 || it.correcta >= it.opciones.length)) fallos.push(`${id}: ${it.id} correcta fuera de rango`);
     if (it.tipo === "completa" && it.opciones.indexOf(it.respuesta) < 0) fallos.push(`${id}: ${it.id} completa sin la respuesta entre las opciones`);
     if (it.tipo === "empareja" && it.pares.length < 3) fallos.push(`${id}: ${it.id} empareja con menos de 3 pares`);

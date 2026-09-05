@@ -478,7 +478,9 @@
     var t = e.tipo;
     if (t === "arrastra" || t === "reconstruye") t = "ordena";
     if (t === "ordena") {
-      var sol = tokens(e.frase_no);
+      // Las fichas de palabras van sin la puntuación pegada («ikke,», «jeg.»), que delataba la posición;
+      // la comprobación compara sin puntuación. Las fichas explícitas (frases enteras) se dejan como están.
+      var sol = tokens(e.frase_no).map(function (w) { return w.replace(/[.,!?;:…]+$/g, ""); }).filter(Boolean);
       if (sol.length < 2) return null;
       // Fichas explícitas (frases enteras o trozos con coma): la solución son las fichas en su orden,
       // no las palabras sueltas, para que el botón se active con el número de fichas y la corrección
@@ -494,7 +496,7 @@
     }
     if (t === "empareja") {
       if (!Array.isArray(e.pares) || e.pares.length < 3) return null;
-      return Object.assign(base, { tipo: "empareja", pares: e.pares, derecha: barajar(e.pares.map(function (x) { return x.es; }), rnd) });
+      return Object.assign(base, { tipo: "empareja", pares: e.pares, pares_lang_es: e.pares_lang_es || "", derecha: barajar(e.pares.map(function (x) { return x.es; }), rnd) });
     }
     if (t === "elige" || t === "escucha_elige") {
       if (!Array.isArray(e.opciones) || e.opciones.length < 2) return null;
@@ -987,11 +989,12 @@
 
     comprobar.addEventListener("click", function () {
       var dado = Array.prototype.map.call(linea.children, function (c) { return c.textContent; });
-      var bien = normalizar(dado.join(" ")) === normalizar(solucion.join(" "))
-        || (item.aceptadas || []).some(function (a) { return normalizar(a) === normalizar(dado.join(" ")); });
+      var sinPunt = function (x) { return normalizar(x).replace(/[.,!?;:…]/g, ""); };
+      var bien = sinPunt(dado.join(" ")) === sinPunt(solucion.join(" "))
+        || (item.aceptadas || []).some(function (a) { return sinPunt(a) === sinPunt(dado.join(" ")); });
       Array.prototype.forEach.call(linea.children, function (c, i) {
-        c.classList.toggle("bien", normalizar(c.textContent) === normalizar(solucion[i]));
-        c.classList.toggle("mal", normalizar(c.textContent) !== normalizar(solucion[i]));
+        c.classList.toggle("bien", sinPunt(c.textContent) === sinPunt(solucion[i]));
+        c.classList.toggle("mal", sinPunt(c.textContent) !== sinPunt(solucion[i]));
       });
       fichas.forEach(function (f) { f.disabled = true; });
       comprobar.disabled = true;
