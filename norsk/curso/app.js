@@ -839,8 +839,7 @@
   // ---------- Audio grabado y clips de frase ----------
   // Cada pieza del recorrido desde cero llega con sus grabaciones (ids AU-…) y con las frases
   // que tienen clip (meta.frases_audio: texto -> hash). De dónde salen las URL:
-  //  · demo pública: archivos estáticos en /norsk/curso/audio-demo/ (solo los audios nuevos
-  //    autorizados el 05.09.2026 y los clips; los audios A1 aprobados siguen con la voz local);
+  //  · demo pública: archivos estáticos en /norsk/curso/audio-demo/ (audios y clips de las piezas abiertas);
   //  · web de pruebas: /api/revision/?modo=audio&archivo=… con la cookie de revisión;
   //  · curso comprado: /api/norsk-curso/?modo=audio&codigo=… devuelve URL firmadas de una hora.
   // Sin URL, suena la voz local del navegador y la app lo dice. Ninguna grabación lleva firma nativa.
@@ -862,8 +861,8 @@
     Object.keys(meta.frases_audio || {}).forEach(function (t) { hashes[meta.frases_audio[t]] = true; });
     if (meta.audio_base) {
       var au = {}, fr = {};
-      // En la demo solo hay archivo para los audios nuevos; la copia local de revisión (audio_base_completo) los tiene todos.
-      ids.forEach(function (id) { var a = meta.audios && meta.audios[id]; if (meta.audio_base_completo || (a && /^GENERADO/.test(String(a.estado || "")))) au[id] = meta.audio_base + encodeURIComponent(id) + ".mp3"; });
+      // Todos los audios declarados de la pieza tienen archivo en la demo (bloqueo de los 44 audios A1 levantado el 05.09.2026).
+      ids.forEach(function (id) { au[id] = meta.audio_base + encodeURIComponent(id) + ".mp3"; });
       Object.keys(hashes).forEach(function (h) { fr[h] = meta.audio_base + "frases/" + h + ".mp3"; });
       aplicarAudio(pieza, au, fr); return null;
     }

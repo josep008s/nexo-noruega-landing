@@ -65,9 +65,8 @@ const RUTAS = {
     // Lámina de la escena (workbook/ilustraciones/web/<codigo>.webp, 1200 px): viaja en meta.lamina
     // como data URL para que la revisión privada y el curso la sirvan sin un bucket más.
     laminas: path.join("workbook", "ilustraciones", "web"),
-    // Audio de la demo pública: estáticos en norsk/curso/audio-demo/ (solo los audios nuevos
-    // autorizados el 05.09.2026 y los clips de frase; los 44 audios A1 aprobados conservan su
-    // publicación bloqueada y en la demo suenan con la voz local).
+    // Audio de la demo pública: estáticos en norsk/curso/audio-demo/ (los audios de las piezas
+    // abiertas con publicación autorizada por Josep, y sus clips de frase).
     audioDemo: path.join(ROOT, "norsk", "curso", "audio-demo"),
     // La demo pública abre estas piezas enteras; el resto solo enseña su nombre.
     demoAbiertas: ["PREA1-U02-L01", "PREA1-U02-L02"],
@@ -997,7 +996,8 @@ function copiarAudioDemo(abiertas) {
   abiertas.forEach((p) => {
     (p.meta.audio || []).forEach((id) => {
       const a = manifiestoAudio && manifiestoAudio[id];
-      if (!a || !/^GENERADO/.test(String(a.estado || "")) || !a.ruta_drive) return;
+      // Desde el 05.09.2026 (bloqueo levantado por Josep) viajan también los 44 audios A1 aprobados.
+      if (!a || !a.ruta_drive || !/AUTORIZADA/.test(String(a.publicacion || ""))) return;
       // ruta_drive va relativa a la carpeta norsk/ del Drive (idioma/rutas/…).
       const origen = path.join(DRIVE_RUTAS, "..", "..", a.ruta_drive);
       if (fs.existsSync(origen)) { fs.copyFileSync(origen, path.join(destino, `${id}.mp3`)); n++; }
