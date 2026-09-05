@@ -48,7 +48,7 @@
     "A2-U01-L01": 81,
     "A2-U01-L02": 77,
     "A2-U01-L03": 65,
-    "A2-U02-L01": 74,
+    "A2-U02-L01": 75,
     "A2-U02-L02": 74,
     "A2-U02-L03": 72,
     "A2-U03-L01": 78,
@@ -74,7 +74,7 @@
   "por_ruta": {
     "norsk-desde-cero-a2": {
       "actualizado": "2026-09-05",
-      "total": 3381,
+      "total": 3382,
       "sesion": 436,
       "piezas": 51,
       "por_pieza": {
@@ -196,7 +196,7 @@
         },
         "A2-U02-L01": {
           "sesion": 8,
-          "extra": 74
+          "extra": 75
         },
         "A2-U02-L02": {
           "sesion": 8,
