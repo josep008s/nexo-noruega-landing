@@ -1049,7 +1049,7 @@
     {
      "id": "practica",
      "titulo": "Practica",
-     "html": "<p>Ocho pasos. Los cuatro primeros son de reconocer; los cuatro últimos, de producir.</p>\n<ol><li>Escucha <code>AU-A1-E02-M</code> y elige: ¿de dónde viene Elena? <code>Spania</code> · <code>Syria</code> · <code>Drammen</code>.</li><li>Escucha otra vez y elige: ¿dónde vive Amir? <code>Lillestrøm</code> · <code>Drammen</code> · <code>Syria</code>.</li><li>Empareja cada bloque con lo que significa: <code>Jeg heter …</code> · <code>Jeg bor i …</code> · <code>Hvor kommer du fra?</code> · <code>Og du?</code> con «Vivo en…», «Me llamo…», «¿Y tú?», «¿De dónde vienes?».</li><li>Elige la pregunta para saber el nombre: <code>Hva heter du?</code> · <code>Hvor bor du?</code> · <code>Hvor kommer du fra?</code>.</li><li>Ordena las fichas: <code>fra</code> · <code>Jeg</code> · <code>Spania</code> · <code>kommer</code>.</li><li>Completa: <code>Jeg ___ i Oslo.</code> con <code>bor</code> · <code>heter</code> · <code>kommer</code>.</li><li>Escribe cómo dirías «Vivo en Bergen».</li><li>Di las tres frases con esta tarjeta y compáralas con el modelo (<code>AU-P-U02-L01-TRE</code>; mientras no exista el audio, con el modelo escrito): Lucía · Spania · Oslo.</li></ol>"
+     "html": "<p>Ocho pasos. Los cuatro primeros son de reconocer; los cuatro últimos, de producir.</p>\n<ol><li>Escucha <code>AU-A1-E02-M</code> y elige: ¿de dónde viene Elena? <code>Syria</code> · <code>Drammen</code> · <code>Spania</code>.</li><li>Escucha otra vez y elige: ¿dónde vive Amir? <code>Syria</code> · <code>Lillestrøm</code> · <code>Drammen</code>.</li><li>Empareja cada bloque con lo que significa: <code>Jeg heter …</code> · <code>Jeg bor i …</code> · <code>Hvor kommer du fra?</code> · <code>Og du?</code> con «Vivo en…», «Me llamo…», «¿Y tú?», «¿De dónde vienes?».</li><li>Elige la pregunta para saber el nombre: <code>Hvor bor du?</code> · <code>Hvor kommer du fra?</code> · <code>Hva heter du?</code>.</li><li>Ordena las fichas: <code>fra</code> · <code>kommer</code> · <code>Jeg</code> · <code>Spania</code>.</li><li>Completa: <code>Jeg ___ i Oslo.</code> con <code>bor</code> · <code>heter</code> · <code>kommer</code>.</li><li>Escribe cómo dirías «Vivo en Bergen».</li><li>Di las tres frases con esta tarjeta y compáralas con el modelo (<code>AU-P-U02-L01-TRE</code>; mientras no exista el audio, con el modelo escrito): Lucía · Spania · Oslo.</li></ol>"
     },
     {
      "id": "repite",
@@ -2071,7 +2071,8 @@
        "B-305",
        "B 305",
        "b305",
-       "b-305"
+       "b-305",
+       "B-tre-null-fem"
       ],
       "mecanismo": "NUM",
       "feedback": {
@@ -2102,7 +2103,7 @@
     {
      "id": "practica",
      "titulo": "Practica",
-     "html": "<ol><li>Escucha <code>AU-A1-E01-M</code> y elige qué letras duda recepción: <code>U eller O</code> · <code>I eller E</code> · <code>R eller L</code>.</li><li>Escucha otra vez y escribe en cifras el número de empleado.</li><li>Escribe en cifras: <code>tre-to-ni-fem</code>.</li><li>Escribe en cifras: <code>åtte-én-null-seks</code>.</li><li>Ordena las fichas: <code>eller</code> · <code>du</code> · <code>U</code> · <code>Sa</code> · <code>O</code>.</li><li>Completa: <code>Ja, det ___.</code> con <code>stemmer</code> · <code>stave</code> · <code>eller</code>.</li><li>Elige la respuesta correcta a <code>Sa du fire-null-sju-to?</code> cuando el dato es correcto: <code>Ja, det stemmer.</code> · <code>Nei, det er U.</code> · <code>Kan du stave det?</code>.</li><li>Di en voz alta la confirmación del código D-420, <code>Sa du D-fire-to-null?</code>, y compárala con el modelo escrito.</li></ol>"
+     "html": "<ol><li>Escucha <code>AU-A1-E01-M</code> y elige qué letras duda recepción: <code>I eller E</code> · <code>R eller L</code> · <code>U eller O</code>.</li><li>Escucha otra vez y escribe en cifras el número de empleado.</li><li>Escribe en cifras: <code>tre-to-ni-fem</code>.</li><li>Escribe en cifras: <code>åtte-én-null-seks</code>.</li><li>Ordena las fichas: <code>eller</code> · <code>du</code> · <code>U</code> · <code>Sa</code> · <code>O</code>.</li><li>Completa: <code>Ja, det ___.</code> con <code>stemmer</code> · <code>stave</code> · <code>eller</code>.</li><li>Elige la respuesta correcta a <code>Sa du fire-null-sju-to?</code> cuando el dato es correcto: <code>Nei, det er U.</code> · <code>Kan du stave det?</code> · <code>Ja, det stemmer.</code>.</li><li>Di en voz alta la confirmación del código D-420, <code>Sa du D-fire-to-null?</code>, y compárala con el modelo escrito.</li></ol>"
     },
     {
      "id": "repite",
