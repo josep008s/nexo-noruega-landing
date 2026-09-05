@@ -854,7 +854,7 @@ for (const fuente of FUENTES) {
     if (!secciones.length || palabras < 50) { errores.push(`${codigoFinal}: contenido vacío o demasiado corto (${palabras} palabras)`); continue; }
 
     if (!meta.lupa) avisos.push(`${codigoFinal}: sin campo lupa en el front-matter`);
-    const tipoFinal = codigoFinal === "ANEXO-UTTRYKK" ? "anexo" : fuente.tipo;
+    const tipoFinal = codigoFinal === "ANEXO-UTTRYKK" ? "anexo" : /^PUENTE-/.test(codigoFinal) ? "puente" : /^SALTO-/.test(codigoFinal) ? "salto" : fuente.tipo;
     let metaPieza;
     if (fuente.tipo === "leccion") {
       // Recorrido desde cero: el front-matter de la lección es la ficha del alumno
@@ -1134,7 +1134,8 @@ function construirDemoLarsito() {
   const texto = JSON.stringify(escenarios);
   if (texto.includes("—")) fallosL.push("em dash en los escenarios de Larsito");
   if (/increíble|brutal|paraíso|trucos|hola chicos/i.test(texto)) fallosL.push("palabra prohibida de marca en los escenarios de Larsito");
-  if (/PENDIENTE|revisi[oó]n nativa|firma nativa/i.test(texto)) fallosL.push("los escenarios de Larsito exponen estado editorial interno");
+  // «PENDIENTE» como palabra entera: «dependiente» (la persona de la tienda) es vocabulario normal de un escenario.
+  if (/\bPENDIENTE\b|revisi[oó]n nativa|firma nativa/i.test(texto)) fallosL.push("los escenarios de Larsito exponen estado editorial interno");
   if (fallosL.length) {
     console.error(`\nERRORES en los escenarios de Larsito (no se escribe la demo):\n- ${fallosL.join("\n- ")}`);
     process.exit(1);

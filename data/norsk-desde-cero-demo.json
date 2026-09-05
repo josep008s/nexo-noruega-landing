@@ -4,7 +4,7 @@
   "ruta": "norsk-desde-cero-a2",
   "actualizado": "2026-09-05",
   "aviso": "Material propio de NEXO NORSK. NEXO NORSK es un proyecto independiente y no tiene relación con HK-dir, con UDI ni con ningún centro de examen. Este recorrido no promete un nivel, un aprobado ni un trámite.",
-  "piezas_totales": 48,
+  "piezas_totales": 51,
   "lecciones_totales": 48
  },
  "piezas": [
@@ -2185,10 +2185,19 @@
    "resumen": "Llegar a una recepción y salir con la tarjeta de acceso, habiendo dicho tu nombre, tu ciudad y tu número, y habiendo pedido repetición una vez sin perder el hilo."
   },
   {
+   "codigo": "SALTO-PREA1-A1",
+   "tipo": "salto",
+   "titulo": "Salto a A1",
+   "orden": 9,
+   "zona": "PREA1",
+   "unidad": "SALTO",
+   "resumen": "Ocho pasos, uno por lección. Si los haces bien, entras en A1; lo que falle te lleva a la lección que lo enseña."
+  },
+  {
    "codigo": "A1-U01-L01",
    "tipo": "leccion",
    "titulo": "Me presento",
-   "orden": 9,
+   "orden": 10,
    "zona": "A1",
    "unidad": "A1-U01",
    "resumen": "En tu primer día en un curso, presentarte con cuatro datos, preguntar dos cosas con el verbo delante y presentar a la persona que tienes al lado."
@@ -2197,7 +2206,7 @@
    "codigo": "A1-U01-L02",
    "tipo": "leccion",
    "titulo": "Para, repite, confirma",
-   "orden": 10,
+   "orden": 11,
    "zona": "A1",
    "unidad": "A1-U01",
    "resumen": "En una recepción, aislar la letra o la cifra dudosa, corregir el dato que han escrito mal y dejar tu ficha de contacto ficticia completa."
@@ -2206,7 +2215,7 @@
    "codigo": "A1-U02-L01",
    "tipo": "leccion",
    "titulo": "Así empieza mi día",
-   "orden": 11,
+   "orden": 12,
    "zona": "A1",
    "unidad": "A1-U02",
    "resumen": "En la pausa, contar cómo empieza tu día en seis frases con hora, y preguntar a la otra persona cuándo se levanta y cuándo termina."
@@ -2215,7 +2224,7 @@
    "codigo": "A1-U02-L02",
    "tipo": "leccion",
    "titulo": "Hoy cambia el horario",
-   "orden": 12,
+   "orden": 13,
    "zona": "A1",
    "unidad": "A1-U02",
    "resumen": "Recibir un cambio de turno, confirmarlo y explicar tu horario de hoy frente al habitual sin perder el verbo."
@@ -2224,7 +2233,7 @@
    "codigo": "A1-U03-L01",
    "tipo": "leccion",
    "titulo": "Un lugar, muchas cosas",
-   "orden": 13,
+   "orden": 14,
    "zona": "A1",
    "unidad": "A1-U03",
    "resumen": "En tu primer día, enseñar a alguien la zona común: dónde hay una taquilla, cuál es la tuya, dónde está la cocina, y preguntar si hay una cafetera."
@@ -2233,7 +2242,7 @@
    "codigo": "A1-U03-L02",
    "tipo": "leccion",
    "titulo": "Dónde está",
-   "orden": 14,
+   "orden": 15,
    "zona": "A1",
    "unidad": "A1-U03",
    "resumen": "Un compañero no encuentra un paquete: dile dónde está con zona, soporte y referencia, sin repetir el nombre del objeto."
@@ -2242,7 +2251,7 @@
    "codigo": "A1-U04-L01",
    "tipo": "leccion",
    "titulo": "Busco esto",
-   "orden": 15,
+   "orden": 16,
    "zona": "A1",
    "unidad": "A1-U04",
    "resumen": "En una tienda después del trabajo, encontrar dos productos que no ves preguntando a un empleado, y pedir la cantidad exacta de cada cosa de tu lista."
@@ -2251,7 +2260,7 @@
    "codigo": "A1-U04-L02",
    "tipo": "leccion",
    "titulo": "Puedo pedirlo",
-   "orden": 16,
+   "orden": 17,
    "zona": "A1",
    "unidad": "A1-U04",
    "resumen": "En una cafetería cerca del trabajo, pedir dos cosas, reaccionar cuando no tienen lo que pides, preguntar el precio, confirmarlo y pagar."
@@ -2260,7 +2269,7 @@
    "codigo": "A1-U05-L01",
    "tipo": "leccion",
    "titulo": "¿Este bus va al centro?",
-   "orden": 17,
+   "orden": 18,
    "zona": "A1",
    "unidad": "A1-U05",
    "resumen": "En una parada con dos marquesinas, subir al autobús correcto: decir adónde vas, preguntar cuál necesitas y desde dónde sale, y confirmar si tienes que cambiar."
@@ -2269,7 +2278,7 @@
    "codigo": "A1-U05-L02",
    "tipo": "leccion",
    "titulo": "Recto, a la izquierda y diez minutos tarde",
-   "orden": 18,
+   "orden": 19,
    "zona": "A1",
    "unidad": "A1-U05",
    "resumen": "Has bajado en la parada correcta y no ves el edificio: seguir la ruta que te dicen, avisar de que llegas diez minutos tarde y decir a qué hora estarás."
@@ -2278,7 +2287,7 @@
    "codigo": "A1-U06-L01",
    "tipo": "leccion",
    "titulo": "Necesito una cita",
-   "orden": 19,
+   "orden": 20,
    "zona": "A1",
    "unidad": "A1-U06",
    "resumen": "Llamar a una recepción para pedir cita: decir qué te pasa con una frase, entender la hora que te ofrecen, rechazarla si no puedes, pedir otra y confirmar el día y la hora."
@@ -2287,7 +2296,7 @@
    "codigo": "A1-U06-L02",
    "tipo": "leccion",
    "titulo": "¿Puedes decirlo otra vez?",
-   "orden": 20,
+   "orden": 21,
    "zona": "A1",
    "unidad": "A1-U06",
    "resumen": "En una sala de consulta, no fingir que entiendes: confirmar la instrucción, decir dónde te duele y qué no puedes hacer, y pedir que te lo enseñen antes de moverte."
@@ -2296,7 +2305,7 @@
    "codigo": "A1-U07-L01",
    "tipo": "leccion",
    "titulo": "Primero esto, después aquello",
-   "orden": 21,
+   "orden": 22,
    "zona": "A1",
    "unidad": "A1-U07",
    "resumen": "Tu primer día: entender el orden de tres tareas y el horario que te dicen, preguntar dónde está lo que necesitas, confirmar qué protección usar y pasarle a un compañero dos datos de un cambio de turno."
@@ -2305,7 +2314,7 @@
    "codigo": "A1-U07-L02",
    "tipo": "leccion",
    "titulo": "No adivines la tarea",
-   "orden": 22,
+   "orden": 23,
    "zona": "A1",
    "unidad": "A1-U07",
    "resumen": "Te dicen «Ta kassene til rom tre», hay seis cajas y la persona ya se aleja: abrir la instrucción con preguntas pequeñas, avisar de que el carrito no funciona y preguntar qué hacer."
@@ -2314,7 +2323,7 @@
    "codigo": "A1-U08-L01",
    "tipo": "leccion",
    "titulo": "¿Tomamos un café el jueves?",
-   "orden": 23,
+   "orden": 24,
    "zona": "A1",
    "unidad": "A1-U08",
    "resumen": "Un compañero te propone un café después del trabajo: reaccionar, decir cuándo puedes, proponer otra hora si la suya no te va, acordar el sitio y cerrar el plan repitiendo día, hora y lugar."
@@ -2323,16 +2332,25 @@
    "codigo": "A1-U08-L02",
    "tipo": "leccion",
    "titulo": "Cambio de plan",
-   "orden": 24,
+   "orden": 25,
    "zona": "A1",
    "unidad": "A1-U08",
    "resumen": "El plan estaba cerrado, tu turno acaba más tarde y la otra persona ya está en camino: avisar pronto, nombrar el cambio, proponer otra opción, conseguir la confirmación y, al acabar, despedirte bien."
   },
   {
+   "codigo": "SALTO-A1-A2",
+   "tipo": "salto",
+   "titulo": "Salto a A2",
+   "orden": 26,
+   "zona": "A1",
+   "unidad": "SALTO",
+   "resumen": "Doce pasos, uno por lección clave de A1. Si los haces bien, entras en A2; lo que falle te lleva a la lección que lo enseña."
+  },
+  {
    "codigo": "A2-U01-L01",
    "tipo": "leccion",
    "titulo": "Lo que hice ayer",
-   "orden": 25,
+   "orden": 27,
    "zona": "A2",
    "unidad": "A2-U01",
    "resumen": "Lunes por la mañana: un compañero te pregunta cómo fue el fin de semana. Contar lo que hiciste el sábado y el domingo con cuatro verbos en pasado, sin pasarte al presente."
@@ -2341,7 +2359,7 @@
    "codigo": "A2-U01-L02",
    "tipo": "leccion",
    "titulo": "Lo que ya he hecho",
-   "orden": 26,
+   "orden": 28,
    "zona": "A2",
    "unidad": "A2-U01",
    "resumen": "Un vecino te pregunta cuánto llevas en Noruega, dónde has estado y en qué has trabajado: contestar con tu experiencia sin necesitar una fecha para cada cosa."
@@ -2350,7 +2368,7 @@
    "codigo": "A2-U01-L03",
    "tipo": "leccion",
    "titulo": "En orden",
-   "orden": 27,
+   "orden": 29,
    "zona": "A2",
    "unidad": "A2-U01",
    "resumen": "Llegaste tarde y te preguntan qué pasó: contar en orden lo que hiciste, dónde se torció y cómo lo resolviste, en menos de un minuto y sin perder el hilo."
@@ -2359,7 +2377,7 @@
    "codigo": "A2-U02-L01",
    "tipo": "leccion",
    "titulo": "Skal og kommer til å",
-   "orden": 28,
+   "orden": 30,
    "zona": "A2",
    "unidad": "A2-U02",
    "resumen": "Un compañero te pregunta qué vas a hacer la semana que viene y en verano: contar dos planes y una previsión, con una duda dicha con «kanskje», sin pasarte al presente donde va «skal»."
@@ -2368,7 +2386,7 @@
    "codigo": "A2-U02-L02",
    "tipo": "leccion",
    "titulo": "Mañana cambia el tiempo",
-   "orden": 29,
+   "orden": 31,
    "zona": "A2",
    "unidad": "A2-U02",
    "resumen": "Tu responsable cambia el horario de mañana, de la semana que viene y del sábado: entenderlo, decir qué te va bien y qué no, y pedir empezar media hora más tarde sin perder la marca de tiempo delante."
@@ -2377,7 +2395,7 @@
    "codigo": "A2-U02-L03",
    "tipo": "leccion",
    "titulo": "Cambio el plan por mensaje",
-   "orden": 30,
+   "orden": 32,
    "zona": "A2",
    "unidad": "A2-U02",
    "resumen": "No puedes ir mañana al curso: escribir un mensaje de cuatro frases que avise, diga por qué, proponga el jueves y cierre, y entender la respuesta."
@@ -2386,7 +2404,7 @@
    "codigo": "A2-U03-L01",
    "tipo": "leccion",
    "titulo": "Leer un anuncio",
-   "orden": 31,
+   "orden": 33,
    "zona": "A2",
    "unidad": "A2-U03",
    "resumen": "Buscas piso: leer un anuncio y sacar cinco datos, llamar para preguntar si sigue libre, en qué planta está y qué incluye la renta, y describir el piso en cinco frases."
@@ -2395,7 +2413,7 @@
    "codigo": "A2-U03-L02",
    "tipo": "leccion",
    "titulo": "Comparar dos pisos",
-   "orden": 32,
+   "orden": 34,
    "zona": "A2",
    "unidad": "A2-U03",
    "resumen": "Tienes dos pisos y hay que elegir: compararlos en voz alta con tres comparativos, decir qué es lo más importante para ti y cerrar la elección."
@@ -2404,7 +2422,7 @@
    "codigo": "A2-U03-L03",
    "tipo": "leccion",
    "titulo": "Avisar de una avería",
-   "orden": 33,
+   "orden": 35,
    "zona": "A2",
    "unidad": "A2-U03",
    "resumen": "La calefacción del piso nuevo no funciona: llamar al conserje, decir qué aparato es y dónde está, contestar a lo que te pregunta, y escribir después un correo de seis frases a la comunidad."
@@ -2413,7 +2431,7 @@
    "codigo": "A2-U04-L01",
    "tipo": "leccion",
    "titulo": "Mi experiencia",
-   "orden": 34,
+   "orden": 36,
    "zona": "A2",
    "unidad": "A2-U04",
    "resumen": "Preparas una entrevista: contar tu experiencia en sesenta segundos con un hecho fechado y una experiencia sin fecha, y escribir un CV de seis líneas con datos ficticios."
@@ -2422,7 +2440,7 @@
    "codigo": "A2-U04-L02",
    "tipo": "leccion",
    "titulo": "La entrevista",
-   "orden": 35,
+   "orden": 37,
    "zona": "A2",
    "unidad": "A2-U04",
    "resumen": "Tu entrevista para un puesto de ayudante de cocina: entender cinco preguntas dichas a velocidad normal, responder a cada una en una o dos frases y hacer tú una pregunta al final."
@@ -2431,7 +2449,7 @@
    "codigo": "A2-U04-L03",
    "tipo": "leccion",
    "titulo": "Condiciones básicas",
-   "orden": 36,
+   "orden": 38,
    "zona": "A2",
    "unidad": "A2-U04",
    "resumen": "Te ofrecen el puesto y te explican las condiciones: leer la hoja, preguntar por el plus y las guardias, y entender qué pasa si te pones enfermo o tienes que cambiar un turno."
@@ -2440,7 +2458,7 @@
    "codigo": "A2-U05-L01",
    "tipo": "leccion",
    "titulo": "Síntomas y duración",
-   "orden": 37,
+   "orden": 39,
    "zona": "A2",
    "unidad": "A2-U05",
    "resumen": "Te levantas con fiebre el primer día de trabajo: llamar al centro de salud, pedir cita para hoy, decir qué tienes y desde cuándo, y conseguir una hora que te venga bien."
@@ -2449,7 +2467,7 @@
    "codigo": "A2-U05-L02",
    "tipo": "leccion",
    "titulo": "Entender el consejo",
-   "orden": 38,
+   "orden": 40,
    "zona": "A2",
    "unidad": "A2-U05",
    "resumen": "En la consulta: entender lo que el médico te aconseja, preguntar si tienes que avisar al jefe y si tienes que volver, y después dar tú los mismos consejos a un compañero en imperativo."
@@ -2458,7 +2476,7 @@
    "codigo": "A2-U05-L03",
    "tipo": "leccion",
    "titulo": "Antes y ahora",
-   "orden": 39,
+   "orden": 41,
    "zona": "A2",
    "unidad": "A2-U05",
    "resumen": "Una semana después: contar en la consulta o al jefe qué ha cambiado, con dos frases de antes, dos de ahora y una valoración con «bedre» o «verre»."
@@ -2467,7 +2485,7 @@
    "codigo": "A2-U06-L01",
    "tipo": "leccion",
    "titulo": "De quién es qué",
-   "orden": 40,
+   "orden": 42,
    "zona": "A2",
    "unidad": "A2-U06",
    "resumen": "Recoges a tu hijo en la guardería: aclarar de quién es cada chaqueta y cada par de botas, presentarte al padre de otra niña y quedar para que los niños jueguen."
@@ -2476,7 +2494,7 @@
    "codigo": "A2-U06-L02",
    "tipo": "leccion",
    "titulo": "Explicar por qué",
-   "orden": 41,
+   "orden": 43,
    "zona": "A2",
    "unidad": "A2-U06",
    "resumen": "Tu hijo no va a la guardería: llamar para avisar y decir por qué, explicar por qué no podéis ir a la reunión de padres y escribir el mensaje con los dos motivos."
@@ -2485,7 +2503,7 @@
    "codigo": "A2-U06-L03",
    "tipo": "leccion",
    "titulo": "Lo que dijo la maestra",
-   "orden": 42,
+   "orden": 44,
    "zona": "A2",
    "unidad": "A2-U06",
    "resumen": "La guardería deja un mensaje de voz: sacar de él cuándo es la excursión, qué hay que llevar y a qué hora, apuntar las palabras clave y contárselo a otro padre que no lo ha oído."
@@ -2494,7 +2512,7 @@
    "codigo": "A2-U07-L01",
    "tipo": "leccion",
    "titulo": "Rellenar un formulario",
-   "orden": 43,
+   "orden": 45,
    "zona": "A2",
    "unidad": "A2-U07",
    "resumen": "Inscribir a tu hijo en un curso de natación del ayuntamiento: preguntar dónde está el formulario y qué campos lleva, rellenarlo con datos ficticios, y leer el mensaje con el plazo y la fecha de inicio."
@@ -2503,7 +2521,7 @@
    "codigo": "A2-U07-L02",
    "tipo": "leccion",
    "titulo": "Banco y compras en línea",
-   "orden": 44,
+   "orden": 46,
    "zona": "A2",
    "unidad": "A2-U07",
    "resumen": "Has pedido una chaqueta por internet: entender los tres avisos que te llegan, pagar la factura en el banco en línea siguiendo las instrucciones, y contarle a un compañero qué dice la noticia del autobús."
@@ -2512,7 +2530,7 @@
    "codigo": "A2-U07-L03",
    "tipo": "leccion",
    "titulo": "Devolver algo",
-   "orden": 45,
+   "orden": 47,
    "zona": "A2",
    "unidad": "A2-U07",
    "resumen": "La chaqueta que pediste es demasiado pequeña: devolverla en la tienda, decir cuándo la compraste y qué le pasa, preguntar si hay otra talla y, si no, pedir el dinero."
@@ -2521,7 +2539,7 @@
    "codigo": "A2-U08-L01",
    "tipo": "leccion",
    "titulo": "Invitar, aceptar y rechazar",
-   "orden": 46,
+   "orden": 48,
    "zona": "A2",
    "unidad": "A2-U08",
    "resumen": "Te invitan a un cumpleaños el sábado a una hora en la que trabajas: felicitar, rechazar esa hora con cortesía, proponer otra y organizar con otro padre un regalo entre los dos."
@@ -2530,7 +2548,7 @@
    "codigo": "A2-U08-L02",
    "tipo": "leccion",
    "titulo": "Seguir la conversación",
-   "orden": 47,
+   "orden": 49,
    "zona": "A2",
    "unidad": "A2-U08",
    "resumen": "En la fiesta, los adultos discuten si la guardería debería abrir más horas: dar tu opinión con una razón, decir con quién estás de acuerdo, hacer una pregunta para que la conversación siga y escribir tu opinión en tres frases."
@@ -2539,10 +2557,19 @@
    "codigo": "A2-U08-L03",
    "tipo": "leccion",
    "titulo": "Reparar y mantener el turno",
-   "orden": 48,
+   "orden": 50,
    "zona": "A2",
    "unidad": "A2-U08",
    "resumen": "El vecino te para en la escalera, habla rápido y usa una palabra que no conoces: entenderle sin abandonar, pedir que vaya más despacio, preguntar qué significa la palabra, confirmar la hora y despedirte bien."
+  },
+  {
+   "codigo": "PUENTE-A2-B1",
+   "tipo": "puente",
+   "titulo": "Puente hacia el curso A2→B1",
+   "orden": 51,
+   "zona": "PUENTE",
+   "unidad": "PUENTE",
+   "resumen": "Doce a quince minutos, sin cronómetro: treinta y dos pasos, dos por mecanismo. Al final ves qué mecanismos están listos y en cuáles conviene volver a una lección concreta antes de abrir M01."
   }
  ]
 }

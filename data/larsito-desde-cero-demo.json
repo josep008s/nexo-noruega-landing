@@ -2453,6 +2453,457 @@
    ]
   },
   {
+   "id": "LARS-A2-U07",
+   "modo": "rollespill",
+   "modo_contrato": "REAL_LIFE",
+   "nivel": "A2",
+   "titulo": "Servicios: el formulario del ayuntamiento, los avisos de la tienda en línea y devolver una compra",
+   "leccion": [
+    "A2-U07-L01",
+    "A2-U07-L02",
+    "A2-U07-L03"
+   ],
+   "contexto_es": "Role-play ficticio en tres partes. Primero, Larsito hace del empleado del mostrador del ayuntamiento y tú preguntas por el formulario de inscripción. Después hace de Lina, una compañera, y tú le preguntas qué significan los avisos de la tienda en línea. Al final hace de dependiente y tú devuelves una chaqueta. Usa la tarjeta ficticia.",
+   "datos_ficticios_es": "Formulario: quieres apuntar a tu hijo a un curso de natación; preguntas dónde está el formulario, qué rellenar, si la fecha va día, mes, año, y cuándo es el plazo. Avisos: has pedido una chaqueta por internet; no entiendes «blir sendt» ni «blir levert til hentested»; la factura hay que pagarla antes del 20 de marzo; la pagas esta noche. Devolución: compraste la chaqueta hace dos semanas por internet, es demasiado pequeña y tiene un agujero en el bolsillo; preguntas por una talla más y por otro color; si no tienen la azul, te llevas el dinero; preguntas si hay que hacer algo más.",
+   "cierre": {
+    "conserva": "Si has preguntado por el formulario y el plazo con «Hvor finner jeg skjemaet?» y «Når er fristen?», has preguntado qué significan los avisos con «Hva betyr …?», y has reclamado en cuatro turnos con «noen», la condición con «hvis» e «ikke» delante del verbo, la escena ha funcionado.",
+    "ahora": "Lo que se te haya atascado vuelve en la práctica de la lección: el ordinal de la fecha, la conversión de «blir» o la palabra de cantidad.",
+    "repite": "Vuelve a hacer la escena con la misma tarjeta, sin mirar la pista ni los bloques."
+   },
+   "turnos": [
+    {
+     "larsito_no": "Hei! Hva kan jeg hjelpe deg med?",
+     "larsito_es": "¡Hola! ¿En qué puedo ayudarte?",
+     "pista_es": "Di que quieres apuntar a tu hijo a un curso de natación y pregunta dónde encuentras el formulario.",
+     "respuestas_modelo_no": [
+      "Hei. Jeg vil melde sønnen min på svømmekurs. Hvor finner jeg skjemaet?"
+     ],
+     "bloques_no": [
+      "Jeg vil melde … på …",
+      "Hvor finner jeg skjemaet?"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Det ligger på nettsiden, under «Påmelding». Du kan også fylle det ut her.",
+     "larsito_es": "Está en la web, en «Inscripción». También puedes rellenarlo aquí.",
+     "pista_es": "Pregunta qué tienes que rellenar.",
+     "respuestas_modelo_no": [
+      "Hva må jeg fylle ut?"
+     ],
+     "bloques_no": [
+      "Hva må jeg fylle ut?"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Navnet hans, fødselsdatoen, adressen deres og telefonnummeret ditt. Og du må skrive under nederst.",
+     "larsito_es": "Su nombre, la fecha de nacimiento, vuestra dirección y tu teléfono. Y tienes que firmar abajo.",
+     "pista_es": "Pregunta si la fecha de nacimiento va día, mes, año.",
+     "respuestas_modelo_no": [
+      "Fødselsdato: er det dag, måned, år?"
+     ],
+     "bloques_no": [
+      "Er det dag, måned, år?"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Ja. For eksempel den tredje mars to tusen og tjueto skriver du null tre, null tre, tjueto.",
+     "larsito_es": "Sí. Por ejemplo, el tres de marzo de 2022 lo escribes cero tres, cero tres, veintidós.",
+     "pista_es": "Pregunta cuándo es el plazo.",
+     "respuestas_modelo_no": [
+      "Og når er fristen?"
+     ],
+     "bloques_no": [
+      "Når er fristen?"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Påmeldingsfristen er den femtende mars. Kurset starter tirsdag den andre april klokka fem.",
+     "larsito_es": "El plazo de inscripción es el quince de marzo. El curso empieza el martes 2 de abril a las cinco.",
+     "pista_es": "Di que entonces llegas a tiempo y da las gracias.",
+     "respuestas_modelo_no": [
+      "Da rekker jeg det. Takk!"
+     ],
+     "bloques_no": [
+      "Da rekker jeg det."
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Hei, Amir. Har du fått jakka?",
+     "larsito_es": "Hola, Amir. ¿Te ha llegado la chaqueta?",
+     "pista_es": "Segunda parte: Larsito es Lina. Di que has pedido una chaqueta nueva por internet pero no entiendes el mensaje, y pregunta qué significa «blir sendt».",
+     "respuestas_modelo_no": [
+      "Jeg har bestilt en ny jakke på nettet, men jeg forstår ikke meldingen. Hva betyr «blir sendt»?"
+     ],
+     "bloques_no": [
+      "Jeg forstår ikke meldingen.",
+      "Hva betyr «…»?"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "At de sender den. «Pakken blir sendt i morgen» betyr at pakken går fra lageret i morgen.",
+     "larsito_es": "Que lo mandan. «El paquete se envía mañana» significa que sale del almacén mañana.",
+     "pista_es": "Pregunta por «blir levert til hentested».",
+     "respuestas_modelo_no": [
+      "Og «blir levert til hentested»?"
+     ],
+     "bloques_no": [
+      "Og «…»?"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "At du må hente den. Du får en melding når den er der. Ta med legitimasjon.",
+     "larsito_es": "Que tienes que recogerlo. Recibes un mensaje cuando esté allí. Lleva identificación.",
+     "pista_es": "Di que también pone «Regningen må betales innen 20. mars».",
+     "respuestas_modelo_no": [
+      "Ok. Her står det også «Regningen må betales innen 20. mars»."
+     ],
+     "bloques_no": [
+      "Her står det også «…»."
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Det er fristen. Du betaler i banken på nettet: velg «Betal regning», skriv inn KID-nummeret og beløpet, og trykk «Betal».",
+     "larsito_es": "Es el plazo. Lo pagas en el banco en línea: elige «Pagar factura», escribe el número KID y el importe, y pulsa «Pagar».",
+     "pista_es": "Da las gracias y di que entonces lo haces esta noche.",
+     "respuestas_modelo_no": [
+      "Takk. Da gjør jeg det i kveld."
+     ],
+     "bloques_no": [
+      "Da gjør jeg det i kveld."
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Hei! Kan jeg hjelpe deg?",
+     "larsito_es": "¡Hola! ¿Puedo ayudarte?",
+     "pista_es": "Tercera parte: Larsito es el dependiente. Di que compraste esta chaqueta por internet hace dos semanas y que quieres cambiarla: es demasiado pequeña.",
+     "respuestas_modelo_no": [
+      "Hei. Jeg kjøpte denne jakka på nettet for to uker siden, og jeg vil gjerne bytte den. Den er for liten."
+     ],
+     "bloques_no": [
+      "Jeg kjøpte … for … siden",
+      "Jeg vil gjerne bytte den.",
+      "Den er for liten."
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Har du kvitteringen?",
+     "larsito_es": "¿Tienes el tique?",
+     "pista_es": "Sí, aquí. Y tiene un agujero en el bolsillo. Pregunta si tienen alguna en una talla más.",
+     "respuestas_modelo_no": [
+      "Ja, her. Og den har et hull i lomma. Har dere noen i større størrelse?"
+     ],
+     "bloques_no": [
+      "Den har et hull i …",
+      "Har dere noen i …?"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "La meg sjekke. Nei, vi har ingen igjen i den fargen.",
+     "larsito_es": "Déjame mirar. No, no nos queda ninguna de ese color.",
+     "pista_es": "Pregunta si tienen alguna en otro color.",
+     "respuestas_modelo_no": [
+      "Har dere noen i en annen farge?"
+     ],
+     "bloques_no": [
+      "Har dere noen i en annen farge?"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Ja, vi har mange i svart. Eller du kan få pengene tilbake.",
+     "larsito_es": "Sí, tenemos muchas en negro. O te devolvemos el dinero.",
+     "pista_es": "Pon la condición: si no tienen la azul, te llevas el dinero.",
+     "respuestas_modelo_no": [
+      "Hvis dere ikke har den blå, tar jeg pengene tilbake."
+     ],
+     "bloques_no": [
+      "Hvis dere ikke har …, tar jeg pengene tilbake."
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Greit. Det tar noen dager før pengene kommer inn på kontoen.",
+     "larsito_es": "Vale. Tarda unos días en llegar a la cuenta.",
+     "pista_es": "Pregunta si tienes que hacer algo más.",
+     "respuestas_modelo_no": [
+      "Er det noe mer jeg må gjøre?"
+     ],
+     "bloques_no": [
+      "Er det noe mer …?"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Nei, ikke noe mer. Her er kvitteringen.",
+     "larsito_es": "No, nada más. Aquí tienes el tique.",
+     "pista_es": "Da las gracias y despídete.",
+     "respuestas_modelo_no": [
+      "Takk. Ha det!"
+     ],
+     "bloques_no": [
+      "Takk. Ha det!"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    }
+   ]
+  },
+  {
+   "id": "LARS-A2-U08",
+   "modo": "rollespill",
+   "modo_contrato": "REAL_LIFE",
+   "nivel": "A2",
+   "titulo": "Entrar en la conversación: la invitación, la ronda de opiniones y el vecino que habla rápido",
+   "leccion": [
+    "A2-U08-L01",
+    "A2-U08-L02",
+    "A2-U08-L03"
+   ],
+   "contexto_es": "Role-play ficticio en tres partes. Primero, Larsito hace de Jonas y te invita al cumpleaños de Emma; después hace de Amir y organizáis el regalo. En la segunda parte hace de Jonas y de Lina en una ronda de opiniones sobre el horario de la guardería. En la tercera hace de Bjørn, el vecino, que habla rápido de una reunión de la comunidad. Usa la tarjeta ficticia.",
+   "datos_ficticios_es": "Invitación: cumpleaños de Emma el sábado a las dos; tú trabajas hasta las cuatro; propones ir después de las cuatro y llegáis a las cuatro y media; preguntas si lleváis algo. Regalo: propones comprarlo entre los dos; crees que un juego; pides que aclare «spill»; le pagas la mitad el sábado. Opiniones: te parece bien el horario más largo porque trabajas hasta las cuatro y no llegas a recoger a Leo antes de las cuatro y media; Jonas no está de acuerdo; Lina propone horario más largo pero no todos los días, y a ti te parece razonable: ¿por qué no solo los viernes? Vecino: reunión de la comunidad el jueves a las siete en el sótano sobre los gastos comunes; pides que hable más despacio, preguntas qué significa «fellesutgifter», te corriges con «Jeg mener», confirmas la hora y te despides.",
+   "cierre": {
+    "conserva": "Si has rechazado con algo positivo, «dessverre» y una alternativa; has opinado con «Jeg synes» y «fordi» y has dicho «enig» o «ikke enig» con una razón; y has pedido despacio, preguntado la palabra, confirmado con «Mener du …?» y cerrado con «Vi snakkes», la escena ha funcionado.",
+    "ahora": "Lo que se te haya atascado vuelve en la práctica de la lección: el orden del rechazo, «synes» frente a «tror» o la frase de rescate que toca.",
+    "repite": "Vuelve a hacer la escena con la misma tarjeta, sin mirar la pista ni los bloques."
+   },
+   "turnos": [
+    {
+     "larsito_no": "Hei, Marta! Emma fyller fem år på lørdag. Vil dere komme i bursdag klokka to?",
+     "larsito_es": "¡Hola, Marta! Emma cumple cinco años el sábado. ¿Venís al cumpleaños a las dos?",
+     "pista_es": "Felicita a Emma, di «qué bien», rechaza el sábado con «dessverre» y di que trabajas hasta las cuatro.",
+     "respuestas_modelo_no": [
+      "Gratulerer med dagen til Emma! Så hyggelig. Men lørdag passer dessverre ikke. Jeg jobber til klokka fire."
+     ],
+     "bloques_no": [
+      "Gratulerer med dagen til …!",
+      "… passer dessverre ikke.",
+      "Jeg jobber til klokka …"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Det går fint. Kan dere komme etter fire? Vi holder på til seks.",
+     "larsito_es": "No pasa nada. ¿Podéis venir después de las cuatro? Estamos hasta las seis.",
+     "pista_es": "Acepta, cierra el plan a las cuatro y media y pregunta si lleváis algo.",
+     "respuestas_modelo_no": [
+      "Ja, det kan vi. Da kommer vi halv fem. Skal vi ta med noe?"
+     ],
+     "bloques_no": [
+      "Ja, det kan vi.",
+      "Da kommer vi …",
+      "Skal vi ta med noe?"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Nei, bare kom. Amir og Sara kommer også.",
+     "larsito_es": "No, solo venid. Amir y Sara también vienen.",
+     "pista_es": "Di «bien», que entonces hablas con Amir y que quizá compréis un regalo entre los dos.",
+     "respuestas_modelo_no": [
+      "Fint! Da snakker jeg med Amir. Kanskje kjøper vi en gave sammen."
+     ],
+     "bloques_no": [
+      "Da snakker jeg med …",
+      "Kanskje kjøper vi …"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Hei, Marta!",
+     "larsito_es": "¡Hola, Marta!",
+     "pista_es": "Ahora Larsito es Amir. Propón comprar un regalo para Emma entre los dos.",
+     "respuestas_modelo_no": [
+      "Amir, skal vi kjøpe en gave til Emma sammen?"
+     ],
+     "bloques_no": [
+      "Skal vi … sammen?"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Ja, gjerne. Hva synes du? En bok eller et spill?",
+     "larsito_es": "Sí, con mucho gusto. ¿Qué opinas? ¿Un libro o un juego?",
+     "pista_es": "Crees que un juego. Pide que aclare qué quiere decir con «spill».",
+     "respuestas_modelo_no": [
+      "Jeg tror et spill. Hva mener du med «spill»?"
+     ],
+     "bloques_no": [
+      "Jeg tror …",
+      "Hva mener du med «…»?"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Et brettspill, for barn. Jeg kan kjøpe det i dag, og vi deler.",
+     "larsito_es": "Un juego de mesa, para niños. Puedo comprarlo hoy y lo pagamos a medias.",
+     "pista_es": "Di «perfecto» y que entonces le pagas la mitad el sábado.",
+     "respuestas_modelo_no": [
+      "Perfekt. Da betaler jeg deg halvparten på lørdag."
+     ],
+     "bloques_no": [
+      "Da betaler jeg deg halvparten …"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Barnehagen skal ha lengre åpningstid fra høsten. Hva synes du?",
+     "larsito_es": "La guardería va a tener horario más largo desde el otoño. ¿Qué opinas?",
+     "pista_es": "Segunda parte. Te parece bien porque trabajas hasta las cuatro, y no llegas a recoger a Leo antes de las cuatro y media.",
+     "respuestas_modelo_no": [
+      "Jeg synes det er bra, fordi jeg jobber til fire. Jeg rekker ikke å hente Leo før halv fem."
+     ],
+     "bloques_no": [
+      "Jeg synes det er bra, fordi …",
+      "Jeg rekker ikke å hente … før …"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Jeg er ikke enig. Jeg synes barna er der lenge nok.",
+     "larsito_es": "No estoy de acuerdo. Me parece que los niños ya están allí bastante tiempo.",
+     "pista_es": "Pídele la razón.",
+     "respuestas_modelo_no": [
+      "Hvorfor det?"
+     ],
+     "bloques_no": [
+      "Hvorfor det?"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Emma er trøtt når jeg henter henne. Kanskje kan de ha lengre åpningstid, men ikke hver dag.",
+     "larsito_es": "Emma está cansada cuando la recojo. Quizá puedan tener horario más largo, pero no todos los días.",
+     "pista_es": "Di que suena razonable y pregunta por qué no solo los viernes.",
+     "respuestas_modelo_no": [
+      "Det høres fornuftig ut. Hvorfor ikke bare fredag?"
+     ],
+     "bloques_no": [
+      "Det høres fornuftig ut.",
+      "Hvorfor ikke bare …?"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Ja, det kan jeg være enig i. Er du enig?",
+     "larsito_es": "Sí, con eso puedo estar de acuerdo. ¿Estás de acuerdo?",
+     "pista_es": "Di que sí, que estás de acuerdo.",
+     "respuestas_modelo_no": [
+      "Ja, jeg er enig."
+     ],
+     "bloques_no": [
+      "Ja, jeg er enig."
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Hei, Marta! Hyggelig å se deg. Har du hørt om møtet i borettslaget på torsdag?",
+     "larsito_es": "¡Hola, Marta! Me alegro de verte. ¿Has oído lo de la reunión de la comunidad el jueves?",
+     "pista_es": "Tercera parte: Larsito es Bjørn. Saluda, di que no lo sabías y pide que lo diga un poco más despacio.",
+     "respuestas_modelo_no": [
+      "Hei, Bjørn! Nei, det har jeg ikke. Kan du si det litt saktere?"
+     ],
+     "bloques_no": [
+      "Nei, det har jeg ikke.",
+      "Kan du si det litt saktere?"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Ja, selvfølgelig. Det er møte i borettslaget på torsdag klokka sju. Vi skal snakke om fellesutgiftene.",
+     "larsito_es": "Sí, claro. Hay reunión de la comunidad el jueves a las siete. Vamos a hablar de los gastos comunes.",
+     "pista_es": "Pregunta qué significa «fellesutgifter».",
+     "respuestas_modelo_no": [
+      "Hva betyr «fellesutgifter»?"
+     ],
+     "bloques_no": [
+      "Hva betyr «…»?"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Det er det alle betaler sammen: for vasking, strøm i gangen og snømåking.",
+     "larsito_es": "Es lo que pagan todos juntos: limpieza, luz de la escalera y quitar la nieve.",
+     "pista_es": "Di «ah, vale»: entonces vais a hablar del precio; corrígete con «Jeg mener»: de cuánto pagáis.",
+     "respuestas_modelo_no": [
+      "Ah, ok. Så vi skal snakke om prisen? Jeg mener, om hvor mye vi betaler?"
+     ],
+     "bloques_no": [
+      "Så vi skal snakke om …?",
+      "Jeg mener, …"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Ja, nettopp. De vil sette den opp fra januar.",
+     "larsito_es": "Sí, exacto. Quieren subirlo desde enero.",
+     "pista_es": "Pide un segundo, busca la palabra «borettslag» en voz alta, di que entonces vas el jueves y confirma la hora.",
+     "respuestas_modelo_no": [
+      "Vent litt, hva heter det igjen … borettslag. Da kommer jeg på torsdag. Klokka sju, mener du?"
+     ],
+     "bloques_no": [
+      "Vent litt, hva heter det igjen …",
+      "Da kommer jeg på …",
+      "…, mener du?"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Ja, klokka sju i kjelleren.",
+     "larsito_es": "Sí, a las siete en el sótano.",
+     "pista_es": "Da las gracias por avisar, di que tienes que irte y despídete.",
+     "respuestas_modelo_no": [
+      "Takk for at du sa fra! Jeg må gå nå. Vi snakkes!"
+     ],
+     "bloques_no": [
+      "Takk for at du sa fra!",
+      "Jeg må gå nå.",
+      "Vi snakkes!"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    }
+   ]
+  },
+  {
    "id": "LARS-PREA1-U01",
    "modo": "rollespill",
    "modo_contrato": "REAL_LIFE",

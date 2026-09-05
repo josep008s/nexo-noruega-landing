@@ -41,12 +41,13 @@ let totalEsen = 0, totalOpc = 0;
 const tipos = {};
 for (const pieza of piezas) {
   const id = pieza.codigo;
-  if (pieza.tipo !== "leccion") continue;
+  if (pieza.tipo !== "leccion" && pieza.tipo !== "puente" && pieza.tipo !== "salto") continue;
   const secs = pieza.secciones.map((s) => s.id);
-  if (secs.join(",") !== SECC.join(",")) fallos.push(`${id}: secciones ${secs.join(",")}`);
+  if (pieza.tipo === "leccion" && secs.join(",") !== SECC.join(",")) fallos.push(`${id}: secciones ${secs.join(",")}`);
+  if (pieza.tipo !== "leccion" && secs.indexOf("comprueba") < 0) fallos.push(`${id}: la pieza de comprobación no tiene la sección «Comprueba» (${secs.join(",")})`);
   const meta = pieza.meta || {};
   for (const k of ["zona", "unidad", "mision", "competencias", "audios", "ejercicios"]) if (meta[k] === undefined || meta[k] === null) fallos.push(`${id}: meta sin ${k}`);
-  if (!/^(PREA1|A1|A2)-U\d\d-L\d\d$/.test(id)) fallos.push(`${id}: código de lección inválido`);
+  if (!/^(PREA1|A1|A2)-U\d\d-L\d\d$|^PUENTE-A2-B1$|^SALTO-(PREA1-A1|A1-A2)$/.test(id)) fallos.push(`${id}: código de lección inválido`);
   for (const e of meta.ejercicios || []) {
     if (!TIPOS.has(e.tipo)) fallos.push(`${id}:${e.id}: tipo ${e.tipo}`);
     if (!e.feedback || !e.feedback.regla || !e.feedback.conserva || !e.feedback.cambia) fallos.push(`${id}:${e.id}: feedback incompleto`);
@@ -74,11 +75,12 @@ for (const pieza of piezas) {
   const ratio = b.opcionales.length / Math.max(1, b.esenciales.length);
   totalEsen += b.esenciales.length; totalOpc += b.opcionales.length;
   console.log(`  ${id}: sesión ${b.esenciales.length} · extra ${b.opcionales.length} (ratio ${ratio.toFixed(1)}) ${JSON.stringify(b.porTipo)}`);
-  if (ratio < 4.5) fallos.push(`${id}: ratio opcional/esencial ${ratio.toFixed(1)} < 4,5`);
+  const comprobacion = pieza.tipo === "puente" || pieza.tipo === "salto";
+  if (ratio < 4.5 && !comprobacion) fallos.push(`${id}: ratio opcional/esencial ${ratio.toFixed(1)} < 4,5`);
   const vistos = {}; const ids = new Set();
   for (let k = 0; k < 2; k++) {
     const t = P.tanda(b.opcionales, { vistos, semilla: `${id}:${k}` });
-    if (!t.items.length) fallos.push(`${id}: tanda ${k} vacía`);
+    if (!t.items.length && !comprobacion) fallos.push(`${id}: tanda ${k} vacía`);
     for (const it of t.items) { if (ids.has(it.id)) fallos.push(`${id}: repite ${it.id} antes de agotar el banco`); ids.add(it.id); vistos[it.id] = true; }
   }
 }
@@ -91,4 +93,4 @@ for (const pieza of piezas) {
 }
 console.log(`  totales: sesión ${totalEsen} · extra ${totalOpc} · tipos ${JSON.stringify(tipos)}${completo ? " (curso completo en disco)" : " (solo demo)"}`);
 if (fallos.length) { console.log("\nFALLOS:\n  " + fallos.slice(0, 40).join("\n  ")); process.exit(1); }
-console.log(`\nPASS norsk_desde_cero_selftest: ${piezas.filter((p) => p.tipo === "leccion").length} lección(es) sin inventar noruego`);
+console.log(`\nPASS norsk_desde_cero_selftest: ${piezas.filter((p) => p.tipo === "leccion").length} lección(es) y ${piezas.filter((p) => p.tipo === "puente" || p.tipo === "salto").length} pieza(s) de comprobación sin inventar noruego`);

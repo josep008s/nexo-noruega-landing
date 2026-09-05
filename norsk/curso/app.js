@@ -14,7 +14,7 @@
   // defecto: sin ?ruta= la app se comporta como hasta ahora.
   var RUTAS = {
     "norskproven-b1": { clave: "nexo_curso_v1", demo: "/data/norsk-curso-demo.json", cuaderno: "/data/norsk-cuaderno.json", muestra: "/norsk/curso/muestra/NEXO-NORSK_Cuaderno-B1_Muestra.pdf", kicker: "Curso B1", nombre: "Noruego de A2 a B1", landing: "/norsk/", titulo: "Curso B1 · NEXO NORSK", inventario: "21 actuaciones orales · 16 mecanismos B1 · 4 destrezas conectadas · más de 2.300 ejercicios opcionales" },
-    "norsk-desde-cero-a2": { clave: "nexo_curso_cero_v1", demo: "/data/norsk-desde-cero-demo.json", cuaderno: null, muestra: null, kicker: "Noruego desde cero hasta A2", nombre: "Noruego desde cero hasta A2", landing: "/norsk/desde-cero/", titulo: "Noruego desde cero hasta A2 · NEXO NORSK", inventario: "4 zonas · 49 lecciones de 15 a 20 minutos · puente hacia el curso A2→B1 · Larsito desde la primera lección" },
+    "norsk-desde-cero-a2": { clave: "nexo_curso_cero_v1", demo: "/data/norsk-desde-cero-demo.json", cuaderno: null, muestra: null, kicker: "Noruego desde cero hasta A2", nombre: "Noruego desde cero hasta A2", landing: "/norsk/desde-cero/", titulo: "Noruego desde cero hasta A2 · NEXO NORSK", inventario: "3 zonas · 48 lecciones de 15 a 20 minutos · 2 saltos · puente hacia el curso A2→B1 · Larsito desde la primera lección" },
   };
   var RUTA = (function () {
     var m = /[?&]ruta=([a-z0-9-]+)/.exec(window.location.search || "");
@@ -196,6 +196,8 @@
     PUENTE: { titulo: "Puente hacia el curso A2→B1", nota: "Doce a quince minutos para saber si puedes abrir M01 y qué conviene repasar antes." },
   };
   var ORDEN_ZONAS = ["PREA1", "A1", "A2", "PUENTE"];
+  // Nombres cortos de los dieciséis mecanismos del curso A2→B1, para el resultado del puente.
+  var NOMBRES_M = { M01: "Orden y verbo segundo", M02: "La negación", M03: "«som» y «enn»", M04: "Los dos pasados", M05: "La secuencia", M06: "Causa y consecuencia", M07: "La condición con «hvis»", M08: "«blir» más participio", M09: "«sa at»", M10: "Los modales", M11: "Opinión y acuerdo", M12: "«noen», «ingen», «mange», «mye»", M13: "Los posesivos", M14: "El aviso administrativo", M15: "«og», «men», «så»", M16: "La reparación" };
 
   var TIPOS = {
     diagnostico: { titulo: "Diagnóstico", nota: "Localiza qué destreza necesita trabajo antes de abrir más material." },
@@ -845,6 +847,136 @@
     return b;
   }
 
+  // Puente A2→B1 y saltos: las secciones explicativas, la sesión con todos los ítems en
+  // orden y un resultado por grupo (mecanismo en el puente, lección en los saltos) con
+  // «listo» o «repasa» y la pieza que conviene abrir. Se guarda el resultado por grupo y
+  // la fecha, nunca las respuestas.
+  function renderComprobacion(pieza, secciones, lector) {
+    var P = window.NexoPractica;
+    var esPuente = pieza.tipo === "puente";
+    var brutos = ((pieza.meta && pieza.meta.ejercicios) || []).filter(function (e) { return e.esencial; });
+
+    function seccionHtml(s) {
+      var bloque = el("section", "lector-seccion seccion-" + s.id);
+      bloque.id = "apartado-" + s.id;
+      if (s.titulo) bloque.appendChild(el("h2", null, s.titulo));
+      var cuerpo = el("div", "seccion-cuerpo");
+      cuerpo.innerHTML = s.html || "";
+      envolverTablas(cuerpo);
+      bloque.appendChild(cuerpo);
+      lector.appendChild(bloque);
+      return bloque;
+    }
+
+    function nombreGrupo(clave) {
+      if (esPuente) return clave + " · " + (NOMBRES_M[clave] || "");
+      var p = piezaEnIndice(clave);
+      return (p ? p.titulo : clave) + " · " + clave;
+    }
+
+    function mostrarResultado(registro) {
+      var falladas = (registro.sesion && registro.sesion.falladas) || [];
+      var grupos = {}, orden = [];
+      brutos.forEach(function (e) {
+        var g = e.m || e.leccion_repaso || "otros";
+        if (!grupos[g]) { grupos[g] = { clave: g, items: [], repaso: e.leccion_repaso || null }; orden.push(g); }
+        grupos[g].items.push(e);
+      });
+      var listos = 0;
+      var caja = el("section", "resultado-comprobacion");
+      caja.id = "resultado";
+      caja.appendChild(el("p", "kicker", esPuente ? "Resultado del puente" : "Resultado del salto"));
+      var tabla = document.createElement("table");
+      var thead = document.createElement("thead"); var trh = document.createElement("tr");
+      [esPuente ? "Mecanismo" : "Lección", "Estado", "Qué hacer"].forEach(function (t) { var th = document.createElement("th"); th.textContent = t; trh.appendChild(th); });
+      thead.appendChild(trh); tabla.appendChild(thead);
+      var tbody = document.createElement("tbody");
+      var guardado = {};
+      orden.forEach(function (g) {
+        var grupo = grupos[g];
+        var fallos = grupo.items.filter(function (e) { return falladas.indexOf(e.id) >= 0; }).length;
+        var ok = fallos === 0;
+        if (ok) listos++;
+        guardado[g] = ok;
+        var tr = document.createElement("tr");
+        var td1 = document.createElement("td"); td1.textContent = nombreGrupo(g); tr.appendChild(td1);
+        var td2 = document.createElement("td"); td2.appendChild(el("span", "estado " + (ok ? "estado-listo" : "estado-repasa"), ok ? "Listo" : "Repasa")); tr.appendChild(td2);
+        var td3 = document.createElement("td");
+        if (ok) td3.textContent = "Nada: los " + grupo.items.length + " pasos bien.";
+        else {
+          var destino = grupo.repaso && piezaEnIndice(grupo.repaso);
+          if (destino && destino.abierta) {
+            var b = el("button", "btn ghost", "Abrir " + destino.titulo);
+            b.type = "button";
+            b.addEventListener("click", function () { abrirPieza(destino.codigo); });
+            td3.appendChild(b);
+          } else td3.textContent = "Repasa " + (grupo.repaso || "la lección que lo enseña") + " y vuelve.";
+        }
+        tr.appendChild(td3);
+        tbody.appendChild(tr);
+      });
+      tabla.appendChild(tbody);
+      var envoltorio = el("div", "tabla-scroll");
+      envoltorio.appendChild(tabla);
+      caja.appendChild(envoltorio);
+      var todo = listos === orden.length;
+      caja.appendChild(el("p", "lectura", esPuente
+        ? (todo ? "Los dieciséis mecanismos están listos. Puedes abrir M01 del curso «Noruego de A2 a B1»." : listos + " de " + orden.length + " mecanismos listos. Repasa los que faltan y vuelve mañana, o abre M01 igualmente: lo que falle volverá en el repaso.")
+        : (todo ? "Todo listo. Puedes entrar en la zona siguiente." : listos + " de " + orden.length + " lecciones listas. Haz las que marcan «Repasa» y vuelve si quieres comprobarlo.")));
+      var acciones = el("div", "fila-acciones");
+      if (esPuente) {
+        var a = el("a", "btn", "Abrir M01 del curso A2→B1");
+        a.href = "/norsk/curso/?ruta=norskproven-b1#M01";
+        acciones.appendChild(a);
+      } else {
+        var sig = ((pieza.meta && pieza.meta.conexion_posterior) || [])[0];
+        var piezaSig = sig && piezaEnIndice(sig);
+        if (piezaSig && piezaSig.abierta) {
+          var bs = el("button", "btn", "Seguir en " + piezaSig.titulo);
+          bs.type = "button";
+          bs.addEventListener("click", function () { abrirPieza(piezaSig.codigo); });
+          acciones.appendChild(bs);
+        }
+      }
+      caja.appendChild(acciones);
+      estado.comprobaciones = estado.comprobaciones || {};
+      estado.comprobaciones[pieza.codigo] = { fecha: new Date().toISOString().slice(0, 10), grupos: guardado };
+      if (todo) estado.hechas[pieza.codigo] = true;
+      guardar();
+      var previo = lector.querySelector("#resultado");
+      if (previo) previo.replaceWith(caja);
+      else {
+        var sesionNodo = lector.querySelector("#sesion");
+        if (sesionNodo && sesionNodo.parentNode === lector) lector.insertBefore(caja, sesionNodo.nextSibling);
+        else lector.appendChild(caja);
+      }
+      caja.scrollIntoView({ block: "start", behavior: "smooth" });
+    }
+
+    function sesion() {
+      var hueco = el("div", "sesion-hueco");
+      lector.appendChild(hueco);
+      var nodo = P.montarEsenciales(pieza, {
+        estado: estado, guardar: guardar,
+        kicker: esPuente ? "Puente" : "Salto",
+        encabezado: esPuente ? "Treinta y dos pasos, dos por mecanismo" : "Los pasos del salto",
+        intro: brutos.length + " pasos en orden, sin cronómetro. Cada uno te dice qué conservar, qué cambiar y qué lección lo enseña. Al final ves el resultado por " + (esPuente ? "mecanismo." : "lección."),
+        alTerminar: mostrarResultado,
+      });
+      if (nodo) hueco.replaceWith(nodo); else hueco.remove();
+    }
+
+    var insertada = false;
+    secciones.forEach(function (s) {
+      if (s.id === "soluciones") return;
+      seccionHtml(s);
+      if (s.id === "comprueba" && !insertada) { insertada = true; sesion(); }
+    });
+    if (!insertada) sesion();
+    var previo = estado.comprobaciones && estado.comprobaciones[pieza.codigo];
+    if (previo && previo.fecha) lector.appendChild(el("p", "ayuda", "Última vez: " + previo.fecha + ". Puedes repetirlo cuantas veces quieras; solo se guarda el resultado por " + (esPuente ? "mecanismo" : "lección") + " y la fecha."));
+  }
+
   function renderLeccion(pieza, secciones, lector) {
     var porId = {};
     secciones.forEach(function (s) { porId[s.id] = s; });
@@ -1115,6 +1247,8 @@
       }
     } else if (pieza.tipo === "leccion" && window.NexoPractica) {
       renderLeccion(pieza, secciones, lector);
+    } else if ((pieza.tipo === "puente" || pieza.tipo === "salto") && window.NexoPractica) {
+      renderComprobacion(pieza, secciones, lector);
     } else if (pieza.tipo === "mecanismo" && window.NexoPractica) {
       var idsEsenciales = { intro: true, "la-escena": true, "la-grieta": true, "el-mecanismo": true };
       var esenciales = secciones.filter(function (s) { return idsEsenciales[s.id]; });
