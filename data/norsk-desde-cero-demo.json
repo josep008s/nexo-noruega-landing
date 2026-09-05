@@ -4,8 +4,8 @@
   "ruta": "norsk-desde-cero-a2",
   "actualizado": "2026-09-05",
   "aviso": "Material propio de NEXO NORSK. NEXO NORSK es un proyecto independiente y no tiene relación con HK-dir, con UDI ni con ningún centro de examen. Este recorrido no promete un nivel, un aprobado ni un trámite.",
-  "piezas_totales": 39,
-  "lecciones_totales": 39
+  "piezas_totales": 42,
+  "lecciones_totales": 42
  },
  "piezas": [
   {
@@ -2462,6 +2462,33 @@
    "zona": "A2",
    "unidad": "A2-U05",
    "resumen": "Una semana después: contar en la consulta o al jefe qué ha cambiado, con dos frases de antes, dos de ahora y una valoración con «bedre» o «verre»."
+  },
+  {
+   "codigo": "A2-U06-L01",
+   "tipo": "leccion",
+   "titulo": "De quién es qué",
+   "orden": 40,
+   "zona": "A2",
+   "unidad": "A2-U06",
+   "resumen": "Recoges a tu hijo en la guardería: aclarar de quién es cada chaqueta y cada par de botas, presentarte al padre de otra niña y quedar para que los niños jueguen."
+  },
+  {
+   "codigo": "A2-U06-L02",
+   "tipo": "leccion",
+   "titulo": "Explicar por qué",
+   "orden": 41,
+   "zona": "A2",
+   "unidad": "A2-U06",
+   "resumen": "Tu hijo no va a la guardería: llamar para avisar y decir por qué, explicar por qué no podéis ir a la reunión de padres y escribir el mensaje con los dos motivos."
+  },
+  {
+   "codigo": "A2-U06-L03",
+   "tipo": "leccion",
+   "titulo": "Lo que dijo la maestra",
+   "orden": 42,
+   "zona": "A2",
+   "unidad": "A2-U06",
+   "resumen": "La guardería deja un mensaje de voz: sacar de él cuándo es la excursión, qué hay que llevar y a qué hora, apuntar las palabras clave y contárselo a otro padre que no lo ha oído."
   }
  ]
 }

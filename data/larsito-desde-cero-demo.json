@@ -2271,6 +2271,188 @@
    ]
   },
   {
+   "id": "LARS-A2-U06",
+   "modo": "rollespill",
+   "modo_contrato": "REAL_LIFE",
+   "nivel": "A2",
+   "titulo": "Guardería y escuela: de quién es qué, por qué no va el niño y qué dijo la maestra",
+   "leccion": [
+    "A2-U06-L01",
+    "A2-U06-L02",
+    "A2-U06-L03"
+   ],
+   "contexto_es": "Role-play ficticio en tres partes. Primero, Larsito hace de la maestra de la guardería cuando recoges a tu hijo. Después hace de la maestra al teléfono y tú avisas de que el niño no va y por qué. Al final hace de otro padre que no ha oído el mensaje de la guardería y tú se lo cuentas. Usa la tarjeta ficticia.",
+   "datos_ficticios_es": "Tu hijo ficticio se llama Leo. Guardería: la chaqueta azul es de Emma, la de Leo cuelga al lado de tu mochila; los zapatos de Leo están fuera; Emma habla de Leo y Leo de ella; vais a mandar un mensaje para quedar el sábado. Aviso: Leo no va porque está enfermo, tiene fiebre; llamas mañana temprano; no podéis ir a la reunión de padres porque no tenéis canguro; pides un resumen. Mensaje de la maestra: excursión al bosque el viernes; ropa de lluvia, botas y comida; salen a las nueve, llegar antes de las ocho y media; es gratis.",
+   "cierre": {
+    "conserva": "Si has puesto el posesivo detrás de la cosa («jakka hans»), has hablado de la persona con «ham» y «henne», has dado el motivo con «fordi» y «ikke» delante del verbo, y has pasado el aviso con «sa at» sin cambiar el tiempo, la escena ha funcionado.",
+    "ahora": "Lo que se te haya atascado vuelve en la práctica de la lección: el posesivo, el pronombre de objeto, el sitio de «ikke» dentro de «fordi» o el tiempo detrás de «sa at».",
+    "repite": "Vuelve a hacer la escena con la misma tarjeta, sin mirar la pista ni los bloques."
+   },
+   "turnos": [
+    {
+     "larsito_no": "Hei, Marta! Leo er ute. Han leker med Emma.",
+     "larsito_es": "¡Hola! Leo está fuera. Está jugando con Emma.",
+     "pista_es": "Pregunta si esta es la chaqueta de él, la azul.",
+     "respuestas_modelo_no": [
+      "Er dette jakka hans? Den blå?"
+     ],
+     "bloques_no": [
+      "Er dette jakka hans?"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Nei, den er hennes. Jakka hans henger der, ved siden av sekken din.",
+     "larsito_es": "No, es de ella. La de él está colgada ahí, al lado de tu mochila.",
+     "pista_es": "Da las gracias y di que no encuentras sus zapatos, los de él.",
+     "respuestas_modelo_no": [
+      "Takk. Og skoene? Jeg finner ikke skoene hans."
+     ],
+     "bloques_no": [
+      "Jeg finner ikke skoene hans."
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "De står ute. Han tok dem av. Og Jonas, faren til Emma, vil hilse på deg.",
+     "larsito_es": "Están fuera. Se los quitó. Y Jonas, el padre de Emma, quiere saludarte.",
+     "pista_es": "Otro padre te pregunta: «Er du moren til Leo? Emma snakker om ham hele tiden.» Di que sí, que eres tú, y que Leo habla de ella.",
+     "respuestas_modelo_no": [
+      "Ja, det er meg. Og Leo snakker om henne."
+     ],
+     "bloques_no": [
+      "Ja, det er meg.",
+      "Leo snakker om henne."
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Vi bor rett ved dere. Barna våre kan leke sammen på lørdag.",
+     "larsito_es": "Vivimos justo al lado de vosotros. Nuestros niños pueden jugar juntos el sábado.",
+     "pista_es": "Di que con mucho gusto y que le mandas un mensaje.",
+     "respuestas_modelo_no": [
+      "Gjerne! Jeg sender deg en melding."
+     ],
+     "bloques_no": [
+      "Jeg sender deg en melding."
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Hei, Marta. Kommer Leo i dag?",
+     "larsito_es": "Hola, Marta. ¿Viene Leo hoy?",
+     "pista_es": "Segunda parte, por teléfono. No: Leo no va hoy porque está enfermo, tiene fiebre.",
+     "respuestas_modelo_no": [
+      "Nei, Leo kommer ikke i dag fordi han er syk. Han har feber."
+     ],
+     "bloques_no": [
+      "… kommer ikke i dag fordi han er syk."
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Å, stakkar. Kommer han i morgen?",
+     "larsito_es": "Ay, pobre. ¿Viene mañana?",
+     "pista_es": "No lo sabes. Llamas mañana temprano.",
+     "respuestas_modelo_no": [
+      "Jeg vet ikke. Jeg ringer i morgen tidlig."
+     ],
+     "bloques_no": [
+      "Jeg vet ikke.",
+      "Jeg ringer i morgen tidlig."
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Fint. Og foreldremøtet på torsdag, kommer dere?",
+     "larsito_es": "Bien. ¿Y a la reunión de padres del jueves venís?",
+     "pista_es": "Por desgracia no podéis ir porque no tenéis canguro. Pide un resumen.",
+     "respuestas_modelo_no": [
+      "Vi kan dessverre ikke komme fordi vi ikke har barnevakt. Kan dere sende et referat?"
+     ],
+     "bloques_no": [
+      "Vi kan dessverre ikke komme fordi vi ikke har …",
+      "Kan dere sende et referat?"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Ja, det gjør vi. En ting til: Leo hadde ikke regntøy i går. Hvorfor ikke?",
+     "larsito_es": "Sí, lo haremos. Una cosa más: Leo no tenía ropa de lluvia ayer. ¿Por qué no?",
+     "pista_es": "Porque se quedó en el coche. Pide perdón y di que lo traes mañana.",
+     "respuestas_modelo_no": [
+      "Fordi det lå igjen i bilen. Beklager! Jeg tar det med i morgen."
+     ],
+     "bloques_no": [
+      "Fordi det lå igjen i …",
+      "Beklager!"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Hei, Marta. Fikk du meldingen fra barnehagen? Jeg hørte den ikke.",
+     "larsito_es": "Hola, Marta. ¿Te llegó el mensaje de la guardería? No lo he oído.",
+     "pista_es": "Tercera parte: Larsito es Amir. Sí: Kari dijo que van de excursión al bosque el viernes.",
+     "respuestas_modelo_no": [
+      "Ja. Kari sa at de skal på tur til skogen på fredag."
+     ],
+     "bloques_no": [
+      "Kari sa at de skal …"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Hva må barna ha med?",
+     "larsito_es": "¿Qué tienen que llevar los niños?",
+     "pista_es": "Dijo que ropa de lluvia, botas y comida.",
+     "respuestas_modelo_no": [
+      "Hun sa at barna må ha regntøy, støvler og matpakke."
+     ],
+     "bloques_no": [
+      "Hun sa at barna må ha …"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Når går de?",
+     "larsito_es": "¿A qué hora salen?",
+     "pista_es": "Dijo que salen a las nueve, así que tenéis que llegar antes de las ocho y media.",
+     "respuestas_modelo_no": [
+      "Hun sa at de går klokka ni, så vi må komme før halv ni."
+     ],
+     "bloques_no": [
+      "Hun sa at de går klokka …",
+      "… så vi må komme før …"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Koster det noe?",
+     "larsito_es": "¿Cuesta algo?",
+     "pista_es": "No. Dijo que la excursión es gratis.",
+     "respuestas_modelo_no": [
+      "Nei. Hun sa at turen er gratis."
+     ],
+     "bloques_no": [
+      "Hun sa at turen er gratis."
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    }
+   ]
+  },
+  {
    "id": "LARS-PREA1-U01",
    "modo": "rollespill",
    "modo_contrato": "REAL_LIFE",
