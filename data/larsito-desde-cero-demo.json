@@ -2242,8 +2242,8 @@
      "audio_modelo": null
     },
     {
-     "larsito_no": "Sover du?",
-     "larsito_es": "¿Duermes?",
+     "larsito_no": "Og hvordan sover du?",
+     "larsito_es": "¿Y cómo duermes?",
      "pista_es": "Antes dormías mal. Ahora mejor, pero te despiertas a las cinco.",
      "respuestas_modelo_no": [
       "Før sov jeg dårlig. Nå sover jeg bedre, men jeg våkner klokka fem."
@@ -2283,7 +2283,7 @@
     "A2-U06-L03"
    ],
    "contexto_es": "Role-play ficticio en tres partes. Primero, Larsito hace de la maestra de la guardería cuando recoges a tu hijo. Después hace de la maestra al teléfono y tú avisas de que el niño no va y por qué. Al final hace de otro padre que no ha oído el mensaje de la guardería y tú se lo cuentas. Usa la tarjeta ficticia.",
-   "datos_ficticios_es": "Tu hijo ficticio se llama Leo. Guardería: la chaqueta azul es de Emma, la de Leo cuelga al lado de tu mochila; los zapatos de Leo están fuera; Emma habla de Leo y Leo de ella; vais a mandar un mensaje para quedar el sábado. Aviso: Leo no va porque está enfermo, tiene fiebre; llamas mañana temprano; no podéis ir a la reunión de padres porque no tenéis canguro; pides un resumen. Mensaje de la maestra: excursión al bosque el viernes; ropa de lluvia, botas y comida; salen a las nueve, llegar antes de las ocho y media; es gratis.",
+   "datos_ficticios_es": "Tu hijo ficticio se llama Leo. Guardería: la chaqueta azul es de Emma, la de Leo cuelga al lado de su mochila; los zapatos de Leo están fuera; Emma habla de Leo y Leo de ella; vais a mandar un mensaje para quedar el sábado. Aviso: Leo no va porque está enfermo, tiene fiebre; llamas mañana temprano; no podéis ir a la reunión de padres porque no tenéis canguro; pides un resumen. Mensaje de la maestra: excursión al bosque el viernes; ropa de lluvia, botas y comida; salen a las nueve, llegar antes de las ocho y media; es gratis.",
    "cierre": {
     "conserva": "Si has puesto el posesivo detrás de la cosa («jakka hans»), has hablado de la persona con «ham» y «henne», has dado el motivo con «fordi» y «ikke» delante del verbo, y has pasado el aviso con «sa at» sin cambiar el tiempo, la escena ha funcionado.",
     "ahora": "Lo que se te haya atascado vuelve en la práctica de la lección: el posesivo, el pronombre de objeto, el sitio de «ikke» dentro de «fordi» o el tiempo detrás de «sa at».",
@@ -2304,8 +2304,8 @@
      "audio_modelo": null
     },
     {
-     "larsito_no": "Nei, den er hennes. Jakka hans henger der, ved siden av sekken din.",
-     "larsito_es": "No, es de ella. La de él está colgada ahí, al lado de tu mochila.",
+     "larsito_no": "Nei, den er hennes. Jakka hans henger der, ved siden av sekken hans.",
+     "larsito_es": "No, es de ella. La de él está colgada ahí, al lado de su mochila.",
      "pista_es": "Da las gracias y di que no encuentras sus zapatos, los de él.",
      "respuestas_modelo_no": [
       "Takk. Og skoene? Jeg finner ikke skoene hans."
@@ -2317,9 +2317,9 @@
      "audio_modelo": null
     },
     {
-     "larsito_no": "De står ute. Han tok dem av. Og Jonas, faren til Emma, vil hilse på deg.",
-     "larsito_es": "Están fuera. Se los quitó. Y Jonas, el padre de Emma, quiere saludarte.",
-     "pista_es": "Otro padre te pregunta: «Er du moren til Leo? Emma snakker om ham hele tiden.» Di que sí, que eres tú, y que Leo habla de ella.",
+     "larsito_no": "De står ute. Han tok dem av. Og Jonas, faren til Emma, vil snakke med deg.",
+     "larsito_es": "Están fuera. Se los quitó. Y Jonas, el padre de Emma, quiere hablar contigo.",
+     "pista_es": "Jonas, tu compañero de trabajo, te pregunta: «Hei, Marta! Er du moren til Leo? Emma snakker om ham hele tiden.» Di que sí, que eres tú, y que Leo habla de ella.",
      "respuestas_modelo_no": [
       "Ja, det er meg. Og Leo snakker om henne."
      ],
@@ -2399,7 +2399,7 @@
      "audio_modelo": null
     },
     {
-     "larsito_no": "Hei, Marta. Fikk du meldingen fra barnehagen? Jeg hørte den ikke.",
+     "larsito_no": "Hei, Marta. Fikk du meldingen fra barnehagen? Jeg har ikke hørt den.",
      "larsito_es": "Hola, Marta. ¿Te llegó el mensaje de la guardería? No lo he oído.",
      "pista_es": "Tercera parte: Larsito es Amir. Sí: Kari dijo que van de excursión al bosque el viernes.",
      "respuestas_modelo_no": [
@@ -2416,7 +2416,7 @@
      "larsito_es": "¿Qué tienen que llevar los niños?",
      "pista_es": "Dijo que ropa de lluvia, botas y comida.",
      "respuestas_modelo_no": [
-      "Hun sa at barna må ha regntøy, støvler og matpakke."
+      "Hun sa at barna må ha med regntøy, støvler og matpakke."
      ],
      "bloques_no": [
       "Hun sa at barna må ha …"
