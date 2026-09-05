@@ -4,8 +4,8 @@
   "ruta": "norsk-desde-cero-a2",
   "actualizado": "2026-09-05",
   "aviso": "Material propio de NEXO NORSK. NEXO NORSK es un proyecto independiente y no tiene relación con HK-dir, con UDI ni con ningún centro de examen. Este recorrido no promete un nivel, un aprobado ni un trámite.",
-  "piezas_totales": 42,
-  "lecciones_totales": 42
+  "piezas_totales": 45,
+  "lecciones_totales": 45
  },
  "piezas": [
   {
@@ -2489,6 +2489,33 @@
    "zona": "A2",
    "unidad": "A2-U06",
    "resumen": "La guardería deja un mensaje de voz: sacar de él cuándo es la excursión, qué hay que llevar y a qué hora, apuntar las palabras clave y contárselo a otro padre que no lo ha oído."
+  },
+  {
+   "codigo": "A2-U07-L01",
+   "tipo": "leccion",
+   "titulo": "Rellenar un formulario",
+   "orden": 43,
+   "zona": "A2",
+   "unidad": "A2-U07",
+   "resumen": "Inscribir a tu hijo en un curso de natación del ayuntamiento: preguntar dónde está el formulario y qué campos lleva, rellenarlo con datos ficticios, y leer el mensaje con el plazo y la fecha de inicio."
+  },
+  {
+   "codigo": "A2-U07-L02",
+   "tipo": "leccion",
+   "titulo": "Banco y compras en línea",
+   "orden": 44,
+   "zona": "A2",
+   "unidad": "A2-U07",
+   "resumen": "Has pedido una chaqueta por internet: entender los tres avisos que te llegan, pagar la factura en el banco en línea siguiendo las instrucciones, y contarle a un compañero qué dice la noticia del autobús."
+  },
+  {
+   "codigo": "A2-U07-L03",
+   "tipo": "leccion",
+   "titulo": "Devolver algo",
+   "orden": 45,
+   "zona": "A2",
+   "unidad": "A2-U07",
+   "resumen": "La chaqueta que pediste es demasiado pequeña: devolverla en la tienda, decir cuándo la compraste y qué le pasa, preguntar si hay otra talla y, si no, pedir el dinero."
   }
  ]
 }
