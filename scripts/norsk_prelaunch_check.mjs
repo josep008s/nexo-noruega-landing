@@ -1043,7 +1043,7 @@ if (exists("norsk/curso/app.js")) {
       if (!esc.length) duro("Larsito desde cero: sin escenarios");
       if (d.audio_estatico !== false) duro("Larsito desde cero: audio_estatico debe ser false (sin grabaciones ni proveedor)");
       if (raw.includes("\u2014")) duro("Larsito desde cero: em dash");
-      if (/PENDIENTE|revisi[oó]n nativa|firma nativa/i.test(raw)) duro("Larsito desde cero: expone estado editorial interno");
+      if (/\bPENDIENTE\b|revisi[oó]n nativa|firma nativa/i.test(raw)) duro("Larsito desde cero: expone estado editorial interno");
       if (PROHIBIDAS.test(raw)) duro("Larsito desde cero: palabra prohibida de marca");
       const turnosMal = esc.flatMap((e) => (e.turnos || []).filter((t) => !t.larsito_no || !t.larsito_es || !t.pista_es || !(t.respuestas_modelo_no || []).length));
       if (turnosMal.length) duro(`Larsito desde cero: ${turnosMal.length} turno(s) incompletos`);
