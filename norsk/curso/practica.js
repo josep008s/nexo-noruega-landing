@@ -1390,11 +1390,32 @@
     return "";
   }
 
+  // Reconstruye la secuencia de fichas colocadas a partir del texto unido (las fichas solo pueden ser las del ítem).
+  function fichasDesde(dado, fichas) {
+    var resto = String(dado || "").trim(), out = [];
+    var cand = fichas.slice().sort(function (a, b) { return b.length - a.length; });
+    while (resto.length) {
+      var hit = null;
+      for (var i = 0; i < cand.length; i++) {
+        var f = cand[i];
+        if (normalizar(resto.slice(0, f.length)) === normalizar(f) && (resto.length === f.length || resto.charAt(f.length) === " ")) { hit = f; break; }
+      }
+      if (!hit) return null;
+      out.push(resto.slice(0, hit.length)); resto = resto.slice(hit.length).trim();
+    }
+    return out;
+  }
+
   function diagnosticar(item, dado, mecanismo) {
     // Si el ítem trae su propia regla en «feedback», no se añade la regla genérica de la pieza (evita dos reglas distintas).
     if (item.feedback && item.feedback.regla) mecanismo = "";
     try {
-      if (item.tipo === "ordena" || item.tipo === "transforma") return diagnosticoOrden(tokens(dado), tokens(item.frase || item.solucion.join(" ")), mecanismo);
+      if (item.tipo === "ordena" || item.tipo === "transforma") {
+        // Con fichas explícitas de varias palabras, el diagnóstico habla de fichas, no de palabras sueltas.
+        var multi = (item.solucion || []).some(function (s) { return /\s/.test(s); });
+        var seq = multi ? fichasDesde(dado, item.solucion) : null;
+        return seq ? diagnosticoOrden(seq, item.solucion, mecanismo) : diagnosticoOrden(tokens(dado), tokens(item.frase || item.solucion.join(" ")), mecanismo);
+      }
       if (item.tipo === "escribe" || item.tipo === "dictado") {
         var ts = tokens(String(dado || "").replace(/[«»"“”]/g, ""));
         var mismoConjunto = ts.length === item.solucion.length && ts.map(normalizar).sort().join("|") === item.solucion.map(normalizar).sort().join("|");
