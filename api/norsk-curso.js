@@ -1,6 +1,9 @@
 // Sirve el curso Norskprøven B1 a compradores con acceso activo. El muro del curso.
 // GET ?modo=indice[&ruta=…]              -> lista de piezas sin cuerpo (sin gastar cuota)
 // GET ?modo=pieza&codigo=M01[&ruta=…]    -> una pieza entera, con sus secciones en HTML
+// GET ?modo=audio&codigo=A1-U01-L01&ruta=… -> URL firmadas (una hora) de las grabaciones y los
+//                                            clips de frase de esa pieza, desde el bucket privado
+//                                            norsk-audio/<ruta>/… (solo el recorrido desde cero)
 //
 // ruta: norskproven-b1 (por defecto) o norsk-desde-cero-a2. Las dos viven en la
 // misma tabla (migración 0008) y la compra tiene que dar derecho a esa ruta.
@@ -12,7 +15,7 @@
 // La demo pública del curso no pasa por aquí: vive en data/norsk-curso-demo.json y
 // la sirve el estático, porque es lo único que puede leerse sin haber pagado.
 
-import { readSessionCookie, compraActiva, tickUso, sbSelect, accesoARuta, RUTAS_CURSO, RUTA_POR_DEFECTO } from "./_norsk_lib.js";
+import { readSessionCookie, compraActiva, tickUso, sbSelect, accesoARuta, storageSignBatch, RUTAS_CURSO, RUTA_POR_DEFECTO } from "./_norsk_lib.js";
 
 // Tope diario por compra para el tipo "curso". Contador propio, separado del de
 // práctica ("api") y del de Larsito: leer una lección no debe quemar la cuota de
@@ -39,7 +42,7 @@ export default async function handler(req, res) {
   if (!compra) { res.status(401).json({ ok: false, error: "caducado" }); return; }
 
   const q = req.query || {};
-  const modo = q.modo === "pieza" ? "pieza" : "indice";
+  const modo = q.modo === "pieza" ? "pieza" : q.modo === "audio" ? "audio" : "indice";
   const ruta = q.ruta ? String(q.ruta) : RUTA_POR_DEFECTO;
   if (!RUTAS_CURSO.includes(ruta)) { res.status(400).json({ ok: false, error: "ruta" }); return; }
   let autorizada = false;
@@ -93,6 +96,29 @@ export default async function handler(req, res) {
     if (usos !== null && usos > TOPE_DIARIO) { res.status(429).json({ ok: false, error: "limite" }); return; }
   } catch (e) {
     console.error("norsk-curso uso", e);
+  }
+
+  if (modo === "audio") {
+    // Las URL caducan en una hora; la app las pide al abrir la pieza y las guarda con ella.
+    // Solo se firman los ids y hashes declarados en la propia pieza: nada que venga del cliente.
+    try {
+      const rows = await selectCurso(`codigo=eq.${encodeURIComponent(codigo)}&activa=is.true&select=codigo,meta&limit=1`);
+      if (!rows || !rows.length) { res.status(404).json({ ok: false, error: "pieza" }); return; }
+      const meta = rows[0].meta || {};
+      const ids = (Array.isArray(meta.audio) ? meta.audio : []).filter((id) => /^AU-[A-Z0-9-]{3,40}$/.test(String(id)));
+      const hashes = Object.values(meta.frases_audio || {}).filter((h) => /^[a-f0-9]{12}$/.test(String(h)));
+      const paths = ids.map((id) => `${ruta}/${id}.mp3`).concat(hashes.map((h) => `${ruta}/frases/${h}.mp3`));
+      const firmadas = await storageSignBatch("norsk-audio", paths, 3600);
+      const audios = {}; const frases = {};
+      ids.forEach((id) => { const u = firmadas[`${ruta}/${id}.mp3`]; if (u) audios[id] = u; });
+      hashes.forEach((h) => { const u = firmadas[`${ruta}/frases/${h}.mp3`]; if (u) frases[h] = u; });
+      res.setHeader("Cache-Control", "private, no-store");
+      res.status(200).json({ ok: true, modo, ruta, codigo, caduca_s: 3600, audios, frases });
+    } catch (e) {
+      console.error("norsk-curso audio", e);
+      res.status(500).json({ ok: false, error: "interno" });
+    }
+    return;
   }
 
   try {

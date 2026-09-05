@@ -384,3 +384,25 @@ export function readRawBody(req) {
     req.on("error", reject);
   });
 }
+
+
+// Firma en lote URL temporales de un bucket privado de Storage (audio del curso).
+// Devuelve { path: urlAbsoluta }; los objetos que no existen se omiten sin error,
+// y la app cae a la voz local del navegador para ellos.
+export async function storageSignBatch(bucket, paths, segundos) {
+  const url = process.env.SUPABASE_URL;
+  const key = process.env.SUPABASE_SERVICE_KEY;
+  if (!url || !key || !Array.isArray(paths) || !paths.length) return {};
+  const r = await fetch(`${url}/storage/v1/object/sign/${encodeURIComponent(bucket)}`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", apikey: key, Authorization: `Bearer ${key}` },
+    body: JSON.stringify({ expiresIn: segundos, paths }),
+  });
+  if (!r.ok) throw new Error(`storage sign lote ${r.status}: ${await r.text()}`);
+  const lista = await r.json();
+  const out = {};
+  (Array.isArray(lista) ? lista : []).forEach((e) => {
+    if (e && !e.error && e.signedURL && e.path) out[e.path] = `${url}/storage/v1${e.signedURL}`;
+  });
+  return out;
+}

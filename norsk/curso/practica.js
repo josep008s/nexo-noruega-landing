@@ -1211,7 +1211,22 @@
     if (audioActual) { try { audioActual.pause(); } catch (err) { /* nada */ } audioActual = null; }
     if (typeof speechSynthesis !== "undefined") { try { speechSynthesis.cancel(); } catch (err) { /* nada */ } }
   }
+  // Clips de frase grabados (texto -> URL) de la pieza abierta: si una frase tiene clip, se
+  // reproduce el clip; si no, la voz local del navegador. Lo fija la app al abrir cada pieza.
+  var frasesUrl = {};
+  function usarFrases(mapa) { frasesUrl = mapa || {}; }
+  function normFrase(t) { return String(t || "").normalize("NFC").replace(/\s+/g, " ").trim(); }
+  function clipDe(texto) { var t = normFrase(texto); return frasesUrl[t] || frasesUrl[t.replace(/[.!?…]+$/, "")] || null; }
+  function reproducirUrl(url, despacio) {
+    pararAudio();
+    audioActual = new Audio(url);
+    audioActual.playbackRate = despacio ? 0.8 : 1;
+    audioActual.play().catch(function () { /* nada */ });
+    return true;
+  }
   function decirNb(texto, despacio) {
+    var clip = clipDe(texto);
+    if (clip) return reproducirUrl(clip, despacio);
     var v = vozLocalNb();
     if (!v) return false;
     String(texto).split("\n").map(function (l) { return l.replace(/^[A-ZÁÉÍÓÚÑ ]+:\s*/, "").trim(); }).filter(Boolean).forEach(function (l) {
@@ -1229,7 +1244,7 @@
     var boton = el("button", "btn ghost audio-boton", "Escuchar"); boton.type = "button";
     var lento = el("button", "btn ghost audio-boton", "Más despacio"); lento.type = "button";
     var nota = el("p", "audio-nota");
-    if (url) nota.textContent = "Audio grabado" + (info && info.duracion_s ? " · " + Math.round(info.duracion_s) + " s" : "") + ". Escúchalo dos veces.";
+    if (url) nota.textContent = "Grabación con voz sintética en noruego" + (info && info.duracion_s ? " · " + Math.round(info.duracion_s) + " s" : "") + ". Escúchala dos veces.";
     else if (texto && vozLocalNb()) nota.textContent = "Voz del navegador, provisional: el audio grabado llega con el curso. Escúchalo dos veces.";
     else if (texto) { nota.textContent = "Tu navegador no tiene voz en noruego. Lee el texto en voz alta o pide a alguien que te lo lea."; boton.disabled = true; lento.disabled = true; mostrarTexto = true; }
     else { nota.textContent = "Audio pendiente."; boton.disabled = true; lento.disabled = true; }
@@ -1830,5 +1845,5 @@
     return caja;
   }
 
-  root.NexoPractica = Object.freeze({ extraer: extraer, banco: banco, bancoExplicito: bancoExplicito, tanda: tanda, filtrar: filtrar, montar: montar, montarEsenciales: montarEsenciales, montarRepaso: montarRepaso, pararAudio: pararAudio, vozLocalNb: vozLocalNb, programarRepaso: programarRepaso, repasoPendiente: repasoPendiente, llamada: llamada, seccionAnexo: seccionAnexo, diagnosticar: diagnosticar, REGLAS: REGLAS, TANDA: TANDA });
+  root.NexoPractica = Object.freeze({ extraer: extraer, banco: banco, bancoExplicito: bancoExplicito, tanda: tanda, filtrar: filtrar, montar: montar, montarEsenciales: montarEsenciales, montarRepaso: montarRepaso, pararAudio: pararAudio, vozLocalNb: vozLocalNb, decirNb: decirNb, reproducirUrl: reproducirUrl, usarFrases: usarFrases, clipDe: clipDe, programarRepaso: programarRepaso, repasoPendiente: repasoPendiente, llamada: llamada, seccionAnexo: seccionAnexo, diagnosticar: diagnosticar, REGLAS: REGLAS, TANDA: TANDA });
 })(typeof window !== "undefined" ? window : globalThis);

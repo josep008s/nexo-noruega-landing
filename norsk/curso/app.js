@@ -38,6 +38,7 @@
   var cache = {};
   var conAcceso = false;
   var demo = null;
+  var revisionPrivada = false; // la web de pruebas sirve el curso entero con la cookie de revisión
   var estado = cargarEstado();
 
   // ---------- Estado local ----------
@@ -835,12 +836,94 @@
   // Orden fijo de la sesión: Responde (escena y primera acción), Repara, Bloques
   // con voz, Practica (los pasos esenciales, en orden), Repite, Con Larsito, Cierre.
   // La práctica extra y las soluciones quedan plegadas: solo si se piden.
-  function botonVozBloque(texto) {
+  // ---------- Audio grabado y clips de frase ----------
+  // Cada pieza del recorrido desde cero llega con sus grabaciones (ids AU-…) y con las frases
+  // que tienen clip (meta.frases_audio: texto -> hash). De dónde salen las URL:
+  //  · demo pública: archivos estáticos en /norsk/curso/audio-demo/ (solo los audios nuevos
+  //    autorizados el 05.09.2026 y los clips; los audios A1 aprobados siguen con la voz local);
+  //  · web de pruebas: /api/revision/?modo=audio&archivo=… con la cookie de revisión;
+  //  · curso comprado: /api/norsk-curso/?modo=audio&codigo=… devuelve URL firmadas de una hora.
+  // Sin URL, suena la voz local del navegador y la app lo dice. Ninguna grabación lleva firma nativa.
+  var audioResuelto = {};
+  function normFrase(t) { return String(t || "").normalize("NFC").replace(/\s+/g, " ").trim(); }
+  function aplicarAudio(pieza, audios, frases) {
+    var meta = pieza.meta || (pieza.meta = {});
+    meta.audios = meta.audios || {};
+    Object.keys(audios || {}).forEach(function (id) { meta.audios[id] = Object.assign({}, meta.audios[id] || {}, { url: audios[id] }); });
+    var mapa = meta.frases_audio || {}, urls = {};
+    Object.keys(mapa).forEach(function (t) { var u = frases && frases[mapa[t]]; if (u) urls[t] = u; });
+    meta.frases_url = urls;
+    audioResuelto[pieza.codigo] = true;
+  }
+  // Devuelve null cuando las URL se resuelven al instante (demo, revisión, sin acceso) y una
+  // promesa cuando hay que pedirlas a la API.
+  function resolverAudio(pieza) {
+    var meta = pieza.meta, ids = meta.audio || [], hashes = {};
+    Object.keys(meta.frases_audio || {}).forEach(function (t) { hashes[meta.frases_audio[t]] = true; });
+    if (meta.audio_base) {
+      var au = {}, fr = {};
+      // En la demo solo hay archivo para los audios nuevos; la copia local de revisión (audio_base_completo) los tiene todos.
+      ids.forEach(function (id) { var a = meta.audios && meta.audios[id]; if (meta.audio_base_completo || (a && /^GENERADO/.test(String(a.estado || "")))) au[id] = meta.audio_base + encodeURIComponent(id) + ".mp3"; });
+      Object.keys(hashes).forEach(function (h) { fr[h] = meta.audio_base + "frases/" + h + ".mp3"; });
+      aplicarAudio(pieza, au, fr); return null;
+    }
+    if (revisionPrivada) {
+      var base = "/api/revision/?modo=audio&archivo=", au2 = {}, fr2 = {};
+      ids.forEach(function (id) { au2[id] = base + encodeURIComponent(id); });
+      Object.keys(hashes).forEach(function (h) { fr2[h] = base + encodeURIComponent("frases/" + h); });
+      aplicarAudio(pieza, au2, fr2); return null;
+    }
+    if (!conAcceso) { aplicarAudio(pieza, {}, {}); return null; }
+    return fetch(API_Q + "modo=audio&codigo=" + encodeURIComponent(pieza.codigo), { credentials: "same-origin" })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (d) { aplicarAudio(pieza, (d && d.ok && d.audios) || {}, (d && d.ok && d.frases) || {}); })
+      .catch(function () { aplicarAudio(pieza, {}, {}); });
+  }
+  // Las referencias <code>AU-…</code> pasan a ser un botón de escucha, y cada frase noruega
+  // marcada como <code> se puede oír: con su clip si lo tiene, con la voz local si no.
+  function activarAudioEnSeccion(cuerpo, pieza, saltarTablas) {
+    if (!ES_CERO || !pieza.meta) return;
+    var P = window.NexoPractica, meta = pieza.meta, urls = meta.frases_url || {}, hayVoz = !!P.vozLocalNb();
+    Array.prototype.slice.call(cuerpo.querySelectorAll("code")).forEach(function (c) {
+      if (c.closest("pre") || c.closest("th") || c.closest("button") || c.closest("a")) return;
+      if (saltarTablas && c.closest("table")) return;
+      var texto = normFrase(c.textContent);
+      if (/^AU-[A-Z0-9-]+$/.test(texto)) {
+        var info = meta.audios && meta.audios[texto];
+        var ref = el("span", "audio-ref");
+        var b = el("button", "btn ghost oir-audio", "Escuchar"); b.type = "button";
+        b.setAttribute("aria-label", "Escuchar la grabación " + texto);
+        if (info && info.url) b.addEventListener("click", function () { P.reproducirUrl(info.url, false); });
+        else if (info && info.texto && hayVoz) { b.textContent = "Escuchar (voz del navegador)"; b.addEventListener("click", function () { P.pararAudio(); P.decirNb(info.texto, false); }); }
+        else { b.disabled = true; b.textContent = "Audio no disponible"; }
+        ref.appendChild(b); ref.appendChild(el("code", "audio-id", texto));
+        c.replaceWith(ref); return;
+      }
+      var u = urls[texto] || null;
+      if (!u && !(hayVoz && /[a-zæøå]/i.test(texto) && texto.split(" ").length <= 14)) return;
+      var btn = el("button", "oir-frase", null); btn.type = "button"; btn.lang = "nb";
+      btn.setAttribute("aria-label", "Escuchar «" + texto + "»" + (u ? "" : " con la voz del navegador"));
+      btn.title = u ? "Escuchar" : "Escuchar con la voz del navegador";
+      c.parentNode.insertBefore(btn, c); btn.appendChild(c);
+      btn.addEventListener("click", function (ev) { ev.preventDefault(); if (u) P.reproducirUrl(u, false); else { P.pararAudio(); P.decirNb(texto, false); } });
+    });
+  }
+  function laminaDe(pieza) {
+    if (!pieza.meta || !pieza.meta.lamina) return null;
+    var fig = el("figure", "lamina");
+    var img = document.createElement("img");
+    img.src = pieza.meta.lamina; img.alt = "Ilustración de la escena: " + pieza.titulo; img.decoding = "async";
+    fig.appendChild(img);
+    return fig;
+  }
+
+  function botonVozBloque(texto, url) {
     var b = el("button", "btn ghost voz-bloque", "Escuchar");
     b.type = "button";
-    b.setAttribute("aria-label", "Escuchar «" + texto + "» con la voz del navegador");
+    b.setAttribute("aria-label", "Escuchar «" + texto + "»" + (url ? "" : " con la voz del navegador"));
     b.addEventListener("click", function () {
       window.NexoPractica.pararAudio();
+      if (url) { window.NexoPractica.reproducirUrl(url, false); return; }
       var v = window.NexoPractica.vozLocalNb();
       if (!v) { b.disabled = true; b.textContent = "Sin voz"; return; }
       var u = new SpeechSynthesisUtterance(texto);
@@ -858,6 +941,9 @@
     var P = window.NexoPractica;
     var esPuente = pieza.tipo === "puente";
     var brutos = ((pieza.meta && pieza.meta.ejercicios) || []).filter(function (e) { return e.esencial; });
+    if (P.usarFrases) P.usarFrases((pieza.meta && pieza.meta.frases_url) || {});
+    var laminaC = laminaDe(pieza);
+    if (laminaC) lector.appendChild(laminaC);
 
     function seccionHtml(s) {
       var bloque = el("section", "lector-seccion seccion-" + s.id);
@@ -866,6 +952,7 @@
       var cuerpo = el("div", "seccion-cuerpo");
       cuerpo.innerHTML = s.html || "";
       envolverTablas(cuerpo);
+      activarAudioEnSeccion(cuerpo, pieza, false);
       bloque.appendChild(cuerpo);
       lector.appendChild(bloque);
       return bloque;
@@ -984,6 +1071,9 @@
     var porId = {};
     secciones.forEach(function (s) { porId[s.id] = s; });
     var P = window.NexoPractica;
+    if (P.usarFrases) P.usarFrases((pieza.meta && pieza.meta.frases_url) || {});
+    var laminaL = laminaDe(pieza);
+    if (laminaL) lector.appendChild(laminaL);
     var banco = P.banco(pieza, null);
     var esenciales = banco.esenciales || [];
     var deResponde = esenciales.filter(function (it) { return /#responde$/.test(String(it.fuente === "esencial" ? (pieza.meta.ejercicios.filter(function (e) { return e.id === it.id; })[0] || {}).fuente || "" : "")); });
@@ -1000,6 +1090,7 @@
       var cuerpo = el("div", "seccion-cuerpo");
       cuerpo.innerHTML = s.html || "";
       envolverTablas(cuerpo);
+      activarAudioEnSeccion(cuerpo, pieza, id === "bloques");
       bloque.appendChild(cuerpo);
       (destino || lector).appendChild(bloque);
       return bloque;
@@ -1024,24 +1115,31 @@
     seccionHtml("repara");
     var bloques = seccionHtml("bloques");
     if (bloques) {
-      // La columna «Audio» de la tabla lleva ids de grabación; en la app cada bloque se puede oír con la voz local del navegador.
+      // La columna «Audio» de la tabla lleva ids de grabación; en la app cada bloque se oye con su
+      // clip grabado y, si no lo tiene, con la voz local del navegador.
       var hayVoz = !!P.vozLocalNb();
+      var frasesUrl = (pieza.meta && pieza.meta.frases_url) || {};
+      var hayClips = false;
       var filas = bloques.querySelectorAll("tbody tr");
       Array.prototype.forEach.call(filas, function (tr) {
         var celdas = tr.querySelectorAll("td");
         if (celdas.length < 3) return;
         var codigo = celdas[0].querySelector("code");
         if (!codigo) return;
-        var texto = codigo.textContent.replace(/\s*…\s*$/, "").trim();
+        var completo = normFrase(codigo.textContent);
+        var texto = completo.replace(/\s*…\s*$/, "").trim();
+        var clip = frasesUrl[completo] || frasesUrl[texto] || null;
+        if (clip) hayClips = true;
         celdas[2].textContent = "";
-        if (hayVoz && texto) celdas[2].appendChild(botonVozBloque(texto));
+        if (clip) celdas[2].appendChild(botonVozBloque(texto, clip));
+        else if (hayVoz && texto) celdas[2].appendChild(botonVozBloque(texto, null));
         else celdas[2].appendChild(el("span", "sin-voz", "con el curso"));
       });
       var th = bloques.querySelectorAll("thead th");
-      Array.prototype.forEach.call(th, function (h) { if (/^Audio$/i.test(h.textContent.trim())) h.textContent = hayVoz ? "Oír" : "Audio"; });
-      bloques.appendChild(el("p", "audio-nota", hayVoz
-        ? "La voz es la del navegador, provisional. Las grabaciones llegan con el curso."
-        : "Este navegador no tiene voz en noruego; las grabaciones llegan con el curso."));
+      Array.prototype.forEach.call(th, function (h) { if (/^Audio$/i.test(h.textContent.trim())) h.textContent = (hayVoz || hayClips) ? "Oír" : "Audio"; });
+      bloques.appendChild(el("p", "audio-nota", hayClips
+        ? "Grabaciones con voz sintética en noruego, sin firma nativa" + (hayVoz ? "; donde falta grabación suena la voz del navegador." : ".")
+        : (hayVoz ? "La voz es la del navegador, provisional. Las grabaciones llegan con el curso." : "Este navegador no tiene voz en noruego; las grabaciones llegan con el curso.")));
     }
     var practica = el("section", "lector-seccion seccion-practica");
     practica.id = "apartado-practica";
@@ -1094,6 +1192,18 @@
   }
 
   function renderPieza(pieza) {
+    if (ES_CERO && pieza.meta && !audioResuelto[pieza.codigo]) {
+      var pendiente = resolverAudio(pieza);
+      if (pendiente) {
+        audioResuelto[pieza.codigo] = "pendiente";
+        var tope = new Promise(function (r) { setTimeout(r, 4000); });
+        Promise.race([pendiente, tope]).then(function () {
+          audioResuelto[pieza.codigo] = true;
+          if (estado.ultimaPieza === pieza.codigo) renderPieza(pieza);
+        });
+        return;
+      }
+    }
     modoLector(true);
     limpiar();
 
@@ -1340,6 +1450,7 @@
 
   function desdeDemo(d) {
     demo = d;
+    revisionPrivada = !!(d && d.meta && d.meta.modo === "revision_local_privada");
     var piezas = [];
 
     if (d.mecanismo) {

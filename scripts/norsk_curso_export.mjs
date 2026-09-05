@@ -59,6 +59,16 @@ const RUTAS = {
     // Cada lección lleva su banco de ejercicios explícito y sus audios declarados.
     ejercicios: "02_ejercicios",
     audio: path.join("03_audio", "manifiesto.json"),
+    // Clips de frase (05.09.2026): un MP3 por frase noruega; mapa texto -> archivo. La lección
+    // exporta solo las frases que usa (meta.frases_audio: texto -> hash) y la app pide las URL.
+    frases: path.join("03_audio", "frases", "mapa.json"),
+    // Lámina de la escena (workbook/ilustraciones/web/<codigo>.webp, 1200 px): viaja en meta.lamina
+    // como data URL para que la revisión privada y el curso la sirvan sin un bucket más.
+    laminas: path.join("workbook", "ilustraciones", "web"),
+    // Audio de la demo pública: estáticos en norsk/curso/audio-demo/ (solo los audios nuevos
+    // autorizados el 05.09.2026 y los clips de frase; los 44 audios A1 aprobados conservan su
+    // publicación bloqueada y en la demo suenan con la voz local).
+    audioDemo: path.join(ROOT, "norsk", "curso", "audio-demo"),
     // La demo pública abre estas piezas enteras; el resto solo enseña su nombre.
     demoAbiertas: ["PREA1-U02-L01", "PREA1-U02-L02"],
     // Escenarios de Larsito por nivel (escenarios_<nivel>.json), que viajan
@@ -759,6 +769,35 @@ function audiosDe(ids) {
   return out;
 }
 
+let mapaFrases = null;
+function decodificarEntidades(t) {
+  return String(t).replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&nbsp;/g, " ");
+}
+function normFrase(t) { return String(t || "").normalize("NFC").replace(/\s+/g, " ").trim(); }
+// Frases de la lección con clip grabado: las de los <code> de las secciones y las de los ejercicios.
+function frasesAudioDe(secciones, ejercicios) {
+  if (!CFG.frases) return null;
+  if (!mapaFrases) {
+    const ruta = path.join(MATERIAL, CFG.frases);
+    mapaFrases = fs.existsSync(ruta) ? JSON.parse(fs.readFileSync(ruta, "utf8")) : {};
+  }
+  const textos = new Set();
+  secciones.forEach((s) => { for (const m of String(s.html || "").matchAll(/<code[^>]*>([^<]*)<\/code>/g)) textos.add(normFrase(decodificarEntidades(m[1]))); });
+  (ejercicios || []).forEach((e) => {
+    ["frase_no", "modelo", "texto_no"].forEach((k) => { if (typeof e[k] === "string") textos.add(normFrase(e[k])); });
+    ["aceptadas", "opciones", "fichas"].forEach((k) => { (Array.isArray(e[k]) ? e[k] : []).forEach((x) => { if (typeof x === "string") textos.add(normFrase(x)); }); });
+  });
+  const out = {};
+  textos.forEach((t) => { const f = mapaFrases[t]; if (f && f.archivo) out[t] = String(f.archivo).replace(/\.mp3$/, ""); });
+  return out;
+}
+function laminaDe(codigo) {
+  if (!CFG.laminas) return null;
+  const f = path.join(MATERIAL, CFG.laminas, `${codigo}.webp`);
+  if (!fs.existsSync(f)) { avisos.push(`${codigo}: sin lámina en ${CFG.laminas}`); return null; }
+  return "data:image/webp;base64," + fs.readFileSync(f).toString("base64");
+}
+
 function ejerciciosDe(codigo) {
   if (!CFG.ejercicios) return null;
   const ruta = path.join(MATERIAL, CFG.ejercicios, `${codigo}.ejercicios.json`);
@@ -879,6 +918,8 @@ for (const fuente of FUENTES) {
         larsito: meta.larsito || null,
         audio: idsAudio,
         audios: audiosDe(idsAudio),
+        frases_audio: frasesAudioDe(secciones, ejercicios),
+        lamina: laminaDe(codigoFinal),
         ejercicios,
         lupa: meta.lupa || null,
         qa_lengua: meta.qa_lengua || null,
@@ -948,9 +989,32 @@ function piezaLimpia(p) {
   return resto;
 }
 
+function copiarAudioDemo(abiertas) {
+  if (!CFG.audioDemo) return;
+  const destino = CFG.audioDemo;
+  fs.mkdirSync(path.join(destino, "frases"), { recursive: true });
+  let n = 0;
+  abiertas.forEach((p) => {
+    (p.meta.audio || []).forEach((id) => {
+      const a = manifiestoAudio && manifiestoAudio[id];
+      if (!a || !/^GENERADO/.test(String(a.estado || "")) || !a.ruta_drive) return;
+      // ruta_drive va relativa a la carpeta norsk/ del Drive (idioma/rutas/…).
+      const origen = path.join(DRIVE_RUTAS, "..", "..", a.ruta_drive);
+      if (fs.existsSync(origen)) { fs.copyFileSync(origen, path.join(destino, `${id}.mp3`)); n++; }
+      else avisos.push(`demo: no encuentro el audio ${id} en ${origen}`);
+    });
+    Object.values(p.meta.frases_audio || {}).forEach((h) => {
+      const origen = path.join(MATERIAL, "03_audio", "frases", `${h}.mp3`);
+      if (fs.existsSync(origen)) { fs.copyFileSync(origen, path.join(destino, "frases", `${h}.mp3`)); n++; }
+    });
+  });
+  console.log(`Audio de la demo: ${n} archivos en ${path.relative(ROOT, destino)}/`);
+}
+
 function construirDemoDesdeCero() {
   const abiertas = CFG.demoAbiertas.map((c) => piezas.find((p) => p.codigo === c)).filter(Boolean);
   if (abiertas.length !== CFG.demoAbiertas.length) { avisos.push("faltan piezas abiertas de la demo del recorrido desde cero"); }
+  copiarAudioDemo(abiertas);
   const indice = piezas
     .filter((p) => CFG.demoAbiertas.indexOf(p.codigo) < 0)
     .map((p) => ({ codigo: p.codigo, tipo: p.tipo, titulo: p.titulo, orden: p.orden, zona: p.meta.zona, unidad: p.meta.unidad, resumen: p.meta.mision || "" }));
@@ -968,6 +1032,7 @@ function construirDemoDesdeCero() {
     piezas: abiertas.map((p) => {
       const meta = Object.assign({}, p.meta);
       delete meta.lupa; delete meta.qa_lengua; delete meta.qa_lengua_alcance;
+      if (CFG.audioDemo) meta.audio_base = "/norsk/curso/audio-demo/";
       return Object.assign({}, piezaLimpia(p), { meta, orden: p.orden, resumen: p.meta.mision || "" });
     }),
     indice,
