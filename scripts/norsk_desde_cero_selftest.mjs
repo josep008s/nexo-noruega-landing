@@ -5,7 +5,7 @@
 // gitignored), todas las piezas: front-matter mínimo, secciones en orden, banco
 // explícito construible, tipos conocidos, respuestas aceptadas normalizadas,
 // audios declarados, feedback completo, cero em dash, y ratio opcional/esencial.
-import { readFileSync, existsSync } from "node:fs";
+import { readFileSync, existsSync, writeFileSync } from "node:fs";
 import vm from "node:vm";
 
 const ENT = { amp: "&", lt: "<", gt: ">", quot: '"', apos: "'", nbsp: " ", laquo: "«", raquo: "»", hellip: "…" };
@@ -39,6 +39,7 @@ if (existsSync(privado)) { piezas = JSON.parse(readFileSync(privado, "utf8")); c
 
 let totalEsen = 0, totalOpc = 0;
 const tipos = {};
+const porPieza = {};
 for (const pieza of piezas) {
   const id = pieza.codigo;
   if (pieza.tipo !== "leccion" && pieza.tipo !== "puente" && pieza.tipo !== "salto") continue;
@@ -74,6 +75,7 @@ for (const pieza of piezas) {
   }
   const ratio = b.opcionales.length / Math.max(1, b.esenciales.length);
   totalEsen += b.esenciales.length; totalOpc += b.opcionales.length;
+  porPieza[id] = { sesion: b.esenciales.length, extra: b.opcionales.length };
   console.log(`  ${id}: sesión ${b.esenciales.length} · extra ${b.opcionales.length} (ratio ${ratio.toFixed(1)}) ${JSON.stringify(b.porTipo)}`);
   const comprobacion = pieza.tipo === "puente" || pieza.tipo === "salto";
   if (ratio < 4.5 && !comprobacion) fallos.push(`${id}: ratio opcional/esencial ${ratio.toFixed(1)} < 4,5`);
@@ -93,4 +95,18 @@ for (const pieza of piezas) {
 }
 console.log(`  totales: sesión ${totalEsen} · extra ${totalOpc} · tipos ${JSON.stringify(tipos)}${completo ? " (curso completo en disco)" : " (solo demo)"}`);
 if (fallos.length) { console.log("\nFALLOS:\n  " + fallos.slice(0, 40).join("\n  ")); process.exit(1); }
+// --meta: totales por ruta y por pieza para la web (data/norsk-practica-meta.json), solo con el curso completo en disco.
+if (process.argv.includes("--meta")) {
+  if (!completo) { console.log("  --meta ignorado: hace falta el curso completo en disco"); }
+  else {
+    const metaPath = new URL("../data/norsk-practica-meta.json", import.meta.url);
+    const meta = existsSync(metaPath) ? JSON.parse(readFileSync(metaPath, "utf8")) : { version: 1, ejercicios_totales: 0, por_pieza: {} };
+    meta.por_ruta = meta.por_ruta || {};
+    meta.por_ruta["norsk-desde-cero-a2"] = { actualizado: new Date().toISOString().slice(0, 10), total: totalOpc, sesion: totalEsen, piezas: piezas.length, por_pieza: porPieza };
+    meta.por_pieza = meta.por_pieza || {};
+    for (const [k, v] of Object.entries(porPieza)) meta.por_pieza[k] = v.extra;
+    writeFileSync(metaPath, JSON.stringify(meta, null, 2) + "\n");
+    console.log(`  data/norsk-practica-meta.json: por_ruta[norsk-desde-cero-a2] = ${totalOpc} extra · ${totalEsen} en sesión · ${piezas.length} piezas`);
+  }
+}
 console.log(`\nPASS norsk_desde_cero_selftest: ${piezas.filter((p) => p.tipo === "leccion").length} lección(es) y ${piezas.filter((p) => p.tipo === "puente" || p.tipo === "salto").length} pieza(s) de comprobación sin inventar noruego`);

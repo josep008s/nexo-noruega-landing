@@ -18,6 +18,271 @@
     "M13": 171,
     "M14": 122,
     "M15": 116,
-    "M16": 121
+    "M16": 121,
+    "PREA1-U01-L01": 43,
+    "PREA1-U01-L02": 42,
+    "PREA1-U02-L01": 56,
+    "PREA1-U02-L02": 54,
+    "PREA1-U03-L01": 58,
+    "PREA1-U03-L02": 54,
+    "PREA1-U04-L01": 43,
+    "PREA1-U04-L02": 45,
+    "SALTO-PREA1-A1": 0,
+    "A1-U01-L01": 69,
+    "A1-U01-L02": 74,
+    "A1-U02-L01": 78,
+    "A1-U02-L02": 72,
+    "A1-U03-L01": 62,
+    "A1-U03-L02": 78,
+    "A1-U04-L01": 68,
+    "A1-U04-L02": 89,
+    "A1-U05-L01": 70,
+    "A1-U05-L02": 83,
+    "A1-U06-L01": 76,
+    "A1-U06-L02": 73,
+    "A1-U07-L01": 72,
+    "A1-U07-L02": 86,
+    "A1-U08-L01": 80,
+    "A1-U08-L02": 78,
+    "SALTO-A1-A2": 0,
+    "A2-U01-L01": 81,
+    "A2-U01-L02": 77,
+    "A2-U01-L03": 65,
+    "A2-U02-L01": 74,
+    "A2-U02-L02": 74,
+    "A2-U02-L03": 72,
+    "A2-U03-L01": 78,
+    "A2-U03-L02": 77,
+    "A2-U03-L03": 82,
+    "A2-U04-L01": 71,
+    "A2-U04-L02": 75,
+    "A2-U04-L03": 77,
+    "A2-U05-L01": 68,
+    "A2-U05-L02": 81,
+    "A2-U05-L03": 69,
+    "A2-U06-L01": 78,
+    "A2-U06-L02": 68,
+    "A2-U06-L03": 70,
+    "A2-U07-L01": 78,
+    "A2-U07-L02": 70,
+    "A2-U07-L03": 65,
+    "A2-U08-L01": 80,
+    "A2-U08-L02": 77,
+    "A2-U08-L03": 71,
+    "PUENTE-A2-B1": 0
+  },
+  "por_ruta": {
+    "norsk-desde-cero-a2": {
+      "actualizado": "2026-09-05",
+      "total": 3381,
+      "sesion": 436,
+      "piezas": 51,
+      "por_pieza": {
+        "PREA1-U01-L01": {
+          "sesion": 8,
+          "extra": 43
+        },
+        "PREA1-U01-L02": {
+          "sesion": 8,
+          "extra": 42
+        },
+        "PREA1-U02-L01": {
+          "sesion": 8,
+          "extra": 56
+        },
+        "PREA1-U02-L02": {
+          "sesion": 8,
+          "extra": 54
+        },
+        "PREA1-U03-L01": {
+          "sesion": 8,
+          "extra": 58
+        },
+        "PREA1-U03-L02": {
+          "sesion": 8,
+          "extra": 54
+        },
+        "PREA1-U04-L01": {
+          "sesion": 8,
+          "extra": 43
+        },
+        "PREA1-U04-L02": {
+          "sesion": 8,
+          "extra": 45
+        },
+        "SALTO-PREA1-A1": {
+          "sesion": 8,
+          "extra": 0
+        },
+        "A1-U01-L01": {
+          "sesion": 8,
+          "extra": 69
+        },
+        "A1-U01-L02": {
+          "sesion": 8,
+          "extra": 74
+        },
+        "A1-U02-L01": {
+          "sesion": 8,
+          "extra": 78
+        },
+        "A1-U02-L02": {
+          "sesion": 8,
+          "extra": 72
+        },
+        "A1-U03-L01": {
+          "sesion": 8,
+          "extra": 62
+        },
+        "A1-U03-L02": {
+          "sesion": 8,
+          "extra": 78
+        },
+        "A1-U04-L01": {
+          "sesion": 8,
+          "extra": 68
+        },
+        "A1-U04-L02": {
+          "sesion": 8,
+          "extra": 89
+        },
+        "A1-U05-L01": {
+          "sesion": 8,
+          "extra": 70
+        },
+        "A1-U05-L02": {
+          "sesion": 8,
+          "extra": 83
+        },
+        "A1-U06-L01": {
+          "sesion": 8,
+          "extra": 76
+        },
+        "A1-U06-L02": {
+          "sesion": 8,
+          "extra": 73
+        },
+        "A1-U07-L01": {
+          "sesion": 8,
+          "extra": 72
+        },
+        "A1-U07-L02": {
+          "sesion": 8,
+          "extra": 86
+        },
+        "A1-U08-L01": {
+          "sesion": 8,
+          "extra": 80
+        },
+        "A1-U08-L02": {
+          "sesion": 8,
+          "extra": 78
+        },
+        "SALTO-A1-A2": {
+          "sesion": 12,
+          "extra": 0
+        },
+        "A2-U01-L01": {
+          "sesion": 8,
+          "extra": 81
+        },
+        "A2-U01-L02": {
+          "sesion": 8,
+          "extra": 77
+        },
+        "A2-U01-L03": {
+          "sesion": 8,
+          "extra": 65
+        },
+        "A2-U02-L01": {
+          "sesion": 8,
+          "extra": 74
+        },
+        "A2-U02-L02": {
+          "sesion": 8,
+          "extra": 74
+        },
+        "A2-U02-L03": {
+          "sesion": 8,
+          "extra": 72
+        },
+        "A2-U03-L01": {
+          "sesion": 8,
+          "extra": 78
+        },
+        "A2-U03-L02": {
+          "sesion": 8,
+          "extra": 77
+        },
+        "A2-U03-L03": {
+          "sesion": 8,
+          "extra": 82
+        },
+        "A2-U04-L01": {
+          "sesion": 8,
+          "extra": 71
+        },
+        "A2-U04-L02": {
+          "sesion": 8,
+          "extra": 75
+        },
+        "A2-U04-L03": {
+          "sesion": 8,
+          "extra": 77
+        },
+        "A2-U05-L01": {
+          "sesion": 8,
+          "extra": 68
+        },
+        "A2-U05-L02": {
+          "sesion": 8,
+          "extra": 81
+        },
+        "A2-U05-L03": {
+          "sesion": 8,
+          "extra": 69
+        },
+        "A2-U06-L01": {
+          "sesion": 8,
+          "extra": 78
+        },
+        "A2-U06-L02": {
+          "sesion": 8,
+          "extra": 68
+        },
+        "A2-U06-L03": {
+          "sesion": 8,
+          "extra": 70
+        },
+        "A2-U07-L01": {
+          "sesion": 8,
+          "extra": 78
+        },
+        "A2-U07-L02": {
+          "sesion": 8,
+          "extra": 70
+        },
+        "A2-U07-L03": {
+          "sesion": 8,
+          "extra": 65
+        },
+        "A2-U08-L01": {
+          "sesion": 8,
+          "extra": 80
+        },
+        "A2-U08-L02": {
+          "sesion": 8,
+          "extra": 77
+        },
+        "A2-U08-L03": {
+          "sesion": 8,
+          "extra": 71
+        },
+        "PUENTE-A2-B1": {
+          "sesion": 32,
+          "extra": 0
+        }
+      }
+    }
   }
 }
