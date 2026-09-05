@@ -480,8 +480,11 @@
     if (t === "ordena") {
       var sol = tokens(e.frase_no);
       if (sol.length < 2) return null;
-      var fichas = Array.isArray(e.fichas) && e.fichas.length ? e.fichas.slice() : sol;
-      return Object.assign(base, { tipo: "ordena", subtipo: e.tipo, fichas: mezclaDistinta(fichas, rnd), solucion: sol, pista: e.es || "", motivo: "", parcial: false, aceptadas: e.aceptadas || [] });
+      // Fichas explícitas (frases enteras o trozos con coma): la solución son las fichas en su orden,
+      // no las palabras sueltas, para que el botón se active con el número de fichas y la corrección
+      // marque cada ficha; la comprobación sigue comparando el texto unido con la frase.
+      var fichas = Array.isArray(e.fichas) && e.fichas.length > 1 ? e.fichas.slice() : sol;
+      return Object.assign(base, { tipo: "ordena", subtipo: e.tipo, fichas: mezclaDistinta(fichas, rnd), solucion: fichas.slice(), pista: e.es || "", motivo: "", parcial: false, aceptadas: e.aceptadas || [] });
     }
     if (t === "completa") {
       var partes = String(e.frase_hueco || "").split("___");
@@ -932,6 +935,7 @@
   function montarOrdena(item, caja, alResolver) {
     var solucion = item.solucion;
     var linea = el("div", "linea-respuesta");
+    linea.setAttribute("role", "group");
     linea.setAttribute("aria-label", "Tu frase. Toca una palabra para quitarla.");
     var banco = el("div", "banco-fichas");
     banco.setAttribute("aria-label", "Palabras disponibles. Toca una para añadirla a la frase.");
@@ -1387,7 +1391,7 @@
     // Si el ítem trae su propia regla en «feedback», no se añade la regla genérica de la pieza (evita dos reglas distintas).
     if (item.feedback && item.feedback.regla) mecanismo = "";
     try {
-      if (item.tipo === "ordena" || item.tipo === "transforma") return diagnosticoOrden(tokens(dado), item.solucion, mecanismo);
+      if (item.tipo === "ordena" || item.tipo === "transforma") return diagnosticoOrden(tokens(dado), tokens(item.frase || item.solucion.join(" ")), mecanismo);
       if (item.tipo === "escribe" || item.tipo === "dictado") {
         var ts = tokens(String(dado || "").replace(/[«»"“”]/g, ""));
         var mismoConjunto = ts.length === item.solucion.length && ts.map(normalizar).sort().join("|") === item.solucion.map(normalizar).sort().join("|");
