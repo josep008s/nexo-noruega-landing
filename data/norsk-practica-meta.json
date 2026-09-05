@@ -66,15 +66,15 @@
     "A2-U07-L01": 78,
     "A2-U07-L02": 70,
     "A2-U07-L03": 65,
-    "A2-U08-L01": 80,
+    "A2-U08-L01": 83,
     "A2-U08-L02": 77,
-    "A2-U08-L03": 71,
+    "A2-U08-L03": 77,
     "PUENTE-A2-B1": 0
   },
   "por_ruta": {
     "norsk-desde-cero-a2": {
       "actualizado": "2026-09-05",
-      "total": 3382,
+      "total": 3391,
       "sesion": 436,
       "piezas": 51,
       "por_pieza": {
@@ -268,7 +268,7 @@
         },
         "A2-U08-L01": {
           "sesion": 8,
-          "extra": 80
+          "extra": 83
         },
         "A2-U08-L02": {
           "sesion": 8,
@@ -276,7 +276,7 @@
         },
         "A2-U08-L03": {
           "sesion": 8,
-          "extra": 71
+          "extra": 77
         },
         "PUENTE-A2-B1": {
           "sesion": 32,

@@ -2513,8 +2513,8 @@
      "audio_modelo": null
     },
     {
-     "larsito_no": "Ja. For eksempel den tredje mars to tusen og tjueto skriver du null tre, null tre, tjueto.",
-     "larsito_es": "Sí. Por ejemplo, el tres de marzo de 2022 lo escribes cero tres, cero tres, veintidós.",
+     "larsito_no": "Ja. For eksempel den tredje mars to tusen og tjueto skriver du null tre, null tre, to tusen og tjueto.",
+     "larsito_es": "Sí. Por ejemplo, el tres de marzo de 2022 lo escribes cero tres, cero tres, dos mil veintidós.",
      "pista_es": "Pregunta cuándo es el plazo.",
      "respuestas_modelo_no": [
       "Og når er fristen?"
@@ -2526,8 +2526,8 @@
      "audio_modelo": null
     },
     {
-     "larsito_no": "Påmeldingsfristen er den femtende mars. Kurset starter tirsdag den andre april klokka fem.",
-     "larsito_es": "El plazo de inscripción es el quince de marzo. El curso empieza el martes 2 de abril a las cinco.",
+     "larsito_no": "Påmeldingsfristen er den femtende mars. Kurset starter torsdag den andre april klokka fem.",
+     "larsito_es": "El plazo de inscripción es el quince de marzo. El curso empieza el jueves 2 de abril a las cinco.",
      "pista_es": "Di que entonces llegas a tiempo y da las gracias.",
      "respuestas_modelo_no": [
       "Da rekker jeg det. Takk!"
@@ -2539,8 +2539,8 @@
      "audio_modelo": null
     },
     {
-     "larsito_no": "Hei, Amir. Har du fått jakka?",
-     "larsito_es": "Hola, Amir. ¿Te ha llegado la chaqueta?",
+     "larsito_no": "Hei, Amir. Har du bestilt jakka?",
+     "larsito_es": "Hola, Amir. ¿Has pedido la chaqueta?",
      "pista_es": "Segunda parte: Larsito es Lina. Di que has pedido una chaqueta nueva por internet pero no entiendes el mensaje, y pregunta qué significa «blir sendt».",
      "respuestas_modelo_no": [
       "Jeg har bestilt en ny jakke på nettet, men jeg forstår ikke meldingen. Hva betyr «blir sendt»?"
@@ -2579,8 +2579,8 @@
      "audio_modelo": null
     },
     {
-     "larsito_no": "Det er fristen. Du betaler i banken på nettet: velg «Betal regning», skriv inn KID-nummeret og beløpet, og trykk «Betal».",
-     "larsito_es": "Es el plazo. Lo pagas en el banco en línea: elige «Pagar factura», escribe el número KID y el importe, y pulsa «Pagar».",
+     "larsito_no": "Det er fristen. Du betaler i nettbanken: velg «Betal regning», skriv inn KID-nummeret og beløpet, og trykk «Betal».",
+     "larsito_es": "Es el plazo. Lo pagas en la banca en línea: elige «Pagar factura», escribe el número KID y el importe, y pulsa «Pagar».",
      "pista_es": "Da las gracias y di que entonces lo haces esta noche.",
      "respuestas_modelo_no": [
       "Takk. Da gjør jeg det i kveld."
@@ -2694,8 +2694,8 @@
    },
    "turnos": [
     {
-     "larsito_no": "Hei, Marta! Emma fyller fem år på lørdag. Vil dere komme i bursdag klokka to?",
-     "larsito_es": "¡Hola, Marta! Emma cumple cinco años el sábado. ¿Venís al cumpleaños a las dos?",
+     "larsito_no": "Hei, Marta! Emma fyller fem år på lørdag. Vil dere komme i bursdagen hennes klokka to?",
+     "larsito_es": "¡Hola, Marta! Emma cumple cinco años el sábado. ¿Venís a su cumpleaños a las dos?",
      "pista_es": "Felicita a Emma, di «qué bien», rechaza el sábado con «dessverre» y di que trabajas hasta las cuatro.",
      "respuestas_modelo_no": [
       "Gratulerer med dagen til Emma! Så hyggelig. Men lørdag passer dessverre ikke. Jeg jobber til klokka fire."
@@ -2755,7 +2755,7 @@
      "larsito_es": "Sí, con mucho gusto. ¿Qué opinas? ¿Un libro o un juego?",
      "pista_es": "Crees que un juego. Pide que aclare qué quiere decir con «spill».",
      "respuestas_modelo_no": [
-      "Jeg tror et spill. Hva mener du med «spill»?"
+      "Jeg tror et spill."
      ],
      "bloques_no": [
       "Jeg tror …",
@@ -2765,14 +2765,27 @@
      "audio_modelo": null
     },
     {
-     "larsito_no": "Et brettspill, for barn. Jeg kan kjøpe det i dag, og vi deler.",
-     "larsito_es": "Un juego de mesa, para niños. Puedo comprarlo hoy y lo pagamos a medias.",
-     "pista_es": "Di «perfecto» y que entonces le pagas la mitad el sábado.",
+     "larsito_no": "Hva mener du med «spill»?",
+     "larsito_es": "¿Qué quieres decir con «juego»?",
+     "pista_es": "Concreta: un juego de mesa, para niños.",
+     "respuestas_modelo_no": [
+      "Et brettspill, for barn."
+     ],
+     "bloques_no": [
+      "Et brettspill …"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Fint. Jeg kan kjøpe det i dag, og vi deler.",
+     "larsito_es": "Bien. Puedo comprarlo hoy y lo pagamos a medias.",
+     "pista_es": "Cierra: perfecto, entonces le pagas la mitad el sábado.",
      "respuestas_modelo_no": [
       "Perfekt. Da betaler jeg deg halvparten på lørdag."
      ],
      "bloques_no": [
-      "Da betaler jeg deg halvparten …"
+      "Da betaler jeg deg …"
      ],
      "audio_no": null,
      "audio_modelo": null
@@ -2805,11 +2818,11 @@
      "audio_modelo": null
     },
     {
-     "larsito_no": "Emma er trøtt når jeg henter henne. Kanskje kan de ha lengre åpningstid, men ikke hver dag.",
-     "larsito_es": "Emma está cansada cuando la recojo. Quizá puedan tener horario más largo, pero no todos los días.",
+     "larsito_no": "Kanskje kan de ha lengre åpningstid, men ikke hver dag.",
+     "larsito_es": "Quizá puedan tener horario más largo, pero no todos los días.",
      "pista_es": "Di que suena razonable y pregunta por qué no solo los viernes.",
      "respuestas_modelo_no": [
-      "Det høres fornuftig ut. Hvorfor ikke bare fredag?"
+      "Det høres fornuftig ut. Hvorfor ikke bare på fredager?"
      ],
      "bloques_no": [
       "Det høres fornuftig ut.",
@@ -2834,13 +2847,12 @@
     {
      "larsito_no": "Hei, Marta! Hyggelig å se deg. Har du hørt om møtet i borettslaget på torsdag?",
      "larsito_es": "¡Hola, Marta! Me alegro de verte. ¿Has oído lo de la reunión de la comunidad el jueves?",
-     "pista_es": "Tercera parte: Larsito es Bjørn. Saluda, di que no lo sabías y pide que lo diga un poco más despacio.",
+     "pista_es": "Tercera parte: Larsito es Bjørn. Saluda, pide perdón y que lo diga un poco más despacio.",
      "respuestas_modelo_no": [
-      "Hei, Bjørn! Nei, det har jeg ikke. Kan du si det litt saktere?"
+      "Hei, Bjørn! Unnskyld, kan du si det litt saktere?"
      ],
      "bloques_no": [
-      "Nei, det har jeg ikke.",
-      "Kan du si det litt saktere?"
+      "Unnskyld, kan du si det litt saktere?"
      ],
      "audio_no": null,
      "audio_modelo": null
@@ -2848,9 +2860,9 @@
     {
      "larsito_no": "Ja, selvfølgelig. Det er møte i borettslaget på torsdag klokka sju. Vi skal snakke om fellesutgiftene.",
      "larsito_es": "Sí, claro. Hay reunión de la comunidad el jueves a las siete. Vamos a hablar de los gastos comunes.",
-     "pista_es": "Pregunta qué significa «fellesutgifter».",
+     "pista_es": "Di que no lo sabías y pregunta qué significa «fellesutgifter».",
      "respuestas_modelo_no": [
-      "Hva betyr «fellesutgifter»?"
+      "Nei, det har jeg ikke. Hva betyr «fellesutgifter»?"
      ],
      "bloques_no": [
       "Hva betyr «…»?"
