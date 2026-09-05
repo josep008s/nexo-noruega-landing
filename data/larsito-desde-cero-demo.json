@@ -1865,6 +1865,202 @@
    ]
   },
   {
+   "id": "LARS-A2-U04",
+   "modo": "rollespill",
+   "modo_contrato": "REAL_LIFE",
+   "nivel": "A2",
+   "titulo": "Buscar trabajo: contar tu experiencia, la entrevista y las condiciones",
+   "leccion": [
+    "A2-U04-L01",
+    "A2-U04-L02",
+    "A2-U04-L03"
+   ],
+   "contexto_es": "Role-play ficticio en tres partes. Primero, Larsito hace de orientador de un curso de empleo y te pide que cuentes tu experiencia. Después hace de jefe de una cafetería y te entrevista para ayudante de cocina. Al final te explica las condiciones y tú preguntas. Usa la tarjeta ficticia.",
+   "datos_ficticios_es": "Tú eres Amir: de Siria, tres años en Noruega, cocinero cinco años, llegaste en 2023 y ese año empezaste el curso de noruego, ahora trabajas en un almacén en Lillestrøm y quieres volver a una cocina. Entrevista: puedes trabajar fines de semana, pero los domingos tienes que estar en casa antes de las seis; sabes usar el lavavajillas, la caja no, pero aprendes rápido; puedes empezar la semana que viene; tu pregunta: cuántas horas a la semana. Condiciones: doscientas diez coronas la hora; plus de cien el fin de semana; tres o cuatro turnos; si te pones enfermo, llamas antes de las siete.",
+   "cierre": {
+    "conserva": "Si has contado la experiencia con «har» y el hecho con fecha en preteritum, has devuelto el verbo de cada pregunta («Ja, det kan jeg») y has preguntado por el plus, los turnos y qué hacer si te pones enfermo, la escena ha funcionado.",
+    "ahora": "Lo que se te haya atascado vuelve en la práctica de la lección: el tiempo verbal, la respuesta corta con «det» o el verbo después de la coma en «hvis».",
+    "repite": "Vuelve a hacer la escena con la misma tarjeta, sin mirar la pista ni los bloques."
+   },
+   "turnos": [
+    {
+     "larsito_no": "Fortell litt om deg selv.",
+     "larsito_es": "Cuéntame un poco de ti.",
+     "pista_es": "Di cómo te llamas, de dónde eres y cuánto tiempo llevas en Noruega.",
+     "respuestas_modelo_no": [
+      "Jeg heter Amir og kommer fra Syria. Jeg har bodd i Norge i tre år."
+     ],
+     "bloques_no": [
+      "Jeg heter … og kommer fra …",
+      "Jeg har bodd i Norge i … år."
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Hva har du jobbet med?",
+     "larsito_es": "¿En qué has trabajado?",
+     "pista_es": "Cocinero, cinco años: con «har jobbet».",
+     "respuestas_modelo_no": [
+      "Jeg har jobbet som kokk i fem år."
+     ],
+     "bloques_no": [
+      "Jeg har jobbet som …"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Når kom du til Norge?",
+     "larsito_es": "¿Cuándo llegaste a Noruega?",
+     "pista_es": "En 2023, y ese mismo año empezaste el curso de noruego.",
+     "respuestas_modelo_no": [
+      "Jeg kom i 2023. Samme år begynte jeg på norskkurs."
+     ],
+     "bloques_no": [
+      "Jeg kom i …",
+      "Samme år begynte jeg på …"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Hva gjør du nå?",
+     "larsito_es": "¿Qué haces ahora?",
+     "pista_es": "Ahora trabajas en un almacén en Lillestrøm, pero quieres volver a una cocina.",
+     "respuestas_modelo_no": [
+      "Nå jobber jeg på et lager i Lillestrøm. Men jeg vil gjerne jobbe på kjøkken igjen."
+     ],
+     "bloques_no": [
+      "Nå jobber jeg …",
+      "Jeg vil gjerne jobbe …"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Velkommen! Har du erfaring fra kjøkken?",
+     "larsito_es": "¡Bienvenido! ¿Tienes experiencia en cocina?",
+     "pista_es": "Segunda parte: Larsito es el jefe. Sí, cinco años de cocinero.",
+     "respuestas_modelo_no": [
+      "Ja, jeg har jobbet som kokk i fem år."
+     ],
+     "bloques_no": [
+      "Ja, jeg har jobbet som …"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Kan du jobbe i helgene?",
+     "larsito_es": "¿Puedes trabajar los fines de semana?",
+     "pista_es": "Sí, con la respuesta corta. Pero los domingos tienes que estar en casa antes de las seis.",
+     "respuestas_modelo_no": [
+      "Ja, det kan jeg. Men på søndager må jeg være hjemme før klokka seks."
+     ],
+     "bloques_no": [
+      "Ja, det kan jeg.",
+      "Men på søndager må jeg …"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Kan du bruke oppvaskmaskinen og kassa?",
+     "larsito_es": "¿Sabes usar el lavavajillas y la caja?",
+     "pista_es": "El lavavajillas sí; la caja no la has usado, pero aprendes rápido.",
+     "respuestas_modelo_no": [
+      "Oppvaskmaskinen, ja. Jeg har ikke brukt kassa, men jeg lærer fort."
+     ],
+     "bloques_no": [
+      "…, ja.",
+      "Jeg har ikke brukt …, men jeg lærer fort."
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Når kan du begynne?",
+     "larsito_es": "¿Cuándo puedes empezar?",
+     "pista_es": "La semana que viene, con el momento delante.",
+     "respuestas_modelo_no": [
+      "Neste uke kan jeg begynne."
+     ],
+     "bloques_no": [
+      "Neste uke kan jeg …"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Har du noen spørsmål til oss?",
+     "larsito_es": "¿Tienes alguna pregunta para nosotros?",
+     "pista_es": "Sí: cuántas horas son a la semana.",
+     "respuestas_modelo_no": [
+      "Ja. Hvor mange timer er det i uka?"
+     ],
+     "bloques_no": [
+      "Hvor mange timer er det i uka?"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Tjue timer. Her er vilkårene. Lønna er to hundre og ti kroner i timen.",
+     "larsito_es": "Veinte horas. Aquí están las condiciones. El sueldo es de doscientas diez coronas la hora.",
+     "pista_es": "Tercera parte: pregunta si tienes plus.",
+     "respuestas_modelo_no": [
+      "Får jeg tillegg?"
+     ],
+     "bloques_no": [
+      "Får jeg …?"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Ja. Hvis du jobber helg, får du hundre.",
+     "larsito_es": "Sí. Si trabajas el fin de semana, cobras cien.",
+     "pista_es": "Pregunta cuántos turnos son a la semana.",
+     "respuestas_modelo_no": [
+      "Hvor mange vakter er det i uka?"
+     ],
+     "bloques_no": [
+      "Hvor mange vakter …?"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Tre eller fire. Du får planen to uker før.",
+     "larsito_es": "Tres o cuatro. Recibes el cuadrante dos semanas antes.",
+     "pista_es": "Pregunta qué haces si te pones enfermo.",
+     "respuestas_modelo_no": [
+      "Hva gjør jeg hvis jeg blir syk?"
+     ],
+     "bloques_no": [
+      "Hva gjør jeg hvis …?"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Hvis du blir syk, ringer du meg før klokka sju.",
+     "larsito_es": "Si te pones enfermo, me llamas antes de las siete.",
+     "pista_es": "Di «vale» y que lo entiendes.",
+     "respuestas_modelo_no": [
+      "Greit. Da forstår jeg."
+     ],
+     "bloques_no": [
+      "Greit.",
+      "Da forstår jeg."
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    }
+   ]
+  },
+  {
    "id": "LARS-PREA1-U01",
    "modo": "rollespill",
    "modo_contrato": "REAL_LIFE",

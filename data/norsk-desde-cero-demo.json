@@ -4,8 +4,8 @@
   "ruta": "norsk-desde-cero-a2",
   "actualizado": "2026-09-05",
   "aviso": "Material propio de NEXO NORSK. NEXO NORSK es un proyecto independiente y no tiene relación con HK-dir, con UDI ni con ningún centro de examen. Este recorrido no promete un nivel, un aprobado ni un trámite.",
-  "piezas_totales": 33,
-  "lecciones_totales": 33
+  "piezas_totales": 36,
+  "lecciones_totales": 36
  },
  "piezas": [
   {
@@ -2408,6 +2408,33 @@
    "zona": "A2",
    "unidad": "A2-U03",
    "resumen": "La calefacción del piso nuevo no funciona: llamar al conserje, decir qué aparato es y dónde está, contestar a lo que te pregunta, y escribir después un correo de seis frases a la comunidad."
+  },
+  {
+   "codigo": "A2-U04-L01",
+   "tipo": "leccion",
+   "titulo": "Mi experiencia",
+   "orden": 34,
+   "zona": "A2",
+   "unidad": "A2-U04",
+   "resumen": "Preparas una entrevista: contar tu experiencia en sesenta segundos con un hecho fechado y una experiencia sin fecha, y escribir un CV de seis líneas con datos ficticios."
+  },
+  {
+   "codigo": "A2-U04-L02",
+   "tipo": "leccion",
+   "titulo": "La entrevista",
+   "orden": 35,
+   "zona": "A2",
+   "unidad": "A2-U04",
+   "resumen": "Tu entrevista para un puesto de ayudante de cocina: entender cinco preguntas dichas a velocidad normal, responder a cada una en una o dos frases y hacer tú una pregunta al final."
+  },
+  {
+   "codigo": "A2-U04-L03",
+   "tipo": "leccion",
+   "titulo": "Condiciones básicas",
+   "orden": 36,
+   "zona": "A2",
+   "unidad": "A2-U04",
+   "resumen": "Te ofrecen el puesto y te explican las condiciones: leer la hoja, preguntar por el plus y las guardias, y entender qué pasa si te pones enfermo o tienes que cambiar un turno."
   }
  ]
 }
