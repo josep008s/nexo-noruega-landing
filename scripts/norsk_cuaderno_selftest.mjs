@@ -37,6 +37,14 @@ await caso("supabase caído -> 503", async () => { const r = res(); await conEnv
 await caso("compra activa -> 302 a URL firmada", async () => { const r = res(); await conEnv(env, () => handler({ method: "GET", query: { tomo: "6" } }, r, sesionOk)); if (r.statusCode !== 302 || !/^https:\/\/demo\.supabase\.co\/storage\/v1\/object\/sign\/norsk-cuaderno\//.test(r.headers.location)) throw new Error(r.statusCode + " " + r.headers.location); if (r.headers["cache-control"] !== "private, no-store") throw new Error("cache"); });
 await caso("firma falla -> 503", async () => { const r = res(); await conEnv(env, () => handler({ method: "GET", query: { tomo: "3" } }, r, { ...sesionOk, fetch: async () => ({ ok: false, status: 500, text: async () => "boom" }) })); if (r.statusCode !== 503) throw new Error(r.statusCode); });
 
+// Recorrido desde cero: cinco tomos en la carpeta de la ruta, con derecho de ruta por compra.
+const cero = { ...sesionOk, accesoARuta: async (id, ruta) => ruta === "norsk-desde-cero-a2" };
+await caso("ruta desde cero, tomo 5 -> 302 a la carpeta de la ruta", async () => { const r = res(); await conEnv(env, () => handler({ method: "GET", query: { tomo: "5", ruta: "norsk-desde-cero-a2" } }, r, cero)); if (r.statusCode !== 302 || !/norsk-cuaderno\/norsk-desde-cero-a2%2F|norsk-cuaderno\/norsk-desde-cero-a2\//.test(r.headers.location) && !/x\.pdf/.test(r.headers.location)) throw new Error(r.statusCode + " " + r.headers.location); });
+await caso("ruta desde cero, tomo 6 -> 400 (solo hay cinco)", async () => { const r = res(); await conEnv(env, () => handler({ method: "GET", query: { tomo: "6", ruta: "norsk-desde-cero-a2" } }, r, cero)); if (r.statusCode !== 400) throw new Error(r.statusCode); });
+await caso("ruta desconocida -> 400", async () => { const r = res(); await conEnv(env, () => handler({ method: "GET", query: { tomo: "1", ruta: "otra" } }, r, cero)); if (r.statusCode !== 400) throw new Error(r.statusCode); });
+await caso("compra sin derecho a la ruta -> 403 y no se firma", async () => { let firmado = false; const r = res(); await conEnv(env, () => handler({ method: "GET", query: { tomo: "1", ruta: "norsk-desde-cero-a2" } }, r, { ...sesionOk, accesoARuta: async () => false, fetch: async () => { firmado = true; } })); if (r.statusCode !== 403 || firmado) throw new Error(r.statusCode + " firmado=" + firmado); });
+await caso("derecho de ruta no consultable -> 503", async () => { const r = res(); await conEnv(env, () => handler({ method: "GET", query: { tomo: "1", ruta: "norsk-desde-cero-a2" } }, r, { ...sesionOk, accesoARuta: async () => { throw new Error("down"); } })); if (r.statusCode !== 503) throw new Error(r.statusCode); });
+
 const fallos = casos.filter((c) => !c[1]);
 for (const c of casos) console.log((c[1] ? "  ok  " : "  FALLA") + " " + c[0] + (c[2] ? " · " + c[2] : ""));
 console.log(fallos.length ? `\n${fallos.length} caso(s) fallan` : `\n${casos.length} casos sin red OK`);

@@ -13,8 +13,8 @@
   // Las dos rutas comparten app, endpoint y tabla. La B1 sigue siendo la ruta por
   // defecto: sin ?ruta= la app se comporta como hasta ahora.
   var RUTAS = {
-    "norskproven-b1": { clave: "nexo_curso_v1", demo: "/data/norsk-curso-demo.json", cuaderno: "/data/norsk-cuaderno.json", muestra: "/norsk/curso/muestra/NEXO-NORSK_Cuaderno-B1_Muestra.pdf", kicker: "Curso B1", nombre: "Noruego de A2 a B1", landing: "/norsk/", titulo: "Curso B1 · NEXO NORSK", inventario: "21 actuaciones orales · 16 mecanismos B1 · 4 destrezas conectadas · más de 2.300 ejercicios opcionales" },
-    "norsk-desde-cero-a2": { clave: "nexo_curso_cero_v1", demo: "/data/norsk-desde-cero-demo.json", cuaderno: null, muestra: null, kicker: "Noruego desde cero hasta A2", nombre: "Noruego desde cero hasta A2", landing: "/norsk/desde-cero/", titulo: "Noruego desde cero hasta A2 · NEXO NORSK", inventario: "3 zonas · 48 lecciones de 15 a 20 minutos · 2 saltos · puente hacia el curso A2→B1 · Larsito desde la primera lección" },
+    "norskproven-b1": { clave: "nexo_curso_v1", demo: "/data/norsk-curso-demo.json", cuaderno: "/data/norsk-cuaderno.json", tomos: "seis", muestra: "/norsk/curso/muestra/NEXO-NORSK_Cuaderno-B1_Muestra.pdf", kicker: "Curso B1", nombre: "Noruego de A2 a B1", landing: "/norsk/", titulo: "Curso B1 · NEXO NORSK", inventario: "21 actuaciones orales · 16 mecanismos B1 · 4 destrezas conectadas · más de 2.300 ejercicios opcionales" },
+    "norsk-desde-cero-a2": { clave: "nexo_curso_cero_v1", demo: "/data/norsk-desde-cero-demo.json", cuaderno: "/data/norsk-cuaderno-desde-cero.json", tomos: "cinco", muestra: null, kicker: "Noruego desde cero hasta A2", nombre: "Noruego desde cero hasta A2", landing: "/norsk/desde-cero/", titulo: "Noruego desde cero hasta A2 · NEXO NORSK", inventario: "3 zonas · 48 lecciones de 15 a 20 minutos · 2 saltos · puente hacia el curso A2→B1 · Larsito desde la primera lección" },
   };
   var RUTA = (function () {
     var m = /[?&]ruta=([a-z0-9-]+)/.exec(window.location.search || "");
@@ -369,9 +369,12 @@
     var cab = el("div", "cuaderno-cab");
     cab.appendChild(el("p", "eti", "Material de apoyo"));
     cab.appendChild(el("h2", null, "Tu cuaderno en PDF"));
+    var nTomos = CFG.tomos || "seis";
     cab.appendChild(el("p", "cuaderno-intro", conAcceso
-      ? "El curso entero en seis tomos para imprimir o leer sin conexión: la teoría con sus esquemas, la práctica con renglones y las claves aparte. Cada descarga es personal y caduca a los quince minutos; vuelve a pulsar si se te pasa."
-      : "El curso entero en seis tomos para imprimir o leer sin conexión: la teoría con sus esquemas, la práctica con renglones y las claves aparte. Viene con el curso completo. Hoy puedes bajarte la muestra gratuita: la guía de uso y el primer mecanismo entero."));
+      ? "El curso entero en " + nTomos + " tomos para imprimir o leer sin conexión: la teoría con sus esquemas, la práctica con renglones y las claves aparte. Cada descarga es personal y caduca a los quince minutos; vuelve a pulsar si se te pasa."
+      : (CUADERNO_MUESTRA
+        ? "El curso entero en " + nTomos + " tomos para imprimir o leer sin conexión: la teoría con sus esquemas, la práctica con renglones y las claves aparte. Viene con el curso completo. Hoy puedes bajarte la muestra gratuita: la guía de uso y el primer mecanismo entero."
+        : "El curso entero en " + nTomos + " tomos para imprimir o leer sin conexión: la teoría con sus esquemas, los ocho pasos de cada lección con renglones y las claves aparte. Viene con el curso completo.")));
     sec.appendChild(cab);
     var lista = el("div", "cuaderno-lista");
     sec.appendChild(lista);

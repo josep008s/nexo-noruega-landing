@@ -1,21 +1,34 @@
-// Descarga del Cuaderno de la Ruta Norskprøven B1 (seis tomos en PDF).
-// GET ?tomo=1..6 -> exige compra activa (cookie de sesión) y responde 302 a una
-// URL firmada de quince minutos contra el bucket privado norsk-cuaderno.
+// Descarga del Cuaderno en PDF de un curso de NEXO NORSK: la Ruta Norskprøven B1 (seis tomos)
+// o el recorrido «Noruego desde cero hasta A2» (cinco tomos).
+// GET ?tomo=N[&ruta=…] -> exige compra activa (cookie de sesión) con derecho a esa ruta y
+// responde 302 a una URL firmada de quince minutos contra el bucket privado norsk-cuaderno.
 // La función no envía el archivo: Vercel no puede servir cuerpos grandes desde
 // una función, y el navegador lo descarga directo del almacén con la URL firmada.
 // Sin claves de Supabase responde 503 y la app no llega a llamar aquí en la demo.
 
-import { readSessionCookie, compraActiva } from "./_norsk_lib.js";
+import { readSessionCookie, compraActiva, accesoARuta, RUTAS_CURSO, RUTA_POR_DEFECTO } from "./_norsk_lib.js";
 
 export const BUCKET = "norsk-cuaderno";
-export const TOMOS = {
-  1: "NEXO-NORSK_Cuaderno-B1_Tomo-1_Los-16-mecanismos-primera-parte.pdf",
-  2: "NEXO-NORSK_Cuaderno-B1_Tomo-2_Los-16-mecanismos-segunda-parte.pdf",
-  3: "NEXO-NORSK_Cuaderno-B1_Tomo-3_Hablar.pdf",
-  4: "NEXO-NORSK_Cuaderno-B1_Tomo-4_Escuchar-y-leer.pdf",
-  5: "NEXO-NORSK_Cuaderno-B1_Tomo-5_Escribir.pdf",
-  6: "NEXO-NORSK_Cuaderno-B1_Tomo-6_Simulacros.pdf",
+// Objetos del bucket por ruta. Los de la B1 siguen en la raíz del bucket; los del
+// recorrido desde cero van en la carpeta de su ruta.
+export const TOMOS_POR_RUTA = {
+  "norskproven-b1": {
+    1: "NEXO-NORSK_Cuaderno-B1_Tomo-1_Los-16-mecanismos-primera-parte.pdf",
+    2: "NEXO-NORSK_Cuaderno-B1_Tomo-2_Los-16-mecanismos-segunda-parte.pdf",
+    3: "NEXO-NORSK_Cuaderno-B1_Tomo-3_Hablar.pdf",
+    4: "NEXO-NORSK_Cuaderno-B1_Tomo-4_Escuchar-y-leer.pdf",
+    5: "NEXO-NORSK_Cuaderno-B1_Tomo-5_Escribir.pdf",
+    6: "NEXO-NORSK_Cuaderno-B1_Tomo-6_Simulacros.pdf",
+  },
+  "norsk-desde-cero-a2": {
+    1: "norsk-desde-cero-a2/NEXO-NORSK_Cuaderno-desde-cero_Tomo-1_Primer-contacto.pdf",
+    2: "norsk-desde-cero-a2/NEXO-NORSK_Cuaderno-desde-cero_Tomo-2_A1-primera-parte.pdf",
+    3: "norsk-desde-cero-a2/NEXO-NORSK_Cuaderno-desde-cero_Tomo-3_A1-segunda-parte.pdf",
+    4: "norsk-desde-cero-a2/NEXO-NORSK_Cuaderno-desde-cero_Tomo-4_A2-primera-parte.pdf",
+    5: "norsk-desde-cero-a2/NEXO-NORSK_Cuaderno-desde-cero_Tomo-5_A2-segunda-parte-y-puente.pdf",
+  },
 };
+export const TOMOS = TOMOS_POR_RUTA["norskproven-b1"];
 const SEGUNDOS = 15 * 60;
 
 export async function urlFirmada(archivo, segundos, deps) {
@@ -54,7 +67,10 @@ export async function handler(req, res, deps) {
   }
 
   const q = req.query || {};
-  const tomo = /^[1-6]$/.test(String(q.tomo || "")) ? Number(q.tomo) : 0;
+  const ruta = q.ruta ? String(q.ruta) : RUTA_POR_DEFECTO;
+  if (!RUTAS_CURSO.includes(ruta) || !TOMOS_POR_RUTA[ruta]) { res.status(400).json({ ok: false, error: "ruta" }); return; }
+  const tomos = TOMOS_POR_RUTA[ruta];
+  const tomo = /^[1-9]$/.test(String(q.tomo || "")) && tomos[Number(q.tomo)] ? Number(q.tomo) : 0;
   if (!tomo) { res.status(400).json({ ok: false, error: "tomo" }); return; }
 
   // Primero la puerta, después el almacén: sin sesión no se firma nada.
@@ -67,9 +83,17 @@ export async function handler(req, res, deps) {
     return;
   }
   if (!compra) { res.status(401).json({ ok: false, error: "caducado" }); return; }
+  // La compra tiene que dar derecho a esta ruta (norsk_compras.rutas, migración 0008).
+  let autorizada = false;
+  try { autorizada = await (deps.accesoARuta || accesoARuta)(compra.id, ruta); } catch (e) {
+    console.error("norsk-cuaderno derecho de ruta no consultable");
+    res.status(503).json({ ok: false, error: "no_disponible" });
+    return;
+  }
+  if (!autorizada) { res.status(403).json({ ok: false, error: "ruta_no_incluida" }); return; }
 
   try {
-    const destino = await urlFirmada(TOMOS[tomo], SEGUNDOS, deps);
+    const destino = await urlFirmada(tomos[tomo], SEGUNDOS, deps);
     res.statusCode = 302;
     res.setHeader("Location", destino);
     res.end();
