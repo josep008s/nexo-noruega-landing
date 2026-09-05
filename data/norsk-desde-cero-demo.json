@@ -4,8 +4,8 @@
   "ruta": "norsk-desde-cero-a2",
   "actualizado": "2026-09-05",
   "aviso": "Material propio de NEXO NORSK. NEXO NORSK es un proyecto independiente y no tiene relación con HK-dir, con UDI ni con ningún centro de examen. Este recorrido no promete un nivel, un aprobado ni un trámite.",
-  "piezas_totales": 45,
-  "lecciones_totales": 45
+  "piezas_totales": 48,
+  "lecciones_totales": 48
  },
  "piezas": [
   {
@@ -2516,6 +2516,33 @@
    "zona": "A2",
    "unidad": "A2-U07",
    "resumen": "La chaqueta que pediste es demasiado pequeña: devolverla en la tienda, decir cuándo la compraste y qué le pasa, preguntar si hay otra talla y, si no, pedir el dinero."
+  },
+  {
+   "codigo": "A2-U08-L01",
+   "tipo": "leccion",
+   "titulo": "Invitar, aceptar y rechazar",
+   "orden": 46,
+   "zona": "A2",
+   "unidad": "A2-U08",
+   "resumen": "Te invitan a un cumpleaños el sábado a una hora en la que trabajas: felicitar, rechazar esa hora con cortesía, proponer otra y organizar con otro padre un regalo entre los dos."
+  },
+  {
+   "codigo": "A2-U08-L02",
+   "tipo": "leccion",
+   "titulo": "Seguir la conversación",
+   "orden": 47,
+   "zona": "A2",
+   "unidad": "A2-U08",
+   "resumen": "En la fiesta, los adultos discuten si la guardería debería abrir más horas: dar tu opinión con una razón, decir con quién estás de acuerdo, hacer una pregunta para que la conversación siga y escribir tu opinión en tres frases."
+  },
+  {
+   "codigo": "A2-U08-L03",
+   "tipo": "leccion",
+   "titulo": "Reparar y mantener el turno",
+   "orden": 48,
+   "zona": "A2",
+   "unidad": "A2-U08",
+   "resumen": "El vecino te para en la escalera, habla rápido y usa una palabra que no conoces: entenderle sin abandonar, pedir que vaya más despacio, preguntar qué significa la palabra, confirmar la hora y despedirte bien."
   }
  ]
 }
