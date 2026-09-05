@@ -1641,6 +1641,230 @@
    }
   },
   {
+   "id": "LARS-A2-U03",
+   "modo": "rollespill",
+   "modo_contrato": "REAL_LIFE",
+   "nivel": "A2",
+   "titulo": "La vivienda: llamar por un anuncio, elegir entre dos pisos y avisar de una avería",
+   "leccion": [
+    "A2-U03-L01",
+    "A2-U03-L02",
+    "A2-U03-L03"
+   ],
+   "contexto_es": "Role-play ficticio en tres partes. Primero, Larsito hace de propietario y tú llamas por el anuncio de un piso. Después hace de compañero y te ayuda a elegir entre dos pisos. Al final hace de conserje y tú avisas de que la calefacción no funciona. Usa la tarjeta ficticia.",
+   "datos_ficticios_es": "Anuncio: piso en Lillestrøm, dos habitaciones, segunda planta a la española (tredje etasje), sin ascensor, terraza grande, doce mil quinientas coronas al mes con electricidad e internet, un dormitorio, baño nuevo; visita el jueves a las cinco. Elección: Lillestrøm (más grande, más barato, terraza) frente a Oslo (más nuevo, más cerca del trabajo, más caro); lo más importante para ti: el precio y la terraza. Avería: el radiador del salón está frío, hace frío en todo el piso, la ventana junto al radiador no cierra del todo; el conserje viene mañana entre las nueve y las doce.",
+   "cierre": {
+    "conserva": "Si has preguntado por el piso con «Er den fortsatt ledig?» y «Hvilken etasje er det?», has comparado con «-ere» y «enn» sin repetir «leilighet», y has dicho de qué radiador hablas con «som» pegado al nombre, la escena ha funcionado.",
+    "ahora": "Lo que se te haya atascado vuelve en la práctica de la lección: el adjetivo con «et», el comparativo irregular o «som».",
+    "repite": "Vuelve a hacer la escena con la misma tarjeta, sin mirar la pista ni los bloques."
+   },
+   "turnos": [
+    {
+     "larsito_no": "Hallo, det er Kari.",
+     "larsito_es": "Diga, soy Kari.",
+     "pista_es": "Di que llamas por el piso de internet y pregunta si sigue libre.",
+     "respuestas_modelo_no": [
+      "Hei, jeg ringer om leiligheten på nettet. Er den fortsatt ledig?"
+     ],
+     "bloques_no": [
+      "Jeg ringer om …",
+      "Er den fortsatt ledig?"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Ja, den er ledig. Det er en fin leilighet, to rom og et lite kjøkken.",
+     "larsito_es": "Sí, está libre. Es un piso bonito, dos habitaciones y una cocina pequeña.",
+     "pista_es": "Pregunta qué planta es.",
+     "respuestas_modelo_no": [
+      "Hvilken etasje er det?"
+     ],
+     "bloques_no": [
+      "Hvilken etasje …?"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Tredje etasje. Det er ingen heis, men det er en stor balkong.",
+     "larsito_es": "Tercera planta a la noruega. No hay ascensor, pero hay una terraza grande.",
+     "pista_es": "Pregunta si la electricidad está incluida en la renta.",
+     "respuestas_modelo_no": [
+      "Er strøm inkludert i leien?"
+     ],
+     "bloques_no": [
+      "Er … inkludert i leien?"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Ja, strøm og internett er inkludert. Leien er tolv tusen fem hundre kroner i måneden.",
+     "larsito_es": "Sí, electricidad e internet están incluidos. La renta son doce mil quinientas coronas al mes.",
+     "pista_es": "Pregunta si el piso tiene un dormitorio o dos.",
+     "respuestas_modelo_no": [
+      "Har leiligheten ett soverom eller to?"
+     ],
+     "bloques_no": [
+      "Har leiligheten … eller …?"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Ett soverom og en stue. Og et nytt bad.",
+     "larsito_es": "Un dormitorio y un salón. Y un baño nuevo.",
+     "pista_es": "Di «estupendo» y pregunta si puedes ir a verlo.",
+     "respuestas_modelo_no": [
+      "Flott. Kan jeg komme og se den?"
+     ],
+     "bloques_no": [
+      "Kan jeg komme og se den?"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Ja, på torsdag klokka fem passer bra. Har du noen spørsmål?",
+     "larsito_es": "Sí, el jueves a las cinco va bien. ¿Tienes alguna pregunta?",
+     "pista_es": "Di que no, gracias, y que os veis el jueves.",
+     "respuestas_modelo_no": [
+      "Nei takk. Vi ses på torsdag."
+     ],
+     "bloques_no": [
+      "Nei takk.",
+      "Vi ses på …"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Så, hvilken leilighet velger du?",
+     "larsito_es": "Bueno, ¿qué piso eliges?",
+     "pista_es": "Segunda parte: Larsito es tu compañero. Di que no lo sabes y que el piso de Lillestrøm es más grande que el de Oslo.",
+     "respuestas_modelo_no": [
+      "Jeg vet ikke. Leiligheten i Lillestrøm er større enn den i Oslo."
+     ],
+     "bloques_no": [
+      "… er større enn den i …"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Men den i Oslo er nærmere jobben.",
+     "larsito_es": "Pero el de Oslo está más cerca del trabajo.",
+     "pista_es": "Sí, y es más nuevo. Pero es más caro.",
+     "respuestas_modelo_no": [
+      "Ja, og den er nyere. Men den er dyrere."
+     ],
+     "bloques_no": [
+      "Den er nyere.",
+      "Den er dyrere."
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Hva er viktigst for deg?",
+     "larsito_es": "¿Qué es lo más importante para ti?",
+     "pista_es": "El precio. Y la terraza.",
+     "respuestas_modelo_no": [
+      "Prisen. Og balkongen."
+     ],
+     "bloques_no": [
+      "Prisen.",
+      "Balkongen."
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Da er det enkelt. Lillestrøm er billigere, større og har balkong.",
+     "larsito_es": "Entonces está claro. Lillestrøm es más barato, más grande y tiene terraza.",
+     "pista_es": "Cierra: te quedas con el de Lillestrøm.",
+     "respuestas_modelo_no": [
+      "Ja. Jeg tar den i Lillestrøm."
+     ],
+     "bloques_no": [
+      "Jeg tar den i …"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Vaktmester, hallo.",
+     "larsito_es": "Conserje, diga.",
+     "pista_es": "Tercera parte: Larsito es el conserje. Di que llamas del piso de la tercera planta a la noruega y que la calefacción no funciona.",
+     "respuestas_modelo_no": [
+      "Hei, jeg ringer fra leiligheten i tredje etasje. Varmen virker ikke."
+     ],
+     "bloques_no": [
+      "Jeg ringer fra …",
+      "… virker ikke."
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Er det ovnen på stua eller på soverommet?",
+     "larsito_es": "¿Es el radiador del salón o el del dormitorio?",
+     "pista_es": "Es el radiador que está en el salón, con «som». Está frío y hace frío en todo el piso.",
+     "respuestas_modelo_no": [
+      "Det er ovnen som står på stua. Den er kald, og det er kaldt i hele leiligheten."
+     ],
+     "bloques_no": [
+      "Det er ovnen som …",
+      "Det er kaldt i hele leiligheten."
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Har du prøvd å skru den av og på?",
+     "larsito_es": "¿Has probado a apagarlo y encenderlo?",
+     "pista_es": "Sí, lo has intentado. Y la ventana que está junto al radiador no cierra del todo.",
+     "respuestas_modelo_no": [
+      "Ja, jeg har prøvd. Og vinduet som er ved siden av ovnen, lukker ikke helt."
+     ],
+     "bloques_no": [
+      "Ja, jeg har prøvd.",
+      "… som er ved siden av …, lukker ikke helt."
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Ok. Jeg kommer i morgen mellom ni og tolv. Er du hjemme?",
+     "larsito_es": "Vale. Vengo mañana entre las nueve y las doce. ¿Estás en casa?",
+     "pista_es": "Sí, estás en casa. Pide que te mande un mensaje antes de venir.",
+     "respuestas_modelo_no": [
+      "Ja, jeg er hjemme. Kan du sende en melding før du kommer?"
+     ],
+     "bloques_no": [
+      "Kan du sende en melding før du kommer?"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Det gjør jeg. Ha det!",
+     "larsito_es": "Lo haré. ¡Adiós!",
+     "pista_es": "Da las gracias y despídete.",
+     "respuestas_modelo_no": [
+      "Takk. Ha det!"
+     ],
+     "bloques_no": [
+      "Takk.",
+      "Ha det!"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    }
+   ]
+  },
+  {
    "id": "LARS-PREA1-U01",
    "modo": "rollespill",
    "modo_contrato": "REAL_LIFE",

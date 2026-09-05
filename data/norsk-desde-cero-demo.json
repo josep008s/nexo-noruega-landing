@@ -4,8 +4,8 @@
   "ruta": "norsk-desde-cero-a2",
   "actualizado": "2026-09-05",
   "aviso": "Material propio de NEXO NORSK. NEXO NORSK es un proyecto independiente y no tiene relación con HK-dir, con UDI ni con ningún centro de examen. Este recorrido no promete un nivel, un aprobado ni un trámite.",
-  "piezas_totales": 30,
-  "lecciones_totales": 30
+  "piezas_totales": 33,
+  "lecciones_totales": 33
  },
  "piezas": [
   {
@@ -2381,6 +2381,33 @@
    "zona": "A2",
    "unidad": "A2-U02",
    "resumen": "No puedes ir mañana al curso: escribir un mensaje de cuatro frases que avise, diga por qué, proponga el jueves y cierre, y entender la respuesta."
+  },
+  {
+   "codigo": "A2-U03-L01",
+   "tipo": "leccion",
+   "titulo": "Leer un anuncio",
+   "orden": 31,
+   "zona": "A2",
+   "unidad": "A2-U03",
+   "resumen": "Buscas piso: leer un anuncio y sacar cinco datos, llamar para preguntar si sigue libre, en qué planta está y qué incluye la renta, y describir el piso en cinco frases."
+  },
+  {
+   "codigo": "A2-U03-L02",
+   "tipo": "leccion",
+   "titulo": "Comparar dos pisos",
+   "orden": 32,
+   "zona": "A2",
+   "unidad": "A2-U03",
+   "resumen": "Tienes dos pisos y hay que elegir: compararlos en voz alta con tres comparativos, decir qué es lo más importante para ti y cerrar la elección."
+  },
+  {
+   "codigo": "A2-U03-L03",
+   "tipo": "leccion",
+   "titulo": "Avisar de una avería",
+   "orden": 33,
+   "zona": "A2",
+   "unidad": "A2-U03",
+   "resumen": "La calefacción del piso nuevo no funciona: llamar al conserje, decir qué aparato es y dónde está, contestar a lo que te pregunta, y escribir después un correo de seis frases a la comunidad."
   }
  ]
 }
