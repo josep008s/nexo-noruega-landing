@@ -11,7 +11,7 @@
 
 import fs from "node:fs";
 import path from "node:path";
-import { spawnSync } from "node:child_process";
+import { spawnSync, execSync } from "node:child_process";
 import { createHash } from "node:crypto";
 import { fileURLToPath } from "node:url";
 
@@ -983,6 +983,33 @@ if (exists("norsk/curso/app.js")) {
   if (flagsAbiertos.length) {
     duro(`pre-lanzamiento: flags de Larsito abiertos en el entorno (${flagsAbiertos.join(", ")})`);
   } else ok("runtime Larsito: todos los flags de pre-lanzamiento permanecen cerrados");
+}
+
+// 5k) Contenido de pago fuera de Git. El curso completo (api/_curso_privado*.js) se
+// generó para la revisión privada y entró por error en el índice el 02.09.2026
+// (PR #48); se retiró el 04.09.2026. Desde entonces: nunca en el índice, siempre
+// en .gitignore, y ningún archivo grande sospechoso dentro de api/.
+{
+  const patronPrivado = /^_curso_privado.*\.js$/;
+  let indice = null;
+  let gitError = "";
+  try {
+    indice = execSync("git ls-files -- api", { cwd: ROOT, encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] })
+      .split("\n").filter(Boolean);
+  } catch (e) { indice = null; gitError = String(e && e.message || e).split("\n")[0].slice(0, 160); }
+  if (indice) {
+    const filtrados = indice.filter((f) => patronPrivado.test(path.basename(f)));
+    if (filtrados.length) duro(`contenido de pago en el índice de Git: ${filtrados.join(", ")}`);
+    else ok("Git: ningún curso privado en el índice de api/");
+  } else aviso(`Git no disponible: no se ha podido comprobar el índice de api/ (${gitError})`);
+  const ignore = exists(".gitignore") ? read(".gitignore") : "";
+  if (!/^api\/_curso_privado\*\.js$/m.test(ignore)) duro(".gitignore: falta la regla api/_curso_privado*.js");
+  else ok(".gitignore: el curso privado queda fuera del repo");
+  const grandes = fs.readdirSync(rel("api"), { withFileTypes: true })
+    .filter((e) => e.isFile() && !patronPrivado.test(e.name) && fs.statSync(rel(path.join("api", e.name))).size > 200 * 1024)
+    .map((e) => e.name);
+  if (grandes.length) duro(`api/: archivos de más de 200 KB que no deberían estar en un repo público: ${grandes.join(", ")}`);
+  else ok("api/: ningún archivo de más de 200 KB fuera del curso privado ignorado");
 }
 
 if (process.argv.includes("--env")) {
