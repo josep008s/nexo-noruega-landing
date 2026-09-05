@@ -4,8 +4,8 @@
   "ruta": "norsk-desde-cero-a2",
   "actualizado": "2026-09-05",
   "aviso": "Material propio de NEXO NORSK. NEXO NORSK es un proyecto independiente y no tiene relación con HK-dir, con UDI ni con ningún centro de examen. Este recorrido no promete un nivel, un aprobado ni un trámite.",
-  "piezas_totales": 36,
-  "lecciones_totales": 36
+  "piezas_totales": 39,
+  "lecciones_totales": 39
  },
  "piezas": [
   {
@@ -2435,6 +2435,33 @@
    "zona": "A2",
    "unidad": "A2-U04",
    "resumen": "Te ofrecen el puesto y te explican las condiciones: leer la hoja, preguntar por el plus y las guardias, y entender qué pasa si te pones enfermo o tienes que cambiar un turno."
+  },
+  {
+   "codigo": "A2-U05-L01",
+   "tipo": "leccion",
+   "titulo": "Síntomas y duración",
+   "orden": 37,
+   "zona": "A2",
+   "unidad": "A2-U05",
+   "resumen": "Te levantas con fiebre el primer día de trabajo: llamar al centro de salud, pedir cita para hoy, decir qué tienes y desde cuándo, y conseguir una hora que te venga bien."
+  },
+  {
+   "codigo": "A2-U05-L02",
+   "tipo": "leccion",
+   "titulo": "Entender el consejo",
+   "orden": 38,
+   "zona": "A2",
+   "unidad": "A2-U05",
+   "resumen": "En la consulta: entender lo que el médico te aconseja, preguntar si tienes que avisar al jefe y si tienes que volver, y después dar tú los mismos consejos a un compañero en imperativo."
+  },
+  {
+   "codigo": "A2-U05-L03",
+   "tipo": "leccion",
+   "titulo": "Antes y ahora",
+   "orden": 39,
+   "zona": "A2",
+   "unidad": "A2-U05",
+   "resumen": "Una semana después: contar en la consulta o al jefe qué ha cambiado, con dos frases de antes, dos de ahora y una valoración con «bedre» o «verre»."
   }
  ]
 }

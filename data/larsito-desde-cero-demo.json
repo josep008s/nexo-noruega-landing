@@ -2061,6 +2061,216 @@
    ]
   },
   {
+   "id": "LARS-A2-U05",
+   "modo": "rollespill",
+   "modo_contrato": "REAL_LIFE",
+   "nivel": "A2",
+   "titulo": "En la consulta: pedir cita, entender el consejo y contar qué ha cambiado",
+   "leccion": [
+    "A2-U05-L01",
+    "A2-U05-L02",
+    "A2-U05-L03"
+   ],
+   "contexto_es": "Role-play ficticio en tres partes. Primero, Larsito hace de recepcionista del centro de salud y tú pides cita para hoy. Después hace de médica: te aconseja y tú preguntas qué tienes que hacer. Al final te llama una semana después y tú cuentas qué ha cambiado. Usa la tarjeta ficticia; no cuentes nada tuyo de verdad.",
+   "datos_ficticios_es": "Cita: llevas tres días con fiebre y toses desde el lunes; empezó hace tres días, el sábado; las once no te van bien, prefieres por la tarde; aceptas la una y media. Consulta: preguntas si avisas al jefe, si tienes que volver y si te conviene coger toda la semana. Una semana después: antes tenías fiebre todo el día y ahora no; toses menos de día, pero de noche es peor; antes dormías mal, ahora mejor pero te despiertas a las cinco; empezaste a trabajar el lunes, estás cansado pero va bien.",
+   "cierre": {
+    "conserva": "Si has dicho la duración con «i tre dager» y «siden mandag», has rechazado una hora con «passer ikke» y propuesto otra con «heller», has preguntado con «Skal jeg …?» y «Må jeg …?», y has contado el cambio con «Før» y «Nå» y el verbo segundo, la escena ha funcionado.",
+    "ahora": "Lo que se te haya atascado vuelve en la práctica de la lección: la preposición de tiempo, el modal del consejo o el verbo detrás de «Før» y «Nå».",
+    "repite": "Vuelve a hacer la escena con la misma tarjeta, sin mirar la pista ni los bloques."
+   },
+   "turnos": [
+    {
+     "larsito_no": "Lillestrøm legekontor, hei.",
+     "larsito_es": "Centro de salud de Lillestrøm, buenos días.",
+     "pista_es": "Saluda, di tu nombre y que quieres pedir cita para hoy.",
+     "respuestas_modelo_no": [
+      "Hei, jeg heter Amir Haddad. Jeg vil gjerne bestille en time i dag."
+     ],
+     "bloques_no": [
+      "Jeg vil gjerne bestille en time i dag."
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Hva gjelder det?",
+     "larsito_es": "¿De qué se trata?",
+     "pista_es": "Llevas tres días con fiebre y toses desde el lunes.",
+     "respuestas_modelo_no": [
+      "Jeg har hatt feber i tre dager, og jeg har hostet siden mandag."
+     ],
+     "bloques_no": [
+      "Jeg har hatt … i … dager",
+      "… siden mandag"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Når begynte det?",
+     "larsito_es": "¿Cuándo empezó?",
+     "pista_es": "Hace tres días, el sábado.",
+     "respuestas_modelo_no": [
+      "Det begynte for tre dager siden, på lørdag."
+     ],
+     "bloques_no": [
+      "Det begynte for … siden"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Vi har ledig klokka elleve. Passer det?",
+     "larsito_es": "Tenemos hueco a las once. ¿Le va bien?",
+     "pista_es": "Las once no te van bien. Pregunta si puedes venir mejor por la tarde.",
+     "respuestas_modelo_no": [
+      "Klokka elleve passer ikke. Kan jeg heller komme om ettermiddagen?"
+     ],
+     "bloques_no": [
+      "… passer ikke.",
+      "Kan jeg heller komme …?"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Klokka halv to, da?",
+     "larsito_es": "¿A la una y media, entonces?",
+     "pista_es": "Acepta y da las gracias.",
+     "respuestas_modelo_no": [
+      "Ja, halv to passer. Takk."
+     ],
+     "bloques_no": [
+      "Ja, … passer."
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Hei, Amir. Hva kan jeg hjelpe deg med?",
+     "larsito_es": "Hola, Amir. ¿En qué puedo ayudarte?",
+     "pista_es": "Segunda parte: Larsito es la médica. Llevas tres días con fiebre y toses mucho.",
+     "respuestas_modelo_no": [
+      "Jeg har hatt feber i tre dager, og jeg hoster mye."
+     ],
+     "bloques_no": [
+      "Jeg har hatt feber i … dager"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Jeg forstår. Du bør holde deg hjemme i tre dager til. Hvil deg, og drikk mye vann.",
+     "larsito_es": "Entiendo. Deberías quedarte en casa tres días más. Descansa y bebe mucha agua.",
+     "pista_es": "Pregunta si avisas al jefe.",
+     "respuestas_modelo_no": [
+      "Skal jeg gi beskjed til sjefen?"
+     ],
+     "bloques_no": [
+      "Skal jeg …?"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Ja. Ring sjefen i dag.",
+     "larsito_es": "Sí. Llama al jefe hoy.",
+     "pista_es": "Pregunta si tienes que volver.",
+     "respuestas_modelo_no": [
+      "Må jeg komme tilbake?"
+     ],
+     "bloques_no": [
+      "Må jeg …?"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Hvis du fortsatt har feber om tre dager, ringer du oss.",
+     "larsito_es": "Si dentro de tres días sigues con fiebre, nos llamas.",
+     "pista_es": "Pregunta si te conviene coger libre toda la semana.",
+     "respuestas_modelo_no": [
+      "Bør jeg ta fri hele uka?"
+     ],
+     "bloques_no": [
+      "Bør jeg …?"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Du bør kanskje ta fri til fredag. Ta det med ro.",
+     "larsito_es": "Quizá deberías coger libre hasta el viernes. Tómatelo con calma.",
+     "pista_es": "Di «vale» y da las gracias.",
+     "respuestas_modelo_no": [
+      "Greit. Takk skal du ha."
+     ],
+     "bloques_no": [
+      "Takk skal du ha."
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Hvordan går det nå, Amir?",
+     "larsito_es": "¿Cómo va ahora, Amir?",
+     "pista_es": "Tercera parte, una semana después. Va mejor: antes tenías fiebre todo el día y ahora no.",
+     "respuestas_modelo_no": [
+      "Det går bedre. Før hadde jeg feber hele dagen. Nå har jeg ikke feber."
+     ],
+     "bloques_no": [
+      "Det går bedre.",
+      "Før hadde jeg …",
+      "Nå har jeg ikke …"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Og hosten?",
+     "larsito_es": "¿Y la tos?",
+     "pista_es": "Toses menos de día, pero de noche es peor.",
+     "respuestas_modelo_no": [
+      "Jeg hoster mindre om dagen, men om natta er det verre."
+     ],
+     "bloques_no": [
+      "Jeg hoster mindre …",
+      "… er det verre."
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Sover du?",
+     "larsito_es": "¿Duermes?",
+     "pista_es": "Antes dormías mal. Ahora mejor, pero te despiertas a las cinco.",
+     "respuestas_modelo_no": [
+      "Før sov jeg dårlig. Nå sover jeg bedre, men jeg våkner klokka fem."
+     ],
+     "bloques_no": [
+      "Før sov jeg …",
+      "Nå sover jeg …"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Har du begynt å jobbe igjen?",
+     "larsito_es": "¿Has vuelto a trabajar?",
+     "pista_es": "Sí, empezaste el lunes. Estás cansado, pero va bien.",
+     "respuestas_modelo_no": [
+      "Ja, jeg begynte på mandag. Jeg er trøtt, men det går."
+     ],
+     "bloques_no": [
+      "Jeg begynte på …",
+      "Jeg er trøtt, men det går."
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    }
+   ]
+  },
+  {
    "id": "LARS-PREA1-U01",
    "modo": "rollespill",
    "modo_contrato": "REAL_LIFE",
