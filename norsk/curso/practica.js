@@ -1113,7 +1113,7 @@
     cols.appendChild(izq); cols.appendChild(der);
     caja.appendChild(el("p", "ayuda-item", item.fuente === "anexo"
       ? "Arrastra cada expresión hasta su significado, o toca una y después la otra."
-      : langDer ? "Arrastra cada pregunta hasta su respuesta, o toca una y después la otra."
+      : langDer ? "Arrastra cada pieza de la izquierda hasta la que le corresponde, o toca una y después la otra."
       : "Arrastra cada frase noruega hasta su significado, o toca una y después la otra."));
     caja.appendChild(cols);
   }

@@ -1661,8 +1661,8 @@
    },
    "turnos": [
     {
-     "larsito_no": "Hallo, det er Kari.",
-     "larsito_es": "Diga, soy Kari.",
+     "larsito_no": "Hallo, det er Solveig.",
+     "larsito_es": "Diga, soy Solveig.",
      "pista_es": "Di que llamas por el piso de internet y pregunta si sigue libre.",
      "respuestas_modelo_no": [
       "Hei, jeg ringer om leiligheten på nettet. Er den fortsatt ledig?"
@@ -1718,10 +1718,10 @@
      "larsito_es": "Un dormitorio y un salón. Y un baño nuevo.",
      "pista_es": "Di «estupendo» y pregunta si puedes ir a verlo.",
      "respuestas_modelo_no": [
-      "Flott. Kan jeg komme og se den?"
+      "Flott. Kan jeg komme og se på den?"
      ],
      "bloques_no": [
-      "Kan jeg komme og se den?"
+      "Kan jeg komme og se på den?"
      ],
      "audio_no": null,
      "audio_modelo": null
@@ -1729,20 +1729,20 @@
     {
      "larsito_no": "Ja, på torsdag klokka fem passer bra. Har du noen spørsmål?",
      "larsito_es": "Sí, el jueves a las cinco va bien. ¿Tienes alguna pregunta?",
-     "pista_es": "Di que no, gracias, y que os veis el jueves.",
+     "pista_es": "Da las gracias y di que os veis el jueves.",
      "respuestas_modelo_no": [
-      "Nei takk. Vi ses på torsdag."
+      "Takk. Vi sees på torsdag."
      ],
      "bloques_no": [
-      "Nei takk.",
-      "Vi ses på …"
+      "Takk.",
+      "Vi sees på …"
      ],
      "audio_no": null,
      "audio_modelo": null
     },
     {
-     "larsito_no": "Så, hvilken leilighet velger du?",
-     "larsito_es": "Bueno, ¿qué piso eliges?",
+     "larsito_no": "Hvilken leilighet velger du?",
+     "larsito_es": "¿Qué piso eliges?",
      "pista_es": "Segunda parte: Larsito es tu compañero. Di que no lo sabes y que el piso de Lillestrøm es más grande que el de Oslo.",
      "respuestas_modelo_no": [
       "Jeg vet ikke. Leiligheten i Lillestrøm er større enn den i Oslo."
@@ -1782,8 +1782,8 @@
      "audio_modelo": null
     },
     {
-     "larsito_no": "Da er det enkelt. Lillestrøm er billigere, større og har balkong.",
-     "larsito_es": "Entonces está claro. Lillestrøm es más barato, más grande y tiene terraza.",
+     "larsito_no": "Da er det enkelt. Den i Lillestrøm er billigere, større og har balkong.",
+     "larsito_es": "Entonces está claro. El de Lillestrøm es más barato, más grande y tiene terraza.",
      "pista_es": "Cierra: te quedas con el de Lillestrøm.",
      "respuestas_modelo_no": [
       "Ja. Jeg tar den i Lillestrøm."
@@ -2033,7 +2033,7 @@
      "audio_modelo": null
     },
     {
-     "larsito_no": "Tre eller fire. Du får planen to uker før.",
+     "larsito_no": "Tre eller fire. Du får vaktplanen to uker før.",
      "larsito_es": "Tres o cuatro. Recibes el cuadrante dos semanas antes.",
      "pista_es": "Pregunta qué haces si te pones enfermo.",
      "respuestas_modelo_no": [
