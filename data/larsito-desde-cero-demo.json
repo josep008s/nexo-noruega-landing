@@ -1,12 +1,28 @@
 {
  "version": 1,
  "ruta": "norsk-desde-cero-a2",
- "generado": "2026-09-04",
+ "generado": "2026-09-05",
  "aviso": "Escenarios ficticios para practicar. Larsito reconoce únicamente las respuestas preparadas de cada turno; no analiza pronunciación, no inventa correcciones y no guarda el contenido de lo que dices. Usa solo los datos de la tarjeta, nunca los tuyos.",
  "reglas_nivel": {
   "A1": {
    "turnos_larsito": "una o dos frases, despacio",
    "apoyo": "pista en castellano y bloque visible; en la segunda vuelta, sin bloques",
+   "modos": [
+    "REAL_LIFE",
+    "DEEP_CORRECTION"
+   ],
+   "correccion": "en cada turno se enseña el modelo para comparar; no se analiza pronunciación ni se afirma nada que no se haya comprobado",
+   "pronunciacion": "NOT_OBSERVED",
+   "escalera": [
+    "repetir la frase más despacio",
+    "dar la pista en castellano",
+    "enseñar el bloque",
+    "enseñar el modelo entero"
+   ]
+  },
+  "A2": {
+   "turnos_larsito": "dos o tres frases, a velocidad normal clara",
+   "apoyo": "pista en castellano solo para el bloqueo; bloques visibles en la primera vuelta y ocultos en la segunda",
    "modos": [
     "REAL_LIFE",
     "DEEP_CORRECTION"
@@ -1199,6 +1215,321 @@
     "conserva": "Si has dicho que sí y que no en la misma frase con «men», has cerrado el plan con día, hora y lugar, y después has avisado pronto, has propuesto otra opción con «i stedet» y te has despedido con el cierre que tocaba, esta escena está hecha.",
     "ahora": "Si has respondido solo «ja» a la propuesta, o has explicado el retraso en cinco frases, vuelve a los cuatro pasos de ¿Tomamos un café el jueves? y a la tabla del cambio de Cambio de plan.",
     "repite": "Vuelve a hacer las dos escenas con la misma tarjeta, sin mirar la pista ni los bloques."
+   }
+  },
+  {
+   "id": "LARS-A2-U01",
+   "modo": "rollespill",
+   "modo_contrato": "REAL_LIFE",
+   "nivel": "A2",
+   "titulo": "El lunes: el fin de semana, la vecina y lo que pasó",
+   "leccion": [
+    "A2-U01-L01",
+    "A2-U01-L02",
+    "A2-U01-L03"
+   ],
+   "contexto_es": "Role-play ficticio en tres partes. Primero, un compañero te pregunta por el fin de semana y tú lo cuentas en pasado. Después, una vecina te pregunta cuánto llevas aquí, dónde has estado y en qué trabajas. Al final, el compañero quiere saber por qué llegaste tarde ayer y tú cuentas en orden lo que pasó. Usa la tarjeta ficticia.",
+   "datos_ficticios_es": "Sábado: excursión a Sognsvann con amigos, cena en tu casa, pasta · domingo: trabajaste de diez a cuatro, llegaste a casa a las cinco, viste la tele. Siete meses en Noruega, te mudaste en febrero · Bergen todavía no, Drammen sí · guardería, tres meses · curso sí, nunca con los vecinos. Ayer: parada, el autobús no vino, veinte minutos, llamaste sin respuesta, tranvía, llegaste a las nueve y media.",
+   "turnos": [
+    {
+     "larsito_no": "Hei! Hvordan var helgen?",
+     "larsito_es": "¡Hola! ¿Qué tal el fin de semana?",
+     "pista_es": "Fue bueno; el sábado, excursión a Sognsvann.",
+     "respuestas_modelo_no": [
+      "Den var fin. På lørdag var jeg på tur. Vi gikk til Sognsvann.",
+      "Den var fin. På lørdag var jeg på tur med noen venner. Vi gikk til Sognsvann."
+     ],
+     "bloques_no": [
+      "På lørdag var jeg …"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Så hyggelig. Hva gjorde dere etterpå?",
+     "larsito_es": "Qué bien. ¿Qué hicisteis después?",
+     "pista_es": "Cenasteis en tu casa; hiciste pasta.",
+     "respuestas_modelo_no": [
+      "Vi spiste middag hjemme hos meg. Jeg lagde pasta."
+     ],
+     "bloques_no": [
+      "Vi spiste …",
+      "Jeg lagde …"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Og på søndag?",
+     "larsito_es": "¿Y el domingo?",
+     "pista_es": "Trabajaste: empezaste a las diez y terminaste a las cuatro.",
+     "respuestas_modelo_no": [
+      "På søndag jobbet jeg. Jeg begynte klokka ti og sluttet klokka fire."
+     ],
+     "bloques_no": [
+      "På søndag jobbet jeg."
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Da var du sliten i går kveld.",
+     "larsito_es": "Entonces anoche estabas cansado.",
+     "pista_es": "Sí: llegaste a las cinco, comiste algo y viste la tele.",
+     "respuestas_modelo_no": [
+      "Ja. Jeg kom hjem klokka fem, spiste litt og så på TV."
+     ],
+     "bloques_no": [
+      "Jeg kom hjem klokka …"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Hei! Du er ny her, ikke sant? Har du bodd i Norge lenge?",
+     "larsito_es": "¡Hola! Eres nuevo aquí, ¿no? ¿Llevas mucho en Noruega?",
+     "pista_es": "Siete meses; te mudaste en febrero.",
+     "respuestas_modelo_no": [
+      "Nei, jeg har bodd her i sju måneder. Jeg flyttet hit i februar."
+     ],
+     "bloques_no": [
+      "Jeg har bodd her i …",
+      "Jeg flyttet hit i …"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Har du vært i Bergen?",
+     "larsito_es": "¿Has estado en Bergen?",
+     "pista_es": "Todavía no, pero sí en Drammen.",
+     "respuestas_modelo_no": [
+      "Nei, jeg har ikke vært i Bergen ennå, men jeg har vært i Drammen."
+     ],
+     "bloques_no": [
+      "Jeg har ikke vært i … ennå"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Og hva jobber du med?",
+     "larsito_es": "¿Y en qué trabajas?",
+     "pista_es": "Guardería; llevas tres meses.",
+     "respuestas_modelo_no": [
+      "Jeg jobber i en barnehage. Jeg har jobbet der i tre måneder."
+     ],
+     "bloques_no": [
+      "Jeg har jobbet der i …"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Har du lært norsk på kurs?",
+     "larsito_es": "¿Has aprendido noruego en un curso?",
+     "pista_es": "Sí, un curso, has aprendido mucho; pero nunca con los vecinos.",
+     "respuestas_modelo_no": [
+      "Ja, jeg har gått på kurs, og jeg har lært mye. Men jeg har aldri snakket norsk med naboene mine."
+     ],
+     "bloques_no": [
+      "Jeg har gått på kurs.",
+      "Jeg har aldri …"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Du kom sent i går. Hva skjedde?",
+     "larsito_es": "Ayer llegaste tarde. ¿Qué pasó?",
+     "pista_es": "Primero la parada, pero el autobús no vino; esperaste veinte minutos.",
+     "respuestas_modelo_no": [
+      "Først gikk jeg til holdeplassen, men bussen kom ikke. Så ventet jeg i tjue minutter."
+     ],
+     "bloques_no": [
+      "Først …, men …",
+      "Så …"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Ringte du?",
+     "larsito_es": "¿Llamaste?",
+     "pista_es": "Sí, luego llamaste, no contestó; así que el tranvía.",
+     "respuestas_modelo_no": [
+      "Ja, etterpå ringte jeg deg, men du svarte ikke. Så tok jeg trikken i stedet."
+     ],
+     "bloques_no": [
+      "Etterpå …, men …",
+      "Så tok jeg …"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Beklager, jeg var i et møte. Når kom du?",
+     "larsito_es": "Perdona, estaba en una reunión. ¿Cuándo llegaste?",
+     "pista_es": "Al final a las nueve y media, y empezaste enseguida.",
+     "respuestas_modelo_no": [
+      "Til slutt kom jeg klokka halv ti, og jeg begynte med en gang."
+     ],
+     "bloques_no": [
+      "Til slutt kom jeg …"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    }
+   ],
+   "cierre": {
+    "conserva": "Si has contado el fin de semana en pasado con la marca de tiempo delante, has dicho tu experiencia con «har» y el participio, y has ordenado lo de ayer con «først», «så», «etterpå» y «til slutt», esta escena está hecha.",
+    "ahora": "Si te has pasado al presente, has puesto «har» con el preteritum, o has contado ayer como una lista sin «men», vuelve a la tabla de formas de Lo que hice ayer, a la de participios de Lo que ya he hecho y a los conectores de En orden.",
+    "repite": "Vuelve a hacer las tres escenas con la misma tarjeta, sin mirar la pista ni los bloques."
+   }
+  },
+  {
+   "id": "LARS-A2-U02",
+   "modo": "rollespill",
+   "modo_contrato": "REAL_LIFE",
+   "nivel": "A2",
+   "titulo": "Lo que viene: planes, cambios de cuadrante y un mensaje",
+   "leccion": [
+    "A2-U02-L01",
+    "A2-U02-L02",
+    "A2-U02-L03"
+   ],
+   "contexto_es": "Role-play ficticio en tres partes. Primero, un compañero te pregunta por tus planes de la semana que viene y del verano. Después, tu responsable te cuenta tres cambios en el cuadrante y tú reaccionas. Al final, avisas a un compañero de que no puedes ir mañana y propones otro día. Usa la tarjeta ficticia.",
+   "datos_ficticios_es": "Planes: curso nuevo la semana que viene · España en verano, en casa de tus padres, tres semanas o quizá cuatro, quizá trabajes desde casa · va a hacer mucho calor. Cambios: mañana a las siete (no puedes: los niños; pides las siete y media) · la semana que viene, almacén (te va bien) · el sábado, dugnad (vas). Mensaje: tu hijo está enfermo, no puedes ir al curso mañana, propones el jueves.",
+   "turnos": [
+    {
+     "larsito_no": "Hva skal du gjøre neste uke?",
+     "larsito_es": "¿Qué vas a hacer la semana que viene?",
+     "pista_es": "La semana que viene empiezas un curso nuevo: «skal».",
+     "respuestas_modelo_no": [
+      "Neste uke skal jeg begynne på et nytt kurs."
+     ],
+     "bloques_no": [
+      "Neste uke skal jeg …"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Så bra. Og i sommer?",
+     "larsito_es": "Qué bien. ¿Y en verano?",
+     "pista_es": "En verano vais a España; viviréis en casa de tus padres.",
+     "respuestas_modelo_no": [
+      "I sommer skal vi til Spania. Vi kommer til å bo hos foreldrene mine.",
+      "I sommer skal jeg til Spania. Jeg kommer til å bo hos foreldrene mine."
+     ],
+     "bloques_no": [
+      "I sommer skal … til …",
+      "Vi kommer til å …"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Hvor lenge?",
+     "larsito_es": "¿Cuánto tiempo?",
+     "pista_es": "Tres semanas, quizá cuatro; quizá trabajes un poco desde casa.",
+     "respuestas_modelo_no": [
+      "Tre uker, kanskje fire. Kanskje jobber jeg litt hjemmefra."
+     ],
+     "bloques_no": [
+      "Kanskje jobber jeg …"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Kommer det til å bli varmt?",
+     "larsito_es": "¿Va a hacer calor?",
+     "pista_es": "Sí, mucho; y devuelve la pregunta.",
+     "respuestas_modelo_no": [
+      "Ja, det kommer til å bli veldig varmt. Hva skal du gjøre?"
+     ],
+     "bloques_no": [
+      "Det kommer til å bli …",
+      "Hva skal du gjøre?"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Det er noen endringer i vaktplanen. I morgen begynner du klokka sju, ikke halv ni.",
+     "larsito_es": "Hay cambios en el cuadrante. Mañana empiezas a las siete, no a las ocho y media.",
+     "pista_es": "A las siete no puedes: los niños. Pide las siete y media.",
+     "respuestas_modelo_no": [
+      "I morgen kan jeg ikke klokka sju. Jeg må hente barna først. Kan jeg begynne halv åtte?"
+     ],
+     "bloques_no": [
+      "I morgen kan jeg ikke …",
+      "Kan jeg begynne …?"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Ja, det går fint. Neste uke jobber du på lageret, ikke i resepsjonen.",
+     "larsito_es": "Sí, me va bien. La semana que viene trabajas en el almacén, no en recepción.",
+     "pista_es": "Te va bien.",
+     "respuestas_modelo_no": [
+      "Greit. Det passer.",
+      "Det passer."
+     ],
+     "bloques_no": [
+      "Det passer."
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Og på lørdag har vi dugnad her. Kommer du?",
+     "larsito_es": "Y el sábado tenemos dugnad aquí. ¿Vienes?",
+     "pista_es": "El sábado vas; pregunta cuánto dura.",
+     "respuestas_modelo_no": [
+      "På lørdag kommer jeg. Hvor lenge?"
+     ],
+     "bloques_no": [
+      "På lørdag kommer jeg.",
+      "Hvor lenge?"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Hei! Sees vi på kurs i morgen?",
+     "larsito_es": "¡Hola! ¿Nos vemos mañana en el curso?",
+     "pista_es": "Tu hijo está enfermo, así que no puedes ir; propón el jueves.",
+     "respuestas_modelo_no": [
+      "Barnet mitt er sykt, så jeg kan ikke komme på kurs i morgen. Kan vi ta oppgaven på torsdag i stedet?"
+     ],
+     "bloques_no": [
+      "…, så jeg kan ikke komme …",
+      "Kan vi ta … i stedet?"
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    },
+    {
+     "larsito_no": "Det går fint. Vi tar det på torsdag. God bedring til barnet!",
+     "larsito_es": "Me va bien. Lo hacemos el jueves. ¡Que se mejore el niño!",
+     "pista_es": "Da las gracias y despídete hasta el jueves.",
+     "respuestas_modelo_no": [
+      "Takk. Vi sees på torsdag."
+     ],
+     "bloques_no": [
+      "Vi sees på torsdag."
+     ],
+     "audio_no": null,
+     "audio_modelo": null
+    }
+   ],
+   "cierre": {
+    "conserva": "Si has dicho el plan con «skal», la previsión con «kommer til å» y la duda con «kanskje» y el verbo detrás; has reaccionado a los cambios con la marca de tiempo delante; y has avisado con «så» y propuesto con «i stedet», esta escena está hecha.",
+    "ahora": "Si has usado «vil» para el futuro, has dicho «Kanskje jeg …» o «I morgen jeg kan ikke», vuelve a la tabla de los tres bloques de Skal og kommer til å y a la de las marcas de Mañana cambia el tiempo.",
+    "repite": "Vuelve a hacer las tres escenas con la misma tarjeta, sin mirar la pista ni los bloques."
    }
   },
   {

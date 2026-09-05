@@ -2,10 +2,10 @@
  "meta": {
   "producto": "NEXO NORSK · Noruego desde cero hasta A2",
   "ruta": "norsk-desde-cero-a2",
-  "actualizado": "2026-09-04",
+  "actualizado": "2026-09-05",
   "aviso": "Material propio de NEXO NORSK. NEXO NORSK es un proyecto independiente y no tiene relación con HK-dir, con UDI ni con ningún centro de examen. Este recorrido no promete un nivel, un aprobado ni un trámite.",
-  "piezas_totales": 24,
-  "lecciones_totales": 24
+  "piezas_totales": 30,
+  "lecciones_totales": 30
  },
  "piezas": [
   {
@@ -2327,6 +2327,60 @@
    "zona": "A1",
    "unidad": "A1-U08",
    "resumen": "El plan estaba cerrado, tu turno acaba más tarde y la otra persona ya está en camino: avisar pronto, nombrar el cambio, proponer otra opción, conseguir la confirmación y, al acabar, despedirte bien."
+  },
+  {
+   "codigo": "A2-U01-L01",
+   "tipo": "leccion",
+   "titulo": "Lo que hice ayer",
+   "orden": 25,
+   "zona": "A2",
+   "unidad": "A2-U01",
+   "resumen": "Lunes por la mañana: un compañero te pregunta cómo fue el fin de semana. Contar lo que hiciste el sábado y el domingo con cuatro verbos en pasado, sin pasarte al presente."
+  },
+  {
+   "codigo": "A2-U01-L02",
+   "tipo": "leccion",
+   "titulo": "Lo que ya he hecho",
+   "orden": 26,
+   "zona": "A2",
+   "unidad": "A2-U01",
+   "resumen": "Un vecino te pregunta cuánto llevas en Noruega, dónde has estado y en qué has trabajado: contestar con tu experiencia sin necesitar una fecha para cada cosa."
+  },
+  {
+   "codigo": "A2-U01-L03",
+   "tipo": "leccion",
+   "titulo": "En orden",
+   "orden": 27,
+   "zona": "A2",
+   "unidad": "A2-U01",
+   "resumen": "Llegaste tarde y te preguntan qué pasó: contar en orden lo que hiciste, dónde se torció y cómo lo resolviste, en menos de un minuto y sin perder el hilo."
+  },
+  {
+   "codigo": "A2-U02-L01",
+   "tipo": "leccion",
+   "titulo": "Skal og kommer til å",
+   "orden": 28,
+   "zona": "A2",
+   "unidad": "A2-U02",
+   "resumen": "Un compañero te pregunta qué vas a hacer la semana que viene y en verano: contar dos planes y una previsión, con una duda dicha con «kanskje», sin pasarte al presente donde va «skal»."
+  },
+  {
+   "codigo": "A2-U02-L02",
+   "tipo": "leccion",
+   "titulo": "Mañana cambia el tiempo",
+   "orden": 29,
+   "zona": "A2",
+   "unidad": "A2-U02",
+   "resumen": "Tu responsable cambia el horario de mañana, de la semana que viene y del sábado: entenderlo, decir qué te va bien y qué no, y pedir empezar media hora más tarde sin perder la marca de tiempo delante."
+  },
+  {
+   "codigo": "A2-U02-L03",
+   "tipo": "leccion",
+   "titulo": "Cambio el plan por mensaje",
+   "orden": 30,
+   "zona": "A2",
+   "unidad": "A2-U02",
+   "resumen": "No puedes ir mañana al curso: escribir un mensaje de cuatro frases que avise, diga por qué, proponga el jueves y cierre, y entender la respuesta."
   }
  ]
 }
